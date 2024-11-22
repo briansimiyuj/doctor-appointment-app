@@ -22,3 +22,7 @@ This is a simple doctor's appointment booking system. It allows users to book ap
   3. React-icons
   4. React-Toastify
   5. Tailwind CSS
+
+### Tailwind Configuration:
+
+Configure Tailwind CSS and and theme colors in `tailwind.config.js` file.
