@@ -1,12 +1,12 @@
+import Navbar from "./components/Navbar/Navbar"
+
 const Script: React.FC = () =>{
 
   return(
 
-    <div className="container bg-primary-bg border-secondary-bg border-2 rounded-lg p-4">
+    <div className="mx-4 sm:mx-10">
 
-      <h1 className="text-primary-text">Hello Wolrd</h1>
-
-      <button className="bg-primary-btn text-white ">Click here</button>
+      <Navbar/>
 
     </div>
     

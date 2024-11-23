@@ -26,3 +26,7 @@ This is a simple doctor's appointment booking system. It allows users to book ap
 ### Tailwind Configuration:
 
 Configure Tailwind CSS and and theme colors in `tailwind.config.js` file.
+
+### Navbar Component
+
+  The Navbar component is a reusable component that can be used in any React application. It includes a logo, a search bar, and a user profile dropdown.
