@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom"
 import Logo from "../../assets/Logo"
 import { useState } from "react"
 import { assets } from "../../assets/frontend/assets"
+import MobileMenu from "./MobileMenu"
 
 const Navbar: React.FC = () =>{
 
@@ -67,6 +68,9 @@ const Navbar: React.FC = () =>{
                     className="w-6 md:hidden cursor-pointer"
                     onClick={() => setShowMenu(!showMenu)}
                 />
+
+
+                <MobileMenu showMenu={showMenu} setShowMenu={setShowMenu}/>
                 
             </div>
 
