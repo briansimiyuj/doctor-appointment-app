@@ -1,7 +1,11 @@
 import { NavLink } from "react-router-dom"
 import Logo from "../../assets/Logo"
+import { useState } from "react"
+import { assets } from "../../assets/frontend/assets"
 
 const Navbar: React.FC = () =>{
+
+    const [showMenu, setShowMenu] = useState<boolean>(false)
 
     return(
 
@@ -52,6 +56,19 @@ const Navbar: React.FC = () =>{
                 </NavLink>
                 
             </ul>
+
+
+
+            <div className="flex items-center gap-4">
+
+                <img 
+                    src={assets.menuIcon} 
+                    alt="menu-icon" 
+                    className="w-6 md:hidden cursor-pointer"
+                    onClick={() => setShowMenu(!showMenu)}
+                />
+                
+            </div>
 
         </nav>
 

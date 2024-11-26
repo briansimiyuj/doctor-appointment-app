@@ -30,3 +30,8 @@ Configure Tailwind CSS and and theme colors in `tailwind.config.js` file.
 ### Navbar Component
 
   The Navbar component is a reusable component that can be used in any React application. It includes a logo, a search bar, and a user profile dropdown.
+
+    1. Create Menu Icon to show mobile menu
+    2. Create a mobile menu component and mount it on Navbar component
+      a. Create cross icon to close mobile menu
+      b. Create a list of links for the mobile menu
