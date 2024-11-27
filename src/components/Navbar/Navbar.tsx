@@ -3,6 +3,7 @@ import Logo from "../../assets/Logo"
 import { useState } from "react"
 import { assets } from "../../assets/frontend/assets"
 import MobileMenu from "./MobileMenu"
+import DropdownMenu from "./DropdownMenu"
 
 const Navbar: React.FC = () =>{
 
@@ -73,6 +74,8 @@ const Navbar: React.FC = () =>{
                             <img src={assets.profilePic} alt="profile-pic" className="w-10 h-10 rounded-full cursor-pointer"/>
 
                             <img src={assets.dropDownIcon} alt="drop-down-icon" className="w-25"/>
+
+                            <DropdownMenu setToken={setToken}/>
 
                         </div>
 
