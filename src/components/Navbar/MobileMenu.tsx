@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom"
 import { assets } from "../../assets/frontend/assets"
+import Logo from "../../assets/Logo"
 
 type MobileMenuPropa ={
 
@@ -17,7 +18,14 @@ const MobileMenu: React.FC<MobileMenuPropa> = ({ showMenu, setShowMenu }) =>{
 
             <div className="flex items-center justify-between px-5 py-6">
 
-                <img src={assets.logo} alt="logo" className="w-36 cursor-pointer" />
+                <NavLink 
+                    to="/"
+                    onClick={() => setShowMenu(false)}
+                >
+                
+                    <Logo/>
+
+                </NavLink>
 
                 <img src={assets.crossIcon} alt="crossIcon" className="w-7 cursor-pointer" onClick={() => setShowMenu(false)}/>
 

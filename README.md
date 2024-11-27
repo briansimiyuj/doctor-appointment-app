@@ -35,5 +35,6 @@ Configure Tailwind CSS and and theme colors in `tailwind.config.js` file.
     2. Create a mobile menu component and mount it on Navbar component
       a. Create cross icon to close mobile menu
       b. Create a list of links for the mobile menu
+      c. Create a logo for the mobile menu and redirect to home page
     3. Create a profile picture and a dropdown icon
     4. Create a dropdown menu for the profile picture and mount it on Navbar component
