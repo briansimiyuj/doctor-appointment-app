@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import Logo from "../../assets/Logo"
 import { useState } from "react"
 import { assets } from "../../assets/frontend/assets"
@@ -6,7 +6,9 @@ import MobileMenu from "./MobileMenu"
 
 const Navbar: React.FC = () =>{
 
-    const [showMenu, setShowMenu] = useState<boolean>(false)
+    const [showMenu, setShowMenu] = useState<boolean>(false),
+          [token, setToken] = useState<boolean>(true),
+          navigate = useNavigate()
 
     return(
 
@@ -61,6 +63,27 @@ const Navbar: React.FC = () =>{
 
 
             <div className="flex items-center gap-4">
+
+                {
+
+                    token ?
+
+                        <div className="flex items-center gap-2 cursor-pointer group relative">
+
+                            <img src={assets.profilePic} alt="profile-pic" className="w-10 h-10 rounded-full cursor-pointer"/>
+
+                            <img src={assets.dropDownIcon} alt="drop-down-icon" className="w-25"/>
+
+                        </div>
+
+                    :
+
+                        <button 
+                            className="bg-primary-bg text-white px-8 py-3 rounded-full font-light hidden md:block"
+                            onClick={() => navigate("/login")}
+                        >Create Account</button>
+
+                }
 
                 <img 
                     src={assets.menuIcon} 
