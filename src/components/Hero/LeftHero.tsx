@@ -18,6 +18,18 @@ const LeftHero: React.FC = ()=>{
 
             </div>
 
+
+            <a 
+                href="#speciality" 
+                className="flex items-center gap-2 bg-white px-8 py-3 rounded-full text-secondary-text text-sm md:m-0 hover:scale-105 transition-all duration-300 ease-in-out"        
+            >
+
+                Book Appointment
+
+                <img src={assets.arrowIcon} alt="arrow-icon" className="w-3" />
+
+            </a>
+
         </div>
 
     )
