@@ -49,3 +49,6 @@ Configure Tailwind CSS and and theme colors in `tailwind.config.js` file.
         b. Create right side of the hero section which will have hero image
 
     2. Create a Speciality Menu component and mount it on Home page
+        a. Add speciality data and create a card for each speciality.
+        b. Each card will have a speciality name and speciality image.
+        e. Each card will be a clickable link to the doctor list page of that speciality.

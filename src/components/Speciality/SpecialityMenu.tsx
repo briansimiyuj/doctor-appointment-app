@@ -19,7 +19,7 @@ const SpecialityMenu: React.FC = ()=>{
                     specialityData.map((speciality, index)=>(
 
                         <Link
-                            to={`/speciality/${speciality.speciality}`}
+                            to={`/doctors/${speciality.speciality}`}
                             key={index}
                             className="flex flex-col items-center text-xs cursor-pointer flex-shrink-0 hover:translate-y-[-10px] transition-all duration-500"
                         >
