@@ -38,3 +38,10 @@ Configure Tailwind CSS and and theme colors in `tailwind.config.js` file.
       c. Create a logo for the mobile menu and redirect to home page
     3. Create a profile picture and a dropdown icon
     4. Create a dropdown menu for the profile picture and mount it on Navbar component
+
+
+### Home Page
+
+  The Home page is the main page of the application. It includes a hero section, a speciality menu, a top doctors section, and a footer.
+
+    

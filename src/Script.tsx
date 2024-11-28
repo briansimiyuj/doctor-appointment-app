@@ -1,4 +1,6 @@
+import { Route, Routes } from "react-router-dom"
 import Navbar from "./components/Navbar/Navbar"
+import HomePage from "./pages/HomePage"
 
 const Script: React.FC = () =>{
 
@@ -8,7 +10,14 @@ const Script: React.FC = () =>{
 
       <Navbar/>
 
-    </div>
+      
+      <Routes>
+
+        <Route path="/" element={<HomePage/>}/>
+
+      </Routes>
+
+    </div> 
     
   )
 
