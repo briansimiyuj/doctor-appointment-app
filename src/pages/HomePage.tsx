@@ -1,8 +1,14 @@
+import Hero from "../components/Hero/Hero"
+
 const HomePage: React.FC = ()=>{
 
     return(
 
-       <h1>HomePage</h1>
+        <>
+        
+            <Hero/>
+        
+        </>
 
     )
 

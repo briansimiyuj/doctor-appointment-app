@@ -44,4 +44,4 @@ Configure Tailwind CSS and and theme colors in `tailwind.config.js` file.
 
   The Home page is the main page of the application. It includes a hero section, a speciality menu, a top doctors section, and a footer.
 
-    
+    1. Create a Hero component and mount it on Home page
