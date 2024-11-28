@@ -46,3 +46,4 @@ Configure Tailwind CSS and and theme colors in `tailwind.config.js` file.
 
     1. Create a Hero component and mount it on Home page
         a. Create left side of the hero section which will have a heading, a paragraph, and a button
+        b. Create right side of the hero section which will have hero image
