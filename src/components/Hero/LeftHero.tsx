@@ -21,7 +21,7 @@ const LeftHero: React.FC = ()=>{
 
             <a 
                 href="#speciality" 
-                className="flex items-center gap-2 bg-white px-8 py-3 rounded-full text-secondary-text text-sm md:m-0 hover:scale-105 transition-all duration-300 ease-in-out"        
+                className="flex items-center gap-2 bg-white px-8 py-3 md:mt-16 text-base md:text-2xl rounded-full text-secondary-text md:m-0 hover:scale-105 transition-all duration-300 ease-in-out"        
             >
 
                 Book Appointment
