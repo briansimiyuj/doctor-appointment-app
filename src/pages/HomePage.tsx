@@ -1,5 +1,6 @@
 import Hero from "../components/Hero/Hero"
 import SpecialityMenu from "../components/Speciality/SpecialityMenu"
+import TopDoctors from "../components/TopDoctors/TopDoctors"
 
 const HomePage: React.FC = ()=>{
 
@@ -10,6 +11,8 @@ const HomePage: React.FC = ()=>{
             <Hero/>
 
             <SpecialityMenu/>
+
+            <TopDoctors/>
         
         </>
 

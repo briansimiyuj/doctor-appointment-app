@@ -55,3 +55,6 @@ Configure Tailwind CSS and and theme colors in `tailwind.config.js` file.
 
     3. Create Currency Context to change currency dynamically
       a. Surround the Script component with the CurrencyContext provider (index.jsx)
+
+    4. Create a Top Doctors component and mount it on Home page
+      a. Add heading and description about top doctors
