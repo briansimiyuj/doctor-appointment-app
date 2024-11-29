@@ -52,3 +52,6 @@ Configure Tailwind CSS and and theme colors in `tailwind.config.js` file.
         a. Add speciality data and create a card for each speciality.
         b. Each card will have a speciality name and speciality image.
         e. Each card will be a clickable link to the doctor list page of that speciality.
+
+    3. Create Currency Context to change currency dynamically
+      a. Surround the Script component with the CurrencyContext provider (index.jsx)
