@@ -19,7 +19,13 @@ const TopDoctors: React.FC = ()=>{
 
                     doctors.slice(0, 5).map((doctor, index) =>(
 
-                        <TopDoctorsCard key={index} doctor={doctor}/>
+                        <TopDoctorsCard 
+                            key={index} 
+                            doctor={{
+                                ...doctor,
+                                isAvailable: index % 2 === 0 ? true : false
+                            }}
+                        />
 
                     ))
 

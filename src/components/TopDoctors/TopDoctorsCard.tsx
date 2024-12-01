@@ -1,22 +1,29 @@
-import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { DoctorType } from "../../assets/DoctorType"
 
 type TopDoctorsCardProps ={
 
-    doctor: DoctorType,
+    doctor: DoctorType & { isAvailable?: boolean}
     key: number
     
 }
 
 const TopDoctorsCard: React.FC<TopDoctorsCardProps> = ({ key, doctor })=>{
 
-    const [availablityStatus, setAvailablityStatus] = useState<boolean>(true)
+    const isAvailable = doctor.isAvailable ?? false,
+          navigate = useNavigate()
 
     return(
 
         <div 
             className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500 ease-in-out"
             key={key}
+            onClick={()=>{
+
+                navigate(`/appointments/${doctor._id}`)
+                scrollTo(0, 0)
+                
+            }}
         >
 
             <img src={doctor.image} alt={`${doctor.name}'s name`} className="bg-blue-50"/>
@@ -26,7 +33,7 @@ const TopDoctorsCard: React.FC<TopDoctorsCardProps> = ({ key, doctor })=>{
 
                 {
 
-                    availablityStatus ?(
+                    isAvailable ?(
 
                         <div className="flex items-center gap-2 text-sm text-center text-green-500">
 
