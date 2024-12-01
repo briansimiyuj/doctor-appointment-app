@@ -62,3 +62,4 @@ Configure Tailwind CSS and and theme colors in `tailwind.config.js` file.
         i. Each card will have a doctor name, doctor image, and doctor speciality
         ii. Each card will be a clickable link to the doctor profile page.
         iii. Create a doctor type in order to accept doctor data as prop
+        iv. Set online status of the doctors randomly

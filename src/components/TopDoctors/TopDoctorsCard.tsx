@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { DoctorType } from "../../assets/DoctorType"
 
 type TopDoctorsCardProps ={
@@ -8,6 +9,8 @@ type TopDoctorsCardProps ={
 }
 
 const TopDoctorsCard: React.FC<TopDoctorsCardProps> = ({ key, doctor })=>{
+
+    const [availablityStatus, setAvailablityStatus] = useState<boolean>(true)
 
     return(
 
@@ -21,13 +24,30 @@ const TopDoctorsCard: React.FC<TopDoctorsCardProps> = ({ key, doctor })=>{
 
             <div className="p-4">
 
-                <div className="flex items-center gap-2 text-sm text-center text-green-500">
+                {
 
-                    <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                    availablityStatus ?(
 
-                    <p>Available</p>
+                        <div className="flex items-center gap-2 text-sm text-center text-green-500">
 
-                </div>
+                            <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+
+                            <p>Available</p>
+
+                        </div>
+
+                    ):(
+
+                        <div className="flex items-center gap-2 text-sm text-center text-red-500">
+
+                            <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+
+                            <p>Not Available</p>
+
+                        </div>
+                    )
+
+                }
 
 
                 <p className="text-gray-900 text-lg font-medium">{doctor.name}</p>
