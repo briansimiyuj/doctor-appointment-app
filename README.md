@@ -64,3 +64,6 @@ Configure Tailwind CSS and and theme colors in `tailwind.config.js` file.
         iii. Create a doctor type in order to accept doctor data as prop
         iv. Set availability status of the doctors randomly
       c. Create a button to view all doctors
+
+    5. Create a Banner component and mount it on Home page
+      a. Create left side of the banner which will have a heading, a paragraph, and a button for booking an appointment
