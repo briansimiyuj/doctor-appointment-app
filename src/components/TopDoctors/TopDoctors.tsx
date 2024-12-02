@@ -1,12 +1,14 @@
+import { useNavigate } from "react-router-dom"
 import { doctors } from "../../assets/frontend/assets"
 import TopDoctorsCard from "./TopDoctorsCard"
 
 const TopDoctors: React.FC = ()=>{
 
+    const navigate = useNavigate()
+
     return(
 
         <div className="flex flex-col items-center gap-4 text-gray-900 md:mx-10">
-
 
             <h1 className="text-3xl font-medium">Top Doctors To Book</h1>   
 
@@ -32,6 +34,11 @@ const TopDoctors: React.FC = ()=>{
                 }
 
             </div>
+
+            <button
+                className="bg-blue-500 text-white px-12 mt-10 py-2 rounded-full hover:bg-blue-600 transition-all duration-300 ease-in-out"
+                onClick={()=> navigate("/doctors")}
+            >See More Doctors</button>
 
         </div>
 
