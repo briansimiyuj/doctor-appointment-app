@@ -67,3 +67,4 @@ Configure Tailwind CSS and and theme colors in `tailwind.config.js` file.
 
     5. Create a Banner component and mount it on Home page
       a. Create left side of the banner which will have a heading, a paragraph, and a button for booking an appointment
+      b. Create right side of the banner which will have a image
