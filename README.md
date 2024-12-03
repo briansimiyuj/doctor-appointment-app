@@ -75,3 +75,5 @@ Configure Tailwind CSS and and theme colors in `tailwind.config.js` file.
 Footer component will have a logo and a paragraph, footer menu, contact section, and a copyright section.
 
   1. Create a Footer component and mount it on Script component after the routes
+
+    a. Create left side of the footer which will have a logo and a paragraph
