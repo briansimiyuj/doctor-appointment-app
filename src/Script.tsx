@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import Navbar from "./components/Navbar/Navbar"
 import HomePage from "./pages/HomePage"
+import Footer from "./components/Footer/Footer"
 
 const Script: React.FC = () =>{
 
@@ -16,6 +17,9 @@ const Script: React.FC = () =>{
         <Route path="/" element={<HomePage/>}/>
 
       </Routes>
+
+
+      <Footer/>
 
     </div> 
     
