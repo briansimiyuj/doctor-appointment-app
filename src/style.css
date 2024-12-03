@@ -19,7 +19,7 @@ body{
 
 @media(max-width: 740px){
 
-    .active li{
+    nav .active li{
         @apply text-white bg-primary-bg;
     }
 

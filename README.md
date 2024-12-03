@@ -77,3 +77,4 @@ Footer component will have a logo and a paragraph, footer menu, contact section,
   1. Create a Footer component and mount it on Script component after the routes
 
     a. Create left side of the footer which will have a logo and a paragraph
+    b. Create footer menu which will have a list of links
