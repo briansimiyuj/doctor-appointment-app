@@ -1,4 +1,5 @@
 import AboutImage from "../components/About/AboutImage"
+import AboutText from "../components/About/AboutText"
 
 const AboutPage: React.FC = ()=>{
 
@@ -14,6 +15,8 @@ const AboutPage: React.FC = ()=>{
                 <div className="my-5 flex flex-col items-center md:flex-row gap-12">
 
                     <AboutImage/>
+
+                    <AboutText/>
 
                 </div>
 

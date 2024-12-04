@@ -90,3 +90,5 @@ The About page is a simple page that explains what MediCare is and what it does.
   1. Create a About page and mount it on Script component and provide a route for it
     a. Create a heading
     b. Create about image and mount it on About page
+    c. Create about text and mount it on About page
+<!-- Both about image and about text have the same parent div -->
