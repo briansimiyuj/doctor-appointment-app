@@ -80,4 +80,11 @@ Footer component will have a logo and a paragraph, footer menu, contact section,
     b. Create footer menu which will have a list of links
     c. Create right side of the footer which will have a contact section
       i. Create social media icons and links
-    d. Create copyright section which will have a paragraph
+    d. Create copyright section which will have a /paragraph
+
+
+### About Page
+
+The About page is a simple page that explains what MediCare is and what it does. It will have a heading, an image, about text and WhyChooseUs section.
+
+  1. Create a About page and mount it on Script component and provide a route for it
