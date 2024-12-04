@@ -1,3 +1,4 @@
+import Copyright from "./Copyright"
 import FooterMenu from "./FooterMenu"
 import LeftFooterSide from "./LeftFooterSide"
 import RightFooterSide from "./RightFooterSide"
@@ -17,6 +18,8 @@ const Footer: React.FC = ()=>{
                 <RightFooterSide/>
 
             </div>
+
+            <Copyright/>
 
         </footer>
 
