@@ -1,5 +1,6 @@
 import AboutImage from "../components/About/AboutImage"
 import AboutText from "../components/About/AboutText"
+import WhyChooseUs from "../components/About/WhyChooseUs"
 
 const AboutPage: React.FC = ()=>{
 
@@ -19,6 +20,9 @@ const AboutPage: React.FC = ()=>{
                     <AboutText/>
 
                 </div>
+
+                
+                <WhyChooseUs/>
 
             </div>
         

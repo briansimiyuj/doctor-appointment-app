@@ -92,3 +92,4 @@ The About page is a simple page that explains what MediCare is and what it does.
     b. Create about image and mount it on About page
     c. Create about text and mount it on About page
 <!-- Both about image and about text have the same parent div -->
+    d. Create WhyChooseUs section and mount it on About page
