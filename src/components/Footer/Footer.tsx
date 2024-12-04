@@ -1,5 +1,6 @@
 import FooterMenu from "./FooterMenu"
 import LeftFooterSide from "./LeftFooterSide"
+import RightFooterSide from "./RightFooterSide"
 
 const Footer: React.FC = ()=>{
 
@@ -12,6 +13,8 @@ const Footer: React.FC = ()=>{
                 <LeftFooterSide/>
 
                 <FooterMenu/>
+
+                <RightFooterSide/>
 
             </div>
 
