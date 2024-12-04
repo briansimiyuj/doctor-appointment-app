@@ -88,3 +88,5 @@ Footer component will have a logo and a paragraph, footer menu, contact section,
 The About page is a simple page that explains what MediCare is and what it does. It will have a heading, an image, about text and WhyChooseUs section.
 
   1. Create a About page and mount it on Script component and provide a route for it
+    a. Create a heading
+    b. Create about image and mount it on About page
