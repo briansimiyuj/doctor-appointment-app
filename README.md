@@ -79,3 +79,4 @@ Footer component will have a logo and a paragraph, footer menu, contact section,
     a. Create left side of the footer which will have a logo and a paragraph
     b. Create footer menu which will have a list of links
     c. Create right side of the footer which will have a contact section
+      i. Create social media icons and links

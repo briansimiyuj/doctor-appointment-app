@@ -1,3 +1,5 @@
+import SocialMediaLinks from "./SocialMediaLinks"
+
 const RightFooterSide: React.FC = ()=>{
 
     return(
@@ -22,6 +24,9 @@ const RightFooterSide: React.FC = ()=>{
                 </li>
 
             </ul>
+
+
+            <SocialMediaLinks/>
 
         </div>
 
