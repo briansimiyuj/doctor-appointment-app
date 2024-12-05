@@ -100,3 +100,4 @@ The About page is a simple page that explains what MediCare is and what it does.
 The Doctors page is a page that lists all the doctors in the database. It will have a filter menu, search bar, and a list of doctors.
 
   1. Create a Doctors page and mount it on Script component and provide a route for it
+    a. Create a search bar and mount it on Doctors page
