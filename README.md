@@ -93,3 +93,10 @@ The About page is a simple page that explains what MediCare is and what it does.
     c. Create about text and mount it on About page
 <!-- Both about image and about text have the same parent div -->
     d. Create WhyChooseUs section and mount it on About page
+
+
+### Doctors Page
+
+The Doctors page is a page that lists all the doctors in the database. It will have a filter menu, search bar, and a list of doctors.
+
+  1. Create a Doctors page and mount it on Script component and provide a route for it

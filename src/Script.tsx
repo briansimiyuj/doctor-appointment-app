@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar/Navbar"
 import HomePage from "./pages/HomePage"
 import Footer from "./components/Footer/Footer"
 import AboutPage from "./pages/AboutPage"
+import DoctorPage from "./pages/DoctorPage"
 
 const Script: React.FC = () =>{
 
@@ -18,6 +19,8 @@ const Script: React.FC = () =>{
         <Route path="/" element={<HomePage/>}/>
 
         <Route path="/about-us" element={<AboutPage/>}/>
+
+        <Route path="/doctors" element={<DoctorPage/>}/>
 
       </Routes>
 
