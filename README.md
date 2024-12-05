@@ -103,3 +103,8 @@ The Doctors page is a page that lists all the doctors in the database. It will h
     a. Create a search bar and mount it on Doctors page
   2. Create a filter menu and mount it on Doctors page
       a. Create a filter menu button
+      b. Create a collapsible menu that shows/hides speciality options
+      c. Map through specialityData to display all available specialities
+      d. Implement active state styling for selected speciality
+      e. Add navigation functionality to filter doctors by speciality
+      f. Make the menu responsive for both mobile and desktop views
