@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { DoctorType } from "../../assets/DoctorType"
 import { doctors } from "../../assets/frontend/assets"
+import DoctorCard from "./DoctorCard"
 
 const DoctorsList: React.FC = ()=>{
 
@@ -34,7 +35,15 @@ const DoctorsList: React.FC = ()=>{
 
         <div className="w-full grid grid-cols-auto gap-4 pt-5 gap-y-6">
 
+            {
 
+                filterDoctors.map((doctor, index) =>(
+
+                    <DoctorCard key={index} doctor={doctor}/>
+
+                ))
+
+            }
 
         </div>
 
