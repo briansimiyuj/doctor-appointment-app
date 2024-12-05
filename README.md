@@ -111,3 +111,6 @@ The Doctors page is a page that lists all the doctors in the database. It will h
       f. Make the menu responsive for both mobile and desktop views
 
     3. Create Doctors List component and mount it on Doctors page
+      a. Initialize a state variable to store the filtered doctors
+      b. Create a function to filter doctors based on speciality
+      c. Run the filter function when the speciality and doctors data change
