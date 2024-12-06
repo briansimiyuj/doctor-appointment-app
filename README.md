@@ -118,3 +118,11 @@ The Doctors page is a page that lists all the doctors in the database. It will h
       e. Map through the filtered doctors and create a card for each doctor
       f. Each card will have a doctor name, doctor image, availability status and doctor speciality
       
+
+### Booking Context
+
+Booking context will be used to store the booking data and provide it to the Booking page.
+
+  1. Get doctorID from the URL using useParams hook and store it in a  constant
+  2. Set a state variable to store the doctor info
+  3. Fetch and update the doctor info whenever the doctorID and doctors array changes
