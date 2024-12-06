@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import { DoctorType } from "../../assets/DoctorType"
 
 interface DoctorCardProps{
@@ -9,13 +10,18 @@ interface DoctorCardProps{
 
 const DoctorCard: React.FC<DoctorCardProps> = ({ doctor, key })=>{
 
-    const isAvailable = doctor.isAvailable ?? false
+    const isAvailable = doctor.isAvailable ?? false,
+         navigate = useNavigate()
 
     return(
 
         <div
             key={key}
             className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
+            onClick={()=>{
+                navigate(`/appointments/${doctor._id}`)
+                scrollTo(0, 0)
+            }}
         >
 
 
@@ -48,6 +54,11 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor, key })=>{
                     )
 
                 }
+
+                
+                <p className="text-gray-900 text-lg font-medium ">{doctor.name}</p>
+
+                <p className="text-gray-600 text-sm">{doctor.speciality}</p> 
 
             </div>
 
