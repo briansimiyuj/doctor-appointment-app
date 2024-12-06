@@ -39,7 +39,13 @@ const DoctorsList: React.FC = ()=>{
 
                 filterDoctors.map((doctor, index) =>(
 
-                    <DoctorCard key={index} doctor={doctor}/>
+                    <DoctorCard 
+                        key={index} 
+                        doctor={{
+                            ...doctor,
+                            isAvailable: index % 2 === 0 ? true : false
+                        }}
+                    />
 
                 ))
 
