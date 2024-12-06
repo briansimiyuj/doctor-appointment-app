@@ -114,5 +114,7 @@ The Doctors page is a page that lists all the doctors in the database. It will h
       a. Initialize a state variable to store the filtered doctors
       b. Create a function to filter doctors based on speciality
       c. Run the filter function when the speciality and doctors data change
-      d. Map through the filtered doctors and create a card for each doctor
-      e. Each card will have a doctor name, doctor image, availability status and doctor speciality
+      d. Add a route for speciality page that will show all doctors with that speciality
+      e. Map through the filtered doctors and create a card for each doctor
+      f. Each card will have a doctor name, doctor image, availability status and doctor speciality
+      

@@ -22,6 +22,8 @@ const Script: React.FC = () =>{
 
         <Route path="/doctors" element={<DoctorPage/>}/>
 
+        <Route path="/doctors/:specialityParam" element={<DoctorPage/>}/>
+
       </Routes>
 
 
