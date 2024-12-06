@@ -235,3 +235,10 @@ Contact page will show the contact information of the clinic and the doctors.
   2. Create a Contact Image component and mount it on Contact Us Page
   3. Create a Contact Info component and mount it on Contact Us Page
   4. Create a Contact Map component and mount it on Contact Us Page
+
+
+### Profile Context
+
+Profile context will be used to store the user profile data and provide it to the Profile page.
+
+  1. Create a type for userData and address
