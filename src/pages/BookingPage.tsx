@@ -1,3 +1,4 @@
+import DoctorDetails from "../components/Bookings/DoctorDetails"
 import { BookingContextProvider } from "../context/BookingContext"
 
 const BookingPage: React.FC = ()=>{
@@ -8,7 +9,7 @@ const BookingPage: React.FC = ()=>{
         
             <BookingContextProvider>
 
-                <h1>Booking Page</h1>
+                <DoctorDetails/>
 
             </BookingContextProvider>
         
