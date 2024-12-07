@@ -136,3 +136,5 @@ Booking page will have doctor details, booking slots and related doctors.
   2. Wrap the Booking page with the BookingContext provider as the parent component
   3. Create a Doctor Details component and mount it on Booking page
     a. Create a Doctor image component and mount it on Doctor Details component
+    b. Create a Doctor info component and mount it on Doctor Details component
+        i. Provide doctor name with a verified icon
