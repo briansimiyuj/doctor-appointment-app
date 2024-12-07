@@ -242,3 +242,5 @@ Contact page will show the contact information of the clinic and the doctors.
 Profile context will be used to store the user profile data and provide it to the Profile page.
 
   1. Create a type for userData and address
+  2. Create a state variable to store the user data and initialize it with a dummy user data
+  3. Create a state variable for editing and initialize it with false
