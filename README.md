@@ -126,3 +126,12 @@ Booking context will be used to store the booking data and provide it to the Boo
   1. Get doctorID from the URL using useParams hook and store it in a  constant
   2. Set a state variable to store the doctor info
   3. Fetch and update the doctor info whenever the doctorID and doctors array changes
+
+
+### Booking Page
+
+Booking page will have doctor details, booking slots and related doctors.
+
+  1. Create a Booking page and mount it on Script component and provide a route for it
+
+  2. Wrap the Booking page with the BookingContext provider as the parent component

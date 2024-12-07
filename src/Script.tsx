@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage"
 import Footer from "./components/Footer/Footer"
 import AboutPage from "./pages/AboutPage"
 import DoctorPage from "./pages/DoctorPage"
+import BookingPage from "./pages/BookingPage"
 
 const Script: React.FC = () =>{
 
@@ -23,6 +24,8 @@ const Script: React.FC = () =>{
         <Route path="/doctors" element={<DoctorPage/>}/>
 
         <Route path="/doctors/:specialityParam" element={<DoctorPage/>}/>
+
+        <Route path="appointments/:doctorID" element={<BookingPage/>}/>
 
       </Routes>
 
