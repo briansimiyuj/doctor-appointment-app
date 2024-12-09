@@ -180,3 +180,15 @@ Booking page will have doctor details, booking slots and related doctors.
   a. Create a state variable to store doctor slots, slotIndex and slotTime
   b. Create an array of days of the week
   c. Get doctor info from the BookingContext
+
+  d. Create a function to fetch the booking slots from the server
+    i. Set doctorSlots with an empty array
+    ii. Create a variable to store the date of the current day
+    iii. Create a loop to iterate over the days of the week
+      1. Create a variable to store current time
+      2. Increase current time by i (i is the index of the day)
+      3. Create a variable to store the end time of the current day
+      4. Increase the end time by i 
+      5. Set the end time to be 21:00 
+      6. Check today matches with the current time. If it does, set the next slot to next hour; if it's past 08:00 and set the next slot to 08:00 next day
+      7. If the minute is 0, set the minute to 30; if it's 30, set the minute to 0
