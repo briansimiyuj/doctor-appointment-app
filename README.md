@@ -167,3 +167,6 @@ Booking page will have doctor details, booking slots and related doctors.
     a. Create a Doctor image component and mount it on Doctor Details component
     b. Create a Doctor info component and mount it on Doctor Details component
         i. Provide doctor name with a verified icon
+        ii. Provide doctor speciality, degree, and experience
+        iii. Provide doctor about text
+        iv. Provide doctor rate
