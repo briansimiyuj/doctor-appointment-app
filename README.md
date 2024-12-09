@@ -172,3 +172,11 @@ Booking page will have doctor details, booking slots and related doctors.
         iv. Provide doctor rate
 
   4. Create a Booking Slots component and mount it on Booking page
+
+    #### Booking Slots Hook
+
+  Booking slots hook will be used to fetch the booking slots from the server and store them in a state variable. It will also provide a function to update the booking slots when the doctorID changes.
+
+  a. Create a state variable to store doctor slots, slotIndex and slotTime
+  b. Create an array of days of the week
+  c. Get doctor info from the BookingContext
