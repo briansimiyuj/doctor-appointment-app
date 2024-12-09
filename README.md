@@ -192,3 +192,16 @@ Booking page will have doctor details, booking slots and related doctors.
       5. Set the end time to be 21:00 
       6. Check today matches with the current time. If it does, set the next slot to next hour; if it's past 08:00 and set the next slot to 08:00 next day
       7. If the minute is 0, set the minute to 30; if it's 30, set the minute to 0
+
+    iv. Create a variable to store the time slots and set it to an empty array
+    v. Create a while loop to check if the current time is before the end time
+      1. Set formatted time
+      2. Push the formatted time and dateTime to the time slots array
+      3. Increase the current time by 30 minutes
+    
+    vi. Update the doctorSlots state with the time slots array
+    vii. Run getAvailableSlots function when the doctor info is updated
+
+#### Booking Slots Component
+
+  a. Create Booking Days component and mount it on Booking Slots component

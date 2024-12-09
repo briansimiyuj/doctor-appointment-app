@@ -1,10 +1,11 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { BookingContext } from "../context/BookingContext"
+import { TimeSlotType } from "../assets/TimeSlotType"
 
 
 export const useBookingSlots = ()=>{
 
-    const [doctorSlots, setDoctorSlots] = useState([]),
+    const [doctorSlots, setDoctorSlots] = useState<TimeSlotType[][]>([]),
           [slotIndex, setSlotIndex] = useState(0),
           [slotTime, setSlotTime] = useState(''),
           { doctorInfo } = useContext(BookingContext),
@@ -31,9 +32,9 @@ export const useBookingSlots = ()=>{
 
             if(today.getDate() === currentTime.getDate()){
 
-                currentTime.setHours(currentTime.getHours() > 8 ? currentTime.getHours() : 8)
+                currentTime.setHours(currentTime.getHours() > 8 ? currentTime.getHours() + 1 : 8)
 
-                currentTime.setMinutes(currentTime.getMinutes() > 30 ? 30: 0)
+                currentTime.setMinutes(currentTime.getMinutes() > 30 ? 0: 30)
 
             }else{
 
@@ -42,9 +43,39 @@ export const useBookingSlots = ()=>{
                 currentTime.setMinutes(0)
 
             }
+
+
+            const [timeSlots, setTimeSlots] = useState<TimeSlotType[]>([])
+
+            while(currentTime < endTime){
+
+                let formattedTime = currentTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
+
+                timeSlots.push({
+                    
+                    dateTime: new Date(currentTime),
+                    time: formattedTime
+
+                })
+
+                currentTime.setMinutes(currentTime.getMinutes() + 30)
+
+            }
+
+            setDoctorSlots(prev => [...prev, timeSlots])
             
         }
     
     }
+
+     
+    useEffect(() =>{
+
+        getAvailableSlots()
+
+    }, [doctorInfo])
+
+
+    return { doctorSlots, slotIndex, setSlotIndex, slotTime, setSlotTime, days }
 
 }
