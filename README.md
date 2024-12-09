@@ -53,10 +53,39 @@ Configure Tailwind CSS and and theme colors in `tailwind.config.js` file.
         b. Each card will have a speciality name and speciality image.
         e. Each card will be a clickable link to the doctor list page of that speciality.
 
-    3. Create Currency Context to change currency dynamically
-      a. Surround the Script component with the CurrencyContext provider (index.jsx)
+### Currency Context
 
-    4. Create a Top Doctors component and mount it on Home page
+The Currency Context provides currency conversion functionality throughout the application.
+
+  1. Create a CurrencyContext using React's Context API
+    a. Define interface for context props:
+      - currency: string for currency code
+      - setCurrency: function to update currency
+      - rate: number for conversion rate
+      - setRate: function to update rate
+      - currencySymbol: string for currency symbol (€ or $)
+
+  2. Create CurrencyProvider component
+    a. Initialize state variables:
+      - currency: stores current currency code
+      - rate: stores current conversion rate
+    b. Provide currencySymbol based on selected currency
+    c. Wrap the component tree with CurrencyContext.Provider
+
+  3. Usage in components:
+    a. Import CurrencyContext and useContext
+    b. Access currency values and functions using useContext hook
+    c. Use setCurrency to change currency
+    d. Use rate for price conversions
+    e. Use currencySymbol to display correct currency symbol
+
+
+
+### Top Doctors Component
+
+The Top Doctors component displays a list of top doctors.
+
+  1. Create a TopDoctors component and mount it on Home page
       a. Add heading and description about top doctors
       b. Map through doctors data and create a card for each doctor.
         i. Each card will have a doctor name, doctor image, and doctor speciality
