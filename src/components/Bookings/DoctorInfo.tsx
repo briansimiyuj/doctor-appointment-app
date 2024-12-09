@@ -8,8 +8,6 @@ const DoctorInfo: React.FC = ()=>{
     const { doctorInfo } = useContext(BookingContext),
           { currencySymbol } = useContext(CurrencyContext)
 
-    console.log(currencySymbol)
-
     return(
 
         <div className="flex-1 border-gray-400 border rounded-lg p-8 py-7 bg-white mx-2 sm:mx-0 mt-[-80px] sm:mt-0">
