@@ -45,7 +45,7 @@ export const useBookingSlots = ()=>{
             }
 
 
-            const [timeSlots, setTimeSlots] = useState<TimeSlotType[]>([])
+            const timeSlots: TimeSlotType[] = []
 
             while(currentTime < endTime){
 

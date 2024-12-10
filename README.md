@@ -205,3 +205,5 @@ Booking page will have doctor details, booking slots and related doctors.
 #### Booking Slots Component
 
   a. Create Booking Days component and mount it on Booking Slots component
+    i. Map through the days of the week and create a card for each day
+    iii. Add a click event listener to each card that will set the slotIndex to the index of the day
