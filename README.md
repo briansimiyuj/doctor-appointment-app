@@ -224,3 +224,4 @@ Related doctors component will show the doctors that are related to the current 
     b. Create a state to store the related doctors state and set it to an empty array
     c.  Create a variable to store the doctors with the same speciality as the current doctor
     d. Push the doctors with the same speciality to the related doctors state
+    e. Map through the related doctors and create a card for each doctor

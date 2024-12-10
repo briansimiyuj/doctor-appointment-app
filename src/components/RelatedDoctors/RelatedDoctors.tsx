@@ -2,6 +2,7 @@
 import { DoctorType } from "../../assets/DoctorType"
 import { BookingContext } from "../../context/BookingContext"
 import { doctors } from "../../assets/frontend/assets"
+import TopDoctorsCard from "../TopDoctors/TopDoctorsCard"
 
 const RelatedDoctors: React.FC = ()=>{
 
@@ -22,11 +23,34 @@ const RelatedDoctors: React.FC = ()=>{
     }, [doctorID, doctorInfo?.speciality, doctors])
 
 
-    console.log(relatedDoctors)
-
     return(
 
-        <h1>RelatedDoctors</h1>
+        <>
+        
+            <h1 className="text-center text-2xl font-bold my-5">Related Doctors</h1>
+
+
+            <div className="flex flex-wrap justify-center gap-10">
+
+                {
+
+                    relatedDoctors.slice(0, 5).map((doctor, key) =>(
+
+                        <div className="w-[250px]">
+
+                            <TopDoctorsCard key={key} doctor={doctor}/>
+
+
+                        </div>
+
+
+                    ))
+
+                }
+
+            </div>
+        
+        </>
 
     )
 
