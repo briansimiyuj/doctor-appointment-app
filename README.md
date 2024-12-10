@@ -214,3 +214,13 @@ Booking page will have doctor details, booking slots and related doctors.
     b. Add a scroll functionality
     
   3. Create a Booking Button
+
+#### Related Doctors Component
+
+Related doctors component will show the doctors that are related to the current doctor based on their speciality. 
+
+  1. Create a Related Doctors component and mount it on Booking page
+    a. Retrieve the doctor info and  doctor ID from the BookingContext
+    b. Create a state to store the related doctors state and set it to an empty array
+    c.  Create a variable to store the doctors with the same speciality as the current doctor
+    d. Push the doctors with the same speciality to the related doctors state
