@@ -4,8 +4,6 @@ const BookingDays: React.FC = ()=>{
 
     const { doctorSlots, slotIndex, setSlotIndex, days } = useBookingSlots()   
 
-    console.log(doctorSlots, doctorSlots.length)
-
     return(
 
         <div className="flex items-center gap-3 w-full overflow-x-scroll mt-4 flex-col sm:flex-row md:flex-col lg:flex-row">
