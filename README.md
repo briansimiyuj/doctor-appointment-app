@@ -22,6 +22,7 @@ This is a simple doctor's appointment booking system. It allows users to book ap
   3. React-icons
   4. React-Toastify
   5. Tailwind CSS
+  6. Tailwind-scrollbar
 
 ### Tailwind Configuration:
 
@@ -209,4 +210,5 @@ Booking page will have doctor details, booking slots and related doctors.
     iii. Add a click event listener to each card that will set the slotIndex to the index of the day
   
   b. Create Booking Time component and mount it on Booking Slots component
-  i. Map through the time slots and create a card for each time slot
+    i. Map through the time slots and create a card for each time slot
+    ii. Add a scroll functionality

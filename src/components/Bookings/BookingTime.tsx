@@ -6,11 +6,16 @@ const BookingTime: React.FC = ()=>{
 
     return(
 
-        <div className="flex items-center gap-3 w-full overflow-x-scroll mt-4 overflow-scroll">
+        <div className="w-full">
 
-            {
+            <div className="relative">
 
-                doctorSlots.length && doctorSlots[slotIndex].map((slot, index)=>(
+
+                <div className="flex items-center gap-5 pb-4 w-full overflow-x-scroll mt-4 overflow-scroll scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 scroll-smooth">
+
+                    {
+
+                        doctorSlots.length && doctorSlots[slotIndex].map((slot, index)=>(
 
                             <p
                                 key={index}
@@ -18,9 +23,18 @@ const BookingTime: React.FC = ()=>{
                                 onClick={()=> setSlotTime(slot.time)}
                             >{slot.time}</p>
 
-                ))
+                        ))
 
-            }
+                    }
+
+                </div>
+
+                <div className="absolute left-0 top-0 bottom-0 bg-gradient-to-r from-white w-8 pointer-events-none"></div>
+                
+                <div className="absolute right-0 top-0 bottom-0 bg-gradient-to-l from-white w-8 pointer-events-none"></div>
+
+            </div>
+
 
         </div>
 
