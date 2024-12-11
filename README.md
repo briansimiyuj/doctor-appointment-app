@@ -225,3 +225,10 @@ Related doctors component will show the doctors that are related to the current 
     c.  Create a variable to store the doctors with the same speciality as the current doctor
     d. Push the doctors with the same speciality to the related doctors state
     e. Map through the related doctors and create a card for each doctor
+
+
+### Contact Page
+
+Contact page will show the contact information of the clinic and the doctors.
+
+  1. Create a Contact Us Page and mount it on Script component and provide a route for it 

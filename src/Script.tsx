@@ -5,6 +5,7 @@ import Footer from "./components/Footer/Footer"
 import AboutPage from "./pages/AboutPage"
 import DoctorPage from "./pages/DoctorPage"
 import BookingPage from "./pages/BookingPage"
+import ContactPage from "./pages/ContactPage"
 
 const Script: React.FC = () =>{
 
@@ -26,6 +27,8 @@ const Script: React.FC = () =>{
         <Route path="/doctors/:specialityParam" element={<DoctorPage/>}/>
 
         <Route path="appointments/:doctorID" element={<BookingPage/>}/>
+
+        <Route path="/contact-us" element={<ContactPage/>}/>
 
       </Routes>
 
