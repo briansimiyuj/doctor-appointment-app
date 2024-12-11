@@ -11,7 +11,7 @@ const BookingTime: React.FC = ()=>{
             <div className="relative">
 
 
-                <div className="flex items-center gap-5 pb-4 w-full overflow-x-scroll mt-4 overflow-scroll scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 scroll-smooth">
+                <div className="flex flex-col lg:flex-row items-center gap-5 pb-4 px-16 w-full overflow-x-scroll mt-4 overflow-scroll scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 scroll-smooth">
 
                     {
 

@@ -6,7 +6,8 @@ const BookingDays: React.FC = ()=>{
 
     return(
 
-        <div className="flex items-center gap-3 w-full overflow-x-scroll mt-4 flex-col sm:flex-row md:flex-col lg:flex-row">
+        <div className="flex items-center gap-3 justify-around w-full h-full overflow-y-auto md:overflow-visible mt-4 flex-col sm:flex-row md:flex-col lg:flex-row">
+
 
             {
 

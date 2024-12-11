@@ -5,13 +5,19 @@ const BookingSlots: React.FC = ()=>{
 
     return(
 
-        <div className="sm:ml-72 sm:pl-4 mt-6 font-medium to-gray-700">
+        <div className="sm:ml-72 md:ml-0 sm:pl-4 mt-6 font-medium to-gray-700">
 
             <h2>Booking Slots</h2>
 
-            <BookingDays/>
+            <div className="flex lg:flex-col gap-4 ">
 
-            <BookingTime/>
+                <BookingDays/>
+
+                <BookingTime/>
+
+
+            </div>
+
 
         </div>
 
