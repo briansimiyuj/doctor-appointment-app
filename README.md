@@ -232,3 +232,4 @@ Related doctors component will show the doctors that are related to the current 
 Contact page will show the contact information of the clinic and the doctors.
 
   1. Create a Contact Us Page and mount it on Script component and provide a route for it 
+  2. Create a Contact Image component and mount it on Contact Us Page
