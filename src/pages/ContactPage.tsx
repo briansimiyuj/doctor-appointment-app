@@ -1,5 +1,6 @@
 import ContactImage from "../components/contact/ContactImage"
 import ContactInfo from "../components/contact/ContactInfo"
+import ContactMap from "../components/contact/ContactMap"
 
 
 const ContactPage: React.FC = ()=>{
@@ -18,6 +19,9 @@ const ContactPage: React.FC = ()=>{
                 <ContactInfo/>
 
             </div>
+
+
+            <ContactMap/>
 
         </div>
 

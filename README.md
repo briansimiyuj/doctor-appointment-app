@@ -234,3 +234,4 @@ Contact page will show the contact information of the clinic and the doctors.
   1. Create a Contact Us Page and mount it on Script component and provide a route for it 
   2. Create a Contact Image component and mount it on Contact Us Page
   3. Create a Contact Info component and mount it on Contact Us Page
+  4. Create a Contact Map component and mount it on Contact Us Page
