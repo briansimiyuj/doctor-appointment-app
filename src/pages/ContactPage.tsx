@@ -1,4 +1,5 @@
 import ContactImage from "../components/contact/ContactImage"
+import ContactInfo from "../components/contact/ContactInfo"
 
 
 const ContactPage: React.FC = ()=>{
@@ -13,6 +14,8 @@ const ContactPage: React.FC = ()=>{
             <div className="my-10 flex flex-col justify-center md:flex-row items-center gap-10 mb-28 text-sm">
 
                 <ContactImage/>
+
+                <ContactInfo/>
 
             </div>
 
