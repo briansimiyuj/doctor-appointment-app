@@ -252,3 +252,5 @@ Profile page will show the user profile data and allow the user to edit the data
 
   1. Create a Profile Page and mount it on Script component and provide a route for it
   2. Wrap the the routes in Script component with the ProfileContext provider as the parent component
+  3. Create a Profile Image component and mount it on Profile page
+    a. Get the user profile image from the ProfileContext and display it
