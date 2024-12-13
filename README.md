@@ -261,3 +261,4 @@ Profile page will show the user profile data and allow the user to edit the data
       i. Fill the contact details from the ProfileContext and display it
     
     c. Create a Basic Info component and mount it on Profile Info component
+    d. Add a button to edit the profile to Profile Page
