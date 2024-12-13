@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { ProfileContext } from "../../context/ProfileContext"
 import ProfileContact from "./ProfileContact"
+import BasicInfo from "./BasicInfo"
 
 const ProfileInfo: React.FC = () =>{
 
@@ -16,6 +17,8 @@ const ProfileInfo: React.FC = () =>{
             <hr className="bg-zinc-400 h-[1px] border-none"/>
 
             <ProfileContact/>
+
+            <BasicInfo/>
 
         </>
 
