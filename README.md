@@ -244,3 +244,11 @@ Profile context will be used to store the user profile data and provide it to th
   1. Create a type for userData and address
   2. Create a state variable to store the user data and initialize it with a dummy user data
   3. Create a state variable for editing and initialize it with false
+
+
+### Profile Page
+
+Profile page will show the user profile data and allow the user to edit the data.
+
+  1. Create a Profile Page and mount it on Script component and provide a route for it
+  2. Wrap the the routes in Script component with the ProfileContext provider as the parent component

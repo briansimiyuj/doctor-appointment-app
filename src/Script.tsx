@@ -6,6 +6,8 @@ import AboutPage from "./pages/AboutPage"
 import DoctorPage from "./pages/DoctorPage"
 import BookingPage from "./pages/BookingPage"
 import ContactPage from "./pages/ContactPage"
+import ProfilePage from "./pages/ProfilePage"
+import { ProfileContextProvider } from "./context/ProfileContext"
 
 const Script: React.FC = () =>{
 
@@ -15,23 +17,29 @@ const Script: React.FC = () =>{
 
       <Navbar/>
 
-      
-      <Routes>
+      <ProfileContextProvider>
 
-        <Route path="/" element={<HomePage/>}/>
+        <Routes>
 
-        <Route path="/about-us" element={<AboutPage/>}/>
+          <Route path="/" element={<HomePage/>}/>
 
-        <Route path="/doctors" element={<DoctorPage/>}/>
+          <Route path="/about-us" element={<AboutPage/>}/>
 
-        <Route path="/doctors/:specialityParam" element={<DoctorPage/>}/>
+          <Route path="/doctors" element={<DoctorPage/>}/>
 
-        <Route path="appointments/:doctorID" element={<BookingPage/>}/>
+          <Route path="/doctors/:specialityParam" element={<DoctorPage/>}/>
 
-        <Route path="/contact-us" element={<ContactPage/>}/>
+          <Route path="appointments/:doctorID" element={<BookingPage/>}/>
 
-      </Routes>
+          <Route path="/contact-us" element={<ContactPage/>}/>
 
+          <Route path="/profile" element={<ProfilePage/>}/>
+
+          <Route path="/profile/:id" element={<ProfilePage/>}/>
+
+        </Routes>
+        
+      </ProfileContextProvider>
 
       <Footer/>
 
