@@ -5,15 +5,15 @@ const ProfilePage: React.FC = ()=>{
 
     return(
 
-            <div className="max-w-lg flex flex-col gap-2 text-sm">
+        <div className="max-w-lg flex flex-col gap-2 text-sm lg:text-base lg:m-auto">
 
-                <div className="flex justify-around items-center">
+            <div className="flex justify-between items-center px-8">
 
-                    <ProfileImage/>
+                <ProfileImage/>
 
-                    <button className="bg-primary-bg p-2 text-secondary-bg cursor-pointer rounded-md">Edit Profile</button>
+                <button className="bg-primary-bg p-2 text-secondary-bg cursor-pointer rounded-md">Edit Profile</button>
 
-                </div>
+            </div>
 
 
             <ProfileInfo/>
