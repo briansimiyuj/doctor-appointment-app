@@ -271,3 +271,4 @@ Profile page will show the user profile data and allow the user to edit the data
       2. Add a functionality to the edit button to change the state of the editing variable to true
       3. Create the edit profile modal and mount it on the Profile page
       4. Initialize the editing state to true for a moment in order to design the modal
+      5. Create a cancel button to close the modal
