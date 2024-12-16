@@ -262,3 +262,10 @@ Profile page will show the user profile data and allow the user to edit the data
     
     c. Create a Basic Info component and mount it on Profile Info component
     d. Add a button to edit the profile to Profile Page
+
+    #### Edit Profile Modal
+
+    Edit profile modal will be used to edit the user profile data.  
+
+      1. Make a conditional rendering for the edit profile modal
+      2. Add a functionality to the edit button to change the state of the editing variable to true
