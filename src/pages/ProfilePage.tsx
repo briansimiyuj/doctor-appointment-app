@@ -2,6 +2,7 @@ import { useContext } from "react"
 import ProfileImage from "../components/Profile/ProfileImage"
 import ProfileInfo from "../components/Profile/ProfileInfo"
 import { ProfileContext } from "../context/ProfileContext"
+import EditProfileModal from "../components/Profile/EditProfileModal"
 
 const ProfilePage: React.FC = ()=>{
 
@@ -19,7 +20,7 @@ const ProfilePage: React.FC = ()=>{
 
                 isEditing ?(
 
-                    <h1>Edit profile</h1>
+                    <EditProfileModal/>
 
                 ):(
 
