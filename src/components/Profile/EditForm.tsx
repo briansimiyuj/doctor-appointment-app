@@ -1,5 +1,6 @@
 import { useContext, useRef } from "react"
 import { ProfileContext } from "../../context/ProfileContext"
+import EditFormInput from "./EditFormInput"
 
 const EditForm: React.FC = ()=>{
 
@@ -45,7 +46,7 @@ const EditForm: React.FC = ()=>{
 
     return(
 
-        <div className="bg-green-500">
+        <>
 
             <form action="" className="flex flex-col gap-4 items-center justify-center w-full">
 
@@ -69,9 +70,12 @@ const EditForm: React.FC = ()=>{
 
                 </div>
 
+              
+                <EditFormInput userData={userData} setUserData={setUserData}/>
+
             </form>
 
-        </div>
+        </>
 
     )
 
