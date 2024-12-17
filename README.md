@@ -278,3 +278,5 @@ Profile page will show the user profile data and allow the user to edit the data
         c. Create a function to handle image click which will open the file selector dialog
         d. Create a function to handle image change which will set the profile picture to the selected image
         e. Create other input fields for the user data and display the current data (make a component for them)
+          i. Create a function to change the user data
+          ii. For every input field, create a function to handle the input change
