@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { assets } from "../../assets/frontend/assets"
 import { ProfileContext } from "../../context/ProfileContext"
+import EditForm from "./EditForm"
 
 const EditProfileModal: React.FC = ()=>{
 
@@ -30,7 +31,10 @@ const EditProfileModal: React.FC = ()=>{
 
                 </div>
 
-            </div>
+
+            <EditForm/>
+
+        </div>
 
         </>
 

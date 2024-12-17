@@ -272,3 +272,7 @@ Profile page will show the user profile data and allow the user to edit the data
       3. Create the edit profile modal and mount it on the Profile page
       4. Initialize the editing state to true for a moment in order to design the modal
       5. Create a cancel button to close the modal
+      6. Create edit form component and mount it on the edit profile modal
+        a. Create a file input to upload the profile picture
+        b. Display the current profile picture
+        c. Create a function to handle image click which will open the file selector dialog
