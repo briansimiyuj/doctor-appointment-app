@@ -276,3 +276,4 @@ Profile page will show the user profile data and allow the user to edit the data
         a. Create a file input to upload the profile picture
         b. Display the current profile picture
         c. Create a function to handle image click which will open the file selector dialog
+        d. Create a function to handle image change which will set the profile picture to the selected image

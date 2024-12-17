@@ -8,13 +8,39 @@ const EditForm: React.FC = ()=>{
 
     if(!context) return null
 
-    const { userData } = context
+    const { userData, setUserData } = context
 
     
     const handleImageClick = () =>{
     
        fileInputRef.current?.click()
     
+    }
+
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
+
+        const file = e.target.files?.[0]
+
+        if(file){
+
+            const reader = new FileReader()
+
+            reader.onload = (e) =>{
+
+                setUserData(prevData=>({
+
+                    ...prevData,
+                    image: e.target?.result as string
+
+                }))
+
+            }
+
+            reader.readAsDataURL(file)
+
+        }
+
     }
 
     return(
@@ -28,7 +54,7 @@ const EditForm: React.FC = ()=>{
                    <img 
                         src={userData.image}
                         alt="current user image" 
-                        className="w-24 h-24 rounded-full object-cover cursor-pointer"
+                        className="w-36 h-36 rounded-full object-cover cursor-pointer mx-auto"
                         onClick={handleImageClick}
                     />
 
@@ -38,6 +64,7 @@ const EditForm: React.FC = ()=>{
                         accept="image/*"
                         hidden
                         ref={fileInputRef}
+                        onChange={handleImageChange} 
                     />
 
                 </div>
