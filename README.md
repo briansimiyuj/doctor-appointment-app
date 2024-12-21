@@ -282,3 +282,4 @@ Profile page will show the user profile data and allow the user to edit the data
           ii. For every input field, create a function to handle the input change
           
         f. Create useEditFormInput hook to handle all input change functions
+          i. Check if the input value is the same as the current value and return

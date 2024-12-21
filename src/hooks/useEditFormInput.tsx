@@ -14,8 +14,14 @@ export const useEditFormInput = ()=>{
     const [nameValue, setNameValue] = useState(userData.name),
               [emailValue, setEmailValue] = useState(userData.address.email),  
               [phoneValue, setPhoneValue] = useState(userData.address.phone),
-              [formData] = useState<UserData>(userData),
-              [initialData] = useState<UserData>(userData)
+               [currentValues] = useState({
+
+                image: userData.image,
+                name: userData.name,
+                email: userData.address.email,
+                phone: userData.address.phone
+    
+            })    
 
     
         const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
@@ -113,17 +119,17 @@ export const useEditFormInput = ()=>{
 
     useEffect(() =>{
     
-       const hasChanges = 
-            initialData.image !== userData.image ||
-            initialData.name !== formData.name ||
-            initialData.address.email !== formData.address.email ||
-            initialData.address.phone !== formData.address.phone 
+        const hasChanges =
+               currentValues.image !== userData.image ||
+               currentValues.name !== userData.name ||
+               currentValues.email !== userData.address.email ||
+               currentValues.phone !== userData.address.phone
+
+        console.log(hasChanges)
 
         setIsChanged(hasChanges)
-
-        console.log("isChanged", isChanged)
     
-    }, [userData, initialData, setIsChanged])
+    }, [userData, userData.image, nameValue, emailValue, phoneValue])
 
     return { nameValue, emailValue, phoneValue, handleInputChange, handleImageChange, isChanged  }
 
