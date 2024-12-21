@@ -283,3 +283,5 @@ Profile page will show the user profile data and allow the user to edit the data
           
         f. Create useEditFormInput hook to handle all input change functions
           i. Check if the input value is the same as the current value and return
+
+        g. Create a submit button to submit the form

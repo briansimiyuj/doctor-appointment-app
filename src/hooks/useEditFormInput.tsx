@@ -125,8 +125,6 @@ export const useEditFormInput = ()=>{
                currentValues.email !== userData.address.email ||
                currentValues.phone !== userData.address.phone
 
-        console.log(hasChanges)
-
         setIsChanged(hasChanges)
     
     }, [userData, userData.image, nameValue, emailValue, phoneValue])
