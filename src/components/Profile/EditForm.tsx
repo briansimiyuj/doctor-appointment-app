@@ -1,15 +1,20 @@
 import { useContext, useRef } from "react"
 import { ProfileContext } from "../../context/ProfileContext"
 import EditFormInput from "./EditFormInput"
+import { useEditFormInput } from "../../hooks/useEditFormInput"
 
 const EditForm: React.FC = ()=>{
 
-    const context = useContext(ProfileContext),
-          fileInputRef = useRef<HTMLInputElement>(null)
+    const fileInputRef = useRef<HTMLInputElement>(null),
+          context = useContext(ProfileContext)
+          if(!context) return null
 
-    if(!context) return null
+          const { userData } = context,
+                editFormInput = useEditFormInput()
 
-    const { userData, setUserData } = context
+          if(!editFormInput) return null
+
+          const { handleImageChange } = editFormInput
 
     
     const handleImageClick = () =>{
@@ -18,31 +23,6 @@ const EditForm: React.FC = ()=>{
     
     }
 
-
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
-
-        const file = e.target.files?.[0]
-
-        if(file){
-
-            const reader = new FileReader()
-
-            reader.onload = (e) =>{
-
-                setUserData(prevData=>({
-
-                    ...prevData,
-                    image: e.target?.result as string
-
-                }))
-
-            }
-
-            reader.readAsDataURL(file)
-
-        }
-
-    }
 
     return(
 
@@ -71,7 +51,7 @@ const EditForm: React.FC = ()=>{
                 </div>
 
               
-                <EditFormInput userData={userData} setUserData={setUserData}/>
+                <EditFormInput/>
 
             </form>
 

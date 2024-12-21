@@ -1,94 +1,12 @@
-import { useState } from "react"
-import { UserData } from "../../assets/ProfileType"
+import { useEditFormInput } from "../../hooks/useEditFormInput"
 
-type EditFormInputProps ={
+const EditFormInput: React.FC = () =>{
+    
+    const formInput = useEditFormInput()
 
-    userData: UserData,
-    setUserData: React.Dispatch<React.SetStateAction<UserData>>
+    if(!formInput) return null
 
-}
-
-const EditFormInput: React.FC<EditFormInputProps> = ({ userData, setUserData })=>{
-
-    const [nameValue, setNameValue] = useState(userData.name),
-          [emailValue, setEmailValue] = useState(userData.address.email),  
-          [phoneValue, setPhoneValue] = useState(userData.address.phone)
-
-
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
-
-        const { name, value } = e.target
-
-        if(name === "name"){
-
-            setNameValue(value)
-
-            setUserData(prevData =>{
-
-                const updatedData = { ...prevData }
-
-                updatedData.name = value
-
-                console.log(updatedData.name)
-
-                return updatedData
-
-            })
-
-        }else if(name === "email"){
-
-            setEmailValue(value)
-
-            setUserData(prevData =>{
-
-                const updatedData = {
-                    
-                    ...prevData, 
-                    
-                    address:{
-
-                        ...userData.address,
-                        email: value
-
-                    }
-
-                }
-
-                console.log(updatedData.address.email)
-
-                return updatedData
-
-            })
-            
-
-        }else if(name === "phone"){
-
-            setPhoneValue(value)
-
-            setUserData(prevData =>{
-
-                const updatedData = {
-                    
-                    ...prevData, 
-                    
-                    address:{
-
-                        ...userData.address,
-                        phone: value
-
-                    }
-
-                }
-
-                console.log(updatedData.address.phone)
-
-                return updatedData
-
-            })
-
-        }
-
-    }
+    const { nameValue, emailValue, phoneValue, handleInputChange } = formInput
 
     return(
 
