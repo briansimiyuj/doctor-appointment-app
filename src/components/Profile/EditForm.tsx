@@ -14,7 +14,7 @@ const EditForm: React.FC = ()=>{
 
           if(!editFormInput) return null
 
-          const { handleImageChange } = editFormInput
+          const { handleImageChange, isChanged } = editFormInput
 
     
     const handleImageClick = () =>{
@@ -51,7 +51,16 @@ const EditForm: React.FC = ()=>{
                 </div>
 
               
-                <EditFormInput/>
+                <EditFormInput/>           
+
+
+                <button
+                    className={`${isChanged
+                        ? 'bg-primary-bg text-secondary-bg cursor-pointer' : 'bg-gray-500 text-secondary-bg cursor-not-allowed' 
+                    }  px-8 py-4 mt-3 rounded-md`}
+                    type="submit"
+                    disabled={!isChanged}
+                >Save</button>
 
             </form>
 
