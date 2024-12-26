@@ -288,3 +288,11 @@ Profile page will show the user profile data and allow the user to edit the data
           i. Make the button disabled if the user data is the same as the current data
 
       7. Initialize the editing state back to false
+
+
+### Login Context
+
+Login context will be used to store the user login data and provide it to the Login page.
+
+  1. Create an interface for login data       
+  2. Create state variables to store the login data and initialize them with empty strings
