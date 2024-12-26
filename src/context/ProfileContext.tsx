@@ -37,7 +37,7 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
         DOB: '1990-01-01'
 
     }),
-        [isEditing, setIsEditing] = useState<boolean>(true),
+        [isEditing, setIsEditing] = useState<boolean>(false),
 
         value = {  userData, setUserData, isEditing, setIsEditing }
 

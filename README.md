@@ -286,3 +286,5 @@ Profile page will show the user profile data and allow the user to edit the data
 
         g. Create a submit button to submit the form
           i. Make the button disabled if the user data is the same as the current data
+
+      7. Initialize the editing state back to false
