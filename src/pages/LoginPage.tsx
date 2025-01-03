@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { LoginContextProvider } from "../context/LoginContext"
+import SignUpForm from "../components/Login/SignUpForm"
 
 const LoginPage: React.FC = ()=>{
 
@@ -9,7 +10,11 @@ const LoginPage: React.FC = ()=>{
 
         <LoginContextProvider>
 
-            <h1>LoginPage</h1>
+            {
+
+                isSignUp ? <SignUpForm setIsSignUp={setIsSignUp}/> : <h1>SignInForm</h1>
+
+            }
 
         </LoginContextProvider>
 

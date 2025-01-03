@@ -308,3 +308,5 @@ Login page will be used to log in and sign up the user. A user can either log in
   2. Create a Login Page and mount it on Script component and provide a route for it
   3. Create a state variable for isSignUp and initialize it with true
   4. Wrap the child components in the Login page with the LoginContext provider as the parent component
+  5. Create a Sign Up component and mount it on the Login page if isSignUp is true
+    a. Render the Sign Up title and description
