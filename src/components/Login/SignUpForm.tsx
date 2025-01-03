@@ -1,5 +1,7 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { LoginContext } from "../../context/LoginContext"
+import { BsEye } from "react-icons/bs"
+import { FiEyeOff } from "react-icons/fi"
 
 interface SignUpFormProps{
 
@@ -13,7 +15,8 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ setIsSignUp }) =>{
 
     if(!context) return null
 
-    const { name, setName, email, setEmail, password, setPassword, confirmPassword, setConfirmPassword } = context
+    const { name, setName, email, setEmail, password, setPassword, confirmPassword, setConfirmPassword } = context,
+         [showPassword, setShowPassword] = useState<boolean>(false)
 
     return(
 
@@ -36,7 +39,8 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ setIsSignUp }) =>{
                     type="text" 
                     name="name" 
                     id="name" 
-                    className="w-full border border-zinc-600 rounded p-2 mt-1"
+                    className="w-full border border-zinc-600 rounded p-2 mt-1 text-xl"
+                    placeholder="Full Name"
                     value={name}
                     onChange={e=> setName(e.target.value)}
                 />
@@ -47,32 +51,58 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ setIsSignUp }) =>{
                     type="email"
                     name="email" 
                     id="email"
-                    className="w-full border border-zinc-600 rounded p-2 mt-1"
+                    className="w-full border border-zinc-600 rounded p-2 mt-1 text-xl"
+                    placeholder="Email"
                     value={email}
                     onChange={e=> setEmail(e.target.value)}
                 />
 
                 <label htmlFor="password">Password:</label>
 
-                <input 
-                    type="password" 
-                    name="password" 
-                    id="password" 
-                    className="w-full border border-zinc-600 rounded p-2 mt-1"
-                    value={password}
-                    onChange={e=> setPassword(e.target.value)}
-                />
+                <div className="relative w-full">  
+
+                    <input 
+                        type={showPassword ? "text" : "password"}
+                        name="password" 
+                        id="password" 
+                        className="w-full border border-zinc-600 rounded p-2 mt-1 text-xl"
+                        placeholder="Password"
+                        value={password}
+                        onChange={e=> setPassword(e.target.value)}
+                    />
+
+
+                    {
+                        
+                        showPassword ? <BsEye className="absolute right-2 top-5 cursor-pointer font-semibold text-xl" onClick={()=> setShowPassword(false)}/> : <FiEyeOff className="absolute right-2 top-4 cursor-pointer text-xl font-semibold" onClick={()=> setShowPassword(true)}/>
+                    
+                    }
+
+                </div>
+
 
                 <label htmlFor="confirmPassword">Confirm Password:</label>
 
-                <input 
-                    type="password"
-                    name="confirmPassword"
-                    id="confirmPassword"
-                    className="w-full border border-zinc-600 rounded p-2 mt-1"
-                    value={confirmPassword}
-                    onChange={e=> setConfirmPassword(e.target.value)}
-                />
+                <div className="relative w-full">
+
+                    <input 
+                        type={showPassword ? "text" : "password"}
+                        name="confirmPassword"
+                        id="confirmPassword"
+                        className="w-full border border-zinc-600 rounded p-2 mt-1 text-xl"
+                        placeholder="Confirm Password"
+                        value={confirmPassword}
+                        onChange={e=> setConfirmPassword(e.target.value)}
+                    />
+
+                    
+                    {
+
+                        showPassword ? <BsEye className="absolute right-2 top-5 cursor-pointer font-semibold text-xl" onClick={()=> setShowPassword(false)}/> : <FiEyeOff className="absolute right-2 top-4 cursor-pointer text-xl font-semibold" onClick={()=> setShowPassword(true)}/>
+
+                    }
+
+                </div>
 
             </div>
 
