@@ -296,3 +296,11 @@ Login context will be used to store the user login data and provide it to the Lo
 
   1. Create an interface for login data       
   2. Create state variables to store the login data and initialize them with empty strings
+
+
+### Login Page
+
+Login page will be used to log in and sign up the user. A user can either log in or sign up using their email and password. The user can also sign up using their Google account.
+
+  1. Create a button in the Navbar component to navigate to the Login page
+      i. Set it in a conditional rendering to show only when the user is not logged in and the user is not on the Login page

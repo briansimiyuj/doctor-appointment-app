@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom"
+import { NavLink, useLocation, useNavigate } from "react-router-dom"
 import Logo from "../../assets/Logo"
 import { useState } from "react"
 import { assets } from "../../assets/frontend/assets"
@@ -8,12 +8,15 @@ import DropdownMenu from "./DropdownMenu"
 const Navbar: React.FC = () =>{
 
     const [showMenu, setShowMenu] = useState<boolean>(false),
-          [token, setToken] = useState<boolean>(true),
-          navigate = useNavigate()
+          [token, setToken] = useState<boolean>(false),
+          navigate = useNavigate(),
+          location = useLocation()
+
+    console.log(location.pathname)
 
     return(
 
-        <nav className="flex justify-between items-center py-4 mb-5 border-b text-sm border-b-gray-400">
+        <nav className="flex flexc justify-between items-center py-4 mb-5 border-b text-sm border-b-gray-400">
 
             <NavLink to="/">
             
@@ -67,7 +70,7 @@ const Navbar: React.FC = () =>{
 
                 {
 
-                    token ?
+                    token ?(
 
                         <div className="flex items-center gap-2 cursor-pointer group relative">
 
@@ -79,12 +82,18 @@ const Navbar: React.FC = () =>{
 
                         </div>
 
-                    :
+                    ):(
 
-                        <button 
-                            className="bg-primary-bg text-white px-8 py-3 rounded-full font-light hidden md:block"
-                            onClick={() => navigate("/login")}
-                        >Create Account</button>
+                        location.pathname !== "/login" ?(
+
+                            <button 
+                                className="bg-primary-bg text-white text-sm md:text-xl px-8 py-3 rounded-full font-light"
+                                onClick={() => navigate("/login")}
+                            >Login</button>
+
+                        ): null
+                        
+                    )
 
                 }
 
