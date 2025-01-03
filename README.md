@@ -311,3 +311,4 @@ Login page will be used to log in and sign up the user. A user can either log in
   5. Create a Sign Up component and mount it on the Login page if isSignUp is true
     a. Render the Sign Up title and description
     b. Create labels and inputs for email, password, confirm password and name
+    c. Make the inputs controlled components  

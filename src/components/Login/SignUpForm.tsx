@@ -1,3 +1,6 @@
+import { useContext } from "react"
+import { LoginContext } from "../../context/LoginContext"
+
 interface SignUpFormProps{
 
     setIsSignUp: React.Dispatch<React.SetStateAction<boolean>>
@@ -5,6 +8,12 @@ interface SignUpFormProps{
 }
 
 const SignUpForm: React.FC<SignUpFormProps> = ({ setIsSignUp }) =>{
+
+    const context = useContext(LoginContext)
+
+    if(!context) return null
+
+    const { name, setName, email, setEmail, password, setPassword, confirmPassword, setConfirmPassword } = context
 
     return(
 
@@ -28,6 +37,8 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ setIsSignUp }) =>{
                     name="name" 
                     id="name" 
                     className="w-full border border-zinc-600 rounded p-2 mt-1"
+                    value={name}
+                    onChange={e=> setName(e.target.value)}
                 />
 
                 <label htmlFor="email">Email:</label>
@@ -37,6 +48,8 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ setIsSignUp }) =>{
                     name="email" 
                     id="email"
                     className="w-full border border-zinc-600 rounded p-2 mt-1"
+                    value={email}
+                    onChange={e=> setEmail(e.target.value)}
                 />
 
                 <label htmlFor="password">Password:</label>
@@ -46,6 +59,8 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ setIsSignUp }) =>{
                     name="password" 
                     id="password" 
                     className="w-full border border-zinc-600 rounded p-2 mt-1"
+                    value={password}
+                    onChange={e=> setPassword(e.target.value)}
                 />
 
                 <label htmlFor="confirmPassword">Confirm Password:</label>
@@ -55,6 +70,8 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ setIsSignUp }) =>{
                     name="confirmPassword"
                     id="confirmPassword"
                     className="w-full border border-zinc-600 rounded p-2 mt-1"
+                    value={confirmPassword}
+                    onChange={e=> setConfirmPassword(e.target.value)}
                 />
 
             </div>
