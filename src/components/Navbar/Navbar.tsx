@@ -12,8 +12,6 @@ const Navbar: React.FC = () =>{
           navigate = useNavigate(),
           location = useLocation()
 
-    console.log(location.pathname)
-
     return(
 
         <nav className="flex flexc justify-between items-center py-4 mb-5 border-b text-sm border-b-gray-400">

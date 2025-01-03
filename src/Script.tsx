@@ -8,6 +8,7 @@ import BookingPage from "./pages/BookingPage"
 import ContactPage from "./pages/ContactPage"
 import ProfilePage from "./pages/ProfilePage"
 import { ProfileContextProvider } from "./context/ProfileContext"
+import LoginPage from "./pages/LoginPage"
 
 const Script: React.FC = () =>{
 
@@ -36,6 +37,8 @@ const Script: React.FC = () =>{
           <Route path="/profile" element={<ProfilePage/>}/>
 
           <Route path="/profile/:id" element={<ProfilePage/>}/>
+
+          <Route path="/login" element={<LoginPage/>}/>
 
         </Routes>
         

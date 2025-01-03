@@ -304,3 +304,7 @@ Login page will be used to log in and sign up the user. A user can either log in
 
   1. Create a button in the Navbar component to navigate to the Login page
       i. Set it in a conditional rendering to show only when the user is not logged in and the user is not on the Login page
+  
+  2. Create a Login Page and mount it on Script component and provide a route for it
+  3. Create a state variable for isSignUp and initialize it with true
+  4. Wrap the child components in the Login page with the LoginContext provider as the parent component
