@@ -7,7 +7,7 @@ interface SignInFormProps{
 
 }
 
-const SignInForm: React.FC<SignInFormProps> = ({ isSignUp }) =>{
+const SignInForm: React.FC<SignInFormProps> = ({ isSignUp, setIsSignUp }) =>{
 
     return(
 
@@ -22,6 +22,20 @@ const SignInForm: React.FC<SignInFormProps> = ({ isSignUp }) =>{
             </div>
 
             <FormInputs isSignUp={isSignUp}/>
+
+            <button 
+                className="bg-primary-bg text-secondary-bg px-12 py-4 text-xl rounded-md hover:bg-blue-600 transition-all duration-300 ease-in-out"
+                type="submit"
+            >Sign In</button>
+
+
+            <div className="flex items-center gap-4">
+
+                <p>Don't have an account?</p>
+
+                <span onClick={() => setIsSignUp(true)} className="cursor-pointer text-blue-500">Sign Up</span>
+
+            </div>
 
         </form>
 
