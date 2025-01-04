@@ -313,4 +313,6 @@ Login page will be used to log in and sign up the user. A user can either log in
     b. Create labels and inputs for email, password, confirm password and name
     c. Make the inputs controlled components  
     d. Add placeholders to the inputs and show password toggle icons
-    e. Create a component for the input labels and mount it on the Sign Up Form component
+    e. Create a component for the input labels and mount it on the Sign Up Form component 
+    f. Create a button and a function to handle the sign up button click
+    g. Create a span to switch to the Sign In component when the user already has an account
