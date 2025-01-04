@@ -316,3 +316,7 @@ Login page will be used to log in and sign up the user. A user can either log in
     e. Create a component for the input labels and mount it on the Sign Up Form component 
     f. Create a button and a function to handle the sign up button click
     g. Create a span to switch to the Sign In component when the user already has an account
+  
+  6. Create a Sign In component and mount it on the Login page if isSignUp is false
+     a. Render the Sign In title and description
+     b. On Form input components, create labels and inputs for both the Sign In and Sign Up components

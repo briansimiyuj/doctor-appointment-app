@@ -3,11 +3,12 @@ import FormInputs from "./FormInputs"
 
 interface SignUpFormProps{
 
+    isSignUp: boolean
     setIsSignUp: React.Dispatch<React.SetStateAction<boolean>>
 
 }
 
-const SignUpForm: React.FC<SignUpFormProps> = ({ setIsSignUp }) =>{
+const SignUpForm: React.FC<SignUpFormProps> = ({ isSignUp, setIsSignUp }) =>{
 
     const formSubmit = (e: FormEvent<HTMLFormElement>) =>{
     
@@ -28,7 +29,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ setIsSignUp }) =>{
             </div>
 
 
-           <FormInputs/>
+           <FormInputs isSignUp={isSignUp}/>
 
 
             <button 
