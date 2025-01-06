@@ -332,3 +332,4 @@ My appointments page will show the user's appointments. It will have a list of a
   2. Loop through the doctors array and create a card component and mount it on the My Appointments Page
     a. Create buttons to pay for the appointment and cancel it  
     b. Create Appointment photo component and mount it on the card component
+    c. Create Doctor information component and mount it on the card component
