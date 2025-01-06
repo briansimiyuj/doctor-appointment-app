@@ -17,6 +17,10 @@ body{
     @apply hidden;
 }
 
+#pay-btn{
+    color: var(--black) !important;
+}
+
 @media(max-width: 740px){
 
     nav .active li{

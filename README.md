@@ -329,3 +329,5 @@ Login page will be used to log in and sign up the user. A user can either log in
 My appointments page will show the user's appointments. It will have a list of appointments with the doctor's name, date, time, and location. The user will be able pay for the appointment and cancel it.
 
   1. Create a My Appointments Page and mount it on Script component and provide a route for it
+  2. Loop through the doctors array and create a card component and mount it on the My Appointments Page
+    a. Create buttons to pay for the appointment and cancel it  
