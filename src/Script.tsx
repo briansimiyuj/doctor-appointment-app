@@ -9,6 +9,7 @@ import ContactPage from "./pages/ContactPage"
 import ProfilePage from "./pages/ProfilePage"
 import { ProfileContextProvider } from "./context/ProfileContext"
 import LoginPage from "./pages/LoginPage"
+import MyAppointmentsPage from "./pages/MyAppointmentsPage"
 
 const Script: React.FC = () =>{
 
@@ -39,6 +40,8 @@ const Script: React.FC = () =>{
           <Route path="/profile/:id" element={<ProfilePage/>}/>
 
           <Route path="/login" element={<LoginPage/>}/>
+
+          <Route path="/bookings" element={<MyAppointmentsPage/>}/>
 
         </Routes>
         

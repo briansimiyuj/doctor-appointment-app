@@ -322,3 +322,10 @@ Login page will be used to log in and sign up the user. A user can either log in
      b. On Form input components, create labels and inputs for both the Sign In and Sign Up components
      c. Create a button and a function to handle the sign in button click
      d. Create a span to switch to the Sign Up component when the user does not have an account
+
+
+### My Appointments Page
+
+My appointments page will show the user's appointments. It will have a list of appointments with the doctor's name, date, time, and location. The user will be able pay for the appointment and cancel it.
+
+  1. Create a My Appointments Page and mount it on Script component and provide a route for it

@@ -8,7 +8,7 @@ import DropdownMenu from "./DropdownMenu"
 const Navbar: React.FC = () =>{
 
     const [showMenu, setShowMenu] = useState<boolean>(false),
-          [token, setToken] = useState<boolean>(false),
+          [token, setToken] = useState<boolean>(true),
           navigate = useNavigate(),
           location = useLocation()
 
