@@ -1,4 +1,5 @@
 import { DoctorType } from "../../assets/DoctorType"
+import AppointmentPhoto from "./AppointmentPhoto"
 
 type AppointmentCardProps ={
 
@@ -8,11 +9,13 @@ type AppointmentCardProps ={
 }
 
 
-const AppointmentCard: React.FC<AppointmentCardProps> = ({ key })=>{
+const AppointmentCard: React.FC<AppointmentCardProps> = ({ doctor, key })=>{
 
     return(
 
         <div key={key} className="grid grid-cols-1 gap-4 sm:items-center sm:flex sm:gap-6 py-2 border-b">
+
+            <AppointmentPhoto doctor={doctor}/>
 
             <div className="flex flex-col gap-2 justify-end">
 
