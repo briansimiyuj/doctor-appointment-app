@@ -1,9 +1,27 @@
+import { useEffect } from "react"
+
 const SettingsPage: React.FC = () =>{
     
     const toggleTheme = () =>{
 
-        document.documentElement.classList.toggle("dark")
+        const isDarkMode = document.documentElement.classList.toggle("dark")
+
+        localStorage.setItem("theme", isDarkMode ? "dark" : "light")
+
     }
+
+
+    useEffect(() =>{
+    
+       const savedTheme = localStorage.getItem("theme")
+
+        if(savedTheme === "dark"){
+            
+            document.documentElement.classList.add("dark")
+
+        }
+    
+    }, [])
 
     return(
 
