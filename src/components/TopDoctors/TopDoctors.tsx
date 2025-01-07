@@ -36,7 +36,7 @@ const TopDoctors: React.FC = ()=>{
             </div>
 
             <button
-                className="bg-blue-500 text-white px-12 mt-10 py-2 rounded-full hover:bg-blue-600 transition-all duration-300 ease-in-out"
+                className="bg-primary-bg text-white px-12 mt-10 py-2 rounded-full hover:bg-blue-600 transition-all duration-300 ease-in-out"
                 onClick={()=> navigate("/doctors")}
             >See More Doctors</button>
 

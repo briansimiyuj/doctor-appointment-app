@@ -134,8 +134,8 @@ body{
     background-color: var(--neutral-800);
 }
 
-[class*="bg-primary-bg"]{
-    color: #fff !important;
+.banner-text{
+    color: #fff;
 }
 
 .bg-white:not(:hover){
@@ -145,6 +145,18 @@ body{
 .hero-heading{
     color: #fff !important;
 }
+
+
+input{
+    background-color: var(--white);
+    color: var(--gray-900);
+    border-color: var(--gray-600);
+}
+
+input::placeholder{
+    color: var(--gray-500);
+}
+
 
 #pay-btn{
     color: var(--black) !important;
