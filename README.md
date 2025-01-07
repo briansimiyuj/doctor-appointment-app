@@ -343,3 +343,4 @@ Dark mode will be a toggleable feature that will change the color scheme of the 
   2. Create Settings page and mount it on Script component and provide a route for it
     a. Create a toggle button to toggle the dark mode on and off
     b. Add notifications settings
+    c. Set dark mode to localStorage
