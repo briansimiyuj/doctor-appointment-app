@@ -146,6 +146,18 @@ body{
     color: #fff !important;
 }
 
+
+input{
+    background-color: var(--white);
+    color: var(--gray-900);
+    border-color: var(--gray-600);
+}
+
+input::placeholder{
+    color: var(--gray-500);
+}
+
+
 #pay-btn{
     color: var(--black) !important;
 }
