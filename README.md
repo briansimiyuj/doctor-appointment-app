@@ -340,3 +340,6 @@ My appointments page will show the user's appointments. It will have a list of a
 Dark mode will be a toggleable feature that will change the color scheme of the app to dark mode. It will have a button to toggle the dark mode on and off.
 
   1. Apply dark mode color scheme to styles.css and components
+  2. Create Settings page and mount it on Script component and provide a route for it
+    a. Create a toggle button to toggle the dark mode on and off
+    b. Add notifications settings
