@@ -21,7 +21,7 @@ const EditFormInput: React.FC = () =>{
                     name="name" 
                     id="name" 
                     placeholder="Enter your name"
-                    className="w-[60%] p-2 rounded-md border border-gray-300"
+                    className="w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                     value={nameValue}
                     onChange={handleInputChange}                 
                 />
@@ -38,7 +38,7 @@ const EditFormInput: React.FC = () =>{
                     name="email" 
                     id="email" 
                     placeholder="Enter your email"
-                    className="w-[60%] p-2 rounded-md border border-gray-300"
+                    className="w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                     value={emailValue}
                     onChange={handleInputChange}
                 />
@@ -55,7 +55,7 @@ const EditFormInput: React.FC = () =>{
                     name="phone" 
                     id="phone" 
                     placeholder="Enter your phone"
-                    className="w-[60%] p-2 rounded-md border border-gray-300"
+                    className="w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                     value={phoneValue} 
                     onChange={handleInputChange}
                 />

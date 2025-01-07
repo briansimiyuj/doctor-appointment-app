@@ -5,16 +5,145 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+@layer base{
+
+    :root{
+        --primary-bg: #007BFF;
+        --secondary-bg: #F8F9FA;
+        --primary-text: #212529;
+        --secondary-text: #6C757D;
+        --gray-500: #6B7280;
+        --gray-600: #4B5563;
+        --gray-700: #374151;
+        --gray-800: #1F2937;
+        --gray-900: #111827;
+        --white: #FFF;
+        --black: #000;
+        --stone-100: #F7FAFC;
+        --stone-500: #78716C;
+        --neutral-700: #404040;
+        --neutral-800: #262626;
+        --zinc-600: #52525B;
+        --zinc-700: #3F3F46;
+    
+        &.dark{
+            --primary-bg: #1C1C1E;
+            --secondary-bg: #2C2C2E;
+            --primary-text: #F2F2F2;
+            --secondary-text: #A0A0A5;
+            --gray-500: #9CA3AF;
+            --gray-600: #D1D5DB;  
+            --gray-700: #E5E7EB;
+            --gray-800: #F3F4F6;
+            --gray-900: #F9FAFB;
+            --white: #2C2C2E;
+            --black: #FFF;
+            --stone-100: #292524;
+            --stone-500: #A8A29E;
+            --neutral-700: #E5E5E5;
+            --neutral-800: #F5F5F5;  
+            --zinc-600: #D4D4D8;
+            --zinc-700: #E4E4E7;
+
+            body{
+                background-color: var(--primary-bg);
+            }
+    
+        }
+
+    }
+    
+    
+}
+
+*{  
     scrollbar-width: none;
 }
 
 body{
     font-family: "Roboto", sans-serif;
+    color: var(--primary-text);
 }
 
 ::-webkit-scrollbar{
     @apply hidden;
+}
+
+.btn-primary-bg{
+    color: var(--white);    
+}
+
+.text-gray-500{
+    color: var(--gray-500);
+}
+
+.text-gray-600{
+    color: var(--gray-600);
+}
+
+.text-gray-700{
+    color: var(--gray-700);
+}
+
+.text-gray-800{
+    color: var(--gray-800);
+}
+
+.text-gray-900{
+    color: var(--gray-900);
+}
+
+.bg-white{
+    background-color: var(--white);
+}
+
+.border-black{
+    border-color: var(--black);
+    background-color: var(--black);
+}
+
+.text-white:not([class*="bg-primary-bg"]){
+    color: var(--white);
+}
+
+.bg-stone-100{
+    background-color: var(--stone-100);
+}
+
+.text-stone-500{
+    color: var(--stone-500);
+}
+
+.text-neutral-800{
+    color: var(--neutral-800);
+}
+
+.text-neutral-700{
+    color: var(--neutral-700);
+}
+
+.text-zinc-600{
+    color: var(--zinc-600);
+}
+
+.text-zinc-700{
+    color: var(--zinc-700);
+}
+
+.bg-neutral-800{
+    background-color: var(--neutral-800);
+}
+
+[class*="bg-primary-bg"]{
+    color: #fff !important;
+}
+
+.bg-white:not(:hover){
+    color: var(--secondary-text) !important;
+}
+
+.hero-heading{
+    color: #fff !important;
 }
 
 #pay-btn{
