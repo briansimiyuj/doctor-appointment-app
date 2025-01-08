@@ -68,6 +68,19 @@ export const useBookingSlots = ()=>{
     
     }
 
+
+    const handleSlotIndexChange = (index: number) =>{
+    
+       console.log('Setting new slot index:', index)
+
+       setSlotIndex(index)
+
+       setSlotTime('')
+
+       getAvailableSlots()
+    
+    }
+
      
     useEffect(() =>{
 
@@ -76,6 +89,6 @@ export const useBookingSlots = ()=>{
     }, [doctorInfo])
 
 
-    return { doctorSlots, slotIndex, setSlotIndex, slotTime, setSlotTime, days }
+    return { doctorSlots, slotIndex, setSlotIndex: handleSlotIndexChange, slotTime, setSlotTime, days }
 
 }

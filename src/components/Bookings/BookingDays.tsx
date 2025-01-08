@@ -4,6 +4,18 @@ const BookingDays: React.FC = ()=>{
 
     const { doctorSlots, slotIndex, setSlotIndex, days } = useBookingSlots()   
 
+    const handleDayClick = (index: number) =>{
+    
+       console.log('Previous slot index:', slotIndex)
+
+       console.log('New slot index:', index)
+
+       console.log('Available slots:', doctorSlots[index])
+
+       setSlotIndex(index)
+    
+    }
+
     return(
 
         <div className="flex items-center gap-3 justify-around w-full h-full overflow-y-auto md:overflow-visible mt-4 flex-col sm:flex-row md:flex-col lg:flex-row">
@@ -16,7 +28,7 @@ const BookingDays: React.FC = ()=>{
                     <div
                        key={index}
                        className={`text-center py-6 lg:px-6 p-6 lg:p-30 sm:text-2xl lg:text-xl min-w-16  rounded-full cursor-pointer ${slotIndex === index ? 'bg-primary-bg text-white' : 'border border-gray-400'}`}
-                       onClick={()=>setSlotIndex(index)}
+                       onClick={()=> handleDayClick(index)}
                     >
 
                         <p>
