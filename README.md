@@ -203,6 +203,10 @@ Booking page will have doctor details, booking slots and related doctors.
     vi. Update the doctorSlots state with the time slots array
     vii. Run getAvailableSlots function when the doctor info is updated
 
+    #### Time slot management
+
+      1. Check if dynamic time slot management is updating based on day selection
+
 #### Booking Slots Component
 
   1. Create Booking Days component and mount it on Booking Slots component
