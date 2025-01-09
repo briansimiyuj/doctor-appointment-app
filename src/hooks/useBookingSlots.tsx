@@ -70,8 +70,8 @@ export const useBookingSlots = ()=>{
 
 
     const handleSlotIndexChange = (index: number) =>{
-    
-       console.log('Setting new slot index:', index)
+        
+       console.log('Available slots for selected day:', doctorSlots[index]?.length)
 
        setSlotIndex(index)
 
