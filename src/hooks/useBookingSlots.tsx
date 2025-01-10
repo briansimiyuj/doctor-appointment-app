@@ -6,17 +6,15 @@ import { TimeSlotType } from "../assets/TimeSlotType"
 export const useBookingSlots = ()=>{
 
     const [doctorSlots, setDoctorSlots] = useState<TimeSlotType[][]>([]),
-          [slotIndex, setSlotIndex] = useState(0),
           [slotTime, setSlotTime] = useState(''),
-          { doctorInfo } = useContext(BookingContext),
+          { doctorInfo, slotIndex, setSlotIndex } = useContext(BookingContext),
           days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
 
     const getAvailableSlots = async(): Promise<void> =>{
-    
-        setDoctorSlots([])
 
-        let today = new Date()
+        let today = new Date(),
+            allSlots: TimeSlotType[][] = []
 
         for(let i =0; i < days.length; i++){
 
@@ -30,17 +28,25 @@ export const useBookingSlots = ()=>{
             endTime.setHours(21, 0, 0, 0)
 
 
-            if(today.getDate() === currentTime.getDate()){
+            if(i === 0){
 
-                currentTime.setHours(currentTime.getHours() > 8 ? currentTime.getHours() + 1 : 8)
+                if(currentTime.getHours() < 8){
 
-                currentTime.setMinutes(currentTime.getMinutes() > 30 ? 0: 30)
+                    currentTime.setHours(8, 0, 0, 0)
 
-            }else{
+                }else{
+                    
+                    let minutes = currentTime.getMinutes(),
+                        nextSlotMinutes = minutes < 30 ? 30 : 0,
+                        nextSlotHours = minutes >= 30 ? currentTime.getHours() + 1 : currentTime.getHours()
 
-                currentTime.setHours(8)
+                    currentTime.setHours(nextSlotHours, nextSlotMinutes, 0, 0)
 
-                currentTime.setMinutes(0)
+                }
+
+            }else{                
+
+                currentTime.setHours(8, 0, 0, 0)
 
             }
 
@@ -62,17 +68,17 @@ export const useBookingSlots = ()=>{
 
             }
 
-            setDoctorSlots(prev => [...prev, timeSlots])
+            allSlots.push(timeSlots)
             
         }
+
+        setDoctorSlots(allSlots)
     
     }
 
 
     const handleSlotIndexChange = (index: number) =>{
         
-       console.log('Available slots for selected day:', doctorSlots[index]?.length)
-
        setSlotIndex(index)
 
        setSlotTime('')
