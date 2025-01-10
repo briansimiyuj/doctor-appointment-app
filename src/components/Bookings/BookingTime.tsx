@@ -1,26 +1,18 @@
-import {  useEffect } from "react"
 import { useBookingSlots } from "../../hooks/useBookingSlots"
 
 const BookingTime: React.FC = ()=>{
 
     const { doctorSlots, slotIndex, slotTime, setSlotTime } = useBookingSlots()
-
-    useEffect(() =>{
-    
-       console.log('Slot index:', slotIndex)
-
-    }, [slotIndex])
     
     
 
     return(
 
-        <div className="w-full">
+        <div className="w-full h-full">
 
-            <div className="relative">
+            <div className="relative h-full overflow-y-auto">
 
-
-                <div className="flex flex-col lg:flex-row items-center gap-5 pb-4 px-16 w-full overflow-x-scroll mt-4 overflow-scroll scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 scroll-smooth">
+                <div className="flex flex-col  h-full  lg:flex-row items-center gap-5 pb-4 px-16 w-full overflow-x-scroll mt-4 overflow-scroll scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 scroll-smooth">
 
                     {
 
