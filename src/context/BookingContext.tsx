@@ -7,6 +7,8 @@ interface BookingContextProps{
 
     doctorInfo: DoctorType | null
     doctorID: string | null
+    slotIndex: number
+    setSlotIndex: (index: number) => void
 
 }
 
@@ -19,7 +21,9 @@ interface BookingContextProviderProps{
 export const BookingContext = createContext<BookingContextProps>({
     
     doctorID: null,
-    doctorInfo: null
+    doctorInfo: null,
+    slotIndex: 0,
+    setSlotIndex: () => {}
 
 })
 
@@ -27,7 +31,8 @@ export const BookingContext = createContext<BookingContextProps>({
 export const BookingContextProvider =  ({ children }: BookingContextProviderProps) =>{
 
     const { doctorID } = useParams(),
-          [doctorInfo, setDoctorInfo] = useState<DoctorType | null>(null)
+          [doctorInfo, setDoctorInfo] = useState<DoctorType | null>(null),
+          [slotIndex, setSlotIndex] = useState(0)
 
 
     const fetchDocInfo = () =>{
@@ -48,7 +53,12 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
 
     return(
 
-        <BookingContext.Provider value={{ doctorInfo, doctorID: doctorID || null }}>
+        <BookingContext.Provider value={{
+            doctorInfo, 
+            doctorID: doctorID || null, 
+            slotIndex,
+            setSlotIndex
+        }}>
         
             {children}
         
