@@ -9,7 +9,7 @@ const BookingSlots: React.FC = ()=>{
 
             <h2>Booking Slots</h2>
 
-            <div className="flex lg:flex-col gap-4 ">
+            <div className="flex lg:flex-col gap-4 h-[900px] lg:h-[300px] overflow-hidden">
 
                 <BookingDays/>
 
