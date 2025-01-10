@@ -5,12 +5,6 @@ const BookingDays: React.FC = ()=>{
     const { doctorSlots, slotIndex, setSlotIndex, days } = useBookingSlots()   
 
     const handleDayClick = (index: number) =>{
-    
-       console.log('Previous slot index:', slotIndex)
-
-       console.log('New slot index:', index)
-
-       console.log('Available slots:', doctorSlots[index])
 
        setSlotIndex(index)
     
