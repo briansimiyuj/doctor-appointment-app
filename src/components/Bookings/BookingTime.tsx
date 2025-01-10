@@ -1,21 +1,17 @@
-import { useEffect, useState } from "react"
+import {  useEffect } from "react"
 import { useBookingSlots } from "../../hooks/useBookingSlots"
-import { TimeSlotType } from "../../assets/TimeSlotType"
 
 const BookingTime: React.FC = ()=>{
 
-    const { doctorSlots, slotIndex, slotTime, setSlotTime } = useBookingSlots(),
-    [currentDaySlots, setCurrentDaySlots] = useState<TimeSlotType[][]>([])
-
+    const { doctorSlots, slotIndex, slotTime, setSlotTime } = useBookingSlots()
 
     useEffect(() =>{
     
-        console.log('Current slots:', doctorSlots[slotIndex])
+       console.log('Slot index:', slotIndex)
 
-        console.log('Current slot time:', slotTime)
-
+    }, [slotIndex])
     
-    }, [slotIndex, doctorSlots, slotTime])
+    
 
     return(
 
