@@ -222,7 +222,7 @@ Booking page will have doctor details, booking slots and related doctors.
     
   2. Create Booking Time component and mount it on Booking Slots component
     a. Map through the time slots and create a card for each time slot
-    b. Add a scroll functionality
+    b. Add a scroll functionality (fixed)
     c. Check if time slots are being updated based on day selection
     
   3. Create a Booking Button
