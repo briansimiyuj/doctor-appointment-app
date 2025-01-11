@@ -157,6 +157,7 @@ Booking context will be used to store the booking data and provide it to the Boo
   2. Set a state variable to store the doctor info
   3. Fetch and update the doctor info whenever the doctorID and doctors array changes
   4. Set a state variable to store slot index
+  5. Set a state to store selected time slot and initialize it with empty array
 
 
 ### Booking Page
@@ -197,7 +198,7 @@ Booking page will have doctor details, booking slots and related doctors.
           3. Set current time and end time to today + i days
           4. Set end time hours to 21:00
           5. For today (i=0): if current hour < 8, set to 8:00; else calculate next 30-min slot
-          6. For other days: set start time to 8:00
+          6. For other days:/ set start time to 8:00
           7. Create time slots array and populate with 30-minute intervals until end time
 
 
@@ -209,6 +210,7 @@ Booking page will have doctor details, booking slots and related doctors.
     
     vi. Update the doctorSlots state with the time slots array
     vii. Run getAvailableSlots function when the doctor info is updated
+    viii. Create a function to handle the slot selection
 
     #### Time slot management
 
@@ -217,11 +219,11 @@ Booking page will have doctor details, booking slots and related doctors.
 #### Booking Slots Component
 
   1. Create Booking Days component and mount it on Booking Slots component
-    a. Map through the days of the week and create a card for each day
+    a. Map through the days of the week and create a card for each day (form input)
     b. Add a click event listener to each card that will set the slotIndex to the index of the day
     
   2. Create Booking Time component and mount it on Booking Slots component
-    a. Map through the time slots and create a card for each time slot
+    a. Map through the time slots and create a card for each time slot (form input)
     b. Add a scroll functionality (fixed)
     c. Check if time slots are being updated based on day selection
     
