@@ -22,10 +22,14 @@ export default {
 
       gridTemplateColumns:{
         "auto": "repeat(auto-fill, minmax(250px, 1fr))",
+      },
+
+      screens:{
+        'xs': '371px',
+        // ... other breakpoints
       }
 
-    },
-  },
+    },  },
   plugins: [
       require('tailwind-scrollbar'),
   ],
