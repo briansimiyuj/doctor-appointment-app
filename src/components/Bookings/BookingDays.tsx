@@ -6,6 +6,15 @@ const BookingDays: React.FC = () =>{
 
     const handleDayClick = (index: number) =>{
 
+        const selectedDay = doctorSlots[index][0]
+
+        console.log('Selected day', {
+
+            day: days[selectedDay.dateTime.getDay()],
+            date: selectedDay.dateTime.getDate(),
+
+        })
+
         setSlotIndex(index)
 
     }
