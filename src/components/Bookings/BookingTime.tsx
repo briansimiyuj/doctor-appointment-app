@@ -1,8 +1,25 @@
+import { useEffect } from "react"
+import { TimeSlotType } from "../../assets/TimeSlotType"
 import { useBookingSlots } from "../../hooks/useBookingSlots"
 
 const BookingTime: React.FC = ()=>{
 
     const { doctorSlots, slotIndex, slotTime, setSlotTime } = useBookingSlots()
+
+    const handleTimeChange = (slot: TimeSlotType) =>{
+    
+        setSlotTime(slot.time)
+
+        // console.log('Selected time:', slotTime)
+    
+    }
+
+
+    useEffect(() =>{
+    
+       console.log('Updated time:', slotTime)
+
+    }, [slotTime])
     
     return(
 
@@ -26,8 +43,7 @@ const BookingTime: React.FC = ()=>{
                                     name="bookingTime"
                                     value={slot.time}
                                     checked={slot.time === slotTime}
-                                    onChange={()=> setSlotTime(slot.time)}
-                                    className="hidden"
+                                    onChange={() => handleTimeChange(slot)}                        className="hidden"
                                 />
 
                                 {slot.time}
