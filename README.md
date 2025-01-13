@@ -226,6 +226,7 @@ Booking page will have doctor details, booking slots and related doctors.
     a. Map through the time slots and create a card for each time slot (form input)
     b. Add a scroll functionality (fixed)
     c. Check if time slots are being updated based on day selection
+    d. Add a click event listener to each card that will set the slotTime to the time of the card
     
   3. Create a Booking Button
 
