@@ -352,6 +352,15 @@ My appointments page will show the user's appointments. It will have a list of a
     c. Create Doctor information component and mount it on the card component
 
 
+    #### Appointed Doctors
+
+    Appointed doctors will be a list of doctors that the user has an appointment with. It will have a list of doctors with the doctor's name, date, time, and location. The user will be able to cancel the appointment.
+
+      1. Create a type for Appointed Doctors
+      2. Create a state variable for the appointed doctors and initialize it with an empty array and pass as props
+      3. If doctor info and selected time slot is available, add the doctor to the appointed doctors array
+
+
 ### Dark Mode
 
 Dark mode will be a toggleable feature that will change the color scheme of the app to dark mode. It will have a button to toggle the dark mode on and off.

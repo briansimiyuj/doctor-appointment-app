@@ -3,6 +3,7 @@ import { DoctorType } from "../assets/types/DoctorType";
 import { useParams } from "react-router-dom";
 import { doctors } from "../assets/frontend/assets";
 import { TimeSlotType } from "../assets/types/TimeSlotType";
+import { AppointedDoctorType } from "../assets/types/AppointedDoctorType";
 
 interface BookingContextProps{
 
@@ -14,6 +15,8 @@ interface BookingContextProps{
     setSlotTime: (time: string) => void
     selectedTimeSlot: TimeSlotType | null
     setSelectedTimeSlot: (slot: TimeSlotType | null) => void
+    appointedDoctors: AppointedDoctorType[]
+    setAppointedDoctors: (doctors: AppointedDoctorType[]) => void
 
 }
 
@@ -32,7 +35,9 @@ export const BookingContext = createContext<BookingContextProps>({
     slotTime: '',
     setSlotTime: () => {},
     selectedTimeSlot: null,
-    setSelectedTimeSlot: () => {}
+    setSelectedTimeSlot: () => {},
+    appointedDoctors: [],
+    setAppointedDoctors: () => {}
 
 })
 
@@ -43,7 +48,8 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
           [doctorInfo, setDoctorInfo] = useState<DoctorType | null>(null),
           [slotIndex, setSlotIndex] = useState(0),
           [slotTime, setSlotTime] = useState(''),
-          [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlotType | null>(null)
+          [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlotType | null>(null),
+          [appointedDoctors, setAppointedDoctors] = useState<AppointedDoctorType[]>([])
 
 
     const fetchDocInfo = () =>{
@@ -72,7 +78,9 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
             slotTime,
             setSlotTime,
             selectedTimeSlot,
-            setSelectedTimeSlot
+            setSelectedTimeSlot,
+            appointedDoctors,
+            setAppointedDoctors
         }}>
         
             {children}
