@@ -158,6 +158,7 @@ Booking context will be used to store the booking data and provide it to the Boo
   3. Fetch and update the doctor info whenever the doctorID and doctors array changes
   4. Set a state variable to store slot index
   5. Set a state to store selected time slot and initialize it with empty array
+  6. Set a state to store slot time and initialize it with empty string
 
 
 ### Booking Page
@@ -229,6 +230,7 @@ Booking page will have doctor details, booking slots and related doctors.
     d. Add a click event listener to each card that will set the slotTime to the time of the card
     
   3. Create a Booking Button
+  4. Create a submit function that will book the appointment
 
 #### Related Doctors Component
 
