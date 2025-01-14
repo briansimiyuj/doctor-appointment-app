@@ -1,4 +1,4 @@
-import { TimeSlotType } from "../../assets/TimeSlotType"
+import { TimeSlotType } from "../../assets/types/TimeSlotType"
 import { useBookingSlots } from "../../hooks/useBookingSlots"
 
 const BookingTime: React.FC = ()=>{

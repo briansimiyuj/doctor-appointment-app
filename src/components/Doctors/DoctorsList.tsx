@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { DoctorType } from "../../assets/DoctorType"
+import { DoctorType } from "../../assets/types/DoctorType"
 import { doctors } from "../../assets/frontend/assets"
 import DoctorCard from "./DoctorCard"
 

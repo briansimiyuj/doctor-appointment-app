@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { UserData } from "../assets/ProfileType"
+import { UserData } from "../assets/types/ProfileType"
 import { ProfileContext } from "../context/ProfileContext"
 
 export const useEditFormInput = ()=>{

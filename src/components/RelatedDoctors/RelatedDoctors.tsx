@@ -1,5 +1,5 @@
     import { useContext, useEffect, useState } from "react"
-import { DoctorType } from "../../assets/DoctorType"
+import { DoctorType } from "../../assets/types/DoctorType"
 import { BookingContext } from "../../context/BookingContext"
 import { doctors } from "../../assets/frontend/assets"
 import TopDoctorsCard from "../TopDoctors/TopDoctorsCard"
