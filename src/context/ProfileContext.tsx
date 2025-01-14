@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { UserData } from "../assets/ProfileType";
+import { UserData } from "../assets/types/ProfileType";
 import { assets } from "../assets/frontend/assets";
 
 interface ProfileContextType{

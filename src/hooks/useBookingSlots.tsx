@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { BookingContext } from "../context/BookingContext"
-import { TimeSlotType } from "../assets/TimeSlotType"
+import { TimeSlotType } from "../assets/types/TimeSlotType"
 
 
 export const useBookingSlots = ()=>{
