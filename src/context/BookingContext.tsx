@@ -1,8 +1,8 @@
 import { createContext, useEffect, useState } from "react";
-import { DoctorType } from "../assets/DoctorType";
+import { DoctorType } from "../assets/types/DoctorType";
 import { useParams } from "react-router-dom";
 import { doctors } from "../assets/frontend/assets";
-import { TimeSlotType } from "../assets/TimeSlotType";
+import { TimeSlotType } from "../assets/types/TimeSlotType";
 
 interface BookingContextProps{
 

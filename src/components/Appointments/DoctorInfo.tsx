@@ -1,4 +1,4 @@
-import { DoctorType } from "../../assets/DoctorType"
+import { DoctorType } from "../../assets/types/DoctorType"
 
 type DoctorInfoProps ={
 
