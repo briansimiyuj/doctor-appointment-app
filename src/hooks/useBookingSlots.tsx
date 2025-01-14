@@ -6,9 +6,9 @@ import { TimeSlotType } from "../assets/TimeSlotType"
 export const useBookingSlots = ()=>{
 
     const [doctorSlots, setDoctorSlots] = useState<TimeSlotType[][]>([]),
-          [slotTime, setSlotTime] = useState(''),
-          { doctorInfo, slotIndex, setSlotIndex } = useContext(BookingContext),
-          days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+          { doctorInfo, slotIndex, setSlotIndex, selectedTimeSlot, setSelectedTimeSlot, slotTime, setSlotTime } = useContext(BookingContext),
+          days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+          selectedDate = doctorSlots[slotIndex]?.[0].dateTime
 
 
     const getAvailableSlots = async(): Promise<void> =>{
@@ -70,7 +70,7 @@ export const useBookingSlots = ()=>{
 
             allSlots.push(timeSlots)
             
-        }
+        }       
 
         setDoctorSlots(allSlots)
     
@@ -87,6 +87,34 @@ export const useBookingSlots = ()=>{
     
     }
 
+
+    const handleTimeSlotSelection = (slot: TimeSlotType) =>{
+    
+        const selectedSlot = doctorSlots[slotIndex]?.find(timeSlot => timeSlot.time === slot.time)
+
+        if(selectedSlot){
+            
+            setSelectedTimeSlot(selectedSlot)
+
+            setSlotTime(slot.time)
+
+            console.log('Selected slot:', selectedSlot)
+        
+        }
+
+    }
+
+
+    useEffect(() =>{
+    
+        if(selectedTimeSlot){
+
+            handleTimeSlotSelection(selectedTimeSlot)
+            
+        }
+    
+    }, [slotTime, selectedDate])
+
      
     useEffect(() =>{
 
@@ -95,6 +123,16 @@ export const useBookingSlots = ()=>{
     }, [doctorInfo])
 
 
-    return { doctorSlots, slotIndex, setSlotIndex: handleSlotIndexChange, slotTime, setSlotTime, days }
+    return{ 
+
+        doctorSlots, 
+        slotIndex, 
+        setSlotIndex: handleSlotIndexChange, 
+        slotTime, 
+        setSlotTime, 
+        days,
+        handleTimeSlotSelection,
+        selectedTimeSlot
+    }
 
 }
