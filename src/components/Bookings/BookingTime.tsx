@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import { TimeSlotType } from "../../assets/TimeSlotType"
 import { useBookingSlots } from "../../hooks/useBookingSlots"
 
@@ -9,17 +8,8 @@ const BookingTime: React.FC = ()=>{
     const handleTimeChange = (slot: TimeSlotType) =>{
     
         setSlotTime(slot.time)
-
-        // console.log('Selected time:', slotTime)
     
     }
-
-
-    useEffect(() =>{
-    
-       console.log('Updated time:', slotTime)
-
-    }, [slotTime])
     
     return(
 
