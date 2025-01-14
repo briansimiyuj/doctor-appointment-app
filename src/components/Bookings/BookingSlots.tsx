@@ -18,8 +18,6 @@ const BookingSlots: React.FC = ()=>{
         if(currentSelectedSlot){
         
             handleTimeSlotSelection(currentSelectedSlot)
-
-            console.log('Form submitted with selected slot:', currentSelectedSlot)
     
         }
         
