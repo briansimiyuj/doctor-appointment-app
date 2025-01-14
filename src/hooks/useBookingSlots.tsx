@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react"
 import { BookingContext } from "../context/BookingContext"
 import { TimeSlotType } from "../assets/types/TimeSlotType"
+import { AppointedDoctorType } from "../assets/types/AppointedDoctorType"
 
 
 export const useBookingSlots = ()=>{
 
     const [doctorSlots, setDoctorSlots] = useState<TimeSlotType[][]>([]),
-          { doctorInfo, slotIndex, setSlotIndex, selectedTimeSlot, setSelectedTimeSlot, slotTime, setSlotTime } = useContext(BookingContext),
+          { doctorInfo, slotIndex, setSlotIndex, selectedTimeSlot, setSelectedTimeSlot, slotTime, setSlotTime, appointedDoctors, setAppointedDoctors } = useContext(BookingContext),
           days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
           selectedDate = doctorSlots[slotIndex]?.[0].dateTime
 
@@ -89,16 +90,35 @@ export const useBookingSlots = ()=>{
 
 
     const handleTimeSlotSelection = (slot: TimeSlotType) =>{
-    
+        
         const selectedSlot = doctorSlots[slotIndex]?.find(timeSlot => timeSlot.time === slot.time)
+        
+        
+        if(doctorInfo){
+
+            const newAppointment: AppointedDoctorType ={
+
+                doctorInfo,
+                appointmentTime: slot
+
+            }
+
+
+            const updatedAppointments = [...appointedDoctors, newAppointment]
+
+            setAppointedDoctors(updatedAppointments)
+
+            console.log('Appointed doctors:', appointedDoctors)
+
+            localStorage.setItem("appointedDoctors", JSON.stringify(updatedAppointments))
+
+        }
 
         if(selectedSlot){
             
             setSelectedTimeSlot(selectedSlot)
 
             setSlotTime(slot.time)
-
-            console.log('Selected slot:', selectedSlot)
         
         }
 
@@ -123,6 +143,17 @@ export const useBookingSlots = ()=>{
     }, [doctorInfo])
 
 
+    useEffect(() =>{
+    
+        if(appointedDoctors.length > 0){
+
+            console.log('New appointment:', appointedDoctors[appointedDoctors.length - 1])
+
+        }
+    
+    }, [appointedDoctors])
+
+
     return{ 
 
         doctorSlots, 
@@ -132,7 +163,9 @@ export const useBookingSlots = ()=>{
         setSlotTime, 
         days,
         handleTimeSlotSelection,
-        selectedTimeSlot
+        selectedTimeSlot,
+        appointedDoctors
+
     }
 
 }
