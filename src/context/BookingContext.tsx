@@ -49,7 +49,14 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
           [slotIndex, setSlotIndex] = useState(0),
           [slotTime, setSlotTime] = useState(''),
           [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlotType | null>(null),
-          [appointedDoctors, setAppointedDoctors] = useState<AppointedDoctorType[]>([])
+         
+            [appointedDoctors, setAppointedDoctors] = useState<AppointedDoctorType[]>(() =>{
+
+                const storedAppointedDoctors = localStorage.getItem("appointedDoctors")
+
+                return storedAppointedDoctors ? JSON.parse(storedAppointedDoctors) : []
+
+            })
 
 
     const fetchDocInfo = () =>{

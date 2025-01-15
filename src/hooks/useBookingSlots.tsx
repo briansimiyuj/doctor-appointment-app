@@ -108,9 +108,9 @@ export const useBookingSlots = ()=>{
 
             setAppointedDoctors(updatedAppointments)
 
-            console.log('Appointed doctors:', appointedDoctors)
-
             localStorage.setItem("appointedDoctors", JSON.stringify(updatedAppointments))
+
+            console.log('Updated appointments:', updatedAppointments)
 
         }
 
@@ -141,17 +141,6 @@ export const useBookingSlots = ()=>{
         getAvailableSlots()
 
     }, [doctorInfo])
-
-
-    useEffect(() =>{
-    
-        if(appointedDoctors.length > 0){
-
-            console.log('New appointment:', appointedDoctors[appointedDoctors.length - 1])
-
-        }
-    
-    }, [appointedDoctors])
 
 
     return{ 

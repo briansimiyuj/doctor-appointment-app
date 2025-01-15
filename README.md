@@ -159,6 +159,7 @@ Booking context will be used to store the booking data and provide it to the Boo
   4. Set a state variable to store slot index
   5. Set a state to store selected time slot and initialize it with empty array
   6. Set a state to store slot time and initialize it with empty string
+  7. Set a state to store appointed doctors and initialize it with data from local storage
 
 
 ### Booking Page
@@ -212,6 +213,7 @@ Booking page will have doctor details, booking slots and related doctors.
     vi. Update the doctorSlots state with the time slots array
     vii. Run getAvailableSlots function when the doctor info is updated
     viii. Create a function to handle the slot selection
+      - Add the selected time slot to local storage
 
     #### Time slot management
 
