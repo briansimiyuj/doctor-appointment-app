@@ -16,7 +16,7 @@ interface BookingContextProps{
     selectedTimeSlot: TimeSlotType | null
     setSelectedTimeSlot: (slot: TimeSlotType | null) => void
     appointedDoctors: AppointedDoctorType[]
-    setAppointedDoctors: (doctors: AppointedDoctorType[]) => void
+    setAppointedDoctors: (doctors: AppointedDoctorType[] | ((prev: AppointedDoctorType[]) => AppointedDoctorType[])) => void
 
 }
 
@@ -58,6 +58,16 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
 
             })
 
+    
+    useEffect(() =>{
+
+        console.log('BookingContext: appointedDoctors updated', appointedDoctors)
+
+        localStorage.setItem("appointedDoctors", JSON.stringify(appointedDoctors))
+
+    }, [appointedDoctors])
+            
+
 
     const fetchDocInfo = () =>{
     
@@ -66,6 +76,20 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
        setDoctorInfo(docInfo)
     
     }
+
+
+
+    useEffect(() =>{
+        
+        const storedAppointedDoctors = localStorage.getItem("appointedDoctors")
+
+        if(storedAppointedDoctors){
+            
+            setAppointedDoctors(JSON.parse(storedAppointedDoctors))
+
+        }
+
+    }, [])
 
     
     useEffect(() =>{

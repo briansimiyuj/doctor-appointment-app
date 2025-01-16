@@ -104,13 +104,20 @@ export const useBookingSlots = ()=>{
             }
 
 
-            const updatedAppointments = [...appointedDoctors, newAppointment]
+            setAppointedDoctors((prevAppointments: AppointedDoctorType[]) =>{
 
-            setAppointedDoctors(updatedAppointments)
+                const updatedAppointments: AppointedDoctorType[] = [...prevAppointments, newAppointment]
 
-            localStorage.setItem("appointedDoctors", JSON.stringify(updatedAppointments))
+                localStorage.setItem("appointedDoctors", JSON.stringify(updatedAppointments))
+               
+                console.log('Updated appointments:', updatedAppointments)
 
-            console.log('Updated appointments:', updatedAppointments)
+                return updatedAppointments
+
+            })
+            
+
+            console.log('Appointed doctors:', appointedDoctors)
 
         }
 

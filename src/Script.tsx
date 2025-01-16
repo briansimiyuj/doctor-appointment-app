@@ -11,6 +11,7 @@ import { ProfileContextProvider } from "./context/ProfileContext"
 import LoginPage from "./pages/LoginPage"
 import MyAppointmentsPage from "./pages/MyAppointmentsPage"
 import SettingsPage from "./pages/SettingsPage"
+import { BookingContextProvider } from "./context/BookingContext"
 
 const Script: React.FC = () =>{
 
@@ -42,7 +43,15 @@ const Script: React.FC = () =>{
 
           <Route path="/login" element={<LoginPage/>}/>
 
-          <Route path="/bookings" element={<MyAppointmentsPage/>}/>
+          <Route path="/bookings" element={
+            
+            <BookingContextProvider>
+
+              <MyAppointmentsPage/>
+
+            </BookingContextProvider>
+
+          }/>
 
           <Route path="/settings" element={<SettingsPage/>}/>
 

@@ -347,7 +347,7 @@ Login page will be used to log in and sign up the user. A user can either log in
 
 My appointments page will show the user's appointments. It will have a list of appointments with the doctor's name, date, time, and location. The user will be able pay for the appointment and cancel it.
 
-  1. Create a My Appointments Page and mount it on Script component and provide a route for it
+  1. Create a My Appointments Page and mount it on Script component and provide a route for it. Wrap the route with BookingContextProvider
   2. Loop through the doctors array and create a card component and mount it on the My Appointments Page
     a. Create buttons to pay for the appointment and cancel it  
     b. Create Appointment photo component and mount it on the card component
@@ -360,7 +360,11 @@ My appointments page will show the user's appointments. It will have a list of a
 
       1. Create a type for Appointed Doctors
       2. Create a state variable for the appointed doctors and initialize it with an empty array and pass as props
-      3. If doctor info and selected time slot is available, add the doctor to the appointed doctors array
+
+  3. Get appointed doctors from the local storage
+  4. If there are no appointed doctors, display a message saying "No Appointments" 
+  5. If there are appointed doctors, loop through the appointed doctors array and create a card component and mount it on the Appointed Doctors Page
+    a. Pass doctor info as props to the card component
 
 
 ### Dark Mode

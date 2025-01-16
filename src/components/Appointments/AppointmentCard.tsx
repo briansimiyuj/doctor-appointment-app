@@ -1,10 +1,10 @@
-import { DoctorType } from "../../assets/types/DoctorType"
+import { AppointedDoctorType } from "../../assets/types/AppointedDoctorType"
 import AppointmentPhoto from "./AppointmentPhoto"
 import DoctorInfo from "./DoctorInfo"
 
 type AppointmentCardProps ={
 
-    doctor: DoctorType
+    doctor: AppointedDoctorType
     key: number
 
 }
@@ -18,10 +18,9 @@ const AppointmentCard: React.FC<AppointmentCardProps> = ({ doctor, key })=>{
 
             <div className="flex gap-5 ">
 
-                <AppointmentPhoto doctor={doctor}/>
+                <AppointmentPhoto doctors={doctor}/>
 
-                <DoctorInfo doctor={doctor}/>
-
+                <DoctorInfo doctors={doctor}/>
 
             </div>
 
