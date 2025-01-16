@@ -365,6 +365,7 @@ My appointments page will show the user's appointments. It will have a list of a
   4. If there are no appointed doctors, display a message saying "No Appointments" 
   5. If there are appointed doctors, loop through the appointed doctors array and create a card component and mount it on the Appointed Doctors Page
     a. Pass doctor info as props to the card component
+    b. Display the doctor's name, date, time, and location
 
 
 ### Dark Mode

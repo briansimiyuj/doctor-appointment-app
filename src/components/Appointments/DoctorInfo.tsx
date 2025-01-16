@@ -1,27 +1,32 @@
-import { DoctorType } from "../../assets/types/DoctorType"
+import { AppointedDoctorType } from "../../assets/types/AppointedDoctorType"
 
 type DoctorInfoProps ={
 
-    doctor: DoctorType
+    doctors: AppointedDoctorType
     
 }
 
 
-const DoctorInfo: React.FC<DoctorInfoProps> = ({ doctor })=>{
+const DoctorInfo: React.FC<DoctorInfoProps> = ({ doctors })=>{
+
+    const doctor = doctors?.doctorInfo
+
+    console.log(doctors)
+
 
     return(
 
         <div className="flex-1 text-sm text-zinc-600">
 
-            <h2 className="text-neutral-800 font-semibold">{doctor.name}</h2>
+            <h2 className="text-neutral-800 font-semibold">{doctor?.name}</h2>
 
-            <p>{doctor.degree} - {doctor.speciality}</p>
+            <p>{doctor?.degree} - {doctor?.speciality}</p>
 
             <h2 className="text-zinc-700 font-medium mt-1">Address:</h2>
 
-            <p className="text-xs">{doctor.address.line1}</p>
+            <p className="text-xs">{doctor?.address?.line1}</p>
 
-            <p className="text-xs">{doctor.address.line2}</p>
+            <p className="text-xs">{doctor?.address?.line2}</p>
 
             <p className="text-sm mt-1">
 
@@ -29,7 +34,7 @@ const DoctorInfo: React.FC<DoctorInfoProps> = ({ doctor })=>{
 
                 <br/>
 
-                July 12, 2023 at 10:00 AM
+                {new Date(doctors.appointmentTime.dateTime).toLocaleDateString()} <br /> {new Date(doctors.appointmentTime.dateTime).toLocaleTimeString()}
 
             </p>
 
