@@ -109,15 +109,10 @@ export const useBookingSlots = ()=>{
                 const updatedAppointments: AppointedDoctorType[] = [...prevAppointments, newAppointment]
 
                 localStorage.setItem("appointedDoctors", JSON.stringify(updatedAppointments))
-               
-                console.log('Updated appointments:', updatedAppointments)
 
                 return updatedAppointments
 
             })
-            
-
-            console.log('Appointed doctors:', appointedDoctors)
 
         }
 
@@ -129,6 +124,17 @@ export const useBookingSlots = ()=>{
         
         }
 
+    }
+
+
+    const cancelAppointment = (time: TimeSlotType) =>{
+
+       const updatedAppointments = appointedDoctors.filter(appointment => appointment.appointmentTime.time !== time.time)
+
+       setAppointedDoctors(updatedAppointments)
+
+       localStorage.setItem("appointedDoctors", JSON.stringify(updatedAppointments))
+    
     }
 
 
@@ -160,7 +166,8 @@ export const useBookingSlots = ()=>{
         days,
         handleTimeSlotSelection,
         selectedTimeSlot,
-        appointedDoctors
+        appointedDoctors,
+        cancelAppointment
 
     }
 

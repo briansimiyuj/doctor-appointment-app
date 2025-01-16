@@ -61,8 +61,6 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
     
     useEffect(() =>{
 
-        console.log('BookingContext: appointedDoctors updated', appointedDoctors)
-
         localStorage.setItem("appointedDoctors", JSON.stringify(appointedDoctors))
 
     }, [appointedDoctors])

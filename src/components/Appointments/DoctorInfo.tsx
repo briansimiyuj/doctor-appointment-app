@@ -11,8 +11,6 @@ const DoctorInfo: React.FC<DoctorInfoProps> = ({ doctors })=>{
 
     const doctor = doctors?.doctorInfo
 
-    console.log(doctors)
-
 
     return(
 
