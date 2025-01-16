@@ -11,8 +11,6 @@ const AppointmentPhoto: React.FC<AppointmentPhotoProps> = ({ doctors }) => {
 
     const doctor = doctors?.doctorInfo
 
-    console.log(doctor)
-
     return(
 
         <img src={doctor?.image} alt={`${doctor?.name} photo`} className="w-32"/>
