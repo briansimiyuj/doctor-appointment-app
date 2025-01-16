@@ -191,29 +191,33 @@ Booking page will have doctor details, booking slots and related doctors.
   b. Create an array of days of the week
   c. Get doctor info from the BookingContext
 
-  d. Create a function to fetch the booking slots from the server
-    i. Set doctorSlots with an empty array
-    ii. Create a variable to store the date of the current day
-    iii. Create a loop to iterate over the days of the week
-          1. Create a variable to store current time using new Date()
-          2. Create a variable to store end time using new Date()
-          3. Set current time and end time to today + i days
-          4. Set end time hours to 21:00
-          5. For today (i=0): if current hour < 8, set to 8:00; else calculate next 30-min slot
-          6. For other days:/ set start time to 8:00
-          7. Create time slots array and populate with 30-minute intervals until end time
+    d. Create a function to fetch the booking slots from the server
+      i. Set doctorSlots with an empty array
+      ii. Create a variable to store the date of the current day
+      iii. Create a loop to iterate over the days of the week
+            1. Create a variable to store current time using new Date()
+            2. Create a variable to store end time using new Date()
+            3. Set current time and end time to today + i days
+            4. Set end time hours to 21:00
+            5. For today (i=0): if current hour < 8, set to 8:00; else calculate next 30-min slot
+            6. For other days:/ set start time to 8:00
+            7. Create time slots array and populate with 30-minute intervals until end time
 
 
-    iv. Create a variable to store the time slots and set it to an empty array
-    v. Create a while loop to check if the current time is before the end time
-      1. Set formatted time
-      2. Push the formatted time and dateTime to the time slots array
-      3. Increase the current time by 30 minutes
-    
-    vi. Update the doctorSlots state with the time slots array
-    vii. Run getAvailableSlots function when the doctor info is updated
-    viii. Create a function to handle the slot selection
-      - Add the selected time slot to local storage
+      iv. Create a variable to store the time slots and set it to an empty array
+      v. Create a while loop to check if the current time is before the end time
+        1. Set formatted time
+        2. Push the formatted time and dateTime to the time slots array
+        3. Increase the current time by 30 minutes
+      
+      vi. Update the doctorSlots state with the time slots array
+      vii. Run getAvailableSlots function when the doctor info is updated
+      viii. Create a function to handle the slot selection
+        - Add the selected time slot to local storage
+
+    e. Create a function to cancel the appointment
+
+      i. Remove the selected time slot from local storage
 
     #### Time slot management
 
@@ -366,6 +370,7 @@ My appointments page will show the user's appointments. It will have a list of a
   5. If there are appointed doctors, loop through the appointed doctors array and create a card component and mount it on the Appointed Doctors Page
     a. Pass doctor info as props to the card component
     b. Display the doctor's name, date, time, and location
+    c. Create a button to cancel the appointment 
 
 
 ### Dark Mode

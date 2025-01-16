@@ -1,4 +1,5 @@
 import { AppointedDoctorType } from "../../assets/types/AppointedDoctorType"
+import { useBookingSlots } from "../../hooks/useBookingSlots"
 import AppointmentPhoto from "./AppointmentPhoto"
 import DoctorInfo from "./DoctorInfo"
 
@@ -11,6 +12,8 @@ type AppointmentCardProps ={
 
 
 const AppointmentCard: React.FC<AppointmentCardProps> = ({ doctor, key })=>{
+
+    const { cancelAppointment } = useBookingSlots()
 
     return(
 
@@ -29,7 +32,10 @@ const AppointmentCard: React.FC<AppointmentCardProps> = ({ doctor, key })=>{
 
                <button className="text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary-bg hover:text-white transition-all duration-300" id="pay-btn">Pay Online</button>
 
-               <button className="text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red-600 hover:text-white transition-all duration-300">Cancel Appointment</button>
+               <button 
+                    className="text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red-600 hover:text-white transition-all duration-300"
+                    onClick={() => cancelAppointment(doctor.appointmentTime)}
+                >Cancel Appointment</button>
 
             </div>
 
