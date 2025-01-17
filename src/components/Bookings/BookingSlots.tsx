@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { useBookingSlots } from "../../hooks/useBookingSlots"
 import BookingDays from "./BookingDays"
 import BookingTime from "./BookingTime"
@@ -5,7 +6,12 @@ import BookingTime from "./BookingTime"
 const BookingSlots: React.FC = ()=>{
 
     const { handleTimeSlotSelection, slotTime, doctorSlots, slotIndex } = useBookingSlots(),
-          isReady = doctorSlots.length > 0 && doctorSlots
+          isReady = doctorSlots.length > 0 && doctorSlots,
+          [bookingStatus, setBookingStatus] = useState(() =>{
+
+            return localStorage.getItem("isBooked") === "false"
+
+        })
 
         
     
@@ -46,10 +52,15 @@ const BookingSlots: React.FC = ()=>{
 
                 <button 
                     type="submit"
-                    className="bg-primary-bg text-white px-8 py-2.5 rounded-full mt-6 hover:bg-blue-600 transition-all duration-300 ease-in-out active:scale-95 shadow-md hover:shadow-lg text-sm sm:text-base font-medium disabled:bg-gray-400 disabled:cursor-not-allowed"
-                    disabled={!isReady}
+                    className={`${bookingStatus ? 'bg-gray-400 cursor-not-allowed p-4 m-4 rounded-full': 'p-4 m-4 rounded-full text-sm sm:text-base font-medium shadow-md transition-all duration-300 ease-in-out bg-primary-bg text-white hover:bg-blue-600 hover:shadow-lg active:scale-95 disabled:bg-gray-400 disabled:cursor-not-allowed'
+                    }`}                    
+                    disabled={!isReady || !bookingStatus}
                 >
-                    Book an appointment
+                    
+                    {
+                        !bookingStatus ? 'Appointment Booked' : 'Book Appointment'
+                    }
+
                 </button>
 
             </form>
