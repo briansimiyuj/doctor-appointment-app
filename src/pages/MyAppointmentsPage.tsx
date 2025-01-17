@@ -1,17 +1,11 @@
 import AppointmentCard from "../components/Appointments/AppointmentCard"
 import { AppointedDoctorType } from "../assets/types/AppointedDoctorType"
 import { BookingContext } from "../context/BookingContext"
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 
 const MyAppointmentsPage: React.FC = ()=>{
 
     const { appointedDoctors } = useContext(BookingContext)
-
-    useEffect(() =>{
-    
-       console.log('Updated Doctors', appointedDoctors)
-    
-    }, [appointedDoctors])
 
     return(
 

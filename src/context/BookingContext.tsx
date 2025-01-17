@@ -16,7 +16,9 @@ interface BookingContextProps{
     selectedTimeSlot: TimeSlotType | null
     setSelectedTimeSlot: (slot: TimeSlotType | null) => void
     appointedDoctors: AppointedDoctorType[]
-    setAppointedDoctors: (doctors: AppointedDoctorType[] | ((prev: AppointedDoctorType[]) => AppointedDoctorType[])) => void
+    setAppointedDoctors: (doctors: AppointedDoctorType[] | ((prev: AppointedDoctorType[]) => AppointedDoctorType[])) => void,
+    isBooked: boolean
+    setIsBooked: (isBooked: boolean) => void
 
 }
 
@@ -37,7 +39,9 @@ export const BookingContext = createContext<BookingContextProps>({
     selectedTimeSlot: null,
     setSelectedTimeSlot: () => {},
     appointedDoctors: [],
-    setAppointedDoctors: () => {}
+    setAppointedDoctors: () => {},
+    isBooked: false,
+    setIsBooked: () => {}
 
 })
 
@@ -49,6 +53,7 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
           [slotIndex, setSlotIndex] = useState(0),
           [slotTime, setSlotTime] = useState(''),
           [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlotType | null>(null),
+          [isBooked, setIsBooked] = useState(false),
          
             [appointedDoctors, setAppointedDoctors] = useState<AppointedDoctorType[]>(() =>{
 
@@ -109,7 +114,9 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
             selectedTimeSlot,
             setSelectedTimeSlot,
             appointedDoctors,
-            setAppointedDoctors
+            setAppointedDoctors,
+            isBooked,
+            setIsBooked
         }}>
         
             {children}
