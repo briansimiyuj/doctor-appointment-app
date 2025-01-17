@@ -7,7 +7,7 @@ import { AppointedDoctorType } from "../assets/types/AppointedDoctorType"
 export const useBookingSlots = ()=>{
 
     const [doctorSlots, setDoctorSlots] = useState<TimeSlotType[][]>([]),
-          { doctorInfo, slotIndex, setSlotIndex, selectedTimeSlot, setSelectedTimeSlot, slotTime, setSlotTime, appointedDoctors, setAppointedDoctors } = useContext(BookingContext),
+          { doctorInfo, slotIndex, setSlotIndex, selectedTimeSlot, setSelectedTimeSlot, slotTime, setSlotTime, appointedDoctors, setAppointedDoctors, isBooked, setIsBooked } = useContext(BookingContext),
           days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
           selectedDate = doctorSlots[slotIndex]?.[0].dateTime
 
@@ -90,6 +90,8 @@ export const useBookingSlots = ()=>{
 
 
     const handleTimeSlotSelection = (slot: TimeSlotType) =>{
+
+        if(doctorInfo && isBooked[doctorInfo._id]) return
         
         const selectedSlot = doctorSlots[slotIndex]?.find(timeSlot => timeSlot.time === slot.time)
         
@@ -109,6 +111,10 @@ export const useBookingSlots = ()=>{
                 const updatedAppointments: AppointedDoctorType[] = [...prevAppointments, newAppointment]
 
                 localStorage.setItem("appointedDoctors", JSON.stringify(updatedAppointments))
+
+                setIsBooked(true)
+
+                localStorage.setItem("isBooked", JSON.stringify(true))
 
                 return updatedAppointments
 
@@ -132,6 +138,10 @@ export const useBookingSlots = ()=>{
        const updatedAppointments = appointedDoctors.filter(appointment => appointment.appointmentTime.time !== time.time)
 
        setAppointedDoctors(updatedAppointments)
+
+       setIsBooked(false)
+
+       localStorage.setItem("isBooked", JSON.stringify(false))
 
        localStorage.setItem("appointedDoctors", JSON.stringify(updatedAppointments))
     
@@ -167,7 +177,8 @@ export const useBookingSlots = ()=>{
         handleTimeSlotSelection,
         selectedTimeSlot,
         appointedDoctors,
-        cancelAppointment
+        cancelAppointment,
+        isBooked
 
     }
 
