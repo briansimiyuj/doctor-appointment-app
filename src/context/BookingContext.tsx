@@ -17,11 +17,10 @@ interface BookingContextProps{
     setSelectedTimeSlot: (slot: TimeSlotType | null) => void
     appointedDoctors: AppointedDoctorType[]
     setAppointedDoctors: (doctors: AppointedDoctorType[] | ((prev: AppointedDoctorType[]) => AppointedDoctorType[])) => void,
-    isBooked: boolean
-    setIsBooked: (isBooked: boolean) => void
+    isBooked: { [doctorId: string]: boolean }
+    setIsBooked: (doctorId: string, status: boolean) => void
 
 }
-
 interface BookingContextProviderProps{
 
     children: React.ReactNode
@@ -40,7 +39,7 @@ export const BookingContext = createContext<BookingContextProps>({
     setSelectedTimeSlot: () => {},
     appointedDoctors: [],
     setAppointedDoctors: () => {},
-    isBooked: false,
+    isBooked: {},
     setIsBooked: () => {}
 
 })
@@ -53,7 +52,13 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
           [slotIndex, setSlotIndex] = useState(0),
           [slotTime, setSlotTime] = useState(''),
           [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlotType | null>(null),
-          [isBooked, setIsBooked] = useState(false),
+          [isBooked, setIsBooked] = useState<{ [doctorId: string]: boolean }>(() =>{
+              
+            const storedIsBooked = localStorage.getItem("isBooked")
+
+            return storedIsBooked ? JSON.parse(storedIsBooked) : {}
+
+          }),
          
             [appointedDoctors, setAppointedDoctors] = useState<AppointedDoctorType[]>(() =>{
 
@@ -77,6 +82,21 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
        const docInfo = doctors.find(doc => doc._id === doctorID) || null
 
        setDoctorInfo(docInfo)
+    
+    }
+
+
+    const handleSetIsBooked = (doctorID: string, isBooked: boolean) =>{
+    
+        setIsBooked(prev =>{
+
+            const updatedIsBooked = { ...prev, [doctorID]: isBooked }
+
+            localStorage.setItem("isBooked", JSON.stringify(updatedIsBooked))
+
+            return updatedIsBooked
+
+        })
     
     }
 
@@ -116,7 +136,7 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
             appointedDoctors,
             setAppointedDoctors,
             isBooked,
-            setIsBooked
+            setIsBooked: handleSetIsBooked
         }}>
         
             {children}

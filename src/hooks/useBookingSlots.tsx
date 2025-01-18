@@ -108,13 +108,14 @@ export const useBookingSlots = ()=>{
 
             setAppointedDoctors((prevAppointments: AppointedDoctorType[]) =>{
 
-                const updatedAppointments: AppointedDoctorType[] = [...prevAppointments, newAppointment]
+                const updatedAppointments: AppointedDoctorType[] = [...prevAppointments, newAppointment],
+                updatedIsBooked = { ...isBooked, [doctorInfo._id]: true }
 
                 localStorage.setItem("appointedDoctors", JSON.stringify(updatedAppointments))
 
-                setIsBooked(true)
+                localStorage.setItem("isBooked", JSON.stringify(updatedIsBooked))
 
-                localStorage.setItem("isBooked", JSON.stringify(true))
+                setIsBooked(doctorInfo._id, true)
 
                 return updatedAppointments
 
@@ -139,9 +140,15 @@ export const useBookingSlots = ()=>{
 
        setAppointedDoctors(updatedAppointments)
 
-       setIsBooked(false)
+        if(doctorInfo){
 
-       localStorage.setItem("isBooked", JSON.stringify(false))
+            const updatedIsBooked = { ...isBooked, [doctorInfo._id]: false }
+
+            localStorage.setItem("isBooked", JSON.stringify(updatedIsBooked))
+
+            setIsBooked(doctorInfo._id, false)
+
+        }
 
        localStorage.setItem("appointedDoctors", JSON.stringify(updatedAppointments))
     
@@ -178,7 +185,8 @@ export const useBookingSlots = ()=>{
         selectedTimeSlot,
         appointedDoctors,
         cancelAppointment,
-        isBooked
+        isBooked,
+        doctorInfo
 
     }
 
