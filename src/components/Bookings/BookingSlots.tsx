@@ -1,19 +1,14 @@
-import { useState } from "react"
 import { useBookingSlots } from "../../hooks/useBookingSlots"
 import BookingDays from "./BookingDays"
 import BookingTime from "./BookingTime"
 
 const BookingSlots: React.FC = ()=>{
 
-    const { handleTimeSlotSelection, slotTime, doctorSlots, slotIndex } = useBookingSlots(),
+    const { handleTimeSlotSelection, slotTime, doctorSlots, slotIndex, doctorInfo, isBooked } = useBookingSlots(),
           isReady = doctorSlots.length > 0 && doctorSlots,
-          [bookingStatus, setBookingStatus] = useState(() =>{
+          isCurrentDoctorBooked = doctorInfo ? isBooked[doctorInfo._id] ?? false : false
 
-            return localStorage.getItem("isBooked") === "false"
-
-        })
-
-        
+     console.log(isCurrentDoctorBooked)   
     
     const handleSubmit = (e: React.FormEvent) =>{
 
@@ -52,15 +47,13 @@ const BookingSlots: React.FC = ()=>{
 
                 <button 
                     type="submit"
-                    className={`${bookingStatus ? 'bg-gray-400 cursor-not-allowed p-4 m-4 rounded-full': 'p-4 m-4 rounded-full text-sm sm:text-base font-medium shadow-md transition-all duration-300 ease-in-out bg-primary-bg text-white hover:bg-blue-600 hover:shadow-lg active:scale-95 disabled:bg-gray-400 disabled:cursor-not-allowed'
+                    className={`${isCurrentDoctorBooked 
+                        ? 'bg-gray-400 cursor-not-allowed p-4 m-4 rounded-full'
+                        : 'p-4 m-4 rounded-full text-sm sm:text-base font-medium shadow-md transition-all duration-300 ease-in-out bg-primary-bg text-white hover:bg-blue-600 hover:shadow-lg active:scale-95 disabled:bg-gray-400 disabled:cursor-not-allowed'
                     }`}                    
-                    disabled={!isReady || !bookingStatus}
-                >
-                    
-                    {
-                        !bookingStatus ? 'Appointment Booked' : 'Book Appointment'
-                    }
-
+                    disabled={!isReady || isCurrentDoctorBooked}
+                >    
+                    { isCurrentDoctorBooked ? 'Appointment Booked' : 'Book Appointment'  }
                 </button>
 
             </form>

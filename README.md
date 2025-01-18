@@ -160,7 +160,7 @@ Booking context will be used to store the booking data and provide it to the Boo
   5. Set a state to store selected time slot and initialize it with empty array
   6. Set a state to store slot time and initialize it with empty string
   7. Set a state to store appointed doctors and initialize it with data from local storage
-  8. Set a state to store a boolean to check if the doctor is booked or not and initialize it with false
+  8. Set a state to store a boolean to check if the doctor is booked or not and initialize it with false. This will be per doctor
 
 
 ### Booking Page
@@ -215,12 +215,12 @@ Booking page will have doctor details, booking slots and related doctors.
       vii. Run getAvailableSlots function when the doctor info is updated
       viii. Create a function to handle the slot selection
         - Add the selected time slot to local storage
-        - Update the isBooked state to true
+        - Update the isBooked state to true, based on the doctorID and previous isBooked state
 
     e. Create a function to cancel the appointment
 
       i. Remove the selected time slot from local storage
-      ii. Update the isBooked state to false
+      ii. Update the isBooked state to false based on the doctorID and previous isBooked state
 
     #### Time slot management
 
