@@ -15,6 +15,7 @@ import profilePic from "./profile_pic.png"
 import groupProfilePic from "./group_profiles.png"
 import stripeLogo from "./stripe_logo.png"
 import razorpayLogo from "./razorpay_logo.png"
+import GoogleLogo from "./google.png"
 import doc1 from "./doc1.jpg"
 import doc2 from "./doc2.jpg"
 import doc3 from "./doc3.jpg"
@@ -54,7 +55,8 @@ export const assets ={
     groupProfilePic,
     stripeLogo,
     razorpayLogo,
-    heroImage
+    heroImage,
+    GoogleLogo,
 
 }
 
