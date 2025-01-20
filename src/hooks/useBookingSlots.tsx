@@ -155,6 +155,55 @@ export const useBookingSlots = ()=>{
     }
 
 
+    const removePastAppointments = () =>{
+    
+        const currentTime = new Date()
+
+        const updatedAppointments = appointedDoctors.filter(appointment =>{
+
+            const appointmentDateTime = new Date(appointment.appointmentTime.dateTime)
+
+            return appointmentDateTime > currentTime
+
+        })
+
+
+        if(updatedAppointments.length !== appointedDoctors.length){
+
+            setAppointedDoctors(updatedAppointments)
+
+            localStorage.setItem("appointedDoctors", JSON.stringify(updatedAppointments))
+
+            const updatedIsBooked = { ...isBooked }
+
+            appointedDoctors.forEach(appointment =>{
+                
+                if(appointment.doctorInfo){
+
+                    updatedIsBooked[appointment.doctorInfo._id] = false
+                     
+                }
+
+            })
+
+            localStorage.setItem("isBooked", JSON.stringify(updatedIsBooked))
+
+        }
+    
+    }
+
+
+    useEffect(() =>{
+        
+        removePastAppointments()
+
+        const interval = setInterval(removePastAppointments, 60000)
+
+        return () => clearInterval(interval)
+
+    }, [appointedDoctors])
+
+
     useEffect(() =>{
     
         if(selectedTimeSlot){

@@ -226,6 +226,8 @@ Booking page will have doctor details, booking slots and related doctors.
 
       1. Check if dynamic time slot management is updating based on day selection
 
+    f. Create a function to remove past appointments from appointedDoctors array and update isBooked state
+
 #### Booking Slots Component
 
   1. Create Booking Days component and mount it on Booking Slots component
