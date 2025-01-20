@@ -387,3 +387,10 @@ Dark mode will be a toggleable feature that will change the color scheme of the 
     a. Create a toggle button to toggle the dark mode on and off
     b. Add notifications settings
     c. Set dark mode to localStorage
+
+
+### Not Found Page
+
+Not Found Page will be a page that will be displayed when the user tries to access a page that does not exist.
+
+  1. Create a Not Found Page and mount it on Script component and provide a route for it
