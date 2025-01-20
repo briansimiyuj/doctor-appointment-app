@@ -12,6 +12,7 @@ import LoginPage from "./pages/LoginPage"
 import MyAppointmentsPage from "./pages/MyAppointmentsPage"
 import SettingsPage from "./pages/SettingsPage"
 import { BookingContextProvider } from "./context/BookingContext"
+import NotFoundPage from "./pages/NotFoundPage"
 
 const Script: React.FC = () =>{
 
@@ -54,6 +55,8 @@ const Script: React.FC = () =>{
           }/>
 
           <Route path="/settings" element={<SettingsPage/>}/>
+
+          <Route path="*" element={<NotFoundPage/>}/>
 
         </Routes>
         
