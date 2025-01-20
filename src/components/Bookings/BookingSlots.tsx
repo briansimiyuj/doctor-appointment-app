@@ -6,9 +6,7 @@ const BookingSlots: React.FC = ()=>{
 
     const { handleTimeSlotSelection, slotTime, doctorSlots, slotIndex, doctorInfo, isBooked } = useBookingSlots(),
           isReady = doctorSlots.length > 0 && doctorSlots,
-          isCurrentDoctorBooked = doctorInfo ? isBooked[doctorInfo._id] ?? false : false
-
-     console.log(isCurrentDoctorBooked)   
+          isCurrentDoctorBooked = doctorInfo ? isBooked[doctorInfo._id] ?? false : false  
     
     const handleSubmit = (e: React.FormEvent) =>{
 
