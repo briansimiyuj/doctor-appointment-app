@@ -9,15 +9,19 @@ const LoginPage: React.FC = ()=>{
 
     return(
 
-        <LoginContextProvider>
+        <div className="bg-secondary-bg dark:bg-primary-bg min-h-screen">
 
-            {
+            <LoginContextProvider>
 
-                isSignUp ? <SignUpForm isSignUp={isSignUp} setIsSignUp={setIsSignUp}/> : <SignInForm isSignUp={isSignUp} setIsSignUp={setIsSignUp}/>
+                {
 
-            }
+                    isSignUp ? <SignUpForm isSignUp={isSignUp} setIsSignUp={setIsSignUp}/> : <SignInForm isSignUp={isSignUp} setIsSignUp={setIsSignUp}/>
 
-        </LoginContextProvider>
+                }
+
+            </LoginContextProvider>
+
+        </div>
 
     )
 
