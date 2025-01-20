@@ -1,5 +1,6 @@
 import { FormEvent } from "react"
 import FormInputs from "./FormInputs"
+import { assets } from "../../assets/frontend/assets"
 
 interface SignUpFormProps{
 
@@ -45,6 +46,33 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ isSignUp, setIsSignUp }) =>{
                 <span onClick={() => setIsSignUp(false)} className="cursor-pointer text-blue-500">Sign In</span>
 
             </div>
+
+
+            <div className="flex items-center gap-2 w-full">
+
+                <div className="flex-1 h-px bg-gray-300"></div>
+                
+                <span className="text-gray-500">Or</span>
+                
+                <div className="flex-1 h-px bg-gray-300"></div>
+
+            </div>
+
+
+            <button 
+                type="button"
+                className="flex items-center gap-2 border border-gray-300 rounded-md px-12 py-4 hover:bg-gray-50 transition-all duration-300"
+            >
+
+                <img 
+                    src={assets.GoogleLogo}
+                    alt="Google" 
+                    className="w-5 h-5"
+                />
+
+                Sign up with Google
+                
+            </button>
 
         </form>
 

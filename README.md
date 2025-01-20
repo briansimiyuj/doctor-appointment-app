@@ -351,6 +351,8 @@ Login page will be used to log in and sign up the user. A user can either log in
      c. Create a button and a function to handle the sign in button click
      d. Create a span to switch to the Sign Up component when the user does not have an account
 
+  7. Create a section for the Google aunthentication button for both the Sign In and Sign Up components
+
 
 ### My Appointments Page
 
