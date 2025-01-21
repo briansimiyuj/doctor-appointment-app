@@ -9,7 +9,7 @@ const LoginPage: React.FC = ()=>{
 
     return(
 
-        <div className="bg-secondary-bg dark:bg-primary-bg min-h-screen">
+        <div className="min-h-screen">
 
             <LoginContextProvider>
 
