@@ -396,3 +396,12 @@ Dark mode will be a toggleable feature that will change the color scheme of the 
 Not Found Page will be a page that will be displayed when the user tries to access a page that does not exist.
 
   1. Create a Not Found Page and mount it on Script component and provide a route for it
+
+
+### Loading State
+
+Loading State will be a page that will be displayed when the app is loading.
+
+  1. Create a state for loading in the Script component and initialize it with true
+  2. Create a Loading component and create several loading animations components
+  3. Use LogoLoading component as the loading animation for the entire app

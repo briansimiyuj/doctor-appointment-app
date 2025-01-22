@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react"
 import { Route, Routes } from "react-router-dom"
 import Navbar from "./components/Navbar/Navbar"
 import HomePage from "./pages/HomePage"
@@ -13,59 +14,92 @@ import MyAppointmentsPage from "./pages/MyAppointmentsPage"
 import SettingsPage from "./pages/SettingsPage"
 import { BookingContextProvider } from "./context/BookingContext"
 import NotFoundPage from "./pages/NotFoundPage"
+import { LogoLoading } from "./assets/Loading"
 
 const Script: React.FC = () =>{
+
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(()=>{
+
+    setTimeout(()=>{
+
+      setIsLoading(false)
+
+    }, 2000)
+
+  }, [])
 
   return(
 
     <div className="mx-4 sm:mx-10">
 
-      <Navbar/>
+      {
 
-      <ProfileContextProvider>
+        isLoading ?(
 
-        <Routes>
+          <div className="min-h-screen flex items-center justify-center">
 
-          <Route path="/" element={<HomePage/>}/>
+            <LogoLoading/>
 
-          <Route path="/about-us" element={<AboutPage/>}/>
+          </div>
 
-          <Route path="/doctors" element={<DoctorPage/>}/>
+        ):(
 
-          <Route path="/doctors/:specialityParam" element={<DoctorPage/>}/>
+          <>
 
-          <Route path="appointments/:doctorID" element={<BookingPage/>}/>
+            <Navbar/>
 
-          <Route path="/contact-us" element={<ContactPage/>}/>
+            <ProfileContextProvider>
 
-          <Route path="/profile" element={<ProfilePage/>}/>
+              <Routes>
 
-          <Route path="/profile/:id" element={<ProfilePage/>}/>
+                <Route path="/" element={<HomePage/>}/>
 
-          <Route path="/login" element={<LoginPage/>}/>
+                <Route path="/about-us" element={<AboutPage/>}/>
 
-          <Route path="/bookings" element={
-            
-            <BookingContextProvider>
+                <Route path="/doctors" element={<DoctorPage/>}/>
 
-              <MyAppointmentsPage/>
+                <Route path="/doctors/:specialityParam" element={<DoctorPage/>}/>
 
-            </BookingContextProvider>
+                <Route path="appointments/:doctorID" element={<BookingPage/>}/>
 
-          }/>
+                <Route path="/contact-us" element={<ContactPage/>}/>
 
-          <Route path="/settings" element={<SettingsPage/>}/>
+                <Route path="/profile" element={<ProfilePage/>}/>
 
-          <Route path="*" element={<NotFoundPage/>}/>
+                <Route path="/profile/:id" element={<ProfilePage/>}/>
 
-        </Routes>
-        
-      </ProfileContextProvider>
+                <Route path="/login" element={<LoginPage/>}/>
 
-      <Footer/>
+                <Route path="/bookings" element={
+          
+                  <BookingContextProvider>
+
+                    <MyAppointmentsPage/>
+
+                  </BookingContextProvider>
+
+                }/>
+
+                <Route path="/settings" element={<SettingsPage/>}/>
+
+                <Route path="*" element={<NotFoundPage/>}/>
+
+              </Routes>
+      
+            </ProfileContextProvider>
+
+            <Footer/>
+
+          </>
+
+        )
+
+      }
 
     </div> 
-    
+
   )
 
 }
