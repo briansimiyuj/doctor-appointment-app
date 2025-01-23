@@ -12,6 +12,7 @@ import arrowIcon from "./arrow_icon.svg"
 import infoIcon from "./info_icon.svg"
 import uploadIcon from "./upload_icon.png"
 import profilePic from "./profile_pic.png"
+import coverImage from "./coverImage.jpg"
 import groupProfilePic from "./group_profiles.png"
 import stripeLogo from "./stripe_logo.png"
 import razorpayLogo from "./razorpay_logo.png"
@@ -45,6 +46,7 @@ export const assets ={
     menuIcon,
     crossIcon,
     chatsIcon,
+    coverImage,
     verifiedIcon,
     contactImage,
     dropDownIcon,
