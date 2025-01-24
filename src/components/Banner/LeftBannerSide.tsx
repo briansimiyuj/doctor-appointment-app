@@ -1,8 +1,19 @@
+import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
+import { LoginContext } from "../../context/LoginContext"
 
 const LeftBannerSide: React.FC = ()=>{
 
-    const navigate = useNavigate()
+    const navigate = useNavigate(),
+          loginContext = useContext(LoginContext)
+          
+    if(!loginContext){
+    
+        throw new Error('LoginContext is undefined')
+
+    }
+
+    const { isAuthenticated } = loginContext
 
     return(
 
@@ -16,10 +27,25 @@ const LeftBannerSide: React.FC = ()=>{
 
             </div>
 
-            <button 
-                className="bg-white text-sm sm:text-base text-gray-600 px-8 py-3 rounded-full mt-6 hover:scale-105 transition-all"
-                onClick={() => navigate("/login")}
-            >Create Account</button>
+            
+            {
+
+                isAuthenticated ?(
+
+                    <button
+                        className="bg-white text-sm sm:text-base text-gray-600 px-8 py-3 rounded-full mt-6 hover:scale-105 transition-all"
+                        onClick={()=>navigate("/doctors")}
+                    >Book Now</button>
+
+                ):(
+
+                    <button
+                        className="bg-white text-sm sm:text-base text-gray-600 px-8 py-3 rounded-full mt-6 hover:scale-105 transition-all"
+                        onClick={()=>navigate("/login")}
+                    >Create Account</button>
+                )
+
+            }
             
         </div>
 

@@ -95,9 +95,13 @@ The Top Doctors component displays a list of top doctors.
         iv. Set availability status of the doctors randomly
       c. Create a button to view all doctors
 
-    5. Create a Banner component and mount it on Home page
-      a. Create left side of the banner which will have a heading, a paragraph, and a button for booking an appointment
-      b. Create right side of the banner which will have a image
+### Banner Component
+
+Banner component will have a heading, a paragraph, and a button for booking an appointment or creating an account.
+
+  1. Create a Banner component and mount it on Home page
+    a. Create left side of the banner which will have a heading, a paragraph, and a button for booking an appointment or creating an account
+    b. Create right side of the banner which will have a image
 
   
 ### Footer Component
