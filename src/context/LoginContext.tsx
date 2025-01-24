@@ -10,6 +10,8 @@ interface LoginContextType{
     setPassword: React.Dispatch<React.SetStateAction<string>>
     confirmPassword: string
     setConfirmPassword: React.Dispatch<React.SetStateAction<string>>
+    isAuthenticated: boolean
+    setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
 
 }
 
@@ -29,8 +31,9 @@ export const LoginContextProvider = ({ children }: LoginContextProviderProps) =>
           [name, setName] = useState<string>(''),
           [password, setPassword] = useState<string>(''),
           [confirmPassword, setConfirmPassword] = useState<string>(''),
+          [isAuthenticated , setIsAuthenticated] = useState<boolean>(true),
 
-        value = { email, setEmail, name, setName, password, setPassword, confirmPassword, setConfirmPassword }
+        value = { email, setEmail, name, setName, password, setPassword, confirmPassword, setConfirmPassword, isAuthenticated  , setIsAuthenticated }
 
     
     return(

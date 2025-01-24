@@ -324,6 +324,7 @@ Login context will be used to store the user login data and provide it to the Lo
 
   1. Create an interface for login data       
   2. Create state variables to store the login data and initialize them with empty strings
+  3. Wrap the routes in Script component with the LoginContext provider as the parent component
 
 
 ### Login Page
@@ -335,8 +336,7 @@ Login page will be used to log in and sign up the user. A user can either log in
   
   2. Create a Login Page and mount it on Script component and provide a route for it
   3. Create a state variable for isSignUp and initialize it with true
-  4. Wrap the child components in the Login page with the LoginContext provider as the parent component
-  5. Create a Sign Up component and mount it on the Login page if isSignUp is true
+  4. Create a Sign Up component and mount it on the Login page if isSignUp is true
     a. Render the Sign Up title and description
     b. Create labels and inputs for email, password, confirm password and name
     c. Make the inputs controlled components  
@@ -345,13 +345,13 @@ Login page will be used to log in and sign up the user. A user can either log in
     f. Create a button and a function to handle the sign up button click
     g. Create a span to switch to the Sign In component when the user already has an account
   
-  6. Create a Sign In component and mount it on the Login page if isSignUp is false
+  5. Create a Sign In component and mount it on the Login page if isSignUp is false
      a. Render the Sign In title and description
      b. On Form input components, create labels and inputs for both the Sign In and Sign Up components
      c. Create a button and a function to handle the sign in button click
      d. Create a span to switch to the Sign Up component when the user does not have an account
 
-  7. Create a section for the Google aunthentication button for both the Sign In and Sign Up components
+  6. Create a section for the Google aunthentication button for both the Sign In and Sign Up components
 
 
 ### My Appointments Page

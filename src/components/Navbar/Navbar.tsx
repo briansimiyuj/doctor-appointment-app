@@ -1,16 +1,18 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom"
 import Logo from "../../assets/Logo"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { assets } from "../../assets/frontend/assets"
 import MobileMenu from "./MobileMenu"
 import DropdownMenu from "./DropdownMenu"
+import { LoginContext } from "../../context/LoginContext"
 
 const Navbar: React.FC = () =>{
 
     const [showMenu, setShowMenu] = useState<boolean>(false),
-          [token, setToken] = useState<boolean>(true),
           navigate = useNavigate(),
-          location = useLocation()
+          location = useLocation(),
+          loginContext = useContext(LoginContext),
+          isAuthenticated = loginContext?.isAuthenticated
 
     return(
 
@@ -68,7 +70,7 @@ const Navbar: React.FC = () =>{
 
                 {
 
-                    token ?(
+                    isAuthenticated ?(
 
                         <div className="flex items-center gap-2 cursor-pointer group relative">
 
@@ -76,7 +78,7 @@ const Navbar: React.FC = () =>{
 
                             <img src={assets.dropDownIcon} alt="drop-down-icon" className="w-25"/>
 
-                            <DropdownMenu setToken={setToken}/>
+                            <DropdownMenu/>
 
                         </div>
 
