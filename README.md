@@ -409,3 +409,10 @@ Loading State will be a page that will be displayed when the app is loading.
   1. Create a state for loading in the Script component and initialize it with true
   2. Create a Loading component and create several loading animations components
   3. Use LogoLoading component as the loading animation for the entire app
+
+
+### Is Authenticated Guard
+
+Is Authenticated Guard will be a component that will check if the user is authenticated and if not, it will redirect the user to the login page.
+
+  1. Make some pages and components that require authentication follow this pattern (LoginPage, BookingSlots, MyAppointmentsPage, SettingsPage)
