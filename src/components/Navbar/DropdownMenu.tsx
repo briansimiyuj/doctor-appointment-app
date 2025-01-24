@@ -1,15 +1,19 @@
-import { Dispatch, SetStateAction } from "react"
+import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
+import { LoginContext } from "../../context/LoginContext"
 
-type DropdownMenuProps ={
+const DropdownMenu: React.FC = () =>{
 
-    setToken: Dispatch<SetStateAction<boolean>>
+    const navigate = useNavigate(),
+          loginContext = useContext(LoginContext)
 
-}
+    if(!loginContext){
+    
+        throw new Error('LoginContext is undefined')
 
-const DropdownMenu: React.FC<DropdownMenuProps> = ({ setToken }) =>{
-
-    const navigate = useNavigate()
+    }
+    
+    const { setIsAuthenticated } = loginContext
 
     return(
 
@@ -23,7 +27,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ setToken }) =>{
 
                 <li className="cursor-pointer hover:text-primary" onClick={() => navigate("/settings")}>Settings</li>
 
-                <li className="cursor-pointer hover:text-primary" onClick={() => setToken(false)}>Logout</li>
+                <li className="cursor-pointer hover:text-primary" onClick={() => setIsAuthenticated(false)}>Logout</li>
 
             </ul>
 
