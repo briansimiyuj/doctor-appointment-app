@@ -303,6 +303,8 @@ Profile page will show the user profile data and allow the user to edit the data
     #### New update 
 
     1. Update the Profile Info data with the new data from the ProfileContext
+    2. Create Profile Data component and mount it on Profile Info component
+         a. Add profile data from the ProfileContext based on the user type
 
     #### Edit Profile Modal
 
