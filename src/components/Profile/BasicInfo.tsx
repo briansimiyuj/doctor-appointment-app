@@ -4,7 +4,7 @@ import { ProfileContext } from "../../context/ProfileContext"
 const BasicInfo: React.FC = () => {
 
     const context = useContext(ProfileContext),
-         userData = context?.userData
+         profile = context?.profile
 
     return(
 
@@ -16,11 +16,11 @@ const BasicInfo: React.FC = () => {
 
                 <h3 className="font-medium">Gender:</h3>
 
-                <p className="text-gray-400">{userData?.gender}</p>
+                <p className="text-gray-400">{profile?.gender}</p>
 
                 <h3 className="font-medium">Date of Birth:</h3>
 
-                <p className="text-gray-400">{userData?.DOB}</p>
+                <p className="text-gray-400">{profile?.DOB}</p>
 
             </div>
 

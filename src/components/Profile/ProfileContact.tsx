@@ -4,7 +4,7 @@ import { ProfileContext } from "../../context/ProfileContext"
 const ProfileContact: React.FC = () =>{
 
     const context = useContext(ProfileContext),
-         userData = context?.userData
+         userData = context?.profile
 
     return(
 

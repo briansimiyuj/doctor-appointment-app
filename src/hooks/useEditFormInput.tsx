@@ -1,30 +1,32 @@
 import { useContext, useEffect, useState } from "react"
-import { UserData } from "../assets/types/ProfileType"
+import { ProfileType } from "../assets/types/ProfileType"
 import { ProfileContext } from "../context/ProfileContext"
 
-export const useEditFormInput = ()=>{
+export const useEditFormInput = () =>{
 
     const context = useContext(ProfileContext),
-          [isChanged, setIsChanged] = useState<boolean>(false)
+            [isChanged, setIsChanged] = useState<boolean>(false)
 
     if(!context) return null
 
-    const { userData, setUserData } = context
+    const { profile, setProfile } = context
 
-    const [nameValue, setNameValue] = useState(userData.name),
-              [emailValue, setEmailValue] = useState(userData.address.email),  
-              [phoneValue, setPhoneValue] = useState(userData.address.phone),
-               [currentValues] = useState({
+    const [nameValue, setNameValue] = useState(profile?.name),
+          [emailValue, setEmailValue] = useState(profile?.address.email),  
+          [phoneValue, setPhoneValue] = useState(profile?.address.phone),
+          [currentValues] = useState({
 
-                image: userData.image,
-                name: userData.name,
-                email: userData.address.email,
-                phone: userData.address.phone
-    
-            })    
+            image: profile?.image,
+            name: profile?.name,
+            email: profile?.address.email,
+            phone: profile?.address.phone,
+            about: profile?.type === "doctor" ? profile.about : undefined,
+            speciality: profile?.type === "doctor" ? profile.speciality : undefined,
 
-    
-        const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
+        })    
+
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
 
         const file = e.target.files?.[0]
 
@@ -34,10 +36,33 @@ export const useEditFormInput = ()=>{
 
             reader.onload = (e) =>{
 
-                setUserData((prevData: UserData) => ({
-                    ...prevData,
-                    image: e.target?.result as string
-                }))
+                setProfile((prevData: ProfileType | null) =>{
+
+                    if (!prevData) return null
+
+                    if (prevData.type === "doctor"){
+
+                        return{
+
+                            ...prevData,
+                            image: e.target?.result as string,
+                            type: "doctor",
+                            rating: prevData.rating,
+                            coverImage: prevData.coverImage
+
+                        }
+
+                    }
+
+                    return{
+
+                        ...prevData,
+                        image: e.target?.result as string,
+                        type: "patient"
+
+                    }
+
+                })
 
             }
 
@@ -47,7 +72,8 @@ export const useEditFormInput = ()=>{
 
     }
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>{
 
         const { name, value } = e.target
 
@@ -55,13 +81,31 @@ export const useEditFormInput = ()=>{
 
             setNameValue(value)
 
-            setUserData(prevData =>{
+            setProfile((prevData: ProfileType | null) =>{
 
-                const updatedData = { ...prevData }
+                if(!prevData) return null
 
-                updatedData.name = value
+                if(prevData.type === "doctor"){
 
-                return updatedData
+                    return{
+
+                        ...prevData,
+                        name: value,
+                        type: "doctor",
+                        rating: prevData.rating,
+                        coverImage: prevData.coverImage
+
+                    }
+
+                }
+
+                return{
+
+                    ...prevData,
+                    name: value,
+                    type: "patient"
+
+                }
 
             })
 
@@ -69,46 +113,106 @@ export const useEditFormInput = ()=>{
 
             setEmailValue(value)
 
-            setUserData(prevData =>{
+            setProfile((prevData: ProfileType | null) =>{
 
-                const updatedData = {
-                    
-                    ...prevData, 
-                    
-                    address:{
+                if(!prevData) return null
 
-                        ...userData.address,
-                        email: value
+                if(prevData.type === "doctor"){
 
+                    return{
+
+                        ...prevData,
+                        address:{
+
+                            ...prevData.address,
+                            email: value
+
+                        },
+                        type: "doctor",
+                        rating: prevData.rating,
+                        coverImage: prevData.coverImage
                     }
 
                 }
 
-                return updatedData
+                return{
+
+                    ...prevData,
+                    address:{
+
+                        ...prevData.address,
+                        email: value
+
+                    },
+
+                    type: "patient"
+
+                }
 
             })
-            
 
         }else if(name === "phone"){
 
             setPhoneValue(value)
 
-            setUserData(prevData =>{
+            setProfile((prevData: ProfileType | null) =>{
 
-                const updatedData = {
-                    
-                    ...prevData, 
-                    
+                if(!prevData) return null
+
+                if(prevData.type === "doctor"){
+
+                    return{
+
+                        ...prevData,
+                        address:{
+
+                            ...prevData.address,
+                            phone: value
+
+                        },
+                        type: "doctor",
+                        rating: prevData.rating,
+                        coverImage: prevData.coverImage
+                    }
+
+                }
+
+                return{
+
+                    ...prevData,
                     address:{
 
-                        ...userData.address,
+                        ...prevData.address,
                         phone: value
+
+                    },
+                    type: "patient"
+
+                }
+
+            })
+
+        }else if(name === "about"){
+
+            setProfile((prevData: ProfileType | null) =>{
+
+                if(!prevData) return null
+
+                if(prevData.type === "doctor"){
+
+                    return{
+
+                        ...prevData,
+                        about: value,
+                        type: "doctor",
+                        rating: prevData.rating,
+                        coverImage: prevData.coverImage
 
                     }
 
                 }
 
-                return updatedData
+                return prevData
 
             })
 
@@ -118,16 +222,17 @@ export const useEditFormInput = ()=>{
 
 
     useEffect(() =>{
-    
+
         const hasChanges =
-               currentValues.image !== userData.image ||
-               currentValues.name !== userData.name ||
-               currentValues.email !== userData.address.email ||
-               currentValues.phone !== userData.address.phone
+            currentValues.image !== profile?.image ||
+            currentValues.name !== profile?.name ||
+            currentValues.email !== profile?.address.email ||
+            currentValues.phone !== profile?.address.phone ||
+            currentValues.about !== (profile?.type === "doctor" ? profile?.about : undefined)
 
         setIsChanged(hasChanges)
-    
-    }, [userData, userData.image, nameValue, emailValue, phoneValue])
+
+    }, [profile, profile?.image, nameValue, emailValue, phoneValue])
 
     return { nameValue, emailValue, phoneValue, handleInputChange, handleImageChange, isChanged  }
 

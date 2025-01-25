@@ -9,7 +9,7 @@ const EditForm: React.FC = ()=>{
           context = useContext(ProfileContext)
           if(!context) return null
 
-          const { userData } = context,
+          const { profile } = context,
                 editFormInput = useEditFormInput()
 
           if(!editFormInput) return null
@@ -33,7 +33,7 @@ const EditForm: React.FC = ()=>{
                 <div className="w-full">
 
                    <img 
-                        src={userData.image}
+                        src={profile?.image}
                         alt="current user image" 
                         className="w-36 h-36 rounded-full object-cover cursor-pointer mx-auto"
                         onClick={handleImageClick}

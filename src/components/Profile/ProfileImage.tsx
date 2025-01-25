@@ -4,7 +4,7 @@ import { ProfileContext } from "../../context/ProfileContext"
 const ProfileImage: React.FC = () =>{
    
     const context = useContext(ProfileContext),
-         profileImage = context?.userData.image
+         profileImage = context?.profile?.image
 
     return(
 
