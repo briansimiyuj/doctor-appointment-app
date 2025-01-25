@@ -280,6 +280,7 @@ Profile context will be used to store the user profile data and provide it to th
   #### New Update Profile Type
 
     1. Create a type for doctor and patient data
+    2. Create state variables to store the doctor and patient data and initialize them with dummy data
 
 
 ### Profile Page
