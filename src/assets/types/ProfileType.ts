@@ -33,6 +33,7 @@ type PatientProfile = UserData &{
     type: "patient"
     appointments?: string[]
     medicalHistory?: string[]
+    coverImage?: string
 
 }
 
