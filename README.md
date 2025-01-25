@@ -277,6 +277,10 @@ Profile context will be used to store the user profile data and provide it to th
   2. Create a state variable to store the user data and initialize it with a dummy user data
   3. Create a state variable for editing and initialize it with false
 
+  #### New Update Profile Type
+
+    1. Create a type for doctor and patient data
+
 
 ### Profile Page
 
