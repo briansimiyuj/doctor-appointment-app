@@ -68,7 +68,7 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
 
         },
 
-        [profile, setProfile] = useState<ProfileType | null>(patientProfile),
+        [profile, setProfile] = useState<ProfileType | null>(doctorProfile),
         [isEditing, setIsEditing] = useState<boolean>(false),
         value = { profile, setProfile, isEditing, setIsEditing, doctorProfile, patientProfile };
 
