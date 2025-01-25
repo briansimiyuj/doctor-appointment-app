@@ -6,14 +6,14 @@ import EditProfileModal from "../components/Profile/EditProfileModal"
 import { LoginContext } from "../context/LoginContext"
 import NotFoundPage from "./NotFoundPage"
 
-const ProfilePage: React.FC = ()=>{
+const ProfilePage: React.FC = () =>{
 
     const profileContext = useContext(ProfileContext),
           loginContext = useContext(LoginContext)
 
     if(!profileContext || !loginContext) return null
 
-    const { isEditing, setIsEditing } = profileContext,
+    const { profile, isEditing, setIsEditing } = profileContext,
           { isAuthenticated } = loginContext
 
     return(
@@ -21,13 +21,12 @@ const ProfilePage: React.FC = ()=>{
         <>
 
             {
-            
                 isAuthenticated ?(
 
                     <>
 
                         {
-                        
+
                             isEditing ?(
 
                                 <EditProfileModal/>
@@ -38,31 +37,51 @@ const ProfilePage: React.FC = ()=>{
 
                                     <div className="flex justify-between items-center px-8">
 
-                                        <ProfileImage/>
+                                        <div className="flex items-center gap-4">
+
+                                            <ProfileImage/>
+
+                                            <div>
+
+
+                                                {
+                                                    profile?.type === 'doctor' &&(
+
+                                                        <p className="text-gray-600">{profile.speciality}</p>
+
+                                                    )
+                                                    
+                                                }
+
+                                            </div>
+
+                                        </div>
+
 
                                         <button 
                                             className="bg-primary-bg p-2 text-secondary-bg cursor-pointer rounded-md"
-                                            onClick={()=>setIsEditing(true)}
+                                            onClick={() => setIsEditing(true)}
                                         >Edit Profile</button>
 
                                     </div>
+
 
                                     <ProfileInfo/>
 
                                 </div>
 
                             )
-                            
-                        }
 
+                        }
+                        
                     </>
 
                 ):(
-                      
+
                     <NotFoundPage/>
 
                 )
-                
+
             }
 
         </>
