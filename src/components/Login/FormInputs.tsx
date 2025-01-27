@@ -1,5 +1,5 @@
 interface FormInputsProps{
-    
+
     isSignUp: boolean
 
 }
@@ -9,18 +9,62 @@ import { LoginContext } from "../../context/LoginContext"
 import { BsEye } from "react-icons/bs"
 import { FiEyeOff } from "react-icons/fi"
 
-const FormInputs: React.FC<FormInputsProps> = ({ isSignUp })=>{
+const FormInputs: React.FC<FormInputsProps> = ({ isSignUp }) =>{
 
     const context = useContext(LoginContext)
 
     if(!context) return null
 
-    const { name, setName, email, setEmail, password, setPassword, confirmPassword, setConfirmPassword } = context,
+    const { name, setName, email, setEmail, password, setPassword, confirmPassword, setConfirmPassword, userType, setUserType } = context,
          [showPassword, setShowPassword] = useState<boolean>(false)
 
     return(
 
         <div className="flex flex-col gap-4 md:m-6 lg:m-6 items-start p-8 md:min-w-[400px] min-w-[300px] border rounded-xl text-zinc-600 text-sm shadow-lg">
+
+            {
+
+                isSignUp &&(
+
+                    <div className="flex items-center gap-4 w-full justify-center mb-2">
+
+                        <div 
+                            className={`flex items-center gap-2 border rounded-md px-4 py-2 cursor-pointer ${
+                                userType === "patient" ? 'bg-primary-bg text-secondary-bg' : 'hover:bg-gray-50'
+                            }`}
+                            onClick={() => setUserType("patient")}
+                        >
+
+                            <input 
+                                type="radio"
+                                name="userType"
+                                checked={userType === "patient"}
+                                onChange={() => setUserType("patient")}
+                            />
+
+                            <span>Patient</span>
+                        
+                        </div>
+
+
+                        <div 
+                            className={`flex items-center gap-2 border rounded-md px-4 py-2 cursor-pointer ${
+                                userType === "doctor" ? 'bg-primary-bg text-secondary-bg' : 'hover:bg-gray-50'
+                            }`}
+                            onClick={() => setUserType("doctor")}
+                        >
+                            <input 
+                                type="radio"
+                                name="userType"
+                                checked={userType === "doctor"}
+                                onChange={() => setUserType("doctor")}
+                            />
+                            <span>Doctor</span>
+                        </div>
+
+                    </div>
+                )
+            }
 
             {
 
