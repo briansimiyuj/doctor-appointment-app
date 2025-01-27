@@ -324,15 +324,16 @@ Profile page will show the user profile data and allow the user to edit the data
         e. Create other input fields for the user data and display the current data (make a component for them)
           i. Create a function to change the user data
           ii. For every input field, create a function to handle the input change
-          
-        f. Create useEditFormInput hook to handle all input change functions
+        f. Add cover image upload for doctor profiles
+          i. Display current cover image
+          ii. Handle cover image selection and preview
+          iii. Make it conditional for doctor type only
+        g. Create useEditFormInput hook to handle all input change functions
           i. Check if the input value is the same as the current value and return
-
-        g. Create a submit button to submit the form
+        h. Create a submit button to submit the form
           i. Make the button disabled if the user data is the same as the current data
 
       7. Initialize the editing state back to false
-
 
 ### Login Context
 
