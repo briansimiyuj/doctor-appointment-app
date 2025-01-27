@@ -338,10 +338,16 @@ Profile page will show the user profile data and allow the user to edit the data
         i. Create a submit button to submit the form
 
       7. Initialize the editing state back to false### Login Context
+### Login Context
+
 Login context will be used to store the user login data and provide it to the Login page.
 
   1. Create an interface for login data       
-  2. Create state variables to store the login data and initialize them with empty strings
+    a. Add userType field with 'patient' | 'doctor' type
+    b. Add setUserType function to update user type
+  2. Create state variables to store the login data
+    a. Initialize userType state with 'patient' as default
+    b. Add userType and setUserType to context value
   3. Wrap the routes in Script component with the LoginContext provider as the parent component
 
 
@@ -356,12 +362,17 @@ Login page will be used to log in and sign up the user. A user can either log in
   3. Create a state variable for isSignUp and initialize it with true
   4. Create a Sign Up component and mount it on the Login page if isSignUp is true
     a. Render the Sign Up title and description
-    b. Create labels and inputs for email, password, confirm password and name
-    c. Make the inputs controlled components  
-    d. Add placeholders to the inputs and show password toggle icons
-    e. Create a component for the input labels and mount it on the Sign Up Form component 
-    f. Create a button and a function to handle the sign up button click
-    g. Create a span to switch to the Sign In component when the user already has an account
+    b. Add user type selection
+      i. Create radio button group for patient/doctor selection
+      ii. Style selection options with visual feedback
+      iii. Handle type selection changes
+      iv. Show relevant fields based on user type
+    c. Create labels and inputs for email, password, confirm password and name
+    d. Make the inputs controlled components  
+    e. Add placeholders to the inputs and show password toggle icons
+    f. Create a component for the input labels and mount it on the Sign Up Form component 
+    g. Create a button and a function to handle the sign up button click
+    h. Create a span to switch to the Sign In component when the user already has an account
   
   5. Create a Sign In component and mount it on the Login page if isSignUp is false
      a. Render the Sign In title and description
@@ -369,10 +380,7 @@ Login page will be used to log in and sign up the user. A user can either log in
      c. Create a button and a function to handle the sign in button click
      d. Create a span to switch to the Sign Up component when the user does not have an account
 
-  6. Create a section for the Google aunthentication button for both the Sign In and Sign Up components
-
-
-### My Appointments Page
+  6. Create a section for the Google aunthentication button for both the Sign In and Sign Up components### My Appointments Page
 
 My appointments page will show the user's appointments. It will have a list of appointments with the doctor's name, date, time, and location. The user will be able pay for the appointment and cancel it.
 
