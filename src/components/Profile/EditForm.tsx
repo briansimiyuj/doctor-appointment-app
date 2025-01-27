@@ -38,16 +38,27 @@ const EditForm: React.FC = () =>{
 
         <>
 
-            <form className="flex flex-col gap-4 items-center justify-center w-full">
+            <form className="flex flex-col gap-8 items-center justify-center w-full max-w-3xl mx-auto p-6">
 
-                <div className="w-full">
+                <div className="w-full flex flex-col items-center gap-4">
 
-                    <img 
-                        src={profile?.image}
-                        alt="current user image" 
-                        className="w-36 h-36 rounded-full object-cover cursor-pointer mx-auto"
-                        onClick={handleImageClick}
-                    />
+                    <div className="relative group">
+
+                        <img 
+                            src={profile?.image}
+                            alt="current user image" 
+                            className="w-40 h-40 rounded-full object-cover cursor-pointer mx-auto transition-transform duration-300 group-hover:scale-105"
+                            onClick={handleImageClick}
+                        />
+
+                        <div className="absolute inset-0 bg-black bg-opacity-40 rounded-full opacity-8 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+
+                            <span className="text-white text-sm">Change Photo</span>
+
+                        </div>
+
+                    </div>
+
 
                     <input 
                         type="file" 
@@ -67,14 +78,24 @@ const EditForm: React.FC = () =>{
 
                         <div className="w-full">
 
-                            <h2 className="text-neutral-500 underline mt-3 mb-3">COVER IMAGE</h2>
+                            <h2 className="text-neutral-500 font-semibold text-lg mb-4">Cover Image</h2>
 
-                            <img 
-                                src={profile.coverImage || assets.uploadIcon}
-                                alt="Cover Image" 
-                                className="w-full h-30 object-cover cursor-pointer"
-                                onClick={handleCoverImageClick}
-                            />
+                            <div className="relative group rounded-lg overflow-hidden p-8">
+
+                                <img 
+                                    src={profile.coverImage || assets.uploadIcon}
+                                    alt="Cover Image" 
+                                    className="w-21 object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105"
+                                    onClick={handleCoverImageClick}
+                                />
+                
+                                <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+
+                                    <span className="text-white text-sm">Change Cover</span>
+                                    
+                                </div>
+                
+                            </div>
 
                             <input 
                                 type="file" 
@@ -86,9 +107,8 @@ const EditForm: React.FC = () =>{
                             />
 
                         </div>
-
                     )
-                    
+
                 }
 
 
@@ -97,9 +117,9 @@ const EditForm: React.FC = () =>{
 
                 <button
                     className={`${isChanged 
-                        ? 'bg-primary-bg text-secondary-bg cursor-pointer' 
-                        : 'bg-gray-500 text-secondary-bg cursor-not-allowed'
-                    } px-8 py-4 mt-3 rounded-md`}
+                        ? 'bg-primary-bg text-secondary-bg hover:bg-opacity-90 cursor-pointer' 
+                        : 'bg-gray-400 text-gray-200 cursor-not-allowed'
+                    } px-10 py-3 rounded-lg font-medium transition-colors duration-300 w-full max-w-md mt-4`}
                     type="submit"
                     disabled={!isChanged}
                 >Save Changes</button>
