@@ -3,24 +3,25 @@ import { ProfileContext } from "../../context/ProfileContext"
 import EditFormInput from "./EditFormInput"
 import { useEditFormInput } from "../../hooks/useEditFormInput"
 
-const EditForm: React.FC = ()=>{
+const EditForm: React.FC = () =>{
 
     const fileInputRef = useRef<HTMLInputElement>(null),
           context = useContext(ProfileContext)
-          if(!context) return null
 
-          const { profile } = context,
-                editFormInput = useEditFormInput()
+    if(!context) return null
 
-          if(!editFormInput) return null
+    const { profile } = context,
+          editFormInput = useEditFormInput()
 
-          const { handleImageChange, isChanged } = editFormInput
+    if(!editFormInput) return null
 
-    
+    const { handleImageChange, isChanged } = editFormInput
+
+
     const handleImageClick = () =>{
-    
-       fileInputRef.current?.click()
-    
+
+        fileInputRef.current?.click()
+
     }
 
 
@@ -28,11 +29,11 @@ const EditForm: React.FC = ()=>{
 
         <>
 
-            <form action="" className="flex flex-col gap-4 items-center justify-center w-full">
+            <form className="flex flex-col gap-4 items-center justify-center w-full">
 
                 <div className="w-full">
 
-                   <img 
+                    <img 
                         src={profile?.image}
                         alt="current user image" 
                         className="w-36 h-36 rounded-full object-cover cursor-pointer mx-auto"
@@ -50,17 +51,18 @@ const EditForm: React.FC = ()=>{
 
                 </div>
 
-              
-                <EditFormInput/>           
+
+                <EditFormInput/>
 
 
                 <button
-                    className={`${isChanged
-                        ? 'bg-primary-bg text-secondary-bg cursor-pointer' : 'bg-gray-500 text-secondary-bg cursor-not-allowed' 
-                    }  px-8 py-4 mt-3 rounded-md`}
+                    className={`${isChanged 
+                        ? 'bg-primary-bg text-secondary-bg cursor-pointer' 
+                        : 'bg-gray-500 text-secondary-bg cursor-not-allowed'
+                    } px-8 py-4 mt-3 rounded-md`}
                     type="submit"
                     disabled={!isChanged}
-                >Save</button>
+                >Save Changes</button>
 
             </form>
 
