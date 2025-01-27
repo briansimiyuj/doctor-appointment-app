@@ -13,7 +13,7 @@ const ProfilePage: React.FC = () =>{
 
     if(!profileContext || !loginContext) return null
 
-    const { profile, isEditing, setIsEditing } = profileContext,
+    const { isEditing, setIsEditing } = profileContext,
           { isAuthenticated } = loginContext
 
     return(
@@ -40,20 +40,6 @@ const ProfilePage: React.FC = () =>{
                                         <div className="flex items-center gap-4">
 
                                             <ProfileImage/>
-
-                                            <div>
-
-
-                                                {
-                                                    profile?.type === 'doctor' &&(
-
-                                                        <p className="text-gray-600">{profile.speciality}</p>
-
-                                                    )
-                                                    
-                                                }
-
-                                            </div>
 
                                         </div>
 

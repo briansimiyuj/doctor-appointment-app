@@ -24,7 +24,11 @@ const ProfileData: React.FC = () => {
                         
                             <h2 className="text-neutral-500 underline mt-3">PROFESSIONAL DETAILS</h2>
 
-                            <div className="grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-neutral-700">
+                            <div className="grid grid-cols-[1fr_3fr] gap-3   gap-y-2.5 mt-3 text-neutral-700">
+
+                                <h3 className="font-medium">Specialization:</h3>
+
+                                <p className="text-gray-400">{profile.speciality}</p>
                         
                                 <h3 className="font-medium">Experience:</h3>
                         
