@@ -25,7 +25,7 @@ const EditProfileModal: React.FC = ()=>{
                     <img 
                         src={assets.crossIcon} 
                         alt="cross icon" 
-                        className="absolute top-0 right-2 cursor-pointer w-10"
+                        className="absolute top-0 right-0 cursor-pointer w-10"
                         onClick={() => setIsEditing(false)}
                     />
 
