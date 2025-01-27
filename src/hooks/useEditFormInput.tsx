@@ -73,7 +73,7 @@ export const useEditFormInput = () =>{
     }
 
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>{
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
 
         const { name, value } = e.target
 
@@ -216,7 +216,32 @@ export const useEditFormInput = () =>{
 
             })
 
-        }
+        }else if(name === "speciality"){
+
+            setProfile((prevData: ProfileType | null) =>{
+
+                if(!prevData) return null
+
+                if(prevData.type === "doctor"){
+
+                    return{
+
+                        ...prevData,
+                        speciality: value,
+                        type: "doctor",
+                        rating: prevData.rating,
+                        coverImage: prevData.coverImage
+
+                    }
+
+                }
+
+
+                return prevData
+
+            }
+
+        )}
 
     }
 

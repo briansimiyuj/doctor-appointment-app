@@ -1,6 +1,7 @@
 import { useEditFormInput } from "../../hooks/useEditFormInput"
 import { useContext } from "react"
 import { ProfileContext } from "../../context/ProfileContext"
+import { specialityData } from "../../assets/frontend/assets"
 
 
 const EditFormInput: React.FC = () =>{
@@ -39,19 +40,37 @@ const EditFormInput: React.FC = () =>{
                 profile?.type === 'doctor' ?(
 
                     <>
+
                         <div className="flex flex-col gap-2 w-full items-center">
 
                             <label htmlFor="speciality" className="font-semibold">Speciality:</label>
 
-                            <input 
-                                type="text"
+                            <select 
                                 name="speciality" 
-                                id="speciality" 
-                                placeholder="Enter your speciality"
+                                id="speciality"
                                 className="w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                                 value={profile.speciality}
                                 onChange={handleInputChange}
-                            />
+                            >
+
+                                <option>Select speciality</option>
+
+
+                                {
+
+                                    specialityData.map((speciality, index) =>(
+
+                                        <option key={index} value={speciality.speciality}>
+                                            
+                                            {speciality.speciality}
+                                        
+                                        </option>
+
+                                    ))
+
+                                }
+
+                            </select>
 
                         </div>
 
