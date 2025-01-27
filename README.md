@@ -321,18 +321,17 @@ Profile page will show the user profile data and allow the user to edit the data
         b. Display the current profile picture
         c. Create a function to handle image click which will open the file selector dialog
         d. Create a function to handle image change which will set the profile picture to the selected image
-        e. Create other input fields for the user data and display the current data (make a component for them)
-          i. Create a function to change the user data
-          ii. For every input field, create a function to handle the input change
-          iii. Add speciality dropdown with options from specialityData
-          iv. Handle select element changes in useEditFormInput hook
-        f. Create useEditFormInput hook to handle all input change functions
-          i. Check if the input value is the same as the current value and return
-        g. Create a submit button to submit the form
-          i. Make the button disabled if the user data is the same as the current data
+        e. Create other input fields for the user data and display the current data
+        f. Style improvements for better user experience
+          i. Add hover effects for image uploads
+          ii. Enhance button states and transitions
+          iii. Implement scrollable modal with sticky header
+          iv. Improve form layout and spacing
+          v. Add visual feedback for interactive elements
+        g. Create useEditFormInput hook to handle all input change functions
+        h. Create a submit button to submit the form
 
-      7. Initialize the editing state back to false
-### Login Context
+      7. Initialize the editing state back to false### Login Context
 
 Login context will be used to store the user login data and provide it to the Login page.
 
