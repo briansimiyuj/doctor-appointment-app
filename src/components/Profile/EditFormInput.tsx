@@ -21,14 +21,14 @@ const EditFormInput: React.FC = () =>{
 
             <div className="flex flex-col gap-2 w-full items-center">
 
-                <label htmlFor="name" className="font-semibold">Name:</label>
+                <label htmlFor="name" className="font-semibold text-sm sm:text-base">Name:</label>
 
                 <input 
                     type="text"
                     name="name" 
                     id="name" 
                     placeholder="Enter your name"
-                    className="w-[60%] p-2 rounded-md border border-gray-300 bg-white"
+                    className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                     value={nameValue}
                     onChange={handleInputChange}                 
                 />
@@ -43,12 +43,12 @@ const EditFormInput: React.FC = () =>{
 
                         <div className="flex flex-col gap-2 w-full items-center">
 
-                            <label htmlFor="speciality" className="font-semibold">Speciality:</label>
+                            <label htmlFor="speciality" className="font-semibold text-sm sm:text-base">Speciality:</label>
 
                             <select 
                                 name="speciality" 
                                 id="speciality"
-                                className="w-[60%] p-2 rounded-md border border-gray-300 bg-white"
+                                className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                                 value={profile.speciality}
                                 onChange={handleInputChange}
                             >
@@ -77,14 +77,14 @@ const EditFormInput: React.FC = () =>{
 
                         <div className="flex flex-col gap-2 w-full items-center">
 
-                            <label htmlFor="experience" className="font-semibold">Experience:</label>
+                            <label htmlFor="experience" className="font-semibold text-sm sm:text-base">Experience:</label>
 
                             <input 
                                 type="text"
                                 name="experience" 
                                 id="experience" 
                                 placeholder="Enter your experience"
-                                className="w-[60%] p-2 rounded-md border border-gray-300 bg-white"
+                                className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                                 value={profile.experience}
                                 onChange={handleInputChange}
                             />
@@ -94,14 +94,14 @@ const EditFormInput: React.FC = () =>{
 
                         <div className="flex flex-col gap-2 w-full items-center">
 
-                            <label htmlFor="fees" className="font-semibold">Fees:</label>
+                            <label htmlFor="fees" className="font-semibold text-sm sm:text-base">Fees:</label>
 
                             <input 
                                 type="number"
                                 name="fees" 
                                 id="fees" 
                                 placeholder="Enter your fees"
-                                className="w-[60%] p-2 rounded-md border border-gray-300 bg-white"
+                                className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                                 value={profile.fees}
                                 onChange={handleInputChange}
                             />
@@ -111,13 +111,13 @@ const EditFormInput: React.FC = () =>{
 
                         <div className="flex flex-col gap-2 w-full items-center">
 
-                            <label htmlFor="about" className="font-semibold">About:</label>
+                            <label htmlFor="about" className="font-semibold text-sm sm:text-base">About:</label>
 
                             <textarea 
                                 name="about" 
                                 id="about" 
                                 placeholder="Enter about yourself"
-                                className="w-[60%] p-2 rounded-md border border-gray-300 bg-white"
+                                className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                                 value={profile.about}
                                 onChange={handleInputChange}
                                 rows={4}
@@ -130,13 +130,13 @@ const EditFormInput: React.FC = () =>{
 
                     <div className="flex flex-col gap-2 w-full items-center">
 
-                        <label htmlFor="medicalHistory" className="font-semibold">Medical History:</label>
+                        <label htmlFor="medicalHistory" className="font-semibold text-sm sm:text-base">Medical History:</label>
 
                         <textarea 
                             name="medicalHistory" 
                             id="medicalHistory" 
                             placeholder="Enter your medical history"
-                            className="w-[60%] p-2 rounded-md border border-gray-300 bg-white"
+                            className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                             value={profile?.medicalHistory?.join('\n')}
                             onChange={handleInputChange}
                             rows={4}
@@ -150,14 +150,14 @@ const EditFormInput: React.FC = () =>{
 
             <div className="flex flex-col gap-2 w-full items-center">
 
-                <label htmlFor="email" className="font-semibold">Email:</label>
+                <label htmlFor="email" className="font-semibold text-sm sm:text-base">Email:</label>
 
                 <input 
                     type="email"
                     name="email" 
                     id="email" 
                     placeholder="Enter your email"
-                    className="w-[60%] p-2 rounded-md border border-gray-300 bg-white"
+                    className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                     value={emailValue}
                     onChange={handleInputChange}
                 />
@@ -167,14 +167,14 @@ const EditFormInput: React.FC = () =>{
 
             <div className="flex flex-col gap-2 w-full items-center">
 
-                <label htmlFor="phone" className="font-semibold">Phone:</label>
+                <label htmlFor="phone" className="font-semibold text-sm sm:text-base">Phone:</label>
 
                 <input 
                     type="text"
                     name="phone" 
                     id="phone" 
                     placeholder="Enter your phone"
-                    className="w-[60%] p-2 rounded-md border border-gray-300 bg-white"
+                    className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                     value={phoneValue} 
                     onChange={handleInputChange}
                 />

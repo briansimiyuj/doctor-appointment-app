@@ -328,11 +328,16 @@ Profile page will show the user profile data and allow the user to edit the data
           iii. Implement scrollable modal with sticky header
           iv. Improve form layout and spacing
           v. Add visual feedback for interactive elements
-        g. Create useEditFormInput hook to handle all input change functions
-        h. Create a submit button to submit the form
+        g. Responsive design implementation
+          i. Full-width inputs on mobile, controlled width on larger screens
+          ii. Optimized image sizes across breakpoints
+          iii. Expanded cover image height for better visual impact
+          iv. Adjusted text and spacing for different screen sizes
+          v. Maintained hover effects across devices
+        h. Create useEditFormInput hook to handle all input change functions
+        i. Create a submit button to submit the form
 
       7. Initialize the editing state back to false### Login Context
-
 Login context will be used to store the user login data and provide it to the Login page.
 
   1. Create an interface for login data       
