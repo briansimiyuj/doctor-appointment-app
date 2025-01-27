@@ -2,10 +2,12 @@ import { useContext, useRef } from "react"
 import { ProfileContext } from "../../context/ProfileContext"
 import EditFormInput from "./EditFormInput"
 import { useEditFormInput } from "../../hooks/useEditFormInput"
+import { assets } from "../../assets/frontend/assets"
 
 const EditForm: React.FC = () =>{
 
     const fileInputRef = useRef<HTMLInputElement>(null),
+          coverImageRef = useRef<HTMLInputElement>(null),
           context = useContext(ProfileContext)
 
     if(!context) return null
@@ -21,6 +23,13 @@ const EditForm: React.FC = () =>{
     const handleImageClick = () =>{
 
         fileInputRef.current?.click()
+
+    }
+
+
+    const handleCoverImageClick = () =>{
+
+        coverImageRef.current?.click()
 
     }
 
@@ -50,6 +59,37 @@ const EditForm: React.FC = () =>{
                     />
 
                 </div>
+
+
+                {
+                
+                    profile?.type === "doctor" &&(
+
+                        <div className="w-full">
+
+                            <h2 className="text-neutral-500 underline mt-3 mb-3">COVER IMAGE</h2>
+
+                            <img 
+                                src={profile.coverImage || assets.uploadIcon}
+                                alt="Cover Image" 
+                                className="w-full h-30 object-cover cursor-pointer"
+                                onClick={handleCoverImageClick}
+                            />
+
+                            <input 
+                                type="file" 
+                                name="coverImage" 
+                                accept="image/*"
+                                hidden
+                                ref={coverImageRef}
+                                onChange={handleImageChange} 
+                            />
+
+                        </div>
+
+                    )
+                    
+                }
 
 
                 <EditFormInput/>
