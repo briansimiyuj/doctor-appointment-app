@@ -34,7 +34,7 @@ export const LoginContextProvider = ({ children }: LoginContextProviderProps) =>
           [password, setPassword] = useState<string>(''),
           [confirmPassword, setConfirmPassword] = useState<string>(''),
           [isAuthenticated , setIsAuthenticated] = useState<boolean>(true),
-          [userType, setUserType] = useState<"patient" | "doctor">("patient"),
+          [userType, setUserType] = useState<"patient" | "doctor">("doctor"),
 
         value = { email, setEmail, name, setName, password, setPassword, confirmPassword, setConfirmPassword, isAuthenticated  , setIsAuthenticated, userType, setUserType }
 
