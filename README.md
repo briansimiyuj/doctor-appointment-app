@@ -52,6 +52,7 @@ The Home page is the main page of the application. It includes a hero section, a
   #### Doctor UI For Left Hero 
 
     1. Create heroContent file that will contain content for patient and doctor UI
+    2. Fill in the content for the doctor UI in left hero component based on the heroContent file
 
     2. Create a Speciality Menu component and mount it on Home page
         a. Add speciality data and create a card for each speciality.
