@@ -13,8 +13,6 @@ const LeftHero: React.FC = ()=>{
           { doctor, patient } = createHeroContent(navigate),
           content = isAuthenticated ? (userType === "patient" ? patient : doctor) : doctor
 
-    console.log(userType)
-
     return(
 
         <div className="md:w-1/2 flex flex-col items-start justify-center gap-4 m-auto md:py-[10vw] md:mb-[-30px]">
