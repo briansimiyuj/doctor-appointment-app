@@ -59,6 +59,16 @@ The Home page is the main page of the application. It includes a hero section, a
         b. Each card will have a speciality name and speciality image.
         e. Each card will be a clickable link to the doctor list page of that speciality.
 
+
+#### Doctors Appointments
+
+Doctors appointments will be a list of some appointments for the doctor.
+
+  1. Create a DoctorsAppointments component and mount it on Home page if the user is a doctor.
+  2. Retrieve appointments array from the AppointmentContext.
+  3. Loop through the appointments and create a card for each appointment.
+  4. Each card will have a patient name, patient image, appointed date and time, and appointment status.
+
 ### Currency Context
 
 The Currency Context provides currency conversion functionality throughout the application.
