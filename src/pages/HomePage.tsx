@@ -5,6 +5,7 @@ import SpecialityMenu from "../components/Speciality/SpecialityMenu"
 import TopDoctors from "../components/TopDoctors/TopDoctors"
 import { LoginContext } from "../context/LoginContext"
 import DoctorAppointments from "../components/Doctors/DoctorAppointments"
+import { AppointmentsContextProvider } from "../context/AppointmentContext"
 
 const HomePage: React.FC = ()=>{
 
@@ -14,19 +15,21 @@ const HomePage: React.FC = ()=>{
 
     const { userType } = loginContext
 
-    if(userType === "doctor") console.log('working')
-
     return(
 
         <>
         
             <Hero/>
 
-            {
+            <AppointmentsContextProvider>
 
-                userType === "doctor" ? <DoctorAppointments/> : <SpecialityMenu/>
+                {
 
-            }
+                    userType === "doctor" ? <DoctorAppointments/> : <SpecialityMenu/>
+
+                }
+ 
+            </AppointmentsContextProvider>
 
             <TopDoctors/>
 
