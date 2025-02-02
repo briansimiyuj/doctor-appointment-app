@@ -78,6 +78,7 @@ Doctors appointments will be a list of some appointments for the doctor.
   2. Retrieve appointments array from the AppointmentContext.
   3. Loop through the appointments and create a card for each appointment.
   4. Each card will have a patient name, patient image, appointed date and time, and appointment status.
+  5. Add a button to view all appointments which will navigate to MyAppointmentsPage.
 
 ### Currency Context
 
