@@ -16,6 +16,7 @@ import { BookingContextProvider } from "./context/BookingContext"
 import NotFoundPage from "./pages/NotFoundPage"
 import { LogoLoading } from "./assets/Loading"
 import { LoginContextProvider } from "./context/LoginContext"
+import { AppointmentsContextProvider } from "./context/AppointmentContext"
 
 const Script: React.FC = () =>{
 
@@ -79,7 +80,11 @@ const Script: React.FC = () =>{
             
                     <BookingContextProvider>
 
-                      <MyAppointmentsPage/>
+                      <AppointmentsContextProvider>
+
+                        <MyAppointmentsPage/>
+
+                      </AppointmentsContextProvider>
 
                     </BookingContextProvider>
 

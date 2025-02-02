@@ -1,7 +1,6 @@
 import { createContext, useState, useEffect } from "react"
 import { AppointmentType } from "../assets/types/AppointmentType"
-import appointmentsData from "../assets/frontend/AppointmentData.json"
-import { patients } from "../assets/frontend/patientsData"
+import { appointmentsData, patients } from "../assets/frontend/assets"
 
 interface AppointmentsContextProps{
 

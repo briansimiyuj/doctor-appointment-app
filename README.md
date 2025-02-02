@@ -60,6 +60,16 @@ The Home page is the main page of the application. It includes a hero section, a
         e. Each card will be a clickable link to the doctor list page of that speciality.
 
 
+### Appointment Context
+
+Appointment context is a global state that will be used to store the appointment data for the patient.
+
+  1. Add dummy data for the appointments as an array of objects.
+  2. Create a state variable to store the appointments and initialize it with empty array.
+  3. Once the component mounts, map through the appointments data and find the appointed patients. Assign this to a variable.
+  4. Set the appointments state variable with appointed patients.
+  5. Wrap the relevant components and pages with the AppointmentContext.Provider (MyAppointmentsPage and DoctorsAppointments)
+
 #### Doctors Appointments
 
 Doctors appointments will be a list of some appointments for the doctor.
