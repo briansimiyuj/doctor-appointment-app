@@ -112,6 +112,7 @@ The Currency Context provides currency conversion functionality throughout the a
 The Doctor Statistics Context will manage patient statistics, appointment metrics, ratings data, performance indicators, and doctor reviews.
 
   1. Create DoctorStatsContbextProps interface that will have doctor stats, ratings, reviews and performance indicators.
+  2. Create a state variables to store the doctor stats, ratings, reviews and performance indicators. Initialize them with dummy data.
 
 
 ### Top Doctors Component
