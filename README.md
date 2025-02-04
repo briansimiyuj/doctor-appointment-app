@@ -115,6 +115,14 @@ The Doctor Statistics Context will manage patient statistics, appointment metric
   2. Create a state variables to store the doctor stats, ratings, reviews and performance indicators. Initialize them with dummy data.
 
 
+### Doctor Statistics Component
+
+The Doctor Statistics component displays doctor statistics, ratings, reviews, and performance indicators.
+
+  1. Create a DoctorStats component and mount it on Home page if the user is a doctor.
+  2. Wrap the component's children with DoctorStatsContext.Provider
+
+
 ### Top Doctors Component
 
 The Top Doctors component displays a list of top doctors.
