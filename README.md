@@ -124,6 +124,7 @@ The Doctor Statistics component displays doctor statistics, ratings, reviews, an
 
       a. Create a StatsGrid component and mount it on DoctorStats component.
       b. Create a StatCard component and mount it on StatsGrid component. The cards will display today's appointments, total appointments, completed appointments, and overall rating.
+      c. Create a button to view all stats and navigate to the DoctorStats page.
 
 
 ### Top Doctors Component
