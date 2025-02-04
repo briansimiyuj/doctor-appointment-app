@@ -6,6 +6,7 @@ import TopDoctors from "../components/TopDoctors/TopDoctors"
 import { LoginContext } from "../context/LoginContext"
 import DoctorAppointments from "../components/Doctors/DoctorAppointments"
 import { AppointmentsContextProvider } from "../context/AppointmentContext"
+import DoctorStats from "../components/DoctorStats/DoctorStats"
 
 const HomePage: React.FC = ()=>{
 
@@ -31,7 +32,11 @@ const HomePage: React.FC = ()=>{
  
             </AppointmentsContextProvider>
 
-            <TopDoctors/>
+            {
+
+                userType === "doctor" ? <DoctorStats/> : <TopDoctors/>
+
+            }
 
             <Banner/>
         
