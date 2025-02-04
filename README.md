@@ -107,6 +107,12 @@ The Currency Context provides currency conversion functionality throughout the a
     e. Use currencySymbol to display correct currency symbol
 
 
+### Doctor Statistics Context
+
+The Doctor Statistics Context will manage patient statistics, appointment metrics, ratings data, performance indicators, and doctor reviews.
+
+  1. Create DoctorStatsContbextProps interface that will have doctor stats, ratings, reviews and performance indicators.
+
 
 ### Top Doctors Component
 
