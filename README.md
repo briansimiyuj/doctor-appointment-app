@@ -120,7 +120,10 @@ The Doctor Statistics Context will manage patient statistics, appointment metric
 The Doctor Statistics component displays doctor statistics, ratings, reviews, and performance indicators.
 
   1. Create a DoctorStats component and mount it on Home page if the user is a doctor.
-  2. Wrap the component's children with DoctorStatsContext.Provider
+  2. Wrap the component's children with DoctorStatsContext.Provider.
+
+      a. Create a StatsGrid component and mount it on DoctorStats component.
+      b. Create a StatCard component and mount it on StatsGrid component. The cards will display today's appointments, total appointments, completed appointments, and overall rating.
 
 
 ### Top Doctors Component
