@@ -152,7 +152,7 @@ Banner component will have a heading, a paragraph, and a button for booking an a
         i. Create a bannerContent.ts file that will contain content for patient and doctor UI
         ii. Update LeftBannerSide component to use the content from bannerContent based on the user type
 
-    b. Create right side of the banner which will have a image
+    b. Create right side of the banner which will have a image for both doctor and patient UI
 
   
 ### Footer Component
