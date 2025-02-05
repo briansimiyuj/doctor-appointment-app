@@ -42,10 +42,12 @@ import patient2 from "./patient2.jpg"
 import patient3 from "./patient3.jpg"
 import patient4 from "./patient4.jpg"
 import patient5 from "./patient5.jpg"
+import analytics from "./analytics.jpg"
 
 export const assets ={
   
     appointmentImage,
+    analytics,
     aboutImage,
     logo,
     menuIcon,
