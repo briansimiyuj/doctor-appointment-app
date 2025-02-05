@@ -1,11 +1,13 @@
 import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { LoginContext } from "../../context/LoginContext"
+import { createBannerContent } from "./bannerContent"
 
 const LeftBannerSide: React.FC = ()=>{
 
     const navigate = useNavigate(),
-          loginContext = useContext(LoginContext)
+          loginContext = useContext(LoginContext),
+          { doctorContent, patientContent } = createBannerContent(navigate)
           
     if(!loginContext){
     
@@ -13,7 +15,8 @@ const LeftBannerSide: React.FC = ()=>{
 
     }
 
-    const { isAuthenticated } = loginContext
+    const { isAuthenticated, userType } = loginContext,
+          content = userType === "doctor" ? doctorContent : patientContent
 
     return(
 
@@ -21,9 +24,9 @@ const LeftBannerSide: React.FC = ()=>{
 
             <div className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold banner-text">
 
-                <h3>Book Appointment</h3>
+                <h3>{content.heading}</h3>
 
-                <h2 className="mt-4">With 100+ Trusted Doctors</h2>
+                <h2 className="mt-4">{content.subHeading}</h2>
 
             </div>
 
@@ -34,15 +37,15 @@ const LeftBannerSide: React.FC = ()=>{
 
                     <button
                         className="bg-white text-sm sm:text-base text-gray-600 px-8 py-3 rounded-full mt-6 hover:scale-105 transition-all"
-                        onClick={()=>navigate("/doctors")}
-                    >Book Now</button>
+                        onClick={content?.buttonAction ? content.buttonAction : undefined}
+                    >{content.buttonText}</button>
 
                 ):(
 
                     <button
                         className="bg-white text-sm sm:text-base text-gray-600 px-8 py-3 rounded-full mt-6 hover:scale-105 transition-all"
                         onClick={()=>navigate("/login")}
-                    >Create Account</button>
+                    >{content.buttonText}</button>
                 )
 
             }
