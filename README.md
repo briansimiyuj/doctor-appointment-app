@@ -146,6 +146,11 @@ Banner component will have a heading, a paragraph, and a button for booking an a
 
   1. Create a Banner component and mount it on Home page
     a. Create left side of the banner which will have a heading, a paragraph, and a button for booking an appointment or creating an account
+
+      #### Update for Doctor UI
+
+        i. Create a bannerContent.ts file that will contain content for patient and doctor UI
+
     b. Create right side of the banner which will have a image
 
   
