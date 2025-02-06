@@ -1,7 +1,7 @@
-    import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { DoctorType } from "../../assets/types/DoctorType"
 import { BookingContext } from "../../context/BookingContext"
-import { doctors } from "../../assets/frontend/assets"
+import { doctors } from "../../assets/frontend/doctorsData"
 import TopDoctorsCard from "../TopDoctors/TopDoctorsCard"
 
 const RelatedDoctors: React.FC = ()=>{

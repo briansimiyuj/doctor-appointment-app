@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
-import { doctors } from "../../assets/frontend/assets"
+import { doctors } from "../../assets/frontend/doctorsData"
+
 import TopDoctorsCard from "./TopDoctorsCard"
 
 const TopDoctors: React.FC = ()=>{
