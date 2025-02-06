@@ -396,7 +396,7 @@ Login context will be used to store the user login data and provide it to the Lo
   1. Create an interface for login data       
     a. Add userType field with 'patient' | 'doctor' type
     b. Add setUserType function to update user type
-  2. Create state variables to store the login data
+  2. Create state variables to s`tore the login data
     a. Initialize userType state with 'patient' as default
     b. Add userType and setUserType to context value
   3. Wrap the routes in Script component with the LoginContext provider as the parent component
@@ -489,3 +489,11 @@ Loading State will be a page that will be displayed when the app is loading.
 Is Authenticated Guard will be a component that will check if the user is authenticated and if not, it will redirect the user to the login page.
 
   1. Make some pages and components that require authentication follow this pattern (LoginPage, BookingSlots, MyAppointmentsPage, SettingsPage)
+
+
+
+### Schedule Page
+
+Schedule Page will be a page that will show the doctor's schedule. It will have a list of days with the doctor's schedule for each day. The doctor will be able to manage the schedule, choose the days of the week that he/she will be available, and the time slots that he/she will be available.
+
+  1. Create a Schedule Page and mount it on Script component and provide a route for it
