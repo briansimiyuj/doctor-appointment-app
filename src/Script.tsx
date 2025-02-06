@@ -17,6 +17,7 @@ import NotFoundPage from "./pages/NotFoundPage"
 import { LogoLoading } from "./assets/Loading"
 import { LoginContextProvider } from "./context/LoginContext"
 import { AppointmentsContextProvider } from "./context/AppointmentContext"
+import SchedulePage from "./pages/SchedulePage"
 
 const Script: React.FC = () =>{
 
@@ -75,6 +76,8 @@ const Script: React.FC = () =>{
                   <Route path="/profile/:id" element={<ProfilePage/>}/>
 
                   <Route path="/login" element={<LoginPage/>}/>
+
+                  <Route path="/schedule" element={<SchedulePage/>}/>
 
                   <Route path="/bookings" element={
             
