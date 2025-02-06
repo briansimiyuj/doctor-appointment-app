@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { DoctorType } from "../assets/types/DoctorType";
 import { useParams } from "react-router-dom";
-import { doctors } from "../assets/frontend/assets";
+import { doctors } from "../assets/frontend/doctorsData";
 import { TimeSlotType } from "../assets/types/TimeSlotType";
 import { AppointedDoctorType } from "../assets/types/AppointedDoctorType";
 
