@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react"
+import { appointmentsData } from "../assets/frontend/assets"
+import { patients } from "../assets/frontend/patientsData"
 import { AppointmentType } from "../assets/types/AppointmentType"
-import { appointmentsData, patients } from "../assets/frontend/assets"
 
 interface AppointmentsContextProps{
 
