@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react"
-import { DoctorStatsContextProps } from "../assets/DoctorStatsContextProps"
+import { DoctorStatsContextProps } from "../assets/contextProps/DoctorStatsContextProps"
 import { assets } from "../assets/frontend/assets"
 
 export const DoctorStatsContext = createContext<DoctorStatsContextProps | null>(null)
