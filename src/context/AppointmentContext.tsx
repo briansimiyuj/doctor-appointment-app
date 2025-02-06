@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react"
-import { appointmentsData } from "../assets/frontend/assets"
+import appointmentsData from "../assets/frontend/AppointmentData.json"
 import { patients } from "../assets/frontend/patientsData"
 import { AppointmentType } from "../assets/types/AppointmentType"
 
