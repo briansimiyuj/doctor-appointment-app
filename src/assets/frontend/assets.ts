@@ -90,6 +90,18 @@ export const doctorImages ={
 }
 
 
+
+export const patientImages ={
+    
+    patient1,
+    patient2,
+    patient3,
+    patient4,
+    patient5,
+
+}
+
+
 export const specialityData =[
 
     {
@@ -124,139 +136,7 @@ export const specialityData =[
 
 ]
 
-export const patients =[
- 
-    {
-        _id: "patient1",
-        name: "John Doe",
-        image: patient1,
-        age: 32,
-        gender: "Male",
-        status: "confirmed",
-        
-        contact:{
-            phone: "+254712345678",
-            email: "johndoe@example.com",
-        },
-        
-        address:{
-            line1: "Westlands Avenue",
-            line2: "Nairobi, Kenya",
-        },
 
-        appointment:{
-            date: "2025-02-10",
-            time: "10:30 AM",
-            doctor: "Dr. Michael Johnson",
-            speciality: "Cardiologist",
-        },
-    },
-    
-    {
-        _id: "patient2",
-        name: "Jane Wanjiru",
-        image: patient2,
-        age: 28,
-        gender: "Female",
-        status: "pending",
-        
-        contact:{
-            phone: "+254798765432",
-            email: "janewanjiru@example.com",
-        },
-        
-        address:{
-            line1: "Ngong Road",
-            line2: "Kilimani, Nairobi",
-        },
-        
-        appointment:{
-            date: "2025-02-12",
-            time: "2:00 PM",
-            doctor: "Dr. Sophia Mwangi",
-            speciality: "Gynecologist",
-        },
-    },
-    
-    {
-        _id: "patient3",
-        name: "Ali Mohammed",
-        image: patient3,
-        age: 40,
-        gender: "Male",
-        status: "approved",
-        
-        contact:{
-            phone: "+255765432198",
-            email: "alimohammed@example.com",
-        },
-        
-        address:{
-            line1: "Kariakoo Street",
-            line2: "Dar es Salaam, Tanzania",
-        },
-        
-        appointment:{
-            date: "2025-02-15",
-            time: "11:00 AM",
-            doctor: "Dr. Amina Hussein",
-            speciality: "Dermatologist",
-        },
-    },
-
-    {
-        _id: "patient4",
-        name: "Mary Achieng",
-        image: patient4,
-        age: 35,
-        gender: "Female",
-        status: "pending",
-        
-        contact:{
-            phone: "+256714567890",
-            email: "maryachieng@example.com",
-        },
-        
-        address:{
-            line1: "Nakasero Road",
-            line2: "Kampala, Uganda",
-        },
-        
-        appointment:{
-            date: "2025-02-18",
-            time: "9:30 AM",
-            doctor: "Dr. David Smith",
-            speciality: "Pediatrician",
-        },
-    },
-
-    {
-        _id: "patient5",
-        name: "Peter Otieno",
-        image: patient5,
-        age: 45,
-        gender: "Male",
-        status: "approved",
-        
-        contact:{
-            phone: "+254723456789",
-            email: "peterotieno@example.com",
-        },
-        
-        address:{
-            line1: "Moi Avenue",
-            line2: "Mombasa, Kenya",
-        },
-        
-        appointment:{
-            date: "2025-02-22",
-            time: "4:00 PM",
-            doctor: "Dr. Marcus Brown",
-            speciality: "Neurologist",
-        }
-
-    }
-]
   
 export const appointmentsData =[
 
