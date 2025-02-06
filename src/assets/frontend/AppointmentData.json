@@ -1,0 +1,46 @@
+[
+    {
+        "_id": "appointment1",
+        "date": "2025-03-10",
+        "time": "10:30 AM",
+        "doctor": "Dr. Michael Johnson",
+        "speciality": "Cardiologist",
+        "patient": "John Doe",
+        "status": "confirmed",
+        "fees": 70
+    },
+
+    {
+        "_id": "appointment2",
+        "date": "2025-03-12",
+        "time": "2:00 PM",
+        "doctor": "Dr. Sophia Mwangi",
+        "speciality": "Gynecologist",
+        "patient": "Jane Wanjiru",
+        "status": "pending",
+        "fees": 70
+    },
+
+    {
+        "_id": "appointment3",
+        "date": "2025-03-15",
+        "time": "11:00 AM",
+        "doctor": "Dr. Amina Hussein",
+        "speciality": "Dermatologist",
+        "patient": "Ali Mohammed",
+        "status": "approved",
+        "fees": 70
+    },
+
+    {
+        "_id": "appointment4",
+        "date": "2025-03-18",
+        "time": "9:30 AM",
+        "doctor": "Dr. David Smith",
+        "speciality": "Pediatrician",
+        "patient": "Mary Achieng",
+        "status": "pending",
+        "fees": 50
+    }
+
+]
