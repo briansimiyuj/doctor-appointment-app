@@ -518,3 +518,13 @@ Schedule Context manages the doctor's schedule configuration and time slot avail
 Schedule Page will be a page that will show the doctor's schedule. It will have a list of days with the doctor's schedule for each day. The doctor will be able to manage the schedule, choose the days of the week that he/she will be available, and the time slots that he/she will be available.
 
   1. Create a Schedule Page and mount it on Script component and provide a route for it
+  2. Wrap the Schedule Page's children with ScheduleContextProvider
+
+#### Weekly Calendar Component
+
+Weekly Calendar Component will be a component that will show the doctor's schedule for each day of the week. It will have a list of days with the doctor's schedule for each day. The doctor will be able to manage the schedule, choose the days of the week that he/she will be available, and the time slots that he/she will be available.
+
+  1. Create a Weekly Calendar Component and mount it on the Schedule Page
+  2. Retrieve schedule data from ScheduleContext
+  3. Create a list of days of the week and map over it to create a list of days with the doctor's schedule for each day
+  4. From the schedule data, retrieve the doctor's slots for each day of the week and map over it to create a list of time slots for each day

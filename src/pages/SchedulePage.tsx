@@ -1,8 +1,15 @@
+import WeeklyCalender from "../components/Schedule/WeeklyCalendar"
+import { ScheduleProvider } from "../context/ScheduleContext"
+
 const SchedulePage: React.FC = ()=>{
 
     return(
 
-        <h1>SchedulePage</h1>
+        <ScheduleProvider>
+
+            <WeeklyCalender/>
+
+        </ScheduleProvider>
 
     )
 
