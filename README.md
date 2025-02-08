@@ -492,8 +492,14 @@ Is Authenticated Guard will be a component that will check if the user is authen
 
 
 
+### Schedule Context
+
+Schedule Context manages the doctor's schedule configuration and time slot availability. It handles: Working hours and break times, Available and blocked time slots, Appointment status (booked, available, break), Schedule preferences (slot duration, max patients, auto-confirmation), Weekly calendar view state.
+
+
 ### Schedule Page
 
 Schedule Page will be a page that will show the doctor's schedule. It will have a list of days with the doctor's schedule for each day. The doctor will be able to manage the schedule, choose the days of the week that he/she will be available, and the time slots that he/she will be available.
 
   1. Create a Schedule Page and mount it on Script component and provide a route for it
+  2. Wrap the Schedule Page's children with ScheduleContextProvider
