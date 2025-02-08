@@ -504,9 +504,17 @@ Schedule Context manages the doctor's schedule configuration and time slot avail
       iv. Working hours and break time
       v. Consolidated dummy schedule object
 
+  2. Create ScheduleContext using React's Context API
+    a. Define interface for context props:
+      - schedule: workingHours, availableSlots, blockedDates, breakTime
+      - preferences: slotDuration, maxPatientsPerDay, autoConfirmation
+      - slot management: index, time, selected slot
+    b. Initialize state variables with dummy data
+    c. Provide context values to children components
+
+
 ### Schedule Page
 
 Schedule Page will be a page that will show the doctor's schedule. It will have a list of days with the doctor's schedule for each day. The doctor will be able to manage the schedule, choose the days of the week that he/she will be available, and the time slots that he/she will be available.
 
   1. Create a Schedule Page and mount it on Script component and provide a route for it
-  2. Wrap the Schedule Page's children with ScheduleContextProvider

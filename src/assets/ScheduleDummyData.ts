@@ -146,11 +146,23 @@ const defaultPreferences ={
 
 }
 
-export const dummySchedule ={
+const transformSlots = (slots: TimeSlotType[][]): { date: string; slots: string[] }[] =>{
+
+    return slots.map(daySlots =>{
+
+        const date = daySlots[0].dateTime.toISOString().split('T')[0],
+              slots = daySlots.map(slot => `${slot.time}-${slot.status}`)
+
+        return { date, slots }
+    
+    })
+}
+
+export const dummySchedule = {
 
     workingHours: defaultWorkingHours,
     preferences: defaultPreferences,
-    availableSlots: dummySlots,
+    availableSlots: transformSlots(dummySlots),
     blockedDates: dummyBlockedDates,
     breakTime: dummyBreakTime,
 
