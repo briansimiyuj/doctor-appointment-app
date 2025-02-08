@@ -5,7 +5,6 @@ const WeeklyCalendar: React.FC = ()=>{
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
           { schedule } = useSchedule()
 
-    console.log(schedule.availableSlots[0].slots)
 
     return(
 
@@ -29,7 +28,16 @@ const WeeklyCalendar: React.FC = ()=>{
 
                                     schedule.availableSlots[index].slots.map((daySlots, index) =>(
 
-                                        <div key={index} className="bg-white rounded-lg px-2 py-1">
+                                        <div 
+                                            key={index}
+                                            className={`
+                                                p-1 sm:p-2 
+                                                rounded 
+                                                text-xs sm:text-sm 
+                                                ${daySlots.includes("available") ? "bg-green-200" : daySlots.includes("booked") ? "bg-red-200" : daySlots.includes("break") ? "bg-yellow-200" : "bg-gray-200"}
+                                                
+                                            `}
+                                        >
 
                                             {daySlots}
 
