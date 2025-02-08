@@ -496,6 +496,13 @@ Is Authenticated Guard will be a component that will check if the user is authen
 
 Schedule Context manages the doctor's schedule configuration and time slot availability. It handles: Working hours and break times, Available and blocked time slots, Appointment status (booked, available, break), Schedule preferences (slot duration, max patients, auto-confirmation), Weekly calendar view state.
 
+  1. Create dummy data for the doctor's schedule configuration and time slot availability
+    a. Create ScheduleDummyData.ts file with:
+      i. Weekly time slots array with status
+      ii. Blocked dates array
+      iii. Default preferences object
+      iv. Working hours and break time
+      v. Consolidated dummy schedule object
 
 ### Schedule Page
 
