@@ -34,12 +34,35 @@ const WeeklyCalendar: React.FC = ()=>{
                                                 p-1 sm:p-2 
                                                 rounded 
                                                 text-xs sm:text-sm 
-                                                ${daySlots.includes("available") ? "bg-green-200" : daySlots.includes("booked") ? "bg-red-200" : daySlots.includes("break") ? "bg-yellow-200" : "bg-gray-200"}
-                                                
+                                                ${daySlots.includes("available") ? "bg-green-200" : daySlots.includes("booked") ? "bg-red-200" : daySlots.includes("break") ? "bg-yellow-200" : "bg-gray-200"}                                                
                                             `}
                                         >
 
-                                            {daySlots}
+                                            {
+
+                                                daySlots.includes("booked") ?(
+
+                                                    <span className="text-gray-600">{daySlots}</span>
+
+                                                ):(
+
+                                                    <select 
+                                                        className={`outline-none w-full ${daySlots.includes("available") ? "bg-green-200" : daySlots.includes("booked") ? "bg-red-200" : daySlots.includes("break") ? "bg-yellow-200" : "bg-gray-200"}`}
+                                                        defaultValue={`${daySlots.includes("available") ? "available" : daySlots.includes("break") ? "break" : "blocked"}`}
+                                                    >
+                                                        
+                                                        <option value="available">Available</option>
+
+                                                        <option value="break">Break</option>
+
+                                                        <option value="blocked">Blocked</option>
+                                                        
+                                                    </select>
+
+
+                                                )
+                                        
+                                            }
 
                                         </div>
 
