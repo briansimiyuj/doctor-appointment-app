@@ -151,7 +151,7 @@ const transformSlots = (slots: TimeSlotType[][]): { date: string; slots: string[
     return slots.map(daySlots =>{
 
         const date = daySlots[0].dateTime.toISOString().split('T')[0],
-              slots = daySlots.map(slot => `${slot.time}-${slot.status}`)
+              slots = daySlots.map(slot => `${slot.time} - ${slot.status}`)
 
         return { date, slots }
     
