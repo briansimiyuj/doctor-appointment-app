@@ -5,6 +5,12 @@ const WeeklyCalendar: React.FC = ()=>{
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
           { schedule } = useSchedule()
 
+    schedule.availableSlots.map(daySlots =>{
+
+        console.log(daySlots.date)
+
+    })
+
 
     return(
 
@@ -16,11 +22,11 @@ const WeeklyCalendar: React.FC = ()=>{
  
                 {
 
-                    days.map((day, index) =>(
+                    schedule.availableSlots.map((day, index) =>(
 
                         <div key={index} className="flex md:flex-col items-center border-b sm:border-0 pb-2 gap-6 px-4 sm:pb-0">
 
-                            <h3 className="font-medium text-base md:text-lg sm:mb-2">{day}</h3>
+                            <h3 className="font-medium text-base md:text-lg sm:mb-2">{days[new Date(day.date).getDay()]} <br/> {day.date}</h3>
 
                             <div className="flex sm:block gap-2 sm:space-y-2 flex-wrap">
 
