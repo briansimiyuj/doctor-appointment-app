@@ -526,7 +526,7 @@ Weekly Calendar Component will be a component that will show the doctor's schedu
 
   1. Create a Weekly Calendar Component and mount it on the Schedule Page
   2. Retrieve schedule data from ScheduleContext
-  3. Create a list of days of the week and map over it to create a list of days with the doctor's schedule for each day
+  3. Create a list of days of the week and map over it to create a list of days with the doctor's schedule for each day. Add date to each day
   4. From the schedule data, retrieve the doctor's slots for each day of the week and map over it to create a list of time slots for each day
   5. Based on slot status:
       a. If slot is booked - display booked status with time
