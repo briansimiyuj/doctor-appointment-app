@@ -15,7 +15,6 @@ interface ScheduleProviderProps{
 export const ScheduleProvider = ({ children }: ScheduleProviderProps ) =>{
 
     const [schedule, setSchedule] = useState(dummySchedule),
-          [preferences, setPreferences] = useState(dummySchedule.preferences),
           [slotIndex, setSlotIndex] = useState(0),
           [slotTime, setSlotTime] = useState(''),
           [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlotType | null>(null)
@@ -23,7 +22,25 @@ export const ScheduleProvider = ({ children }: ScheduleProviderProps ) =>{
     return(
 
         <ScheduleContext.Provider 
-            value={{ schedule, setSchedule, preferences, setPreferences, slotIndex, setSlotIndex, slotTime, setSlotTime, selectedTimeSlot, setSelectedTimeSlot }}
+            value={{ 
+                
+                schedule:{
+
+                    workingHours: schedule.workingHours,
+                    preferences: schedule.preferences,
+                    availableSlots: schedule.availableSlots,
+                    blockedDates: schedule.blockedDates,
+                    breakTime: schedule.breakTime
+                },
+                selectedTimeSlot,
+                setSelectedTimeSlot,
+                slotIndex,
+                setSlotIndex,
+                slotTime,
+                setSlotTime,
+                setSchedule
+
+            }}
         >
 
             {children}
