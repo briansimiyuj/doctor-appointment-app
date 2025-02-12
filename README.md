@@ -533,3 +533,4 @@ Weekly Calendar Component will be a component that will show the doctor's schedu
       b. If slot is available/break/blocked - show select element with status options
       c. Style slots differently based on their status (green for available, yellow for booked, gray for break)
 
+  6. Add time to selected element
