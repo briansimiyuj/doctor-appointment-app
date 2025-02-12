@@ -491,6 +491,18 @@ Is Authenticated Guard will be a component that will check if the user is authen
   1. Make some pages and components that require authentication follow this pattern (LoginPage, BookingSlots, MyAppointmentsPage, SettingsPage)
 
 
+### Schedule Context Types
+
+Schedule Context Types define the structure for doctor's schedule management. It includes working hours, preferences, available slots, blocked dates and break times.
+
+  1. Create ScheduleContextProps interface
+    a. Define schedule object structure:
+      i. Working hours with start and end times
+      ii. Preferences for slot duration and patient limits
+      iii. Available slots array with dates and time slots
+      iv. Blocked dates array
+      v. Break time with start and end
+    b. Define setSchedule function type to update schedule state
 
 ### Schedule Context
 
