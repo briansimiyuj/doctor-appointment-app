@@ -87,6 +87,11 @@ const WeeklyCalendar: React.FC = ()=>{
 
             </div>
 
+
+            <button 
+                className="w-full px-6 py-3 mt-9 text-base bg-secondary-bg text-primary-bg rounded-md hover:bg-white transition-all duration-300 ease-in-out sm:w-full sm:px-8 sm:py-4 sm:text-lg"
+            >Save</button>
+
         </div>
 
     )
