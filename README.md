@@ -534,3 +534,4 @@ Weekly Calendar Component will be a component that will show the doctor's schedu
       c. Style slots differently based on their status (green for available, yellow for booked, gray for break)
 
   6. Add time to selected element
+  7. Create a button to save the schedule
