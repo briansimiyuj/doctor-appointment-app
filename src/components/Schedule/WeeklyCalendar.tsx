@@ -1,9 +1,11 @@
 import { useSchedule } from "../../context/ScheduleContext"
+import { useScheduleManagement } from "../../hooks/useScheduleManagement"
 
 const WeeklyCalendar: React.FC = ()=>{
 
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          { schedule } = useSchedule()
+          { schedule } = useSchedule(),
+          { handleInputChange } = useScheduleManagement()
 
 
     return(
@@ -53,7 +55,8 @@ const WeeklyCalendar: React.FC = ()=>{
                                                         <select 
                                                            className={`outline-none w-full ${daySlots.includes("available") ? "bg-green-200" : daySlots.includes("break") ? "bg-yellow-200" : "bg-gray-200"}`}
                                                            defaultValue={`${daySlots.includes("available") ? "available" : daySlots.includes("break") ? "break" : "blocked"} - ${time}`}
-                                                    >
+                                                           onChange={(e) => handleInputChange(e)}
+                                                        >
                                                                                                                 
                                                         <option value={`available - ${time}`}>Available - {time}</option>
 

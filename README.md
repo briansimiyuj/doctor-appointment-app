@@ -547,3 +547,20 @@ Weekly Calendar Component will be a component that will show the doctor's schedu
 
   6. Add time to selected element
   7. Create a button to save the schedule
+
+
+### Schedule Management Hook
+
+Schedule management hook will be used to manage the doctor's schedule. It will have the following functionalities: 
+
+  - Track schedule changes 
+  - Update status of a slot 
+  - Compare schedule state changes 
+  - Save schedule changes 
+  - Reset schedule 
+  - Validate schedule changes 
+  - Handle schedule conflicts 
+  - Format schedule data for display
+
+  1. Create a function to track when the schedule changes 
+      a. Get what time the doctor has selected
