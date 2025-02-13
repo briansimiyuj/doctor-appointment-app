@@ -573,3 +573,11 @@ Schedule management hook will be used to manage the doctor's schedule. It will h
       c. It sets isChanged to true if the status of the slot has changed
 
   5. Create a function to save the schedule
+
+
+### Schedule Slots Component
+
+Schedule slots component will be used to display the doctor's schedule. 
+
+  1. Create a Schedule Slots Component and mount it on the Weekly Calendar Component
+  2. Transfer the schedule UI from the Weekly Calendar Component to the Schedule Slots Component
