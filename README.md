@@ -562,5 +562,10 @@ Schedule management hook will be used to manage the doctor's schedule. It will h
   - Handle schedule conflicts 
   - Format schedule data for display
 
-  1. Create a function to track when the schedule changes 
-      a. Get what time the doctor has selected
+  1. Get schedule data from ScheduleContext
+  2. Create a state variable for isChanged and set it to false
+  3. Create a state variable for tempSchedule and set it to the schedule data from ScheduleContext
+  4. Create a function to update the status of a slot
+      a. It takes event, date and slotIndex as parameters
+      b. It updates the status of the slot in the tempSchedule object
+      c. It sets isChanged to true if the status of the slot has changed
