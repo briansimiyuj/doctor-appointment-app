@@ -547,6 +547,8 @@ Weekly Calendar Component will be a component that will show the doctor's schedu
 
   6. Add time to selected element
   7. Create a button to save the schedule
+  8. Make the button disabled if the schedule is not changed
+  9. On button click, send the updated schedule to the backend
 
 
 ### Schedule Management Hook
@@ -569,3 +571,5 @@ Schedule management hook will be used to manage the doctor's schedule. It will h
       a. It takes event, date and slotIndex as parameters
       b. It updates the status of the slot in the tempSchedule object
       c. It sets isChanged to true if the status of the slot has changed
+
+  5. Create a function to save the schedule

@@ -3,7 +3,7 @@ import { useSchedule } from "../context/ScheduleContext"
 
 export const useScheduleManagement = () =>{
 
-    const { schedule }  = useSchedule(),
+    const { schedule, setSchedule }  = useSchedule(),
           [isChanged, setIsChanged] = useState<boolean>(false),
           [tempSchedule, setTempSchedule] = useState(schedule)
 
@@ -28,8 +28,6 @@ export const useScheduleManagement = () =>{
 
                 })
 
-                console.log(updatedDaySlots)
-
                 return { ...day, slots: updatedDaySlots }
 
 
@@ -39,13 +37,24 @@ export const useScheduleManagement = () =>{
             
         })
 
-        console.log(updatedSlots)
-
         setTempSchedule({ ...tempSchedule, availableSlots: updatedSlots })
 
         setIsChanged(true)
     
     }
+
+
+    const handleSave = () =>{
     
-    return { handleInputChange, isChanged }
+       setSchedule(tempSchedule)
+
+       setIsChanged(false)
+
+       localStorage.setItem("schedule", JSON.stringify(tempSchedule))
+
+       console.log('Schedule saved')
+    
+    }
+    
+    return { handleInputChange, isChanged, handleSave }
 }

@@ -5,7 +5,7 @@ const WeeklyCalendar: React.FC = ()=>{
 
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
           { schedule } = useSchedule(),
-          { handleInputChange } = useScheduleManagement()
+          { handleInputChange, isChanged, handleSave } = useScheduleManagement()
 
 
     return(
@@ -90,9 +90,15 @@ const WeeklyCalendar: React.FC = ()=>{
 
             </div>
 
-
+       
             <button 
-                className="w-full px-6 py-3 mt-9 text-base bg-secondary-bg text-primary-bg rounded-md hover:bg-white transition-all duration-300 ease-in-out sm:w-full sm:px-8 sm:py-4 sm:text-lg"
+                disabled={!isChanged}
+                className={`w-full px-6 py-3 mt-9 text-base rounded-md transition-all duration-300 ease-in-out sm:w-full sm:px-8 sm:py-4 sm:text-lg ${
+                    isChanged 
+                        ? "bg-secondary-bg text-primary-bg hover:bg-white" 
+                        : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                }`}
+                onClick={handleSave}
             >Save</button>
 
         </div>
