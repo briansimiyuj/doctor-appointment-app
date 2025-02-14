@@ -15,6 +15,7 @@ interface ScheduleProviderProps{
 export const ScheduleProvider = ({ children }: ScheduleProviderProps ) =>{
 
     const [schedule, setSchedule] = useState(dummySchedule),
+          [isChanged, setIsChanged] = useState(false),
           [slotIndex, setSlotIndex] = useState(0),
           [slotTime, setSlotTime] = useState(''),
           [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlotType | null>(null)
@@ -38,7 +39,9 @@ export const ScheduleProvider = ({ children }: ScheduleProviderProps ) =>{
                 setSlotIndex,
                 slotTime,
                 setSlotTime,
-                setSchedule
+                setSchedule, 
+                isChanged,
+                setIsChanged
 
             }}
         >

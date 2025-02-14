@@ -3,8 +3,7 @@ import { useSchedule } from "../context/ScheduleContext"
 
 export const useScheduleManagement = () =>{
 
-    const { schedule, setSchedule }  = useSchedule(),
-          [isChanged, setIsChanged] = useState<boolean>(false),
+    const { schedule, setSchedule, isChanged, setIsChanged }  = useSchedule(),
           [tempSchedule, setTempSchedule] = useState(schedule)
 
     const handleInputChange = (e: React.ChangeEvent<HTMLSelectElement>, date: string, slotIndex: number) =>{
