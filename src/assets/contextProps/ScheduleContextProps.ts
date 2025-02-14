@@ -62,5 +62,7 @@ export interface ScheduleContextProps {
     setSlotTime: (time: string) => void
     selectedTimeSlot: TimeSlotType | null
     setSelectedTimeSlot: (slot: TimeSlotType | null) => void
+    isChanged: boolean
+    setIsChanged: (changed: boolean) => void 
 
 }
