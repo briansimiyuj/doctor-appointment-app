@@ -51,11 +51,15 @@ export const useScheduleManagement = () =>{
 
     useEffect(() =>{
     
-        console.log('Updated temp schedule:', tempSchedule.availableSlots[0].slots[0])
- 
-        console.log('Updated schedule:', schedule.availableSlots[0].slots[0])
-     
-    }, [tempSchedule, schedule]) 
+        if(isChanged){
+
+            console.log('Saving to local storage:', schedule)
+
+            localStorage.setItem("schedule", JSON.stringify(schedule))
+
+        }
+    
+    }, [schedule, isChanged])
 
 
     const handleSave = () =>{
@@ -63,8 +67,6 @@ export const useScheduleManagement = () =>{
        setSchedule(tempSchedule)
 
        setIsChanged(false)
-
-       localStorage.setItem("schedule", JSON.stringify(tempSchedule))
 
        console.log('Schedule saved')
     
