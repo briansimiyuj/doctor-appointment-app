@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSchedule } from "../context/ScheduleContext"
 
 export const useScheduleManagement = () =>{
@@ -21,8 +21,6 @@ export const useScheduleManagement = () =>{
 
                     if(index === slotIndex){
 
-                        console.log('Updating slot from:', slot, 'to:', formattedValue)
-
                         return formattedValue
 
                     }
@@ -40,22 +38,24 @@ export const useScheduleManagement = () =>{
             
         })
 
-        console.log('Final slot value:', updatedSlots[slotIndex].slots[slotIndex])
-
-
 
         setTempSchedule({ ...tempSchedule, availableSlots: updatedSlots })
 
         setSchedule({ ...schedule, availableSlots: updatedSlots })
 
-        console.log('Temp schedule updated', tempSchedule.availableSlots[slotIndex].slots[slotIndex])
-
-        console.log('Schedule updated', schedule.availableSlots[slotIndex].slots[slotIndex])
-
         setIsChanged(true)
     
     }
 
+
+
+    useEffect(() =>{
+    
+        console.log('Updated temp schedule:', tempSchedule.availableSlots[0].slots[0])
+ 
+        console.log('Updated schedule:', schedule.availableSlots[0].slots[0])
+     
+    }, [tempSchedule, schedule]) 
 
 
     const handleSave = () =>{
