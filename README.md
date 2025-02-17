@@ -554,26 +554,26 @@ Weekly Calendar Component will be a component that will show the doctor's schedu
 
 ### Schedule Management Hook
 
-Schedule management hook will be used to manage the doctor's schedule. It will have the following functionalities: 
+Schedule management hook handles all schedule-related operations and state management.
 
-  - Track schedule changes 
-  - Update status of a slot 
-  - Compare schedule state changes 
-  - Save schedule changes 
-  - Reset schedule 
-  - Validate schedule changes 
-  - Handle schedule conflicts 
-  - Format schedule data for display
+  1. Initialize state variables
+    a. Create tempSchedule state to store schedule changes
+    b. Create isChanged state to track modifications
+    c. Get schedule data from ScheduleContext
 
-  1. Get schedule data from ScheduleContext
-  2. Create a state variable for tempSchedule and set it to the schedule data from ScheduleContext
-  3. Create a function to update the status of a slot
-      a. It takes event, date and slotIndex as parameters
-      b. It updates the status of the slot in the tempSchedule object
-      c. It sets isChanged to true if the status of the slot has changed
+  2. Handle status updates
+    a. Create handleInputChange function that:
+      i. Takes event, date and slotIndex as parameters
+      ii. Extracts status and time from selected value
+      iii. Formats value to match data structure (time - status)
+      iv. Updates tempSchedule with new formatted value
+      v. Updates main schedule state
+      vi. Sets isChanged flag for save button activation
 
-  4. Create a function to save the schedule
-
+  3. Track state changes
+    a. Monitor tempSchedule updates
+    b. Compare with original schedule
+    c. Enable/disable save functionality based on changes
 
 ### Schedule Slots Component
 
