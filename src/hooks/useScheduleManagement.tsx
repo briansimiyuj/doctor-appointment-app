@@ -8,7 +8,9 @@ export const useScheduleManagement = () =>{
 
     const handleInputChange = (e: React.ChangeEvent<HTMLSelectElement>, date: string, slotIndex: number) =>{
     
-       const { value } = e.target
+       const { value } = e.target,
+             [status, time] = value.split(" - "),
+             formattedValue = `${time} - ${status}`
 
         
         const updatedSlots = tempSchedule.availableSlots.map(day =>{
@@ -19,7 +21,9 @@ export const useScheduleManagement = () =>{
 
                     if(index === slotIndex){
 
-                        return value
+                        console.log('Updating slot from:', slot, 'to:', formattedValue)
+
+                        return formattedValue
 
                     }
 
@@ -36,11 +40,22 @@ export const useScheduleManagement = () =>{
             
         })
 
+        console.log('Final slot value:', updatedSlots[slotIndex].slots[slotIndex])
+
+
+
         setTempSchedule({ ...tempSchedule, availableSlots: updatedSlots })
+
+        setSchedule({ ...schedule, availableSlots: updatedSlots })
+
+        console.log('Temp schedule updated', tempSchedule.availableSlots[slotIndex].slots[slotIndex])
+
+        console.log('Schedule updated', schedule.availableSlots[slotIndex].slots[slotIndex])
 
         setIsChanged(true)
     
     }
+
 
 
     const handleSave = () =>{
@@ -56,4 +71,5 @@ export const useScheduleManagement = () =>{
     }
     
     return { handleInputChange, isChanged, handleSave }
+
 }
