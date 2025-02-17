@@ -574,6 +574,11 @@ Schedule management hook handles all schedule-related operations and state manag
     a. Monitor tempSchedule updates
     b. Compare with original schedule
     c. Enable/disable save functionality based on changes
+    
+  4. Save schedule changes
+     a. Save updated schedule to local storage once schedule data and isChanged flag change
+     b. Set schedule data with updated tempSchedule 
+     c. Reset isChanged flag
 
 ### Schedule Slots Component
 
