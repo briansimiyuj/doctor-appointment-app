@@ -522,6 +522,7 @@ Schedule Context manages the doctor's schedule configuration and time slot avail
       - preferences: slotDuration, maxPatientsPerDay, autoConfirmation
       - slot management: index, time, selected slot
     b. Initialize state variables with dummy data
+       - Check if the schedule is saved in localStorage, if yes, use it as the initial state. Otherwise, use the dummy data.
     c. Create a state variable for isChanged and set it to false
     d. Provide context values to children components
 

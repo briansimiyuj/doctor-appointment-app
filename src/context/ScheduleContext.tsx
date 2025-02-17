@@ -14,7 +14,10 @@ interface ScheduleProviderProps{
 
 export const ScheduleProvider = ({ children }: ScheduleProviderProps ) =>{
 
-    const [schedule, setSchedule] = useState(dummySchedule),
+    const savedSchedule = localStorage.getItem("schedule"),
+          initialSchedule = savedSchedule ? JSON.parse(savedSchedule) : dummySchedule;
+
+    const [schedule, setSchedule] = useState(initialSchedule),
           [isChanged, setIsChanged] = useState(false),
           [slotIndex, setSlotIndex] = useState(0),
           [slotTime, setSlotTime] = useState(''),

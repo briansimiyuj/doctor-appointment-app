@@ -53,8 +53,6 @@ export const useScheduleManagement = () =>{
     
         if(isChanged){
 
-            console.log('Saving to local storage:', schedule)
-
             localStorage.setItem("schedule", JSON.stringify(schedule))
 
         }
@@ -67,8 +65,6 @@ export const useScheduleManagement = () =>{
        setSchedule(tempSchedule)
 
        setIsChanged(false)
-
-       console.log('Schedule saved')
     
     }
     
