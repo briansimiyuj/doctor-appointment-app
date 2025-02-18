@@ -28,6 +28,12 @@ This is a simple doctor's appointment booking system. It allows users to book ap
 
 Configure Tailwind CSS and and theme colors in `tailwind.config.js` file.
 
+### Theme Context:
+
+ThemeContext is a custom React context that provides a theme to the application. It allows the application to switch between light and dark themes.
+
+  1. Transfer theme logic from Settings Page to ThemeContext
+
 ### Navbar Component
 
   The Navbar component is a reusable component that can be used in any React application. It includes a logo, a search bar, and a user profile dropdown.
@@ -466,6 +472,8 @@ Dark mode will be a toggleable feature that will change the color scheme of the 
     a. Create a toggle button to toggle the dark mode on and off
     b. Add notifications settings
     c. Set dark mode to localStorage
+
+  4. Transfer these settings to theme context
 
 
 ### Not Found Page

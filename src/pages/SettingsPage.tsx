@@ -1,32 +1,13 @@
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { LoginContext } from "../context/LoginContext"
 import NotFoundPage from "./NotFoundPage"
+import { useTheme } from "../context/ThemeContext"
 
 const SettingsPage: React.FC = () =>{
 
     const loginContext = useContext(LoginContext),
-          isAuthenticated = loginContext?.isAuthenticated
-    
-    const toggleTheme = () =>{
-
-        const isDarkMode = document.documentElement.classList.toggle("dark")
-
-        localStorage.setItem("theme", isDarkMode ? "dark" : "light")
-
-    }
-
-
-    useEffect(() =>{
-    
-       const savedTheme = localStorage.getItem("theme")
-
-        if(savedTheme === "dark"){
-            
-            document.documentElement.classList.add("dark")
-
-        }
-    
-    }, [])
+          isAuthenticated = loginContext?.isAuthenticated,
+          { toggleTheme } = useTheme()
 
     return(
 
