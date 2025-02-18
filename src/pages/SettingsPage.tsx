@@ -2,11 +2,13 @@ import { useContext } from "react"
 import { LoginContext } from "../context/LoginContext"
 import NotFoundPage from "./NotFoundPage"
 import { useTheme } from "../context/ThemeContext"
+import DoctorSettings from "../components/settings/DoctorSettings"
 
 const SettingsPage: React.FC = () =>{
 
     const loginContext = useContext(LoginContext),
           isAuthenticated = loginContext?.isAuthenticated,
+          userType = loginContext?.userType,
           { toggleTheme } = useTheme()
 
     return(
@@ -42,6 +44,9 @@ const SettingsPage: React.FC = () =>{
                                     >Toggle Theme</button>
             
                                 </div>
+
+
+                                { userType === "doctor" && <DoctorSettings/> }
             
                                 
                                 <div className="pt-6 border-t">
@@ -72,6 +77,9 @@ const SettingsPage: React.FC = () =>{
                                 </div>
             
                             </div>
+
+
+                            <button className="bg-primary-bg text-white px-4 py-2 rounded-lg mt-6">Save Changes</button>
             
                         </div>
             
