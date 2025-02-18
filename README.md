@@ -327,7 +327,6 @@ Contact page will show the contact information of the clinic and the doctors.
 
 
 ### Profile Context
-
 Profile context will be used to store the user profile data and provide it to the Profile page.
 
   1. Create a type for userData and address
@@ -475,6 +474,13 @@ Dark mode will be a toggleable feature that will change the color scheme of the 
 
   4. Transfer these settings to theme context
 
+
+### Doctor's Settings Component
+
+Doctor's Settings will be a component that will allow the doctor to set their consultation fee, session duration, availability settings and preferences for online consultation.
+
+  1. Create a Doctor's Settings component and mount it on the Settings page if the user is a doctor
+  2. Add labels and inputs for consultation fee, session duration, availability settings and preferences for online consultation
 
 ### Not Found Page
 
