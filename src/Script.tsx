@@ -18,6 +18,7 @@ import { LogoLoading } from "./assets/Loading"
 import { LoginContextProvider } from "./context/LoginContext"
 import { AppointmentsContextProvider } from "./context/AppointmentContext"
 import SchedulePage from "./pages/SchedulePage"
+import { ThemeProvider } from "./context/ThemeContext"
 
 const Script: React.FC = () =>{
 
@@ -35,83 +36,87 @@ const Script: React.FC = () =>{
 
   return(
 
-    <div className="mx-4 sm:mx-10">
+    <ThemeProvider>
 
-      {
+      <div className="mx-4 sm:mx-10">
 
-        isLoading ?(
+        {
 
-          <div className="min-h-screen flex items-center justify-center">
+          isLoading ?(
 
-            <LogoLoading/>
+            <div className="min-h-screen flex items-center justify-center">
 
-          </div>
+              <LogoLoading/>
 
-        ):(
+            </div>
 
-          <LoginContextProvider>
+          ):(
 
-            <>
+            <LoginContextProvider>
 
-              <Navbar/>
+              <>
 
-              <ProfileContextProvider>
+                <Navbar/>
 
-                <Routes>
+                <ProfileContextProvider>
 
-                  <Route path="/" element={<HomePage/>}/>
+                  <Routes>
 
-                  <Route path="/about-us" element={<AboutPage/>}/>
+                    <Route path="/" element={<HomePage/>}/>
 
-                  <Route path="/doctors" element={<DoctorPage/>}/>
+                    <Route path="/about-us" element={<AboutPage/>}/>
 
-                  <Route path="/doctors/:specialityParam" element={<DoctorPage/>}/>
+                    <Route path="/doctors" element={<DoctorPage/>}/>
 
-                  <Route path="appointments/:doctorID" element={<BookingPage/>}/>
+                    <Route path="/doctors/:specialityParam" element={<DoctorPage/>}/>
 
-                  <Route path="/contact-us" element={<ContactPage/>}/>
+                    <Route path="appointments/:doctorID" element={<BookingPage/>}/>
 
-                  <Route path="/profile" element={<ProfilePage/>}/>
+                    <Route path="/contact-us" element={<ContactPage/>}/>
 
-                  <Route path="/profile/:id" element={<ProfilePage/>}/>
+                    <Route path="/profile" element={<ProfilePage/>}/>
 
-                  <Route path="/login" element={<LoginPage/>}/>
+                    <Route path="/profile/:id" element={<ProfilePage/>}/>
 
-                  <Route path="/schedule" element={<SchedulePage/>}/>
+                    <Route path="/login" element={<LoginPage/>}/>
 
-                  <Route path="/bookings" element={
-            
-                    <BookingContextProvider>
+                    <Route path="/schedule" element={<SchedulePage/>}/>
 
-                      <AppointmentsContextProvider>
+                    <Route path="/bookings" element={
+              
+                      <BookingContextProvider>
 
-                        <MyAppointmentsPage/>
+                        <AppointmentsContextProvider>
 
-                      </AppointmentsContextProvider>
+                          <MyAppointmentsPage/>
 
-                    </BookingContextProvider>
+                        </AppointmentsContextProvider>
 
-                  }/>
+                      </BookingContextProvider>
 
-                  <Route path="/settings" element={<SettingsPage/>}/>
+                    }/>
 
-                  <Route path="*" element={<NotFoundPage/>}/>
+                    <Route path="/settings" element={<SettingsPage/>}/>
 
-                </Routes>
-        
-              </ProfileContextProvider>
+                    <Route path="*" element={<NotFoundPage/>}/>
 
-              <Footer/>
+                  </Routes>
+          
+                </ProfileContextProvider>
 
-            </>
+                <Footer/>
 
-          </LoginContextProvider>
+              </>
 
-        )
+            </LoginContextProvider>
 
-      }
+          )
 
-    </div> 
+        }
+
+      </div> 
+
+    </ThemeProvider>
 
   )
 
