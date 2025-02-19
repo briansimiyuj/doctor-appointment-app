@@ -462,6 +462,12 @@ My appointments page will show the user's appointments. It will have a list of a
     c. Create a button to cancel the appointment 
 
 
+### Settings Context
+
+Settings context will be used to store the user's settings and provide it to the Settings page
+
+  1. Create settings context props interface and export it
+
 ### Dark Mode
 
 Dark mode will be a toggleable feature that will change the color scheme of the app to dark mode. It will have a button to toggle the dark mode on and off.
