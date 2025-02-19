@@ -467,6 +467,13 @@ My appointments page will show the user's appointments. It will have a list of a
 Settings context will be used to store the user's settings and provide it to the Settings page
 
   1. Create settings context props interface and export it
+  2. Create a dummy data for settings 
+    i. Create dummySettingsData.ts file with dummy data 
+  
+  3. Create state variables for settings and initialize them with dummy data
+  4. Create various functions to update settings
+  5. Pass down the props in SettingContextProvider
+
 
 ### Dark Mode
 
