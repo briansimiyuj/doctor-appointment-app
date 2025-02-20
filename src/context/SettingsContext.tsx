@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import { AvailabilitySettings, ConsultationSettings, NotificationSettings, SettingsContextProps } from "../assets/contextProps/SettingsContextProps"
 import { dummySettingsData } from "../assets/dummySettingsData"
 
@@ -29,6 +29,23 @@ export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>
         setNotificationSettings(settings)
 
     }
+
+
+    useEffect(() =>{
+    
+       console.log('Duration updated:', consultationSettings.duration)
+
+       console.log('Fees updated:', consultationSettings.fee)
+
+       console.log('Accepting new patients:', availabilitySettings.acceptNewPatients)
+
+       console.log('Allowing online consultations:', availabilitySettings.allowOnlineConsultations)
+
+       console.log('Email notifications:', notificationSettings.emailNotifications)
+
+       console.log('SMS notifications:', notificationSettings.smsNotifications)
+    
+    }, [notificationSettings, consultationSettings, availabilitySettings])
 
     
     return(

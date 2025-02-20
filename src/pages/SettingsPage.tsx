@@ -3,13 +3,17 @@ import { LoginContext } from "../context/LoginContext"
 import NotFoundPage from "./NotFoundPage"
 import { useTheme } from "../context/ThemeContext"
 import DoctorSettings from "../components/settings/DoctorSettings"
+import { useSettings } from "../context/SettingsContext"
+import { useSettingsManagement } from "../hooks/useSettingsManagement"
 
 const SettingsPage: React.FC = () =>{
 
     const loginContext = useContext(LoginContext),
           isAuthenticated = loginContext?.isAuthenticated,
           userType = loginContext?.userType,
-          { toggleTheme } = useTheme()
+          { toggleTheme } = useTheme(),
+          { notificationSettings } = useSettings(),
+          { handleNotificationUpdate } = useSettingsManagement()
 
     return(
 
@@ -57,7 +61,13 @@ const SettingsPage: React.FC = () =>{
             
                                         <label className="flex items-center space-x-3">
             
-                                            <input type="checkbox" className="form-checkbox"/>
+                                            <input 
+                                                type="checkbox" 
+                                                name="emailNotifications"
+                                                className="form-checkbox"
+                                                checked={notificationSettings.emailNotifications}
+                                                onChange={handleNotificationUpdate}
+                                            />
             
                                             <span>Email notifications for appointments</span>
             
@@ -66,7 +76,13 @@ const SettingsPage: React.FC = () =>{
             
                                         <label className="flex items-center space-x-3">
             
-                                            <input type="checkbox" className="form-checkbox"/>
+                                            <input 
+                                                type="checkbox" 
+                                                name="smsNotifications"
+                                                className="form-checkbox"
+                                                checked={notificationSettings.smsNotifications}
+                                                onChange={handleNotificationUpdate}
+                                            />
                                             
                                             <span>SMS reminders</span>
             

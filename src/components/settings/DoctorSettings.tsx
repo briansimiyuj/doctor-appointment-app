@@ -1,4 +1,10 @@
+import { useSettings } from "../../context/SettingsContext"
+import { useSettingsManagement } from "../../hooks/useSettingsManagement"
+
 const DoctorSettings: React.FC = ()=>{
+
+    const { consultationSettings, availabilitySettings } = useSettings(),
+          { handleConsultationUpdate, handleAvailabilityUpdate } = useSettingsManagement()
 
     return(
 
@@ -19,6 +25,9 @@ const DoctorSettings: React.FC = ()=>{
                             type="number"
                             className="border rounded-lg p-2"
                             placeholder="Enter consultation fee"
+                            value={consultationSettings.fee}
+                            onChange={handleConsultationUpdate}
+                            name="fee"
                         />
 
                     </div>
@@ -31,7 +40,12 @@ const DoctorSettings: React.FC = ()=>{
 
                         <div className="relative">
 
-                            <select className="border rounded-lg p-2 pr-10 bg-white appearance-none w-full">
+                            <select 
+                                className="border rounded-lg p-2 pr-10 bg-white appearance-none w-full"
+                                defaultValue={consultationSettings.duration}
+                                onChange={handleConsultationUpdate}
+                                name="duration"
+                            >
 
                                 <option value="15">15 minutes</option>
 
@@ -72,7 +86,13 @@ const DoctorSettings: React.FC = ()=>{
 
                     <label className="flex items-center space-x-3">
 
-                        <input type="checkbox" className="form-checkbox"/>
+                        <input 
+                            type="checkbox" 
+                            name="acceptNewPatients"
+                            className="form-checkbox"
+                            checked={availabilitySettings.acceptNewPatients}
+                            onChange={handleAvailabilityUpdate}
+                        />
 
                         <span>Accept new patients</span>
 
@@ -80,7 +100,13 @@ const DoctorSettings: React.FC = ()=>{
 
                     <label className="flex items-center space-x-3">
 
-                        <input type="checkbox" className="form-checkbox"/>
+                        <input 
+                            type="checkbox" 
+                            className="form-checkbox"
+                            name="allowOnlineConsultations"
+                            checked={availabilitySettings.allowOnlineConsultations}
+                            onChange={handleAvailabilityUpdate}
+                        />
 
                         <span>Allow online consultations</span>
 
