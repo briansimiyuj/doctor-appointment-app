@@ -473,6 +473,7 @@ Settings context will be used to store the user's settings and provide it to the
   3. Create state variables for settings and initialize them with dummy data
   4. Create various functions to update settings
   5. Pass down the props in SettingContextProvider
+  6. Wrap the Settings page with the SettingProvider in the Script component
 
 
 ### Dark Mode
@@ -485,6 +486,8 @@ Dark mode will be a toggleable feature that will change the color scheme of the 
     b. Add notifications settings
     c. Set dark mode to localStorage
 
+  3. Make the inputs in Settings page controlled components with data from SettingsContext
+
   4. Transfer these settings to theme context
 
 
@@ -494,6 +497,7 @@ Doctor's Settings will be a component that will allow the doctor to set their co
 
   1. Create a Doctor's Settings component and mount it on the Settings page if the user is a doctor
   2. Add labels and inputs for consultation fee, session duration, availability settings and preferences for online consultation
+  3. Make the inputs controlled components with data from SettingsContext
 
 ### Not Found Page
 
