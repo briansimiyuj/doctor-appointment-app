@@ -499,6 +499,19 @@ Doctor's Settings will be a component that will allow the doctor to set their co
   2. Add labels and inputs for consultation fee, session duration, availability settings and preferences for online consultation
   3. Make the inputs controlled components with data from SettingsContext
 
+
+
+### Settings Management Hook
+
+Settings Management Hook will update the settings in the database and update the SettingsContext.
+
+  1. Retrieve consultationSettings, availabilitySettings, notificationSettings, updateConsultationSettings, updateAvailabilitySettings, updateNotificationSettings from SettingsContext
+  2. Create functions to update the settings in the local storage and update the SettingsContext
+    a. Track what user has changed in the settings
+    b. Create an object for newSettings and spread it with consultationSettings, availabilitySettings or notificationSettings. If user has changed any of the settings, update the corresponding property in newSettings
+    c. Update consultationSettings, availabilitySettings or notificationSettings with newSettings
+
+
 ### Not Found Page
 
 Not Found Page will be a page that will be displayed when the user tries to access a page that does not exist.
