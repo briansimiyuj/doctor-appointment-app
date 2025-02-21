@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react"
+import { createContext, useContext, useState } from "react"
 import { AvailabilitySettings, ConsultationSettings, NotificationSettings, SettingsContextProps } from "../assets/contextProps/SettingsContextProps"
 import { dummySettingsData } from "../assets/dummySettingsData"
 
@@ -28,17 +28,6 @@ export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>
 
     }),
           [isChanged, setIsChanged] = useState(false)
-
-         
-    useEffect(() =>{
-    
-        if(isChanged){
-
-            console.log(consultationSettings, availabilitySettings, notificationSettings)
-
-        }
-    
-    }, [consultationSettings, availabilitySettings, notificationSettings, isChanged])
 
 
     const updateConsultationSettings = (settings: ConsultationSettings) =>{
