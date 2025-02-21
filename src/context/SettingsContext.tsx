@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import { AvailabilitySettings, ConsultationSettings, NotificationSettings, SettingsContextProps } from "../assets/contextProps/SettingsContextProps"
 import { dummySettingsData } from "../assets/dummySettingsData"
 
@@ -6,10 +6,39 @@ const SettingsContext = createContext<SettingsContextProps | null>(null)
 
 export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>{
 
-    const [consultationSettings, setConsultationSettings] = useState<ConsultationSettings>(dummySettingsData.consultationSettings),
-          [availabilitySettings, setAvailabilitySettings] = useState<AvailabilitySettings>(dummySettingsData.availabilitySettings),
-          [notificationSettings, setNotificationSettings] = useState<NotificationSettings>(dummySettingsData.notificationSettings),
+    const [consultationSettings, setConsultationSettings] = useState<ConsultationSettings>(() =>{
+
+        const savedSettings = localStorage.getItem("doctorSettings")
+
+        return savedSettings ? JSON.parse(savedSettings).consultationSettings : dummySettingsData.consultationSettings
+
+    })
+    const [availabilitySettings, setAvailabilitySettings] = useState<AvailabilitySettings>(() =>{
+
+        const savedSettings = localStorage.getItem("doctorSettings")
+
+        return savedSettings ? JSON.parse(savedSettings).availabilitySettings : dummySettingsData.availabilitySettings
+
+    })
+    const [notificationSettings, setNotificationSettings] = useState<NotificationSettings>(() =>{
+
+        const savedSettings = localStorage.getItem("doctorSettings")
+
+        return savedSettings ? JSON.parse(savedSettings).notificationSettings : dummySettingsData.notificationSettings
+
+    }),
           [isChanged, setIsChanged] = useState(false)
+
+         
+    useEffect(() =>{
+    
+        if(isChanged){
+
+            console.log(consultationSettings, availabilitySettings, notificationSettings)
+
+        }
+    
+    }, [consultationSettings, availabilitySettings, notificationSettings, isChanged])
 
 
     const updateConsultationSettings = (settings: ConsultationSettings) =>{
