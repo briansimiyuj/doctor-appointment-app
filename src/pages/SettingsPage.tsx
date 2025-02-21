@@ -13,7 +13,7 @@ const SettingsPage: React.FC = () =>{
           userType = loginContext?.userType,
           { toggleTheme } = useTheme(),
           { notificationSettings } = useSettings(),
-          { handleNotificationUpdate } = useSettingsManagement()
+          { handleNotificationUpdate, isChanged } = useSettingsManagement()
 
     return(
 
@@ -95,7 +95,10 @@ const SettingsPage: React.FC = () =>{
                             </div>
 
 
-                            <button className="bg-primary-bg text-white px-4 py-2 rounded-lg mt-6">Save Changes</button>
+                            <button 
+                                className={`bg-primary-bg px-4 py-2 mt-5 rounded-lg text-white ${!isChanged ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'}`}
+                                disabled={!isChanged}
+                            >Save Changes</button>
             
                         </div>
             
