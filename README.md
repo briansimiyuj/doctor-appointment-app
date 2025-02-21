@@ -488,8 +488,8 @@ Dark mode will be a toggleable feature that will change the color scheme of the 
     c. Set dark mode to localStorage
 
   3. Make the inputs in Settings page controlled components with data from SettingsContext
-
   4. Transfer these settings to theme context
+  5. Make the save button disabled if the settings are not changed
 
 
 ### Doctor's Settings Component
