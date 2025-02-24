@@ -510,7 +510,15 @@ Settings Management Hook will update the settings in the database and update the
   2. Create functions to update the settings in the local storage and update the SettingsContext
     a. Track what user has changed in the settings
     b. Create an object for newSettings and spread it with consultationSettings, availabilitySettings or notificationSettings. If user has changed any of the settings, update the corresponding property in newSettings
-    c. Update consultationSettings, availabilitySettings or notificationSettings with newSettings
+    c. Update consultationSettings, availabilitySettings or notificationSettings with newSettings 
+
+  4. Create a function to update the settings in the localStorage and update the SettingsContext (checkIfChanged)
+    a. Create a state for initialSettings and initialize it with consultationSettings, availabilitySettings and notificationSettings
+    b. Create a boolean state for hasChanges and initialize it JSON version of newSettings.
+      i. If the JSON version of newSettings is not equal to the JSON version of initialSettings, hasChanges will be true
+    c. Set isChanged state to hasChanges
+
+  5. Call checkIfChanged in the 3 update functions
 
 
 ### Not Found Page

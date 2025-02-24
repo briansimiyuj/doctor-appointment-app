@@ -1,8 +1,10 @@
+import { useState } from "react"
 import { useSettings } from "../context/SettingsContext"
 
 export const useSettingsManagement = () =>{
 
-    const { consultationSettings, updateConsultationSettings, availabilitySettings, updateAvailabilitySettings, notificationSettings, updateNotificationSettings, isChanged, setIsChanged } = useSettings()
+    const { consultationSettings, updateConsultationSettings, availabilitySettings, updateAvailabilitySettings, notificationSettings, updateNotificationSettings, isChanged, setIsChanged } = useSettings(),
+          [initialSettings] = useState({ consultationSettings, availabilitySettings, notificationSettings })
 
 
     const handleSettingsUpdate = () =>{
@@ -20,6 +22,16 @@ export const useSettingsManagement = () =>{
     }
 
 
+
+    const checkIfChanged = (newSettings: any) =>{
+    
+       const hasChanges = JSON.stringify(newSettings) !== JSON.stringify(initialSettings)
+
+       setIsChanged(hasChanges)
+    
+    }
+
+
     const handleConsultationUpdate = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>{
 
         const { name, value } = e.target,
@@ -31,6 +43,10 @@ export const useSettingsManagement = () =>{
                 }
 
         updateConsultationSettings(newSettings)
+
+        console.log('Consultation settings updated:', value)
+
+        checkIfChanged({ ...initialSettings, consultationSettings: newSettings })
 
     }
 
@@ -47,6 +63,10 @@ export const useSettingsManagement = () =>{
 
         updateAvailabilitySettings(newSettings)
 
+        console.log('Availability settings updated:', checked)
+
+        checkIfChanged({ ...initialSettings, availabilitySettings: newSettings })
+
     }
 
 
@@ -61,6 +81,10 @@ export const useSettingsManagement = () =>{
                 }
 
         updateNotificationSettings(newSettings)
+
+        console.log('Notification settings updated:', checked)
+
+        checkIfChanged({ ...initialSettings, notificationSettings: newSettings })
 
     }
 
