@@ -47,8 +47,6 @@ export const useSettingsManagement = () =>{
 
         updateConsultationSettings(newSettings)
 
-        console.log('Consultation settings updated:', value)
-
         checkIfChanged({ ...initialSettings, consultationSettings: newSettings })
 
     }
@@ -66,8 +64,6 @@ export const useSettingsManagement = () =>{
 
         updateAvailabilitySettings(newSettings)
 
-        console.log('Availability settings updated:', checked)
-
         checkIfChanged({ ...initialSettings, availabilitySettings: newSettings })
 
     }
@@ -84,8 +80,6 @@ export const useSettingsManagement = () =>{
                 }
 
         updateNotificationSettings(newSettings)
-
-        console.log('Notification settings updated:', checked)
 
         checkIfChanged({ ...initialSettings, notificationSettings: newSettings })
 
