@@ -520,6 +520,7 @@ Settings Management Hook will update the settings in the database and update the
 
   5. Call checkIfChanged in the 3 update functions
   6. Add currency input to the Settings page and update the consultationSettings with the selected currency
+  7. Retrieve handleSettingsUpdate from SettingsContext and call it when the user clicks the save button
 
 ### Not Found Page
 
