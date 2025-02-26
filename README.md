@@ -519,7 +519,7 @@ Settings Management Hook will update the settings in the database and update the
     c. Set isChanged state to hasChanges
 
   5. Call checkIfChanged in the 3 update functions
-
+  6. Add currency input to the Settings page and update the consultationSettings with the selected currency
 
 ### Not Found Page
 

@@ -34,13 +34,16 @@ export const useSettingsManagement = () =>{
 
     const handleConsultationUpdate = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>{
 
-        const { name, value } = e.target,
+        const { name, value, type } = e.target,
+              parsedValue = type === "number" ? parseFloat(value) : value,
                 newSettings ={
 
                     ...consultationSettings,
-                    [name]: value
+                    [name]: parsedValue
 
                 }
+                
+        console.log('New consultation settings:', newSettings.currency)
 
         updateConsultationSettings(newSettings)
 
