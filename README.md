@@ -484,7 +484,7 @@ Dark mode will be a toggleable feature that will change the color scheme of the 
   1. Apply dark mode color scheme to styles.css and components
   2. Create Settings page and mount it on Script component and provide a route for it
     a. Create a toggle button to toggle the dark mode on and off
-    b. Add notifications settings
+    b. Add notifications settings **transfer to NotificationSettings component**
     c. Set dark mode to localStorage
 
   3. Make the inputs in Settings page controlled components with data from SettingsContext
@@ -499,6 +499,15 @@ Doctor's Settings will be a component that will allow the doctor to set their co
   1. Create a Doctor's Settings component and mount it on the Settings page if the user is a doctor
   2. Add labels and inputs for consultation fee, session duration, availability settings and preferences for online consultation
   3. Make the inputs controlled components with data from SettingsContext
+
+
+
+### Notifications Settings Component
+
+Notifications Settings will be a component that will allow the doctor to set their notification preferences.
+
+  1. Create a Notification Settings component and mount it on the Settings page
+  2. Bring in the notification settings from Settings page
 
 
 
