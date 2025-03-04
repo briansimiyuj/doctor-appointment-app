@@ -20,7 +20,24 @@ export interface NotificationSettings{
 
     emailNotifications: boolean
     smsNotifications: boolean
-    appointmentReminders: boolean
+    appointmentReminders:{
+
+        daysBefore: boolean
+        hoursBefore: boolean
+        sameDay: boolean
+
+    }
+
+    bookingUpdates:{
+
+        confirmation: boolean
+        cancellation: boolean
+        rescheduling: boolean
+
+    }
+
+    paymentNotifications: boolean
+    systemUpdates: boolean
 
 }
 
