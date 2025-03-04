@@ -469,6 +469,7 @@ Settings context will be used to store the user's settings and provide it to the
   1. Create settings context props interface and export it
   2. Create a dummy data for settings 
     i. Create dummySettingsData.ts file with dummy data 
+    ii. Create dummy notifications settings data
   
   3. Create state variables for settings and initialize them with dummy data
   4. Create various functions to update settings
