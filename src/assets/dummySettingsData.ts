@@ -22,7 +22,25 @@ export const dummySettingsData ={
 
         emailNotifications: true,
         smsNotifications: true,
-        appointmentReminders: true
+        appointmentReminders:{
+
+            daysBefore: true,
+            hoursBefore: true,
+            sameDay: true
+
+        },
+
+        boookingUpdates:{
+
+            confirmation: true,
+            cancellation: true,
+            rescheduling: true
+
+        },
+
+        paymentNotifications: true,
+        systemUpdates: true
+        
     }
     
 }
