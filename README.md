@@ -508,6 +508,7 @@ Notifications Settings will be a component that will allow the doctor to set the
 
   1. Create a Notification Settings component and mount it on the Settings page
   2. Bring in the notification settings from Settings page
+  3. Add more settings for appointment reminders, booking updates, payment reminders, and system updates
 
 
 
