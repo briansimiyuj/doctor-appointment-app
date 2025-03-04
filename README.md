@@ -466,16 +466,11 @@ My appointments page will show the user's appointments. It will have a list of a
 
 Settings context will be used to store the user's settings and provide it to the Settings page
 
-  1. Create settings context props interface and export it
-  2. Create a dummy data for settings 
-    i. Create dummySettingsData.ts file with dummy data 
-    ii. Create dummy notifications settings data
-  
-  3. Create state variables for settings and initialize them with dummy data
-  4. Create various functions to update settings
-  5. Pass down the props in SettingContextProvider
-  6. Wrap the Settings page with the SettingProvider in the Script component
-  7. Check if the values are being updated when the user updates the settings
+  1. Consultation settings (fees, duration, currency)
+  2. Availability settings (new patients, online/in-person consultations)
+  3. Notification preferences with user-specific controls
+    a. Base notifications for all users (email, SMS, appointments, bookings)
+    b. Additional settings for doctors (payments, system updates)
 
 
 ### Dark Mode
