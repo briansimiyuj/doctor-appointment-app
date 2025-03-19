@@ -4,11 +4,15 @@ import { useParams } from "react-router-dom";
 import { doctors } from "../assets/frontend/doctorsData";
 import { TimeSlotType } from "../assets/types/TimeSlotType";
 import { AppointedDoctorType } from "../assets/types/AppointedDoctorType";
+import { PatientType } from "../assets/types/PatientType";
+import { patients } from "../assets/frontend/patientsData";
 
 interface BookingContextProps{
 
     doctorInfo: DoctorType | null
+    patientInfo: PatientType | null
     doctorID: string | null
+    patientID: string | null
     slotIndex: number
     setSlotIndex: (index: number) => void
     slotTime: string
@@ -30,7 +34,9 @@ interface BookingContextProviderProps{
 export const BookingContext = createContext<BookingContextProps>({
     
     doctorID: null,
+    patientID: null,
     doctorInfo: null,
+    patientInfo: null,
     slotIndex: 0,
     setSlotIndex: () => {},
     slotTime: '',
@@ -47,8 +53,9 @@ export const BookingContext = createContext<BookingContextProps>({
 
 export const BookingContextProvider =  ({ children }: BookingContextProviderProps) =>{
 
-    const { doctorID } = useParams(),
+    const { doctorID, patientID } = useParams(),
           [doctorInfo, setDoctorInfo] = useState<DoctorType | null>(null),
+          [patientInfo, setPatientInfo] = useState<PatientType | null>(null),
           [slotIndex, setSlotIndex] = useState(0),
           [slotTime, setSlotTime] = useState(''),
           [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlotType | null>(null),
@@ -86,6 +93,15 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
     }
 
 
+    const fetchPatientInfo = () =>{
+    
+       const patientInfo = patients.find(patient => patient._id === patientID) || null
+
+       setPatientInfo(patientInfo)
+    
+    }
+
+
     const handleSetIsBooked = (doctorID: string, isBooked: boolean) =>{
     
         setIsBooked(prev =>{
@@ -118,15 +134,19 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
     useEffect(() =>{
     
        fetchDocInfo()
+
+       fetchPatientInfo()
     
-    }, [doctorID, doctors])
+    }, [doctorID, doctors, patientID, patients])
 
 
     return(
 
         <BookingContext.Provider value={{
             doctorInfo, 
+            patientInfo,
             doctorID: doctorID || null, 
+            patientID: patientID || null,
             slotIndex,
             setSlotIndex,
             slotTime,

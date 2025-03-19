@@ -214,14 +214,15 @@ The Doctors page is a page that lists all the doctors in the database. It will h
 
 Booking context will be used to store the booking data and provide it to the Booking page.
 
-  1. Get doctorID from the URL using useParams hook and store it in a  constant
-  2. Set a state variable to store the doctor info
+  1. Get doctorID and patientID from the URL using useParams hook and store them in a constant
+  2. Set state variables to store the doctor info and patient info
   3. Fetch and update the doctor info whenever the doctorID and doctors array changes
-  4. Set a state variable to store slot index
-  5. Set a state to store selected time slot and initialize it with empty array
-  6. Set a state to store slot time and initialize it with empty string
-  7. Set a state to store appointed doctors and initialize it with data from local storage
-  8. Set a state to store a boolean to check if the doctor is booked or not and initialize it with false. This will be per doctor
+  4. Fetch and update the patient info whenever the patientID and patients array changes
+  5. Set a state variable to store slot index
+  6. Set a state to store selected time slot and initialize it with empty array
+  7. Set a state to store slot time and initialize it with empty string
+  8. Set a state to store appointed doctors and initialize it with data from local storage
+  9. Set a state to store a boolean to check if the doctor is booked or not and initialize it with false. This will be per doctor
 
 
 ### Booking Page
