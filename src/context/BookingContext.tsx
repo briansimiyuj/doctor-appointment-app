@@ -6,6 +6,7 @@ import { TimeSlotType } from "../assets/types/TimeSlotType";
 import { AppointedDoctorType } from "../assets/types/AppointedDoctorType";
 import { PatientType } from "../assets/types/PatientType";
 import { patients } from "../assets/frontend/patientsData";
+import { AppointedPatientType } from "../assets/types/AppointedPatientType";
 
 interface BookingContextProps{
 
@@ -21,6 +22,8 @@ interface BookingContextProps{
     setSelectedTimeSlot: (slot: TimeSlotType | null) => void
     appointedDoctors: AppointedDoctorType[]
     setAppointedDoctors: (doctors: AppointedDoctorType[] | ((prev: AppointedDoctorType[]) => AppointedDoctorType[])) => void,
+    appointedPatients: AppointedPatientType[]
+    setAppointedPatients: (patients: AppointedPatientType[] | ((prev: AppointedPatientType[]) => AppointedPatientType[])) => void,
     isBooked: { [doctorId: string]: boolean }
     setIsBooked: (doctorId: string, status: boolean) => void
 
@@ -45,6 +48,8 @@ export const BookingContext = createContext<BookingContextProps>({
     setSelectedTimeSlot: () => {},
     appointedDoctors: [],
     setAppointedDoctors: () => {},
+    appointedPatients: [],
+    setAppointedPatients: () => {},
     isBooked: {},
     setIsBooked: () => {}
 
@@ -73,15 +78,29 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
 
                 return storedAppointedDoctors ? JSON.parse(storedAppointedDoctors) : []
 
-            })
+            }),
 
+            [appointedPatients, setAppointedPatients] = useState<AppointedPatientType[]>(() =>{
+
+
+                const storedAppointedPatients = localStorage.getItem("appointedPatients")
+
+                return storedAppointedPatients ? JSON.parse(storedAppointedPatients) : []
+
+            }) 
     
     useEffect(() =>{
 
         localStorage.setItem("appointedDoctors", JSON.stringify(appointedDoctors))
 
     }, [appointedDoctors])
-            
+
+    
+    useEffect(() =>{
+    
+       localStorage.setItem("appointedPatients", JSON.stringify(appointedPatients))
+    
+    }, [appointedPatients])
 
 
     const fetchDocInfo = () =>{
@@ -155,6 +174,8 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
             setSelectedTimeSlot,
             appointedDoctors,
             setAppointedDoctors,
+            appointedPatients,
+            setAppointedPatients,
             isBooked,
             setIsBooked: handleSetIsBooked
         }}>

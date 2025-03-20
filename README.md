@@ -222,7 +222,8 @@ Booking context will be used to store the booking data and provide it to the Boo
   6. Set a state to store selected time slot and initialize it with empty array
   7. Set a state to store slot time and initialize it with empty string
   8. Set a state to store appointed doctors and initialize it with data from local storage
-  9. Set a state to store a boolean to check if the doctor is booked or not and initialize it with false. This will be per doctor
+  9. Set a state to store appointed patients and initialize it with data from local storage
+  10. Set a state to store a boolean to check if the doctor is booked or not and initialize it with false. This will be per doctor
 
 
 ### Booking Page
