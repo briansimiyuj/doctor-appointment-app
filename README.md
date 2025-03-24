@@ -223,7 +223,19 @@ Booking context will be used to store the booking data and provide it to the Boo
   7. Set a state to store slot time and initialize it with empty string
   8. Set a state to store appointed doctors and initialize it with data from local storage
   9. Set a state to store appointed patients and initialize it with data from local storage
-  10. Set a state to store a boolean to check if the doctor is booked or not and initialize it with false. This will be per doctor
+  10. For the `appointedPatients` state:
+    a. Initialize it with data from local storage if available
+    b. If no data exists in local storage, create sample data with the first 3 patients from the patients array
+    c. Each appointed patient object has a structure with:
+      i. `patientInfo`: Contains the full patient information object
+      ii. `appointedTime`: Contains the appointment time slot information
+        - For sample data, times are set to "10:00 AM", "11:00 AM", and "12:00 PM" for the first three patients respectively
+
+    d. This data structure allows doctors to view their appointed patients with relevant appointment details
+    e. The state is persisted to local storage whenever it changes, ensuring data persistence across page refreshes
+
+  11. The context provides methods to update both `appointedDoctors` and `appointedPatients` arrays, allowing for appointment management from both the patient and doctor perspectives
+  12. Set a state to store a boolean to check if the doctor is booked or not and initialize it with false. This will be per doctor
 
 
 ### Booking Page

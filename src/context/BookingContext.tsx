@@ -85,7 +85,24 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
 
                 const storedAppointedPatients = localStorage.getItem("appointedPatients")
 
-                return storedAppointedPatients ? JSON.parse(storedAppointedPatients) : []
+                if(storedAppointedPatients){
+
+                    return JSON.parse(storedAppointedPatients)
+
+                }else{
+
+                    return patients.slice(0, 3).map((patient, index) =>({
+
+                        patientInfo: patient,
+                        appointedTime:{
+
+                            time: index === 0 ? "10:00 AM" : index === 1 ? "11:00 AM" : "12:00 PM",
+
+                        }
+
+                    }))
+
+                }
 
             }) 
     
