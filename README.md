@@ -450,7 +450,10 @@ Login page will be used to log in and sign up the user. A user can either log in
      c. Create a button and a function to handle the sign in button click
      d. Create a span to switch to the Sign Up component when the user does not have an account
 
-  6. Create a section for the Google aunthentication button for both the Sign In and Sign Up components### My Appointments Page
+  6. Create a section for the Google aunthentication button for both the Sign In and Sign Up components
+  
+  
+### My Appointments Page
 
 My appointments page will show the user's appointments. It will have a list of appointments with the doctor's name, date, time, and location. The user will be able pay for the appointment and cancel it.
 
@@ -474,6 +477,13 @@ My appointments page will show the user's appointments. It will have a list of a
     a. Pass doctor info as props to the card component
     b. Display the doctor's name, date, time, and location
     c. Create a button to cancel the appointment 
+
+
+    #### Appointed Patients
+
+    Appointed patients will be a list of patients that the user has an appointment with. It will have a list of patients with the patient's name, date, time, and location. The user will be able to cancel the appointment.
+
+    1. Create a component for the PatientAppointmentCard component and mount it on the My Appointments Page
 
 
 ### Settings Context
