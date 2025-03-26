@@ -23,4 +23,12 @@ export type PatientType ={
         doctor: string
         speciality: string
     }
+
+    medicalHistory:{
+        diseases: string[]
+        allergies: string[]
+        surgeries: string[]
+        medications: string[]
+    }
+
 }
