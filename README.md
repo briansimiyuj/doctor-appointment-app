@@ -484,6 +484,7 @@ My appointments page will show the user's appointments. It will have a list of a
     Appointed patients will be a list of patients that the user has an appointment with. It will have a list of patients with the patient's name, date, time, and location. The user will be able to cancel the appointment.
 
     1. Create a component for the PatientAppointmentCard component and mount it on the My Appointments Page
+    2. Improvise the AppointmentPhoto component to display the patient's photo when the user is a doctor
 
 
 ### Settings Context

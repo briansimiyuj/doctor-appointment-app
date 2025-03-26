@@ -1,21 +1,39 @@
 import { AppointedDoctorType } from "../../assets/types/AppointedDoctorType"
+import { AppointedPatientType } from "../../assets/types/AppointedPatientType"
 
 
 type AppointmentPhotoProps ={
 
-    doctors: AppointedDoctorType
+    doctors?: AppointedDoctorType
+    patients?: AppointedPatientType
     
 }
 
-const AppointmentPhoto: React.FC<AppointmentPhotoProps> = ({ doctors }) => {
+const AppointmentPhoto: React.FC<AppointmentPhotoProps> = ({ doctors, patients }) => {
 
-    const doctor = doctors?.doctorInfo
+    if(doctors){
 
-    return(
+        const doctor = doctors?.doctorInfo
 
-        <img src={doctor?.image} alt={`${doctor?.name} photo`} className="w-32"/>
+        return(
 
-    )
+            <img src={doctor?.image} alt={`${doctor?.name} photo`} className="w-32"/>
+
+        )
+
+    }
+
+    if(patients){
+
+        const patient = patients?.patientInfo
+
+        return(
+
+            <img src={patient?.image} alt={`${patient?.name} photo`} className="w-32"/>
+
+        )
+
+    }
 
 }
 
