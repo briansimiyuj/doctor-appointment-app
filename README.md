@@ -485,6 +485,7 @@ My appointments page will show the user's appointments. It will have a list of a
 
     1. Create a component for the PatientAppointmentCard component and mount it on the My Appointments Page
     2. Improvise the AppointmentPhoto component to display the patient's photo when the user is a doctor
+    3. Create a component for the PatientInfo component and mount it on the PatientAppointmentCard component
 
 
 ### Settings Context

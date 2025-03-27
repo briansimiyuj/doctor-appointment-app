@@ -1,5 +1,6 @@
 import { AppointedPatientType } from "../../assets/types/AppointedPatientType"
 import AppointmentPhoto from "./AppointmentPhoto"
+import PatientInfo from "./PatientInfo"
 
 type PatientAppointmentCardProps ={
 
@@ -17,7 +18,10 @@ const PatientAppointmentCard: React.FC<PatientAppointmentCardProps> = ({ patient
 
                 <AppointmentPhoto patients={patient}/>
 
+                <PatientInfo patients={patient}/>
+
             </div>
+
             
         </div>
 
