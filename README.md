@@ -228,6 +228,8 @@ Booking context will be used to store the booking data and provide it to the Boo
     b. If no data exists in local storage, create sample data with the first 3 patients from the patients array
     c. Each appointed patient object has a structure with:
       i. `patientInfo`: Contains the full patient information object
+        - Add medical history to the patient object
+        
       ii. `appointedTime`: Contains the appointment time slot information
         - For sample data, times are set to "10:00 AM", "11:00 AM", and "12:00 PM" for the first three patients respectively
 
