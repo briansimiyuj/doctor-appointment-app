@@ -20,6 +20,7 @@ import { AppointmentsContextProvider } from "./context/AppointmentContext"
 import SchedulePage from "./pages/SchedulePage"
 import { ThemeProvider } from "./context/ThemeContext"
 import { SettingsProvider } from "./context/SettingsContext"
+import PatientDetailsPage from "./pages/PatientDetailsPage"
 
 const Script: React.FC = () =>{
 
@@ -92,6 +93,16 @@ const Script: React.FC = () =>{
                           <MyAppointmentsPage/>
 
                         </AppointmentsContextProvider>
+
+                      </BookingContextProvider>
+
+                    }/>
+
+                    <Route path="/patient/:patientID" element={
+
+                      <BookingContextProvider>
+
+                        <PatientDetailsPage/>
 
                       </BookingContextProvider>
 
