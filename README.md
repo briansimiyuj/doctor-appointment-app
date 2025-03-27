@@ -490,11 +490,7 @@ My appointments page will show the user's appointments. It will have a list of a
     3. Create a component for the PatientInfo component and mount it on the PatientAppointmentCard component
 
 
-### Patient Details Page
-
-Patient details page will show the patient's details; medical history, allergies, notes, prescription, name and contact information. The doctor will be able to add notes, prescription, allergies and medical history.
-
-  1. Create a Patient Details Page and mount it on Script component and provide a route for it
+    
 
 
 ### Settings Context
