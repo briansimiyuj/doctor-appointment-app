@@ -94,6 +94,14 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
                     return patients.slice(0, 3).map((patient, index) =>({
 
                         patientInfo: patient,
+                        medicalHistory:{
+
+                            diseases: ["diabetes", "hypertension", "asthma"],
+                            allergies: ["penicillin", "latex"],
+                            medications: ["aspirin", "ibuprofen"]
+
+                        },
+
                         appointedTime:{
 
                             time: index === 0 ? "10:00 AM" : index === 1 ? "11:00 AM" : "12:00 PM",
