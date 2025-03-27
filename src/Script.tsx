@@ -98,7 +98,7 @@ const Script: React.FC = () =>{
 
                     }/>
 
-                    <Route path="/patient/:patientID" element={
+                    <Route path="/appointment/:patientID" element={
 
                       <BookingContextProvider>
 
