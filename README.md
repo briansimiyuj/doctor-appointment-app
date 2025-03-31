@@ -490,6 +490,13 @@ My appointments page will show the user's appointments. It will have a list of a
     3. Create a component for the PatientInfo component and mount it on the PatientAppointmentCard component
 
 
+### Patient Details Context
+
+Patient details context will be used to store the patient's details and appointment details and provide it to the Patient Details page
+
+  1. Create props for the Patient Details context
+
+  
 ### Patient Details Page
 
 Patient details page will show the patient's details; medical history, allergies, notes, prescription, name and contact information. The doctor will be able to add notes, prescription, allergies and medical history.
@@ -681,4 +688,4 @@ Schedule management hook handles all schedule-related operations and state manag
 Schedule slots component will be used to display the doctor's schedule. 
 
   1. Create a Schedule Slots Component and mount it on the Weekly Calendar Component
-  2. Transfer the schedule UI from the Weekly Calendar Component to the Schedule Slots Component
+  2. Transfer the schedule UI from the Weekly Calendar Component to the Schedule Slots Com
