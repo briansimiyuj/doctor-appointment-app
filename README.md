@@ -23,6 +23,7 @@ This is a simple doctor's appointment booking system. It allows users to book ap
   4. React-Toastify
   5. Tailwind CSS
   6. Tailwind-scrollbar
+  7. UUID
 
 ### Tailwind Configuration:
 
