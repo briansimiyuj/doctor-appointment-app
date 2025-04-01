@@ -21,6 +21,7 @@ import SchedulePage from "./pages/SchedulePage"
 import { ThemeProvider } from "./context/ThemeContext"
 import { SettingsProvider } from "./context/SettingsContext"
 import PatientDetailsPage from "./pages/PatientDetailsPage"
+import { PatientDetailsProvider } from "./context/PatientDetailsContext"
 
 const Script: React.FC = () =>{
 
@@ -102,7 +103,11 @@ const Script: React.FC = () =>{
 
                       <BookingContextProvider>
 
-                        <PatientDetailsPage/>
+                        <PatientDetailsProvider>
+
+                         <PatientDetailsPage/>
+
+                         </PatientDetailsProvider>
 
                       </BookingContextProvider>
 

@@ -495,6 +495,11 @@ My appointments page will show the user's appointments. It will have a list of a
 Patient details context will be used to store the patient's details and appointment details and provide it to the Patient Details page
 
   1. Create props for the Patient Details context
+  2. Create a state variable for the patient and initialize it with null
+  3. Create a state variable for active tab and initialize it with "Medical History"
+  4. Create a state variable for patient appointment with `appointment type` and initialize it with empty array
+  5. Create a function to fetch the patient appointment based on patient id
+  6. Find the appointed patient based on the patient id and set the patient details and appointment details
 
   
 ### Patient Details Page
