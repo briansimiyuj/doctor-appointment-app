@@ -5,6 +5,8 @@ import { AppointmentsContext } from "./AppointmentContext"
 import { AppointmentType } from "../assets/types/AppointmentType"
 import { BookingContext } from "./BookingContext"
 import { useParams } from "react-router-dom"
+import { DocumentType } from "../assets/types/DocumentType"
+import { v4 as uuid } from "uuid"
 
 interface PatientDetailsProviderProps{
 
@@ -21,7 +23,16 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
       [patientAppointments, setPatientAppointments] = useState<AppointmentType[]>([]),
       { appointments } = useContext(AppointmentsContext),
       { appointedPatients } = useContext(BookingContext),
-      { patientID } = useParams<{ patientID: string }>()
+      { patientID } = useParams<{ patientID: string }>(),
+      [documents, setDocuments] = useState<Array<{
+
+            id: string
+            name: string
+            type: string
+            uploadDate: Date
+            uploadedBy: string
+
+      }>>([])
 
 
       const fetchPatientAppointments = (patientID: string) =>{
@@ -54,6 +65,35 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             }
             
       }, [appointments, appointedPatients, patientID])
+
+
+
+      const addDocument = (document: DocumentType) =>{
+      
+            const newDocument ={
+
+                  id: uuid(),
+                  ...document
+
+            }
+
+            setDocuments(prevDocuments => [...prevDocuments, newDocument])
+
+            localStorage.setItem(`documents-${patientID}`, JSON.stringify([...documents, newDocument]))
+      
+      }
+
+
+      const removeDocument = (index: string) =>{
+      
+         const updatedDocuments = documents.filter(document => document.id !== index)
+
+         setDocuments(updatedDocuments)
+
+         localStorage.setItem(`documents-${patientID}`, JSON.stringify(updatedDocuments))
+      
+      }
+
 
       const value ={
 
