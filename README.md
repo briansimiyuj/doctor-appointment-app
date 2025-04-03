@@ -512,6 +512,13 @@ Patient details page will show the patient's details; medical history, allergies
 
   1. Create a Patient Details Page and mount it on Script component and provide a route for it
 
+    ### Patient Header Component
+
+    Patient header component will show the patient's name, photo, and contact information. 
+
+    1. Create a Patient Header component and mount it on the Patient Details Page
+      a. Add patient photo component and mount it on the Patient Header component
+
 
 ### Settings Context
 
