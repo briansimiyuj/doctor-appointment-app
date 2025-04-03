@@ -7,6 +7,7 @@ import { BookingContext } from "./BookingContext"
 import { useParams } from "react-router-dom"
 import { DocumentType } from "../assets/types/DocumentType"
 import { v4 as uuid } from "uuid"
+import { NoteType } from "../assets/types/NoteType"
 
 interface PatientDetailsProviderProps{
 
@@ -24,6 +25,16 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
       { appointments } = useContext(AppointmentsContext),
       { appointedPatients } = useContext(BookingContext),
       { patientID } = useParams<{ patientID: string }>(),
+      [notes, setNotes] = useState<Array<{
+
+            id: string
+            title: string
+            content: string
+            date: Date
+            doctorID: string
+            doctorName: string
+
+      }>>([]),
       [documents, setDocuments] = useState<Array<{
 
             id: string
@@ -95,6 +106,56 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
       }
 
 
+
+      const addNote = (note: NoteType) =>{
+    
+            const newNote ={
+    
+                id: uuid(),
+                ...note
+    
+            }
+    
+            setNotes(prevNotes => [...prevNotes, newNote])
+    
+            localStorage.setItem(`note-${patientID}`, JSON.stringify([notes, newNote]))
+        
+      }
+
+      const removeNote = (index: number) =>{
+    
+            const updatedNotes = [...notes]
+     
+            updatedNotes.splice(index, 1)
+     
+            setNotes(updatedNotes)
+     
+            localStorage.setItem(`note-${patientID}`, JSON.stringify(updatedNotes))
+         
+      }
+
+
+      useEffect(() =>{
+    
+            if(patientID){
+    
+                  const savedNotes = localStorage.getItem(`notes-${patientID}`)
+    
+                  if(savedNotes){
+    
+                    setNotes(JSON.parse(savedNotes))
+    
+                  }else{  
+    
+                        setNotes([])
+    
+                  }
+    
+            }
+        
+      }, [patientID])
+
+
       const value ={
 
             activeTab,
@@ -103,8 +164,8 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             setPatientAppointments,
             fetchPatientAppointments,
             notes: [],
-            addNote: () => {},
-            removeNote: () => {},
+            addNote,
+            removeNote,
             addMedicalCondition: () => {},
             removeMedicalCondition: () => {},
             addAllergy: () => {},
@@ -114,8 +175,8 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             addSurgery: () => {},
             removeSurgery: () => {},
             documents: [],
-            addDocument: () => {},
-            removeDocument: () => {},
+            addDocument,
+            removeDocument,
             updatePatientStatus: () => {},
             scheduleAppointment: () => {},
             cancelAppointment: () => {},

@@ -5,7 +5,7 @@
 This is a simple doctor's appointment booking system. It allows users to book appointments with doctors and view their schedules.
 
 ## Features
-
+ 
 - User registration and login
 - Doctor registration and login
 - Appointment booking
@@ -501,8 +501,9 @@ Patient details context will be used to store the patient's details and appointm
   4. Create a state variable for patient appointment with `appointment type` and initialize it with empty array
   5. Create a function to fetch the patient appointment based on patient id
   6. Find the appointed patient based on the patient id and set the patient details and appointment details
-  7. Create a state variable for documents with document type and initialize it with empty array
+  7. Create a state variables for notes and documents with respective types and initialize them with empty array
   8. Create functions to add and remove documents and update local storage
+  9. Create functions to add and remove notes and update local storage
 
   
 ### Patient Details Page
