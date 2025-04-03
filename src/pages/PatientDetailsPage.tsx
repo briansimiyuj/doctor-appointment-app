@@ -1,14 +1,14 @@
-import { usePatientDetails } from "../context/PatientDetailsContext"
+import PatientHeader from "../components/PatientDetails/PatientHeader"
 
 const PatientDetailsPage: React.FC = ()=>{
 
-    const { patientDetails } = usePatientDetails()
-
-    console.log(patientDetails)
-
     return(
 
-        <h1>{patientDetails?.patientInfo?.name}</h1>
+        <div className="container mx-auto px-4 py-8">
+
+            <PatientHeader/>
+
+        </div>
 
     )
 
