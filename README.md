@@ -518,6 +518,11 @@ Patient details page will show the patient's details; medical history, allergies
 
     1. Create a Patient Header component and mount it on the Patient Details Page
       a. Add patient photo component and mount it on the Patient Header component
+      b. Create Patient Basic Info component and mount it on the Patient Header component
+
+        #### Patient Basic Info Component
+
+        Patient basic info component will show the patient's name, age, gender, and medical condition.
 
 
 ### Settings Context
