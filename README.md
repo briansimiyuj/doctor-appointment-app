@@ -524,6 +524,12 @@ Patient details page will show the patient's details; medical history, allergies
 
         Patient basic info component will show the patient's name, age, gender, and medical condition.
 
+  2. Create a Patient Contact Info component and mount it on the Patient Details Page
+
+    ### Patient Contact Info Component
+
+    Patient contact info component will show the patient's contact information and address.
+
 
 ### Settings Context
 
