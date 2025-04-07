@@ -542,6 +542,16 @@ Patient details page will show the patient's details; medical history, allergies
     5. Add an onClick event to the tab button and set the active tab to the tab object's id
 
 
+    ### Tabs Content Component
+
+    Tabs content component will be a container for the tabs.
+
+    1. Create a Tabs Content component and mount it on the Patient Details Page if the tab ID corresponds to the active tab and pass the tab ID as a prop
+    2. Set Tabs Content props with the tab ID and children as props
+    3. If the active tab doesn't match the tab ID, return null
+    4. Display the tab's children
+
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page
