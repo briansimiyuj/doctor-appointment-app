@@ -1,5 +1,6 @@
 import PatientContactInfo from "../components/PatientDetails/PatientContactInfo"
 import PatientHeader from "../components/PatientDetails/PatientHeader"
+import TabsNavigation from "../components/PatientDetails/TabsNavigation"
 
 const PatientDetailsPage: React.FC = ()=>{
 
@@ -10,6 +11,12 @@ const PatientDetailsPage: React.FC = ()=>{
             <PatientHeader/>
 
             <PatientContactInfo/>
+
+            <div className="bg-white rounded-lg shadow-md overflow-hidden mt-6">
+
+                <TabsNavigation/>
+
+            </div>
 
         </div>
 

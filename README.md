@@ -531,6 +531,17 @@ Patient details page will show the patient's details; medical history, allergies
     Patient contact info component will show the patient's contact information and address.
 
 
+    ### Tabs Navigation Component
+    
+    Tabs navigation component will show the tabs for the patient details page.
+
+    1. Create a Tabs Navigation component and mount it on the Patient Details Page  
+    2. Create an array of tabs objects
+    3. Map through the tabs array and create a tab button for each tab object
+    4. Add an active class to the active tab button
+    5. Add an onClick event to the tab button and set the active tab to the tab object's id
+
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page
