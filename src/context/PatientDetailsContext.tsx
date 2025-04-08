@@ -20,7 +20,7 @@ export const PatientDetailsContext = createContext<PatientDetailsContextProps | 
 export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ children }) =>{
 
 const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null>(null), 
-      [activeTab, setActiveTab] =  useState<"medical-history" | "appointments" | "prescriptions" | "notes" | "documents">("medical-history"),
+      [activeTab, setActiveTab] =  useState<"medical-history" | "appointments" | "prescriptions" | "notes" | "documents">("appointments"),
       [patientAppointments, setPatientAppointments] = useState<AppointmentType[]>([]),
       { appointments } = useContext(AppointmentsContext),
       { appointedPatients } = useContext(BookingContext),

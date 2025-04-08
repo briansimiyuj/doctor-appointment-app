@@ -552,6 +552,14 @@ Patient details page will show the patient's details; medical history, allergies
     4. Display the tab's children
 
 
+    #### Appointments Tab Component
+
+    Appointments tab component will show the patient's appointments.
+
+      1. Set the active tab to "Appointments" by default on the Patient Details Context
+      2. Create a component for the Appointments Tab and mount it on the Tabs Content component with the id of "Appointments"
+      3. Create a component for the Appointment Tab Header and mount it on the Appointments Tab Component
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page
