@@ -3,6 +3,7 @@ import PatientHeader from "../components/PatientDetails/PatientHeader"
 import TabsNavigation from "../components/PatientDetails/TabsNavigation"
 import TabContent from "../components/PatientDetails/Tabs/TabContent"
 import { usePatientDetails } from "../context/PatientDetailsContext"
+import AppointmentTab from "../components/PatientDetails/Tabs/AppointmentTab"
 
 const PatientDetailsPage: React.FC = ()=>{
 
@@ -38,11 +39,7 @@ const PatientDetailsPage: React.FC = ()=>{
 
                         <TabContent tabID="appointments">
 
-                            <div className="p-4">
-
-                                <h3 className="text-lg font-medium mb-4">Appointments</h3>
-
-                            </div>
+                            <AppointmentTab/>
 
                         </TabContent>
 
