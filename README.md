@@ -512,6 +512,7 @@ Patient details context will be used to store the patient's details and appointm
 Patient details page will show the patient's details; medical history, allergies, notes, prescription, name and contact information. The doctor will be able to add notes, prescription, allergies and medical history.
 
   1. Create a Patient Details Page and mount it on Script component and provide a route for it and wrap the route with BookingContextProvider, AppointmentContextProvider and PatientDetailsContextProvider
+  2. If there are no appointment for the patient, show a message saying "No appointment found for this patient"
 
     ### Patient Header Component
 
@@ -525,7 +526,7 @@ Patient details page will show the patient's details; medical history, allergies
 
         Patient basic info component will show the patient's name, age, gender, and medical condition.
 
-  2. Create a Patient Contact Info component and mount it on the Patient Details Page
+  3. Create a Patient Contact Info component and mount it on the Patient Details Page
 
     ### Patient Contact Info Component
 
