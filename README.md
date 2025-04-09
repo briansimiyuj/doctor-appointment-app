@@ -558,7 +558,11 @@ Patient details page will show the patient's details; medical history, allergies
 
       1. Set the active tab to "Appointments" by default on the Patient Details Context
       2. Create a component for the Appointments Tab and mount it on the Tabs Content component with the id of "Appointments"
-      3. Create a component for the Appointment Tab Header and mount it on the Appointments Tab Component
+      3. Create a component for Appointment and mount it on the Appointments Tab component if there are patient appointments
+
+      ### Appointment Component
+
+      Appointment component will show the appointment details: date, time, consultation type, and status.
 
 ### Settings Context
 
