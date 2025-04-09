@@ -16,8 +16,9 @@ export  interface AppointmentType{
 
     }
 
-    date: string;
-    time: string;
+    date: string
+    time: string
     status: string
+    consultationType: "online" | "in-person"
     
 }

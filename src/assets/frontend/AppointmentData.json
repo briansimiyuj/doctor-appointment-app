@@ -7,7 +7,8 @@
         "speciality": "Cardiologist",
         "patient": "John Doe",
         "status": "confirmed",
-        "fees": 70
+        "fees": 70,
+        "consultationType": "Online"
     },
 
     {
@@ -18,7 +19,8 @@
         "speciality": "Gynecologist",
         "patient": "Jane Wanjiru",
         "status": "pending",
-        "fees": 70
+        "fees": 70,
+        "consultationType": "In Person"
     },
 
     {
@@ -29,7 +31,8 @@
         "speciality": "Dermatologist",
         "patient": "Ali Mohammed",
         "status": "approved",
-        "fees": 70
+        "fees": 70,
+        "consultationType": "Online"
     },
 
     {
@@ -40,7 +43,8 @@
         "speciality": "Pediatrician",
         "patient": "Mary Achieng",
         "status": "pending",
-        "fees": 50
+        "fees": 50,
+        "consultationType": "In Person"
     }
 
 ]
