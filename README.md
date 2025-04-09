@@ -565,6 +565,22 @@ Patient details page will show the patient's details; medical history, allergies
 
       Appointment component will show the appointment details: date, time, consultation type, and status.
 
+      #### Appointment Tab Header Component
+
+      Appointment tab header component will show the appointment title and a button to manage the appointment based on the appointment status.
+
+      ##### Tab Action Button Component
+
+      Tab action button component will show the button to manage the appointment based on the appointment status.
+
+      - 🟢 **Pending appointments** show an "Approve Appointment" button with a checkmark icon.
+      - 🔵 **Confirmed appointments** display both "Reschedule" and "Cancel" buttons side by side.
+      - ⚪ **Completed appointments** offer an "Add Notes" button for post-appointment documentation.
+      - 🔴 **Cancelled appointments** provide a "Schedule New Appointment" button to facilitate rebooking.
+      - 🟣 **Other statuses** show a generic "Manage Appointment" button as a fallback option.
+
+      1. Create a Tab Action Button component and mount it on the Appointment Tab Header component
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page
