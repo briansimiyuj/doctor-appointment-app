@@ -4,8 +4,6 @@ const Appointment: React.FC = ()=>{
 
     const { patientAppointments } = usePatientDetails()
 
-    console.log(patientAppointments)
-
     return(
 
         <div className="space-y-4">

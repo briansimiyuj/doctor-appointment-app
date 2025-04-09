@@ -76,6 +76,7 @@ Appointment context is a global state that will be used to store the appointment
   3. Once the component mounts, map through the appointments data and find the appointed patients. Assign this to a variable.
   4. Set the appointments state variable with appointed patients.
   5. Wrap the relevant components and pages with the AppointmentContext.Provider (MyAppointmentsPage and DoctorsAppointments)
+  6. Add consultation type to the appointment data.
 
 #### Doctors Appointments
 

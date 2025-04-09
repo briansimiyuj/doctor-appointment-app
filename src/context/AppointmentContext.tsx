@@ -28,8 +28,10 @@ export const AppointmentsContextProvider = ({ children }: AppointmentsContextPro
             const patient = patients.find(p => p.name === appointment.patient)
 
             const doctor = { _id: appointment.doctor, name: appointment.doctor, image: appointment.doctor }
+
+            const consultationType = appointment.consultationType || "Online"
             
-            return { ...appointment, patient, doctor }
+            return { ...appointment, patient, doctor, consultationType }
 
 
         })
