@@ -7,7 +7,23 @@ import AppointmentTab from "../components/PatientDetails/Tabs/AppointmentTab"
 
 const PatientDetailsPage: React.FC = ()=>{
 
-    const { activeTab } = usePatientDetails()
+    const { activeTab, patientAppointments } = usePatientDetails()
+
+    if(patientAppointments.length === 0){
+
+        return(
+
+            <div className="container mx-auto px-4 py-8">
+
+                <h1 className="text-2xl font-bold mb-4">No Appointments</h1> 
+
+                <p className="text-gray-600">There are no appointments for this patient.</p>
+
+            </div>
+
+        )
+
+    }
 
     return(
 
