@@ -582,6 +582,23 @@ Patient details page will show the patient's details; medical history, allergies
 
       1. Create a Tab Action Button component and mount it on the Appointment Tab Header component
 
+     **Buttons Action**
+
+      *Update Appointment Status*: Update appointment function will update the appointment status based on the button clicked.
+
+        1. Add `updateAppointmentStatus` function to the patient details context props
+        2. Call the `updateAppointmentStatus` function with the appointment and the new status as parameters 
+
+          a. Create a deep copy of the patient's appointments array
+          b. Find the index of the appointment to update
+          c. Check if the appointment exists in the array
+          d. If the appointment exists, create a new appointment object with the updated status
+          e. Replace the appointment at the found index with the new appointment object
+          f. Update the patient's appointments array with the new array
+          g. Save the updated appointments to localStorage using the patient ID as part of the key
+          h. Implement a separate useEffect hook to load appointments from localStorage when the component mounts
+
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page
