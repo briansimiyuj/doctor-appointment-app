@@ -139,7 +139,8 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
     
             if(patientID){
     
-                  const savedNotes = localStorage.getItem(`notes-${patientID}`)
+                  const savedNotes = localStorage.getItem(`notes-${patientID}`),
+                        savedAppointments = localStorage.getItem(`appointments-${patientID}`)
     
                   if(savedNotes){
     
@@ -150,10 +151,50 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
                         setNotes([])
     
                   }
+
+                  if(savedAppointments){
+                        
+                        const parsedAppointments = JSON.parse(savedAppointments)
+
+                        setPatientAppointments(parsedAppointments)
+
+                  }else{
+                        
+                        fetchPatientAppointments(patientID)
+
+                  }
     
             }
         
       }, [patientID])
+
+
+      const updateAppointmentStatus = (appointment: AppointmentType, newStatus: "pending" | "completed" | "cancelled" | "confirmed" | "approved" | "rescheduled") =>{
+      
+            setPatientAppointments(prevAppointments =>{
+
+                  const updatedAppointments = [...prevAppointments],
+                        appointmentIndex = updatedAppointments.findIndex(app => app.date === appointment.date && app.time === appointment.time)
+
+                  if(appointmentIndex !== -1){
+
+                        updatedAppointments[appointmentIndex] = {...updatedAppointments[appointmentIndex], status: newStatus}
+
+                        localStorage.setItem(`appointments-${patientID}`, JSON.stringify(updatedAppointments))
+
+                        console.log(updatedAppointments)
+
+                        return updatedAppointments
+
+                  }
+
+                  return prevAppointments
+
+            })
+
+
+      
+      }
 
 
       const value ={
@@ -181,7 +222,8 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             scheduleAppointment: () => {},
             cancelAppointment: () => {},
             patientDetails,
-            setPatientDetails
+            setPatientDetails,
+            updateAppointmentStatus
 
       }
 

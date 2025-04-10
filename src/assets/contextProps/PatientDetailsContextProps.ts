@@ -56,4 +56,6 @@ export interface PatientDetailsContextProps{
     scheduleAppointment: (appointment: { date: Date, time: string,  reason: string }) => void
     cancelAppointment: (patientID: string, doctorID: string, date: Date, time: string, reason: string) => void
 
+    // Update appointment status
+    updateAppointmentStatus: (appointment: AppointmentType, newStatus: "pending" | "confirmed" | "cancelled" | "completed" | "approved" | "rescheduled") => void
 }
