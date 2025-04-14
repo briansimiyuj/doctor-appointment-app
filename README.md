@@ -598,6 +598,10 @@ Patient details page will show the patient's details; medical history, allergies
           g. Save the updated appointments to localStorage using the patient ID as part of the key
           h. Implement a separate useEffect hook to load appointments from localStorage when the component mounts
 
+      *Approve Appointment Button*: Approve appointment button will approve the appointment.
+
+        1. Attach approve appointment function from update patient details hook to the approve appointment button
+
 
       ### Update Patient Details Hook
 

@@ -1,12 +1,13 @@
 import { usePatientDetails } from "../../../context/PatientDetailsContext"
+import { useUpdatePatientDetails } from "../../../hooks/useUpdatePatientDetails"
 
 const TabActionButton: React.FC = ()=>{
 
     const { patientAppointments } = usePatientDetails(),
+          { handleApproveAppointment } = useUpdatePatientDetails(),
          latestAppointment = patientAppointments && patientAppointments.length > 0 
         ? patientAppointments[0] 
         : null
-    
     
     const renderActionButton = () =>{
 
@@ -16,7 +17,10 @@ const TabActionButton: React.FC = ()=>{
 
             return(
 
-                <button className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto">
+                <button 
+                   className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
+                   onClick={handleApproveAppointment}
+                >
 
                     <span className="flex items-center justify-center gap-2">
 
