@@ -597,6 +597,7 @@ Patient details page will show the patient's details; medical history, allergies
           f. Update the patient's appointments array with the new array
           g. Save the updated appointments to localStorage using the patient ID as part of the key
           h. Implement a separate useEffect hook to load appointments from localStorage when the component mounts
+          i. Load appointments from localStorage when the component mounts
 
       *Approve Appointment Button*: Approve appointment button will approve the appointment.
 

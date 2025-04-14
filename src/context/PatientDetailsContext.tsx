@@ -48,6 +48,16 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
 
       const fetchPatientAppointments = (patientID: string) =>{
 
+            const savedAppointments = localStorage.getItem(`appointments-${patientID}`)
+
+            if(savedAppointments){
+
+                  setPatientAppointments(JSON.parse(savedAppointments))
+
+                  return
+
+            }
+
             if(appointments){
 
                   const filteredAppointments = appointments.filter(appointment => appointment.patient._id === patientID)
@@ -139,8 +149,7 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
     
             if(patientID){
     
-                  const savedNotes = localStorage.getItem(`notes-${patientID}`),
-                        savedAppointments = localStorage.getItem(`appointments-${patientID}`)
+                  const savedNotes = localStorage.getItem(`notes-${patientID}`)
     
                   if(savedNotes){
     
@@ -152,18 +161,6 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
     
                   }
 
-                  if(savedAppointments){
-                        
-                        const parsedAppointments = JSON.parse(savedAppointments)
-
-                        setPatientAppointments(parsedAppointments)
-
-                  }else{
-                        
-                        fetchPatientAppointments(patientID)
-
-                  }
-    
             }
         
       }, [patientID])
@@ -181,8 +178,6 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
                         updatedAppointments[appointmentIndex] = {...updatedAppointments[appointmentIndex], status: newStatus}
 
                         localStorage.setItem(`appointments-${patientID}`, JSON.stringify(updatedAppointments))
-
-                        console.log(updatedAppointments)
 
                         return updatedAppointments
 

@@ -13,8 +13,6 @@ export const useUpdatePatientDetails = () =>{
 
             updateAppointmentStatus(latestAppointment, "approved")
 
-            console.log('Appointment approved')
-
         }
     
     }
