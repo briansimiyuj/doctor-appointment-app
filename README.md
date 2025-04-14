@@ -599,6 +599,14 @@ Patient details page will show the patient's details; medical history, allergies
           h. Implement a separate useEffect hook to load appointments from localStorage when the component mounts
 
 
+      ### Update Patient Details Hook
+
+        Update patient details hook will update the patient details in the database.
+
+      *Approve Function*
+
+          1. Create a function to approve the appointment 
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page
