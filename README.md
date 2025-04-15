@@ -603,6 +603,10 @@ Patient details page will show the patient's details; medical history, allergies
 
         1. Attach approve appointment function from update patient details hook to the approve appointment button
 
+      *Cancel Appointment Button*: Cancel appointment button will open a modal to confirm the cancellation of the appointment.
+
+        1. Attach open modal function from update patient details hook to the cancel appointment button
+
 
       ### Update Patient Details Hook
 
