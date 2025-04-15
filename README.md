@@ -625,6 +625,14 @@ Patient details page will show the patient's details; medical history, allergies
           a. Set the appointment to cancel state to the appointment parameter
           b. Set the modal visibility state to true
 
+    ### Cancel Appointment Modal Component
+
+      Cancel appointment modal component will be used to confirm the cancellation of the appointment.
+
+      1. Create a Cancel Appointment Modal component and mount it on the Tab Action Button component if showCancelModal state is true 
+        a. Set the modal visibility state to true (for development purposes)
+        b. Add dummy appointment data for testing purposes and set it to the appointment to cancel state
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page
