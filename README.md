@@ -612,6 +612,15 @@ Patient details page will show the patient's details; medical history, allergies
 
           1. Create a function to approve the appointment 
 
+      *Cancel Appointment Function*
+
+       Cancel appointment function will open a modal to confirm the cancellation of the appointment.
+
+        1. Create states for modal visibility and appointment to cancel
+        2. Create a function to open the modal which takes the appointment to cancel as a parameter
+          a. Set the appointment to cancel state to the appointment parameter
+          b. Set the modal visibility state to true
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page
