@@ -1,5 +1,6 @@
 import { ModalProvider } from "../../../context/ModalContext"
 import ModalBody from "./ModalBody"
+import ModalFooter from "./ModalFooter"
 
 const CancelAppointmentModal: React.FC<{appointment: any, onClose: () => void}> = ({appointment, onClose})=>{
 
@@ -14,6 +15,8 @@ const CancelAppointmentModal: React.FC<{appointment: any, onClose: () => void}> 
                 <ModalProvider appointment={appointment} onClose={onClose}>
 
                     <ModalBody/>
+
+                    <ModalFooter/>
 
                 </ModalProvider>
 
