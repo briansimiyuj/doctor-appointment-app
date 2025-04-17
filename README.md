@@ -649,6 +649,7 @@ Patient details page will show the patient's details; medical history, allergies
         b. Add dummy appointment data for testing purposes and set it to the appointment to cancel state
 
       2. Create a Modal Body component and mount it on the Cancel Appointment Modal component
+      3. Wrap the Modal Body component with a Modal Provider
 
 ### Settings Context
 

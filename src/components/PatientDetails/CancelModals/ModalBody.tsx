@@ -1,9 +1,8 @@
-import { useUpdatePatientDetails } from "../../../hooks/useUpdatePatientDetails"
+import { useModalContext } from "../../../context/ModalContext"
 
 const ModalBody: React.FC = ()=>{
 
-    const { appointmentToCancel } = useUpdatePatientDetails(),
-          appointment = appointmentToCancel
+    const { appointment } = useModalContext()
 
     return(
 

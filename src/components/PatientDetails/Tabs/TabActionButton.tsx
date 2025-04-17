@@ -5,7 +5,8 @@ import CancelAppointmentModal from "../CancelModals/CancelAppointmentModal"
 const TabActionButton: React.FC = ()=>{
 
     const { patientAppointments } = usePatientDetails(),
-          { handleApproveAppointment, openCancelModal, showCancelModal } = useUpdatePatientDetails(),
+
+          { handleApproveAppointment, openCancelModal, showCancelModal, closeCancelModal } = useUpdatePatientDetails() as any,
          latestAppointment = patientAppointments && patientAppointments.length > 0 
         ? patientAppointments[0] 
         : null
@@ -157,12 +158,11 @@ const TabActionButton: React.FC = ()=>{
         
             {renderActionButton()}
 
-            { showCancelModal && <CancelAppointmentModal/> }
+            { showCancelModal && <CancelAppointmentModal appointment={latestAppointment} onClose={closeCancelModal}/> }
         
         </>
 
     )
 
 }
-
 export default TabActionButton
