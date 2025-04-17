@@ -658,6 +658,11 @@ Patient details page will show the patient's details; medical history, allergies
         a. It will have a checkbox to confirm the cancellation 
         b. If the checkbox is not checked, show an error message
 
+      6. Create a Modal Footer component and mount it on the Cancel Appointment Modal component
+
+        a. It will have a button to close the modal
+        b. It will have a button to confirm the cancellation
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page

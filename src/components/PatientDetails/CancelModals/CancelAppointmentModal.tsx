@@ -1,5 +1,6 @@
 import { ModalProvider } from "../../../context/ModalContext"
 import ModalBody from "./ModalBody"
+import ModalFooter from "./ModalFooter"
 
 interface CancelAppointmentModalProps{
 
@@ -21,6 +22,8 @@ const CancelAppointmentModal: React.FC<CancelAppointmentModalProps> = ({ appoint
                 <ModalProvider appointment={appointment} onClose={onClose}>
 
                     <ModalBody/>
+
+                    <ModalFooter/>
 
                 </ModalProvider>
 
