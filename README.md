@@ -650,6 +650,9 @@ Patient details page will show the patient's details; medical history, allergies
 
       2. Create a Modal Body component and mount it on the Cancel Appointment Modal component
       3. Wrap the Modal Body component with a Modal Provider
+      4. Create a Reason component and mount it on the Modal Body component
+        a. It will have a text area to input the reason for cancellation
+        b. If the reason is empty, show an error message
 
 ### Settings Context
 
