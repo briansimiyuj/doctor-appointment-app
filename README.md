@@ -625,6 +625,11 @@ Patient details page will show the patient's details; medical history, allergies
           a. Set the appointment to cancel state to the appointment parameter
           b. Set the modal visibility state to true
 
+        3. Create a function to close the modal
+
+          a. Set the appointment to cancel state to null
+          b. Set the modal visibility state to false
+
 
     ### Modal Context
 
@@ -662,6 +667,8 @@ Patient details page will show the patient's details; medical history, allergies
 
         a. It will have a button to close the modal
         b. It will have a button to confirm the cancellation
+
+      7. Set the modal visibility state back to false and initialize the appointment to cancel state with null
 
 ### Settings Context
 

@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { usePatientDetails } from "../context/PatientDetailsContext"
 import { AppointmentType } from "../assets/types/AppointmentType"
-import { DummyAppointment } from "../assets/DummyAppointment"
 
 export const useUpdatePatientDetails = () =>{
 
@@ -9,8 +8,8 @@ export const useUpdatePatientDetails = () =>{
              latestAppointment = patientAppointments && patientAppointments.length > 0 
             ? patientAppointments[0] 
             : null,
-          [showCancelModal, setShowCancelModal] = useState(true),
-          [appointmentToCancel, setAppointmentToCancel] = useState<AppointmentType | null>(DummyAppointment)
+          [showCancelModal, setShowCancelModal] = useState(false),
+          [appointmentToCancel, setAppointmentToCancel] = useState<AppointmentType | null>(null)
 
     const handleApproveAppointment = () =>{
     
@@ -26,7 +25,18 @@ export const useUpdatePatientDetails = () =>{
     const openCancelModal = (appointment: AppointmentType) =>{
     
        setAppointmentToCancel(appointment)
+       
        setShowCancelModal(true)
+    
+    }
+
+    const closeCancelModal = () =>{
+    
+       setAppointmentToCancel(null)
+       
+       setShowCancelModal(false)
+
+       console.log('working')
     
     }
 
@@ -35,7 +45,8 @@ export const useUpdatePatientDetails = () =>{
         handleApproveAppointment,
         openCancelModal,
         showCancelModal,
-        appointmentToCancel
+        appointmentToCancel,
+        closeCancelModal
 
     }
 
