@@ -1,6 +1,14 @@
+import { ModalProvider } from "../../../context/ModalContext"
 import ModalBody from "./ModalBody"
 
-const CancelAppointmentModal: React.FC = ()=>{
+interface CancelAppointmentModalProps{
+
+    appointment: any, 
+    onClose: () => void
+
+}
+
+const CancelAppointmentModal: React.FC<CancelAppointmentModalProps> = ({ appointment, onClose })=>{
 
     return(
 
@@ -10,7 +18,11 @@ const CancelAppointmentModal: React.FC = ()=>{
 
                 <h2 className="text-xl font-bold mb-4 text-center text-gray-800">Cancel Appointment</h2>
 
-                <ModalBody/>
+                <ModalProvider appointment={appointment} onClose={onClose}>
+
+                    <ModalBody/>
+
+                </ModalProvider>
 
             </div>
 
