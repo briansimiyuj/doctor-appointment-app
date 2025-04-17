@@ -633,6 +633,8 @@ Patient details page will show the patient's details; medical history, allergies
         a. Set the modal visibility state to true (for development purposes)
         b. Add dummy appointment data for testing purposes and set it to the appointment to cancel state
 
+      2. Create a Modal Body component and mount it on the Cancel Appointment Modal component
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page
