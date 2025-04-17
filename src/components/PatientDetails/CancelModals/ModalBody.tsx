@@ -5,8 +5,6 @@ const ModalBody: React.FC = ()=>{
     const { appointmentToCancel } = useUpdatePatientDetails(),
           appointment = appointmentToCancel
 
-    console.log(appointment)
-
     return(
 
         <div className="mb-4">

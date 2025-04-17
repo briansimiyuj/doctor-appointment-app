@@ -625,6 +625,21 @@ Patient details page will show the patient's details; medical history, allergies
           a. Set the appointment to cancel state to the appointment parameter
           b. Set the modal visibility state to true
 
+
+    ### Modal Context
+
+      Modal context will be used to manage the state of the modal (Handle cancel appointment, reason for cancellation, etc.)
+
+        1. Retrieve updateAppointmentStatus function from the patient details context
+        2. Create states for reason and isConfirmed and initialize them to an empty string and false respectively
+        3. Check if the reason is not empty and isConfirmed is true, if both are true, set a boolean state to it
+        4. Create a function to handle the cancel appointment
+
+          a. If there is no appointment to cancel or the boolean state is false, return
+          b. Call the updateAppointmentStatus function with the appointment to cancel and the 'cancelled' status
+          c. Call onClose function to close the modal
+
+
     ### Cancel Appointment Modal Component
 
       Cancel appointment modal component will be used to confirm the cancellation of the appointment.
