@@ -653,6 +653,10 @@ Patient details page will show the patient's details; medical history, allergies
       4. Create a Reason component and mount it on the Modal Body component
         a. It will have a text area to input the reason for cancellation
         b. If the reason is empty, show an error message
+      
+      5. Create a Confirmation checkbox component and mount it on the Modal Body component
+        a. It will have a checkbox to confirm the cancellation 
+        b. If the checkbox is not checked, show an error message
 
 ### Settings Context
 
