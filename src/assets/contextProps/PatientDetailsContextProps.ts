@@ -3,6 +3,7 @@ import { AppointmentType } from "../types/AppointmentType"
 
 export interface PatientDetailsContextProps{
 
+    patientID: string
     patientDetails: AppointedPatientType | null
     setPatientDetails: (patientDetails: AppointedPatientType | null) => void
 
@@ -57,5 +58,6 @@ export interface PatientDetailsContextProps{
     cancelAppointment: (patientID: string, doctorID: string, date: Date, time: string, reason: string) => void
 
     // Update appointment status
-    updateAppointmentStatus: (appointment: AppointmentType, newStatus: "pending" | "confirmed" | "cancelled" | "completed" | "approved" | "rescheduled") => void
+    updateAppointmentStatus: (appointment: AppointmentType, newStatus: "pending" | "confirmed" | "cancelled" | "completed" | "approved" | "rescheduled" | "rejected") => void
+
 }

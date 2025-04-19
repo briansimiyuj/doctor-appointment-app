@@ -4,12 +4,13 @@ import { AppointmentType } from "../assets/types/AppointmentType"
 
 export const useUpdatePatientDetails = () =>{
 
-    const { patientAppointments, updateAppointmentStatus } = usePatientDetails(),
+    const { patientAppointments, updateAppointmentStatus, patientID } = usePatientDetails(),
              latestAppointment = patientAppointments && patientAppointments.length > 0 
             ? patientAppointments[0] 
             : null,
           [showCancelModal, setShowCancelModal] = useState(false),
-          [appointmentToCancel, setAppointmentToCancel] = useState<AppointmentType | null>(null)
+          [appointmentToCancel, setAppointmentToCancel] = useState<AppointmentType | null>(null),
+          [appointmentToReject, setAppointmentToReject] = useState<AppointmentType | null>(null)
 
     const handleApproveAppointment = () =>{
     
@@ -35,8 +36,34 @@ export const useUpdatePatientDetails = () =>{
        setAppointmentToCancel(null)
        
        setShowCancelModal(false)
+    
+    }
 
-       console.log('working')
+    const handleRejectAppointment = (reason: string, alternative?: string)  =>{
+    
+       if(!appointmentToReject) return
+
+       const appointmentID = `${appointmentToReject.date}-${appointmentToReject.time}`,
+             rejectionReason = JSON.parse(localStorage.getItem(`rejection-reason-${patientID}`) || '{}')
+
+        rejectionReason[appointmentID] ={
+
+            reason,
+            alternative: alternative || '',
+            rejectedAt: new Date().toISOString(),
+            appointmentDetails: appointmentToReject
+
+        }
+
+        localStorage.setItem(`rejectionReason-${patientID}`, JSON.stringify(rejectionReason))
+
+        console.log('Appointment rejected with reason:', reason)
+
+        if(alternative){
+
+            console.log('Alternative appointment:', alternative)
+
+        }
     
     }
 
@@ -46,7 +73,9 @@ export const useUpdatePatientDetails = () =>{
         openCancelModal,
         showCancelModal,
         appointmentToCancel,
-        closeCancelModal
+        closeCancelModal,
+        handleRejectAppointment,
+        setAppointmentToReject
 
     }
 

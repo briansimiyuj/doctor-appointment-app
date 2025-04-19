@@ -24,7 +24,7 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
       [patientAppointments, setPatientAppointments] = useState<AppointmentType[]>([]),
       { appointments } = useContext(AppointmentsContext),
       { appointedPatients } = useContext(BookingContext),
-      { patientID } = useParams<{ patientID: string }>(),
+      { patientID = "" } = useParams<{ patientID: string }>(),
       [notes, setNotes] = useState<Array<{
 
             id: string
@@ -166,7 +166,7 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
       }, [patientID])
 
 
-      const updateAppointmentStatus = (appointment: AppointmentType, newStatus: "pending" | "completed" | "cancelled" | "confirmed" | "approved" | "rescheduled") =>{
+      const updateAppointmentStatus = (appointment: AppointmentType, newStatus: "pending" | "completed" | "cancelled" | "confirmed" | "approved" | "rescheduled" | "rejected") =>{
       
             setPatientAppointments(prevAppointments =>{
 
@@ -218,7 +218,8 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             cancelAppointment: () => {},
             patientDetails,
             setPatientDetails,
-            updateAppointmentStatus
+            updateAppointmentStatus,
+            patientID
 
       }
 
