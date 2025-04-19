@@ -19,24 +19,47 @@ const TabActionButton: React.FC = ()=>{
 
             return(
 
-                <button 
-                   className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
-                   onClick={handleApproveAppointment}
-                >
+                <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-2">
+                
+                    <button 
+                    className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
+                    onClick={handleApproveAppointment}
+                    >
 
-                    <span className="flex items-center justify-center gap-2">
+                        <span className="flex items-center justify-center gap-2">
 
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7"/>
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7"/>
 
-                        </svg>
+                            </svg>
 
-                        Approve Appointment
+                            Approve Appointment
 
-                    </span>
+                        </span>
 
-                </button>
+                    </button>
+                
+                    <button
+                        className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
+                    >
+
+                        <span className="flex items-center justify-center gap-2">
+
+
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/>
+ 
+                            </svg>
+
+                            Reject Appointment
+
+                        </span>
+
+                    </button>
+                
+                </div>
 
             )
 
