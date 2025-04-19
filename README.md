@@ -630,6 +630,24 @@ Patient details page will show the patient's details; medical history, allergies
           a. Set the appointment to cancel state to null
           b. Set the modal visibility state to false
 
+      *Reject Appointment Function*
+
+      Reject appointment function will open a modal to confirm the rejection of the appointment.  
+
+        1. Create a state for appointment to reject and initialize it to null
+        2. Create a function to reject the appointment which takes reason and alterntive as parameters
+          a. If there is no appointment to reject, exit the function early
+          b. Update the appointment status to rejected
+          c. Retreive appointment ID from the appointment to reject object (date - time)
+          d. Retrieve rejection from local storage using the appointment ID as part of the key 
+          e. Create a new rejection object with:
+            - The provided rejection reason
+            - Any alternative suggestion (or empty string if not provided)
+            - Timestamp of when the rejection was made
+            - Full appointment details for reference
+            
+          f. Store the updated rejection reason back into local storage
+
 
     ### Modal Context
 
