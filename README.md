@@ -647,6 +647,11 @@ Patient details page will show the patient's details; medical history, allergies
             
           e. Store the updated rejection reason back into local storage
 
+        3. Create a state for modal visibility and initialize it to false
+        4. Create a function to open the modal which takes the appointment to reject as a parameter
+          a. Set the appointment to reject state to the appointment parameter
+          b. Set the modal visibility state to true
+
 
     ### Modal Context
 

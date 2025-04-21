@@ -9,6 +9,7 @@ export const useUpdatePatientDetails = () =>{
             ? patientAppointments[0] 
             : null,
           [showCancelModal, setShowCancelModal] = useState(false),
+          [showRejectModal, setShowRejectModal] = useState(false),
           [appointmentToCancel, setAppointmentToCancel] = useState<AppointmentType | null>(null),
           [appointmentToReject, setAppointmentToReject] = useState<AppointmentType | null>(null)
 
@@ -37,6 +38,17 @@ export const useUpdatePatientDetails = () =>{
        
        setShowCancelModal(false)
     
+    }
+
+
+    const openRejectModal = (appointment: AppointmentType) =>{
+
+       setAppointmentToReject(appointment)
+
+       setShowRejectModal(true)
+
+       console.log('perfect')
+
     }
 
     const handleRejectAppointment = (reason: string, alternative?: string)  =>{
@@ -75,7 +87,10 @@ export const useUpdatePatientDetails = () =>{
         appointmentToCancel,
         closeCancelModal,
         handleRejectAppointment,
-        setAppointmentToReject
+        setAppointmentToReject,
+        showRejectModal,
+        appointmentToReject,
+        openRejectModal
 
     }
 
