@@ -35,6 +35,8 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children, appointm
 
         if(!appointment || !isValid) return
 
+        updateAppointmentStatus(appointment, "rejected")
+
         if(onReject){
 
             onReject(reason)
