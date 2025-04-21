@@ -656,6 +656,11 @@ Patient details page will show the patient's details; medical history, allergies
           a. Set the appointment to reject state to the appointment parameter
           b. Set the modal visibility state to true
 
+        5. Create a function to close the modal
+
+          a. Set the appointment to reject state to null
+          b. Set the modal visibility state to false
+
 
     ### Modal Context
 

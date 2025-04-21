@@ -50,6 +50,15 @@ export const useUpdatePatientDetails = () =>{
 
     }
 
+
+    const closeRejectModal = () =>{
+
+       setAppointmentToReject(null)
+
+       setShowRejectModal(false)
+
+    }
+
     const handleRejectAppointment = (reason: string, alternative?: string)  =>{
     
        if(!appointmentToReject) return
@@ -89,7 +98,8 @@ export const useUpdatePatientDetails = () =>{
         setAppointmentToReject,
         showRejectModal,
         appointmentToReject,
-        openRejectModal
+        openRejectModal,
+        closeRejectModal
 
     }
 
