@@ -6,7 +6,7 @@ const TabActionButton: React.FC = ()=>{
 
     const { patientAppointments } = usePatientDetails(),
 
-          { handleApproveAppointment, openCancelModal, showCancelModal, closeCancelModal } = useUpdatePatientDetails() as any,
+          { handleApproveAppointment, openCancelModal, showCancelModal, closeCancelModal, openRejectModal } = useUpdatePatientDetails() as any,
          latestAppointment = patientAppointments && patientAppointments.length > 0 
         ? patientAppointments[0] 
         : null
@@ -42,6 +42,7 @@ const TabActionButton: React.FC = ()=>{
                 
                     <button
                         className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
+                        onClick={openRejectModal}
                     >
 
                         <span className="flex items-center justify-center gap-2">
