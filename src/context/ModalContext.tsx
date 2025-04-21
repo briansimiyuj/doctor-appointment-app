@@ -8,7 +8,7 @@ interface ModalProviderProps{
     children: React.ReactNode  
     appointment: AppointmentType | null
     onClose: () => void
-    onReject: (reason: string, alternative?: string) => void
+    onReject?: (reason: string, alternative?: string) => void
 
 }
 

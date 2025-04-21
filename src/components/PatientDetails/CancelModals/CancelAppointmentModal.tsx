@@ -19,7 +19,7 @@ const CancelAppointmentModal: React.FC<CancelAppointmentModalProps> = ({ appoint
 
                 <h2 className="text-xl font-bold mb-4 text-center text-gray-800">Cancel Appointment</h2>
 
-                <ModalProvider appointment={appointment} onClose={onClose}>
+                <ModalProvider appointment={appointment} onClose={onClose} onReject={undefined}>
 
                     <ModalBody/>
 
