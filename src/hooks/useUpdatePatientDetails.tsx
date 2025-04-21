@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { usePatientDetails } from "../context/PatientDetailsContext"
 import { AppointmentType } from "../assets/types/AppointmentType"
-import { DummyAppointment } from "../assets/DummyAppointment"
 
 export const useUpdatePatientDetails = () =>{
 
@@ -10,9 +9,9 @@ export const useUpdatePatientDetails = () =>{
             ? patientAppointments[0] 
             : null,
           [showCancelModal, setShowCancelModal] = useState(false),
-          [showRejectModal, setShowRejectModal] = useState(true),
+          [showRejectModal, setShowRejectModal] = useState(false),
           [appointmentToCancel, setAppointmentToCancel] = useState<AppointmentType | null>(null),
-          [appointmentToReject, setAppointmentToReject] = useState<AppointmentType | null>(DummyAppointment)
+          [appointmentToReject, setAppointmentToReject] = useState<AppointmentType | null>(null)
 
     const handleApproveAppointment = () =>{
     
