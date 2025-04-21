@@ -696,6 +696,10 @@ Patient details page will show the patient's details; medical history, allergies
 
       7. Set the modal visibility state back to false and initialize the appointment to cancel state with null
 
+    ### Reject Appointment Modal Component 
+
+    Reject appointment modal component will be used to confirm the rejection of the appointment. It will have a similar structure to the Cancel Appointment Modal component.
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page

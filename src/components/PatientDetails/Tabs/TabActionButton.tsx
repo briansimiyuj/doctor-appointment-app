@@ -1,12 +1,13 @@
 import { usePatientDetails } from "../../../context/PatientDetailsContext"
 import { useUpdatePatientDetails } from "../../../hooks/useUpdatePatientDetails"
 import CancelAppointmentModal from "../CancelModals/CancelAppointmentModal"
+import RejectAppointmentModal from "../RejectModal/RejectAppointmentModal"
 
 const TabActionButton: React.FC = ()=>{
 
     const { patientAppointments } = usePatientDetails(),
 
-          { handleApproveAppointment, openCancelModal, showCancelModal, closeCancelModal, openRejectModal } = useUpdatePatientDetails() as any,
+          { handleApproveAppointment, openCancelModal, showCancelModal, closeCancelModal, openRejectModal, showRejectModal } = useUpdatePatientDetails() as any,
          latestAppointment = patientAppointments && patientAppointments.length > 0 
         ? patientAppointments[0] 
         : null
@@ -183,6 +184,8 @@ const TabActionButton: React.FC = ()=>{
             {renderActionButton()}
 
             { showCancelModal && <CancelAppointmentModal appointment={latestAppointment} onClose={closeCancelModal}/> }
+
+            { showRejectModal && <RejectAppointmentModal appointment={latestAppointment}/> }
         
         </>
 
