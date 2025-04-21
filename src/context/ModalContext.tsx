@@ -8,12 +8,13 @@ interface ModalProviderProps{
     children: React.ReactNode  
     appointment: AppointmentType | null
     onClose: () => void
+    onReject: (reason: string, alternative?: string) => void
 
 }
 
 export const ModalContext = createContext<ModalContextProps | undefined>(undefined)
 
-export const ModalProvider: React.FC<ModalProviderProps> = ({ children, appointment, onClose }) =>{
+export const ModalProvider: React.FC<ModalProviderProps> = ({ children, appointment, onClose, onReject }) =>{
 
     const { updateAppointmentStatus } = usePatientDetails(),
             [reason, setReason] = useState<string>(''),
@@ -30,6 +31,20 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children, appointm
     
     }
 
+    const handleRejectAppointment = () =>{
+
+        if(!appointment || !isValid) return
+
+        if(onReject){
+
+            onReject(reason)
+
+        }
+
+        onClose()
+
+    }
+
     const value ={
 
         appointment,
@@ -41,7 +56,8 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children, appointm
         onClose,
         isValid,
         isConfirm: isConfirmed,
-        setIsConfirm: setIsConfirmed
+        setIsConfirm: setIsConfirmed,
+        handleRejectAppointment
 
     }
 
