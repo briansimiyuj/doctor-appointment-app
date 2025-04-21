@@ -677,8 +677,9 @@ Patient details page will show the patient's details; medical history, allergies
 
         5. Create a function to handle reject appointment
           a. If there is no appointment to reject or the boolean state is false, exit the function early
-          b. If an onReject callback function is provided, call it with the appointment to reject and the rejection reason
-          c. Call onClose function to close the modal
+          b. Call the updateAppointmentStatus function with the appointment to reject and the 'rejected' status
+          c. If an onReject callback function is provided, call it with the appointment to reject and the rejection reason
+          d. Call onClose function to close the modal
 
 
     ### Cancel Appointment Modal Component
