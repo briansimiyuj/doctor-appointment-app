@@ -1,4 +1,5 @@
 import { useModalContext } from "../../../context/ModalContext"
+import ConfirmationCheckBox from "./ConfirmationCheckBox"
 import ReasonInput from "./ReasonInput"
 
 const ModalBody: React.FC = ()=>{
@@ -16,6 +17,8 @@ const ModalBody: React.FC = ()=>{
             </p>
 
             <ReasonInput/>
+
+            <ConfirmationCheckBox/>
 
         </div>
 
