@@ -1,7 +1,7 @@
 import { ModalProvider } from "../../../context/ModalContext"
 import ModalBody from "./ModalBody"
 
-const RejectAppointmentModal: React.FC<{ appointment: any }> = ({ appointment })=>{ 
+const RejectAppointmentModal: React.FC<{ appointment: any, onClose: () => void }> = ({ appointment, onClose }) => { 
 
     return(
 
@@ -12,7 +12,7 @@ const RejectAppointmentModal: React.FC<{ appointment: any }> = ({ appointment })
 
                 <h2 className="text-xl font-bold mb-4 text-center text-gray-800">Reject Appointment</h2>
 
-                <ModalProvider appointment={appointment}>
+                <ModalProvider appointment={appointment} onClose={onClose}>
 
                     <ModalBody/>
 

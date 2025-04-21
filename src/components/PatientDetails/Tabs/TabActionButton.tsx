@@ -7,7 +7,7 @@ const TabActionButton: React.FC = ()=>{
 
     const { patientAppointments } = usePatientDetails(),
 
-          { handleApproveAppointment, openCancelModal, showCancelModal, closeCancelModal, openRejectModal, showRejectModal } = useUpdatePatientDetails() as any,
+          { handleApproveAppointment, openCancelModal, showCancelModal, closeCancelModal, openRejectModal, showRejectModal, closeRejectModal } = useUpdatePatientDetails() as any,
          latestAppointment = patientAppointments && patientAppointments.length > 0 
         ? patientAppointments[0] 
         : null
@@ -185,7 +185,7 @@ const TabActionButton: React.FC = ()=>{
 
             { showCancelModal && <CancelAppointmentModal appointment={latestAppointment} onClose={closeCancelModal}/> }
 
-            { showRejectModal && <RejectAppointmentModal appointment={latestAppointment}/> }
+            { showRejectModal && <RejectAppointmentModal appointment={latestAppointment} onClose={closeRejectModal}/> }
         
         </>
 
