@@ -2,7 +2,7 @@ import { ModalProvider } from "../../../context/ModalContext"
 import ModalBody from "./ModalBody"
 import ModalFooter from "./ModalFooter"
 
-const CancelAppointmentModal: React.FC<{appointment: any, onClose: () => void}> = ({appointment, onClose})=>{
+const CancelAppointmentModal: React.FC<{appointment: any, onClose: () => void}> = ({appointment, onClose })=>{
 
     return(
 
@@ -12,7 +12,7 @@ const CancelAppointmentModal: React.FC<{appointment: any, onClose: () => void}> 
 
                 <h2 className="text-xl font-bold mb-4 text-center text-gray-800">Cancel Appointment</h2>
 
-                <ModalProvider appointment={appointment} onClose={onClose}>
+                <ModalProvider appointment={appointment} onClose={onClose} onReject={undefined}>
 
                     <ModalBody/>
 
