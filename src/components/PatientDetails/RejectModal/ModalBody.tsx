@@ -1,4 +1,5 @@
 import { useModalContext } from "../../../context/ModalContext"
+import ReasonInput from "./ReasonInput"
 
 const ModalBody: React.FC = ()=>{
 
@@ -13,6 +14,8 @@ const ModalBody: React.FC = ()=>{
                 Are you sure you want to reject the appointment on <span className="font-medium">{appointment?.date}</span> at <span className="font-medium">{appointment?.time}</span>?
 
             </p>
+
+            <ReasonInput/>
 
         </div>
 
