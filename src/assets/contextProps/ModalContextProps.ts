@@ -10,5 +10,6 @@ export interface ModalContextProps{
     handleCancelAppointment: () => void
     onClose: () => void
     isValid: boolean
+    handleRejectAppointment: () => void
 
 }
