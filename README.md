@@ -607,6 +607,10 @@ Patient details page will show the patient's details; medical history, allergies
 
         1. Attach open modal function from update patient details hook to the cancel appointment button
 
+      *Reject Appointment Button*: Reject appointment button will reject the appointment.
+
+        1. Attach open modal function from update patient details hook to the reject appointment button
+
 
       ### Update Patient Details Hook
 
