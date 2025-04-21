@@ -1,7 +1,11 @@
 import { ModalProvider } from "../../../context/ModalContext"
+import { useUpdatePatientDetails } from "../../../hooks/useUpdatePatientDetails"
 import ModalBody from "./ModalBody"
+import ModalFooter from "./ModalFooter"
 
 const RejectAppointmentModal: React.FC<{ appointment: any, onClose: () => void }> = ({ appointment, onClose }) => { 
+
+    const { handleRejectAppointment } = useUpdatePatientDetails()
 
     return(
 
@@ -12,9 +16,11 @@ const RejectAppointmentModal: React.FC<{ appointment: any, onClose: () => void }
 
                 <h2 className="text-xl font-bold mb-4 text-center text-gray-800">Reject Appointment</h2>
 
-                <ModalProvider appointment={appointment} onClose={onClose}>
+                <ModalProvider appointment={appointment} onClose={onClose} onReject={handleRejectAppointment}>
 
                     <ModalBody/>
+
+                    <ModalFooter/>
 
                 </ModalProvider>
 
