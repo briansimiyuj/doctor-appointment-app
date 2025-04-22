@@ -667,7 +667,7 @@ Patient details page will show the patient's details; medical history, allergies
       Modal context will be used to manage the state of the modal (Handle cancel appointment, reason for cancellation, etc.)
 
         1. Retrieve updateAppointmentStatus function from the patient details context
-        2. Create states for reason and isConfirmed and initialize them to an empty string and false respectively
+        2. Create states for reason, alternative and isConfirmed and initialize them to an empty string and false respectively
         3. Check if the reason is not empty and isConfirmed is true, if both are true, set a boolean state to it
         4. Create a function to handle the cancel appointment
 
