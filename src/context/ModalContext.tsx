@@ -18,6 +18,7 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children, appointm
 
     const { updateAppointmentStatus } = usePatientDetails(),
             [reason, setReason] = useState<string>(''),
+            [alternative, setAlternative] = useState<string>(''),
             [isConfirmed, setIsConfirmed] = useState<boolean>(false),
             isValid = reason.trim() !== '' && isConfirmed
 
@@ -52,6 +53,8 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children, appointm
         appointment,
         reason,
         setReason,
+        alternative,
+        setAlternative,
         isConfirmed,
         setIsConfirmed,
         handleCancelAppointment,
