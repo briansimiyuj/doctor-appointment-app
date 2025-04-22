@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom"
 import { DocumentType } from "../assets/types/DocumentType"
 import { v4 as uuid } from "uuid"
 import { NoteType } from "../assets/types/NoteType"
+import { DoctorType } from "../assets/types/DoctorType"
 
 interface PatientDetailsProviderProps{
 
@@ -186,11 +187,43 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
                   return prevAppointments
 
             })
-
-
       
       }
 
+
+      const rescheduleAppointment = (appointment: AppointmentType, newDate: Date, newTime: string, newDoctor: DoctorType, newConsultationType: "online" | "in-person") =>{
+      
+            setPatientAppointments(prevAppointments =>{
+
+                  const updatedAppointments = [...prevAppointments],
+                        appointmentIndex = updatedAppointments.findIndex(app => app.date === appointment.date && app.time === appointment.time)
+
+                  if(appointmentIndex !== -1){
+
+                        const updatedAppointment ={
+
+                              ...updatedAppointments[appointmentIndex],
+                              date: newDate.toISOString(),
+                              time: newTime,
+                              doctor: newDoctor,
+                              status: "rescheduled",
+                              consultationType: newConsultationType
+                        }
+                                                
+                        updatedAppointments[appointmentIndex] = updatedAppointment  
+
+                        localStorage.setItem(`appointments-${patientID}`, JSON.stringify(updatedAppointments))
+
+                        return updatedAppointments
+
+                  }
+
+                  return prevAppointments
+                  
+            })
+      
+
+      }
 
       const value ={
 
@@ -216,6 +249,7 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             updatePatientStatus: () => {},
             scheduleAppointment: () => {},
             cancelAppointment: () => {},
+            rescheduleAppointment,
             patientDetails,
             setPatientDetails,
             updateAppointmentStatus,

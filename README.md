@@ -505,6 +505,20 @@ Patient details context will be used to store the patient's details and appointm
   7. Create a state variables for notes and documents with respective types and initialize them with empty array
   8. Create functions to add and remove documents and update local storage
   9. Create functions to add and remove notes and update local storage
+  10. Create a function to reschedule the appointment and update the appointment details
+    a. Create a setter function to update patient appointments array
+    b. Create a deep copy of previous appointments and asssign it to a variable 
+    c. Find the appointment to reschedule by matching date and time
+    d. If the appointment is found, create an updated appointment object with:
+      i. New appointment with updated date and time
+      ii. New date and time for the consultation
+      iii. New status
+
+    e. Replace the old appointment with the updated one in the appointments array
+    f. Save the updated appointments to localStorage using the patient ID as part of the key
+    g. Return the updated appointments array to update state
+    h. If the appointment is not found, return the original appointments array
+
 
   
 ### Patient Details Page
