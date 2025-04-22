@@ -676,6 +676,17 @@ Patient details page will show the patient's details; medical history, allergies
           a. Set the appointment to reject state to null
           b. Set the modal visibility state to false
 
+      *Reschedule Appointment Function*
+
+      Reschedule appointment function will open a modal to confirm the rescheduling of the appointment.
+
+        1. Create a state for appointment to reschedule and initialize it to null
+        2. Create states for modal visibility, new date and new time and initialize them to false and an empty string respectively
+        3. Create a function to open the modal which takes the appointment to reschedule as a parameter
+          a. Initialize the new date and new time states to the appointment date and time respectively
+          b. Set the modal visibility state to true
+          c. Set the appointment to reschedule state to the appointment parameter
+
 
     ### Modal Context
 

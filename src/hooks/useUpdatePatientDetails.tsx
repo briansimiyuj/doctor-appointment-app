@@ -10,8 +10,12 @@ export const useUpdatePatientDetails = () =>{
             : null,
           [showCancelModal, setShowCancelModal] = useState(false),
           [showRejectModal, setShowRejectModal] = useState(false),
+          [showRescheduleModal, setShowRescheduleModal] = useState(false),
           [appointmentToCancel, setAppointmentToCancel] = useState<AppointmentType | null>(null),
-          [appointmentToReject, setAppointmentToReject] = useState<AppointmentType | null>(null)
+          [appointmentToReject, setAppointmentToReject] = useState<AppointmentType | null>(null),
+          [appointmentToReschedule, setAppointmentToReschedule] = useState<AppointmentType | null>(null),
+          [newDate, setNewDate] = useState<string | null>(null),
+          [newTime, setNewTime] = useState<string | null>(null)
 
     const handleApproveAppointment = () =>{
     
@@ -86,6 +90,19 @@ export const useUpdatePatientDetails = () =>{
     
     }
 
+
+    const openRescheduleModal = (appointment: AppointmentType) =>{
+    
+       setAppointmentToReschedule(appointment)
+
+       setNewDate(appointment.date)
+
+       setNewTime(appointment.time)
+
+       setShowRescheduleModal(true)
+    
+    }
+
     return{
 
         handleApproveAppointment,
@@ -98,7 +115,14 @@ export const useUpdatePatientDetails = () =>{
         showRejectModal,
         appointmentToReject,
         openRejectModal,
-        closeRejectModal
+        closeRejectModal,
+        openRescheduleModal,
+        showRescheduleModal,
+        appointmentToReschedule,
+        newDate,
+        newTime,
+        setNewDate,
+        setNewTime
 
     }
 
