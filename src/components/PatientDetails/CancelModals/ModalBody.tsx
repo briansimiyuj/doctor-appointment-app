@@ -1,4 +1,5 @@
 import { useModalContext } from "../../../context/ModalContext"
+import AlternativeInput from "./AlternativeInput"
 import ConfirmationCheckBox from "./ConfirmationCheckBox"
 import ReasonInput from "./ReasonInput"
 
@@ -18,6 +19,8 @@ const ModalBody: React.FC = ()=>{
 
 
             <ReasonInput/>
+
+            <AlternativeInput/>
 
             <ConfirmationCheckBox/>
 
