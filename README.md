@@ -706,6 +706,7 @@ Patient details page will show the patient's details; medical history, allergies
 
         a. It will have a button to close the modal
         b. It will have a button to confirm the cancellation
+        c. Make the buttons stacked vertically on smaller screens
 
       9. Set the modal visibility state back to false and initialize the appointment to cancel state with null
 
