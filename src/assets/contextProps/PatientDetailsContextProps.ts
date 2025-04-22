@@ -1,5 +1,6 @@
 import { AppointedPatientType } from "../types/AppointedPatientType"
 import { AppointmentType } from "../types/AppointmentType"
+import { DoctorType } from "../types/DoctorType"
 
 export interface PatientDetailsContextProps{
 
@@ -56,6 +57,7 @@ export interface PatientDetailsContextProps{
     // Appointment scheduling
     scheduleAppointment: (appointment: { date: Date, time: string,  reason: string }) => void
     cancelAppointment: (patientID: string, doctorID: string, date: Date, time: string, reason: string) => void
+    rescheduleAppointment: (appointment: AppointmentType, newDate: Date, newTime: string, newDoctor: DoctorType, newConsultationType: "online" | "in-person") => void
 
     // Update appointment status
     updateAppointmentStatus: (appointment: AppointmentType, newStatus: "pending" | "confirmed" | "cancelled" | "completed" | "approved" | "rescheduled" | "rejected") => void
