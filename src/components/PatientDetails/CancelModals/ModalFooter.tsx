@@ -6,10 +6,10 @@ const ModalFooter: React.FC = ()=>{
 
     return(
 
-        <div className="flex justify-end gap-3">
+        <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-3">
 
             <button 
-                className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-md transition-all duration-300" 
+                className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-md transition-all duration-300 w-full sm:w-auto mt-2 sm:mt-0"
                 onClick={onClose}
             >Back</button>
 
