@@ -564,7 +564,7 @@ Patient details page will show the patient's details; medical history, allergies
 
       ### Appointment Component
 
-      Appointment component will show the appointment details: date, time, consultation type, and status.
+      Appointment component will show the appointment details: date, time, consultation type, and status. Each status will have different background color.
 
       #### Appointment Tab Header Component
 
