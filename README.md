@@ -578,6 +578,7 @@ Patient details page will show the patient's details; medical history, allergies
       - 🔵 **Confirmed appointments** display both "Reschedule" and "Cancel" buttons side by side.
       - ⚪ **Completed appointments** offer an "Add Notes" button for post-appointment documentation.
       - 🔴 **Cancelled appointments** provide a "Schedule New Appointment" button to facilitate rebooking.
+      - 🔴 **Rejected appointments** show a "Schedule New Appointment" button to facilitate rebooking.
       - 🟣 **Other statuses** show a generic "Manage Appointment" button as a fallback option.
 
       1. Create a Tab Action Button component and mount it on the Appointment Tab Header component
