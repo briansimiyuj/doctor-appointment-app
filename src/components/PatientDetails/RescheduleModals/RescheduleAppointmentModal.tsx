@@ -1,3 +1,6 @@
+import { RescheduleModalProvider } from "../../../context/RescheduleModalContext"
+import ModalBody from "./ModalBody"
+
 interface RescheduleAppointmentModalProps{
 
     appointment: any
@@ -13,6 +16,12 @@ const RescheduleAppointmentModal: React.FC<RescheduleAppointmentModalProps> = ({
             <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-4">
 
                 <h2 className="text-xl font-bold mb-4 text-center text-gray-800">Reschedule Appointment</h2>
+
+                <RescheduleModalProvider appointment={appointment}>
+
+                    <ModalBody/>
+
+                </RescheduleModalProvider>
 
             </div>
 
