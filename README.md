@@ -761,6 +761,7 @@ Patient details page will show the patient's details; medical history, allergies
     Reschedule modal component will be used to confirm the rescheduling of the appointment. 
 
       1. Create a Reschedule Modal component and mount it on the Tab Action Button component if showRescheduleModal state is true
+      2. Create a Modal Body component and mount it on the Reschedule Modal component. Wrap the Modal Body component with a Modal Provider
 
 ### Settings Context
 
