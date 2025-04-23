@@ -755,6 +755,13 @@ Patient details page will show the patient's details; medical history, allergies
         a. If there is no appointment to reschedule or the boolean state is false, exit the function early
         b. Call onClose function to close the modal
 
+
+    ### Reschedule Modal Component
+
+    Reschedule modal component will be used to confirm the rescheduling of the appointment. 
+
+      1. Create a Reschedule Modal component and mount it on the Tab Action Button component if showRescheduleModal state is true
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page
