@@ -100,8 +100,6 @@ export const useUpdatePatientDetails = () =>{
        setNewTime(appointment.time)
 
        setShowRescheduleModal(true)
-
-       console.log(showRescheduleModal)
     
     }
 
