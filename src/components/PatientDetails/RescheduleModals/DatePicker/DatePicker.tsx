@@ -2,6 +2,7 @@ import { DatePickerProvider } from "../../../../context/DatePickerContext"
 import CalendarGrid from "./CalendarGrid"
 import CalendarHeader from "./CalendarHeader"
 import DayNames from "./DayNames"
+import SelectedDateDisplay from "./SelectedDateDisplay"
 
 const DatePicker: React.FC = ()=>{
 
@@ -20,6 +21,8 @@ const DatePicker: React.FC = ()=>{
                 <DatePickerProvider>
 
                     <CalendarHeader/>
+                    
+                    <SelectedDateDisplay/>
 
                     <DayNames/>
 
