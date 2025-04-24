@@ -773,6 +773,13 @@ Patient details page will show the patient's details; medical history, allergies
         4. Update the selected date state with newDate object if the newDate changes
         5. Update newDate state with the selected date if it is available
         6. Create a function to get days in a month and return an array of days in the month
+        7. Create a function to get the first day of the month and return the day of the week
+        8. Create a function to navigate to the previous month and update the current month state
+        9. Create a function to navigate to the next month and update the current month state
+        10. Create a function to check if a date is in the past and return a boolean to check if the date is in the past
+        11. Create a function to check if a date is selected and return a boolean to check if the date is selected
+        12. Create a function to check if a date is today and return a boolean to check if the date is today
+        12. Create a function to handle the date selection and update the selected date state if the date is not in the past
 
       #### Date Picker Component
 
