@@ -786,7 +786,18 @@ Patient details page will show the patient's details; medical history, allergies
       Date Picker component will be used to select the new date of the appointment, it will have a date picker
 
         1. Create a Date Picker component and mount it on the Modal Body component
+        2. Wrap the child components with Date Picker Provider
 
+      ##### Calendar Header Component
+
+      Calendar Header component will be used to navigate to the previous and next months
+       
+        1. Create a Calendar Header component and mount it on the Date Picker component
+          a. It will have a button to navigate to previous month and a button to navigate to next month
+        
+        2. Create an array of months names and map over it with the current month and current year to display the month name and year in the header
+        3. Attach an event listener to the previous month button to navigate to the previous month
+        4. Attach an event listener to the next month button to navigate to the next month
 
 
 ### Settings Context
