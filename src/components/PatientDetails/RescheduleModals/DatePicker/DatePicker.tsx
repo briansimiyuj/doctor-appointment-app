@@ -1,4 +1,5 @@
 import { DatePickerProvider } from "../../../../context/DatePickerContext"
+import CalendarGrid from "./CalendarGrid"
 import CalendarHeader from "./CalendarHeader"
 import DayNames from "./DayNames"
 
@@ -21,6 +22,8 @@ const DatePicker: React.FC = ()=>{
                     <CalendarHeader/>
 
                     <DayNames/>
+
+                    <CalendarGrid/>
                     
                 </DatePickerProvider>
 

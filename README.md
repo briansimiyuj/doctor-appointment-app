@@ -804,6 +804,23 @@ Patient details page will show the patient's details; medical history, allergies
         1. Create a Day Names component and mount it on the Date Picker component
         2. Create an array of day names and map over it to display the day names
 
+      #### Calendar Grid Component
+
+        1. Create a Calendar Grid component and mount it on the Date Picker component
+        2. Retrieve the current month, getDaysInMonth, and getFirstDayOfMonth from the Date Picker component
+        3. Create a function to render the calendar grid and return a table with the days of the month
+          a. Create constants for the year, month, and first day of the month and assign them to their respective variables
+          b. Create an empty array to store the days of the month
+          c. Loop through firstDayOfMonth times to add empty cells to the days array
+          d. Loop through the days in the month and add them to the days array as a component (Day Cell)
+
+        #### Day Cell Component
+
+          1. Display the day of the month in the div 
+            a. if the day is in the past, text color should be gray and cursor should be not-allowed
+            b. if the day is selected, background color should be blue and text color should be white
+            c. if the day is today, and not selected, border color should be blue, background color white
+            d. if the day is not today and not selected, background color should be white and text color should be black, background color on hover should be light gray
 
 ### Settings Context
 
