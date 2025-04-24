@@ -763,6 +763,14 @@ Patient details page will show the patient's details; medical history, allergies
       1. Create a Reschedule Modal component and mount it on the Tab Action Button component if showRescheduleModal state is true
       2. Create a Modal Body component and mount it on the Reschedule Modal component. Wrap the Modal Body component with a Modal Provider
 
+      #### Date Picker Component
+
+      Date Picker component will be used to select the new date of the appointment, it will have a date picker
+
+        1. Create a Date Picker component and mount it on the Modal Body component
+
+
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page

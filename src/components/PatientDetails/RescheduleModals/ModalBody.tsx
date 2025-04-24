@@ -1,4 +1,5 @@
 import { useRescheduleModal } from "../../../context/RescheduleModalContext"
+import DatePicker from "./DatePicker/DatePicker"
 
 const ModalBody: React.FC = ()=>{
 
@@ -17,6 +18,8 @@ const ModalBody: React.FC = ()=>{
                 </p>
 
             </div>
+
+            <DatePicker/>
 
         </>
 
