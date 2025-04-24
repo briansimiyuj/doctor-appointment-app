@@ -799,6 +799,11 @@ Patient details page will show the patient's details; medical history, allergies
         3. Attach an event listener to the previous month button to navigate to the previous month
         4. Attach an event listener to the next month button to navigate to the next month
 
+      #### Day Names Component
+
+        1. Create a Day Names component and mount it on the Date Picker component
+        2. Create an array of day names and map over it to display the day names
+
 
 ### Settings Context
 
