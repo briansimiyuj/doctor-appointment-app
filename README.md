@@ -822,6 +822,12 @@ Patient details page will show the patient's details; medical history, allergies
             c. if the day is today, and not selected, border color should be blue, background color white
             d. if the day is not today and not selected, background color should be white and text color should be black, background color on hover should be light gray
 
+      #### Selected Date Display Component
+
+        1. Create a Selected Date Display component and mount it on the Date Picker component
+          a. Retrieve the selected date from the Date Picker context
+          b. Display the selected date in an input field
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page
