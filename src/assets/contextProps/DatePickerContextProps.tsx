@@ -11,5 +11,9 @@ export interface DatePickerContextProps{
     handleDateClick: (date: Date) => void
     getDaysInMonth: (month: number, year: number) => number
     getFirstDayOfMonth: (month: number, year: number) => number
+    isCalendarVisible: boolean
+    showCalendar: () => void
+    hideCalendar: () => void
+    toggleCalendar: () => void
 
 }

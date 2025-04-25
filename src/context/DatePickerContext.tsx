@@ -14,7 +14,27 @@ export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children
 
     const { newDate, setNewDate } = useRescheduleModal(),
           [currentMonth, setCurrentMonth] = useState(new Date()),
-          [selectedDate, setSelectedDate] = useState<Date | null>(newDate ? new Date(newDate) : null)
+          [selectedDate, setSelectedDate] = useState<Date | null>(newDate ? new Date(newDate) : null),
+          [isCalendarVisible, setIsCalendarVisible] = useState(false),
+          toggleCalendar = () => setIsCalendarVisible(prev => !prev)
+
+    
+    useEffect(() =>{
+
+        if(selectedDate){
+
+            const timer = setTimeout(() =>{
+                
+                hideCalendar()
+
+            }, 300)
+
+            return () => clearTimeout(timer)
+
+        }
+        
+    }, [selectedDate])
+
 
     useEffect(() =>{
     
@@ -105,6 +125,22 @@ export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children
 
     }
 
+    const showCalendar = () =>{
+    
+       setIsCalendarVisible(true)
+
+       window.dispatchEvent(new CustomEvent("calendarToggle", { detail: { isOpen: true } }))
+    
+    }
+
+    const hideCalendar = () =>{
+
+       setIsCalendarVisible(false)
+
+       window.dispatchEvent(new CustomEvent("calendarToggle", { detail: { isOpen: false } }))
+
+    }
+
     const value ={
 
         currentMonth,
@@ -117,7 +153,11 @@ export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children
         isToday,
         handleDateClick,
         getDaysInMonth,
-        getFirstDayOfMonth
+        getFirstDayOfMonth,
+        isCalendarVisible,
+        showCalendar,
+        hideCalendar,
+        toggleCalendar
 
     }
 
