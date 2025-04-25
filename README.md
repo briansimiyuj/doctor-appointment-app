@@ -828,8 +828,9 @@ Patient details page will show the patient's details; medical history, allergies
       #### Selected Date Display Component
 
         1. Create a Selected Date Display component and mount it on the Date Picker component
-          a. Retrieve the selected date from the Date Picker context
+          a. Retrieve the selected date and showCalendar function from the Date Picker context
           b. Display the selected date in an input field
+          c. Attach showCalendar function to the input field to show the calendar when clicked
 
 ### Settings Context
 
