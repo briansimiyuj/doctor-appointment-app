@@ -8,21 +8,32 @@ interface DayCellProps{
 
 const DayCell: React.FC<DayCellProps> = ({ date })=>{
 
-    const { isPastDate, isSelectedDate, isToday } = useDatePicker(),
+    const { isPastDate, isSelectedDate, isToday, handleDateClick } = useDatePicker(),
           isPast = isPastDate(date),
           isSelected = isSelectedDate(date),
           isTodayDate = isToday(date)
+
+    const handleClick = () =>{
+    
+        if(!isPast){
+
+            handleDateClick(date)
+
+        }
+    
+    }
           
 
     return(
 
         <div
-           className={`
+            className={`
                 h-10 w-10 flex items-center justify-center rounded-full cursor-pointer
                 ${isPast ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-200'}
                 ${isSelected ? 'bg-primary-bg text-white hover:bg-primary-bg' : ''}
                 ${isTodayDate && !isSelected ? 'border border-primary-bg text-primary-bg' : ''}
-            `}    
+            `}   
+            onClick={handleClick}
         >{date.getDate()}</div>
 
     )

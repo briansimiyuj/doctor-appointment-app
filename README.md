@@ -836,6 +836,9 @@ Patient details page will show the patient's details; medical history, allergies
             c. if the day is today, and not selected, border color should be blue, background color white
             d. if the day is not today and not selected, background color should be white and text color should be black, background color on hover should be light gray
 
+          2. Create a function to handle the date selection and update the selected date state if the date is not in the past
+          3. Attach the function to the div element as an onClick event listener
+
       #### Selected Date Display Component
 
         1. Create a Selected Date Display component and mount it on the Date Picker component
