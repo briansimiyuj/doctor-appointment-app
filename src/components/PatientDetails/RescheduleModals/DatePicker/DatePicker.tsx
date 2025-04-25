@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react"
 import { DatePickerProvider, useDatePicker } from "../../../../context/DatePickerContext"
 import CalendarGrid from "./CalendarGrid"
 import CalendarHeader from "./CalendarHeader"
@@ -6,7 +7,35 @@ import SelectedDateDisplay from "./SelectedDateDisplay"
 
 const DatePickerContent: React.FC = ()=>{
 
-    const { isCalendarVisible } = useDatePicker()
+    const { isCalendarVisible, hideCalendar } = useDatePicker(),
+          calendarRef = useRef<HTMLDivElement>(null)
+
+    
+    useEffect(() =>{
+    
+        const handleClickOutside = (event: MouseEvent) =>{
+
+            if(calendarRef.current && !calendarRef.current.contains(event.target as Node)){
+
+                hideCalendar()
+
+            }
+
+        }
+
+        if(isCalendarVisible){
+
+            document.addEventListener("mousedown", handleClickOutside)
+
+        }
+
+        return () =>{
+
+            document.removeEventListener("mousedown", handleClickOutside)
+
+        }
+    
+    }, [isCalendarVisible, hideCalendar])
 
     return(
 
@@ -21,14 +50,17 @@ const DatePickerContent: React.FC = ()=>{
             <div className="bg-white rounded-lg shadow p-4">
 
                 <SelectedDateDisplay/>
-                
+
                 {
 
                     isCalendarVisible &&(
 
                         <>
 
-                            <div className="m-2 bg-white rounded-lg shadow-md p-4 absolute">
+                            <div 
+                                className="m-2 bg-white rounded-lg shadow-md p-4 absolute"
+                                ref={calendarRef}
+                            >
 
                                 <CalendarHeader/>
                                 
