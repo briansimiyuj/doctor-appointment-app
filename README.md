@@ -780,6 +780,9 @@ Patient details page will show the patient's details; medical history, allergies
         11. Create a function to check if a date is selected and return a boolean to check if the date is selected
         12. Create a function to check if a date is today and return a boolean to check if the date is today
         12. Create a function to handle the date selection and update the selected date state if the date is not in the past
+        13. Create a state for isCalendarVisible and initialize it to false
+        14. Create functions to handle the calendar visibility and update the isCalendarVisible state
+        15. Add a small delay to allow the user to see their selection before closing the calendar
 
       #### Date Picker Component
 
