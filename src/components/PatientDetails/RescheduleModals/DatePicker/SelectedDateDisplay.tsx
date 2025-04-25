@@ -2,7 +2,7 @@ import { useDatePicker } from "../../../../context/DatePickerContext"
 
 const SelectedDateDisplay: React.FC = ()=>{
 
-    const { selectedDate } = useDatePicker()
+    const { selectedDate, showCalendar } = useDatePicker()
 
     return(
 
@@ -18,7 +18,10 @@ const SelectedDateDisplay: React.FC = ()=>{
                     value={selectedDate?.toISOString().split('T')[0]}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md  focus:outline-none focus:ring-2 focus:ring-primary-bg  text-center font-medium cursor-pointer bg-white appearance-none hover:bg-gray-50 transition-colors"
                     readOnly
-                    onClick={() => document.getElementById('calendar-container')?.scrollIntoView({ behavior: 'smooth' })}
+                    onClick={() =>{
+                        document.getElementById('calendar-container')?.scrollIntoView({ behavior: 'smooth' });
+                        showCalendar()
+                    }}
                 />
 
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
