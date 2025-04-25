@@ -1,10 +1,12 @@
-import { DatePickerProvider } from "../../../../context/DatePickerContext"
+import { DatePickerProvider, useDatePicker } from "../../../../context/DatePickerContext"
 import CalendarGrid from "./CalendarGrid"
 import CalendarHeader from "./CalendarHeader"
 import DayNames from "./DayNames"
 import SelectedDateDisplay from "./SelectedDateDisplay"
 
-const DatePicker: React.FC = ()=>{
+const DatePickerContent: React.FC = ()=>{
+
+    const { isCalendarVisible } = useDatePicker()
 
     return(
 
@@ -18,21 +20,47 @@ const DatePicker: React.FC = ()=>{
 
             <div className="bg-white rounded-lg shadow p-4">
 
-                <DatePickerProvider>
+                <SelectedDateDisplay/>
+                
+                {
 
-                    <CalendarHeader/>
+                    isCalendarVisible &&(
+
+                        <>
+
+                            <div className="m-2 bg-white rounded-lg shadow-md p-4 absolute">
+
+                                <CalendarHeader/>
+                                
+                                <DayNames/>
+
+                                <CalendarGrid/>
+
+                            </div>
+
+                        </>
+
+                    )
                     
-                    <SelectedDateDisplay/>
-
-                    <DayNames/>
-
-                    <CalendarGrid/>
-                    
-                </DatePickerProvider>
+                }
 
             </div>
 
         </div>
+
+    )
+
+}
+
+const DatePicker: React.FC = ()=>{
+
+    return(
+
+        <DatePickerProvider>
+
+            <DatePickerContent/>
+
+        </DatePickerProvider>
 
     )
 

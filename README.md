@@ -784,12 +784,23 @@ Patient details page will show the patient's details; medical history, allergies
         14. Create functions to handle the calendar visibility and update the isCalendarVisible state
         15. Add a small delay to allow the user to see their selection before closing the calendar
 
-      #### Date Picker Component
+      #### Date Picker Content
 
-      Date Picker component will be used to select the new date of the appointment, it will have a date picker
+      Date Picker Content component displays the selected date and manages the visibility of the calendar. It:
+      
+        1. Shows the selected date in an input field
+        2. Displays the calendar when the input is clicked
+        3. Positions the calendar as a dropdown with absolute positioning
+        4. Contains all the child components for the calendar UI
 
-        1. Create a Date Picker component and mount it on the Modal Body component
-        2. Wrap the child components with Date Picker Provider
+      #### Date Picker
+
+      Date Picker is the main component that wraps the DatePickerContent with the DatePickerProvider context. It:
+
+        1. Provides state management through DatePickerContext
+        2. Handles date selection logic
+        3. Manages calendar visibility
+        4. Ensures proper data flow between all subcomponents
 
       ##### Calendar Header Component
 
