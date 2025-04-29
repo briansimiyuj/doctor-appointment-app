@@ -1,24 +1,52 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { DatePickerContextProps } from "../assets/contextProps/DatePickerContextProps"
 import { useRescheduleModal } from "./RescheduleModalContext"
+import { TimeSlotType } from "../assets/types/TimeSlotType"
+import { dummySlots } from "../assets/ScheduleDummyData"
 
 interface DatePickerProviderProps{
 
     children: React.ReactNode
+    initialDate?: string
+    doctorAvailability?: TimeSlotType
 
 }
 
 const DatePickerContext = createContext<DatePickerContextProps | undefined>(undefined)
 
-export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children }) =>{
+export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children, initialDate, doctorAvailability = [] }) =>{
 
     const { newDate, setNewDate } = useRescheduleModal(),
-          [currentMonth, setCurrentMonth] = useState(new Date()),
-          [selectedDate, setSelectedDate] = useState<Date | null>(newDate ? new Date(newDate) : null),
+          [currentMonth, setCurrentMonth] = useState(() =>{
+
+                if(initialDate){
+
+                    const date = new Date(initialDate)
+                    
+                    return new Date(date.getFullYear(), date.getMonth(), 1)
+
+                }
+
+                return new Date(new Date().getFullYear(), new Date().getMonth(), 1)
+
+          }),
+          [selectedDate, setSelectedDate] = useState<Date | null>(() =>{
+
+            return initialDate ? new Date(initialDate) : null
+
+          }),
           [isCalendarVisible, setIsCalendarVisible] = useState(false),
           toggleCalendar = () => setIsCalendarVisible(prev => !prev)
 
+    const availableDateSlots = Array.isArray(doctorAvailability) && doctorAvailability.length > 0 ? doctorAvailability.filter((slot: TimeSlotType) => slot.status === "available").map((slot: TimeSlotType) => new Date(slot.dateTime)) : dummySlots.flat().filter((slot: TimeSlotType) => slot.status === "available").map((slot: TimeSlotType) => new Date(slot.dateTime))
+
+    const isAvailableDate = (date: Date) =>{
     
+       return availableDateSlots.some(slot => slot.getDate() === date.getDate() && slot.getMonth() === date.getMonth() && slot.getFullYear() === date.getFullYear())
+    
+    }
+
+
     useEffect(() =>{
 
         if(selectedDate){
@@ -157,7 +185,9 @@ export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children
         isCalendarVisible,
         showCalendar,
         hideCalendar,
-        toggleCalendar
+        toggleCalendar,
+        availableDateSlots,
+        isAvailableDate
 
     }
 

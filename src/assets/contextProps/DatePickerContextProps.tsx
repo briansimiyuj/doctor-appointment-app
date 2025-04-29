@@ -15,5 +15,7 @@ export interface DatePickerContextProps{
     showCalendar: () => void
     hideCalendar: () => void
     toggleCalendar: () => void
+    availableDateSlots: Date[]
+    isAvailableDate: (date: Date) => boolean
 
 }
