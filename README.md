@@ -783,7 +783,25 @@ Patient details page will show the patient's details; medical history, allergies
         13. Create a state for isCalendarVisible and initialize it to false
         14. Create functions to handle the calendar visibility and update the isCalendarVisible state
         15. Add a small delay to allow the user to see their selection before closing the calendar
-        16. Create a function to check if the date available and returns a boolean
+        16. Create a function to check if a date is available and returns a boolean
+            a. First check doctorAvailability if provided
+            b. Compare date components (day, month, year) rather than timestamps
+            c. Fall back to dummySlots when no doctor availability exists
+            d. Use schedule.availableSlots as final fallback option
+            e. Parse status from slot string format when using schedule data
+
+        17. Generate available dates array for highlighting in calendar
+            a. Filter doctorAvailability or dummySlots to only include "available" status
+            b. Map filtered slots to Date objects for comparison
+            c. Store in availableDates state for efficient access
+            d. Update when doctorAvailability or schedule changes
+
+        18. Implement multi-level fallback system for date availability
+            a. Try doctorAvailability from props as primary source
+            b. Use dummySlots from imported data as secondary source
+            c. Fall back to schedule context data if needed
+            d. Ensure component works with partial or missing data
+
 
       #### Date Picker Content
 
