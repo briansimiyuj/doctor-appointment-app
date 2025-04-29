@@ -1,3 +1,4 @@
+import { AppointmentType } from "../types/AppointmentType"
 import { TimeSlotType } from "../types/TimeSlotType"
 
 export interface ScheduleContextProps {
@@ -64,5 +65,6 @@ export interface ScheduleContextProps {
     setSelectedTimeSlot: (slot: TimeSlotType | null) => void
     isChanged: boolean
     setIsChanged: (changed: boolean) => void 
+    appointment?: AppointmentType
 
 }

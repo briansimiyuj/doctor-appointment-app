@@ -1,4 +1,5 @@
 import { useRescheduleModal } from "../../../context/RescheduleModalContext"
+import { ScheduleProvider } from "../../../context/ScheduleContext"
 import DatePicker from "./DatePicker/DatePicker"
 
 const ModalBody: React.FC = ()=>{
@@ -19,7 +20,11 @@ const ModalBody: React.FC = ()=>{
 
             </div>
 
-            <DatePicker/>
+            <ScheduleProvider>
+                
+                <DatePicker/>
+
+            </ScheduleProvider>
 
         </>
 
