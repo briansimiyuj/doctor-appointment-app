@@ -783,6 +783,7 @@ Patient details page will show the patient's details; medical history, allergies
         13. Create a state for isCalendarVisible and initialize it to false
         14. Create functions to handle the calendar visibility and update the isCalendarVisible state
         15. Add a small delay to allow the user to see their selection before closing the calendar
+        16. Create a function to check if the date available and returns a boolean
 
       #### Date Picker Content
 
