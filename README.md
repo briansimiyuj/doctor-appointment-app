@@ -854,6 +854,7 @@ Patient details page will show the patient's details; medical history, allergies
             b. if the day is selected, background color should be blue and text color should be white
             c. if the day is today, and not selected, border color should be blue, background color white
             d. if the day is not today and not selected, background color should be white and text color should be black, background color on hover should be light gray
+            e. if the day is not today, not selected, and not available, background color should be red, text color should be gray, cursor should be not-allowed. Make sure to disable the button
 
           2. Create a function to handle the date selection and update the selected date state if the date is not in the past
           3. Attach the function to the div element as an onClick event listener
