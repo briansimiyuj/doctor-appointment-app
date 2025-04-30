@@ -35,7 +35,9 @@ export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children
             return initialDate ? new Date(initialDate) : null
 
           }),
-          [isCalendarVisible, setIsCalendarVisible] = useState(false),
+          [isCalendarVisible, setIsCalendarVisible] = useState(
+                import.meta.env.MODE === "production" ? false : true
+          ),
           toggleCalendar = () => setIsCalendarVisible(prev => !prev)
 
     const availableDateSlots = Array.isArray(doctorAvailability) && doctorAvailability.length > 0 ? doctorAvailability.filter((slot: TimeSlotType) => slot.status === "available").map((slot: TimeSlotType) => new Date(slot.dateTime)) : dummySlots.flat().filter((slot: TimeSlotType) => slot.status === "available").map((slot: TimeSlotType) => new Date(slot.dateTime))
