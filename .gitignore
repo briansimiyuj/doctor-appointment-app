@@ -25,3 +25,4 @@ doctor-appointment-app.code-workspace
 *.sln
 *.sw?
 text.txt
+.env
