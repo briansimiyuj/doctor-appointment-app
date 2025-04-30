@@ -866,6 +866,14 @@ Patient details page will show the patient's details; medical history, allergies
           b. Display the selected date in an input field
           c. Attach showCalendar function to the input field to show the calendar when clicked
 
+      #### Available Time Slots Hook
+
+      Available Time Slots hook will be used to fetch the available time slots for the selected date and update the state accordingly. It will be used in the Time Picker component to display the available time slots.
+
+        1. Filter the available slots based on the selected date
+        2. Get all slots from the schedule (retrieve from schedule context)
+        3. Group the slots by morning, afternoon and evening
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page
