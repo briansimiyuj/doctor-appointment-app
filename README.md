@@ -880,6 +880,14 @@ Patient details page will show the patient's details; medical history, allergies
 
         1. Create a Time Picker component and mount it on the Modal Body component and wrap it with Date Picker context
 
+      #### Select Time Display Component
+
+      Select Time Display component will be used to display selected time.
+
+        1. Create a Select Time Picker component and mount it on the Time Picker component
+
+
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page
