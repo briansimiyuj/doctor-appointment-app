@@ -1,6 +1,10 @@
+import { useDatePicker } from "../../../../context/DatePickerContext"
 import SelectedTimeDisplay from "./SelectedTimeDisplay"
+import TimePickerHeader from "./TimePickerHeader"
 
 const TimePicker: React.FC = ()=>{
+
+    const { isTimePickerVisible } = useDatePicker()
 
     return(
 
@@ -11,6 +15,24 @@ const TimePicker: React.FC = ()=>{
             <div className="bg-white p-4 rounded-lg shadow-md">
 
                 <SelectedTimeDisplay/>
+
+                {
+
+                    isTimePickerVisible &&(
+
+                        <>
+                        
+                            <div className="m2 bg-white rounded-lg shadow-md p-4">
+
+                                <TimePickerHeader/>
+
+                            </div>
+                        
+                        </>
+
+                    )
+
+                }
 
             </div>
 

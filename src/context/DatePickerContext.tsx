@@ -8,15 +8,16 @@ interface DatePickerProviderProps{
 
     children: React.ReactNode
     initialDate?: string
+    initialTime?: string
     doctorAvailability?: TimeSlotType
 
 }
 
 const DatePickerContext = createContext<DatePickerContextProps | undefined>(undefined)
 
-export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children, initialDate, doctorAvailability = [] }) =>{
+export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children, initialDate, initialTime, doctorAvailability = [] }) =>{
 
-    const { newDate, setNewDate } = useRescheduleModal(),
+    const { newDate, setNewDate, newTime, setNewTime } = useRescheduleModal(),
           [currentMonth, setCurrentMonth] = useState(() =>{
 
                 if(initialDate){
@@ -35,10 +36,12 @@ export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children
             return initialDate ? new Date(initialDate) : null
 
           }),
-          [isCalendarVisible, setIsCalendarVisible] = useState(
-                import.meta.env.MODE === "production" ? false : true
-          ),
-          toggleCalendar = () => setIsCalendarVisible(prev => !prev)
+          [selectedTime, setSelectedTime] = useState<string | null>(initialTime ? initialTime : null),
+          [isCalendarVisible, setIsCalendarVisible] = useState(false),
+          toggleCalendar = () => setIsCalendarVisible(prev => !prev),
+          [isTimePickerVisible, _setIsTimePickerVisible] = useState(
+            import.meta.env.MODE === "production" ? false : true
+          )
 
     const availableDateSlots = Array.isArray(doctorAvailability) && doctorAvailability.length > 0 ? doctorAvailability.filter((slot: TimeSlotType) => slot.status === "available").map((slot: TimeSlotType) => new Date(slot.dateTime)) : dummySlots.flat().filter((slot: TimeSlotType) => slot.status === "available").map((slot: TimeSlotType) => new Date(slot.dateTime))
 
@@ -75,6 +78,25 @@ export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children
         }
     
     }, [newDate])
+
+    useEffect(() =>{
+    
+        if(newTime){
+
+            setSelectedTime(newTime)
+        }
+    
+    }, [newTime])
+
+    useEffect(() =>{
+        
+        if(selectedTime){
+
+            setNewTime(selectedTime)
+
+        }
+
+    }, [selectedTime])
 
     useEffect(() =>{
     
@@ -189,7 +211,10 @@ export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children
         hideCalendar,
         toggleCalendar,
         availableDateSlots,
-        isAvailableDate
+        isAvailableDate,
+        isTimePickerVisible,
+        selectedTime,
+        setSelectedTime
 
     }
 
