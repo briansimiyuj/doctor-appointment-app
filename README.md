@@ -874,6 +874,12 @@ Patient details page will show the patient's details; medical history, allergies
         2. Get all slots from the schedule (retrieve from schedule context)
         3. Group the slots by morning, afternoon and evening
 
+      #### Time Picker Component
+
+      Time Picker component will be used to display the available time slots for the selected date. 
+
+        1. Create a Time Picker component and mount it on the Modal Body component and wrap it with Date Picker context
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page
