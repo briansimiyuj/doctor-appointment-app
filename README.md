@@ -900,6 +900,13 @@ Patient details page will show the patient's details; medical history, allergies
         1. Create a Select Time Picker Header component and mount it on the Time Picker component
 
 
+      #### Time Slot Grid Component
+
+      Time Slot Grid component will be used to display various groups of time slots
+
+        1. Create a Time Slot Grid component and mount it on the Time Picker component
+        2. Create Time Slot Grid Group component and mount it on the Time Slot Grid component. This will be used to group the time slots by morning, afternoon and evening
+
 
 ### Settings Context
 

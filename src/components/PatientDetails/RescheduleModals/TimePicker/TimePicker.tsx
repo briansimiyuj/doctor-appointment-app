@@ -1,6 +1,7 @@
 import { useDatePicker } from "../../../../context/DatePickerContext"
 import SelectedTimeDisplay from "./SelectedTimeDisplay"
 import TimePickerHeader from "./TimePickerHeader"
+import TimeSlotGrid from "./TimeSlotGrid"
 
 const TimePicker: React.FC = ()=>{
 
@@ -25,6 +26,8 @@ const TimePicker: React.FC = ()=>{
                             <div className="m2 bg-white rounded-lg shadow-md p-4">
 
                                 <TimePickerHeader/>
+
+                                <TimeSlotGrid/>
 
                             </div>
                         
