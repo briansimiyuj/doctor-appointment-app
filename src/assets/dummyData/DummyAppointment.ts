@@ -1,6 +1,6 @@
-import { AppointmentType } from "./types/AppointmentType";
+import { AppointmentType } from "../types/AppointmentType"
 
-export const DummyAppointment: AppointmentType = {
+export const DummyAppointment: AppointmentType ={
     
     date: "2023-06-15",
     time: "10:00 AM",

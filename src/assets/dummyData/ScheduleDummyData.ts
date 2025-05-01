@@ -1,4 +1,5 @@
-import { TimeSlotType } from "./types/TimeSlotType"
+import { TimeSlotType } from "../types/TimeSlotType"
+
 
 const today = new Date()
 

@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { ScheduleContextProps } from "../assets/contextProps/ScheduleContextProps";
-import { dummySchedule } from "../assets/ScheduleDummyData";
 import { TimeSlotType } from "../assets/types/TimeSlotType";
+import { dummySchedule } from "../assets/dummyData/ScheduleDummyData";
 
 export const ScheduleContext = createContext<ScheduleContextProps | null>(null)
 
