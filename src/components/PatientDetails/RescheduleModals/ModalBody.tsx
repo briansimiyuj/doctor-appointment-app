@@ -1,6 +1,8 @@
+import { DatePickerProvider } from "../../../context/DatePickerContext"
 import { useRescheduleModal } from "../../../context/RescheduleModalContext"
 import { ScheduleProvider } from "../../../context/ScheduleContext"
 import DatePicker from "./DatePicker/DatePicker"
+import TimePicker from "./TimePicker/TimePicker"
 
 const ModalBody: React.FC = ()=>{
 
@@ -23,6 +25,12 @@ const ModalBody: React.FC = ()=>{
             <ScheduleProvider>
                 
                 <DatePicker/>
+
+                <DatePickerProvider>
+
+                    <TimePicker/>
+
+                </DatePickerProvider>
 
             </ScheduleProvider>
 
