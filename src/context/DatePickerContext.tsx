@@ -2,7 +2,8 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { DatePickerContextProps } from "../assets/contextProps/DatePickerContextProps"
 import { useRescheduleModal } from "./RescheduleModalContext"
 import { TimeSlotType } from "../assets/types/TimeSlotType"
-import { dummySlots } from "../assets/ScheduleDummyData"
+import { dummySlots } from "../assets/dummyData/ScheduleDummyData"
+
 
 interface DatePickerProviderProps{
 

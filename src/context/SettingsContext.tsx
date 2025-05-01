@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react"
 import { AvailabilitySettings, ConsultationSettings, NotificationSettings, SettingsContextProps } from "../assets/contextProps/SettingsContextProps"
-import { dummySettingsData } from "../assets/dummySettingsData"
 import { LoginContext } from "./LoginContext"
+import { dummySettingsData } from "../assets/dummyData/dummySettingsData"
 
 const SettingsContext = createContext<SettingsContextProps | null>(null)
 
