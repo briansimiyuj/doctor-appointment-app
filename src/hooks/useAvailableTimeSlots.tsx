@@ -1,5 +1,6 @@
 import { useMemo } from "react"
 import { useSchedule } from "../context/ScheduleContext"
+import { DummyTimeSlots } from "../assets/dummyData/DummyTimeSlots"
 
 export const useAvailableTimeSlots = (selectedDate: Date | null) =>{
 
@@ -24,6 +25,24 @@ export const useAvailableTimeSlots = (selectedDate: Date | null) =>{
             return []
 
         })
+
+        if(allSlots.length === 0){
+
+            const getRandomSubset = (slots: string[], probability = .7) =>{
+            
+                return slots.filter(() => Math.random() < probability)
+            
+            }
+
+            return[
+
+                ...getRandomSubset(DummyTimeSlots.morning),
+                ...getRandomSubset(DummyTimeSlots.afternoon),
+                ...getRandomSubset(DummyTimeSlots.evening)
+
+            ]
+
+        }
 
         return allSlots
 
