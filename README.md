@@ -802,6 +802,12 @@ Patient details page will show the patient's details; medical history, allergies
             c. Fall back to schedule context data if needed
             d. Ensure component works with partial or missing data
 
+        19. Implement time slot selection logic
+          a. Create a state for selectedTime and initialize it to: if initialTime is available, new Date(initialTime) else null
+          b. Create a state for isTimePickerVisible and initialize it to false
+          c. Set selectedTime with newTime if available when newTime changes
+          d. Set newTime with selectedTime if available when selectedTime changes
+
 
       #### Date Picker Content
 
@@ -885,6 +891,12 @@ Patient details page will show the patient's details; medical history, allergies
       Select Time Display component will be used to display selected time.
 
         1. Create a Select Time Picker component and mount it on the Time Picker component
+
+      #### Select Time Picker Header Component
+
+      Select Time Picker Header component will be used to display the selected time
+
+        1. Create a Select Time Picker Header component and mount it on the Time Picker component
 
 
 
