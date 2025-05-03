@@ -9,8 +9,6 @@ interface TimeSlotGroupProps{
 
 const TimeSlotGroup: React.FC<TimeSlotGroupProps> = ({ title, slots, selectedTime, onSelectTime })=>{   
 
-    console.log(slots.length)
-
     if(slots.length === 0) return null
 
     return(

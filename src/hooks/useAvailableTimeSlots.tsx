@@ -49,9 +49,36 @@ export const useAvailableTimeSlots = (selectedDate: Date | null) =>{
     }, [selectedDate, schedule])
 
 
+    const filteredSlots = useMemo(() =>{
+
+        if(!selectedDate || availableSlots.length === 0) return []
+
+        const now = new Date(),
+              isToday = selectedDate.toDateString() === now.toDateString()
+
+        if(!isToday) return availableSlots
+
+        return availableSlots.filter(timeStr =>{
+
+            const [hours, minutes] = timeStr.split(':').map(Number),
+                  slotTime = new Date(selectedDate)
+
+            slotTime.setHours(hours, minutes, 0, 0)
+
+            const bufferTime = new Date()
+
+            bufferTime.setMinutes(bufferTime.getMinutes() + 30)
+
+            return slotTime > bufferTime
+
+        })
+
+    }, [selectedDate, availableSlots])
+
+
     const groupedSlots = useMemo(() =>{
 
-        const morning = availableSlots.filter(slot =>{
+        const morning = filteredSlots.filter(slot =>{
 
             const hour = parseInt(slot.split(':')[0])
 
@@ -59,15 +86,15 @@ export const useAvailableTimeSlots = (selectedDate: Date | null) =>{
 
         })
 
-        const afternoon = availableSlots.filter(slot =>{
+        const afternoon = filteredSlots.filter(slot =>{
 
             const hour = parseInt(slot.split(':')[0])
 
-            return hour >= 12   
+            return hour >= 12 && hour < 18
 
         })
 
-        const evening = availableSlots.filter(slot =>{
+        const evening = filteredSlots.filter(slot =>{
 
             const hour = parseInt(slot.split(':')[0])
 
@@ -77,13 +104,14 @@ export const useAvailableTimeSlots = (selectedDate: Date | null) =>{
 
         return { morning, afternoon, evening }
 
-    }, [availableSlots])
+    }, [filteredSlots])
+
 
     return{
 
-        availableSlots,
+        filteredSlots,
         groupedSlots, 
-        hasAvailableSlots: availableSlots.length > 0
+        hasAvailableSlots: filteredSlots.length > 0
 
     }
 

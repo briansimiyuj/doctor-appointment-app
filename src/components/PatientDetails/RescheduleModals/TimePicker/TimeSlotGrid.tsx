@@ -7,8 +7,6 @@ const TimeSlotGrid: React.FC = ()=>{
     const { selectedDate, selectedTime, setSelectedTime } = useDatePicker(),
           { groupedSlots } = useAvailableTimeSlots(selectedDate)
 
-    console.log(groupedSlots.morning.length)
-
     return(
 
 

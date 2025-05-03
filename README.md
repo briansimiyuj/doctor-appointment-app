@@ -878,8 +878,10 @@ Patient details page will show the patient's details; medical history, allergies
 
         1. Filter the available slots based on the selected date
         2. Get all slots from the schedule (retrieve from schedule context)
-        3. Group the slots by morning, afternoon and evening
+        3. Group the filtered slots by morning, afternoon and evening
         4. Create dummy slots for the selected date
+        5. Filter the slots based on the current time; if the slot is in the past, remove it from the array
+        6. Add a buffer time of 30 minutes to avoid booking slots that are too close to the current time
 
       #### Time Picker Component
 
