@@ -19,6 +19,20 @@ const TimeSlotGrid: React.FC = ()=>{
                 onSelectTime={setSelectedTime}
             />
 
+            <TimeSlotGroup
+                title="Afternoon"
+                slots={groupedSlots.afternoon}
+                selectedTime={selectedTime}
+                onSelectTime={setSelectedTime}
+            />
+
+            <TimeSlotGroup
+                title="Evening"
+                slots={groupedSlots.evening}
+                selectedTime={selectedTime}
+                onSelectTime={setSelectedTime}
+            />
+
         </div>
 
     )

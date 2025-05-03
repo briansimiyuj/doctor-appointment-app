@@ -26,8 +26,8 @@ const TimeSlotGroup: React.FC<TimeSlotGroupProps> = ({ title, slots, selectedTim
                         <button
                             key={time}
                             className={`${
-                                selectedTime === time ? 'bg-primary-bg text-white' : 'bg-white text-gray-700'
-                            } p-2 rounded-md shadow-md hover:bg-primary-bg hover:text-white`}
+                                selectedTime === time ? 'bg-primary-bg text-white' : 'bg-white text-gray-700 hover:bg-primary-bg hover:text-white'
+                            } p-2 rounded-md shadow-md`}
                             onClick={()=>onSelectTime(time)}
                         >{time}</button>
 
