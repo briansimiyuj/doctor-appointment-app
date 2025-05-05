@@ -208,6 +208,12 @@ export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children
     
     }
 
+    const closeTimePicker = () =>{
+        
+        setIsTimePickerVisible(false)
+
+    }
+
     const handleTimeClick = (time: string) =>{
 
         setSelectedTime(time)
@@ -236,7 +242,8 @@ export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children
         isTimePickerVisible,
         selectedTime,
         handleTimeClick,
-        openTimePicker
+        openTimePicker,
+        closeTimePicker
 
     }
 
