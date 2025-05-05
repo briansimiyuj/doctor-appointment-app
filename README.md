@@ -898,6 +898,8 @@ Patient details page will show the patient's details; medical history, allergies
       Select Time Display component will be used to display selected time.
 
         1. Create a Select Time Picker component and mount it on the Time Picker component
+        2. Attach showTimePicker function to the input field to show the time picker when clicked
+          a. If the user hasn't selected a date, display a message to select a date first
 
       #### Select Time Picker Header Component
 
