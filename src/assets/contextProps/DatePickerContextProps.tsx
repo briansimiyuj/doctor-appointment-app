@@ -21,5 +21,6 @@ export interface DatePickerContextProps{
     selectedTime: string | null
     handleTimeClick: (time: string) => void
     openTimePicker: () => void
+    closeTimePicker: () => void
 
 }
