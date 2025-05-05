@@ -882,6 +882,7 @@ Patient details page will show the patient's details; medical history, allergies
         4. Create dummy slots for the selected date
         5. Filter the slots based on the current time; if the slot is in the past, remove it from the array
         6. Add a buffer time of 30 minutes to avoid booking slots that are too close to the current time
+        7. Cache the generated dummy slots by date to avoid re-generating them after selection
 
       #### Time Picker Component
 

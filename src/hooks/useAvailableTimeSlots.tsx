@@ -1,10 +1,11 @@
-import { useMemo } from "react"
+import { useMemo, useRef } from "react"
 import { useSchedule } from "../context/ScheduleContext"
 import { DummyTimeSlots } from "../assets/dummyData/DummyTimeSlots"
 
 export const useAvailableTimeSlots = (selectedDate: Date | null) =>{
 
-    const { schedule } = useSchedule()
+    const { schedule } = useSchedule(),
+          dummySlotsCache = useRef<Record<string, string[]>>({})
 
     const availableSlots = useMemo(() =>{
 
@@ -28,19 +29,27 @@ export const useAvailableTimeSlots = (selectedDate: Date | null) =>{
 
         if(allSlots.length === 0){
 
+            const dateKey = selectedDate.toISOString().split('T')[0]
+
+            if(dummySlotsCache.current[dateKey]) return dummySlotsCache.current[dateKey]
+
             const getRandomSubset = (slots: string[], probability = .7) =>{
             
                 return slots.filter(() => Math.random() < probability)
             
             }
 
-            return[
+            const dummySlots =[
 
                 ...getRandomSubset(DummyTimeSlots.morning),
                 ...getRandomSubset(DummyTimeSlots.afternoon),
                 ...getRandomSubset(DummyTimeSlots.evening)
 
             ]
+
+            dummySlotsCache.current[dateKey] = dummySlots
+
+            return dummySlots
 
         }
 
