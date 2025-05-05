@@ -4,7 +4,7 @@ import TimeSlotGroup from "./TimeSlotGroup"
 
 const TimeSlotGrid: React.FC = ()=>{
 
-    const { selectedDate, selectedTime, setSelectedTime } = useDatePicker(),
+    const { selectedDate, selectedTime, handleTimeClick } = useDatePicker(),
           { groupedSlots } = useAvailableTimeSlots(selectedDate)
 
     return(
@@ -16,21 +16,21 @@ const TimeSlotGrid: React.FC = ()=>{
                 title="Morning"
                 slots={groupedSlots.morning}
                 selectedTime={selectedTime}
-                onSelectTime={setSelectedTime}
+                onSelectTime={handleTimeClick}
             />
 
             <TimeSlotGroup
                 title="Afternoon"
                 slots={groupedSlots.afternoon}
                 selectedTime={selectedTime}
-                onSelectTime={setSelectedTime}
+                onSelectTime={handleTimeClick}
             />
 
             <TimeSlotGroup
                 title="Evening"
                 slots={groupedSlots.evening}
                 selectedTime={selectedTime}
-                onSelectTime={setSelectedTime}
+                onSelectTime={handleTimeClick}
             />
 
         </div>
