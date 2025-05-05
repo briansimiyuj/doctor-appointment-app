@@ -40,9 +40,7 @@ export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children
           [selectedTime, setSelectedTime] = useState<string | null>(initialTime ? initialTime : null),
           [isCalendarVisible, setIsCalendarVisible] = useState(false),
           toggleCalendar = () => setIsCalendarVisible(prev => !prev),
-          [isTimePickerVisible, setIsTimePickerVisible] = useState(
-            import.meta.env.MODE === "production" ? false : true
-          )
+          [isTimePickerVisible, setIsTimePickerVisible] = useState(false)
 
     const availableDateSlots = Array.isArray(doctorAvailability) && doctorAvailability.length > 0 ? doctorAvailability.filter((slot: TimeSlotType) => slot.status === "available").map((slot: TimeSlotType) => new Date(slot.dateTime)) : dummySlots.flat().filter((slot: TimeSlotType) => slot.status === "available").map((slot: TimeSlotType) => new Date(slot.dateTime))
 
@@ -217,6 +215,8 @@ export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children
     const handleTimeClick = (time: string) =>{
 
         setSelectedTime(time)
+
+        closeTimePicker()
 
     }
 

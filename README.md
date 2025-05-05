@@ -892,6 +892,7 @@ Patient details page will show the patient's details; medical history, allergies
       Time Picker component will be used to display the available time slots for the selected date. 
 
         1. Create a Time Picker component and mount it on the Modal Body component and wrap it with Date Picker context
+        2. Create a function that closes time slot grid when the user clicks outside of it
 
       #### Select Time Display Component
 
