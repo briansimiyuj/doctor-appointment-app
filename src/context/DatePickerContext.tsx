@@ -196,9 +196,15 @@ export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children
 
     const openTimePicker = () =>{
 
+        if(!selectedDate){
+
+            alert("Please select a date first.")
+
+            return
+
+        }
+
         setIsTimePickerVisible(true)
-    
-       console.log('working')
     
     }
 

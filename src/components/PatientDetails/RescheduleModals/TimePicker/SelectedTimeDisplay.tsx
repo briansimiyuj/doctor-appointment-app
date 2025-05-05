@@ -1,13 +1,17 @@
+import { useDatePicker } from "../../../../context/DatePickerContext"
 import { useRescheduleModal } from "../../../../context/RescheduleModalContext"
 
 const SelectedTimeDisplay: React.FC = ()=>{
 
-    const { newTime } = useRescheduleModal()
+    const { newTime } = useRescheduleModal(),
+          { openTimePicker } = useDatePicker()
 
     return(
 
         <div 
             className="flex items-center justify-between p-2 border rounded-md cursor-pointer hover:border-primary-bg"
+            onClick={openTimePicker}
+            role="button"
         >
 
             <span className="text-gray-700">
