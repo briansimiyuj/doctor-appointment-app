@@ -807,6 +807,7 @@ Patient details page will show the patient's details; medical history, allergies
           b. Create a state for isTimePickerVisible and initialize it to false
           c. Set selectedTime with newTime if available when newTime changes
           d. Set newTime with selectedTime if available when selectedTime changes
+          e. Create a function to handle the time selection and update the selectedTime
 
 
       #### Date Picker Content

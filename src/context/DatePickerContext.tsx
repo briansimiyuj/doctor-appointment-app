@@ -194,6 +194,12 @@ export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children
 
     }
 
+    const handleTimeClick = (time: string) =>{
+
+        setSelectedTime(time)
+
+    }
+
     const value ={
 
         currentMonth,
@@ -215,7 +221,7 @@ export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children
         isAvailableDate,
         isTimePickerVisible,
         selectedTime,
-        setSelectedTime
+        handleTimeClick
 
     }
 

@@ -19,6 +19,6 @@ export interface DatePickerContextProps{
     isAvailableDate: (date: Date) => boolean
     isTimePickerVisible: boolean
     selectedTime: string | null
-    setSelectedTime: (time: string | null) => void
+    handleTimeClick: (time: string) => void
 
 }
