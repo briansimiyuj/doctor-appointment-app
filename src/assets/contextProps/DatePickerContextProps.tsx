@@ -20,5 +20,6 @@ export interface DatePickerContextProps{
     isTimePickerVisible: boolean
     selectedTime: string | null
     handleTimeClick: (time: string) => void
+    openTimePicker: () => void
 
 }

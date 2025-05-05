@@ -40,7 +40,7 @@ export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children
           [selectedTime, setSelectedTime] = useState<string | null>(initialTime ? initialTime : null),
           [isCalendarVisible, setIsCalendarVisible] = useState(false),
           toggleCalendar = () => setIsCalendarVisible(prev => !prev),
-          [isTimePickerVisible, _setIsTimePickerVisible] = useState(
+          [isTimePickerVisible, setIsTimePickerVisible] = useState(
             import.meta.env.MODE === "production" ? false : true
           )
 
@@ -194,6 +194,14 @@ export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children
 
     }
 
+    const openTimePicker = () =>{
+
+        setIsTimePickerVisible(true)
+    
+       console.log('working')
+    
+    }
+
     const handleTimeClick = (time: string) =>{
 
         setSelectedTime(time)
@@ -221,7 +229,8 @@ export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children
         isAvailableDate,
         isTimePickerVisible,
         selectedTime,
-        handleTimeClick
+        handleTimeClick,
+        openTimePicker
 
     }
 
