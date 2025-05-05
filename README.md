@@ -809,6 +809,8 @@ Patient details page will show the patient's details; medical history, allergies
           d. Set newTime with selectedTime if available when selectedTime changes
           e. Create a function to handle the time selection and update the selectedTime
 
+        20. Create a function to show and hide the time picker. When the user selects a time, update the selectedTime state and hide the time picker.
+
 
       #### Date Picker Content
 
