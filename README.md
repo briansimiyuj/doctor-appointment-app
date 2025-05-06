@@ -927,6 +927,7 @@ Patient details page will show the patient's details; medical history, allergies
      1. Create a Doctor Selector component and mount it on the Modal Body component
      2. Retrieve selected doctor from the Reschedule context
      3. Create a state for dropdown visibility and initialize it to false
+     4. Create a state for search term and initialize it to empty string
 
      #### Select Doctor Display Component
 
@@ -936,6 +937,16 @@ Patient details page will show the patient's details; medical history, allergies
       2. If selected doctor is available, display the doctor's name and image. If not, display a message to select a doctor
       3. Add a dropdown icon to the right of the doctor's name and image. When clicked, toggle the showDropdown state
       4. Attach a function to the parent div to toggle the showDropdown state
+      5. If showDropdown is true, display the following:
+
+      #### Doctor Searchbar Component
+
+      Doctor Searchbar component will be used to search for doctors
+
+       1. Create a Doctor Searchbar component and mount it on the Doctor Selector component. Pass search term state as a prop
+       2. Make the searchbar a controlled component by attaching a value attribute to the input element and setting it to the search term state
+       3. Create a function to handle the search term change and update the search term state
+       4. Attach the function to the input element's onChange event
 
 
 ### Settings Context
