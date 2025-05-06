@@ -755,6 +755,10 @@ Patient details page will show the patient's details; medical history, allergies
         a. If there is no appointment to reschedule or the boolean state is false, exit the function early
         b. Call onClose function to close the modal
 
+      5. Create states for selected doctors and available doctors and initialize them to null and doctors in doctors data respectively
+      6. Create a function to filter the doctors based on speciality
+      7. Create a function to reset the filtered doctors to show all doctors
+
 
     ### Reschedule Modal Component
 
