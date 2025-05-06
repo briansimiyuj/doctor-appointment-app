@@ -912,7 +912,6 @@ Patient details page will show the patient's details; medical history, allergies
 
         1. Create a Select Time Picker Header component and mount it on the Time Picker component
 
-
       #### Time Slot Grid Component
 
       Time Slot Grid component will be used to display various groups of time slots
@@ -920,6 +919,20 @@ Patient details page will show the patient's details; medical history, allergies
         1. Create a Time Slot Grid component and mount it on the Time Picker component
         2. Create Time Slot Grid Group component and mount it on the Time Slot Grid component. This will be used to group the time slots by morning, afternoon and evening
         3. Do the same for all groups of time slots
+
+    ### Doctor Selector Component
+
+    Doctor Selector component will be used to display a list of doctors available for the rescheduled appointment.
+
+     1. Create a Doctor Selector component and mount it on the Modal Body component
+     2. Retrieve selected doctor from the Reschedule context
+     3. Create a state for dropdown visibility and initialize it to false
+
+     #### Select Doctor Display Component
+
+     Select Doctor Display component will be used to display the selected doctor
+
+      1. Create a Select Doctor Display component and mount it on the Doctor Selector component and pass selected doctor and showDropdown state as props
 
 
 ### Settings Context
