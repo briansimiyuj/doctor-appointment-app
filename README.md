@@ -933,6 +933,9 @@ Patient details page will show the patient's details; medical history, allergies
      Select Doctor Display component will be used to display the selected doctor
 
       1. Create a Select Doctor Display component and mount it on the Doctor Selector component and pass selected doctor and showDropdown state as props
+      2. If selected doctor is available, display the doctor's name and image. If not, display a message to select a doctor
+      3. Add a dropdown icon to the right of the doctor's name and image. When clicked, toggle the showDropdown state
+      4. Attach a function to the parent div to toggle the showDropdown state
 
 
 ### Settings Context
