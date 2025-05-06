@@ -1,11 +1,13 @@
 import { useState } from "react"
 import { useRescheduleModal } from "../../../../context/RescheduleModalContext"
 import SelectedDoctorDisplay from "./SelectedDoctorDisplay"
+import DoctorSearchBar from "./DoctorSearchBar"
 
 const DoctorSelector: React.FC = ()=>{
 
     const { selectedDoctor } = useRescheduleModal(),
-          [showDropdown, setShowDropdown] = useState(false)
+          [showDropdown, setShowDropdown] = useState(true),
+          [searchTerm, setSearchTerm] = useState('')
 
     return(
 
@@ -20,6 +22,21 @@ const DoctorSelector: React.FC = ()=>{
                     showDropdown={showDropdown}
                     toggleDropdown={() => setShowDropdown(!showDropdown)}
                 />
+
+
+                {
+
+                    showDropdown &&(
+
+                        <div className="absolute z-10 mt-2 w-full bg-white border rounded-md shadow-lg max-h-60 overflow-auto p-3">
+
+                            <DoctorSearchBar onSearch={setSearchTerm} searchTerm={searchTerm}/>  
+
+                        </div>
+
+                    )
+
+                }
 
             </div>
 
