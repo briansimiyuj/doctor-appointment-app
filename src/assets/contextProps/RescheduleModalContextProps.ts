@@ -1,4 +1,5 @@
 import { AppointmentType } from "../types/AppointmentType";
+import { DoctorType } from "../types/DoctorType";
 
 export interface RescheduleModalContextProps{
 
@@ -12,5 +13,10 @@ export interface RescheduleModalContextProps{
     handleRescheduleConfirm: () => void
     onClose: () => void
     isValid: boolean
+    selectedDoctor: DoctorType | null
+    setSelectedDoctor: (doctor: DoctorType) => void
+    availableDoctors: DoctorType[]
+    filterDoctorsBySpeciality: (speciality: string) => void
+    resetDoctorFilter: () => void
 
 }
