@@ -2,6 +2,7 @@ import { DatePickerProvider } from "../../../context/DatePickerContext"
 import { useRescheduleModal } from "../../../context/RescheduleModalContext"
 import { ScheduleProvider } from "../../../context/ScheduleContext"
 import DatePicker from "./DatePicker/DatePicker"
+import DoctorSelector from "./DoctorSelector/DoctorSelector"
 import TimePicker from "./TimePicker/TimePicker"
 
 const ModalBody: React.FC = ()=>{
@@ -21,6 +22,8 @@ const ModalBody: React.FC = ()=>{
                 </p>
 
             </div>
+
+            <DoctorSelector/>
 
             <ScheduleProvider>
                 
