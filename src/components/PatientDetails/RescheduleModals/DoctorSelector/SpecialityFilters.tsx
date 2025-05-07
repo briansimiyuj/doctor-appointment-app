@@ -1,14 +1,26 @@
 import { useState } from "react"
 import { specialityData } from "../../../../assets/frontend/assets"
+import { useRescheduleModal } from "../../../../context/RescheduleModalContext"
 
 const SpecialityFilters: React.FC = ()=>{
 
-    const [activeSpeciality, setActiveSpeciality] = useState<string | null>(null)
+    const [activeSpeciality, setActiveSpeciality] = useState<string | null>(null),
+          { filterDoctorsBySpeciality, resetDoctorFilter } = useRescheduleModal()
 
     const handleSpecialityClick = (speciality: string) =>{
     
         setActiveSpeciality(speciality)
+
+        filterDoctorsBySpeciality(speciality)
     
+    }
+
+    const handleResetClick = () =>{
+
+        setActiveSpeciality(null)
+
+        resetDoctorFilter()
+
     }
 
     return(
