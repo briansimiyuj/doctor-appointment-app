@@ -962,6 +962,14 @@ Patient details page will show the patient's details; medical history, allergies
        6. Create a function to handle the speciality reset and update the filter speciality state
        7. Make the component into a dropdown 
 
+      #### Doctor List Component
+
+      Doctor List component will be used to display a list of doctors
+
+        1. Create a Doctor List component and mount it on the Doctor Selector component and pass the following props: filteredDoctors, selectedDoctorID and doctor selection function
+        2. Fill in the doctor's name, image and speciality
+        3. Attach onSelectDoctor function to the parent div to select the doctor
+
 
 ### Settings Context
 

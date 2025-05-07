@@ -3,6 +3,7 @@ import { useRescheduleModal } from "../../../../context/RescheduleModalContext"
 import SelectedDoctorDisplay from "./SelectedDoctorDisplay"
 import DoctorSearchBar from "./DoctorSearchBar"
 import SpecialityFilters from "./SpecialityFilters"
+import DoctorList from "./DoctorList"
 
 const DoctorSelector: React.FC = ()=>{
 
@@ -54,6 +55,12 @@ const DoctorSelector: React.FC = ()=>{
                             <DoctorSearchBar onSearch={setSearchTerm} searchTerm={searchTerm}/>  
 
                             <SpecialityFilters/>
+
+                            <DoctorList
+                                doctors={filterDoctors}
+                                onDoctorSelect={handleDoctorSelectition}
+                                selectedDoctorID={selectedDoctor?._id}
+                            />
 
                         </div>
 
