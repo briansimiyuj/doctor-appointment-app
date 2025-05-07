@@ -948,6 +948,14 @@ Patient details page will show the patient's details; medical history, allergies
        3. Create a function to handle the search term change and update the search term state
        4. Attach the function to the input element's onChange event
 
+      #### Speciality Filter Component
+
+      Speciality Filter component will be used to filter doctors by speciality
+
+       1. Create a Speciality Filter component and mount it on the Doctor Selector component.
+       2. Loop through the speciality data and create a button for each speciality
+       3. When an user clicks on a speciality, the button will be highlighted
+
 
 ### Settings Context
 
