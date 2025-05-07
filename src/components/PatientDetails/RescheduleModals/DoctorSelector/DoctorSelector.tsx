@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useRescheduleModal } from "../../../../context/RescheduleModalContext"
 import SelectedDoctorDisplay from "./SelectedDoctorDisplay"
 import DoctorSearchBar from "./DoctorSearchBar"
+import SpecialityFilters from "./SpecialityFilters"
 
 const DoctorSelector: React.FC = ()=>{
 
@@ -31,6 +32,8 @@ const DoctorSelector: React.FC = ()=>{
                         <div className="absolute z-10 mt-2 w-full bg-white border rounded-md shadow-lg max-h-60 overflow-auto p-3">
 
                             <DoctorSearchBar onSearch={setSearchTerm} searchTerm={searchTerm}/>  
+
+                            <SpecialityFilters/>
 
                         </div>
 
