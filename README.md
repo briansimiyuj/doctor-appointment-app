@@ -955,6 +955,9 @@ Patient details page will show the patient's details; medical history, allergies
        1. Create a Speciality Filter component and mount it on the Doctor Selector component.
        2. Loop through the speciality data and create a button for each speciality
        3. When an user clicks on a speciality, the button will be highlighted
+       4. Retrieve the filter speciality functions from the reschedule context.
+       5. Create a function to handle the speciality change and update the filter speciality state
+       6. Create a function to handle the speciality reset and update the filter speciality state
 
 
 ### Settings Context
