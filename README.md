@@ -960,6 +960,7 @@ Patient details page will show the patient's details; medical history, allergies
        4. Retrieve the filter speciality functions from the reschedule context.
        5. Create a function to handle the speciality change and update the filter speciality state
        6. Create a function to handle the speciality reset and update the filter speciality state
+       7. Make the component into a dropdown 
 
 
 ### Settings Context
