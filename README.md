@@ -925,9 +925,11 @@ Patient details page will show the patient's details; medical history, allergies
     Doctor Selector component will be used to display a list of doctors available for the rescheduled appointment.
 
      1. Create a Doctor Selector component and mount it on the Modal Body component
-     2. Retrieve selected doctor from the Reschedule context
+     2. Retrieve selected doctor state and available doctors from the Reschedule context
      3. Create a state for dropdown visibility and initialize it to false
      4. Create a state for search term and initialize it to empty string
+     5. Filter the doctors based on the search term
+     6. Create a function to handle doctor selection and update the selected doctor state
 
      #### Select Doctor Display Component
 

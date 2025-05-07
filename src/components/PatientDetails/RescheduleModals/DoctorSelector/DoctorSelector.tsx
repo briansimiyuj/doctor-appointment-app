@@ -6,9 +6,29 @@ import SpecialityFilters from "./SpecialityFilters"
 
 const DoctorSelector: React.FC = ()=>{
 
-    const { selectedDoctor } = useRescheduleModal(),
+    const { selectedDoctor, availableDoctors, setSelectedDoctor } = useRescheduleModal(),
           [showDropdown, setShowDropdown] = useState(true),
           [searchTerm, setSearchTerm] = useState('')
+
+    const filterDoctors = availableDoctors.filter(doctor =>(
+
+        doctor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        doctor.speciality.toLowerCase().includes(searchTerm.toLowerCase())
+    ))
+
+    const handleDoctorSelectition = (doctorID: string) =>{
+    
+        const doctor = availableDoctors.find(doctor => doctor._id === doctorID)
+
+        if(doctor){
+
+            setSelectedDoctor(doctor)
+
+            setShowDropdown(false)
+
+        }
+    
+    }
 
     return(
 
