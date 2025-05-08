@@ -8,7 +8,7 @@ import DoctorList from "./DoctorList"
 const DoctorSelector: React.FC = ()=>{
 
     const { selectedDoctor, availableDoctors, setSelectedDoctor } = useRescheduleModal(),
-          [showDropdown, setShowDropdown] = useState(true),
+          [showDropdown, setShowDropdown] = useState(false),
           [searchTerm, setSearchTerm] = useState('')
 
     const filterDoctors = availableDoctors.filter(doctor =>(

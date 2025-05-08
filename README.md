@@ -976,6 +976,13 @@ Patient details page will show the patient's details; medical history, allergies
         2. Fill in the doctor's name, image and speciality
         3. Attach onSelectDoctor function to the parent div to select the doctor
 
+    ### Reschedule Modal Footer Component
+
+    Modal Footer component will display a button to confirm the rescheduling of the appointment and a button to close the modal. It will be similar to cancel appointment and reject appointment modal footers.
+
+      1. Create a Modal Footer component and mount it on the Reschedule Appointment Modal component and wrap it with Reschedule Modal Provider
+
+        
 
 ### Settings Context
 
