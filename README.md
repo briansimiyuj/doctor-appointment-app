@@ -691,6 +691,11 @@ Patient details page will show the patient's details; medical history, allergies
           b. Set the modal visibility state to true
           c. Set the appointment to reschedule state to the appointment parameter
 
+        4. Create a function to close the modal
+          a. Set the appointment to reschedule state to null
+          b. Set the modal visibility state to false
+          c. Set new date and new time states to null
+
 
     ### Modal Context
 

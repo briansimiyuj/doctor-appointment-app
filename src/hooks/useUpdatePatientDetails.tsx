@@ -105,6 +105,18 @@ export const useUpdatePatientDetails = () =>{
     
     }
 
+    const closeRescheduleModal = () =>{
+    
+       setAppointmentToReschedule(null)
+
+       setNewDate(null)
+
+       setNewTime(null)
+
+       setShowRescheduleModal(false)
+    
+    }
+
     return{
 
         handleApproveAppointment,
@@ -119,6 +131,7 @@ export const useUpdatePatientDetails = () =>{
         openRejectModal,
         closeRejectModal,
         openRescheduleModal,
+        closeRescheduleModal,
         showRescheduleModal,
         appointmentToReschedule,
         newDate,
