@@ -12,6 +12,8 @@ const SelectedDoctorDisplay: React.FC<SelectedDoctorDisplayProps> = ({ selectedD
 
     return(
 
+        <div className="bg-white rounded-lg shadow p-4 pt-2">
+
         <div 
             className="flex items-center justify-between cursor-pointer p-2 border hover:border-primary-bg"
             onClick={toggleDropdown}
@@ -59,6 +61,8 @@ const SelectedDoctorDisplay: React.FC<SelectedDoctorDisplayProps> = ({ selectedD
 
 
             </svg>
+
+        </div>
 
         </div>
 
