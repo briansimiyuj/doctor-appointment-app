@@ -6,7 +6,7 @@ const SelectedDateDisplay: React.FC = ()=>{
 
     return(
 
-        <div className="mx-4 text-center">
+        <div className="text-center">
 
             <label htmlFor="selected-date" className="block text-sm font-medium text-gray-700 mb-1">Select Date:</label>
 

@@ -47,7 +47,7 @@ const DatePickerContent: React.FC = ()=>{
 
             </div>
 
-            <div className="bg-white rounded-lg shadow p-4">
+            <div className="bg-white rounded-lg shadow p-4 pt-2">
 
                 <SelectedDateDisplay/>
 
@@ -58,7 +58,7 @@ const DatePickerContent: React.FC = ()=>{
                         <>
 
                             <div 
-                                className="m-2 bg-white rounded-lg shadow-md p-4 absolute"
+                                className="mt-4 bg-white rounded-lg shadow-md p-4"
                                 ref={calendarRef}
                             >
 

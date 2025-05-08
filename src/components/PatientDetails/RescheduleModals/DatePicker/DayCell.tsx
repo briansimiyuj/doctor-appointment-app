@@ -26,7 +26,7 @@ const DayCell: React.FC<DayCellProps> = ({ date })=>{
     }
 
 
-    let cellStyle = "h-10 w-10 flex items-center justify-center rounded-full"
+    let cellStyle = "h-7 w-7 xs:h-8 xs:w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 flex items-center justify-center rounded-full text-xs xs:text-sm sm:text-base"
 
     cellStyle += isClickable ? " cursor-pointer" : " cursor-not-allowed"
 
