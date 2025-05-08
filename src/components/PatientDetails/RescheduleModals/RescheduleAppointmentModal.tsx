@@ -4,10 +4,11 @@ import ModalBody from "./ModalBody"
 interface RescheduleAppointmentModalProps{
 
     appointment: any
+    onClose: () => void
 
 }
 
-const RescheduleAppointmentModal: React.FC<RescheduleAppointmentModalProps> = ({  appointment }) =>{
+const RescheduleAppointmentModal: React.FC<RescheduleAppointmentModalProps> = ({  appointment, onClose }) =>{
 
     return(
 
@@ -17,7 +18,7 @@ const RescheduleAppointmentModal: React.FC<RescheduleAppointmentModalProps> = ({
 
                 <h2 className="text-xl font-bold mb-4 text-center text-gray-800">Reschedule Appointment</h2>
 
-                <RescheduleModalProvider appointment={appointment}>
+                <RescheduleModalProvider appointment={appointment} onClose={onClose}>
 
                     <ModalBody/>
 
