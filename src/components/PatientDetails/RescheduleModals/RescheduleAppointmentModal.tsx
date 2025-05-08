@@ -1,5 +1,6 @@
 import { RescheduleModalProvider } from "../../../context/RescheduleModalContext"
 import ModalBody from "./ModalBody"
+import ModalFooter from "./ModalFooter"
 
 interface RescheduleAppointmentModalProps{
 
@@ -21,6 +22,8 @@ const RescheduleAppointmentModal: React.FC<RescheduleAppointmentModalProps> = ({
                 <RescheduleModalProvider appointment={appointment} onClose={onClose}>
 
                     <ModalBody/>
+
+                    <ModalFooter/>
 
                 </RescheduleModalProvider>
 
