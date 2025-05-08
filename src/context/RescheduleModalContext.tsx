@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import { AppointmentType } from "../assets/types/AppointmentType"
 import { RescheduleModalContextProps } from "../assets/contextProps/RescheduleModalContextProps"
 import { useUpdatePatientDetails } from "../hooks/useUpdatePatientDetails"
@@ -21,7 +21,17 @@ export const RescheduleModalProvider: React.FC<RescheduleModalProviderProps> = (
           [isConfirmed, setIsConfirmed] = useState(false),
           [selectedDoctor, setSelectedDoctor] = useState<DoctorType | null>(null),
           [availableDoctors, setAvailableDoctors] = useState<DoctorType[]>(doctors),
-          isValid = newDate?.trim() !== '' && newTime?.trim() !== '' && isConfirmed
+          isValid = newDate?.trim() !== '' && newTime?.trim() !== '' && isConfirmed,
+          mockCurrentDoctorID = 'doctor1'
+
+
+    useEffect(() =>{
+    
+        const filteredDoctors = doctors.filter(doctor => doctor._id !== mockCurrentDoctorID)
+
+        setAvailableDoctors(filteredDoctors)
+    
+    }, [])
 
 
     const handleRescheduleConfirm = () =>{
@@ -34,7 +44,7 @@ export const RescheduleModalProvider: React.FC<RescheduleModalProviderProps> = (
 
     const filterDoctorsBySpeciality = (speciality: string) =>{
 
-        const filteredDoctors = doctors.filter(doctor => doctor.speciality === speciality)
+        const filteredDoctors = doctors.filter(doctor => doctor.speciality === speciality && doctor._id !== mockCurrentDoctorID)
 
         setAvailableDoctors(filteredDoctors)
 
@@ -42,7 +52,9 @@ export const RescheduleModalProvider: React.FC<RescheduleModalProviderProps> = (
 
     const resetDoctorFilter = () =>{
 
-        setAvailableDoctors(doctors)
+        const filteredDoctors = doctors.filter(doctor => doctor._id !== mockCurrentDoctorID)
+
+        setAvailableDoctors(filteredDoctors)
 
     }        
 

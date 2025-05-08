@@ -758,6 +758,7 @@ Patient details page will show the patient's details; medical history, allergies
       5. Create states for selected doctors and available doctors and initialize them to null and doctors in doctors data respectively
       6. Create a function to filter the doctors based on speciality
       7. Create a function to reset the filtered doctors to show all doctors
+        a. Filter the current doctor from the available doctors array
 
 
     ### Reschedule Modal Component
