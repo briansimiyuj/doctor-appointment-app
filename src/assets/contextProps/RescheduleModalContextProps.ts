@@ -8,8 +8,6 @@ export interface RescheduleModalContextProps{
     setNewDate: (date: string) => void
     newTime: string | null
     setNewTime: (time: string) => void
-    isConfirmed: boolean  
-    setIsConfirmed: (confirmed: boolean) => void
     handleRescheduleConfirm: () => void
     onClose: () => void
     isValid: boolean

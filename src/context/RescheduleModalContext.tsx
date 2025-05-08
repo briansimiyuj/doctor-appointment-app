@@ -18,10 +18,9 @@ const RescheduleModalContext = createContext<RescheduleModalContextProps | undef
 export const RescheduleModalProvider: React.FC<RescheduleModalProviderProps> = ({ children, appointment, onClose }) =>{
 
     const { newDate, setNewDate, newTime, setNewTime } = useUpdatePatientDetails(),
-          [isConfirmed, setIsConfirmed] = useState(false),
           [selectedDoctor, setSelectedDoctor] = useState<DoctorType | null>(null),
           [availableDoctors, setAvailableDoctors] = useState<DoctorType[]>(doctors),
-          isValid = newDate?.trim() !== '' && newTime?.trim() !== '' && isConfirmed,
+          isValid = newDate !== null && newTime !== null && selectedDoctor !== null,
           mockCurrentDoctorID = 'doctor1'
 
 
@@ -65,8 +64,6 @@ export const RescheduleModalProvider: React.FC<RescheduleModalProviderProps> = (
         setNewDate,
         newTime,
         setNewTime,
-        isConfirmed,
-        setIsConfirmed,
         isValid,
         onClose,
         handleRescheduleConfirm,

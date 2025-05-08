@@ -754,15 +754,14 @@ Patient details page will show the patient's details; medical history, allergies
     Reschedule modal context will be used to manage the state of the modal (Handle rescheduling of the appointment)
 
       1. Retrieve newDate, newTime, setNewDate, setNewTime from the update patient details hook
-      2. Create a state for isConfirmed and initialize it to false
-      3. Check if the new date and time are not empty and isConfirmed is true, if both are true, set a boolean state to it
-      4. Create a function to handle the reschedule confirmation
+      2. Check if the new date and time are not empty and isConfirmed is true, if both are true, set a boolean state to it
+      3. Create a function to handle the reschedule confirmation
         a. If there is no appointment to reschedule or the boolean state is false, exit the function early
         b. Call onClose function to close the modal
 
-      5. Create states for selected doctors and available doctors and initialize them to null and doctors in doctors data respectively
-      6. Create a function to filter the doctors based on speciality
-      7. Create a function to reset the filtered doctors to show all doctors
+      4. Create states for selected doctors and available doctors and initialize them to null and doctors in doctors data respectively
+      5. Create a function to filter the doctors based on speciality
+      6. Create a function to reset the filtered doctors to show all doctors
         a. Filter the current doctor from the available doctors array
 
 
