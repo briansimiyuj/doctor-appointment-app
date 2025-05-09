@@ -10,6 +10,7 @@ export const useRescheduleAppointment = () =>{
         appointment: AppointmentType,
         newDate: string,
         newTime: string,
+        consultationType: "in-person" | "online",
         selectedDoctor: DoctorType
     ) =>{
     
@@ -20,6 +21,7 @@ export const useRescheduleAppointment = () =>{
             ...appointment,
             date: newDate,
             time: newTime,
+            consultationType: consultationType,
             doctor:{
 
                 _id: selectedDoctor._id,
@@ -41,7 +43,8 @@ export const useRescheduleAppointment = () =>{
                 date: appointment.date,
                 time: appointment.time,
                 doctorID: appointment.doctor._id,
-                doctorName: appointment.doctor.name
+                doctorName: appointment.doctor.name,
+                consultationType: appointment.consultationType
 
             }, 
             
@@ -50,7 +53,8 @@ export const useRescheduleAppointment = () =>{
                 date: newDate,
                 time: newTime,
                 doctorID: selectedDoctor._id,
-                doctorName: selectedDoctor.name
+                doctorName: selectedDoctor.name,
+                consultationType: consultationType
 
             },
 
