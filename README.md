@@ -984,6 +984,18 @@ Patient details page will show the patient's details; medical history, allergies
 
     3. Create a confirmation checkbox component and mount it on Modal Body component
 
+    ### Reschedule Appointment Hook
+
+    Reschedule Appointment hook will be used to handle the rescheduling of the appointment
+
+      1. Retrieve updateAppointmentStatus function from Patient Details context
+      2. Create a function to handle the rescheduling of the appointment which takes appointment, newDate, newTime and selectedDoctor as parameters
+        a. If newDate, newTime and selectedDoctor are not provided, exit the function 
+        b. Create an object to store the updated appointment details
+        c. Update the appointment status to "rescheduled" 
+        d. Store rescheduling history
+        e. Store the updated appointment details in the database and local storage
+
         
 
 ### Settings Context
