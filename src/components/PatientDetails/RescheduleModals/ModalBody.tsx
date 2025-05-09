@@ -1,6 +1,7 @@
 import { DatePickerProvider } from "../../../context/DatePickerContext"
 import { useRescheduleModal } from "../../../context/RescheduleModalContext"
 import { ScheduleProvider } from "../../../context/ScheduleContext"
+import ConfirmationCheckBox from "./ConfirmationCheckBox"
 import DatePicker from "./DatePicker/DatePicker"
 import DoctorSelector from "./DoctorSelector/DoctorSelector"
 import TimePicker from "./TimePicker/TimePicker"
@@ -36,6 +37,8 @@ const ModalBody: React.FC = ()=>{
                 </DatePickerProvider>
 
             </ScheduleProvider>
+
+            <ConfirmationCheckBox/>
 
         </>
 
