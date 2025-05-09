@@ -11,6 +11,8 @@ export interface RescheduleModalContextProps{
     handleRescheduleConfirm: () => void
     isConfirmed: boolean
     setIsConfirmed: (isConfirmed: boolean) => void
+    consultationType: "in-person" | "online" | null
+    setConsultationType: (type: "in-person" | "online") => void
     onClose: () => void
     isValid: boolean
     selectedDoctor: DoctorType | null

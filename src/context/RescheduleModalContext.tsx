@@ -23,7 +23,8 @@ export const RescheduleModalProvider: React.FC<RescheduleModalProviderProps> = (
           [selectedDoctor, setSelectedDoctor] = useState<DoctorType | null>(null),
           [isConfirmed, setIsConfirmed] = useState(false),
           [availableDoctors, setAvailableDoctors] = useState<DoctorType[]>(doctors),
-          isValid = newDate !== null && newTime !== null && selectedDoctor !== null && isConfirmed,
+          [consultationType, setConsultationType] = useState<"in-person" | "online" | null>(null),
+          isValid = Boolean(newDate) !== null && newTime !== null && selectedDoctor !== null && consultationType !== null && isConfirmed,
           mockCurrentDoctorID = 'doctor1'
 
 
@@ -46,9 +47,8 @@ export const RescheduleModalProvider: React.FC<RescheduleModalProviderProps> = (
             if(rescheduleSuccess){
                 
                 onClose()
-                
-            }
 
+            }
             
         }
 
@@ -86,7 +86,9 @@ export const RescheduleModalProvider: React.FC<RescheduleModalProviderProps> = (
         setSelectedDoctor,
         availableDoctors,
         filterDoctorsBySpeciality,
-        resetDoctorFilter
+        resetDoctorFilter,
+        consultationType,
+        setConsultationType
         
     }
 
