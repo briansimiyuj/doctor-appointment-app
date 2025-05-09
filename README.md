@@ -982,6 +982,13 @@ Patient details page will show the patient's details; medical history, allergies
           2. Fill in the doctor's name, image and speciality
           3. Attach onSelectDoctor function to the parent div to select the doctor
 
+      ### Consultation Type Selector Component
+
+      Consultation Type Selector component will be used to select the consultation type
+
+        1. Create a Consultation Type Selector component and mount it on the Modal Body component
+        2. Make two radio inputs for the online and in-person consultation types
+
       ### Reschedule Modal Footer Component
 
       Modal Footer component will display a button to confirm the rescheduling of the appointment and a button to close the modal. It will be similar to cancel appointment and reject appointment modal footers.
