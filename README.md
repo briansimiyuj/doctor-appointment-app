@@ -772,214 +772,216 @@ Patient details page will show the patient's details; medical history, allergies
       1. Create a Reschedule Modal component and mount it on the Tab Action Button component if showRescheduleModal state is true
       2. Create a Modal Body component and mount it on the Reschedule Modal component. Wrap the Modal Body component with a Modal Provider
 
-      #### Date Picker Context
+        #### Date Picker Context
 
-      Date Picker context will be used to manage the state of the date picker (Handle date selection)
+        Date Picker context will be used to manage the state of the date picker (Handle date selection)
 
-        1. Retrieve newDate, setNewDate from the Reschedule Modal context
-        2. Create a state for current month and initialize it to a new Date object
-        3. Create a state for selected date and initialize it to: if newDate is available, new Date(newDate) else null
-        4. Update the selected date state with newDate object if the newDate changes
-        5. Update newDate state with the selected date if it is available
-        6. Create a function to get days in a month and return an array of days in the month
-        7. Create a function to get the first day of the month and return the day of the week
-        8. Create a function to navigate to the previous month and update the current month state
-        9. Create a function to navigate to the next month and update the current month state
-        10. Create a function to check if a date is in the past and return a boolean to check if the date is in the past
-        11. Create a function to check if a date is selected and return a boolean to check if the date is selected
-        12. Create a function to check if a date is today and return a boolean to check if the date is today
-        12. Create a function to handle the date selection and update the selected date state if the date is not in the past
-        13. Create a state for isCalendarVisible and initialize it to false
-        14. Create functions to handle the calendar visibility and update the isCalendarVisible state
-        15. Add a small delay to allow the user to see their selection before closing the calendar
-        16. Create a function to check if a date is available and returns a boolean
-            a. First check doctorAvailability if provided
-            b. Compare date components (day, month, year) rather than timestamps
-            c. Fall back to dummySlots when no doctor availability exists
-            d. Use schedule.availableSlots as final fallback option
-            e. Parse status from slot string format when using schedule data
+          1. Retrieve newDate, setNewDate from the Reschedule Modal context
+          2. Create a state for current month and initialize it to a new Date object
+          3. Create a state for selected date and initialize it to: if newDate is available, new Date(newDate) else null
+          4. Update the selected date state with newDate object if the newDate changes
+          5. Update newDate state with the selected date if it is available
+          6. Create a function to get days in a month and return an array of days in the month
+          7. Create a function to get the first day of the month and return the day of the week
+          8. Create a function to navigate to the previous month and update the current month state
+          9. Create a function to navigate to the next month and update the current month state
+          10. Create a function to check if a date is in the past and return a boolean to check if the date is in the past
+          11. Create a function to check if a date is selected and return a boolean to check if the date is selected
+          12. Create a function to check if a date is today and return a boolean to check if the date is today
+          12. Create a function to handle the date selection and update the selected date state if the date is not in the past
+          13. Create a state for isCalendarVisible and initialize it to false
+          14. Create functions to handle the calendar visibility and update the isCalendarVisible state
+          15. Add a small delay to allow the user to see their selection before closing the calendar
+          16. Create a function to check if a date is available and returns a boolean
+              a. First check doctorAvailability if provided
+              b. Compare date components (day, month, year) rather than timestamps
+              c. Fall back to dummySlots when no doctor availability exists
+              d. Use schedule.availableSlots as final fallback option
+              e. Parse status from slot string format when using schedule data
 
-        17. Generate available dates array for highlighting in calendar
-            a. Filter doctorAvailability or dummySlots to only include "available" status
-            b. Map filtered slots to Date objects for comparison
-            c. Store in availableDates state for efficient access
-            d. Update when doctorAvailability or schedule changes
+          17. Generate available dates array for highlighting in calendar
+              a. Filter doctorAvailability or dummySlots to only include "available" status
+              b. Map filtered slots to Date objects for comparison
+              c. Store in availableDates state for efficient access
+              d. Update when doctorAvailability or schedule changes
 
-        18. Implement multi-level fallback system for date availability
-            a. Try doctorAvailability from props as primary source
-            b. Use dummySlots from imported data as secondary source
-            c. Fall back to schedule context data if needed
-            d. Ensure component works with partial or missing data
+          18. Implement multi-level fallback system for date availability
+              a. Try doctorAvailability from props as primary source
+              b. Use dummySlots from imported data as secondary source
+              c. Fall back to schedule context data if needed
+              d. Ensure component works with partial or missing data
 
-        19. Implement time slot selection logic
-          a. Create a state for selectedTime and initialize it to: if initialTime is available, new Date(initialTime) else null
-          b. Create a state for isTimePickerVisible and initialize it to false
-          c. Set selectedTime with newTime if available when newTime changes
-          d. Set newTime with selectedTime if available when selectedTime changes
-          e. Create a function to handle the time selection and update the selectedTime
+          19. Implement time slot selection logic
+            a. Create a state for selectedTime and initialize it to: if initialTime is available, new Date(initialTime) else null
+            b. Create a state for isTimePickerVisible and initialize it to false
+            c. Set selectedTime with newTime if available when newTime changes
+            d. Set newTime with selectedTime if available when selectedTime changes
+            e. Create a function to handle the time selection and update the selectedTime
 
-        20. Create a function to show and hide the time picker. When the user selects a time, update the selectedTime state and hide the time picker.
+          20. Create a function to show and hide the time picker. When the user selects a time, update the selectedTime state and hide the time picker.
 
 
-      #### Date Picker Content
+        #### Date Picker Content
 
-      Date Picker Content component displays the selected date and manages the visibility of the calendar. It:
-      
-        1. Shows the selected date in an input field
-        2. Displays the calendar when the input is clicked
-        3. Positions the calendar as a dropdown with absolute positioning
-        4. Contains all the child components for the calendar UI
-
-      #### Date Picker
-
-      Date Picker is the main component that wraps the DatePickerContent with the DatePickerProvider context. It:
-
-        1. Provides state management through DatePickerContext
-        2. Handles date selection logic
-        3. Manages calendar visibility
-        4. Ensures proper data flow between all subcomponents
-
-      ##### Calendar Header Component
-
-      Calendar Header component will be used to navigate to the previous and next months
-       
-        1. Create a Calendar Header component and mount it on the Date Picker component
-          a. It will have a button to navigate to previous month and a button to navigate to next month
+        Date Picker Content component displays the selected date and manages the visibility of the calendar. It:
         
-        2. Create an array of months names and map over it with the current month and current year to display the month name and year in the header
-        3. Attach an event listener to the previous month button to navigate to the previous month
-        4. Attach an event listener to the next month button to navigate to the next month
+          1. Shows the selected date in an input field
+          2. Displays the calendar when the input is clicked
+          3. Positions the calendar as a dropdown with absolute positioning
+          4. Contains all the child components for the calendar UI
 
-      #### Day Names Component
+        #### Date Picker
 
-        1. Create a Day Names component and mount it on the Date Picker component
-        2. Create an array of day names and map over it to display the day names
+        Date Picker is the main component that wraps the DatePickerContent with the DatePickerProvider context. It:
 
-      #### Calendar Grid Component
+          1. Provides state management through DatePickerContext
+          2. Handles date selection logic
+          3. Manages calendar visibility
+          4. Ensures proper data flow between all subcomponents
 
-        1. Create a Calendar Grid component and mount it on the Date Picker component
-        2. Retrieve the current month, getDaysInMonth, and getFirstDayOfMonth from the Date Picker component
-        3. Create a function to render the calendar grid and return a table with the days of the month
-          a. Create constants for the year, month, and first day of the month and assign them to their respective variables
-          b. Create an empty array to store the days of the month
-          c. Loop through firstDayOfMonth times to add empty cells to the days array
-          d. Loop through the days in the month and add them to the days array as a component (Day Cell)
+        ##### Calendar Header Component
 
-        #### Day Cell Component
+        Calendar Header component will be used to navigate to the previous and next months
+        
+          1. Create a Calendar Header component and mount it on the Date Picker component
+            a. It will have a button to navigate to previous month and a button to navigate to next month
+          
+          2. Create an array of months names and map over it with the current month and current year to display the month name and year in the header
+          3. Attach an event listener to the previous month button to navigate to the previous month
+          4. Attach an event listener to the next month button to navigate to the next month
 
-          1. Display the day of the month in the div 
-            a. if the day is in the past, text color should be gray and cursor should be not-allowed
-            b. if the day is selected, background color should be blue and text color should be white
-            c. if the day is today, and not selected, border color should be blue, background color white
-            d. if the day is not today and not selected, background color should be white and text color should be black, background color on hover should be light gray
-            e. if the day is not today, not selected, and not available, background color should be red, text color should be gray, cursor should be not-allowed. Make sure to disable the button
+        #### Day Names Component
 
-          2. Create a function to handle the date selection and update the selected date state if the date is not in the past
-          3. Attach the function to the div element as an onClick event listener
+          1. Create a Day Names component and mount it on the Date Picker component
+          2. Create an array of day names and map over it to display the day names
 
-      #### Selected Date Display Component
+        #### Calendar Grid Component
 
-        1. Create a Selected Date Display component and mount it on the Date Picker component
-          a. Retrieve the selected date and showCalendar function from the Date Picker context
-          b. Display the selected date in an input field
-          c. Attach showCalendar function to the input field to show the calendar when clicked
+          1. Create a Calendar Grid component and mount it on the Date Picker component
+          2. Retrieve the current month, getDaysInMonth, and getFirstDayOfMonth from the Date Picker component
+          3. Create a function to render the calendar grid and return a table with the days of the month
+            a. Create constants for the year, month, and first day of the month and assign them to their respective variables
+            b. Create an empty array to store the days of the month
+            c. Loop through firstDayOfMonth times to add empty cells to the days array
+            d. Loop through the days in the month and add them to the days array as a component (Day Cell)
 
-      #### Available Time Slots Hook
+          #### Day Cell Component
 
-      Available Time Slots hook will be used to fetch the available time slots for the selected date and update the state accordingly. It will be used in the Time Picker component to display the available time slots.
+            1. Display the day of the month in the div 
+              a. if the day is in the past, text color should be gray and cursor should be not-allowed
+              b. if the day is selected, background color should be blue and text color should be white
+              c. if the day is today, and not selected, border color should be blue, background color white
+              d. if the day is not today and not selected, background color should be white and text color should be black, background color on hover should be light gray
+              e. if the day is not today, not selected, and not available, background color should be red, text color should be gray, cursor should be not-allowed. Make sure to disable the button
 
-        1. Filter the available slots based on the selected date
-        2. Get all slots from the schedule (retrieve from schedule context)
-        3. Group the filtered slots by morning, afternoon and evening
-        4. Create dummy slots for the selected date
-        5. Filter the slots based on the current time; if the slot is in the past, remove it from the array
-        6. Add a buffer time of 30 minutes to avoid booking slots that are too close to the current time
-        7. Cache the generated dummy slots by date to avoid re-generating them after selection
+            2. Create a function to handle the date selection and update the selected date state if the date is not in the past
+            3. Attach the function to the div element as an onClick event listener
 
-      #### Time Picker Component
+        #### Selected Date Display Component
 
-      Time Picker component will be used to display the available time slots for the selected date. 
+          1. Create a Selected Date Display component and mount it on the Date Picker component
+            a. Retrieve the selected date and showCalendar function from the Date Picker context
+            b. Display the selected date in an input field
+            c. Attach showCalendar function to the input field to show the calendar when clicked
 
-        1. Create a Time Picker component and mount it on the Modal Body component and wrap it with Date Picker context
-        2. Create a function that closes time slot grid when the user clicks outside of it
+        #### Available Time Slots Hook
 
-      #### Select Time Display Component
+        Available Time Slots hook will be used to fetch the available time slots for the selected date and update the state accordingly. It will be used in the Time Picker component to display the available time slots.
 
-      Select Time Display component will be used to display selected time.
+          1. Filter the available slots based on the selected date
+          2. Get all slots from the schedule (retrieve from schedule context)
+          3. Group the filtered slots by morning, afternoon and evening
+          4. Create dummy slots for the selected date
+          5. Filter the slots based on the current time; if the slot is in the past, remove it from the array
+          6. Add a buffer time of 30 minutes to avoid booking slots that are too close to the current time
+          7. Cache the generated dummy slots by date to avoid re-generating them after selection
 
-        1. Create a Select Time Picker component and mount it on the Time Picker component
-        2. Attach showTimePicker function to the input field to show the time picker when clicked
-          a. If the user hasn't selected a date, display a message to select a date first
+        #### Time Picker Component
 
-      #### Select Time Picker Header Component
+        Time Picker component will be used to display the available time slots for the selected date. 
 
-      Select Time Picker Header component will be used to display the selected time
+          1. Create a Time Picker component and mount it on the Modal Body component and wrap it with Date Picker context
+          2. Create a function that closes time slot grid when the user clicks outside of it
 
-        1. Create a Select Time Picker Header component and mount it on the Time Picker component
+        #### Select Time Display Component
 
-      #### Time Slot Grid Component
+        Select Time Display component will be used to display selected time.
 
-      Time Slot Grid component will be used to display various groups of time slots
+          1. Create a Select Time Picker component and mount it on the Time Picker component
+          2. Attach showTimePicker function to the input field to show the time picker when clicked
+            a. If the user hasn't selected a date, display a message to select a date first
 
-        1. Create a Time Slot Grid component and mount it on the Time Picker component
-        2. Create Time Slot Grid Group component and mount it on the Time Slot Grid component. This will be used to group the time slots by morning, afternoon and evening
-        3. Do the same for all groups of time slots
+        #### Select Time Picker Header Component
 
-    ### Doctor Selector Component
+        Select Time Picker Header component will be used to display the selected time
 
-    Doctor Selector component will be used to display a list of doctors available for the rescheduled appointment.
+          1. Create a Select Time Picker Header component and mount it on the Time Picker component
 
-     1. Create a Doctor Selector component and mount it on the Modal Body component
-     2. Retrieve selected doctor state and available doctors from the Reschedule context
-     3. Create a state for dropdown visibility and initialize it to false
-     4. Create a state for search term and initialize it to empty string
-     5. Filter the doctors based on the search term
-     6. Create a function to handle doctor selection and update the selected doctor state
+        #### Time Slot Grid Component
 
-     #### Select Doctor Display Component
+        Time Slot Grid component will be used to display various groups of time slots
 
-     Select Doctor Display component will be used to display the selected doctor
+          1. Create a Time Slot Grid component and mount it on the Time Picker component
+          2. Create Time Slot Grid Group component and mount it on the Time Slot Grid component. This will be used to group the time slots by morning, afternoon and evening
+          3. Do the same for all groups of time slots
 
-      1. Create a Select Doctor Display component and mount it on the Doctor Selector component and pass selected doctor and showDropdown state as props
-      2. If selected doctor is available, display the doctor's name and image. If not, display a message to select a doctor
-      3. Add a dropdown icon to the right of the doctor's name and image. When clicked, toggle the showDropdown state
-      4. Attach a function to the parent div to toggle the showDropdown state
-      5. If showDropdown is true, display the following:
+      ### Doctor Selector Component
 
-      #### Doctor Searchbar Component
+      Doctor Selector component will be used to display a list of doctors available for the rescheduled appointment.
 
-      Doctor Searchbar component will be used to search for doctors
+      1. Create a Doctor Selector component and mount it on the Modal Body component
+      2. Retrieve selected doctor state and available doctors from the Reschedule context
+      3. Create a state for dropdown visibility and initialize it to false
+      4. Create a state for search term and initialize it to empty string
+      5. Filter the doctors based on the search term
+      6. Create a function to handle doctor selection and update the selected doctor state
 
-       1. Create a Doctor Searchbar component and mount it on the Doctor Selector component. Pass search term state as a prop
-       2. Make the searchbar a controlled component by attaching a value attribute to the input element and setting it to the search term state
-       3. Create a function to handle the search term change and update the search term state
-       4. Attach the function to the input element's onChange event
+      #### Select Doctor Display Component
 
-      #### Speciality Filter Component
+      Select Doctor Display component will be used to display the selected doctor
 
-      Speciality Filter component will be used to filter doctors by speciality
+        1. Create a Select Doctor Display component and mount it on the Doctor Selector component and pass selected doctor and showDropdown state as props
+        2. If selected doctor is available, display the doctor's name and image. If not, display a message to select a doctor
+        3. Add a dropdown icon to the right of the doctor's name and image. When clicked, toggle the showDropdown state
+        4. Attach a function to the parent div to toggle the showDropdown state
+        5. If showDropdown is true, display the following:
 
-       1. Create a Speciality Filter component and mount it on the Doctor Selector component.
-       2. Loop through the speciality data and create a button for each speciality
-       3. When an user clicks on a speciality, the button will be highlighted
-       4. Retrieve the filter speciality functions from the reschedule context.
-       5. Create a function to handle the speciality change and update the filter speciality state
-       6. Create a function to handle the speciality reset and update the filter speciality state
-       7. Make the component into a dropdown 
+        #### Doctor Searchbar Component
 
-      #### Doctor List Component
+        Doctor Searchbar component will be used to search for doctors
 
-      Doctor List component will be used to display a list of doctors
+        1. Create a Doctor Searchbar component and mount it on the Doctor Selector component. Pass search term state as a prop
+        2. Make the searchbar a controlled component by attaching a value attribute to the input element and setting it to the search term state
+        3. Create a function to handle the search term change and update the search term state
+        4. Attach the function to the input element's onChange event
 
-        1. Create a Doctor List component and mount it on the Doctor Selector component and pass the following props: filteredDoctors, selectedDoctorID and doctor selection function
-        2. Fill in the doctor's name, image and speciality
-        3. Attach onSelectDoctor function to the parent div to select the doctor
+        #### Speciality Filter Component
 
-    ### Reschedule Modal Footer Component
+        Speciality Filter component will be used to filter doctors by speciality
 
-    Modal Footer component will display a button to confirm the rescheduling of the appointment and a button to close the modal. It will be similar to cancel appointment and reject appointment modal footers.
+        1. Create a Speciality Filter component and mount it on the Doctor Selector component.
+        2. Loop through the speciality data and create a button for each speciality
+        3. When an user clicks on a speciality, the button will be highlighted
+        4. Retrieve the filter speciality functions from the reschedule context.
+        5. Create a function to handle the speciality change and update the filter speciality state
+        6. Create a function to handle the speciality reset and update the filter speciality state
+        7. Make the component into a dropdown 
 
-      1. Create a Modal Footer component and mount it on the Reschedule Appointment Modal component and wrap it with Reschedule Modal Provider
+        #### Doctor List Component
+
+        Doctor List component will be used to display a list of doctors
+
+          1. Create a Doctor List component and mount it on the Doctor Selector component and pass the following props: filteredDoctors, selectedDoctorID and doctor selection function
+          2. Fill in the doctor's name, image and speciality
+          3. Attach onSelectDoctor function to the parent div to select the doctor
+
+      ### Reschedule Modal Footer Component
+
+      Modal Footer component will display a button to confirm the rescheduling of the appointment and a button to close the modal. It will be similar to cancel appointment and reject appointment modal footers.
+
+        1. Create a Modal Footer component and mount it on the Reschedule Appointment Modal component and wrap it with Reschedule Modal Provider
+
+    3. Create a confirmation checkbox component and mount it on Modal Body component
 
         
 
