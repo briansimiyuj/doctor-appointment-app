@@ -41,8 +41,9 @@ export const RescheduleModalProvider: React.FC<RescheduleModalProviderProps> = (
 
         if(!appointment && !isValid) return
 
-        if(newDate && newTime && selectedDoctor){
-            const rescheduleSuccess = rescheduleAppointment(appointment, newDate, newTime, selectedDoctor)
+        if(newDate && newTime && selectedDoctor && consultationType){
+
+            const rescheduleSuccess = rescheduleAppointment(appointment, newDate, newTime, consultationType, selectedDoctor)
 
             if(rescheduleSuccess){
                 
