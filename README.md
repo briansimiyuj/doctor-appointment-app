@@ -769,6 +769,8 @@ Patient details page will show the patient's details; medical history, allergies
        a. Assign the function to a boolean variable
        b. If the boolean state is true, call the onClose function to close the modal
 
+      8. Create a state for consultation type and initialize it to null
+
 
     ### Reschedule Modal Component
 
