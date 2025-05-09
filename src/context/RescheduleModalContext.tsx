@@ -4,6 +4,7 @@ import { RescheduleModalContextProps } from "../assets/contextProps/RescheduleMo
 import { useUpdatePatientDetails } from "../hooks/useUpdatePatientDetails"
 import { doctors } from "../assets/frontend/doctorsData"
 import { DoctorType } from "../assets/types/DoctorType"
+import { useRescheduleAppointment } from "../hooks/useRescheduleAppointment"
 
 interface RescheduleModalProviderProps{
 
@@ -18,6 +19,7 @@ const RescheduleModalContext = createContext<RescheduleModalContextProps | undef
 export const RescheduleModalProvider: React.FC<RescheduleModalProviderProps> = ({ children, appointment, onClose }) =>{
 
     const { newDate, setNewDate, newTime, setNewTime } = useUpdatePatientDetails(),
+          { rescheduleAppointment } = useRescheduleAppointment(),
           [selectedDoctor, setSelectedDoctor] = useState<DoctorType | null>(null),
           [isConfirmed, setIsConfirmed] = useState(false),
           [availableDoctors, setAvailableDoctors] = useState<DoctorType[]>(doctors),
@@ -38,7 +40,17 @@ export const RescheduleModalProvider: React.FC<RescheduleModalProviderProps> = (
 
         if(!appointment && !isValid) return
 
-        onClose()
+        if(newDate && newTime && selectedDoctor){
+            const rescheduleSuccess = rescheduleAppointment(appointment, newDate, newTime, selectedDoctor)
+
+            if(rescheduleSuccess){
+                
+                onClose()
+                
+            }
+
+            
+        }
 
     }
 

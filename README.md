@@ -765,6 +765,10 @@ Patient details page will show the patient's details; medical history, allergies
       6. Create a function to reset the filtered doctors to show all doctors
         a. Filter the current doctor from the available doctors array
 
+      7. Retrieve the reschedule appointment function from the reschedule appointment hook
+       a. Assign the function to a boolean variable
+       b. If the boolean state is true, call the onClose function to close the modal
+
 
     ### Reschedule Modal Component
 
