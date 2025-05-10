@@ -225,6 +225,16 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
 
       }
 
+      const updateAppointment = (appointment: AppointmentType) =>{
+
+            setPatientAppointments(prevAppointments =>{
+
+                  return prevAppointments.map(app => app._id === appointment._id ? appointment : app)
+
+            })
+
+      }
+
       const value ={
 
             activeTab,
@@ -253,7 +263,8 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             patientDetails,
             setPatientDetails,
             updateAppointmentStatus,
-            patientID
+            patientID,
+            updateAppointment
 
       }
 
