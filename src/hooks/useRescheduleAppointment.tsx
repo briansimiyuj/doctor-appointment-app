@@ -68,10 +68,6 @@ export const useRescheduleAppointment = () =>{
 
         localStorage.setItem("rescheduleHistory", JSON.stringify(rescheduleHistory))
 
-        console.log('Appointment rescheduled:', updatedAppointment)
-
-        console.log('original appointment:', appointment)
-
         return true
 
     }
