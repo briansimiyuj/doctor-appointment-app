@@ -519,6 +519,8 @@ Patient details context will be used to store the patient's details and appointm
     g. Return the updated appointments array to update state
     h. If the appointment is not found, return the original appointments array
 
+  11. Create a function to update the appointment details
+    a. Create a setter function to update patient appointments array
 
   
 ### Patient Details Page
