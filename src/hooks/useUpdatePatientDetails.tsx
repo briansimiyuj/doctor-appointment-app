@@ -10,9 +10,7 @@ export const useUpdatePatientDetails = () =>{
             : null,
           [showCancelModal, setShowCancelModal] = useState(false),
           [showRejectModal, setShowRejectModal] = useState(false),
-          [showRescheduleModal, setShowRescheduleModal] = useState(
-             import.meta.env.MODE === "production" ? false : true
-          ),
+          [showRescheduleModal, setShowRescheduleModal] = useState(false),
           [appointmentToCancel, setAppointmentToCancel] = useState<AppointmentType | null>(null),
           [appointmentToReject, setAppointmentToReject] = useState<AppointmentType | null>(null),
           [appointmentToReschedule, setAppointmentToReschedule] = useState<AppointmentType | null>(null),
