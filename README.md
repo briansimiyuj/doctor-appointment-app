@@ -1003,7 +1003,7 @@ Patient details page will show the patient's details; medical history, allergies
 
     Reschedule Appointment hook will be used to handle the rescheduling of the appointment
 
-      1. Retrieve updateAppointmentStatus function from Patient Details context
+      1. Retrieve updateAppointment function from Patient Details context
       2. Create a function to handle the rescheduling of the appointment which takes appointment, newDate, newTime, consultationType and selectedDoctor as parameters
         a. If newDate, newTime, and selectedDoctor are not provided, exit the function 
         b. Create an object to store the updated appointment details

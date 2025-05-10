@@ -4,7 +4,7 @@ import { usePatientDetails } from "../context/PatientDetailsContext"
 
 export const useRescheduleAppointment = () =>{
 
-    const { updateAppointmentStatus } = usePatientDetails()
+    const { updateAppointment } = usePatientDetails()
 
     const rescheduleAppointment =(
         appointment: AppointmentType,
@@ -34,7 +34,7 @@ export const useRescheduleAppointment = () =>{
 
         }
 
-        updateAppointmentStatus(appointment, "rescheduled")
+        updateAppointment(updatedAppointment)
         
         const rescheduleDetails ={
 
@@ -69,6 +69,8 @@ export const useRescheduleAppointment = () =>{
         localStorage.setItem("rescheduleHistory", JSON.stringify(rescheduleHistory))
 
         console.log('Appointment rescheduled:', updatedAppointment)
+
+        console.log('original appointment:', appointment)
 
         return true
 
