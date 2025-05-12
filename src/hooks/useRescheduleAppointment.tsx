@@ -35,6 +35,12 @@ export const useRescheduleAppointment = () =>{
         }
 
         updateAppointment(updatedAppointment)
+
+        const patientID = appointment.patient._id || 'defaultPatientID',
+              storedAppointments = (localStorage.getItem(`appointments-${patientID}`) || "[]"),
+              updatedAppointments = JSON.parse(storedAppointments).map((app: AppointmentType) => app._id === appointment._id ? updatedAppointment : app)
+
+        localStorage.setItem(`appointments-${patientID}`, JSON.stringify(updatedAppointments))
         
         const rescheduleDetails ={
 

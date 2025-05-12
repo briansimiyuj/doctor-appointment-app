@@ -22,10 +22,16 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
 const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null>(null), 
       [activeTab, setActiveTab] =  useState<"medical-history" | "appointments" | "prescriptions" | "notes" | "documents">("appointments"),
-      [patientAppointments, setPatientAppointments] = useState<AppointmentType[]>([]),
+      { patientID = "" } = useParams<{ patientID: string }>(),
+      [patientAppointments, setPatientAppointments] = useState<AppointmentType[]>(() =>{
+
+            const savedAppointments = localStorage.getItem(`appointments-${patientID}`)
+
+            return savedAppointments ? JSON.parse(savedAppointments) : []
+
+      }),
       { appointments } = useContext(AppointmentsContext),
       { appointedPatients } = useContext(BookingContext),
-      { patientID = "" } = useParams<{ patientID: string }>(),
       [notes, setNotes] = useState<Array<{
 
             id: string

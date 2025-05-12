@@ -499,7 +499,7 @@ Patient details context will be used to store the patient's details and appointm
   1. Create props for the Patient Details context
   2. Create a state variable for the patient and initialize it with null
   3. Create a state variable for active tab and initialize it with "Medical History"
-  4. Create a state variable for patient appointment with `appointment type` and initialize it with empty array
+  4. Create a state variable for patient appointment with `appointment type` and initialize it with: if there is saved appointment in local storage then the saved appointment else empty array
   5. Create a function to fetch the patient appointment based on patient id
   6. Find the appointed patient based on the patient id and set the patient details and appointment details
   7. Create a state variables for notes and documents with respective types and initialize them with empty array
@@ -1012,6 +1012,7 @@ Patient details page will show the patient's details; medical history, allergies
         d. Store rescheduling history
         e. Store the updated appointment details in the database and local storage
 
+      3. Save the updated appointments to localStorage
         
 
 ### Settings Context
