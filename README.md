@@ -1024,6 +1024,12 @@ Patient details page will show the patient's details; medical history, allergies
         e. Store the updated appointment details in the database and local storage
 
       3. Save the updated appointments to localStorage
+
+    ### Rescheduled History Modal
+
+    Rescheduled History Modal will be used to display the rescheduling history of the appointment
+
+    1. Create a Rescheduled History Modal component and mount it on the Reschedule Appointment Modal component on Tab Action component if showRescheduledHistoryModal is true
         
 
 ### Settings Context
