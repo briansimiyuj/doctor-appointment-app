@@ -699,6 +699,17 @@ Patient details page will show the patient's details; medical history, allergies
           b. Set the modal visibility state to false
           c. Set new date and new time states to null
 
+      *Reschedule History Modal Function*
+
+      Reschedule history modal function will open a modal to display the reschedule history of the appointment.
+
+        1. Create a state for reschedule history modal visibility and initialize it to false
+        2. Create a function to open the modal
+          a. Set the modal visibility state to true
+        
+        3. Create a function to close the modal
+          a. Set the modal visibility state to false
+
 
     ### Modal Context
 
