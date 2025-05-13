@@ -1032,6 +1032,7 @@ Patient details page will show the patient's details; medical history, allergies
     1. Create a Rescheduled History Modal component and mount it on the Reschedule Appointment Modal component on Tab Action component if showRescheduledHistoryModal is true
     2. Create an interface of the rescheduling history
     3. Create a function to get the rescheduling history of the appointment which returns an array of rescheduling history
+    4. Create a Modal Body component and mount it on the Rescheduled History Modal component; it will display the original appointment details and the rescheduled appointment detailsc
         
 
 ### Settings Context
