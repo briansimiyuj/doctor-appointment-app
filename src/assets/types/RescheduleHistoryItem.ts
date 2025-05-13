@@ -20,7 +20,7 @@ interface RescheduleHistoryItem{
 
     }
 
-    timestamp: string
+    timeStamp: string
 
 }
 
