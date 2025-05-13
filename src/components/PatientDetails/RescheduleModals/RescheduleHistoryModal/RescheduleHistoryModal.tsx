@@ -1,4 +1,6 @@
-const RescheduleHistoryModal: React.FC = () =>{
+import ModalBody from "./ModalBody"
+
+const RescheduleHistoryModal: React.FC= () =>{
 
     return(
 
@@ -7,6 +9,8 @@ const RescheduleHistoryModal: React.FC = () =>{
             <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-2xl mx-auto overflow-y-auto max-h-[90vh] flex flex-col">
 
                 <h2 className="text-xl font-bold mb-4 text-center text-gray-800">Reschedule History</h2>
+
+                <ModalBody/>
 
             </div>
 
