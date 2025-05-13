@@ -26,14 +26,18 @@ const ModalBody: React.FC = ()=>{
 
                                 <div className="border rounded-lg p-4 bg-gray-50" key={index}>
 
-                                    <div className="flex items-start justify-between mb-3">
+                                    <div className="flex items-start justify-between gap-4 mb-3">
 
-                                        <h3 className="font-medium">Rescheduled History</h3>
+                                        <h3 className="font-medium">Rescheduled On</h3>
 
                                         <span className="text-gray-500">
 
-                                            {new Date(historyItem.timestamp).toLocaleString()}
+                                            {
 
+                                                `${new Date(historyItem.timeStamp).toLocaleDateString()} at ${new Date(historyItem.timeStamp).toLocaleTimeString()}`
+
+                                            }
+ 
                                         </span>
 
                                     </div>
