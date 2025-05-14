@@ -117,6 +117,8 @@ export const useUpdatePatientDetails = () =>{
          console.log('Alternative appointment:', alternative)
 
       }
+
+      closeRejectModal()
    
    }
 
