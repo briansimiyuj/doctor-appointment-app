@@ -7,6 +7,8 @@ interface RescheduleHistoryItem{
         consultationType: "online" | "in-person"
         doctorName: string
         doctorID: string
+        reason: string
+        alternative?: string
 
     }
 

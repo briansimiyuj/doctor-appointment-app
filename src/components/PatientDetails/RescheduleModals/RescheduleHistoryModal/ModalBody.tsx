@@ -1,4 +1,5 @@
 import { rescheduleHistory } from "../../../../assets/types/RescheduleHistoryItem"
+import ReasonAlt from "./ReasonAlt"
 
 const ModalBody: React.FC = ()=>{
 
@@ -53,6 +54,8 @@ const ModalBody: React.FC = ()=>{
                                             <p className="text-sm">Time: {historyItem.originalAppointment.time}</p>
 
                                             <p className="text-sm">Doctor: {historyItem.originalAppointment.doctorName}</p>
+
+                                            <ReasonAlt/>
 
                                         </div>
 
