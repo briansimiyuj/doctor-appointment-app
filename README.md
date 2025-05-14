@@ -633,6 +633,10 @@ Patient details page will show the patient's details; medical history, allergies
 
         1. Attach open modal function from update patient details hook to the reschedule appointment button
 
+      *Reschedule History Button*: Reschedule history button will show the rescheduled history of the appointment.
+
+        1. Attach open modal function from update patient details hook to the reschedule history button
+
 
       ### Update Patient Details Hook
 
