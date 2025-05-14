@@ -717,7 +717,7 @@ Patient details page will show the patient's details; medical history, allergies
 
       Modal context will be used to manage the state of the modal (Handle cancel appointment, reason for cancellation, etc.)
 
-        1. Retrieve updateAppointmentStatus function from the patient details context
+        1. Retrieve updateAppointmentStatus function from the patient details context and handleRejectAppointment as rejectAppointment, reason and alternative states from update patient details hook
         2. Create states for reason, alternative and isConfirmed and initialize them to an empty string and false respectively
         3. Check if the reason is not empty and isConfirmed is true, if both are true, set a boolean state to it
         4. Create a function to handle the cancel appointment
@@ -731,6 +731,7 @@ Patient details page will show the patient's details; medical history, allergies
           b. Call the updateAppointmentStatus function with the appointment to reject and the 'rejected' status
           c. If an onReject callback function is provided, call it with the appointment to reject and the rejection reason
           d. Call onClose function to close the modal
+          e. Call the rejectAppointment function with the reason and alternative parameters
 
 
     ### Cancel Appointment Modal Component
