@@ -660,28 +660,30 @@ Patient details page will show the patient's details; medical history, allergies
 
       Reject appointment function will open a modal to confirm the rejection of the appointment.  
 
-        1. Create a state for appointment to reject and initialize it to null
-        2. Create a function to reject the appointment which takes reason and alterntive as parameters
-          a. If there is no appointment to reject, exit the function early
-          b. Retreive appointment ID from the appointment to reject object (date - time)
-          c. Retrieve rejection from local storage using the appointment ID as part of the key 
-          d. Create a new rejection object with:
+        1. Create a state for appointment to reject and initialize it with data from localStorage if available
+        2. Create a function to reject the appointment which takes reason and alternative as parameters
+          a. Get the appointmen
+          b. If there is no appointment to reject, exit the function early
+          c. Retrieve appointment ID from the appointment to reject object (date - time)
+          d. Retrieve rejection reason from local storage using the patient ID as part of the key 
+          e. Create a new rejection object with:
             - The provided rejection reason
             - Any alternative suggestion (or empty string if not provided)
             - Timestamp of when the rejection was made
             - Full appointment details for reference
             
-          e. Store the updated rejection reason back into local storage
+          f. Store the updated rejection reason back into local storage
 
         3. Create a state for modal visibility and initialize it to false
         4. Create a function to open the modal which takes the appointment to reject as a parameter
-          a. Set the appointment to reject state to the appointment parameter
-          b. Set the modal visibility state to true
+          a. Save the appointment to localStorage for persistence
+          b. Set the appointment to reject state to the appointment parameter
+          c. Set the modal visibility state to true
 
         5. Create a function to close the modal
-
-          a. Set the appointment to reject state to null
-          b. Set the modal visibility state to false
+          a. Remove the appointment from localStorage
+          b. Set the appointment to reject state to null
+          c. Set the modal visibility state to false
 
       *Reschedule Appointment Function*
 
