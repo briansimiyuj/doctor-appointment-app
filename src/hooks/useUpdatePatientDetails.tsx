@@ -54,8 +54,6 @@ export const useUpdatePatientDetails = () =>{
 
    const openRejectModal = (appointment: AppointmentType) =>{
 
-      console.log('opening reject modal with appointment:', appointment)
-
       localStorage.setItem('CurrentAppointmentToReject', JSON.stringify(appointment))
 
       setAppointmentToReject(appointment)
@@ -109,14 +107,6 @@ export const useUpdatePatientDetails = () =>{
       }
 
       localStorage.setItem(`rejectionReason-${patientID}`, JSON.stringify(rejectionReason))
-
-      console.log('Appointment rejected with reason:', reason)
-
-      if(alternative){
-
-         console.log('Alternative appointment:', alternative)
-
-      }
 
       closeRejectModal()
    
