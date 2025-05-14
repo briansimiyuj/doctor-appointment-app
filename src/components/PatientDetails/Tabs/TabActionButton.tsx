@@ -45,7 +45,7 @@ const TabActionButton: React.FC = ()=>{
                 
                     <button
                         className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
-                        onClick={openRejectModal}
+                        onClick={() => openRejectModal(latestAppointment)}
                     >
 
                         <span className="flex items-center justify-center gap-2">
