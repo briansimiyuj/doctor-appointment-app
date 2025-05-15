@@ -19,7 +19,7 @@ export const useUpdatePatientDetails = () =>{
          }),
          [appointmentToReschedule, setAppointmentToReschedule] = useState<AppointmentType | null>(null),
          [showRescheduleHistoryModal, setShowRescheduleHistoryModal] = useState(
-         false
+            import.meta.env.VITE_DEV_MODE === "production" ? false : true
          ),
          [newDate, setNewDate] = useState<string | null>(null),
          [newTime, setNewTime] = useState<string | null>(null)
