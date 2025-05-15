@@ -14,15 +14,11 @@ const ReasonAlt: React.FC = ()=>{
             const patientID = patientDetails.patientInfo._id,
                   storedReason = localStorage.getItem(`rejectionReason-${patientID}`)
 
-            console.log('Stored rejection reason:', storedReason)
-
             if(storedReason){
 
                 try{
 
                     const parsedReason = JSON.parse(storedReason)
-                    
-                    console.log('Parsed rejection reason:', parsedReason)
 
                     setRejectionData(parsedReason)
 
@@ -46,12 +42,31 @@ const ReasonAlt: React.FC = ()=>{
           reeason = latestRejection.reason,
           alternative = latestRejection.alternative
 
-    console.log('Latest rejection reason:', reeason)
-    console.log('Latest rejection alternative:', alternative)
-
     return(
 
-        <h1>ReasonAlt</h1>
+        <div className="mt-4">
+        
+            <h4 className="text-sm font-medium text-gray-700 mb-2">Reason</h4>
+
+            <p className="text-sm text-gray-500">{reeason}</p>
+
+            {
+
+                alternative &&(
+
+                    <div className="mt-2">
+
+                        <h5 className="text-sm font-medium text-gray-700 mb-2">Alternative Suggestion</h5>
+
+                        <p className="text-sm text-gray-500">{alternative}</p>
+
+                    </div>
+
+                )
+
+            }
+        
+        </div>
 
     )
 

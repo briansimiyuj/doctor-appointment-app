@@ -1046,6 +1046,7 @@ Patient details page will show the patient's details; medical history, allergies
       c. Every time patient details change, do the following:
         i. Retrieve the reason for rescheduling from local storage
       d. Get most recent rejection data 
+      e. Display the reason for rescheduling if it exists
 
 ### Settings Context
 
