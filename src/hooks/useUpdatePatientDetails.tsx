@@ -18,9 +18,7 @@ export const useUpdatePatientDetails = () =>{
             return savedAppointment ? JSON.parse(savedAppointment) : null
          }),
          [appointmentToReschedule, setAppointmentToReschedule] = useState<AppointmentType | null>(null),
-         [showRescheduleHistoryModal, setShowRescheduleHistoryModal] = useState(
-            import.meta.env.VITE_DEV_MODE === "production" ? false : true
-         ),
+         [showRescheduleHistoryModal, setShowRescheduleHistoryModal] = useState(false),
          [newDate, setNewDate] = useState<string | null>(null),
          [newTime, setNewTime] = useState<string | null>(null)
 
@@ -145,7 +143,9 @@ export const useUpdatePatientDetails = () =>{
 
    const closeRescheduleHistoryModal = () =>{
 
-      setShowRescheduleHistoryModal(false)       
+      setShowRescheduleHistoryModal(false)     
+      
+      // FIXME: Closing modal is not working
    
    }
 
