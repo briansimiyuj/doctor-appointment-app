@@ -1,5 +1,6 @@
 import { ModalProvider } from "../../../context/ModalContext"
 import { useUpdatePatientDetails } from "../../../hooks/useUpdatePatientDetails"
+import ModalHeader from "../ModalHeader"
 import ModalBody from "./ModalBody"
 import ModalFooter from "./ModalFooter"
 
@@ -14,7 +15,7 @@ const RejectAppointmentModal: React.FC<{ appointment: any, onClose: () => void }
 
             <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-4 overflow-y-auto max-h-[90vh]">
 
-                <h2 className="text-xl font-bold mb-4 text-center text-gray-800">Reject Appointment</h2>
+               <ModalHeader title="Reject Appointment" onClose={onClose}/>
 
                 <ModalProvider appointment={appointment} onClose={onClose} onReject={handleRejectAppointment}>
 
