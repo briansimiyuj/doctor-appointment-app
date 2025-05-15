@@ -737,6 +737,10 @@ Patient details page will show the patient's details; medical history, allergies
           d. Call onClose function to close the modal
           e. Call the rejectAppointment function with the reason and alternative parameters
 
+    ### Modal Header Component
+
+      Modal header component will be used to display the header of the modal and the close button. It will be a reusable component across all patient details modals.
+
 
     ### Cancel Appointment Modal Component
 
