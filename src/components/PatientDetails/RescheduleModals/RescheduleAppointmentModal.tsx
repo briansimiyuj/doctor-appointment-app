@@ -1,4 +1,5 @@
 import { RescheduleModalProvider } from "../../../context/RescheduleModalContext"
+import ModalHeader from "../ModalHeader"
 import ModalBody from "./ModalBody"
 import ModalFooter from "./ModalFooter"
 
@@ -17,7 +18,7 @@ const RescheduleAppointmentModal: React.FC<RescheduleAppointmentModalProps> = ({
 
             <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-4 transition-all duration-300 ease-out">
 
-                <h2 className="text-xl font-bold mb-4 text-center text-gray-800">Reschedule Appointment</h2>
+                <ModalHeader title="Reschedule Appointment" onClose={onClose}/>
 
                 <RescheduleModalProvider appointment={appointment} onClose={onClose}>
 
