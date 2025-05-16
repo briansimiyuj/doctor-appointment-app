@@ -1,10 +1,13 @@
-import { useUpdatePatientDetails } from "../../../../hooks/useUpdatePatientDetails"
 import ModalHeader from "../../ModalHeader"
 import ModalBody from "./ModalBody"
 
-const RescheduleHistoryModal: React.FC= () =>{
+interface RescheduleHistoryModalProps{
 
-    const { closeRescheduleHistoryModal } = useUpdatePatientDetails()
+    onClose: () => void
+
+}
+
+const RescheduleHistoryModal: React.FC<RescheduleHistoryModalProps> = ({ onClose }) =>{
 
     return(
 
@@ -12,7 +15,7 @@ const RescheduleHistoryModal: React.FC= () =>{
 
             <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-2xl mx-auto overflow-y-auto max-h-[90vh] flex flex-col">
 
-                <ModalHeader title="Reschedule History" onClose={closeRescheduleHistoryModal}/>
+                <ModalHeader title="Reschedule History" onClose={onClose}/>
 
                 <ModalBody/>
 

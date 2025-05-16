@@ -143,9 +143,7 @@ export const useUpdatePatientDetails = () =>{
 
    const closeRescheduleHistoryModal = () =>{
 
-      setShowRescheduleHistoryModal(false)     
-      
-      // FIXME: Closing modal is not working
+      setShowRescheduleHistoryModal(false) 
    
    }
 
