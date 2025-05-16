@@ -9,7 +9,7 @@ const TabActionButton: React.FC = ()=>{
 
     const { patientAppointments } = usePatientDetails(),
 
-          { handleApproveAppointment, openCancelModal, showCancelModal, closeCancelModal, openRejectModal, showRejectModal, closeRejectModal, openRescheduleModal, showRescheduleModal, closeRescheduleModal, showRescheduleHistoryModal, openRescheduleHistoryModal } = useUpdatePatientDetails() as any,
+          { handleApproveAppointment, openCancelModal, showCancelModal, closeCancelModal, openRejectModal, showRejectModal, closeRejectModal, openRescheduleModal, showRescheduleModal, closeRescheduleModal, showRescheduleHistoryModal, openRescheduleHistoryModal, closeRescheduleHistoryModal } = useUpdatePatientDetails() as any,
          latestAppointment = patientAppointments && patientAppointments.length > 0 
         ? patientAppointments[0] 
         : null
@@ -50,8 +50,7 @@ const TabActionButton: React.FC = ()=>{
 
                         <span className="flex items-center justify-center gap-2">
 
-
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 24 24" stroke="currentColor">
 
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/>
  
@@ -241,7 +240,7 @@ const TabActionButton: React.FC = ()=>{
 
             { showRescheduleModal && <RescheduleAppointmentModal appointment={latestAppointment} onClose={closeRescheduleModal}/> }
 
-            { showRescheduleHistoryModal && <RescheduleHistoryModal/> }    
+            { showRescheduleHistoryModal && <RescheduleHistoryModal onClose={closeRescheduleHistoryModal}/> }    
         
         </>
 

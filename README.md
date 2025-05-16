@@ -1038,13 +1038,17 @@ Patient details page will show the patient's details; medical history, allergies
 
     ### Rescheduled History Modal
 
-    Rescheduled History Modal will be used to display the rescheduling history of the appointment
+    Rescheduled History Modal will be used to display the rescheduling history of the appointment.
 
-    1. Create a Rescheduled History Modal component and mount it on the Reschedule Appointment Modal component on Tab Action component if showRescheduledHistoryModal is true
-    2. Create an interface of the rescheduling history
-    3. Create a function to get the rescheduling history of the appointment which returns an array of rescheduling history
-    4. Create a Modal Body component and mount it on the Rescheduled History Modal component; it will display the original appointment details and the rescheduled appointment details
-    5. Create a Reason component and mount it on the Modal Body component; it will display the reason for rescheduling
+    1. Create a Rescheduled History Modal component and mount it on the Tab Action Button component if showRescheduleHistoryModal state is true
+    2. Add an onClose prop to the Rescheduled History Modal component
+    3. Pass the closeRescheduleHistoryModal function as the onClose prop from the parent
+    4. Call the onClose prop when the user triggers a close action (e.g., clicking the close button)
+    5. Ensure the modal closes properly and updates the modal visibility state
+    6. Create an interface of the rescheduling history
+    7. Create a function to get the rescheduling history of the appointment which returns an array of rescheduling history
+    8. Create a Modal Body component and mount it on the Rescheduled History Modal component; it will display the original appointment details and the rescheduled appointment details
+    9. Create a Reason component and mount it on the Modal Body component; it will display the reason for rescheduling
       a. Retrieve patient details from the patient details context 
       b. Create a state for rejection data with type RejectionData or string and initialize it to null
       c. Every time patient details change, do the following:
@@ -1236,4 +1240,4 @@ Schedule management hook handles all schedule-related operations and state manag
 Schedule slots component will be used to display the doctor's schedule. 
 
   1. Create a Schedule Slots Component and mount it on the Weekly Calendar Component
-  2. Transfer the schedule UI from the Weekly Calendar Component to the Schedule Slots Com
+  2. Transfer the schedule UI from the Weekly Calendar Component to the Schedule Slots Component
