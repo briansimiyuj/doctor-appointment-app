@@ -591,7 +591,7 @@ Patient details page will show the patient's details; medical history, allergies
       Tab action button component will show the button to manage the appointment based on the appointment status.
 
       - 🟢 **Pending appointments** show an "Approve Appointment" button with a checkmark icon and a "Reject Appointment" button with a cross icon.
-      - 🔵 **Confirmed appointments** display both "Reschedule" and "Cancel" buttons side by side.
+      - 🔵 **Approved appointments** display "Manage Appointment" and "Cancel" buttons side by side.
       - ⚪ **Completed appointments** offer an "Add Notes" button for post-appointment documentation.
       - 🔴 **Cancelled appointments** provide a "Schedule New Appointment" button to facilitate rebooking.
       - 🔴 **Rejected appointments** show a "Schedule New Appointment" button to facilitate rebooking.
