@@ -218,7 +218,8 @@ Booking context will be used to store the booking data and provide it to the Boo
 
   1. Get doctorID and patientID from the URL using useParams hook and store them in a constant
   2. Set state variables to store the doctor info and patient info
-  3. Fetch and update the doctor info whenever the doctorID and doctors array changes
+  3. Fetch and update the doctor info whenever the doctorID and 
+  doctors array changes
   4. Fetch and update the patient info whenever the patientID and patients array changes
   5. Set a state variable to store slot index
   6. Set a state to store selected time slot and initialize it with empty array
@@ -494,35 +495,42 @@ My appointments page will show the user's appointments. It will have a list of a
 
 ### Patient Details Context
 
-Patient details context will be used to store the patient's details and appointment details and provide it to the Patient Details page
-
   1. Create props for the Patient Details context
   2. Create a state variable for the patient and initialize it with null
   3. Create a state variable for active tab and initialize it with "Medical History"
   4. Create a state variable for patient appointment with `appointment type` and initialize it with: if there is saved appointment in local storage then the saved appointment else empty array
   5. Create a function to fetch the patient appointment based on patient id
   6. Find the appointed patient based on the patient id and set the patient details and appointment details
-  7. Create a state variables for notes and documents with respective types and initialize them with empty array
+  7. Create state variables for notes and documents with respective types and initialize them with empty array
   8. Create functions to add and remove documents and update local storage
   9. Create functions to add and remove notes and update local storage
-  10. Create a function to reschedule the appointment and update the appointment details
+  10. Add `updateAppointmentStatus` function to the patient details context props
+    a. Create a deep copy of the patient's appointments array
+    b. Find the index of the appointment to update
+    c. Check if the appointment exists in the array
+    d. If the appointment exists, create a new appointment object with the updated status
+    e. Replace the appointment at the found index with the new appointment object
+    f. Update the patient's appointments array with the new array
+    g. Save the updated appointments to localStorage using the patient ID as part of the key
+    h. Implement a separate useEffect hook to load appointments from localStorage when the component mounts
+    i. Load appointments from localStorage when the component mounts
+
+  12. Create a function to reschedule the appointment and update the appointment details
     a. Create a setter function to update patient appointments array
-    b. Create a deep copy of previous appointments and asssign it to a variable 
+    b. Create a deep copy of previous appointments and assign it to a variable 
     c. Find the appointment to reschedule by matching date and time
     d. If the appointment is found, create an updated appointment object with:
       i. New appointment with updated date and time
       ii. New date and time for the consultation
       iii. New status
-
     e. Replace the old appointment with the updated one in the appointments array
     f. Save the updated appointments to localStorage using the patient ID as part of the key
     g. Return the updated appointments array to update state
     h. If the appointment is not found, return the original appointments array
 
-  11. Create a function to update the appointment details
+  13. Create a function to update the appointment details
     a. Create a setter function to update patient appointments array
 
-  
 ### Patient Details Page
 
 Patient details page will show the patient's details; medical history, allergies, notes, prescription, name and contact information. The doctor will be able to add notes, prescription, allergies and medical history.
@@ -601,21 +609,6 @@ Patient details page will show the patient's details; medical history, allergies
       1. Create a Tab Action Button component and mount it on the Appointment Tab Header component
 
      **Buttons Action**
-
-      *Update Appointment Status*: Update appointment function will update the appointment status based on the button clicked.
-
-        1. Add `updateAppointmentStatus` function to the patient details context props
-        2. Call the `updateAppointmentStatus` function with the appointment and the new status as parameters 
-
-          a. Create a deep copy of the patient's appointments array
-          b. Find the index of the appointment to update
-          c. Check if the appointment exists in the array
-          d. If the appointment exists, create a new appointment object with the updated status
-          e. Replace the appointment at the found index with the new appointment object
-          f. Update the patient's appointments array with the new array
-          g. Save the updated appointments to localStorage using the patient ID as part of the key
-          h. Implement a separate useEffect hook to load appointments from localStorage when the component mounts
-          i. Load appointments from localStorage when the component mounts
 
       *Approve Appointment Button*: Approve appointment button will approve the appointment.
 
