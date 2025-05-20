@@ -53,6 +53,7 @@ export interface PatientDetailsContextProps{
     //Patient appointments
     patientAppointments: AppointmentType[]
     fetchPatientAppointments: (patientID: string) => void
+    setPatientAppointments: (appointments: AppointmentType[] | ((prev: AppointmentType[]) => AppointmentType[])) => void
 
     // Appointment scheduling
     scheduleAppointment: (appointment: { date: Date, time: string,  reason: string }) => void

@@ -1066,6 +1066,29 @@ Patient details page will show the patient's details; medical history, allergies
       d. Get most recent rejection data 
       e. Display the reason for rescheduling if it exists
 
+  ### Schedule Appointment Context
+
+  Schedule Appointment Context will be used to store the new appointment details and provide it to the Schedule Appointment Modal component
+
+    1. Create the following states:
+      a. newDate and set it to null (accepts Date or string)
+      b. newTime and set it to null
+      c. consultationType and set it to null (either "in-person" or "online")
+      d. isConfirmed and set it to false
+      e. appointmentToSchedule to store the appointment being rescheduled
+
+    2. Integrate with DatePickerContext to reuse the DatePicker and TimePicker components
+      a. Get selectedDate and selectedTime from DatePickerContext
+      b. Use these values for newDate and newTime in the Schedule Appointment Context
+
+    3. Create a validation check (isValid) that ensures all required fields are filled
+      a. Check if newDate, newTime, consultationType are all provided
+      b. Verify that isConfirmed is true
+
+    4. Create a function to handle the schedule appointment submission
+      a. If isValid is false or there is no patient details, exit the function
+
+
   ### Schedule Appointment Modal
 
   Schedule Appointment Modal will be used to schedule a new appointment
