@@ -630,6 +630,10 @@ Patient details page will show the patient's details; medical history, allergies
 
         1. Attach open modal function from update patient details hook to the reschedule history button
 
+      *Schedule New Appointment Button*: Schedule new appointment button will open a modal to schedule a new appointment.
+
+        1. Attach open modal function from update patient details hook to the schedule new appointment button
+
 
       ### Update Patient Details Hook
 
@@ -1061,6 +1065,13 @@ Patient details page will show the patient's details; medical history, allergies
         i. Retrieve the reason for rescheduling from local storage
       d. Get most recent rejection data 
       e. Display the reason for rescheduling if it exists
+
+  ### Schedule Appointment Modal
+
+  Schedule Appointment Modal will be used to schedule a new appointment
+
+    1. Create a Schedule Appointment Modal component and mount it on the Tab Action Button component if showScheduleNewAppointmentModal state is true and pass onClose prop
+    2. Mount the Modal Header component and Modal Body component on the Schedule Appointment Modal component and pass onClose prop
 
 ### Settings Context
 
