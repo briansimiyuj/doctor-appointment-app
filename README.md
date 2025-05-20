@@ -709,6 +709,19 @@ Patient details page will show the patient's details; medical history, allergies
         3. Create a function to close the modal
           a. Set the modal visibility state to false
 
+      *Schedule New Appointment Function*
+
+      Schedule new appointment function will open a modal to schedule a new appointment.
+
+        1. Create states for modal visibility and appointment to schedule and initialize them to false and null respectively
+        2. Create a function to open the modal which takes the appointment to schedule as a parameter
+          a. Set the modal visibility state to true
+          b. Set the appointment to schedule state to the appointment parameter
+          
+        3. Create a function to close the modal
+          a. Set the modal visibility state to false
+          b. Set the appointment to schedule state to null
+
 
     ### Modal Context
 
