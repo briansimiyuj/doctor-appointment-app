@@ -1095,6 +1095,7 @@ Patient details page will show the patient's details; medical history, allergies
 
     1. Create a Schedule Appointment Modal component and mount it on the Tab Action Button component if showScheduleNewAppointmentModal state is true and pass onClose prop
     2. Mount the Modal Header component and Modal Body component on the Schedule Appointment Modal component and pass onClose prop
+    3. Create a Modal Body component and mount it on the Schedule Appointment Modal component and wrap it with DatePickerProvider and ScheduleAppointmentProvider
 
 ### Settings Context
 
