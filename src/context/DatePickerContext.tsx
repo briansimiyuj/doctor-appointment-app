@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { DatePickerContextProps } from "../assets/contextProps/DatePickerContextProps"
-import { useRescheduleModal } from "./RescheduleModalContext"
 import { TimeSlotType } from "../assets/types/TimeSlotType"
 import { dummySlots } from "../assets/dummyData/ScheduleDummyData"
 
@@ -12,13 +11,40 @@ interface DatePickerProviderProps{
     initialTime?: string
     doctorAvailability?: TimeSlotType
 
+    externalDateState?:{
+
+        date: string | null
+        setDate: (date: string) => void
+
+    }
+
+    externalTimeState?:{
+
+        time: string | null
+        setTime: (time: string) => void
+
+    }
+
 }
 
 const DatePickerContext = createContext<DatePickerContextProps | undefined>(undefined)
 
-export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children, initialDate, initialTime, doctorAvailability = [] }) =>{
+export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ 
+    children, 
+    initialDate, 
+    initialTime, 
+    doctorAvailability = [],
+    externalDateState,
+    externalTimeState
+ }) =>{
 
-    const { newDate, setNewDate, newTime, setNewTime } = useRescheduleModal(),
+
+    const [localDate, setLocalDate] = useState<string | null>(initialDate || null),
+          [localTime, setLocalTime] = useState<string | null>(initialTime || null),
+          newDate = externalDateState?.date ?? localDate,
+          setNewDate = externalDateState?.setDate || setLocalDate,
+          newTime = externalTimeState?.time ?? localTime,
+          setNewTime = externalTimeState?.setTime ?? setLocalTime,
           [currentMonth, setCurrentMonth] = useState(() =>{
 
                 if(initialDate){
@@ -95,7 +121,7 @@ export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ children
 
         }
 
-    }, [selectedTime])
+    }, [selectedTime, setNewTime])
 
     useEffect(() =>{
     

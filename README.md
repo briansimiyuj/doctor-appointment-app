@@ -818,49 +818,51 @@ Patient details page will show the patient's details; medical history, allergies
 
         Date Picker context will be used to manage the state of the date picker (Handle date selection)
 
-          1. Retrieve newDate, setNewDate from the Reschedule Modal context
-          2. Create a state for current month and initialize it to a new Date object
-          3. Create a state for selected date and initialize it to: if newDate is available, new Date(newDate) else null
-          4. Update the selected date state with newDate object if the newDate changes
-          5. Update newDate state with the selected date if it is available
-          6. Create a function to get days in a month and return an array of days in the month
-          7. Create a function to get the first day of the month and return the day of the week
-          8. Create a function to navigate to the previous month and update the current month state
-          9. Create a function to navigate to the next month and update the current month state
-          10. Create a function to check if a date is in the past and return a boolean to check if the date is in the past
-          11. Create a function to check if a date is selected and return a boolean to check if the date is selected
-          12. Create a function to check if a date is today and return a boolean to check if the date is today
-          12. Create a function to handle the date selection and update the selected date state if the date is not in the past
-          13. Create a state for isCalendarVisible and initialize it to false
-          14. Create functions to handle the calendar visibility and update the isCalendarVisible state
-          15. Add a small delay to allow the user to see their selection before closing the calendar
-          16. Create a function to check if a date is available and returns a boolean
+          1. Create a flexible context that can work with either internal state or external state provided via props
+          2. Accept `externalDateState` and `externalTimeState` props to allow integration with different parent contexts
+          3. Create local state variables for date and time when external state is not provided
+          4. Create a state for current month and initialize it to a new Date object
+          5. Create a state for selected date and initialize it to: if initialDate is available, new Date(initialDate) else null
+          6. Update the selected date state with external date object if the external date changes
+          7. Update external date state with the selected date if it is available
+          8. Create a function to get days in a month and return an array of days in the month
+          9. Create a function to get the first day of the month and return the day of the week
+          10. Create a function to navigate to the previous month and update the current month state
+          11. Create a function to navigate to the next month and update the current month state
+          12. Create a function to check if a date is in the past and return a boolean to check if the date is in the past
+          13. Create a function to check if a date is selected and return a boolean to check if the date is selected
+          14. Create a function to check if a date is today and return a boolean to check if the date is today
+          15. Create a function to handle the date selection and update the selected date state if the date is not in the past
+          16. Create a state for isCalendarVisible and initialize it to false
+          17. Create functions to handle the calendar visibility and update the isCalendarVisible state
+          18. Add a small delay to allow the user to see their selection before closing the calendar
+          19. Create a function to check if a date is available and returns a boolean
               a. First check doctorAvailability if provided
               b. Compare date components (day, month, year) rather than timestamps
               c. Fall back to dummySlots when no doctor availability exists
               d. Use schedule.availableSlots as final fallback option
               e. Parse status from slot string format when using schedule data
 
-          17. Generate available dates array for highlighting in calendar
+          20. Generate available dates array for highlighting in calendar
               a. Filter doctorAvailability or dummySlots to only include "available" status
               b. Map filtered slots to Date objects for comparison
               c. Store in availableDates state for efficient access
               d. Update when doctorAvailability or schedule changes
 
-          18. Implement multi-level fallback system for date availability
+          21. Implement multi-level fallback system for date availability
               a. Try doctorAvailability from props as primary source
               b. Use dummySlots from imported data as secondary source
               c. Fall back to schedule context data if needed
               d. Ensure component works with partial or missing data
 
-          19. Implement time slot selection logic
+          22. Implement time slot selection logic
             a. Create a state for selectedTime and initialize it to: if initialTime is available, new Date(initialTime) else null
             b. Create a state for isTimePickerVisible and initialize it to false
-            c. Set selectedTime with newTime if available when newTime changes
-            d. Set newTime with selectedTime if available when selectedTime changes
+            c. Set selectedTime with external time if available when external time changes
+            d. Set external time with selectedTime if available when selectedTime changes
             e. Create a function to handle the time selection and update the selectedTime
 
-          20. Create a function to show and hide the time picker. When the user selects a time, update the selectedTime state and hide the time picker.
+          23. Create a function to show and hide the time picker. When the user selects a time, update the selectedTime state and hide the time picker.
 
 
         #### Date Picker Content
