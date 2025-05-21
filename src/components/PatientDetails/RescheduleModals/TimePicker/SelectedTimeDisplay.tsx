@@ -1,10 +1,40 @@
 import { useDatePicker } from "../../../../context/DatePickerContext"
-import { useRescheduleModal } from "../../../../context/RescheduleModalContext"
+import { useScheduleAppointmentContext } from "../../../../context/ScheduleAppointmentContext"
 
-const SelectedTimeDisplay: React.FC = ()=>{
+interface SelectedTimeDisplayProps{
 
-    const { newTime } = useRescheduleModal(),
-          { openTimePicker } = useDatePicker()
+    useScheduleContext?: boolean
+
+}
+const SelectedTimeDisplay: React.FC<SelectedTimeDisplayProps> = ({ useScheduleContext = false }) =>{
+
+    const { openTimePicker } = useDatePicker()
+
+    let timeValue = null
+
+    if(useScheduleContext){
+        
+        try{
+
+            const { newTime } = useScheduleAppointmentContext()
+
+            timeValue = newTime
+
+        }catch(err){
+
+            console.warn("useScheduleContext is true but useScheduleAppointmentContext is not available", err)
+
+            timeValue = null
+
+        }
+        
+    }else{
+
+        const { selectedTime } = useDatePicker()
+
+        timeValue = selectedTime
+
+    }
 
     return(
 
@@ -16,7 +46,7 @@ const SelectedTimeDisplay: React.FC = ()=>{
 
             <span className="text-gray-700">
 
-                { newTime ? newTime : "Select Time" }
+                { timeValue ? timeValue : "Select Time" }
 
             </span>
 

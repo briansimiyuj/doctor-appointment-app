@@ -951,9 +951,17 @@ Patient details page will show the patient's details; medical history, allergies
 
         Select Time Display component will be used to display selected time.
 
-          1. Create a Select Time Picker component and mount it on the Time Picker component
-          2. Attach showTimePicker function to the input field to show the time picker when clicked
-            a. If the user hasn't selected a date, display a message to select a date first
+        1. Create a Select Time Display component that can work with either DatePickerContext or ScheduleAppointmentContext
+          a. Accept a `useScheduleContext` prop to determine which context to use (default: false)
+          b. Get `openTimePicker` from the DatePickerContext
+          c. Get time value from the appropriate context based on the `useScheduleContext` prop
+              i. If using ScheduleAppointmentContext, try to get `newTime` from it
+              ii. If using DatePickerContext or if ScheduleAppointmentContext is not available, get `selectedTime` from DatePickerContext
+          d. Handle potential errors if the specified context is not available
+        2. Render a clickable container that displays the selected time or "Select Time" if no time is selected
+        3. Attach the `openTimePicker` function to show the time picker when clicked
+        4. Include a clock icon to visually indicate the time selection functionality
+
 
         #### Select Time Picker Header Component
 
@@ -1098,6 +1106,7 @@ Patient details page will show the patient's details; medical history, allergies
     1. Create a Schedule Appointment Modal component and mount it on the Tab Action Button component if showScheduleNewAppointmentModal state is true and pass onClose prop
     2. Mount the Modal Header component and Modal Body component on the Schedule Appointment Modal component and pass onClose prop
     3. Create a Modal Body component and mount it on the Schedule Appointment Modal component and wrap it with DatePickerProvider and ScheduleAppointmentProvider
+      a. Mount the DatePicker and TimePicker components on the Modal Body component
 
 ### Settings Context
 

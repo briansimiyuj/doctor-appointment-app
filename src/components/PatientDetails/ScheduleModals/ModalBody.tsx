@@ -1,8 +1,21 @@
+import DatePicker from "../RescheduleModals/DatePicker/DatePicker"
+import TimePicker from "../RescheduleModals/TimePicker/TimePicker"
+
 const ModalBody: React.FC = () =>{
 
     return(
 
-        <h1>ModalBody</h1>
+        <div className="space-y-6">
+
+            <div>
+
+                <DatePicker/>
+
+                <TimePicker/>
+
+            </div>
+
+        </div>
 
     )
 
