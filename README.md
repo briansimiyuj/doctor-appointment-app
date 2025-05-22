@@ -806,6 +806,13 @@ Patient details page will show the patient's details; medical history, allergies
 
       8. Create a state for consultation type and initialize it to null
 
+    ### Date Time Context
+
+    Date Time context will be used to provide date and time state to the date picker context.
+
+      1. Create a state for date and initialize it to initial date (which is null)
+      2. Create a state for time and initialize it to null (which is null)
+
 
     ### Reschedule Modal Component
 
