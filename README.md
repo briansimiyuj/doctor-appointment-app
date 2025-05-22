@@ -1110,6 +1110,7 @@ Patient details page will show the patient's details; medical history, allergies
     2. Mount the Modal Header component and Modal Body component on the Schedule Appointment Modal component and pass onClose prop
     3. Create a Modal Body component and mount it on the Schedule Appointment Modal component and wrap it with DatePickerProvider and ScheduleAppointmentProvider. Wrap the DatePickerProvider and ScheduleAppointmentProvider components with a DateTimeProvider
       a. Mount the DatePicker and TimePicker components on the Modal Body component
+      b. Create a ScheduleConsultationTypeSelector component and mount it on the Modal Body component. It will similar to ConsultationTypeSelector on Reschedule Appointment Modal
 
 ### Settings Context
 
