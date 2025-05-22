@@ -1112,6 +1112,8 @@ Patient details page will show the patient's details; medical history, allergies
       a. Mount the DatePicker and TimePicker components on the Modal Body component
       b. Create a ScheduleConsultationTypeSelector component and mount it on the Modal Body component. It will similar to ConsultationTypeSelector on Reschedule Appointment Modal
       c. Create a ConfirmationCheckbox component and mount it on the Modal Body component. It will be similar to the ConfirmationCheckbox on Reschedule Appointment Modal
+    
+    4. Create a Modal Footer component and mount it on the Schedule Appointment Modal component; it will have a button to close the modal and a button to schedule the appointment
 
 ### Settings Context
 
