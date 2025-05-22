@@ -5,6 +5,7 @@ import { ScheduleAppointmentProvider } from "../../../context/ScheduleAppointmen
 import { ScheduleProvider } from "../../../context/ScheduleContext"
 import ModalHeader from "../ModalHeader"
 import ModalBody from "./ModalBody"
+import ModalFooter from "./ModalFooter"
 
 interface ScheduleAppointmentModalProps{
 
@@ -34,6 +35,8 @@ const ScheduleAppointmentModal: React.FC<ScheduleAppointmentModalProps> = ({ onC
                                 <div className="p-6">
 
                                     <ModalBody/>
+
+                                    <ModalFooter/>
 
                                 </div>
 
