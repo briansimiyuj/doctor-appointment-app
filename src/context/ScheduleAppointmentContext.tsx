@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react"
 import { AppointmentType } from "../assets/types/AppointmentType"
 import { ScheduleAppointmentContextProps } from "../assets/contextProps/ScheduleAppointmentContextProps"
 import { usePatientDetails } from "./PatientDetailsContext"
-import { useDatePicker } from "./DatePickerContext"
+import { useDateTime } from "./DateTimeContext"
 
 interface ScheduleAppointmentProviderProps{
 
@@ -16,7 +16,7 @@ export const ScheduleAppointmentContext = createContext<ScheduleAppointmentConte
 
 export const ScheduleAppointmentProvider: React.FC<ScheduleAppointmentProviderProps> = ({ children, appointment, onClose }) =>{
 
-    const { selectedDate, selectedTime } = useDatePicker(),
+    const { date: newDate, time: newTime }  = useDateTime(),
           [consultationType, setConsultationType] = useState<"in-person" | "online" | null>(null),
           [isConfirmed, setIsConfirmed] = useState(false),
           { patientDetails } = usePatientDetails(),

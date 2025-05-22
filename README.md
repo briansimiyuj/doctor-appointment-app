@@ -788,23 +788,24 @@ Patient details page will show the patient's details; medical history, allergies
 
     Reschedule modal context will be used to manage the state of the modal (Handle rescheduling of the appointment)
 
-      1. Retrieve newDate, newTime, setNewDate, setNewTime from the update patient details hook
-      2. Create a state for isConfirmed and initialize it to false
-      2. Check if the new date and time are not empty and isConfirmed is true, if both are true, set a boolean state to it
-      3. Create a function to handle the reschedule confirmation
+      1. Retrieve newDate, newTime, setNewDate, setNewTime from the date and time context
+      2. Initialize date and time states from appointment data
+      3. Create a state for isConfirmed and initialize it to false
+      4. Check if the new date and time are not empty and isConfirmed is true, if both are true, set a boolean state to it
+      5. Create a function to handle the reschedule confirmation
         a. If there is no appointment to reschedule or the boolean state is false, exit the function early
         b. Call onClose function to close the modal
 
-      4. Create states for selected doctors and available doctors and initialize them to null and doctors in doctors data respectively
-      5. Create a function to filter the doctors based on speciality
-      6. Create a function to reset the filtered doctors to show all doctors
+      6. Create states for selected doctors and available doctors and initialize them to null and doctors in doctors data respectively
+      7. Create a function to filter the doctors based on speciality
+      8. Create a function to reset the filtered doctors to show all doctors
         a. Filter the current doctor from the available doctors array
 
-      7. Retrieve the reschedule appointment function from the reschedule appointment hook
+      9. Retrieve the reschedule appointment function from the reschedule appointment hook
        a. Assign the function to a boolean variable
        b. If the boolean state is true, call the onClose function to close the modal
 
-      8. Create a state for consultation type and initialize it to null
+      10. Create a state for consultation type and initialize it to null
 
     ### Date Time Context
 
@@ -825,51 +826,48 @@ Patient details page will show the patient's details; medical history, allergies
 
         Date Picker context will be used to manage the state of the date picker (Handle date selection)
 
-          1. Create a flexible context that can work with either internal state or external state provided via props
-          2. Accept `externalDateState` and `externalTimeState` props to allow integration with different parent contexts
-          3. Create local state variables for date and time when external state is not provided
-          4. Create a state for current month and initialize it to a new Date object
-          5. Create a state for selected date and initialize it to: if initialDate is available, new Date(initialDate) else null
-          6. Update the selected date state with external date object if the external date changes
-          7. Update external date state with the selected date if it is available
-          8. Create a function to get days in a month and return an array of days in the month
-          9. Create a function to get the first day of the month and return the day of the week
-          10. Create a function to navigate to the previous month and update the current month state
-          11. Create a function to navigate to the next month and update the current month state
-          12. Create a function to check if a date is in the past and return a boolean to check if the date is in the past
-          13. Create a function to check if a date is selected and return a boolean to check if the date is selected
-          14. Create a function to check if a date is today and return a boolean to check if the date is today
-          15. Create a function to handle the date selection and update the selected date state if the date is not in the past
-          16. Create a state for isCalendarVisible and initialize it to false
-          17. Create functions to handle the calendar visibility and update the isCalendarVisible state
-          18. Add a small delay to allow the user to see their selection before closing the calendar
-          19. Create a function to check if a date is available and returns a boolean
+          1. Retrieve the date and time states from the date time context as newDate and newTime respectively
+          2. Create a state for selected date and initialize it to newDate
+          3. Update the selected date state with newDate if newDate is available
+          4. Update newDate state with the selected date if it is available and newDate and selected date change
+          5. Create a function to get days in a month and return an array of days in the month
+          6. Create a function to get the first day of the month and return the day of the week
+          7. Create a function to navigate to the previous month and update the current month state
+          8. Create a function to navigate to the next month and update the current month state
+          9. Create a function to check if a date is in the past and return a boolean to check if the date is in the past
+          10. Create a function to check if a date is selected and return a boolean to check if the date is selected
+          11. Create a function to check if a date is today and return a boolean to check if the date is today
+          12. Create a function to handle the date selection and update the selected date state if the date is not in the past
+          13. Create a state for isCalendarVisible and initialize it to false
+          14. Create functions to handle the calendar visibility and update the isCalendarVisible state
+          15. Add a small delay to allow the user to see their selection before closing the calendar
+          16. Create a function to check if a date is available and returns a boolean
               a. First check doctorAvailability if provided
               b. Compare date components (day, month, year) rather than timestamps
               c. Fall back to dummySlots when no doctor availability exists
               d. Use schedule.availableSlots as final fallback option
               e. Parse status from slot string format when using schedule data
 
-          20. Generate available dates array for highlighting in calendar
+          17. Generate available dates array for highlighting in calendar
               a. Filter doctorAvailability or dummySlots to only include "available" status
               b. Map filtered slots to Date objects for comparison
               c. Store in availableDates state for efficient access
               d. Update when doctorAvailability or schedule changes
 
-          21. Implement multi-level fallback system for date availability
+          18. Implement multi-level fallback system for date availability
               a. Try doctorAvailability from props as primary source
               b. Use dummySlots from imported data as secondary source
               c. Fall back to schedule context data if needed
               d. Ensure component works with partial or missing data
 
-          22. Implement time slot selection logic
+          19. Implement time slot selection logic
             a. Create a state for selectedTime and initialize it to: if initialTime is available, new Date(initialTime) else null
             b. Create a state for isTimePickerVisible and initialize it to false
             c. Set selectedTime with external time if available when external time changes
             d. Set external time with selectedTime if available when selectedTime changes
             e. Create a function to handle the time selection and update the selectedTime
 
-          23. Create a function to show and hide the time picker. When the user selects a time, update the selectedTime state and hide the time picker.
+          20. Create a function to show and hide the time picker. When the user selects a time, update the selectedTime state and hide the time picker.
 
 
         #### Date Picker Content
@@ -1045,7 +1043,7 @@ Patient details page will show the patient's details; medical history, allergies
 
       Modal Footer component will display a button to confirm the rescheduling of the appointment and a button to close the modal. It will be similar to cancel appointment and reject appointment modal footers.
 
-        1. Create a Modal Footer component and mount it on the Reschedule Appointment Modal component and wrap it with Reschedule Modal Provider
+        1. Create a Modal Footer component and mount it on the Reschedule Appointment Modal component and wrap it with Reschedule Modal Provider and Date Picker Provider. Wrap the Reschedule Modal Provider and Date Picker Provider with Date Time Provider.
 
     3. Create a confirmation checkbox component and mount it on Modal Body component
 
@@ -1087,12 +1085,10 @@ Patient details page will show the patient's details; medical history, allergies
 
   Schedule Appointment Context will be used to store the new appointment details and provide it to the Schedule Appointment Modal component
 
-    1. Create the following states:
-      a. newDate and set it to null (accepts Date or string)
-      b. newTime and set it to null
+    1. Retrieve newDate and newTime from Date Time context
       c. consultationType and set it to null (either "in-person" or "online")
       d. isConfirmed and set it to false
-      e. appointmentToSchedule to store the appointment being rescheduled
+      e. appointmentToSchedule to store the appointment being scheduled
 
     2. Integrate with DatePickerContext to reuse the DatePicker and TimePicker components
       a. Get selectedDate and selectedTime from DatePickerContext
@@ -1112,7 +1108,7 @@ Patient details page will show the patient's details; medical history, allergies
 
     1. Create a Schedule Appointment Modal component and mount it on the Tab Action Button component if showScheduleNewAppointmentModal state is true and pass onClose prop
     2. Mount the Modal Header component and Modal Body component on the Schedule Appointment Modal component and pass onClose prop
-    3. Create a Modal Body component and mount it on the Schedule Appointment Modal component and wrap it with DatePickerProvider and ScheduleAppointmentProvider
+    3. Create a Modal Body component and mount it on the Schedule Appointment Modal component and wrap it with DatePickerProvider and ScheduleAppointmentProvider. Wrap the DatePickerProvider and ScheduleAppointmentProvider components with a DateTimeProvider
       a. Mount the DatePicker and TimePicker components on the Modal Body component
 
 ### Settings Context

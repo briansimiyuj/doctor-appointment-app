@@ -1,10 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { AppointmentType } from "../assets/types/AppointmentType"
 import { RescheduleModalContextProps } from "../assets/contextProps/RescheduleModalContextProps"
-import { useUpdatePatientDetails } from "../hooks/useUpdatePatientDetails"
 import { doctors } from "../assets/frontend/doctorsData"
 import { DoctorType } from "../assets/types/DoctorType"
 import { useRescheduleAppointment } from "../hooks/useRescheduleAppointment"
+import { useDateTime } from "./DateTimeContext"
 
 interface RescheduleModalProviderProps{
 
@@ -18,7 +18,7 @@ const RescheduleModalContext = createContext<RescheduleModalContextProps | undef
 
 export const RescheduleModalProvider: React.FC<RescheduleModalProviderProps> = ({ children, appointment, onClose }) =>{
 
-    const { newDate, setNewDate, newTime, setNewTime } = useUpdatePatientDetails(),
+    const { date: newDate, setDate: setNewDate, time: newTime, setTime: setNewTime }  = useDateTime(),
           { rescheduleAppointment } = useRescheduleAppointment(),
           [selectedDoctor, setSelectedDoctor] = useState<DoctorType | null>(null),
           [isConfirmed, setIsConfirmed] = useState(false),
@@ -26,6 +26,18 @@ export const RescheduleModalProvider: React.FC<RescheduleModalProviderProps> = (
           [consultationType, setConsultationType] = useState<"in-person" | "online" | null>(null),
           isValid = Boolean(newDate) !== null && newTime !== null && selectedDoctor !== null && consultationType !== null && isConfirmed,
           mockCurrentDoctorID = 'doctor1'
+
+    useEffect(() =>{
+    
+        if(appointment){
+
+            setNewDate(appointment.date)
+
+            setNewTime(appointment.time)
+
+        }
+    
+    }, [appointment, setNewDate, setNewTime])      
 
 
     useEffect(() =>{
