@@ -1,5 +1,6 @@
 import DatePicker from "../RescheduleModals/DatePicker/DatePicker"
 import TimePicker from "../RescheduleModals/TimePicker/TimePicker"
+import ScheduleConsultationTypeSelector from "./ScheduleConsultationTypeSelector"
 
 const ModalBody: React.FC = () =>{
 
@@ -12,6 +13,8 @@ const ModalBody: React.FC = () =>{
                 <DatePicker/>
 
                 <TimePicker/>
+
+                <ScheduleConsultationTypeSelector/>
 
             </div>
 
