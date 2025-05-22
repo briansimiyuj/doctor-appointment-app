@@ -2,28 +2,14 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { DatePickerContextProps } from "../assets/contextProps/DatePickerContextProps"
 import { TimeSlotType } from "../assets/types/TimeSlotType"
 import { dummySlots } from "../assets/dummyData/ScheduleDummyData"
+import { useDateTime } from "./DateTimeContext"
 
 
 interface DatePickerProviderProps{
 
     children: React.ReactNode
     initialDate?: string
-    initialTime?: string
     doctorAvailability?: TimeSlotType
-
-    externalDateState?:{
-
-        date: string | null
-        setDate: (date: string) => void
-
-    }
-
-    externalTimeState?:{
-
-        time: string | null
-        setTime: (time: string) => void
-
-    }
 
 }
 
@@ -32,19 +18,11 @@ const DatePickerContext = createContext<DatePickerContextProps | undefined>(unde
 export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({ 
     children, 
     initialDate, 
-    initialTime, 
-    doctorAvailability = [],
-    externalDateState,
-    externalTimeState
+    doctorAvailability = []
  }) =>{
 
 
-    const [localDate, setLocalDate] = useState<string | null>(initialDate || null),
-          [localTime, setLocalTime] = useState<string | null>(initialTime || null),
-          newDate = externalDateState?.date ?? localDate,
-          setNewDate = externalDateState?.setDate || setLocalDate,
-          newTime = externalTimeState?.time ?? localTime,
-          setNewTime = externalTimeState?.setTime ?? setLocalTime,
+    const { date: newDate, setDate: setNewDate, time: newTime, setTime: setNewTime }  = useDateTime(),
           [currentMonth, setCurrentMonth] = useState(() =>{
 
                 if(initialDate){
@@ -63,7 +41,7 @@ export const DatePickerProvider: React.FC<DatePickerProviderProps> = ({
             return initialDate ? new Date(initialDate) : null
 
           }),
-          [selectedTime, setSelectedTime] = useState<string | null>(initialTime ? initialTime : null),
+          [selectedTime, setSelectedTime] = useState<string | null>(newTime),
           [isCalendarVisible, setIsCalendarVisible] = useState(false),
           toggleCalendar = () => setIsCalendarVisible(prev => !prev),
           [isTimePickerVisible, setIsTimePickerVisible] = useState(false)

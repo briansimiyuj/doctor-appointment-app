@@ -1,6 +1,8 @@
 import { AppointmentType } from "../../../assets/types/AppointmentType"
 import { DatePickerProvider } from "../../../context/DatePickerContext"
+import { DateTimeProvider } from "../../../context/DateTimeContext"
 import { ScheduleAppointmentProvider } from "../../../context/ScheduleAppointmentContext"
+import { ScheduleProvider } from "../../../context/ScheduleContext"
 import ModalHeader from "../ModalHeader"
 import ModalBody from "./ModalBody"
 
@@ -21,19 +23,27 @@ const ScheduleAppointmentModal: React.FC<ScheduleAppointmentModalProps> = ({ onC
 
                 <ModalHeader title="Schedule Appointment" onClose={onClose}/>
 
-                <DatePickerProvider>
+                <DateTimeProvider>
 
-                    <ScheduleAppointmentProvider appointment={appointment} onClose={onClose}>
+                    <DatePickerProvider>
 
-                        <div className="p-6">
+                        <ScheduleProvider>
 
-                            <ModalBody/>
+                            <ScheduleAppointmentProvider appointment={appointment} onClose={onClose}>
 
-                        </div>
+                                <div className="p-6">
 
-                    </ScheduleAppointmentProvider>
+                                    <ModalBody/>
 
-                </DatePickerProvider>
+                                </div>
+
+                            </ScheduleAppointmentProvider>
+
+                        </ScheduleProvider>
+
+                    </DatePickerProvider>
+
+                </DateTimeProvider>
 
             </div>
 

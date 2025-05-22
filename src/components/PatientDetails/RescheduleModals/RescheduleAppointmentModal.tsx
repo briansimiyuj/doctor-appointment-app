@@ -1,4 +1,6 @@
+import { DateTimeProvider } from "../../../context/DateTimeContext"
 import { RescheduleModalProvider } from "../../../context/RescheduleModalContext"
+import { ScheduleProvider } from "../../../context/ScheduleContext"
 import ModalHeader from "../ModalHeader"
 import ModalBody from "./ModalBody"
 import ModalFooter from "./ModalFooter"
@@ -20,13 +22,21 @@ const RescheduleAppointmentModal: React.FC<RescheduleAppointmentModalProps> = ({
 
                 <ModalHeader title="Reschedule Appointment" onClose={onClose}/>
 
-                <RescheduleModalProvider appointment={appointment} onClose={onClose}>
+                <DateTimeProvider>
 
-                    <ModalBody/>
+                    <ScheduleProvider>
 
-                    <ModalFooter/>
+                        <RescheduleModalProvider appointment={appointment} onClose={onClose}>
 
-                </RescheduleModalProvider>
+                            <ModalBody/>
+
+                            <ModalFooter/>
+
+                        </RescheduleModalProvider>
+
+                    </ScheduleProvider>
+
+                </DateTimeProvider>
 
             </div>
 
