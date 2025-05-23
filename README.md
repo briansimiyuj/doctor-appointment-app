@@ -1115,6 +1115,20 @@ Patient details page will show the patient's details; medical history, allergies
     
     4. Create a Modal Footer component and mount it on the Schedule Appointment Modal component; it will have a button to close the modal and a button to schedule the appointment
 
+  ### Schedule Appointment Hook
+
+    Schedule Appointment Hook will be used to schedule a new appointment and store the new appointment details in the local storage
+
+    1. Retrieve patient details, patient appointments, and updateAppointment function from the PatientDetailsContext
+    2. Create a function to schedule a new appointment which takes an object with appointment, newDate, newTime and consultationType as parameters
+      a. If any of the required parameters are not provided, exit the function and return false
+      b. Create a new appointment object by spreading the original appointment and updating with the provided parameters
+      c. Call the updateAppointment function to update the appointment in the application state
+      d. Get existing appointments from local storage and update the specific appointment in the array
+      e. Save the updated appointments array back to local storage using the patientID as part of the key
+      f. Return true to indicate that the appointment was successfully scheduled
+
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page
