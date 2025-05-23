@@ -3,6 +3,7 @@ import { AppointmentType } from "../assets/types/AppointmentType"
 import { ScheduleAppointmentContextProps } from "../assets/contextProps/ScheduleAppointmentContextProps"
 import { usePatientDetails } from "./PatientDetailsContext"
 import { useDateTime } from "./DateTimeContext"
+import { useScheduleAppointment } from "../hooks/useScheduleAppointment"
 
 interface ScheduleAppointmentProviderProps{
 
@@ -18,6 +19,7 @@ export const ScheduleAppointmentProvider: React.FC<ScheduleAppointmentProviderPr
 
     const { date: newDate, time: newTime }  = useDateTime(),
           [consultationType, setConsultationType] = useState<"in-person" | "online" | null>(null),
+          { scheduleAppointment } = useScheduleAppointment(),
           [isConfirmed, setIsConfirmed] = useState(false),
           { patientDetails } = usePatientDetails(),
           isvalid = Boolean(newDate && newTime && consultationType && isConfirmed)
@@ -26,6 +28,17 @@ export const ScheduleAppointmentProvider: React.FC<ScheduleAppointmentProviderPr
     
         if(!isvalid || !patientDetails) return
 
+        if(newDate && newTime && consultationType && isConfirmed){
+
+            const scheduleSuccess = scheduleAppointment({ newDate,newTime, consultationType,appointment })
+
+            if(scheduleSuccess){
+
+                onClose()
+
+            }
+
+        }
     
     }
 
