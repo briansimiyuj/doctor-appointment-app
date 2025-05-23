@@ -12,7 +12,7 @@ interface scheduleAppointmentParams{
 
 export const useScheduleAppointment = () =>{
 
-    const  { patientDetails, patientAppointments, updateAppointment } = usePatientDetails()
+    const  { patientDetails, updateAppointment } = usePatientDetails()
 
     const scheduleAppointment = (params: scheduleAppointmentParams) =>{
     
@@ -37,8 +37,6 @@ export const useScheduleAppointment = () =>{
         updatedAppointments = JSON.parse(storedAppointments).map((app: AppointmentType) => app._id === appointment._id ? newAppointment : app)
 
         localStorage.setItem(`appointments-${patientID}`, JSON.stringify(updatedAppointments))
-
-        console.log(patientAppointments)
 
         return true
 

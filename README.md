@@ -1100,6 +1100,19 @@ Patient details page will show the patient's details; medical history, allergies
 
     4. Create a function to handle the schedule appointment submission
       a. If isValid is false or there is no patient details, exit the function
+      b. If there are valid inputs (newDate, newTime, consultationType, and isConfirmed):
+         i. Call scheduleAppointment with the necessary parameters (newDate, newTime, consultationType, appointment)
+         ii. If the scheduling is successful (scheduleSuccess is true), close the modal by calling onClose()
+
+      c. The scheduleAppointment function should:
+         i. Create a new appointment object with the updated date, time, and consultation type
+         ii. Add the new appointment to the patient's appointments array
+         iii. Update the local storage with the new appointments list
+         iv. Return true if the operation was successful, false otherwise
+         
+      d. Handle any potential errors during the scheduling process with appropriate error messages
+      e. Ensure all state updates are properly reflected in the UI after scheduling
+
 
 
   ### Schedule Appointment Modal
