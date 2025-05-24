@@ -10,7 +10,7 @@ const TabActionButton: React.FC = ()=>{
 
     const { patientAppointments } = usePatientDetails(),
 
-          { handleApproveAppointment, openCancelModal, showCancelModal, closeCancelModal, openRejectModal, showRejectModal, closeRejectModal, openRescheduleModal, showRescheduleModal, closeRescheduleModal, showRescheduleHistoryModal, openRescheduleHistoryModal, closeRescheduleHistoryModal, showScheduleNewAppointmentModal, openScheduleNewAppointmentModal, closeScheduleNewAppointmentModal, appointmentToSchedule } = useUpdatePatientDetails() as any,
+          { handleApproveAppointment,appointmentToCancel, openCancelModal, showCancelModal, closeCancelModal, openRejectModal, showRejectModal, closeRejectModal, openRescheduleModal, showRescheduleModal, appointmentToReschedule, closeRescheduleModal, showRescheduleHistoryModal, appointmentToReject, openRescheduleHistoryModal, closeRescheduleHistoryModal, showScheduleNewAppointmentModal, openScheduleNewAppointmentModal, closeScheduleNewAppointmentModal, appointmentToSchedule } = useUpdatePatientDetails() as any,
          latestAppointment = patientAppointments && patientAppointments.length > 0 
         ? patientAppointments[0] 
         : null
@@ -240,11 +240,11 @@ const TabActionButton: React.FC = ()=>{
         
             {renderActionButton()}
 
-            { showCancelModal && <CancelAppointmentModal appointment={latestAppointment} onClose={closeCancelModal}/> }
+            { showCancelModal && <CancelAppointmentModal appointment={appointmentToCancel} onClose={closeCancelModal}/> }
 
-            { showRejectModal && <RejectAppointmentModal appointment={latestAppointment} onClose={closeRejectModal}/> }
+            { showRejectModal && <RejectAppointmentModal appointment={appointmentToReject} onClose={closeRejectModal}/> }
 
-            { showRescheduleModal && <RescheduleAppointmentModal appointment={latestAppointment} onClose={closeRescheduleModal}/> }
+            { showRescheduleModal && <RescheduleAppointmentModal appointment={appointmentToReschedule}onClose={closeRescheduleModal}/> }
 
             { showRescheduleHistoryModal && <RescheduleHistoryModal onClose={closeRescheduleHistoryModal}/> }    
 
