@@ -1185,6 +1185,26 @@ Patient details page will show the patient's details; medical history, allergies
 
     1. Create a Schedule History Modal component and mount it on the Tab Action Button component if showScheduleHistoryModal state is true and pass onClose prop
     2. Mount the Modal Header component on the Schedule History Modal component and pass onClose and title props
+            3. Create an interface for the rescheduling history that tracks all appointment actions and changes
+      a. Use ScheduleHistoryItem interface to track individual actions (scheduled, rescheduled, cancelled, rejected, approved, completed)
+      b. Include the full AppointmentType object to maintain complete appointment data for each history entry
+      c. Track who performed each action using performedBy field:
+        i. appointment.patient & appointment.doctor: Define who the appointment is between (appointment participants)
+        ii. performedBy: Identifies who initiated/performed the specific action (action performer)
+          - Examples: Patient schedules → performedBy = patient, Doctor approves → performedBy = doctor
+      d. For rescheduled appointments, store previousValues to track what changed (date, time, doctor, consultationType)
+      e. Include optional reason and alternative fields for cancellations and rejections
+      f. Add timestamp for each action and optional notes for additional context
+      g. Include optional rescheduleDetails for rescheduled appointments containing:
+        i. originalAppointment object with previous date, time, consultationType, doctorName, and doctorID
+        ii. newAppointment object with updated date, time, consultationType, doctorName, and doctorID
+        iii. This provides detailed before/after comparison for rescheduled appointments
+
+    4. Create a function to get the rescheduling history of the appointment which returns an array of ScheduleHistoryItem objects
+      a. Retrieve history from localStorage using appointment ID as the key
+      b. Parse and return the complete history array showing the full lifecycle of appointment changes
+      c. Each history item contains the appointment state at that point in time and who made the change
+
 
 
 ### Settings Context
