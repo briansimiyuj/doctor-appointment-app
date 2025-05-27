@@ -634,6 +634,10 @@ Patient details page will show the patient's details; medical history, allergies
 
         1. Attach open modal function from update patient details hook to the schedule new appointment button
 
+      *Schedule History Button*: Schedule history button will show the schedule history of the appointment.
+
+        1. Attach open modal function from update patient details hook to the schedule history button
+
 
       ### Update Patient Details Hook
 
@@ -1149,8 +1153,6 @@ Patient details page will show the patient's details; medical history, allergies
       d. Handle any potential errors during the scheduling process with appropriate error messages
       e. Ensure all state updates are properly reflected in the UI after scheduling
 
-
-
   ### Schedule Appointment Modal
 
   Schedule Appointment Modal will be used to schedule a new appointment
@@ -1176,6 +1178,13 @@ Patient details page will show the patient's details; medical history, allergies
       d. Get existing appointments from local storage and update the specific appointment in the array
       e. Save the updated appointments array back to local storage using the patientID as part of the key
       f. Return true to indicate that the appointment was successfully scheduled
+
+  ### Schedule History Modal
+
+  Schedule History Modal will be used to display the patient's schedule history
+
+    1. Create a Schedule History Modal component and mount it on the Tab Action Button component if showScheduleHistoryModal state is true and pass onClose prop
+    2. Mount the Modal Header component on the Schedule History Modal component and pass onClose and title props
 
 
 ### Settings Context
