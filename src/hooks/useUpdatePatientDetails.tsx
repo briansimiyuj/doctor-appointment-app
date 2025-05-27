@@ -26,6 +26,9 @@ export const useUpdatePatientDetails = () =>{
          [showRescheduleHistoryModal, setShowRescheduleHistoryModal] = useState(false),
          [showScheduleNewAppointmentModal, setShowScheduleNewAppointmentModal] = useState(false),
          [appointmentToSchedule, setAppointmentToSchedule] = useState<AppointmentType | null>(null),
+         [showScheduleHistoryModal, setShowcheduleHistoryModal] = useState<boolean>(
+            import.meta.env.VITE_DEV_MODE === 'true' ? true : false
+         ),
          [newDate, setNewDate] = useState<string | null>(null),
          [newTime, setNewTime] = useState<string | null>(null)
 
@@ -172,6 +175,18 @@ export const useUpdatePatientDetails = () =>{
 
    }
 
+   const openScheduleHistoryModal = () =>{
+
+      setShowcheduleHistoryModal(true)      
+   
+   }
+
+   const closeScheduleHistoryModal = () =>{
+
+      setShowcheduleHistoryModal(false) 
+   
+   }
+
    return{
 
       handleApproveAppointment,
@@ -199,7 +214,10 @@ export const useUpdatePatientDetails = () =>{
       showScheduleNewAppointmentModal,
       openScheduleNewAppointmentModal,
       closeScheduleNewAppointmentModal,
-      appointmentToSchedule
+      appointmentToSchedule,
+      showScheduleHistoryModal,
+      openScheduleHistoryModal,
+      closeScheduleHistoryModal
 
    }
 

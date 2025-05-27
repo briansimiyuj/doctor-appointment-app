@@ -734,6 +734,17 @@ Patient details page will show the patient's details; medical history, allergies
           a. Set the modal visibility state to false
           b. Set the appointment to schedule state to null
 
+      *Schedule History Modal Function*
+
+      Schedule history modal function will open a modal to show the schedule history of the appointment.
+
+        1. Create a state for schedule history modal visibility and initialize it to false
+        2. Create a function to open the modal
+          a. Set the modal visibility state to true
+
+        3. Create a function to close the modal
+          a. Set the modal visibility state to false
+
 
     ### Modal Context
 
