@@ -40,8 +40,6 @@ export const useCancelAppointment = () =>{
         }
 
         localStorage.setItem(`cancellation-reason-${patientID}`, JSON.stringify(cancellationReason))
-        
-        console.log(cancellationReason)
 
     }
 

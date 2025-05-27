@@ -65,8 +65,6 @@ export const useUpdatePatientDetails = () =>{
 
       setAppointmentToReject(appointment)
 
-      console.log(appointmentToReject)
-
       setShowRejectModal(true)
 
    }
