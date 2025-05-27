@@ -51,6 +51,8 @@ export const useUpdatePatientDetails = () =>{
    }
 
    const closeCancelModal = () =>{
+
+      localStorage.removeItem('CurrentAppointmentToCancel')
    
       setAppointmentToCancel(null)
       

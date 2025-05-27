@@ -645,18 +645,25 @@ Patient details page will show the patient's details; medical history, allergies
 
       *Cancel Appointment Function*
 
-       Cancel appointment function will open a modal to confirm the cancellation of the appointment.
+        1. Create state variables for modal visibility and appointment management
+          a. Initialize showCancelModal and showRejectModal states to false for controlling modal display
+          b. Initialize appointmentToCancel state with localStorage fallback to persist appointment data across renders
 
-        1. Retrieve updateAppointmentStatus, patientAppointments and patientID from patient details context
-        2. Retrieve the appointmentToCancel from updatePatientDetails hook 
-        3. Create a function to handle the cancel appointment which takes reason and alternative as parameters 
-          a. Get the appointment to cancel either from the hook state or from localStorage as fallback
-          b. If there is no appointment to cancel (neither from state nor localStorage), log error and exit the function
-          c. Call the updateAppointmentStatus function with the appointment and the 'cancelled' status
-          d. Create an appointment ID using the format: date-time
-          e. Retrieve existing cancellation reasons from localStorage using the patient ID as part of the key
-          f. Create a new cancellation reason object with the provided reason, alternative, timestamp, and appointment details
-          g. Store the updated cancellation reasons object back to localStorage with the appointment ID as the key
+        2. Create a function to open the cancel modal which takes an appointment as a parameter
+          a. Store the appointment in localStorage with key 'CurrentAppointmentToCancel' for persistence
+          b. Set the appointmentToCancel state to the provided appointment
+          c. Set showCancelModal state to true to display the modal
+
+        3. Create a function to close the cancel modal
+          a. Remove the appointment data from localStorage using 'CurrentAppointmentToCancel' key
+          b. Set appointmentToCancel state back to null to clear the selected appointment
+          c. Set showCancelModal state to false to hide the modal
+
+        4. The appointmentToCancel state initialization should check localStorage on component mount
+          a. Retrieve any saved appointment from localStorage using 'CurrentAppointmentToCancel' key
+          b. Parse the JSON data if it exists, otherwise default to null
+          c. This ensures appointment data persists if the component re-renders while modal is open
+
 
       *Reject Appointment Function*
 
