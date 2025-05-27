@@ -11,7 +11,12 @@ export const useUpdatePatientDetails = () =>{
          [showCancelModal, setShowCancelModal] = useState(false),
          [showRejectModal, setShowRejectModal] = useState(false),
          [showRescheduleModal, setShowRescheduleModal] = useState(false),
-         [appointmentToCancel, setAppointmentToCancel] = useState<AppointmentType | null>(null),
+         [appointmentToCancel, setAppointmentToCancel] = useState<AppointmentType | null>(() =>{
+            const savedAppointment = localStorage.getItem('CurrentAppointmentToCancel')
+
+            return savedAppointment ? JSON.parse(savedAppointment) : null
+            
+         }),
          [appointmentToReject, setAppointmentToReject] = useState<AppointmentType | null>(() =>{
             const savedAppointment = localStorage.getItem('CurrentAppointmentToReject')
 
@@ -36,6 +41,8 @@ export const useUpdatePatientDetails = () =>{
 
 
    const openCancelModal = (appointment: AppointmentType) =>{
+
+      localStorage.setItem('CurrentAppointmentToCancel', JSON.stringify(appointment))
    
       setAppointmentToCancel(appointment)
       

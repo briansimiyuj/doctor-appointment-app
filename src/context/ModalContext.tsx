@@ -3,6 +3,7 @@ import { ModalContextProps } from "../assets/contextProps/ModalContextProps"
 import { usePatientDetails } from "./PatientDetailsContext"
 import { AppointmentType } from "../assets/types/AppointmentType"
 import { useUpdatePatientDetails } from "../hooks/useUpdatePatientDetails"
+import { useCancelAppointment } from "../hooks/useCancelAppointment"
 
 interface ModalProviderProps{
 
@@ -10,15 +11,17 @@ interface ModalProviderProps{
     appointment: AppointmentType | null
     onClose: () => void
     onReject?: (reason: string, alternative?: string) => void
+    onCancel?: (reason: string, alternative?: string) => void
 
 }
 
 export const ModalContext = createContext<ModalContextProps | undefined>(undefined)
 
-export const ModalProvider: React.FC<ModalProviderProps> = ({ children, appointment, onClose, onReject }) =>{
+export const ModalProvider: React.FC<ModalProviderProps> = ({ children, appointment, onClose, onReject, onCancel }) =>{
 
     const { updateAppointmentStatus } = usePatientDetails(),
           { handleRejectAppointment: rejectAppointment } = useUpdatePatientDetails(),
+          { handleCancelAppointment: cancelAppointment } = useCancelAppointment(), 
             [reason, setReason] = useState<string>(''),
             [alternative, setAlternative] = useState<string>(''),
             [isConfirmed, setIsConfirmed] = useState<boolean>(false),
@@ -28,7 +31,13 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children, appointm
     
         if(!appointment || !isValid) return
 
-        updateAppointmentStatus(appointment, "cancelled", )
+        cancelAppointment(reason, alternative)
+
+        if(onCancel){
+
+            onCancel(reason)
+
+        }
 
         onClose()
     

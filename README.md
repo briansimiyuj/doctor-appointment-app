@@ -647,11 +647,7 @@ Patient details page will show the patient's details; medical history, allergies
 
        Cancel appointment function will open a modal to confirm the cancellation of the appointment.
 
-
-
-
-
-        1. Retrieve updateAppointmentStatus from the patient details context 
+        1. Retrieve updateAppointmentStatus, patientAppointments and patientID from patient details context
         2. Retrieve the appointmentToCancel from updatePatientDetails hook 
         3. Create a function to handle the cancel appointment which takes reason and alternative as parameters 
           a. Get the appointment to cancel either from the hook state or from localStorage as fallback
@@ -736,13 +732,13 @@ Patient details page will show the patient's details; medical history, allergies
 
       Modal context will be used to manage the state of the modal (Handle cancel appointment, reason for cancellation, etc.)
 
-        1. Retrieve updateAppointmentStatus function from the patient details context and handleRejectAppointment as rejectAppointment, reason and alternative states from update patient details hook
+        1. Retrieve updateAppointmentStatus function from the patient details context and handleRejectAppointment as rejectAppointment, cancelAppointment, reason and alternative states from update patient details hook
         2. Create states for reason, alternative and isConfirmed and initialize them to an empty string and false respectively
         3. Check if the reason is not empty and isConfirmed is true, if both are true, set a boolean state to it
         4. Create a function to handle the cancel appointment
 
-          a. If there is no appointment to cancel or the boolean state is false, return
-          b. Call the updateAppointmentStatus function with the appointment to cancel and the 'cancelled' status
+          a. If there is no appointment to cancel or the boolean state is false, exit the function early
+          b. Call the cancelAppointment function with the appointment to cancel and the reason parameter
           c. Call onClose function to close the modal
 
         5. Create a function to handle reject appointment
