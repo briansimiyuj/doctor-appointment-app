@@ -41,7 +41,21 @@ const ScheduleHistoryHeader: React.FC<ScheduleHistoryHeaderProps> = ({ actionTyp
 
     return(
 
-        <h1>ScheduleHistoryHeader</h1>
+        <div className="flex items-start justify-between gap-4 mb-3">
+            
+            <h3 className={`font-medium ${getActionColor(actionType)}`}>
+
+                { getActionLabel(actionType) }
+
+            </h3>
+
+            <span className="text-gray-500 text-sm">
+
+                { new Date(timeStamp).toLocaleDateString() } at { new Date(timeStamp).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }) }
+
+            </span>
+
+        </div>
 
     )
 
