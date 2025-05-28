@@ -1243,6 +1243,10 @@ Patient details page will show the patient's details; medical history, allergies
           - Display the action label with appropriate color styling using the getActionColor function
           - Format the timestamp showing both date and time in a readable format
 
+        ii. Create Schedule History Details component and mount it on the Schedule History Card component and pass the history item as a prop
+          - Display current appointment details (date, time, doctor, consultation type)
+          - Display past appointment details (date, time, doctor, consultation type) if available 
+
 
 ### Settings Context
 
