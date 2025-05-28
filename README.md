@@ -818,6 +818,16 @@ Patient details page will show the patient's details; medical history, allergies
         f. Create a new cancellation reason object with the provided reason, alternative, timestamp, and appointment details
         g. Store the updated cancellation reasons object back to localStorage with the appointment ID as the key
 
+      4. Store the appointment cancellation in schedule history
+        a. Create a ScheduleHistoryItem object with unique ID, appointment data, and "cancelled" action type
+        b. Set the timestamp to current ISO string and include the cancellation reason and alternative
+        c. Set performedBy field with doctor information from the appointment or fallback to DummyAppointment data
+        d. Add optional notes describing the cancellation action
+        e. Retrieve existing schedule history from localStorage using "scheduleHistory" key
+        f. Append the new history item to the existing history array
+        g. Store the updated schedule history array back to localStorage for audit trail purposes
+
+
 
 
     ### Reject Appointment Modal Component 
