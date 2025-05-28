@@ -26,9 +26,7 @@ export const useUpdatePatientDetails = () =>{
          [showRescheduleHistoryModal, setShowRescheduleHistoryModal] = useState(false),
          [showScheduleNewAppointmentModal, setShowScheduleNewAppointmentModal] = useState(false),
          [appointmentToSchedule, setAppointmentToSchedule] = useState<AppointmentType | null>(null),
-         [showScheduleHistoryModal, setShowcheduleHistoryModal] = useState<boolean>(
-            import.meta.env.VITE_DEV_MODE === 'true' ? true : false
-         ),
+         [showScheduleHistoryModal, setShowcheduleHistoryModal] = useState<boolean>(false),
          [newDate, setNewDate] = useState<string | null>(null),
          [newTime, setNewTime] = useState<string | null>(null)
 

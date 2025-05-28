@@ -1245,7 +1245,11 @@ Patient details page will show the patient's details; medical history, allergies
 
         ii. Create Schedule History Details component and mount it on the Schedule History Card component and pass the history item as a prop
           - Display current appointment details (date, time, doctor, consultation type)
-          - Display past appointment details (date, time, doctor, consultation type) if available 
+          - Display past appointment details (date, time, doctor, consultation type) if available
+
+        iii. Create Schedule History Metadata component and mount it on the Schedule History Card component and pass performedBy, reason, altenative, and notes as props
+          - Display who made the change
+          - Display reason, alternative, and notes if available
 
 
 ### Settings Context
