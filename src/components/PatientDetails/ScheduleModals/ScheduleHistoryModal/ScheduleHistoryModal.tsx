@@ -1,4 +1,5 @@
 import ModalHeader from "../../ModalHeader"
+import ModalBody from "./ModalBody"
 
 interface ScheduleHistoryModalProps{
     
@@ -15,6 +16,8 @@ const ScheduleHistoryModal: React.FC<ScheduleHistoryModalProps> = ({ onClose }) 
             <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-2xl mx-auto overflow-y-auto max-h-[90vh]">
 
                 <ModalHeader title="Schedule History" onClose={onClose}/>
+
+                <ModalBody/>
 
             </div>
 

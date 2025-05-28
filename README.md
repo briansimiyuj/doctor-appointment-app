@@ -1215,6 +1215,10 @@ Patient details page will show the patient's details; medical history, allergies
       b. Parse and return the complete history array showing the full lifecycle of appointment changes
       c. Each history item contains the appointment state at that point in time and who made the change
 
+    5. Create a Modal Body component and mount it on the Schedule History Modal component
+      a. If there is no scheduling history, display a message indicating that there is no history to display
+      b. If there is scheduling history, display a card for each history item showing when the appointment was scheduled, previous appointment, reason, alternative, and who made the change and notes. 
+
 
 
 ### Settings Context

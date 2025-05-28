@@ -67,8 +67,6 @@ export const useCancelAppointment = () =>{
 
         localStorage.setItem("scheduleHistory", JSON.stringify(updatedHistory))
 
-        console.log('Schedule history updated:', scheduleHistoryItem)
-
     }
 
     return { handleCancelAppointment }
