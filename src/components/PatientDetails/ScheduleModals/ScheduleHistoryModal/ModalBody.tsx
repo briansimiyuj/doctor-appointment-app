@@ -1,11 +1,10 @@
 import { useScheduleHistory } from "../../../../hooks/useScheduleHistory"
+import ScheduleHistoryCard from "./ScheduleHistoryCard"
 
 const ModalBody: React.FC = ()=>{
 
     const { getScheduleHistory } = useScheduleHistory(),
           scheduleHistory = getScheduleHistory()
-
-    console.log(scheduleHistory)
 
     return(
 
@@ -23,7 +22,23 @@ const ModalBody: React.FC = ()=>{
 
                 ):(
 
-                    <div className="space-y-4"></div>
+                    <div className="space-y-4">
+
+                        {
+
+                            scheduleHistory.map((item, index) =>(
+
+                                <ScheduleHistoryCard
+                                    key={index}
+                                    item={item}
+                                    index={index}
+                                />
+
+                            ))
+
+                        }
+
+                    </div>
 
                 )
 

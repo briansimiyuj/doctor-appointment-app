@@ -1218,7 +1218,30 @@ Patient details page will show the patient's details; medical history, allergies
     5. Create a Modal Body component and mount it on the Schedule History Modal component
       a. If there is no scheduling history, display a message indicating that there is no history to display
       b. If there is scheduling history, display a card for each history item showing when the appointment was scheduled, previous appointment, reason, alternative, and who made the change and notes. 
+      c. Loop through the history array and create a card for each item
+        i. Create a ScheduleHistoryHeader component and mount it on the Schedule History Card component and pass actionType and timeStamp as props
+           The ScheduleHistoryHeader component displays the action label and timestamp for each history item
 
+          - Create getActionLabel function that takes action string as parameter and returns appropriate label:
+            *"cancelled" returns "Appointment Cancelled"*
+            *"rescheduled" returns "Appointment Rescheduled"*
+            *"rejected" returns "Appointment Rejected"*
+            *"approved" returns "Appointment Approved"*
+            *"pending" returns "Appointment Pending"*
+            *"completed" returns "Appointment Completed"*
+            *default returns "Appointment Updated"*
+
+          - Create getActionColor function that takes action string as parameter and returns appropriate CSS color class:
+            *"cancelled" returns "text-red-600"*
+            *"rescheduled" returns "text-blue-600"*
+            *"rejected" returns "text-red-600"*
+            *"approved" returns "text-green-600"*
+            *"pending" returns "text-yellow-600"*
+            *"completed" returns "text-gray-600"*
+            *default returns "text-gray-600"*
+
+          - Display the action label with appropriate color styling using the getActionColor function
+          - Format the timestamp showing both date and time in a readable format
 
 
 ### Settings Context
