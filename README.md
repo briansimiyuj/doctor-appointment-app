@@ -1251,6 +1251,23 @@ Patient details page will show the patient's details; medical history, allergies
           - Display who made the change
           - Display reason, alternative, and notes if available
 
+  ### Schedule History Hook
+
+    Schedule history hook will be used to manage schedule history of appointments and provide centralized storage for all appointment actions.
+
+      1. Retrieve patientDetails from Patient Details context
+      2. Create a function to add a new history item to the schedule history array which takes appointment, actionType, reason, alternative, previousValues, performedBy and notes as parameters
+        a. If there is no patientDetails, exit the function 
+        b. Get the existing history array from localStorage using patientID as the key
+        c. Create a new history item object with the appointment, actionType, reason, alternative, previousValues, performedBy, notes, ID and timestamp
+        d. Add the new history item to the history array at the beginning
+        e. Save the updated history array to localStorage using patientID as the key
+
+      3. Create a function to get the schedule history of the appointment which returns an array of ScheduleHistoryItem objects
+        a. If there is no patientDetails, return an empty array
+        b. Retrieve history from localStorage using patientID as the key
+        c. Parse and return the complete history array showing the full lifecycle of appointment changes
+
 
 ### Settings Context
 
