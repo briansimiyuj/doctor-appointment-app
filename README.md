@@ -807,7 +807,7 @@ Patient details page will show the patient's details; medical history, allergies
 
     Cancel appointment hook will be used to cancel the appointment and store the reason for cancellation in local storage.
 
-      1. Retrieve updateAppointmentStatus from the patient details context 
+      1. Retrieve updateAppointmentStatus from the patient details context and addScheduleHistoryEntry from the schedule history hook
       2. Retrieve the appointmentToCancel from updatePatientDetails hook 
       3. Create a function to handle the cancel appointment which takes reason and alternative as parameters 
         a. Get the appointment to cancel either from the hook state or from localStorage as fallback
@@ -819,14 +819,8 @@ Patient details page will show the patient's details; medical history, allergies
         g. Store the updated cancellation reasons object back to localStorage with the appointment ID as the key
 
       4. Store the appointment cancellation in schedule history
-        a. Create a ScheduleHistoryItem object with unique ID, appointment data, and "cancelled" action type
-        b. Set the timestamp to current ISO string and include the cancellation reason and alternative
-        c. Set performedBy field with doctor information from the appointment or fallback to DummyAppointment data
-        d. Add optional notes describing the cancellation action
-        e. Retrieve existing schedule history from localStorage using "scheduleHistory" key
-        f. Append the new history item to the existing history array
-        g. Store the updated schedule history array back to localStorage for audit trail purposes
-
+        a. Call addScheduleHistoryEntry function with appointment, "cancelled" action type, reason, and alternative parameters
+        b. Pass performedBy object with patient information from the appointment (type: "patient", name, and _id)
 
 
 
