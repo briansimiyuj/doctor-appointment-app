@@ -643,10 +643,6 @@ Patient details page will show the patient's details; medical history, allergies
 
         Update patient details hook will update the patient details in the database.
 
-      *Approve Function*
-
-          1. Create a function to approve the appointment 
-
       *Cancel Appointment Function*
 
         1. Create state variables for modal visibility and appointment management
@@ -748,6 +744,31 @@ Patient details page will show the patient's details; medical history, allergies
 
         3. Create a function to close the modal
           a. Set the modal visibility state to false
+
+      #### Approve Appointment Hook
+
+      Approve appointment hook will be used to approve pending appointments and store the approval action in the centralized schedule history.
+
+        1. Retrieve updateAppointmentStatus from the patient details context and addScheduleHistoryEntry from the schedule history hook
+        2. Retrieve userType from the login context to determine who is performing the approval action
+        3. Get the latest appointment from patientAppointments array (first item in the array)
+        4. Create a function to handle the approve appointment action
+          a. Check if there is a latest appointment available to approve
+          b. If appointment exists, call updateAppointmentStatus function with the appointment and "approved" status
+          c. Determine performer details based on user type:
+            i. For doctors: use doctor name and ID from the appointment
+            ii. For patients: use patient name and ID from the appointment
+            iii. Set type field to the current userType from login context
+          d. Call addScheduleHistoryEntry function with:
+            i. Updated appointment object with "approved" status
+            ii. Action type as "approved"
+            iii. Reason as "Appointment approved by [userType]"
+            iv. No alternative (undefined)
+            v. Previous values containing the original appointment status
+            vi. Performer details object with type, name, and ID
+            vii. Detailed notes about the approval action including date and time
+            viii. No reschedule details (undefined) since this is an approval action
+
 
 
     ### Modal Context

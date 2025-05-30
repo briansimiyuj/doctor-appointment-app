@@ -4,10 +4,8 @@ import { AppointmentType } from "../assets/types/AppointmentType"
 
 export const useUpdatePatientDetails = () =>{
 
-   const { patientAppointments, updateAppointmentStatus, patientID } = usePatientDetails(),
-            latestAppointment = patientAppointments && patientAppointments.length > 0 
-         ? patientAppointments[0] 
-         : null,
+   const { patientID } = usePatientDetails(),
+
          [showCancelModal, setShowCancelModal] = useState(false),
          [showRejectModal, setShowRejectModal] = useState(false),
          [showRescheduleModal, setShowRescheduleModal] = useState(false),
@@ -29,16 +27,6 @@ export const useUpdatePatientDetails = () =>{
          [showScheduleHistoryModal, setShowcheduleHistoryModal] = useState<boolean>(false),
          [newDate, setNewDate] = useState<string | null>(null),
          [newTime, setNewTime] = useState<string | null>(null)
-
-   const handleApproveAppointment = () =>{
-   
-      if(latestAppointment){
-
-         updateAppointmentStatus(latestAppointment, "approved")
-
-      }
-   
-   }
 
 
    const openCancelModal = (appointment: AppointmentType) =>{
@@ -187,7 +175,6 @@ export const useUpdatePatientDetails = () =>{
 
    return{
 
-      handleApproveAppointment,
       openCancelModal,
       showCancelModal,
       appointmentToCancel,
