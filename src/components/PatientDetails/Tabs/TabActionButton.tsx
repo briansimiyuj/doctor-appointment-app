@@ -1,4 +1,5 @@
 import { usePatientDetails } from "../../../context/PatientDetailsContext"
+import { useApproveAppointment } from "../../../hooks/useApproveAppointment"
 import { useUpdatePatientDetails } from "../../../hooks/useUpdatePatientDetails"
 import CancelAppointmentModal from "../CancelModals/CancelAppointmentModal"
 import RejectAppointmentModal from "../RejectModal/RejectAppointmentModal"
@@ -10,8 +11,8 @@ import ScheduleHistoryModal from "../ScheduleModals/ScheduleHistoryModal/Schedul
 const TabActionButton: React.FC = ()=>{
 
     const { patientAppointments } = usePatientDetails(),
-
-          { handleApproveAppointment,appointmentToCancel, openCancelModal, showCancelModal, closeCancelModal, openRejectModal, showRejectModal, closeRejectModal, openRescheduleModal, showRescheduleModal, appointmentToReschedule, closeRescheduleModal, showRescheduleHistoryModal, appointmentToReject, openRescheduleHistoryModal, closeRescheduleHistoryModal, showScheduleNewAppointmentModal, openScheduleNewAppointmentModal, closeScheduleNewAppointmentModal, appointmentToSchedule, showScheduleHistoryModal, openScheduleHistoryModal, closeScheduleHistoryModal } = useUpdatePatientDetails() as any,
+          { handleApproveAppointment } = useApproveAppointment(),
+          { appointmentToCancel, openCancelModal, showCancelModal, closeCancelModal, openRejectModal, showRejectModal, closeRejectModal, openRescheduleModal, showRescheduleModal, appointmentToReschedule, closeRescheduleModal, showRescheduleHistoryModal, appointmentToReject, openRescheduleHistoryModal, closeRescheduleHistoryModal, showScheduleNewAppointmentModal, openScheduleNewAppointmentModal, closeScheduleNewAppointmentModal, appointmentToSchedule, showScheduleHistoryModal, openScheduleHistoryModal, closeScheduleHistoryModal } = useUpdatePatientDetails() as any,
          latestAppointment = patientAppointments && patientAppointments.length > 0 
         ? patientAppointments[0] 
         : null
