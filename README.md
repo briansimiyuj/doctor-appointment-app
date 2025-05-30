@@ -1262,6 +1262,8 @@ Patient details page will show the patient's details; medical history, allergies
         b. Retrieve history from localStorage using patientID as the key
         c. Parse and return the complete history array showing the full lifecycle of appointment changes
 
+      4. Update other hooks for updating appointment to use Schedule History hook
+
 
 ### Settings Context
 

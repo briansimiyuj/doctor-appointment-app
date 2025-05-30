@@ -1,3 +1,5 @@
+import { useContext } from "react"
+import { LoginContext } from "../context/LoginContext"
 import { usePatientDetails } from "../context/PatientDetailsContext"
 import { useScheduleHistory } from "./useScheduleHistory"
 import { useUpdatePatientDetails } from "./useUpdatePatientDetails"
@@ -6,7 +8,9 @@ export const useCancelAppointment = () =>{
 
     const { updateAppointmentStatus } = usePatientDetails(),
           { appointmentToCancel} = useUpdatePatientDetails(),
-          { addScheduleHistoryEntry } = useScheduleHistory()
+          { addScheduleHistoryEntry } = useScheduleHistory(),
+          loginContext = useContext(LoginContext),
+          userType = loginContext?.userType || "patient"
 
     const handleCancelAppointment = (reason: string, alternative?: string) =>{
 
@@ -28,17 +32,21 @@ export const useCancelAppointment = () =>{
 
         updateAppointmentStatus(appointment, "cancelled")
 
+        const performedBy ={
+
+            type: userType,
+            name: userType === "doctor" ? appointment.doctor.name : appointment.patient.name,
+            _id: userType === "doctor" ? appointment.doctor._id : appointment.patient._id
+
+        }
+
         addScheduleHistoryEntry(
 
             appointment,
             "cancelled",
             reason,
             alternative,
-            {
-                type: "patient",
-                name: appointment.patient.name,
-                _id: appointment.patient._id
-            }
+            performedBy
 
         )
 
