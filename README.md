@@ -602,7 +602,7 @@ Patient details page will show the patient's details; medical history, allergies
       - 🔵 **Approved appointments** display "Manage Appointment" and "Cancel" buttons side by side.
       - ⚪ **Completed appointments** offer an "Add Notes" button for post-appointment documentation.
       - 🔴 **Cancelled appointments** provide a "Schedule New Appointment" button to facilitate rebooking and "Schedule History" button to display schedule history.
-      - 🔴 **Rejected appointments** show a "Schedule New Appointment" button to facilitate rebooking.
+      - 🔴 **Rejected appointments** show a "Schedule New Appointment" button to facilitate rebooking and "Schedule History" button to display schedule history.
       - 🟣 **Rescheduled appointments** display a "Rescheduled History" button to display the rescheduled history.
       - 🟣 **Other statuses** show a generic "Manage Appointment" button as a fallback option.
 
