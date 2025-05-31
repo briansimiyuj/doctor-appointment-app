@@ -670,26 +670,13 @@ Patient details page will show the patient's details; medical history, allergies
       Reject appointment function will open a modal to confirm the rejection of the appointment.  
 
         1. Create a state for appointment to reject and initialize it with data from localStorage if available
-        2. Create a function to reject the appointment which takes reason and alternative as parameters
-          a. Get the appointmen
-          b. If there is no appointment to reject, exit the function early
-          c. Retrieve appointment ID from the appointment to reject object (date - time)
-          d. Retrieve rejection reason from local storage using the patient ID as part of the key 
-          e. Create a new rejection object with:
-            - The provided rejection reason
-            - Any alternative suggestion (or empty string if not provided)
-            - Timestamp of when the rejection was made
-            - Full appointment details for reference
-            
-          f. Store the updated rejection reason back into local storage
-
-        3. Create a state for modal visibility and initialize it to false
-        4. Create a function to open the modal which takes the appointment to reject as a parameter
+        2. Create a state for modal visibility and initialize it to false
+        3. Create a function to open the modal which takes the appointment to reject as a parameter
           a. Save the appointment to localStorage for persistence
           b. Set the appointment to reject state to the appointment parameter
           c. Set the modal visibility state to true
 
-        5. Create a function to close the modal
+        4. Create a function to close the modal
           a. Remove the appointment from localStorage
           b. Set the appointment to reject state to null
           c. Set the modal visibility state to false
@@ -768,6 +755,45 @@ Patient details page will show the patient's details; medical history, allergies
             vi. Performer details object with type, name, and ID
             vii. Detailed notes about the approval action including date and time
             viii. No reschedule details (undefined) since this is an approval action
+
+      #### Reject Appointment Hook
+
+      Reject appointment hook will be used to reject pending appointments and store the rejection action in the centralized schedule history.
+
+        1. Retrieve patientDetails, patientAppointments, and updateAppointmentStatus from the patient details context and addScheduleHistoryEntry from the schedule history hook
+        2. Retrieve userType from the login context to determine who is performing the rejection action
+        3. Retrieve appointment to reject from the update patient details hook
+        3. Get patientID from patientDetails for localStorage operations
+        4. Create a function to handle the reject appointment action which takes reason ans alternative as parameters
+          a. Get the appointment to reject either from the hook or from localStorage as fallback using 'CurrentAppointmentToReject' key
+          b. If there is no appointment to reject (neither from parameter nor localStorage), log error and exit the function
+          c. Create an appointment ID using the format: date-time for tracking purposes
+          d. Retrieve existing rejection reasons from localStorage using the patient ID as part of the key
+          e. Create a new rejection reason object with:
+            i. The provided rejection reason
+            ii. Any alternative suggestion (or empty string if not provided)
+            iii. Timestamp of when the rejection was made
+            iv. Full appointment details for reference
+          f. Store the updated rejection reasons object back to localStorage with the appointment ID as the key
+          g. Call updateAppointmentStatus function with the appointment and "rejected" status
+          h. Determine performer details based on user type:
+            i. For doctors: use doctor name and ID from the appointment
+            ii. For patients: use patient name and ID from the appointment
+            iii. Set type field to the current userType from login context
+          i. Call addScheduleHistoryEntry function with:
+            i. Updated appointment object with "rejected" status
+            ii. Action type as "rejected"
+            iii. Reason as the provided rejection reason
+            iv. Alternative as the provided alternative suggestion
+            v. Previous values containing the original appointment status
+            vi. Performer details object with type, name, and ID
+            vii. Detailed notes about the rejection action including date, time, and alternative if provided
+            viii. No reschedule details (undefined) since this is a rejection action
+
+        5. Return handleRejectAppointment function for use in components
+        6. The hook maintains backward compatibility with existing localStorage rejection storage while integrating with the new centralized schedule history system
+        7. Uses appointment data as the source of truth for performer details instead of requiring additional context providers
+        
 
 
 
