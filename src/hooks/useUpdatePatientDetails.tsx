@@ -1,12 +1,9 @@
 import { useState } from "react"
-import { usePatientDetails } from "../context/PatientDetailsContext"
 import { AppointmentType } from "../assets/types/AppointmentType"
 
 export const useUpdatePatientDetails = () =>{
 
-   const { patientID } = usePatientDetails(),
-
-         [showCancelModal, setShowCancelModal] = useState(false),
+   const [showCancelModal, setShowCancelModal] = useState(false),
          [showRejectModal, setShowRejectModal] = useState(false),
          [showRescheduleModal, setShowRescheduleModal] = useState(false),
          [appointmentToCancel, setAppointmentToCancel] = useState<AppointmentType | null>(() =>{
@@ -69,43 +66,6 @@ export const useUpdatePatientDetails = () =>{
 
       setShowRejectModal(false)
 
-   }
-
-   const handleRejectAppointment = (reason: string, alternative?: string)  =>{
-   
-      const appointment = appointmentToReject || (() =>{
-
-         const savedAppointment = localStorage.getItem('CurrentAppointmentToReject')
-
-         return savedAppointment ? JSON.parse(savedAppointment) : null
-
-      })()
-      
-      if(!appointment){
-
-         console.error('No appointment to reject')
-
-         return
-
-      }
-
-
-      const appointmentID = `${appointment.date}-${appointment.time}`,
-            rejectionReason = JSON.parse(localStorage.getItem(`rejection-reason-${patientID}`) || '{}')
-
-      rejectionReason[appointmentID] ={
-
-         reason,
-         alternative: alternative || '',
-         rejectedAt: new Date().toISOString(),
-         appointmentDetails: appointmentToReject
-
-      }
-
-      localStorage.setItem(`rejectionReason-${patientID}`, JSON.stringify(rejectionReason))
-
-      closeRejectModal()
-   
    }
 
 
@@ -179,7 +139,6 @@ export const useUpdatePatientDetails = () =>{
       showCancelModal,
       appointmentToCancel,
       closeCancelModal,
-      handleRejectAppointment,
       setAppointmentToReject,
       showRejectModal,
       appointmentToReject,
