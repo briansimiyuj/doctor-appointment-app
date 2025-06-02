@@ -20,6 +20,14 @@ export const useUpdatePatientDetails = () =>{
          [appointmentToReschedule, setAppointmentToReschedule] = useState<AppointmentType | null>(null),
          [showRescheduleHistoryModal, setShowRescheduleHistoryModal] = useState(false),
          [showScheduleNewAppointmentModal, setShowScheduleNewAppointmentModal] = useState(false),
+         [showManageModal, setShowManageModal] = useState(
+            import.meta.env.VITE_DEV_MODE === 'true' ? true : false
+         ),
+         [appointmentToManage, setAppointmentToManage] = useState<AppointmentType | null>(() =>{
+            const savedAppointment = localStorage.getItem('CurrentAppointmentToManage')
+
+            return savedAppointment ? JSON.parse(savedAppointment) : null
+         }),
          [appointmentToSchedule, setAppointmentToSchedule] = useState<AppointmentType | null>(null),
          [showScheduleHistoryModal, setShowcheduleHistoryModal] = useState<boolean>(false),
          [newDate, setNewDate] = useState<string | null>(null),
@@ -133,6 +141,26 @@ export const useUpdatePatientDetails = () =>{
    
    }
 
+   const openManageModal = (appointment: AppointmentType) =>{
+   
+      localStorage.setItem('CurrentAppointmentToManage', JSON.stringify(appointment))
+
+      setAppointmentToManage(appointment)
+
+      setShowManageModal(true)
+   
+   }
+
+   const closeManageModal = () =>{
+
+      localStorage.removeItem('CurrentAppointmentToManage')
+
+      setAppointmentToManage(null)
+
+      setShowManageModal(false)
+
+   }
+
    return{
 
       openCancelModal,
@@ -161,7 +189,11 @@ export const useUpdatePatientDetails = () =>{
       appointmentToSchedule,
       showScheduleHistoryModal,
       openScheduleHistoryModal,
-      closeScheduleHistoryModal
+      closeScheduleHistoryModal,
+      showManageModal,
+      openManageModal,
+      closeManageModal,
+      appointmentToManage
 
    }
 

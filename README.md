@@ -638,6 +638,10 @@ Patient details page will show the patient's details; medical history, allergies
 
         1. Attach open modal function from update patient details hook to the schedule history button
 
+      *Manage Appointment Button*: Manage appointment button will open a modal to manage the appointment.
+
+        1. Attach open modal function from update patient details hook to the manage appointment button
+
 
       ### Update Patient Details Hook
 
@@ -731,6 +735,24 @@ Patient details page will show the patient's details; medical history, allergies
 
         3. Create a function to close the modal
           a. Set the modal visibility state to false
+
+      *Manage Appointment Function*
+
+      Manage appointment function will open a modal to manage the appointment.
+
+      1. Create a states for modal visibility and appointment to manage and initialize them to false and data from localStorage respectively
+      2. Create a function to open the modal
+        a. Set the modal visibility state to true
+        b. Save the appointment to localStorage for persistence
+        b. Set the appointment to manage state to the appointment parameter
+
+      3. Create a function to close the modal
+        a. Set the modal visibility state to false
+        b. Set the appointment to manage state to null
+
+      *Update Appointment Status Function*
+
+      Update appointment status function will update the status of the appointment.
 
       #### Approve Appointment Hook
 
@@ -1310,6 +1332,27 @@ Patient details page will show the patient's details; medical history, allergies
         c. Parse and return the complete history array showing the full lifecycle of appointment changes
 
       4. Update other hooks for updating appointment to use Schedule History hook
+
+  ### Manage Appointment Modal
+
+    Manage Appointment Modal will be used to provide doctors with quick status management and appointment overview functionality for efficient appointment handling.
+
+      1. Create a Manage Appointment Modal component and mount it on the Tab Action Button component if the showManageModal state is true and pass closeManageModal as a prop
+      2. Mount ModalHeader component on the Manage Appointment Modal component and pass title and onClose as props
+      3. Create a ModalBody component and mount it on the Manage Appointment Modal component and pass appointmentToManage as props
+      4. Create a StatusManagement component and mount it on the ModalBody component and pass appointmentToManage as a prop
+
+  #### Complete Appointment Hook
+
+    Complete Appointment Hook will be used to handle the completion of an appointment and update the appointment status accordingly.
+
+      1. Retreive updateAppointmentStatus from patient details context, addScheduleHistoryEntry from schedule history hook and userType from the login context
+      2. If there is no appointmentToManage, return null
+      3. Create a function to mark the appointment as completed
+        a. Call updateAppointmentStatus with the appointment and status of 'completed'
+        b. Get perfomer details from appointment data
+        c. Add a new history item to the schedule history array using addScheduleHistoryEntry function
+
 
 
 ### Settings Context
