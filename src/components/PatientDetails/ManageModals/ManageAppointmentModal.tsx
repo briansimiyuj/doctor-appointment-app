@@ -1,4 +1,5 @@
 import ModalHeader from "../ModalHeader"
+import ModalBody from "./ModalBody"
 
 interface ManageAppointmentModalProps{
 
@@ -15,6 +16,8 @@ const ManageAppointmentModal: React.FC<ManageAppointmentModalProps> = ({ onClose
             <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-2xl mx-auto overflow-y-auto max-h-[90vh] flex flex-col">
 
                 <ModalHeader title="Manage Appointment" onClose={onClose}/>
+
+                <ModalBody/>
 
             </div>
             
