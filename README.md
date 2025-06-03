@@ -1342,6 +1342,18 @@ Patient details page will show the patient's details; medical history, allergies
       3. Create a ModalBody component and mount it on the Manage Appointment Modal component
       4. Create a StatusManagement component and mount it on the ModalBody component
 
+  #### Complete Appointment Hook
+
+    Complete Appointment Hook will be used to handle the completion of an appointment and update the appointment status accordingly.
+
+      1. Retreive updateAppointmentStatus from patient details context, addScheduleHistoryEntry from schedule history hook and userType from the login context
+      2. If there is no appointmentToManage, return null
+      3. Create a function to mark the appointment as completed
+        a. Call updateAppointmentStatus with the appointment and status of 'completed'
+        b. Get perfomer details from appointment data
+        c. Add a new history item to the schedule history array using addScheduleHistoryEntry function
+
+
 
 ### Settings Context
 
