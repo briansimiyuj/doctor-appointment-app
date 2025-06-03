@@ -1341,6 +1341,9 @@ Patient details page will show the patient's details; medical history, allergies
       2. Mount ModalHeader component on the Manage Appointment Modal component and pass title and onClose as props
       3. Create a ModalBody component and mount it on the Manage Appointment Modal component
       4. Create a StatusManagement component and mount it on the ModalBody component
+      5. Create a LiveChat Component and mount it on the ModalBody component
+      6. Create a Video Call Component and mount it on the ModalBody component
+
 
   ### Status Management Component
 

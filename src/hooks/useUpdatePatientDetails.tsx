@@ -20,9 +20,7 @@ export const useUpdatePatientDetails = () =>{
          [appointmentToReschedule, setAppointmentToReschedule] = useState<AppointmentType | null>(null),
          [showRescheduleHistoryModal, setShowRescheduleHistoryModal] = useState(false),
          [showScheduleNewAppointmentModal, setShowScheduleNewAppointmentModal] = useState(false),
-         [showManageModal, setShowManageModal] = useState(
-            import.meta.env.VITE_DEV_MODE === 'true' ? true : false
-         ),
+         [showManageModal, setShowManageModal] = useState(false),
          [appointmentToManage, setAppointmentToManage] = useState<AppointmentType | null>(() =>{
             const savedAppointment = localStorage.getItem('CurrentAppointmentToManage')
 
