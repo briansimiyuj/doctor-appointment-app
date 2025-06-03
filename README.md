@@ -1342,6 +1342,13 @@ Patient details page will show the patient's details; medical history, allergies
       3. Create a ModalBody component and mount it on the Manage Appointment Modal component
       4. Create a StatusManagement component and mount it on the ModalBody component
 
+  ### Status Management Component
+
+    Status Management Component will be used to mark the appointment as completed.
+
+      1. Retrieve handleMarkAsComplete function from complete appointment hook
+      2. Create a button and attach handleMarkAsComplete as an onClick event handler
+
   #### Complete Appointment Hook
 
     Complete Appointment Hook will be used to handle the completion of an appointment and update the appointment status accordingly.
