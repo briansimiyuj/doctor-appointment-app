@@ -1427,6 +1427,8 @@ Patient details page will show the patient's details; medical history, allergies
         b. Create a DiagnosisInput component and mount it on the NotesForm component
           i. Create a TextArea and make it controlled by the diagnosis state
 
+        c. Create a PrescriptionInput component and mount it on the NotesForm component
+          i. Create a TextArea and make it controlled by the prescription state
 
 ### Settings Context
 
