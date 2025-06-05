@@ -1,9 +1,15 @@
 import { BiCheck } from "react-icons/bi"
 import { useCompleteAppointment } from "../../../hooks/useCompleteAppointment"
 
-const StatusManagement: React.FC= () =>{     
+interface StatusManagementProps{
+
+    onClose: () => void
+
+}
+
+const StatusManagement: React.FC<StatusManagementProps> = ({ onClose }) =>{     
     
-    const completeAppointment = useCompleteAppointment(),
+    const completeAppointment = useCompleteAppointment(onClose),
           handleMarkAsCompleted = completeAppointment?.handleMarkAsCompleted
 
     return(

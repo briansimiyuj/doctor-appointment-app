@@ -151,6 +151,8 @@ export const useUpdatePatientDetails = () =>{
 
    const closeManageModal = () =>{
 
+      console.log('working')
+
       localStorage.removeItem('CurrentAppointmentToManage')
 
       setAppointmentToManage(null)

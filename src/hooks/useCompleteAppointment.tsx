@@ -4,11 +4,11 @@ import { usePatientDetails } from "../context/PatientDetailsContext"
 import { useScheduleHistory } from "./useScheduleHistory"
 import { useUpdatePatientDetails } from "./useUpdatePatientDetails"
 
-export const useCompleteAppointment = () =>{
+export const useCompleteAppointment = (onClose?: () => void) =>{
 
     const { updateAppointmentStatus } = usePatientDetails(),
           { addScheduleHistoryEntry } = useScheduleHistory(),
-          { appointmentToManage } = useUpdatePatientDetails(),
+          { appointmentToManage, closeManageModal } = useUpdatePatientDetails(),
           loginContext = useContext(LoginContext),
           userType = loginContext?.userType || "doctor"
 
@@ -36,6 +36,16 @@ export const useCompleteAppointment = () =>{
             `Appointment for ${appointmentToManage?.date} at ${appointmentToManage?.time} marked as completed`
 
         )
+
+        if(onClose){
+
+            onClose()
+
+        }else{
+
+            closeManageModal()
+
+        }
 
     }
 

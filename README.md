@@ -1362,6 +1362,8 @@ Patient details page will show the patient's details; medical history, allergies
         a. Call updateAppointmentStatus with the appointment and status of 'completed'
         b. Get perfomer details from appointment data
         c. Add a new history item to the schedule history array using addScheduleHistoryEntry function
+        
+      4. Close the manage appointment modal
 
 
 
