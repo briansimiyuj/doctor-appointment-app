@@ -1390,6 +1390,7 @@ Patient details page will show the patient's details; medical history, allergies
     Add Notes Modal Component will be used to add notes to an appointment.
 
       1. Create a Add Notes Modal component and mount it on the Tab Action Button component if the showAddNotesModal state is true and pass closeAddNotesModal and appointmentToAddNotes as props
+      2. Mount ModalHeader component on the Add Notes Modal component and pass title and onClose as props
 
 
 
