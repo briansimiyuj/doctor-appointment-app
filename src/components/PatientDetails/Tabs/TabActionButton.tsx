@@ -14,7 +14,7 @@ const TabActionButton: React.FC = ()=>{
 
     const { patientAppointments } = usePatientDetails(),
           { handleApproveAppointment } = useApproveAppointment(),
-          { appointmentToCancel, openCancelModal, showCancelModal, closeCancelModal, openRejectModal, showRejectModal, closeRejectModal, openRescheduleModal, showRescheduleModal, appointmentToReschedule, closeRescheduleModal, showRescheduleHistoryModal, appointmentToReject, openRescheduleHistoryModal, closeRescheduleHistoryModal, showScheduleNewAppointmentModal, openScheduleNewAppointmentModal, closeScheduleNewAppointmentModal, appointmentToSchedule, showScheduleHistoryModal, openScheduleHistoryModal, closeScheduleHistoryModal, showManageModal, openManageModal, closeManageModal, openAddNotesModal, showAddNotesModal, closeAddNotesModal, appointmentToAddNotes } = useUpdatePatientDetails() as any,
+          { appointmentToCancel, openCancelModal, showCancelModal, closeCancelModal, openRejectModal, showRejectModal, closeRejectModal, openRescheduleModal, showRescheduleModal, appointmentToReschedule, closeRescheduleModal, showRescheduleHistoryModal, appointmentToReject, openRescheduleHistoryModal, closeRescheduleHistoryModal, showScheduleNewAppointmentModal, openScheduleNewAppointmentModal, closeScheduleNewAppointmentModal, appointmentToSchedule, showScheduleHistoryModal, openScheduleHistoryModal, closeScheduleHistoryModal, showManageModal, openManageModal, closeManageModal, openAddNotesModal, showAddNotesModal, closeAddNotesModal } = useUpdatePatientDetails() as any,
          latestAppointment = patientAppointments && patientAppointments.length > 0 
         ? patientAppointments[0] 
         : null
@@ -333,7 +333,7 @@ const TabActionButton: React.FC = ()=>{
 
             { showManageModal && <ManageAppointmentModal onClose={closeManageModal}/> }
 
-            { showAddNotesModal && <AddNotesModal appointment={appointmentToAddNotes} onClose={closeAddNotesModal}/> }
+            { showAddNotesModal && <AddNotesModal onClose={closeAddNotesModal}/> }
         
         </>
 
