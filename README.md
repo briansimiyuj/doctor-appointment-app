@@ -1392,6 +1392,29 @@ Patient details page will show the patient's details; medical history, allergies
       1. Create a Add Notes Modal component and mount it on the Tab Action Button component if the showAddNotesModal state is true and pass closeAddNotesModal and appointmentToAddNotes as props
       2. Mount ModalHeader component on the Add Notes Modal component and pass title and onClose as props
 
+  ### Add Notes Context
+
+    Add Notes Context will be used to manage the state of adding clinical notes to completed appointments and provide form data to the Add Notes Modal component.
+
+      1. Create the following states:
+        a. notes and initialize it to an empty string
+        b. prescription and initialize it to an empty string
+        c. diagnosis and initialize it to an empty string
+        d. follow up date and initialize it to an empty string
+        e. isSubmitting and initialize it to false
+        f. appointmentNotes and initialize it to data from localStorage, otherwise an empty array
+
+      2. Create a function to add notes to the appointment which takes notes as a parameter
+        a. Create updateNotes array with the previous notes and the new notes
+        b. Update the appointmentNotes state with the updated notes array
+        c. Update the localStorage with the updated appointmentNotes
+
+      3. Create a function to get appointment notes which takes appointmentID as a parameter
+        a. Filter the appointmentNotes array to find the appointment with the given ID
+        b. Return the notes of the found appointment
+
+      4. Create a function to reset the form data
+         a. Set the notes, prescription, diagnosis, follow up date, and isSubmitting states to their initial values 
 
 
 ### Settings Context
