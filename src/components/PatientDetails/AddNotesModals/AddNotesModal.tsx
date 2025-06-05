@@ -1,4 +1,6 @@
+import { AddNotesProvider } from "../../../context/AddNotesContext"
 import ModalHeader from "../ModalHeader"
+import ModalBody from "./ModalBody"
 
 interface AddNotesModalProps{
     
@@ -15,6 +17,12 @@ const AddNotesModal: React.FC<AddNotesModalProps> = ({ onClose }) =>{
             <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-2xl mx-auto overflow-y-auto max-h-[90vh] flex flex-col">
 
                 <ModalHeader title="Add Notes" onClose={onClose}/>
+
+                <AddNotesProvider>
+
+                    <ModalBody/>
+
+                </AddNotesProvider>
 
             </div>
 

@@ -1391,6 +1391,7 @@ Patient details page will show the patient's details; medical history, allergies
 
       1. Create a Add Notes Modal component and mount it on the Tab Action Button component if the showAddNotesModal state is true and pass closeAddNotesModal as a prop
       2. Mount ModalHeader component on the Add Notes Modal component and pass title and onClose as props
+      3. Create a ModalBody component and mount it on the Add Notes Modal component and  wrap it with AddNotesProvider
 
   ### Add Notes Context
 
@@ -1415,6 +1416,10 @@ Patient details page will show the patient's details; medical history, allergies
 
       4. Create a function to reset the form data
          a. Set the notes, prescription, diagnosis, follow up date, and isSubmitting states to their initial values 
+
+    #### Modal Body Component
+
+      1. Create an NotesForm component and mount it on the ModalBody component
 
 
 ### Settings Context
