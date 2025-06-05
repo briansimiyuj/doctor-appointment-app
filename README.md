@@ -642,6 +642,10 @@ Patient details page will show the patient's details; medical history, allergies
 
         1. Attach open modal function from update patient details hook to the manage appointment button
 
+      *Add Notes Button*: Add notes button will open a modal to add notes to the appointment.
+
+        1. Attach open modal function from update patient details hook to the add notes button
+
 
       ### Update Patient Details Hook
 
@@ -1380,6 +1384,12 @@ Patient details page will show the patient's details; medical history, allergies
         c. Add a new history item to the schedule history array using addScheduleHistoryEntry function
         
       4. Close the manage appointment modal
+
+  ### Add Notes Modal Component
+
+    Add Notes Modal Component will be used to add notes to an appointment.
+
+      1. Create a Add Notes Modal component and mount it on the Tab Action Button component if the showAddNotesModal state is true and pass closeAddNotesModal and appointmentToAddNotes as props
 
 
 
