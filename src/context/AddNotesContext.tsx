@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react"
 import { AddNotesContextProps } from "../assets/contextProps/AddNotesContextProps"
 import { AppointmentNoteType } from "../assets/types/AppointmentNoteType"
+import { usePatientDetails } from "./PatientDetailsContext"
 
 interface AddNotesProviderProps{
 
@@ -17,9 +18,11 @@ export const AddNotesProvider: React.FC<AddNotesProviderProps> = ({ children }) 
           [diagnosis, setDiagnosis] = useState<string>(''),
           [followUpDate, setFollowUpDate] = useState<string>(''),
           [isSubmitting, setIsSubmitting] = useState<boolean>(false),
+          { patientDetails } = usePatientDetails(),
+          patientID = patientDetails?.patientInfo._id,
             [appointmentNotes, setAppointmentNotes] = useState<AppointmentNoteType[]>(() =>{
 
-              const savedNotes = localStorage.getItem("appointmentNotes")
+              const savedNotes = localStorage.getItem(`appointmentNotes-${patientID}`)
 
               return savedNotes ? JSON.parse(savedNotes) : []
 
@@ -31,7 +34,7 @@ export const AddNotesProvider: React.FC<AddNotesProviderProps> = ({ children }) 
 
         setAppointmentNotes(updatedNotes)
 
-        localStorage.setItem("appointmentNotes", JSON.stringify(updatedNotes))
+        localStorage.setItem(`appointmentNotes-${patientID}`, JSON.stringify(updatedNotes))
 
     }
 

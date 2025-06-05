@@ -1391,10 +1391,6 @@ Patient details page will show the patient's details; medical history, allergies
 
       1. Create a Add Notes Modal component and mount it on the Tab Action Button component if the showAddNotesModal state is true and pass closeAddNotesModal as a prop
       2. Mount ModalHeader component on the Add Notes Modal component and pass title and onClose as props
-      3. Create a ModalBody component and mount it on the Add Notes Modal component and  wrap it with AddNotesProvider
-      4. Create a ModalFooter component and mount it on the Add Notes Modal component and pass closeAddNotesModal as a prop 
-        a. Create a button to close the modal and attach closeAddNotesModal as an onClick event handler
-        b. Create a button to submit the notes 
 
   ### Add Notes Context
 
@@ -1411,7 +1407,7 @@ Patient details page will show the patient's details; medical history, allergies
       2. Create a function to add notes to the appointment which takes notes as a parameter
         a. Create updateNotes array with the previous notes and the new notes
         b. Update the appointmentNotes state with the updated notes array
-        c. Update the localStorage with the updated appointmentNotes
+        c. Update the localStorage with the updated appointmentNotes using patientID as the key
 
       3. Create a function to get appointment notes which takes appointmentID as a parameter
         a. Filter the appointmentNotes array to find the appointment with the given ID
@@ -1419,25 +1415,6 @@ Patient details page will show the patient's details; medical history, allergies
 
       4. Create a function to reset the form data
          a. Set the notes, prescription, diagnosis, follow up date, and isSubmitting states to their initial values 
-
-    #### Modal Body Component
-
-      1. Create an NotesForm component and mount it on the ModalBody component
-        a. Create a ClinicalNotesInput component and mount it on the NotesForm component
-          i. Create a TextArea and make it controlled by the notes state
-          ii. If the notes state is empty, display a message that says "Clinical notes are required"
-
-        b. Create a DiagnosisInput component and mount it on the NotesForm component
-          i. Create a TextArea and make it controlled by the diagnosis state
-
-        c. Create a PrescriptionInput component and mount it on the NotesForm component
-          i. Create a TextArea and make it controlled by the prescription state
-
-        d. Create a FollowUpDateInput component and mount it on the NotesForm component
-          i. Reuse the DatePicker component and wrap it with DateTimeProvider and DatePickerProvider, and pass the follow up date state as a prop to both providers
-          ii. Create a DatePickerWrapper component to bridge the gap between DatePicker's selectedDate and AddNotes context's setFollowUpDate
-          iii. Use useEffect to sync selectedDate from DatePicker with setFollowUpDate in AddNotes context
-          iv. Convert selectedDate to ISO string format (YYYY-MM-DD) before setting followUpDate state
 
 
 ### Settings Context
