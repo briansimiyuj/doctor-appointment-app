@@ -1420,6 +1420,9 @@ Patient details page will show the patient's details; medical history, allergies
     #### Modal Body Component
 
       1. Create an NotesForm component and mount it on the ModalBody component
+        a. Create a ClinicalNotesInput component and mount it on the NotesForm component
+          i. Create a TextArea and make it controlled by the notes state
+          ii. If the notes state is empty, display a message that says "Clinical notes are required"
 
 
 ### Settings Context

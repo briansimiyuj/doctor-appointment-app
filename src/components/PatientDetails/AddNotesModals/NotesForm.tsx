@@ -1,8 +1,14 @@
+import ClinicalNotesInput from "./Inputs/ClinicalNotesInput"
+
 const NotesForm: React.FC = ()=>{
 
     return(
 
-        <h1>NotesForm</h1>
+        <div className="space-y-4 mb-6">
+
+            <ClinicalNotesInput/>
+
+        </div>
 
     )
 
