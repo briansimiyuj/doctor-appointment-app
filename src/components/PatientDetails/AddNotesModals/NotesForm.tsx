@@ -1,5 +1,6 @@
 import ClinicalNotesInput from "./Inputs/ClinicalNotesInput"
 import DiagnosisInput from "./Inputs/DiagnosisInput"
+import FollowUpDateInput from "./Inputs/FollowUpDateInput"
 import PrescriptionInput from "./Inputs/PrescriptionInput"
 
 const NotesForm: React.FC = ()=>{
@@ -13,6 +14,8 @@ const NotesForm: React.FC = ()=>{
             <DiagnosisInput/>
 
             <PrescriptionInput/>
+
+            <FollowUpDateInput/>
 
         </div>
 
