@@ -1,4 +1,4 @@
-# Doctor's Appointment Booking System
+ # Doctor's Appointment Booking System
 
 ## Description
 
@@ -1438,6 +1438,19 @@ Patient details page will show the patient's details; medical history, allergies
           ii. Create a DatePickerWrapper component to bridge the gap between DatePicker's selectedDate and AddNotes context's setFollowUpDate
           iii. Use useEffect to sync selectedDate from DatePicker with setFollowUpDate in AddNotes context
           iv. Convert selectedDate to ISO string format (YYYY-MM-DD) before setting followUpDate state
+
+    #### Add Notes Hook
+
+    Add Notes Hook will be used to handle the submission of notes. It will take appointment as a parameter
+
+      1. Retreive notes, prescription, diagnosis, follow up date, addAppointmentNotes and resetForm from Add Notes contexts
+      2. Retrieve patient details from patient details context
+      3. Create a function to handle the submission of notes 
+        a. If the notes, appointment or patient details are empty, exit the function  
+        b. Create a new appointment object with ID, appointmentID, patientID, doctorID, notes, prescription, diagnosis, follow up date, created at timeStamp, and doctor name
+        c. Call addAppointmentNotes with the new appointment object
+        d. Reset the form data
+        e. Close the modal
 
 
 ### Settings Context
