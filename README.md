@@ -1430,6 +1430,13 @@ Patient details page will show the patient's details; medical history, allergies
         c. Create a PrescriptionInput component and mount it on the NotesForm component
           i. Create a TextArea and make it controlled by the prescription state
 
+        d. Create a FollowUpDateInput component and mount it on the NotesForm component
+          i. Reuse the DatePicker component and wrap it with DateTimeProvider and DatePickerProvider, and pass the follow up date state as a prop to both providers
+          ii. Create a DatePickerWrapper component to bridge the gap between DatePicker's selectedDate and AddNotes context's setFollowUpDate
+          iii. Use useEffect to sync selectedDate from DatePicker with setFollowUpDate in AddNotes context
+          iv. Convert selectedDate to ISO string format (YYYY-MM-DD) before setting followUpDate state
+
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page
