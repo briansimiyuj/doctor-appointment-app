@@ -1395,6 +1395,7 @@ Patient details page will show the patient's details; medical history, allergies
       4. Create a ModalFooter component and mount it on the Add Notes Modal component and pass closeAddNotesModal as a prop 
         a. Create a button to close the modal and attach closeAddNotesModal as an onClick event handler
         b. Create a button to submit the notes 
+          i. Attach handleSubmit as an onClick event handler
 
   ### Add Notes Context
 

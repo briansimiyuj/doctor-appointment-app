@@ -1,4 +1,6 @@
 import { useAddNotes } from "../../../context/AddNotesContext"
+import { useAddNotesSubmit } from "../../../hooks/useAddNotesSubmit"
+import { useUpdatePatientDetails } from "../../../hooks/useUpdatePatientDetails"
 
 interface ModalFooterProps{
 
@@ -8,7 +10,9 @@ interface ModalFooterProps{
 
 const ModalFooter: React.FC<ModalFooterProps> = ({ onClose }) =>{
 
-    const { notes, isSubmitting } = useAddNotes()
+    const { isSubmitting } = useAddNotes(),
+          { appointmentToAddNotes } = useUpdatePatientDetails(),
+          { handleSubmit, canSubmit } = useAddNotesSubmit(appointmentToAddNotes)
 
     return(
 
@@ -21,7 +25,8 @@ const ModalFooter: React.FC<ModalFooterProps> = ({ onClose }) =>{
 
             <button
                 className="px-4 py-2 bg-primary-bg text-white rounded-md hover:bg-primary-bg-darker disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                disabled={!notes.trim() || isSubmitting}
+                disabled={!canSubmit || isSubmitting}
+                onClick={() => handleSubmit(onClose)}
             >Save</button>
             
         </div>
