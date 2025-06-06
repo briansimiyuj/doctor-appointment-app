@@ -1,6 +1,7 @@
 import { AddNotesProvider } from "../../../context/AddNotesContext"
 import ModalHeader from "../ModalHeader"
 import ModalBody from "./ModalBody"
+import ModalFooter from "./ModalFooter"
 
 interface AddNotesModalProps{
     
@@ -21,6 +22,8 @@ const AddNotesModal: React.FC<AddNotesModalProps> = ({ onClose }) =>{
                 <AddNotesProvider>
 
                     <ModalBody/>
+
+                    <ModalFooter onClose={onClose}/>
 
                 </AddNotesProvider>
 
