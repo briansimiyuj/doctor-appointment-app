@@ -36,8 +36,6 @@ export const useAddNotesSubmit = (appointment: AppointmentType | null) =>{
         resetForm() 
 
         onClose()
-
-        console.log(noteData)
     
     }
 
