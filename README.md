@@ -646,6 +646,10 @@ Patient details page will show the patient's details; medical history, allergies
 
         1. Attach open modal function from update patient details hook to the add notes button
 
+      *View Notes Button*: View notes button will open a modal to view the notes of the appointment.
+
+        1. Attach open modal function from update patient details hook to the view notes button
+
 
       ### Update Patient Details Hook
 
@@ -1468,6 +1472,13 @@ Patient details page will show the patient's details; medical history, allergies
         c. Call addAppointmentNotes with the new appointment object
         d. Reset the form data
         e. Close the modal
+
+  ### View Notes Modal Component
+
+  View Notes Modal Component will be used to display the notes for a specific appointment. 
+
+    1. Create a ViewNotesModal component and mount it on the Tab Action Button component if the showViewNotesModal is true
+    2. Mount ModalHeader component on the View Notes Modal component and pass title and onClose as props
 
 
 ### Settings Context
