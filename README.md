@@ -770,6 +770,22 @@ Patient details page will show the patient's details; medical history, allergies
           b. Set the appointment to add notes state to null
           c. Remove the appointment from localStorage
 
+      *View Notes Function*
+
+      View notes function will open a modal to view notes of the appointment.
+
+        1. Create a state for view notes modal visibility and initialize it to false
+        2. Create a state for appointment to view notes and initialize it with data from localStorage if available, otherwise null
+        3. Create a function to open the view notes modal 
+          a. Set the view notes modal visibility state to true
+          b. Save the appointment to localStorage for persistence
+          c. Set the appointment to view notes state to the appointment parameter
+
+        4. Create a function to close the view notes modal
+          a. Set the view notes modal visibility state to false
+          b. Set the appointment to view notes state to null
+          c. Remove the appointment from localStorage
+
       *Update Appointment Status Function*
 
       Update appointment status function will update the status of the appointment.
