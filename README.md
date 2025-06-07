@@ -600,8 +600,8 @@ Patient details page will show the patient's details; medical history, allergies
 
       - 🟢 **Pending appointments** show an "Approve Appointment" button with a checkmark icon and a "Reject Appointment" button with a cross icon.
       - 🔵 **Approved appointments** display "Manage Appointment" and "Cancel" buttons side by side.
-      - ⚪ **Completed appointments** offer an "Add Notes" button for post-appointment documentation and a "Schedule History" button to display schedule history.
-      - 🔴 **Cancelled appointments** provide a "Schedule New Appointment" button to facilitate rebooking and "Schedule History" button to display schedule history.
+      - ⚪ **Completed appointments** offer an "Add Notes" button for post-appointment documentation, a "Schedule History" button to display schedule history and a "View Notes" button for viewing notes.
+      - 🔴 **Cancelled appointments** provide a "Schedule New Appointment" button to facilitate rebooking, "Schedule History" button to display schedule history and a "View Notes" button for viewing notes.
       - 🔴 **Rejected appointments** show a "Schedule New Appointment" button to facilitate rebooking and "Schedule History" button to display schedule history.
       - 🟣 **Rescheduled appointments** display a "Rescheduled History" button to display the rescheduled history.
       - 🟣 **Other statuses** show a generic "Manage Appointment" button as a fallback option.
