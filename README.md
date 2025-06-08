@@ -1,4 +1,4 @@
- # Doctor's Appointment Booking System
+# Doctor's Appointment Booking System
 
 ## Description
 
@@ -1472,6 +1472,20 @@ Patient details page will show the patient's details; medical history, allergies
         c. Call addAppointmentNotes with the new appointment object
         d. Reset the form data
         e. Close the modal
+
+  ### View Notes Hook
+
+  View Notes Hook will be used to fetch and display the notes for a specific appointment. It will take appointment as a parameter.
+
+    1. Create a state to store appointment notes and initialize it to an empty array
+    2. Retrieve patient details from patient details context
+    3. Whenever appointment and patient details change, do the following:
+      a. If appointment and patient details are empty, set appointment notes to an empty array and exit the function
+      b. Fetch the notes for the appointment from localStorage using the patientID as the key
+      c. If the notes are found, parse them as allNotes
+      d. Filter the allNotes array to find the notes for the appointment
+      e. Set the appointment notes to the filtered notes array
+      f. If the notes are not found, set appointment notes to an empty array
 
   ### View Notes Modal Component
 
