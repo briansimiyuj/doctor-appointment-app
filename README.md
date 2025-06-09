@@ -1505,6 +1505,7 @@ Patient details page will show the patient's details; medical history, allergies
 
       1. Create a Note Header component and mount it on the Note List component and pass note's index and note.createdAt as props
       2. Display the note's created at timeStamp and the note's title
+      3. Create a Note Content component and mount it on the Note List component and pass note.notes as a prop
 
 
 ### Settings Context
