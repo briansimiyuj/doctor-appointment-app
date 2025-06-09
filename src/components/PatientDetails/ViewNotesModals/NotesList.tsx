@@ -1,4 +1,5 @@
 import { AppointmentNoteType } from "../../../assets/types/AppointmentNoteType";
+import NoteHeader from "./NoteHeader";
 
 interface NotesListProps{
 
@@ -11,7 +12,14 @@ const NotesList: React.FC<NotesListProps> = ({ note, index })=>{
 
     return(
 
-        <h1>NotesList</h1>
+        <div className="border rounded p-4 bg-gray-50">
+
+            <NoteHeader
+                index={index}
+                createdAt={note.createdAt}
+            />
+
+        </div>
 
     )
 

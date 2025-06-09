@@ -1501,6 +1501,11 @@ Patient details page will show the patient's details; medical history, allergies
       2. If hasNotes is false, display a message that say "No notes available for this appointment."
       3. Map through the appointment notes and create a NoteList component for each note and pass note and index as props
 
+    #### Note List Component
+
+      1. Create a Note Header component and mount it on the Note List component and pass note's index and note.createdAt as props
+      2. Display the note's created at timeStamp and the note's title
+
 
 ### Settings Context
 
