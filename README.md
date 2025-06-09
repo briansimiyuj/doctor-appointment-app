@@ -1493,6 +1493,13 @@ Patient details page will show the patient's details; medical history, allergies
 
     1. Create a ViewNotesModal component and mount it on the Tab Action Button component if the showViewNotesModal is true
     2. Mount ModalHeader component on the View Notes Modal component and pass title and onClose as props
+    3. Create a ModalBody component and mount it on the View Notes Modal component 
+
+    #### Modal Body Component
+
+      1. Retrieve hasNotes from View Notes context
+      2. If hasNotes is false, display a message that say "No notes available for this appointment."
+      3. Map through the appointment notes and create a NoteList component for each note and pass note and index as props
 
 
 ### Settings Context

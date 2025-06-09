@@ -1,4 +1,5 @@
 import ModalHeader from "../ModalHeader"
+import ModalBody from "./ModalBody"
 
 interface ViewNotesModalProps{
 
@@ -15,6 +16,8 @@ const ViewNotesModal: React.FC<ViewNotesModalProps> = ({ onClose }) =>{
             <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-2xl mx-auto overflow-y-auto max-h-[90vh] flex flex-col">
 
                <ModalHeader title="View Notes" onClose={onClose}/>
+
+               <ModalBody/>
 
             </div>
 
