@@ -1,5 +1,6 @@
 import { AppointmentNoteType } from "../../../assets/types/AppointmentNoteType";
 import NoteContent from "./NoteContent";
+import NoteDiagnosis from "./NoteDiagnosis";
 import NoteHeader from "./NoteHeader";
 
 interface NotesListProps{
@@ -21,6 +22,8 @@ const NotesList: React.FC<NotesListProps> = ({ note, index })=>{
             />
 
             <NoteContent notes={note.notes}/>
+
+            <NoteDiagnosis diagnosis={note.diagnosis}/>
 
         </div>
 
