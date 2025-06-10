@@ -1473,6 +1473,32 @@ Patient details page will show the patient's details; medical history, allergies
         d. Reset the form data
         e. Close the modal
 
+    #### Schedule Follow Up Hook
+
+    The Schedule Follow Up Hook manages the process of automatically scheduling a follow-up appointment when a doctor adds a note with a follow-up date. The flow ensures the doctor can review and edit the follow-up before it is finalized.
+
+    1. Create a state to store `pendingFollowUp` and initialize it to null.  
+      - This state holds the details of the follow-up appointment that is being prepared but not yet confirmed.
+
+    2. Retrieve the `scheduleAppointment` function from the Schedule Appointment hook.  
+      - This function will be used to actually create the new appointment once the doctor confirms.
+
+    3. Create a function `triggerFollowUpScheduling` which takes an appointment and a follow-up date as parameters:  
+      a. If the appointment or follow-up date is not provided, exit the function and alert the user.
+      a. Extract the default time (usually the same as the original appointment) and consultation type from the appointment.  
+      b. Set the `pendingFollowUp` state with the appointment, follow-up date, default time, and consultation type.  
+      - This step is like preparing a draft of the new appointment and showing it to the doctor for review.
+
+    4. Create a function `confirmFollowUpScheduling` which takes appointment, date, time, and consultation type as parameters:  
+      a. Call `scheduleAppointment` with the provided appointment details.  
+      b. Reset the `pendingFollowUp` state to null after scheduling.  
+      - This step finalizes the follow-up appointment after the doctor reviews and confirms the details.
+
+    5. Create a function `cancelFollowUpScheduling` which resets the `pendingFollowUp` state to null.  
+      - This allows the doctor to cancel the follow-up scheduling process if they change their mind.
+
+    6. Use the `pendingFollowUp` state to control the display of a modal or review screen, allowing the doctor to edit and confirm the follow-up appointment before it is scheduled.
+
   ### View Notes Hook
 
   View Notes Hook will be used to fetch and display the notes for a specific appointment. It will take appointment as a parameter.
