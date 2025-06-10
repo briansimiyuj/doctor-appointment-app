@@ -1420,6 +1420,12 @@ Patient details page will show the patient's details; medical history, allergies
       5. Retrieve pendingFollowUp, confirmFollowUpScheduling and cancelFollowUpScheduling from Schedule Follow Up Hook
       6. Create a Follow Up Modal component and mount it on the Add Notes Modal component if pendingFollowUp is true and pass pendingFollowUp, confirmFollowUpScheduling and cancelFollowUpScheduling as props
 
+  #### Follow Up Modal Component
+
+  Follow Up Modal Component will be used to let the doctor review or edit the follow up date for scheduling a follow up appointment.
+
+    1. Mount ModalHeader component on the Follow Up Modal component and pass title and onClose as props
+
   ### Add Notes Context
 
     Add Notes Context will be used to manage the state of adding clinical notes to completed appointments and provide form data to the Add Notes Modal component.
