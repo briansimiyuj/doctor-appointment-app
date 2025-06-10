@@ -1508,6 +1508,7 @@ Patient details page will show the patient's details; medical history, allergies
       3. Create a Note Content component and mount it on the Note List component and pass note.notes as a prop
       4. Create a Note Diagnosis component and mount it on the Note List component and pass note.diagnosis as a prop
       5. Create a Note Prescription component and mount it on the Note List component and pass note.prescription as a prop
+      6. Create a Note Follow Up component and mount it on the Note List component and pass note.followUpDate as a prop
 
 
 ### Settings Context
