@@ -1,5 +1,7 @@
 import { AddNotesProvider } from "../../../context/AddNotesContext"
+import { useScheduleFollowUp } from "../../../hooks/useScheduleFollowUp"
 import ModalHeader from "../ModalHeader"
+import FollowUpModals from "./FollowUpModals/FollowUpModals"
 import ModalBody from "./ModalBody"
 import ModalFooter from "./ModalFooter"
 
@@ -10,6 +12,8 @@ interface AddNotesModalProps{
 }
 
 const AddNotesModal: React.FC<AddNotesModalProps> = ({ onClose }) =>{
+
+    const { pendingFollowUp, confirmFollowUpScheduling, cancelFollowUpScheduling } = useScheduleFollowUp()
 
     return(
 
@@ -22,12 +26,27 @@ const AddNotesModal: React.FC<AddNotesModalProps> = ({ onClose }) =>{
                 <AddNotesProvider>
 
                     <ModalBody/>
+                
+                        {
+
+                            pendingFollowUp &&( 
+
+                                <FollowUpModals
+                                    followUp={pendingFollowUp}
+                                    onConfirm={confirmFollowUpScheduling}
+                                    onCancel={cancelFollowUpScheduling}
+                                />
+
+                            )
+
+                        }
 
                     <ModalFooter onClose={onClose}/>
 
                 </AddNotesProvider>
 
             </div>
+
 
         </div>
 

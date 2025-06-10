@@ -1417,6 +1417,9 @@ Patient details page will show the patient's details; medical history, allergies
         b. Create a button to submit the notes 
           i. Attach handleSubmit as an onClick event handler
 
+      5. Retrieve pendingFollowUp, confirmFollowUpScheduling and cancelFollowUpScheduling from Schedule Follow Up Hook
+      6. Create a Follow Up Modal component and mount it on the Add Notes Modal component if pendingFollowUp is true and pass pendingFollowUp, confirmFollowUpScheduling and cancelFollowUpScheduling as props
+
   ### Add Notes Context
 
     Add Notes Context will be used to manage the state of adding clinical notes to completed appointments and provide form data to the Add Notes Modal component.
