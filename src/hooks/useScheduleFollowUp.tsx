@@ -3,6 +3,8 @@ import { PendingFollowUp } from "../assets/types/PendingFollowUp"
 import { useScheduleAppointment } from "./useScheduleAppointment"
 import { AppointmentType } from "../assets/types/AppointmentType"
 import { DummyAppointment } from "../assets/dummyData/DummyAppointment"
+import { useAddNotes } from "../context/AddNotesContext"
+import { useDatePicker } from "../context/DatePickerContext"
 
 export const useScheduleFollowUp = () =>{
 
@@ -17,7 +19,9 @@ export const useScheduleFollowUp = () =>{
 
           } : null
     ),
-          { scheduleAppointment } = useScheduleAppointment()
+          { scheduleAppointment } = useScheduleAppointment(),
+          { setFollowUpDate } = useAddNotes(),
+          { setSelectedDate } = useDatePicker()
 
     const triggerFollowUpScheduling = (appointment: AppointmentType, followUpDate: string) =>{
 
@@ -60,6 +64,10 @@ export const useScheduleFollowUp = () =>{
           consultationType
 
         })
+
+        setFollowUpDate(date)
+
+        setSelectedDate(new Date(date))
 
         setPendingFollowUp(null)
     
