@@ -6,15 +6,17 @@ import { ScheduleProvider } from "../../../../context/ScheduleContext"
 import DatePicker from "../../RescheduleModals/DatePicker/DatePicker"
 import TimePicker from "../../RescheduleModals/TimePicker/TimePicker"
 import ScheduleConsultationTypeSelector from "../../ScheduleModals/ScheduleConsultationTypeSelector"
+import FooterWrapper from "./FooterWrapper"
 
 interface FollowUpModalsProps{
 
     followUp: PendingFollowUp
     onCancel: () => void
+    onSave: (date: string, time: string, consultationType: "in-person" | "online") => void
 
 }
 
-const ModalBody: React.FC<FollowUpModalsProps> = ({ followUp, onCancel }) => {
+const ModalBody: React.FC<FollowUpModalsProps> = ({ followUp, onCancel, onSave }) =>{
 
     return(
 
@@ -37,6 +39,14 @@ const ModalBody: React.FC<FollowUpModalsProps> = ({ followUp, onCancel }) => {
                     </DatePickerProvider>
 
                     <ScheduleConsultationTypeSelector/>
+
+                <FooterWrapper 
+                    onCancel={onCancel} 
+                    onSave={onSave} 
+                    initialDate={followUp.followUpDate} 
+                    initialTime={followUp.defaultTime} 
+                    initialConsultationType={followUp.consultationType}
+                />
 
             </ScheduleAppointmentProvider>
 
