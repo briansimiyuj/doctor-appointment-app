@@ -1239,9 +1239,9 @@ Patient details page will show the patient's details; medical history, allergies
   Schedule Appointment Context will be used to store the new appointment details and provide it to the Schedule Appointment Modal component
 
     1. Retrieve newDate and newTime from Date Time context
-      c. consultationType and set it to null (either "in-person" or "online")
-      d. isConfirmed and set it to false
-      e. appointmentToSchedule to store the appointment being scheduled
+    2. Create the following states:
+      a. consultationType and initialize it to the props passed
+      b. isConfirmed and set it to false
 
     2. Integrate with DatePickerContext to reuse the DatePicker and TimePicker components
       a. Get selectedDate and selectedTime from DatePickerContext
@@ -1256,15 +1256,6 @@ Patient details page will show the patient's details; medical history, allergies
       b. If there are valid inputs (newDate, newTime, consultationType, and isConfirmed):
          i. Call scheduleAppointment with the necessary parameters (newDate, newTime, consultationType, appointment)
          ii. If the scheduling is successful (scheduleSuccess is true), close the modal by calling onClose()
-
-      c. The scheduleAppointment function should:
-         i. Create a new appointment object with the updated date, time, and consultation type
-         ii. Add the new appointment to the patient's appointments array
-         iii. Update the local storage with the new appointments list
-         iv. Return true if the operation was successful, false otherwise
-         
-      d. Handle any potential errors during the scheduling process with appropriate error messages
-      e. Ensure all state updates are properly reflected in the UI after scheduling
 
   ### Schedule Appointment Modal
 
@@ -1425,6 +1416,11 @@ Patient details page will show the patient's details; medical history, allergies
   Follow Up Modal Component will be used to let the doctor review or edit the follow up date for scheduling a follow up appointment.
 
     1. Mount ModalHeader component on the Follow Up Modal component and pass title and onClose as props
+    2. Create a ModalBody component and mount it on the Follow Up Modal component and pass followUp and onClose as props
+      a. Wrap ModalBody with DateTimeProvider, ScheduleAppointmentProvider, ScheduleProovider and DatePickerProvider to provide the necessary context for date, time, and consultation type selection.
+      b. Pass the consultationType from the followUp data as a prop to ScheduleAppointmentProvider to ensure the correct initial consultation type is set.
+      c. Mount DatePicker, TimePicker, and ScheduleConsultationTypeSelector components inside the providers.
+      d. Use a FooterWrapper component inside the providers to access context hooks only within the provider tree, preventing context errors.
 
   ### Add Notes Context
 

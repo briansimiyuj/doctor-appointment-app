@@ -10,15 +10,16 @@ interface ScheduleAppointmentProviderProps{
     children: React.ReactNode
     appointment: AppointmentType
     onClose: () => void
+    consultationType?: "in-person" | "online" | null
 
 }
 
 export const ScheduleAppointmentContext = createContext<ScheduleAppointmentContextProps | undefined>(undefined)
 
-export const ScheduleAppointmentProvider: React.FC<ScheduleAppointmentProviderProps> = ({ children, appointment, onClose }) =>{
+export const ScheduleAppointmentProvider: React.FC<ScheduleAppointmentProviderProps> = ({ children, appointment, onClose, consultationType: initialConsultationType = null }) =>{
 
     const { date: newDate, time: newTime }  = useDateTime(),
-          [consultationType, setConsultationType] = useState<"in-person" | "online" | null>(null),
+          [consultationType, setConsultationType] = useState<"in-person" | "online" | null>(initialConsultationType),
           { scheduleAppointment } = useScheduleAppointment(),
           [isConfirmed, setIsConfirmed] = useState(false),
           { patientDetails } = usePatientDetails(),

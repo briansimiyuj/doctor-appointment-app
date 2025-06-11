@@ -1,5 +1,6 @@
 import { PendingFollowUp } from "../../../../assets/types/PendingFollowUp"
 import ModalHeader from "../../ModalHeader"
+import ModalBody from "./ModalBody"
 
 interface FollowUpModalsProps{
 
@@ -18,6 +19,14 @@ const FollowUpModals: React.FC<FollowUpModalsProps> = ({ followUp, onConfirm, on
             <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-2xl mx-auto overflow-y-auto max-h-screen">
 
                 <ModalHeader title="Schedule Follow Up" onClose={onCancel}/>
+
+                <ModalBody
+                    followUp={followUp}
+                    onCancel={onCancel}
+                    onSave={(date, time, consultationType) =>
+                        onConfirm(followUp.appointment, date, time, consultationType)
+                    }
+                />
 
             </div>
 
