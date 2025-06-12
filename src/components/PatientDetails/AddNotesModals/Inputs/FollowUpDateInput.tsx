@@ -24,11 +24,23 @@ const DatePickerWrapper: React.FC = () =>{
 
 const FollowUpDateInput: React.FC = () =>{
 
+    const { followUpDate } = useAddNotes()
+
     return(
 
         <>
         
             <label htmlFor="followUpDate" className="block text-sm font-medium text-gray-700 mb-2">Follow-up Date</label>
+
+            {
+
+                !followUpDate || followUpDate.trim() === '' ?(
+
+                    <span className="text-xs text-red-500 mb-2">Please select a follow-up date to schedule a follow-up appointment.</span>
+
+                ): null
+
+            }
 
             <DatePickerWrapper/>
         

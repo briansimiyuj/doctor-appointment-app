@@ -16,19 +16,31 @@ const ModalFooter: React.FC<ModalFooterProps> = ({ onClose, triggerFollowUpSched
           { appointmentToAddNotes } = useUpdatePatientDetails(),
           { handleSubmit, canSubmit } = useAddNotesSubmit(appointmentToAddNotes)
 
+    const disableFollowUp = !appointmentToAddNotes && !followUpDate || followUpDate.trim() === ''
+
     return(
 
-        <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-3">
+        <div className="flex flex-col sm:flex-row justify-end gap-3 sm:gap-3">
 
-            <button
-                className="bg-primary-btn text-white px-4 py-2 rounded-md"
-                onClick={() =>{
-                    if(appointmentToAddNotes){
-                        triggerFollowUpScheduling(appointmentToAddNotes, followUpDate)
-                    }
-                }}
-                disabled={!appointmentToAddNotes}
-            >Schedule Follow Up</button>
+            {
+
+                !disableFollowUp &&(
+
+                    <button
+                        className={`bg-primary-btn text-white px-4 py-2 rounded-md transition-all duration-300 w-full sm:w-auto mt-2 sm:mt-0 ${disableFollowUp ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+                        onClick={() =>{
+                            if(appointmentToAddNotes){
+                                triggerFollowUpScheduling(appointmentToAddNotes, followUpDate)
+                            }
+                        }}
+                        disabled={disableFollowUp}
+                    >Schedule Follow Up</button>
+
+
+                )
+
+            }
+
 
             <button
                 className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-md transition-all duration-300 w-full sm:w-auto mt-2 sm:mt-0 cursor-pointer"
@@ -36,7 +48,7 @@ const ModalFooter: React.FC<ModalFooterProps> = ({ onClose, triggerFollowUpSched
             >Cancel</button>
 
             <button
-                className="px-4 py-2 bg-primary-bg text-white rounded-md hover:bg-primary-bg-darker disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className={`bg-primary-btn text-white px-4 py-2 rounded-md transition-all duration-300 w-full sm:w-auto mt-2 sm:mt-0 ${!canSubmit ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
                 disabled={!canSubmit || isSubmitting}
                 onClick={() => handleSubmit(onClose)}
             >Save</button>

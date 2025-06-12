@@ -1408,8 +1408,9 @@ Patient details page will show the patient's details; medical history, allergies
         b. Create a button to submit the notes 
           i. Attach handleSubmit as an onClick event handler
         
-        c. Create a button to schedule a follow up appointment
+        c. Create a button to schedule a follow up appointment if followUpDate is selected and appointmentToAddNotes is available
          i. Attach triggerFollowUpScheduling as an onClick event handler if appointmentToAddNotes is available
+         ii. Make the button disabled if appointmentToAddNotes is null and followUpDate is not selected
 
       5. Retrieve pendingFollowUp, confirmFollowUpScheduling and cancelFollowUpScheduling from Schedule Follow Up Hook
       6. Create a Follow Up Modal component and mount it on the Add Notes Modal component if pendingFollowUp is true and pass pendingFollowUp, confirmFollowUpScheduling and cancelFollowUpScheduling as props
@@ -1467,6 +1468,7 @@ Patient details page will show the patient's details; medical history, allergies
           ii. Create a DatePickerWrapper component to bridge the gap between DatePicker's selectedDate and AddNotes context's setFollowUpDate
           iii. Use useEffect to sync selectedDate from DatePicker with setFollowUpDate in AddNotes context
           iv. Convert selectedDate to ISO string format (YYYY-MM-DD) before setting followUpDate state
+          v. If there is no follow up date, display a message that says "Please select a follow-up date to schedule a follow-up appointment."
 
     #### Add Notes Hook
 
