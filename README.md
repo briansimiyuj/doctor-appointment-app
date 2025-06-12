@@ -1403,10 +1403,13 @@ Patient details page will show the patient's details; medical history, allergies
       1. Create a Add Notes Modal component and mount it on the Tab Action Button component if the showAddNotesModal state is true and pass closeAddNotesModal as a prop
       2. Mount ModalHeader component on the Add Notes Modal component and pass title and onClose as props
       3. Create a ModalBody component and mount it on the Add Notes Modal component and  wrap it with AddNotesProvider
-      4. Create a ModalFooter component and mount it on the Add Notes Modal component and pass closeAddNotesModal as a prop 
+      4. Create a ModalFooter component and mount it on the Add Notes Modal component and pass closeAddNotesModal and triggerFollowUpScheduling from Schedule Follow Up Hook as props 
         a. Create a button to close the modal and attach closeAddNotesModal as an onClick event handler
         b. Create a button to submit the notes 
           i. Attach handleSubmit as an onClick event handler
+        
+        c. Create a button to schedule a follow up appointment
+         i. Attach triggerFollowUpScheduling as an onClick event handler if appointmentToAddNotes is available
 
       5. Retrieve pendingFollowUp, confirmFollowUpScheduling and cancelFollowUpScheduling from Schedule Follow Up Hook
       6. Create a Follow Up Modal component and mount it on the Add Notes Modal component if pendingFollowUp is true and pass pendingFollowUp, confirmFollowUpScheduling and cancelFollowUpScheduling as props

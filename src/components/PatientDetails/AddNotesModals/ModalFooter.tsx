@@ -1,3 +1,4 @@
+import { AppointmentType } from "../../../assets/types/AppointmentType";
 import { useAddNotes } from "../../../context/AddNotesContext"
 import { useAddNotesSubmit } from "../../../hooks/useAddNotesSubmit"
 import { useUpdatePatientDetails } from "../../../hooks/useUpdatePatientDetails"
@@ -5,18 +6,29 @@ import { useUpdatePatientDetails } from "../../../hooks/useUpdatePatientDetails"
 interface ModalFooterProps{
 
     onClose: () => void
+    triggerFollowUpScheduling: (appointment: AppointmentType, followUpDate: string) => void
 
 }
 
-const ModalFooter: React.FC<ModalFooterProps> = ({ onClose }) =>{
+const ModalFooter: React.FC<ModalFooterProps> = ({ onClose, triggerFollowUpScheduling }) =>{
 
-    const { isSubmitting } = useAddNotes(),
+    const { isSubmitting, followUpDate } = useAddNotes(),
           { appointmentToAddNotes } = useUpdatePatientDetails(),
           { handleSubmit, canSubmit } = useAddNotesSubmit(appointmentToAddNotes)
 
     return(
 
         <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-3">
+
+            <button
+                className="bg-primary-btn text-white px-4 py-2 rounded-md"
+                onClick={() =>{
+                    if(appointmentToAddNotes){
+                        triggerFollowUpScheduling(appointmentToAddNotes, followUpDate)
+                    }
+                }}
+                disabled={!appointmentToAddNotes}
+            >Schedule Follow Up</button>
 
             <button
                 className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-md transition-all duration-300 w-full sm:w-auto mt-2 sm:mt-0 cursor-pointer"

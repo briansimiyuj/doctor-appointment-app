@@ -49,7 +49,7 @@ const AddNotesModal: React.FC<AddNotesModalProps> = ({ onClose }) =>{
 
 const AddNotesModalContent: React.FC<AddNotesModalProps> = ({ onClose }) =>{
 
-    const { pendingFollowUp, confirmFollowUpScheduling, cancelFollowUpScheduling } = useScheduleFollowUp()
+    const { pendingFollowUp, confirmFollowUpScheduling, cancelFollowUpScheduling, triggerFollowUpScheduling } = useScheduleFollowUp()
 
     return(
 
@@ -71,8 +71,10 @@ const AddNotesModalContent: React.FC<AddNotesModalProps> = ({ onClose }) =>{
 
                 }
 
-            <ModalFooter onClose={onClose}/>
-        
+            <ModalFooter 
+                onClose={onClose}
+                triggerFollowUpScheduling={triggerFollowUpScheduling}
+            />
         
         </>
 
