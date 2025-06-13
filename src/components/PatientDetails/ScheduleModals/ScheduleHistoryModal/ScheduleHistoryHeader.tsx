@@ -1,6 +1,6 @@
 interface ScheduleHistoryHeaderProps{
 
-    actionType: "cancelled" | "rescheduled" | "rejected" | "approved" | "pending" | "completed"
+    actionType: "cancelled" | "rescheduled" | "rejected" | "approved" | "pending" | "completed" | "follow-up"
     timeStamp: string
 
 }
@@ -17,6 +17,7 @@ const ScheduleHistoryHeader: React.FC<ScheduleHistoryHeaderProps> = ({ actionTyp
            case "approved": return "Appointment Approved"
            case "pending": return "Appointment Pending"
            case "completed": return "Appointment Completed"
+           case "follow-up": return "Follow-up Scheduled"
            default: return "Appointment Updated"
 
         }
@@ -33,6 +34,7 @@ const ScheduleHistoryHeader: React.FC<ScheduleHistoryHeaderProps> = ({ actionTyp
             case "approved": return "text-green-600"
             case "pending": return "text-yellow-600"
             case "completed": return "text-gray-600"
+            case "follow-up": return "text-blue-600"
             default: return "text-gray-600"
 
         }

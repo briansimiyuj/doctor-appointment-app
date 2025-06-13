@@ -173,7 +173,7 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
       }, [patientID])
 
 
-      const updateAppointmentStatus = (appointment: AppointmentType, newStatus: "pending" | "completed" | "cancelled" | "confirmed" | "approved" | "rescheduled" | "rejected") =>{
+      const updateAppointmentStatus = (appointment: AppointmentType, newStatus: "pending" | "completed" | "cancelled" | "confirmed" | "approved" | "rescheduled" | "rejected" | "follow-up") =>{
       
             setPatientAppointments(prevAppointments =>{
 

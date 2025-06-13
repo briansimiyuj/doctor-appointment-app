@@ -1323,6 +1323,7 @@ Patient details page will show the patient's details; medical history, allergies
             *"approved" returns "Appointment Approved"*
             *"pending" returns "Appointment Pending"*
             *"completed" returns "Appointment Completed"*
+            *"follow-up" returns "Follow-up Scheduled"* 
             *default returns "Appointment Updated"*
 
           - Create getActionColor function that takes action string as parameter and returns appropriate CSS color class:
@@ -1332,6 +1333,7 @@ Patient details page will show the patient's details; medical history, allergies
             *"approved" returns "text-green-600"*
             *"pending" returns "text-yellow-600"*
             *"completed" returns "text-gray-600"*
+            *"follow-up" returns "text-blue-600"*
             *default returns "text-gray-600"*
 
           - Display the action label with appropriate color styling using the getActionColor function

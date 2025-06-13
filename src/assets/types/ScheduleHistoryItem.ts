@@ -4,7 +4,7 @@ export interface ScheduleHistoryItem{
 
     _id: string
     appointment: AppointmentType
-    actionType: "cancelled" | "rescheduled" | "rejected" | "approved" | "pending" | "cancelled" | "completed"
+    actionType: "cancelled" | "rescheduled" | "rejected" | "approved" | "pending" | "cancelled" | "completed" | "follow-up"
     timeStamp: string
     reason?: string
     alternative?: string

@@ -9,7 +9,7 @@ export const useScheduleHistory = ()=>{
 
     const addScheduleHistoryEntry =(
         appointment: AppointmentType,
-        actionType: "cancelled" | "rescheduled" | "rejected" | "approved" | "pending" | "completed",
+        actionType: "cancelled" | "rescheduled" | "rejected" | "approved" | "pending" | "completed" | "follow-up",
         reason?: string,
         alternative?: string,
         performedBy?:{

@@ -10,6 +10,7 @@ interface scheduleAppointmentParams{
     newDate: string,
     newTime: string,
     consultationType: "in-person" | "online" | null,
+    status?: "pending" | "completed" | "cancelled" | "confirmed" | "approved" | "rescheduled" | "rejected" | "follow-up"
 
 }
 
@@ -23,7 +24,7 @@ export const useScheduleAppointment = () =>{
 
     const scheduleAppointment = (params: scheduleAppointmentParams) =>{
     
-        const { appointment, newDate, newTime, consultationType } = params
+        const { appointment, newDate, newTime, consultationType, status } = params
 
         if(!appointment || !newDate || !newTime || !consultationType) return false
 
@@ -32,7 +33,7 @@ export const useScheduleAppointment = () =>{
             ...appointment,
             date: newDate,
             time: newTime,
-            status: "pending",
+            status: status || "pending",
             consultationType: consultationType
 
         }
@@ -50,7 +51,7 @@ export const useScheduleAppointment = () =>{
         addScheduleHistoryEntry(
 
             newAppointment,
-            "pending",
+            newAppointment.status as "pending" | "completed" | "cancelled" | "approved" | "rescheduled" | "rejected" | "follow-up",
             `New appointment scheduled by ${userType}`,
             undefined,
             performedBy,

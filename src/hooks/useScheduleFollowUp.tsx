@@ -51,7 +51,8 @@ export const useScheduleFollowUp = () =>{
           appointment,
           newDate: date,
           newTime: time,
-          consultationType
+          consultationType,
+          status: "follow-up"
 
         })
 
