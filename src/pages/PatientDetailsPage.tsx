@@ -3,7 +3,7 @@ import PatientHeader from "../components/PatientDetails/PatientHeader"
 import TabsNavigation from "../components/PatientDetails/TabsNavigation"
 import TabContent from "../components/PatientDetails/Tabs/TabContent"
 import { usePatientDetails } from "../context/PatientDetailsContext"
-import AppointmentTab from "../components/PatientDetails/Tabs/AppointmentTab"
+import AppointmentTab from "../components/PatientDetails/Tabs/AppointmentTab/AppointmentTab"
 
 const PatientDetailsPage: React.FC = ()=>{
 
