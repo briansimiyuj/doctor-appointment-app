@@ -1556,6 +1556,7 @@ Patient details page will show the patient's details; medical history, allergies
     1. Set the active tab to "Documents" by default on the Patient Details Context
     2. Create a component for the Document Tab and mount it on the Tab Content component with id of "documents"
     3. Create a component for the Document Tab Header and mount it on the Document Tab component
+      a. Add a button for the upload a document
 
 
 ### Settings Context
