@@ -1549,6 +1549,14 @@ Patient details page will show the patient's details; medical history, allergies
       5. Create a Note Prescription component and mount it on the Note List component and pass note.prescription as a prop
       6. Create a Note Follow Up component and mount it on the Note List component and pass note.followUpDate as a prop
 
+  ### Document Tab Component
+
+  Document Tab Component will be used to upload, view, download, and delete documents.
+
+    1. Set the active tab to "Documents" by default on the Patient Details Context
+    2. Create a component for the Document Tab and mount it on the Tab Content component with id of "documents"
+    3. Create a component for the Document Tab Header and mount it on the Document Tab component
+
 
 ### Settings Context
 
