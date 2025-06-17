@@ -1,9 +1,11 @@
 import { FiPlus } from "react-icons/fi"
 import { usePatientDetails } from "../../../../context/PatientDetailsContext"
+import { useDocumentsTab } from "../../../../context/DocumentsTabContext"
 
 const DocumentsTabHeader: React.FC = ()=>{
 
-    const { documents } = usePatientDetails()
+    const { documents } = usePatientDetails(),
+          { toggleUploadArea } = useDocumentsTab()
 
     return(
 
@@ -23,7 +25,10 @@ const DocumentsTabHeader: React.FC = ()=>{
 
                 </h4>
 
-                <button className="bg-primary-bg flex items-center gap-2 text-secondary-bg px-4 py-2 rounded-md hover:bg-blue-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1">
+                <button 
+                    className="bg-primary-bg flex items-center gap-2 text-secondary-bg px-4 py-2 rounded-md hover:bg-blue-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
+                    onClick={toggleUploadArea}
+                >
 
                     <FiPlus className="w-4 h-4"/>
 
