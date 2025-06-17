@@ -1549,12 +1549,44 @@ Patient details page will show the patient's details; medical history, allergies
       5. Create a Note Prescription component and mount it on the Note List component and pass note.prescription as a prop
       6. Create a Note Follow Up component and mount it on the Note List component and pass note.followUpDate as a prop
 
+  ### Document Tab Context
+
+  Document Tab Context will be used to handle all UI logic for uploading, viewing, downloading, and deleting documents.
+
+    1. Create the following states:
+      a. showUploadArea and initialize it to false
+      b. selectedFiles and initialize it to an empty array
+      c. selectedDocument and initialize it to null
+      d. showViewModal and initialize it to false
+      e. isDownloading and initialize it to false
+      f. showDeleteModal and initialize it to false
+      g. documentToDelete and initialize it to null
+
+    2. Create a function `toggleUploadArea` which toggles the showUploadArea state
+      a. Set showUploadArea to the opposite of its current value
+
+    3. Create a function `openViewModal` which takes document as a parameter
+      a. Set selectedDocument to the document parameter
+      b. Set showViewModal to true
+
+    4. Create a function `closeViewModal` which closes the view modal
+      a. Set showViewModal to false
+      b. Set selectedDocument to null
+
+    5. Create a function `openDeleteModal` which takes document as a parameter
+      a. Set documentToDelete to the document parameter
+      b. Set showDeleteModal to true
+
+    6. Create a function `closeDeleteModal` which closes the delete modal
+      a. Set showDeleteModal to false
+      b. Set documentToDelete to null
+
   ### Document Tab Component
 
   Document Tab Component will be used to upload, view, download, and delete documents.
 
     1. Set the active tab to "Documents" by default on the Patient Details Context
-    2. Create a component for the Document Tab and mount it on the Tab Content component with id of "documents"
+    2. Create a component for the Document Tab and mount it on the Tab Content component with id of "documents". Wrap it with the Document Tab Context Provider
     3. Create a component for the Document Tab Header and mount it on the Document Tab component
       a. Add a button for the upload a document
 
