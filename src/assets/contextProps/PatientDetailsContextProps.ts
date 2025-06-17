@@ -47,7 +47,7 @@ export interface PatientDetailsContextProps{
 
     }>
 
-    addDocument: (document: { name: string, type: string, uploadDate: Date, uploadedBy: string }) => void
+    addDocument: (document: { _id: string, name: string, type: string, uploadDate: Date, uploadedBy: string }) => void
     removeDocument: (index: string) => void
 
     //Patient appointments

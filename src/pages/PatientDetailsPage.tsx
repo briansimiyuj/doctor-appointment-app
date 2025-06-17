@@ -5,6 +5,7 @@ import TabContent from "../components/PatientDetails/Tabs/TabContent"
 import { usePatientDetails } from "../context/PatientDetailsContext"
 import AppointmentTab from "../components/PatientDetails/Tabs/AppointmentTab/AppointmentTab"
 import DocumentTab from "../components/PatientDetails/Tabs/DocumentTab/DocumentTab"
+import { DocumentsTabContextProvider } from "../context/DocumentsTabContext"
 
 const PatientDetailsPage: React.FC = ()=>{
 
@@ -79,7 +80,11 @@ const PatientDetailsPage: React.FC = ()=>{
 
                             <div className="p-4">
 
-                                <DocumentTab/>
+                                <DocumentsTabContextProvider>
+
+                                    <DocumentTab/>
+
+                                </DocumentsTabContextProvider>
 
                             </div>
 
