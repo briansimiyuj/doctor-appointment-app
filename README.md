@@ -1589,6 +1589,11 @@ Patient details page will show the patient's details; medical history, allergies
     2. Create a component for the Document Tab and mount it on the Tab Content component with id of "documents". Wrap it with the Document Tab Context Provider
     3. Create a component for the Document Tab Header and mount it on the Document Tab component
       a. Add a button for the upload a document
+      b. Attach a click event listener to the button that calls the toggleUploadArea function from the Document Tab Context
+
+    #### Document Upload Area Component
+
+    1. Create a component for the Document Upload Area and mount it on the Document Tab component when showUploadArea is true
 
 
 ### Settings Context
