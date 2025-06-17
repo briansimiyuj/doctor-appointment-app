@@ -1,6 +1,10 @@
+import { useDocumentsTab } from "../../../../context/DocumentsTabContext"
+import SelectedFiles from "./SelectedFiles"
 import BrowseFilesButton from "./BrowseFilesButton"
 
 const DocumentUploadArea: React.FC = ()=>{
+
+    const { selectedFiles } = useDocumentsTab()
 
     return(
 
@@ -15,6 +19,16 @@ const DocumentUploadArea: React.FC = ()=>{
                 <p>Maximum file size: 10MB per file</p>
 
             </div>
+
+            {
+
+                selectedFiles.length > 0 &&( 
+
+                    <SelectedFiles/>
+
+                )
+
+            }
 
         </div>
 
