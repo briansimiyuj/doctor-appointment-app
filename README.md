@@ -1594,6 +1594,16 @@ Patient details page will show the patient's details; medical history, allergies
     #### Document Upload Area Component
 
     1. Create a component for the Document Upload Area and mount it on the Document Tab component when showUploadArea is true
+    2. Create a component for browse files button and mount it on the Document Upload Area component
+      a. Attach the following event listeners to
+        i . The parent div: onDrragover will call `handleDragOver`, onDrop will call `handleDrop`,
+        onClick will call `handleBrowseClick` from file select hook
+        ii. The browser button: onClick will call `handleBrowseClick` from file select hook
+      
+      b. Create an input element of type file in the browse files button and attach the `handleFileSelect` function from the file select hook to the onChange event listener
+
+    2. Display supported file types and maximum file size
+    3. 
 
 
 ### Settings Context
