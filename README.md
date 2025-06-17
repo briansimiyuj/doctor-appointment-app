@@ -1603,7 +1603,11 @@ Patient details page will show the patient's details; medical history, allergies
       b. Create an input element of type file in the browse files button and attach the `handleFileSelect` function from the file select hook to the onChange event listener
 
     2. Display supported file types and maximum file size
-    3. 
+    3. If the selectedFiles array is greater than 0, mount SelectedFiles component on the Document Upload Area component
+
+      ##### Selected Files Component
+
+      
 
 
 ### Settings Context
