@@ -43,6 +43,15 @@ import patient3 from "./patient3.jpg"
 import patient4 from "./patient4.jpg"
 import patient5 from "./patient5.jpg"
 import analytics from "./analytics.jpg"
+import medicalReport from "../dummyData/dummyDocuments/Medical Report.pdf"
+import medicalCertificate from "../dummyData/dummyDocuments/sample medical certificate.pdf"
+import sampleRadiologyReport from "../dummyData/dummyDocuments/sample radiology.pdf"
+import samplePrescription from "../dummyData/dummyDocuments/sample prescription.pdf"
+import sampleDischargeSummary from "../dummyData/dummyDocuments/sample discharge summary.pdf"
+import sampleXray from "../dummyData/dummyDocuments/sample xray.jpg"
+import sampleUltrasound from "../dummyData/dummyDocuments/sample ultrasound image.webp"
+import sampleCTScan from "../dummyData/dummyDocuments/sample CT Scan.jpeg"
+import { DocumentType } from "../types/DocumentType"
 
 export const assets ={
   
@@ -134,4 +143,96 @@ export const specialityData =[
         image: Pediatrician
     }
 
+]
+
+export const dummyDocuments: DocumentType[] =[
+
+    {
+        _id: "1",
+        name: "Sample Radiology Report",
+        type: "pdf",
+        uploadDate: new Date("2023-01-01"),
+        uploadedBy: "Dr. Smith",
+        // @ts-ignore
+        file: sampleRadiologyReport,
+        size: 1024
+    },
+
+    {
+        _id: "2",
+        name: "Sample Prescription",
+        type: "pdf",
+        uploadDate: new Date("2023-01-02"),
+        uploadedBy: "Dr. Johnson",
+        // @ts-ignore
+        file: samplePrescription,
+        size: 2048
+    },
+
+    {
+        _id: "3",
+        name: "Sample Discharge Summary",
+        type: "pdf",
+        uploadDate: new Date("2023-01-03"),
+        uploadedBy: "Dr. Lee",
+        // @ts-ignore
+        file: sampleDischargeSummary,
+        size: 4096
+    },
+
+    {
+        _id: "4",
+        name: "Sample X-ray",
+        type: "jpg",
+        uploadDate: new Date("2023-01-04"),
+        uploadedBy: "Dr. Brown",
+        // @ts-ignore
+        file: sampleXray,
+        size: 8192
+    },
+    
+    {
+        _id: "5",
+        name: "Sample Ultrasound",
+        type: "webp",
+        uploadDate: new Date("2023-01-05"),
+        uploadedBy: "Dr. Green",
+        // @ts-ignore
+        file: sampleUltrasound,
+        size: 16384
+    },
+    
+    {
+        _id: "6",
+        name: "Sample CT Scan",
+        type: "jpeg",
+        uploadDate: new Date("2023-01-06"),
+        uploadedBy: "Dr. White",
+        // @ts-ignore
+        file: sampleCTScan,
+        size: 32768
+    },
+    
+    {
+        _id: "7",
+        name: "Medical Report",
+        type: "pdf",
+        uploadDate: new Date("2023-01-07"),
+        uploadedBy: "Dr. Black",
+        // @ts-ignore
+        file: medicalReport,
+        size: 65536
+    },
+    
+    {
+        _id: "8",
+        name: "Medical Certificate",
+        type: "pdf",
+        uploadDate: new Date("2023-01-08"),
+        uploadedBy: "Dr. Grey",
+        // @ts-ignore
+        file: medicalCertificate,
+        size: 131072
+    }
+    
 ]
