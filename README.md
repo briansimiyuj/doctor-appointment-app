@@ -1607,7 +1607,11 @@ Patient details page will show the patient's details; medical history, allergies
 
       ##### Selected Files Component
 
-      
+      1. Retrieve selectedFiles from Document Tab Context
+      2. If there are no selected files, exit the component
+      3. Map through the selectedFiles array and create a SelectedFileCard for each file and pass file and index as props
+      4. SelectedFileCard component will display the file name, size, and a remove button
+
 
 
 ### Settings Context
