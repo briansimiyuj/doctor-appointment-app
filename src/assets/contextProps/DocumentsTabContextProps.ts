@@ -5,8 +5,8 @@ export interface DocumentsTabContextProps{
     showUploadArea: boolean
     setShowUploadArea: (show: boolean) => void
     toggleUploadArea: () => void
-    selectedFiles: File[]
-    setSelectedFiles: (files: File[]) => void
+    selectedFiles: DocumentType[]
+    setSelectedFiles: (files: DocumentType[]) => void
     isUploading: boolean
     setIsUploading: (isUploading: boolean) => void
 
