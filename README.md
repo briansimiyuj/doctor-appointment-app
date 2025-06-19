@@ -1602,6 +1602,13 @@ Patient details page will show the patient's details; medical history, allergies
       
       b. Create an input element of type file in the browse files button and attach the `handleFileSelect` function from the file select hook to the onChange event listener
 
+      a. Attach the following event listeners to
+        i . The parent div: onDrragover will call `handleDragOver`, onDrop will call `handleDrop`,
+        onClick will call `handleBrowseClick` from file select hook
+        ii. The browser button: onClick will call `handleBrowseClick` from file select hook
+      
+      b. Create an input element of type file in the browse files button and attach the `handleFileSelect` function from the file select hook to the onChange event listener
+
     2. Display supported file types and maximum file size
     3. If the selectedFiles array is greater than 0, mount SelectedFiles component on the Document Upload Area component
 
@@ -1611,6 +1618,7 @@ Patient details page will show the patient's details; medical history, allergies
       2. If there are no selected files, exit the component
       3. Map through the selectedFiles array and create a SelectedFileCard for each file and pass file and index as props
       4. SelectedFileCard component will display the file name, size, and a remove button
+      5. Attach an onClick event listener to the remove button that will call the `removeFile` function from the file select hook and pass the index of the file to be removed
 
   ### File Selection Hook
 

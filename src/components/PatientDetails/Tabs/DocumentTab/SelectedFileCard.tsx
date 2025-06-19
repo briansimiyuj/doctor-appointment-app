@@ -1,5 +1,6 @@
 import { FiFile, FiX } from "react-icons/fi"
 import { DocumentType } from "../../../../assets/types/DocumentType"
+import { useFileSelection } from "../../../../hooks/useFileSelection"
 
 interface SelectedFileCardProps{
 
@@ -8,7 +9,9 @@ interface SelectedFileCardProps{
 
 }
 
-const SelectedFileCard: React.FC<SelectedFileCardProps> = ({ file, })=>{
+const SelectedFileCard: React.FC<SelectedFileCardProps> = ({ file, index })=>{
+
+    const { removeFile } = useFileSelection()
 
     return(
 
@@ -39,6 +42,7 @@ const SelectedFileCard: React.FC<SelectedFileCardProps> = ({ file, })=>{
             <button
                 className="p-1 text-gray-400 hover:text-red-500 transition-colors"
                 title="Remove file"
+                onClick={() => removeFile(index)}
             >
 
                 <FiX className="w-4 h-4"/>
