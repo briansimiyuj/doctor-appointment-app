@@ -1665,6 +1665,26 @@ Patient details page will show the patient's details; medical history, allergies
     7. Create a `removeFile` function that will remove a file from the selected files array when the "Remove" button is clicked
     8. Create a `clearFiles` function that will clear all selected files 
 
+  ### File Upload Hook
+
+  Files upload hook will be used to upload the selected files to the local storage
+
+    1. Retrieve the selected following:
+      a. `isUploading`, `setIsUploading` and `setShowUploadArea` from Document Tab Context
+      b. `selectedFiles` and `clearFiles` from File Selection hook
+      c. `addDocument` from Patient Details Context
+
+    2. Create a `handleFilesUpload` function that will be called when the "Upload" button is clicked
+      a. Check if there are any files selected, if not, exit the function
+      b. Set `isUploading` to true
+      c. Simulate the upload process by using `setTimeout` to delay the upload by 2 seconds 
+      c. Convert file objects to DocumentType objects
+      d. Add the converted documents to the patient's documents
+      e. Clear the selected files
+      f. Set `showUploadArea` to false
+
+    3. Create a `canUpload` boolean state that will be used to disable the "Upload" button if there are no files selected and the upload process is not in progress
+
 
 
 ### Settings Context
