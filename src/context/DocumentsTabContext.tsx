@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react"
 import { DocumentsTabContextProps } from "../assets/contextProps/DocumentsTabContextProps"
 import { DocumentType } from "../assets/types/DocumentType"
+import { dummyDocuments } from "../assets/frontend/assets"
 
 interface DocumentsTabContextProviderProps{
 
@@ -15,7 +16,9 @@ export const DocumentsTabContextProvider: React.FC<DocumentsTabContextProviderPr
     const [showUploadArea, setShowUploadArea] = useState(
         import.meta.env.VITE_DEV_MODE === 'true' ? true : false
     ),
-          [selectedFiles, setSelectedFiles] = useState<DocumentType[]>([]),
+          [selectedFiles, setSelectedFiles] = useState<DocumentType[]>(
+            import.meta.env.VITE_DEV_MODE === 'true' ? dummyDocuments : []
+          ),
           [isUploading, setIsUploading] = useState(false),
           [selectedDocument, setSelectedDocument] = useState<DocumentType | null>(null),
           [showViewModal, setShowViewModal] = useState(false),

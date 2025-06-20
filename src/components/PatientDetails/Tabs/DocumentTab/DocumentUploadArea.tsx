@@ -1,6 +1,7 @@
 import { useDocumentsTab } from "../../../../context/DocumentsTabContext"
 import SelectedFiles from "./SelectedFiles"
 import BrowseFilesButton from "./BrowseFilesButton"
+import UploadButton from "./UploadButton"
 
 const DocumentUploadArea: React.FC = ()=>{
 
@@ -24,7 +25,13 @@ const DocumentUploadArea: React.FC = ()=>{
 
                 selectedFiles.length > 0 &&( 
 
-                    <SelectedFiles/>
+                    <>
+
+                        <SelectedFiles/>
+
+                        <UploadButton/>
+
+                    </>
 
                 )
 
