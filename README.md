@@ -1620,6 +1620,9 @@ Patient details page will show the patient's details; medical history, allergies
       4. SelectedFileCard component will display the file name, size, and a remove button
       5. Attach an onClick event listener to the remove button that will call the `removeFile` function from the file select hook and pass the index of the file to be removed
 
+    4. Create a Upload Button component and mount it on the Document Upload Area component
+      a. Display the upload button 
+
   ### File Selection Hook
 
   File selection hook will be used to handle file selection, drag and drop, validate file size and type, and add files to the selectedFiles array

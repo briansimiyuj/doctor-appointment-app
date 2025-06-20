@@ -78,8 +78,6 @@ export const useFileSelection = () =>{
 
         } 
 
-        console.log('Files selected')
-        
     }
 
     const handleDrop = (e: React.DragEvent<HTMLDivElement>) =>{
@@ -97,8 +95,6 @@ export const useFileSelection = () =>{
             setSelectedFiles([...selectedFiles, ...validFiles])
 
         }
-
-       console.log('files dropped')
     
     }
 
@@ -108,15 +104,11 @@ export const useFileSelection = () =>{
 
         e.stopPropagation()
 
-        console.log('files dragged over')
-
     }
 
     const handleBrowseClick = (fileInputRef: React.RefObject<HTMLInputElement>) =>{
     
         fileInputRef.current?.click()
-
-        console.log('File explorer opened') 
     
     }
 
@@ -126,15 +118,12 @@ export const useFileSelection = () =>{
 
        setSelectedFiles(updatedFiles)
 
-       console.log('File removed')
     
     }
 
     const clearFiles = () =>{
     
        setSelectedFiles([])
-
-       console.log('Files cleared')
     
     }
 
