@@ -50,7 +50,14 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             uploadDate: Date
             uploadedBy: string
 
-      }>>([])
+      }>>(() =>{
+
+            const savedDocuments = localStorage.getItem(`documents-${patientID}`)
+
+            return savedDocuments ? JSON.parse(savedDocuments) : []
+            
+      }
+      )
 
 
       const fetchPatientAppointments = (patientID: string) =>{
@@ -259,7 +266,7 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             removeMedication: () => {},
             addSurgery: () => {},
             removeSurgery: () => {},
-            documents: [],
+            documents,
             addDocument,
             removeDocument,
             updatePatientStatus: () => {},

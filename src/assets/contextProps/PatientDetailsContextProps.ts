@@ -44,6 +44,7 @@ export interface PatientDetailsContextProps{
         type: string
         uploadDate: Date
         uploadedBy: string
+        size: number
 
     }>
 

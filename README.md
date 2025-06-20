@@ -501,7 +501,7 @@ My appointments page will show the user's appointments. It will have a list of a
   4. Create a state variable for patient appointment with `appointment type` and initialize it with: if there is saved appointment in local storage then the saved appointment else empty array
   5. Create a function to fetch the patient appointment based on patient id
   6. Find the appointed patient based on the patient id and set the patient details and appointment details
-  7. Create state variables for notes and documents with respective types and initialize them with empty array
+  7. Create state variables for notes and documents with respective types and initialize them with data from local storage
   8. Create functions to add and remove documents and update local storage
   9. Create functions to add and remove notes and update local storage
   10. Add `updateAppointmentStatus` function to the patient details context props
