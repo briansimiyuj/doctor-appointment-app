@@ -1621,7 +1621,9 @@ Patient details page will show the patient's details; medical history, allergies
       5. Attach an onClick event listener to the remove button that will call the `removeFile` function from the file select hook and pass the index of the file to be removed
 
     4. Create a Upload Button component and mount it on the Document Upload Area component
-      a. Display the upload button 
+      a. Retrieve `handleFileUpload`, `isUploading`, `canUpload` and `selectedFilesCount` from file upload hook
+      b. Display an Upload button with a disabled attribute if `canUpload` is false and attach an onClick event listener to the button that will call the `handleFileUpload` function 
+        i. If `isUploading` is true, display a message indicating that the files are being uploaded
 
   ### File Selection Hook
 
