@@ -12,9 +12,7 @@ const DocumentsTabContext = createContext<DocumentsTabContextProps | undefined>(
 
 export const DocumentsTabContextProvider: React.FC<DocumentsTabContextProviderProps> = ({ children })=>{
 
-    const [showUploadArea, setShowUploadArea] = useState(
-        import.meta.env.VITE_DEV_MODE === 'true' ? true : false
-    ),
+    const [showUploadArea, setShowUploadArea] = useState(false),
           [selectedFiles, setSelectedFiles] = useState<DocumentType[]>([]),
           [isUploading, setIsUploading] = useState(false),
           [selectedDocument, setSelectedDocument] = useState<DocumentType | null>(null),
