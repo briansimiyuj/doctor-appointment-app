@@ -1,5 +1,6 @@
 import { FiDownload, FiEye, FiTrash2 } from "react-icons/fi";
 import { DocumentType } from "../../../../assets/types/DocumentType";
+import { useDocumentsTab } from "../../../../context/DocumentsTabContext";
 
 interface DocumentCardActionsProps{
 
@@ -9,12 +10,15 @@ interface DocumentCardActionsProps{
 
 const DocumentCardActions: React.FC<DocumentCardActionsProps> = ({ document })=>{
 
+    const { openViewModal, openDeleteModal } = useDocumentsTab()
+
     return(
 
         <div className="flex flex-col mt-6 gap-2">
 
             <button 
                 className="bg-primary-btn flex items-center gap-2 text-base px-4 py-2 rounded text-white justify-center"
+                onClick={() => openViewModal(document)}
             >
 
                 <FiEye className="w-6 h-6"/>
@@ -35,6 +39,7 @@ const DocumentCardActions: React.FC<DocumentCardActionsProps> = ({ document })=>
 
             <button 
                 className="bg-red-500 flex items-center gap-2 text-base px-4 py-2 rounded text-white justify-center"
+                onClick={() => openDeleteModal(document)}
             >
 
                 <FiTrash2 className="w-6 h-6"/>

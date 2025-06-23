@@ -1703,7 +1703,10 @@ Patient details page will show the patient's details; medical history, allergies
         c. Display the document's icon, name, uploaded date, and uploaded by
 
       2. Create a DocumentCardActions component and mount it to the DocumentCard component and pass the document as a prop
-        a. Display buttons to download, view, and delete the document
+        a. Retrieve `openViewModal` and `openDeleteModal` functions from Document Tab Context
+        b. Display buttons to download, view, and delete the document
+        c. Attach event listeners to the buttons to call the respective functions when clicked: View button calls `openViewModal` function, Delete Button calls `openDeleteModal` function
+
 
 ### Settings Context
 
