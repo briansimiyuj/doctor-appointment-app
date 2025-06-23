@@ -1694,6 +1694,13 @@ Patient details page will show the patient's details; medical history, allergies
       1. Retrieve `documents` from Patient Details Context
       2. Loop through the `documents` array and create a DocumentCard component for each document
 
+      #### DocumentCard Component
+
+      1. Create a DocumentCardHeader component and mount it to the DocumentCard component and pass the document as a prop
+
+        a. Create a function to get file icon based on the file type (image or file)
+        b. Create a function to format the date
+        c. Display the document's icon, name, uploaded date, and uploaded by
 
 ### Settings Context
 
