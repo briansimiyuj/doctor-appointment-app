@@ -42,15 +42,7 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             doctorName: string
 
       }>>([]),
-      [documents, setDocuments] = useState<Array<{
-
-            id: string
-            name: string
-            type: string
-            uploadDate: Date
-            uploadedBy: string
-
-      }>>(() =>{
+      [documents, setDocuments] = useState<DocumentType[]>(() =>{
 
             const savedDocuments = localStorage.getItem(`documents-${patientID}`)
 
@@ -121,7 +113,7 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
 
       const removeDocument = (index: string) =>{
       
-         const updatedDocuments = documents.filter(document => document.id !== index)
+         const updatedDocuments = documents.filter(document => document._id !== index)
 
          setDocuments(updatedDocuments)
 

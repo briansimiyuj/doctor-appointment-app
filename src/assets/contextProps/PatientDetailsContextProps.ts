@@ -1,6 +1,7 @@
 import { AppointedPatientType } from "../types/AppointedPatientType"
 import { AppointmentType } from "../types/AppointmentType"
 import { DoctorType } from "../types/DoctorType"
+import { DocumentType } from "../types/DocumentType"
 
 export interface PatientDetailsContextProps{
 
@@ -37,18 +38,9 @@ export interface PatientDetailsContextProps{
     removeNote: (index: number) => void
 
     // Documents management
-    documents: Array<{
-        
-        id: string
-        name: string
-        type: string
-        uploadDate: Date
-        uploadedBy: string
-        size: number
+    documents: DocumentType[]
 
-    }>
-
-    addDocument: (document: { _id: string, name: string, type: string, uploadDate: Date, uploadedBy: string }) => void
+    addDocument: (document: DocumentType) => void
     removeDocument: (index: string) => void
 
     //Patient appointments
