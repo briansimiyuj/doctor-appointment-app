@@ -1,10 +1,13 @@
 import { useDocumentsTab } from "../../../../context/DocumentsTabContext"
+import { usePatientDetails } from "../../../../context/PatientDetailsContext"
+import DocumentsList from "./DocumentsList"
 import DocumentsTabHeader from "./DocumentsTabHeader"
 import DocumentUploadArea from "./DocumentUploadArea"
 
 const DocumentTab: React.FC = ()=>{
 
-    const { showUploadArea } = useDocumentsTab()
+    const { showUploadArea } = useDocumentsTab(),
+          { documents } = usePatientDetails()
 
     return(
 
@@ -13,6 +16,24 @@ const DocumentTab: React.FC = ()=>{
             <DocumentsTabHeader/>
 
             { showUploadArea && <DocumentUploadArea/> }
+
+            {
+
+                documents && documents.length > 0 ?(
+
+                    <DocumentsList/>
+
+                ):(
+
+                    <div className="text-center py-8">
+
+                        <p className="text-gray-500">No documents uploaded yet.</p>
+
+                    </div>
+
+                )
+
+            }
 
         </div>
     )
