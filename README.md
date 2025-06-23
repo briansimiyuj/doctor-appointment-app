@@ -1702,6 +1702,9 @@ Patient details page will show the patient's details; medical history, allergies
         b. Create a function to format the date
         c. Display the document's icon, name, uploaded date, and uploaded by
 
+      2. Create a DocumentCardActions component and mount it to the DocumentCard component and pass the document as a prop
+        a. Display buttons to download, view, and delete the document
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page
