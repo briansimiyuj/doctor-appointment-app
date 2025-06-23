@@ -1707,6 +1707,16 @@ Patient details page will show the patient's details; medical history, allergies
         b. Display buttons to download, view, and delete the document
         c. Attach event listeners to the buttons to call the respective functions when clicked: View button calls `openViewModal` function, Delete Button calls `openDeleteModal` function
 
+    3. Create a ViewDocumentModal component and mount it to the Document Tab component if `showViewModal` is true from Document Tab Context
+
+
+    #### View Document Modal Component
+
+    ViewDocumentModal component will be used to display the document in a modal window
+
+      1. Retrieve `closeViewModal` function from Document Tab Context
+      2. Reuse the ModalHeader and pass title and `closeViewModal` function as props
+
 
 ### Settings Context
 
