@@ -1591,102 +1591,108 @@ Patient details page will show the patient's details; medical history, allergies
       a. Add a button for the upload a document
       b. Attach a click event listener to the button that calls the toggleUploadArea function from the Document Tab Context
 
-    #### Document Upload Area Component
+      #### Document Upload Area Component
 
-    1. Create a component for the Document Upload Area and mount it on the Document Tab component when showUploadArea is true
-    2. Create a component for browse files button and mount it on the Document Upload Area component
-      a. Attach the following event listeners to
-        i . The parent div: onDrragover will call `handleDragOver`, onDrop will call `handleDrop`,
-        onClick will call `handleBrowseClick` from file select hook
-        ii. The browser button: onClick will call `handleBrowseClick` from file select hook
+      1. Create a component for the Document Upload Area and mount it on the Document Tab component when showUploadArea is true
+      2. Create a component for browse files button and mount it on the Document Upload Area component
+        a. Attach the following event listeners to
+          i . The parent div: onDrragover will call `handleDragOver`, onDrop will call `handleDrop`,
+          onClick will call `handleBrowseClick` from file select hook
+          ii. The browser button: onClick will call `handleBrowseClick` from file select hook
+        
+        b. Create an input element of type file in the browse files button and attach the `handleFileSelect` function from the file select hook to the onChange event listener
+
+        a. Attach the following event listeners to
+          i . The parent div: onDrragover will call `handleDragOver`, onDrop will call `handleDrop`,
+          onClick will call `handleBrowseClick` from file select hook
+          ii. The browser button: onClick will call `handleBrowseClick` from file select hook
+        
+        b. Create an input element of type file in the browse files button and attach the `handleFileSelect` function from the file select hook to the onChange event listener
+
+      2. Display supported file types and maximum file size
+      3. If the selectedFiles array is greater than 0, mount SelectedFiles component on the Document Upload Area component
+
+        ##### Selected Files Component
+
+        1. Retrieve selectedFiles from Document Tab Context
+        2. If there are no selected files, exit the component
+        3. Map through the selectedFiles array and create a SelectedFileCard for each file and pass file and index as props
+        4. SelectedFileCard component will display the file name, size, and a remove button
+        5. Attach an onClick event listener to the remove button that will call the `removeFile` function from the file select hook and pass the index of the file to be removed
+
+      4. Create a Upload Button component and mount it on the Document Upload Area component
+        a. Retrieve `handleFileUpload`, `isUploading`, `canUpload` and `selectedFilesCount` from file upload hook
+        b. Display an Upload button with a disabled attribute if `canUpload` is false and attach an onClick event listener to the button that will call the `handleFileUpload` function 
+          i. If `isUploading` is true, display a message indicating that the files are being uploaded
+
+    ### File Selection Hook
+
+    File selection hook will be used to handle file selection, drag and drop, validate file size and type, and add files to the selectedFiles array
+
+      1. Retrieve selectedFiles state from Document Tab Context
+      2. Create a `validateFiles` function that will validate the file size and type. It will take an array of files as an argument and return an array of valid files
+        a. Create a constants
+          i. `validFiles` to hold the valid files
+          ii. `maxSize` to hold the maximum file size in bytes which is 10MB
+          iii. `allowedTypes` to hold the allowed file types which are PDF, JPG, JPEG, PNG, MSWORD
+
+        b. Loop through the files array and check if the file size is greater than the maximum size and if the file type is not in the allowed types. If they are, exit the loop and return. If not, add the file to the validFiles array
       
-      b. Create an input element of type file in the browse files button and attach the `handleFileSelect` function from the file select hook to the onChange event listener
-
-      a. Attach the following event listeners to
-        i . The parent div: onDrragover will call `handleDragOver`, onDrop will call `handleDrop`,
-        onClick will call `handleBrowseClick` from file select hook
-        ii. The browser button: onClick will call `handleBrowseClick` from file select hook
+      3. Create a `handleFileSelection` function that will handle file selection. It will take an event as an argument
+        a. Extract files from the event target using `e.target.files`
+        b. Check if files exist and have length greater than 0 to ensure valid file selection
+        c. If valid files are present:
+          i. Call `validateFiles` function to validate the selected files against allowed types and size limits
+          ii. Update the selected files state using `setSelectedFiles` with the validated files array
+          iii. This ensures only valid files are stored in the component state
       
-      b. Create an input element of type file in the browse files button and attach the `handleFileSelect` function from the file select hook to the onChange event listener
+        d. The function handles both single and multiple file selections
+        e. Invalid files are filtered out during validation, maintaining data integrity
+        f. The validated files are then available for further processing (upload, preview, etc.)
 
-    2. Display supported file types and maximum file size
-    3. If the selectedFiles array is greater than 0, mount SelectedFiles component on the Document Upload Area component
+      4. Create a `handleDrag` function that will handle drag and drop events. It will take an event as an argument
+        a. Prevent the default behavior of the event to allow for custom drag and drop handling
+        b. Stop the propagation of the event to prevent it from triggering other event listeners
 
-      ##### Selected Files Component
+      5. Create a `handleDrop` function that will handle the drop event. It will take an event as an argument
+        a. Prevent the default behavior of the event to allow for custom drag and drop handling
+        b. Stop the propagation of the event to prevent it from triggering other event listeners
+        c. Check if the event contains files
+        d. If files are present:
+          i. Call `validateFiles` function to validate the dragged files against allowed types and size limits
+          ii. Update the selected files state using `setSelectedFiles` with the validated files array
+          iii. This ensures only valid files are stored in the component state
 
-      1. Retrieve selectedFiles from Document Tab Context
-      2. If there are no selected files, exit the component
-      3. Map through the selectedFiles array and create a SelectedFileCard for each file and pass file and index as props
-      4. SelectedFileCard component will display the file name, size, and a remove button
-      5. Attach an onClick event listener to the remove button that will call the `removeFile` function from the file select hook and pass the index of the file to be removed
+      6. Create a `handleBrowseClick` function that will handle will open the file picker dialog when the "Browse" button is clicked
+      7. Create a `removeFile` function that will remove a file from the selected files array when the "Remove" button is clicked
+      8. Create a `clearFiles` function that will clear all selected files 
 
-    4. Create a Upload Button component and mount it on the Document Upload Area component
-      a. Retrieve `handleFileUpload`, `isUploading`, `canUpload` and `selectedFilesCount` from file upload hook
-      b. Display an Upload button with a disabled attribute if `canUpload` is false and attach an onClick event listener to the button that will call the `handleFileUpload` function 
-        i. If `isUploading` is true, display a message indicating that the files are being uploaded
+    ### File Upload Hook
 
-  ### File Selection Hook
+    Files upload hook will be used to upload the selected files to the local storage
 
-  File selection hook will be used to handle file selection, drag and drop, validate file size and type, and add files to the selectedFiles array
+      1. Retrieve the selected following:
+        a. `isUploading`, `setIsUploading` and `setShowUploadArea` from Document Tab Context
+        b. `selectedFiles` and `clearFiles` from File Selection hook
+        c. `addDocument` from Patient Details Context
 
-    1. Retrieve selectedFiles state from Document Tab Context
-    2. Create a `validateFiles` function that will validate the file size and type. It will take an array of files as an argument and return an array of valid files
-      a. Create a constants
-        i. `validFiles` to hold the valid files
-        ii. `maxSize` to hold the maximum file size in bytes which is 10MB
-        iii. `allowedTypes` to hold the allowed file types which are PDF, JPG, JPEG, PNG, MSWORD
+      2. Create a `handleFilesUpload` function that will be called when the "Upload" button is clicked
+        a. Check if there are any files selected, if not, exit the function
+        b. Set `isUploading` to true
+        c. Simulate the upload process by using `setTimeout` to delay the upload by 2 seconds 
+        c. Convert file objects to DocumentType objects
+        d. Add the converted documents to the patient's documents
+        e. Clear the selected files
+        f. Set `showUploadArea` to false
 
-      b. Loop through the files array and check if the file size is greater than the maximum size and if the file type is not in the allowed types. If they are, exit the loop and return. If not, add the file to the validFiles array
-    
-    3. Create a `handleFileSelection` function that will handle file selection. It will take an event as an argument
-      a. Extract files from the event target using `e.target.files`
-      b. Check if files exist and have length greater than 0 to ensure valid file selection
-      c. If valid files are present:
-        i. Call `validateFiles` function to validate the selected files against allowed types and size limits
-        ii. Update the selected files state using `setSelectedFiles` with the validated files array
-        iii. This ensures only valid files are stored in the component state
-    
-      d. The function handles both single and multiple file selections
-      e. Invalid files are filtered out during validation, maintaining data integrity
-      f. The validated files are then available for further processing (upload, preview, etc.)
+      3. Create a `canUpload` boolean state that will be used to disable the "Upload" button if there are no files selected and the upload process is not in progress
 
-    4. Create a `handleDrag` function that will handle drag and drop events. It will take an event as an argument
-      a. Prevent the default behavior of the event to allow for custom drag and drop handling
-      b. Stop the propagation of the event to prevent it from triggering other event listeners
+    3. Create a DocumentsList component and mount it to the Document Tab component if `documents` is not empty
 
-    5. Create a `handleDrop` function that will handle the drop event. It will take an event as an argument
-      a. Prevent the default behavior of the event to allow for custom drag and drop handling
-      b. Stop the propagation of the event to prevent it from triggering other event listeners
-      c. Check if the event contains files
-      d. If files are present:
-        i. Call `validateFiles` function to validate the dragged files against allowed types and size limits
-        ii. Update the selected files state using `setSelectedFiles` with the validated files array
-        iii. This ensures only valid files are stored in the component state
+      #### DocumentsList Component
 
-    6. Create a `handleBrowseClick` function that will handle will open the file picker dialog when the "Browse" button is clicked
-    7. Create a `removeFile` function that will remove a file from the selected files array when the "Remove" button is clicked
-    8. Create a `clearFiles` function that will clear all selected files 
-
-  ### File Upload Hook
-
-  Files upload hook will be used to upload the selected files to the local storage
-
-    1. Retrieve the selected following:
-      a. `isUploading`, `setIsUploading` and `setShowUploadArea` from Document Tab Context
-      b. `selectedFiles` and `clearFiles` from File Selection hook
-      c. `addDocument` from Patient Details Context
-
-    2. Create a `handleFilesUpload` function that will be called when the "Upload" button is clicked
-      a. Check if there are any files selected, if not, exit the function
-      b. Set `isUploading` to true
-      c. Simulate the upload process by using `setTimeout` to delay the upload by 2 seconds 
-      c. Convert file objects to DocumentType objects
-      d. Add the converted documents to the patient's documents
-      e. Clear the selected files
-      f. Set `showUploadArea` to false
-
-    3. Create a `canUpload` boolean state that will be used to disable the "Upload" button if there are no files selected and the upload process is not in progress
-
+      1. Retrieve `documents` from Patient Details Context
+      2. Loop through the `documents` array and create a DocumentCard component for each document
 
 
 ### Settings Context
