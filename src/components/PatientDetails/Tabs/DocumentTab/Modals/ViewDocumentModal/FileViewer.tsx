@@ -1,5 +1,6 @@
 import { DocumentType } from "../../../../../../assets/types/DocumentType"
 import ImageViewer from "./Viewers/ImageViewer"
+import PDFViewer from "./Viewers/PDFViewer"
 
 interface FileViewerProps{
 
@@ -14,8 +15,15 @@ const FileViewer: React.FC<FileViewerProps> = ({ document })=>{
         if(document?.type?.startsWith("image/") || document?.type === "image"){
 
             return <ImageViewer document={document}/>
-            
+
         }
+
+        if(document?.type === "application/pdf" || document?.type === "pdf"){
+            
+            return <PDFViewer document={document}/>
+
+        }
+
     
     }
 
