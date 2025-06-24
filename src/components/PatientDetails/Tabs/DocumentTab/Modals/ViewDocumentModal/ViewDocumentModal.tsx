@@ -1,9 +1,10 @@
 import { useDocumentsTab } from "../../../../../../context/DocumentsTabContext"
 import ModalHeader from "../../../AppointmentTab/Modals/ModalHeader"
+import ModalBody from "./ModalBody"
 
 const ViewDocumentModal: React.FC = ()=>{
 
-    const { closeViewModal } = useDocumentsTab()
+    const { closeViewModal, selectedDocument } = useDocumentsTab()
 
     return(
 
@@ -13,6 +14,16 @@ const ViewDocumentModal: React.FC = ()=>{
             <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-4 overflow-y-auto max-h-[90vh]">
 
                 <ModalHeader title="View Document" onClose={closeViewModal}/>
+
+                {
+                
+                    selectedDocument &&(
+
+                        <ModalBody document={selectedDocument}/>
+                        
+                    )
+                    
+                }
 
             </div>
 
