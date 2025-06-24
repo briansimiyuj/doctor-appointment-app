@@ -1722,6 +1722,13 @@ Patient details page will show the patient's details; medical history, allergies
           ii. Create a function to get file type based on file extension
           iii. Display the document name, type, and icon
 
+        b. Create a FileViewer component and mount it to the ModalBody component and pass the document as a prop
+
+        ##### File Viewer Component
+
+        1. Create a `renderViewer` function that will render the appropriate viewer based on the file type.
+          a. If the file is an image, render an Image component with the image src as the document content
+
 
 ### Settings Context
 
