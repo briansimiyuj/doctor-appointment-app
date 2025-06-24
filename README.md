@@ -1728,6 +1728,7 @@ Patient details page will show the patient's details; medical history, allergies
 
         1. Create a `renderViewer` function that will render the appropriate viewer based on the file type.
           a. If the file is an image, render an Image component with the image src as the document content
+          b. If the file is a pdf, render a PDFViewer component with the pdf src as the document content
 
 
 ### Settings Context
