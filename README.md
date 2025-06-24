@@ -1716,6 +1716,11 @@ Patient details page will show the patient's details; medical history, allergies
 
       1. Retrieve `closeViewModal` function from Document Tab Context
       2. Reuse the ModalHeader and pass title and `closeViewModal` function as props
+      3. Create a ModalBody component and mount it to the ViewDocumentModal component and pass the document as a prop
+        a. Create a DocumentInfo component and mount it to the ModalBody component and pass the document as a prop
+          i. Create a function to get file icon based on file type (image or document)
+          ii. Create a function to get file type based on file extension
+          iii. Display the document name, type, and icon
 
 
 ### Settings Context
