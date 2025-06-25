@@ -27,16 +27,62 @@ export const useUploadFile = () =>{
             
             await new Promise(resolve => setTimeout(resolve, 2000))
 
-            const uploadedDocuments: DocumentType[] = selectedFiles.map(file =>({
+            const uploadedDocuments: DocumentType[] = await Promise.all(
 
-                _id: uuidv4(),
-                name: file.name,
-                type: file.type,
-                size: file.size,
-                uploadDate: new Date(),
-                uploadedBy: DummyAppointment.doctor.name
-                
-            }))
+                (selectedFiles as unknown as File[]).map(async (file: File): Promise<DocumentType> =>{
+
+                    let content = ''
+
+                    content = await new Promise<string>(resolve =>{
+
+                        const reader = new FileReader()
+
+                        reader.onload = () => resolve(reader.result as string)
+                        reader.readAsDataURL(file)
+
+                    })
+
+                    let normalizedType = file.type
+
+                    if(!normalizedType){
+
+                        if(file.name.toLowerCase().endsWith(".pdf")){
+                            
+                            normalizedType = "application/pdf"
+
+                        }else if(file.name.toLowerCase().match(/\.(jpg|jpeg)$/)){
+
+                            normalizedType = "image/jpeg"
+
+                        }else if(file.name.toLowerCase().endsWith(".png")){
+
+                            normalizedType = "image/png"
+
+                        }else if(file.name.toLowerCase().endsWith(".webp")){
+
+                            normalizedType = "image/webp"
+
+                        }
+                        
+                    }
+
+                    const document: DocumentType ={
+
+                        _id: uuidv4(),
+                        name: file.name,
+                        type: normalizedType,
+                        size: file.size,
+                        uploadDate: new Date(),
+                        uploadedBy: DummyAppointment.doctor.name,
+                        content: content
+
+                    }
+
+                    return document
+
+                })
+
+            )
 
             uploadedDocuments.forEach(document => addDocument(document))
 

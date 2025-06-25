@@ -1680,10 +1680,18 @@ Patient details page will show the patient's details; medical history, allergies
         a. Check if there are any files selected, if not, exit the function
         b. Set `isUploading` to true
         c. Simulate the upload process by using `setTimeout` to delay the upload by 2 seconds 
-        c. Convert file objects to DocumentType objects
-        d. Add the converted documents to the patient's documents
-        e. Clear the selected files
-        f. Set `showUploadArea` to false
+        d. Convert file objects to `DocumentType` objects with the following properties:
+          - `_id`: unique identifier (generated with uuid)
+          - `name`: file name
+          - `type`: normalized MIME type (e.g., "application/pdf", "image/jpeg", etc.)
+          - `size`: file size in bytes
+          - `uploadDate`: current date
+          - `uploadedBy`: uploader's name (from context or dummy data)
+          - `content`: file content as a base64 string (from FileReader)
+
+        e. Add the converted documents to the patient's documents
+        f. Clear the selected files
+        g. Set `showUploadArea` to false
 
       3. Create a `canUpload` boolean state that will be used to disable the "Upload" button if there are no files selected and the upload process is not in progress
 

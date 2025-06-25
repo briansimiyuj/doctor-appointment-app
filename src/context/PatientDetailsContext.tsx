@@ -97,16 +97,17 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
 
       const addDocument = (document: DocumentType) =>{
       
-            const newDocument ={
+            setDocuments(prevDocuments => [...prevDocuments, document])
 
-                  id: uuid(),
-                  ...document
+            setDocuments(prevDocuments =>{
+                  
+                  const updatedDocuments = [...prevDocuments, document]
+                  
+                  localStorage.setItem(`documents-${patientID}`, JSON.stringify(updatedDocuments))
+                  
+                  return updatedDocuments
 
-            }
-
-            setDocuments(prevDocuments => [...prevDocuments, newDocument])
-
-            localStorage.setItem(`documents-${patientID}`, JSON.stringify([...documents, newDocument]))
+            })
       
       }
 
