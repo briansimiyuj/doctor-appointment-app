@@ -150,89 +150,81 @@ export const dummyDocuments: DocumentType[] =[
     {
         _id: "1",
         name: "Sample Radiology Report",
-        type: "pdf",
+        type: "application/pdf",
         uploadDate: new Date("2023-01-01"),
         uploadedBy: "Dr. Smith",
-        // @ts-ignore
-        file: sampleRadiologyReport,
-        size: 1024
+        size: 1024,
+        content: sampleRadiologyReport
     },
 
     {
         _id: "2",
         name: "Sample Prescription",
-        type: "pdf",
+        type: "application/pdf",
         uploadDate: new Date("2023-01-02"),
         uploadedBy: "Dr. Johnson",
-        // @ts-ignore
-        file: samplePrescription,
-        size: 2048
+        size: 2048,
+        content: samplePrescription
     },
 
     {
         _id: "3",
         name: "Sample Discharge Summary",
-        type: "pdf",
+        type: "application/pdf",
         uploadDate: new Date("2023-01-03"),
         uploadedBy: "Dr. Lee",
-        // @ts-ignore
-        file: sampleDischargeSummary,
-        size: 4096
+        size: 4096,
+        content: sampleDischargeSummary
     },
 
     {
         _id: "4",
         name: "Sample X-ray",
-        type: "jpg",
+        type: "image/jpeg",
         uploadDate: new Date("2023-01-04"),
         uploadedBy: "Dr. Brown",
-        // @ts-ignore
-        file: sampleXray,
-        size: 8192
+        size: 8192,
+        content: sampleXray
     },
     
     {
         _id: "5",
         name: "Sample Ultrasound",
-        type: "webp",
+        type: "image/webp",
         uploadDate: new Date("2023-01-05"),
         uploadedBy: "Dr. Green",
-        // @ts-ignore
-        file: sampleUltrasound,
-        size: 16384
+        size: 16384,
+        content: sampleUltrasound
     },
     
     {
         _id: "6",
         name: "Sample CT Scan",
-        type: "jpeg",
+        type: "image/jpeg",
         uploadDate: new Date("2023-01-06"),
         uploadedBy: "Dr. White",
-        // @ts-ignore
-        file: sampleCTScan,
-        size: 32768
+        size: 32768,
+        content: sampleCTScan
     },
     
     {
         _id: "7",
         name: "Medical Report",
-        type: "pdf",
+        type: "application/pdf",
         uploadDate: new Date("2023-01-07"),
         uploadedBy: "Dr. Black",
-        // @ts-ignore
-        file: medicalReport,
-        size: 65536
+        size: 65536,
+        content: medicalReport
     },
     
     {
         _id: "8",
         name: "Medical Certificate",
-        type: "pdf",
+        type: "application/pdf",
         uploadDate: new Date("2023-01-08"),
         uploadedBy: "Dr. Grey",
-        // @ts-ignore
-        file: medicalCertificate,
-        size: 131072
+        size: 131072,
+        content: medicalCertificate
     }
     
 ]
