@@ -1742,6 +1742,16 @@ Patient details page will show the patient's details; medical history, allergies
         a. Display a close button that calls the `closeViewModal` function when clicked
         b. Display a open in full view button that calls the `openInFullView` function when clicked
 
+    ### Document Full View Hook
+
+    Document full view hook will be used to display the document in full view
+
+      1. Create a `openInFullView` function that will navigate to the document full view page. It will take the document as a parameter.
+        a. Store the document in the local storage
+        b. Navigate to the document full view page in a new tab
+
+      2. Create a `getFullViewDocument` function that will get the document from the local storage and return it
+
 
 
 ### Settings Context
