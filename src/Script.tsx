@@ -22,6 +22,7 @@ import { ThemeProvider } from "./context/ThemeContext"
 import { SettingsProvider } from "./context/SettingsContext"
 import PatientDetailsPage from "./pages/PatientDetailsPage"
 import { PatientDetailsProvider } from "./context/PatientDetailsContext"
+import DocumentFullViewPage from "./pages/DocumentFullViewPage"
 
 const Script: React.FC = () =>{
 
@@ -84,6 +85,8 @@ const Script: React.FC = () =>{
                     <Route path="/login" element={<LoginPage/>}/>
 
                     <Route path="/schedule" element={<SchedulePage/>}/>
+
+                    <Route path="/document-viewer/:_id" element={<DocumentFullViewPage/>}/>
 
                     <Route path="/bookings" element={
               
