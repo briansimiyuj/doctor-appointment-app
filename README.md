@@ -1754,7 +1754,12 @@ Patient details page will show the patient's details; medical history, allergies
 
       2. Create a `getFullViewDocument` function that will get the document from the local storage and return it
 
+  ### Document Full View Page
 
+  Document full view page will be used to display the document in full view
+
+    1. Create a DocumentFullView page and mount it on the Script component and provide a route to it
+ 
 
 ### Settings Context
 
