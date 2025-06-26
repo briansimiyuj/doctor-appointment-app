@@ -1738,6 +1738,11 @@ Patient details page will show the patient's details; medical history, allergies
           a. If the file is an image, render an Image component with the image src as the document content
           b. If the file is a pdf, render a PDFViewer component with the pdf src as the document content
 
+      4. Create a ModalFooter component and mount it to the ViewDocumentModal component and pass document and `closeViewModal` as props
+        a. Display a close button that calls the `closeViewModal` function when clicked
+        b. Display a open in full view button that calls the `openInFullView` function when clicked
+
+
 
 ### Settings Context
 
