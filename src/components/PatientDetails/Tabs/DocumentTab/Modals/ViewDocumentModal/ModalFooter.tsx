@@ -1,5 +1,6 @@
 import { DocumentType } from "../../../../../../assets/types/DocumentType"
 import { FiMaximize2, FiX } from "react-icons/fi"
+import { useDocumentFullView } from "../../../../../../hooks/useDocumentFullView"
 
 interface ModalFooterProps{
 
@@ -9,6 +10,16 @@ interface ModalFooterProps{
 }
 
 const ModalFooter: React.FC<ModalFooterProps> = ({ document, onClose })=>{
+
+    const { openDocumentFullView } = useDocumentFullView()
+
+    const handleOpenFullView = () =>{
+
+        openDocumentFullView(document)
+
+        onClose()
+
+    }
 
     return(
 
@@ -27,6 +38,7 @@ const ModalFooter: React.FC<ModalFooterProps> = ({ document, onClose })=>{
 
             <button
                 className="px-4 py-2 bg-primary-btn hover:bg-primary-bg-darker text-white rounded-md transition-colors flex items-center gap-2 w-full sm:w-auto justify-center"
+                onClick={handleOpenFullView}
             >
 
                 <FiMaximize2 className="w-4 h-4"/>
