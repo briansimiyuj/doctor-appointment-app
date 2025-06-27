@@ -1759,6 +1759,19 @@ Patient details page will show the patient's details; medical history, allergies
   Document full view page will be used to display the document in full view
 
     1. Create a DocumentFullView page and mount it on the Script component and provide a route to it
+
+  ### Document From Storage Hook
+
+  Document from storage hook will be used to get the document from the local storage
+
+    1. Retrieve the document ID from the URL using the `useParams` hook.
+    2. Retrieve the `getFullViewDocument` function from the `useDocumentFullView` hook.
+    3. Create a state variable `document` and initialize it to `null`.
+    4. Use a `useEffect` to:
+      a. Set a timeout to retrieve the document from local storage using `getFullViewDocument`.
+      b. If the document does not exist or its `_id` does not match the URL param, navigate back.
+      c. If the document exists and matches, set the `document` state.
+      d. On cleanup, clear the timeout 
  
 
 ### Settings Context
