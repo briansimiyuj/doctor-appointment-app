@@ -1,4 +1,5 @@
 import ImageViewer from "../components/DocumentFullView/ImageViewer"
+import PDFViewer from "../components/DocumentFullView/PDFViewer"
 import { useDocumentFromStorage } from "../hooks/useDocumentFromStorage"
 
 const DocumentFullViewPage: React.FC = ()=>{
@@ -17,6 +18,15 @@ const DocumentFullViewPage: React.FC = ()=>{
 
                 )
 
+            }
+
+            {
+
+                document?.type.startsWith("application/pdf") &&(
+
+                    <PDFViewer document={document}/>
+
+                )
             }
 
         </div>
