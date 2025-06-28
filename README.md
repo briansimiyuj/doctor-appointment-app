@@ -1759,6 +1759,8 @@ Patient details page will show the patient's details; medical history, allergies
   Document full view page will be used to display the document in full view
 
     1. Create a DocumentFullView page and mount it on the Script component and provide a route to it
+    2. Retrieve `document` from the document from storage hook
+    3. If `document` is an image, create an ImageViewer component and pass the `document` as a prop and display it
 
   ### Document From Storage Hook
 
