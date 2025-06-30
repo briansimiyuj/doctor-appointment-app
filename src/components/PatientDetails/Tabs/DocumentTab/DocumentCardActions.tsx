@@ -1,6 +1,7 @@
 import { FiDownload, FiEye, FiTrash2 } from "react-icons/fi";
 import { DocumentType } from "../../../../assets/types/DocumentType";
 import { useDocumentsTab } from "../../../../context/DocumentsTabContext";
+import { useDownloadDocument } from "../../../../hooks/useDownloadDocument";
 
 interface DocumentCardActionsProps{
 
@@ -10,7 +11,8 @@ interface DocumentCardActionsProps{
 
 const DocumentCardActions: React.FC<DocumentCardActionsProps> = ({ document })=>{
 
-    const { openViewModal, openDeleteModal } = useDocumentsTab()
+    const { openViewModal, openDeleteModal } = useDocumentsTab(),
+          { downloadDocument } = useDownloadDocument()
 
     return(
 
@@ -29,6 +31,7 @@ const DocumentCardActions: React.FC<DocumentCardActionsProps> = ({ document })=>
 
             <button 
                 className="bg-gray-800 flex items-center gap-2 text-base px-4 py-2 rounded text-white justify-center"
+                onClick={() => downloadDocument(document)}
             >
                 
                 <FiDownload className="w-6 h-6"/>

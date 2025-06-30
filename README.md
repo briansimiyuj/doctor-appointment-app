@@ -1714,6 +1714,7 @@ Patient details page will show the patient's details; medical history, allergies
         a. Retrieve `openViewModal` and `openDeleteModal` functions from Document Tab Context
         b. Display buttons to download, view, and delete the document
         c. Attach event listeners to the buttons to call the respective functions when clicked: View button calls `openViewModal` function, Delete Button calls `openDeleteModal` function
+        d. Attach event listener to the download button to call the `downloadDocument` function from Download Document Hook 
 
     3. Create a ViewDocumentModal component and mount it to the Document Tab component if `showViewModal` is true from Document Tab Context
 
