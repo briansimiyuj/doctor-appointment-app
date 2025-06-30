@@ -1796,6 +1796,17 @@ Patient details page will show the patient's details; medical history, allergies
       3. Display a message to the user asking them to confirm the deletion of the document
       4. Create a Cancel button and set its `onClick` to `closeDeleteModal` function
 
+    ### Delete Document Hook
+
+    Delete document hook will be used to handle the deletion of the document
+
+      1. Retrieve the `removeDocument` function from the Patient Details Context
+      2. Retrieve the `closeDeleteModal` and `documentToDelete` from the Documents Tab Context
+      3. Create a `handleDeleteDocument` function
+      4. If there is no `documentToDelete`, exit the function.
+      5. Call `removeDocument` function with ID of the `documentToDelete` as an argument
+      6. Call `closeDeleteModal` function to close the modal
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page
