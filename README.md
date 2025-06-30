@@ -1793,6 +1793,8 @@ Patient details page will show the patient's details; medical history, allergies
 
       1. Retrieve the `closeDeleteModal` function from the Documents Tab Context
       2. Reuse the ModalHeader and pass title and `closeDeleteModal` function as props
+      3. Display a message to the user asking them to confirm the deletion of the document
+      4. Create a Cancel button and set its `onClick` to `closeDeleteModal` function
 
 ### Settings Context
 
