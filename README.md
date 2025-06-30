@@ -1775,7 +1775,15 @@ Patient details page will show the patient's details; medical history, allergies
       b. If the document does not exist or its `_id` does not match the URL param, navigate back.
       c. If the document exists and matches, set the `document` state.
       d. On cleanup, clear the timeout 
- 
+
+  ### Download Document Hook
+
+  Download document hook will be used to download the document from the server
+
+    1. Create a `downloadDocument` function that will download the document from the server. It will take the document as a parameter.
+      a. If the document does not have a `content` property, exit the function.
+      b. Create a link element and set its `href` to the `content` property of the document.
+      c. Set the `download` attribute to the `name` property 
 
 ### Settings Context
 
