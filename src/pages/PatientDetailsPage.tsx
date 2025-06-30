@@ -6,6 +6,8 @@ import { usePatientDetails } from "../context/PatientDetailsContext"
 import AppointmentTab from "../components/PatientDetails/Tabs/AppointmentTab/AppointmentTab"
 import DocumentTab from "../components/PatientDetails/Tabs/DocumentTab/DocumentTab"
 import { DocumentsTabContextProvider } from "../context/DocumentsTabContext"
+import { NotesTabProvider } from "../context/NotesTabContext"
+import NoteTab from "../components/PatientDetails/Tabs/NoteTabs/NoteTab"
 
 const PatientDetailsPage: React.FC = ()=>{
 
@@ -68,7 +70,11 @@ const PatientDetailsPage: React.FC = ()=>{
                             
                             <div className="p-4">
 
-                                <h3 className="text-lg font-medium mb-4">Notes</h3>
+                                <NotesTabProvider>
+
+                                    <NoteTab/>
+
+                                </NotesTabProvider>
 
                             </div>
 
