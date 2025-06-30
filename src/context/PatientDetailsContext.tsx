@@ -97,8 +97,6 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
 
       const addDocument = (document: DocumentType) =>{
       
-            setDocuments(prevDocuments => [...prevDocuments, document])
-
             setDocuments(prevDocuments =>{
                   
                   const updatedDocuments = [...prevDocuments, document]
@@ -108,7 +106,7 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
                   return updatedDocuments
 
             })
-      
+
       }
 
 
