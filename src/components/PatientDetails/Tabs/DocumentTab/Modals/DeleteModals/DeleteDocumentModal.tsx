@@ -1,9 +1,11 @@
 import { useDocumentsTab } from "../../../../../../context/DocumentsTabContext"
+import { useDeleteDocument } from "../../../../../../hooks/useDeleteDocument"
 import ModalHeader from "../../../AppointmentTab/Modals/ModalHeader"
 
 const DeleteDocumentModal: React.FC = ()=>{
 
-    const { closeDeleteModal, documentToDelete } = useDocumentsTab()
+    const { closeDeleteModal, documentToDelete } = useDocumentsTab(),
+          { handleDeleteDocument } = useDeleteDocument()
 
     return(
 
@@ -24,6 +26,7 @@ const DeleteDocumentModal: React.FC = ()=>{
 
                     <button
                         className="bg-red-500 hover:bg-red-600 text-white py-3 px-4 text-xl font-bold rounded-md transition-all duration-300 mr-2"
+                        onClick={handleDeleteDocument}
                     >Delete</button>
 
                 </div>

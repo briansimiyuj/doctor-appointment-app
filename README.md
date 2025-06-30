@@ -1795,6 +1795,8 @@ Patient details page will show the patient's details; medical history, allergies
       2. Reuse the ModalHeader and pass title and `closeDeleteModal` function as props
       3. Display a message to the user asking them to confirm the deletion of the document
       4. Create a Cancel button and set its `onClick` to `closeDeleteModal` function
+      5. Retrieve the `handleDeleteDocument` function from the Delete Document hook
+      6. Create a Delete button and set its `onClick` to `handleDeleteDocument` function
 
     ### Delete Document Hook
 
