@@ -3,11 +3,12 @@ import { usePatientDetails } from "../../../../context/PatientDetailsContext"
 import DocumentsList from "./DocumentsList"
 import DocumentsTabHeader from "./DocumentsTabHeader"
 import DocumentUploadArea from "./DocumentUploadArea"
+import DeleteDocumentModal from "./Modals/DeleteModals/DeleteDocumentModal"
 import ViewDocumentModal from "./Modals/ViewDocumentModal/ViewDocumentModal"
 
 const DocumentTab: React.FC = ()=>{
 
-    const { showUploadArea, showViewModal } = useDocumentsTab(),
+    const { showUploadArea, showViewModal, showDeleteModal } = useDocumentsTab(),
           { documents } = usePatientDetails()
 
     return(
@@ -37,6 +38,8 @@ const DocumentTab: React.FC = ()=>{
             }
 
             { showViewModal && <ViewDocumentModal/> }
+
+            { showDeleteModal && <DeleteDocumentModal/> }
 
         </div>
     )

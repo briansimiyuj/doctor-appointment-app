@@ -1718,73 +1718,81 @@ Patient details page will show the patient's details; medical history, allergies
 
     3. Create a ViewDocumentModal component and mount it to the Document Tab component if `showViewModal` is true from Document Tab Context
 
+      #### View Document Modal Component
 
-    #### View Document Modal Component
+      ViewDocumentModal component will be used to display the document in a modal window
 
-    ViewDocumentModal component will be used to display the document in a modal window
+        1. Retrieve `closeViewModal` function from Document Tab Context
+        2. Reuse the ModalHeader and pass title and `closeViewModal` function as props
+        3. Create a ModalBody component and mount it to the ViewDocumentModal component and pass the document as a prop
+          a. Create a DocumentInfo component and mount it to the ModalBody component and pass the document as a prop
+            i. Create a function to get file icon based on file type (image or document)
+            ii. Create a function to get file type based on file extension
+            iii. Display the document name, type, and icon
 
-      1. Retrieve `closeViewModal` function from Document Tab Context
-      2. Reuse the ModalHeader and pass title and `closeViewModal` function as props
-      3. Create a ModalBody component and mount it to the ViewDocumentModal component and pass the document as a prop
-        a. Create a DocumentInfo component and mount it to the ModalBody component and pass the document as a prop
-          i. Create a function to get file icon based on file type (image or document)
-          ii. Create a function to get file type based on file extension
-          iii. Display the document name, type, and icon
+          b. Create a FileViewer component and mount it to the ModalBody component and pass the document as a prop
 
-        b. Create a FileViewer component and mount it to the ModalBody component and pass the document as a prop
+          ##### File Viewer Component
 
-        ##### File Viewer Component
+          1. Create a `renderViewer` function that will render the appropriate viewer based on the file type.
+            a. If the file is an image, render an Image component with the image src as the document content
+            b. If the file is a pdf, render a PDFViewer component with the pdf src as the document content
 
-        1. Create a `renderViewer` function that will render the appropriate viewer based on the file type.
-          a. If the file is an image, render an Image component with the image src as the document content
-          b. If the file is a pdf, render a PDFViewer component with the pdf src as the document content
+        4. Create a ModalFooter component and mount it to the ViewDocumentModal component and pass document and `closeViewModal` as props
+          a. Retreive `openInFullView` function from the DocumentFullView hook
+          b. Display a close button that calls the `closeViewModal` function when clicked
+          c. Create `handleOpenInFullView` function that calls `openInFullView` and onClose functions
+          b. Display a open in full view button that calls the `handleOpenInFullView` function when clicked
 
-      4. Create a ModalFooter component and mount it to the ViewDocumentModal component and pass document and `closeViewModal` as props
-        a. Retreive `openInFullView` function from the DocumentFullView hook
-        b. Display a close button that calls the `closeViewModal` function when clicked
-        c. Create `handleOpenInFullView` function that calls `openInFullView` and onClose functions
-        b. Display a open in full view button that calls the `handleOpenInFullView` function when clicked
+      ### Document Full View Hook
 
-    ### Document Full View Hook
+      Document full view hook will be used to display the document in full view
 
-    Document full view hook will be used to display the document in full view
+        1. Create a `openInFullView` function that will navigate to the document full view page. It will take the document as a parameter.
+          a. Store the document in the local storage
+          b. Navigate to the document full view page in a new tab
 
-      1. Create a `openInFullView` function that will navigate to the document full view page. It will take the document as a parameter.
-        a. Store the document in the local storage
-        b. Navigate to the document full view page in a new tab
+        2. Create a `getFullViewDocument` function that will get the document from the local storage and return it
 
-      2. Create a `getFullViewDocument` function that will get the document from the local storage and return it
+      ### Document Full View Page
 
-  ### Document Full View Page
+      Document full view page will be used to display the document in full view
 
-  Document full view page will be used to display the document in full view
+        1. Create a DocumentFullView page and mount it on the Script component and provide a route to it
+        2. Retrieve `document` from the document from storage hook
+        3. If `document` is an image, create an ImageViewer component and pass the `document` as a prop and display it
+        4. If `document` is a pdf, create a PDFViewer component and pass the `document` as a prop and display it.
 
-    1. Create a DocumentFullView page and mount it on the Script component and provide a route to it
-    2. Retrieve `document` from the document from storage hook
-    3. If `document` is an image, create an ImageViewer component and pass the `document` as a prop and display it
-    4. If `document` is a pdf, create a PDFViewer component and pass the `document` as a prop and display it.
+      ### Document From Storage Hook
 
-  ### Document From Storage Hook
+      Document from storage hook will be used to get the document from the local storage
 
-  Document from storage hook will be used to get the document from the local storage
+        1. Retrieve the document ID from the URL using the `useParams` hook.
+        2. Retrieve the `getFullViewDocument` function from the `useDocumentFullView` hook.
+        3. Create a state variable `document` and initialize it to `null`.
+        4. Use a `useEffect` to:
+          a. Set a timeout to retrieve the document from local storage using `getFullViewDocument`.
+          b. If the document does not exist or its `_id` does not match the URL param, navigate back.
+          c. If the document exists and matches, set the `document` state.
+          d. On cleanup, clear the timeout 
 
-    1. Retrieve the document ID from the URL using the `useParams` hook.
-    2. Retrieve the `getFullViewDocument` function from the `useDocumentFullView` hook.
-    3. Create a state variable `document` and initialize it to `null`.
-    4. Use a `useEffect` to:
-      a. Set a timeout to retrieve the document from local storage using `getFullViewDocument`.
-      b. If the document does not exist or its `_id` does not match the URL param, navigate back.
-      c. If the document exists and matches, set the `document` state.
-      d. On cleanup, clear the timeout 
+      ### Download Document Hook
 
-  ### Download Document Hook
+      Download document hook will be used to download the document from the server
 
-  Download document hook will be used to download the document from the server
+        1. Create a `downloadDocument` function that will download the document from the server. It will take the document as a parameter.
+          a. If the document does not have a `content` property, exit the function.
+          b. Create a link element and set its `href` to the `content` property of the document.
+          c. Set the `download` attribute to the `name` property 
 
-    1. Create a `downloadDocument` function that will download the document from the server. It will take the document as a parameter.
-      a. If the document does not have a `content` property, exit the function.
-      b. Create a link element and set its `href` to the `content` property of the document.
-      c. Set the `download` attribute to the `name` property 
+    4. Create a DeleteDocumentModal component and mount it to the Documen Tab component if `showDeleteModal` is true.'
+
+    #### Delete Document Modal
+
+    Delete document modal will use to confirm the deletion of the document
+
+      1. Retrieve the `closeDeleteModal` function from the Documents Tab Context
+      2. Reuse the ModalHeader and pass title and `closeDeleteModal` function as props
 
 ### Settings Context
 
