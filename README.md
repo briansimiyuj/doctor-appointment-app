@@ -1809,6 +1809,36 @@ Patient details page will show the patient's details; medical history, allergies
       5. Call `removeDocument` function with ID of the `documentToDelete` as an argument
       6. Call `closeDeleteModal` function to close the modal
 
+  ### Notes Tab Context
+
+  Notes tab context will be used to store the user's notes and provide it to the Notes tab component
+
+    1. Create the following state variables:
+      a. `showAddNoteModal` and initialize it to `false` 
+      b. `showViewNoteModal` and initialize it to `false`
+      c. `showDeleteNoteModal` and initialize it to `false`
+      d. `selectedNote` and initialize it to `null`
+
+    2. Create `openAddNoteModal` function
+      a. Set `showAddNoteModal` to `true`
+      b. Set `selectedNote` to `null`
+
+    3. Create `openViewNoteModal` function which takes a note as an argument
+      a. Set `showViewNoteModal` to `true`
+      b. Set `selectedNote` to the note passed in as an argument
+
+    4. Create `openDeleteNoteModal` function which takes a note as an argument
+      a. Set `showDeleteNoteModal` to `true`
+      b. Set `selectedNote` to the note passed in as an argument
+
+    5. Create `closeModals` function 
+       a. Set `showAddNoteModal` to `false`
+        b. Set `showViewNoteModal` to `false`
+        c. Set `showDeleteNoteModal` to `false`
+        d. Set `selectedNote` to `null`
+    
+
+
 ### Settings Context
 
 Settings context will be used to store the user's settings and provide it to the Settings page
