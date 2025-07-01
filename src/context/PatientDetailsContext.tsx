@@ -32,24 +32,20 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
       }),
       { appointments } = useContext(AppointmentsContext),
       { appointedPatients } = useContext(BookingContext),
-      [notes, setNotes] = useState<Array<{
+      [notes, setNotes] = useState<NoteType[]>(() =>{
 
-            id: string
-            title: string
-            content: string
-            date: Date
-            doctorID: string
-            doctorName: string
+            const savedNotes = localStorage.getItem(`notes-${patientID}`)
 
-      }>>([]),
+            return savedNotes ? JSON.parse(savedNotes) : []
+
+      }),
       [documents, setDocuments] = useState<DocumentType[]>(() =>{
 
             const savedDocuments = localStorage.getItem(`documents-${patientID}`)
 
             return savedDocuments ? JSON.parse(savedDocuments) : []
             
-      }
-      )
+      })
 
 
       const fetchPatientAppointments = (patientID: string) =>{
@@ -122,18 +118,21 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
 
 
 
-      const addNote = (note: NoteType) =>{
+      const addNote = (note: Omit<NoteType, "_id">) =>{
     
             const newNote ={
     
-                id: uuid(),
-                ...note
+                _id: uuid(),
+                ...note,
+                date: new Date()
     
             }
     
-            setNotes(prevNotes => [...prevNotes, newNote])
+            const updatedNotes = [newNote, ...notes]
+
+            setNotes(updatedNotes)
     
-            localStorage.setItem(`note-${patientID}`, JSON.stringify([notes, newNote]))
+            localStorage.setItem(`notes-${patientID}`, JSON.stringify(updatedNotes))
         
       }
 
@@ -246,7 +245,7 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             patientAppointments,
             setPatientAppointments,
             fetchPatientAppointments,
-            notes: [],
+            notes,
             addNote,
             removeNote,
             addMedicalCondition: () => {},

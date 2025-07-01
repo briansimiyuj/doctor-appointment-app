@@ -2,6 +2,7 @@ import { AppointedPatientType } from "../types/AppointedPatientType"
 import { AppointmentType } from "../types/AppointmentType"
 import { DoctorType } from "../types/DoctorType"
 import { DocumentType } from "../types/DocumentType"
+import { NoteType } from "../types/NoteType"
 
 export interface PatientDetailsContextProps{
 
@@ -24,17 +25,8 @@ export interface PatientDetailsContextProps{
     removeSurgery: (index: number) => void
 
     // Notes management 
-    notes: Array<{
-
-        id: string
-        title: string
-        content: string
-        date: Date
-        doctorID: string
-        doctorName: string
-
-    }>
-    addNote: (note: {  title: string, content: string, date: Date, doctorID: string, doctorName: string }) => void
+    notes: NoteType[]
+    addNote: (note: NoteType) => void
     removeNote: (index: number) => void
 
     // Documents management
