@@ -1846,6 +1846,7 @@ Patient details page will show the patient's details; medical history, allergies
     3. Create a NoteTabHeader component and mount it on the Notes Tab component.
       a. Display a title and number of notes
       b. Create a button to add a new note
+        i. On click, call `openAddNoteModal` function from the Notes Tab Context
 
 
 

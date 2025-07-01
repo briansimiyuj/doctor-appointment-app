@@ -1,9 +1,11 @@
 import { FiPlus } from "react-icons/fi"
 import { usePatientDetails } from "../../../../context/PatientDetailsContext"
+import { useNotesTabContext } from "../../../../context/NotesTabContext"
 
 const NoteTabHeader: React.FC = ()=>{
 
-    const { notes } = usePatientDetails()
+    const { notes } = usePatientDetails(),
+          { openAddNoteModal } = useNotesTabContext()
 
     return(
 
@@ -25,6 +27,7 @@ const NoteTabHeader: React.FC = ()=>{
 
                 <button 
                     className="bg-primary-bg flex items-center gap-2 text-secondary-bg px-4 py-2 rounded-md hover:bg-blue-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
+                    onClick={openAddNoteModal}
                 >
 
                     <FiPlus className="w-4 h-4"/>
