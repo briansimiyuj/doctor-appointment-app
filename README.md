@@ -1843,6 +1843,9 @@ Patient details page will show the patient's details; medical history, allergies
 
     1. Set the active tab to "Notes" by default on the Patient Details Context
     2. Create a component for the Notes Tab and mount it on the Tab Content component with id of "notes". Wrap it with the Notes Tab Context Provider
+    3. Create a NoteTabHeader component and mount it on the Notes Tab component.
+      a. Display a title and number of notes
+      b. Create a button to add a new note
 
 
 

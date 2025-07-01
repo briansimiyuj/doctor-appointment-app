@@ -1,8 +1,14 @@
+import NoteTabHeader from "./NoteTabHeader"
+
 const NoteTab: React.FC = ()=>{
 
     return(
 
-        <h1>NoteTab</h1>
+        <>
+        
+            <NoteTabHeader/>
+        
+        </>
 
     )
 
