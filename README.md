@@ -1862,6 +1862,11 @@ Patient details page will show the patient's details; medical history, allergies
         a. Create a form with a title input and a textarea for the note content
         b. Make it a controlled component and use the `title` and `content` state variables from the Notes Tab Context
 
+    4. Create a ModalFooter component and mount it on the AddNoteModal component
+        a. Create a button to submit the note
+         i. Make it disabled if the title or content is empty
+        b. Create a button to close the modal
+
 
 
 ### Settings Context

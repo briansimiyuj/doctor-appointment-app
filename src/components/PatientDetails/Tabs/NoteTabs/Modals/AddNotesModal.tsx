@@ -1,6 +1,7 @@
 import { useNotesTabContext } from "../../../../../context/NotesTabContext"
 import ModalHeader from "../../AppointmentTab/Modals/ModalHeader"
 import ModalBody from "./ModalBody"
+import ModalFooter from "./ModalFooter"
 
 const AddNotesModal: React.FC = ()=>{
 
@@ -15,6 +16,8 @@ const AddNotesModal: React.FC = ()=>{
                 <ModalHeader title="Add Notes" onClose={closeModals}/>
 
                 <ModalBody/>
+
+                <ModalFooter/>
 
             </div>
 
