@@ -17,7 +17,9 @@ export const NotesTabProvider: React.FC<NotesTabProviderProps> = ({ children }) 
     ),
           [showDeleteNoteModal, setShowDeleteNoteModal] = useState<boolean>(false),
           [showViewNoteModal, setShowViewNoteModal] = useState<boolean>(false),
-          [selectedNote, setSelectedNote] = useState<NoteType | null>(null)
+          [selectedNote, setSelectedNote] = useState<NoteType | null>(null),
+          [title, setTitle] = useState<string>(''),         
+          [content, setContent] = useState<string>('')
 
     const openAddNoteModal = () =>{
     
@@ -64,7 +66,11 @@ export const NotesTabProvider: React.FC<NotesTabProviderProps> = ({ children }) 
         openAddNoteModal,
         openViewNoteModal,
         openDeleteNoteModal,
-        closeModals
+        closeModals,
+        title,
+        setTitle,
+        content,
+        setContent
 
     }
 

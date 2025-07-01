@@ -1818,6 +1818,8 @@ Patient details page will show the patient's details; medical history, allergies
       b. `showViewNoteModal` and initialize it to `false`
       c. `showDeleteNoteModal` and initialize it to `false`
       d. `selectedNote` and initialize it to `null`
+      e. `title` and initialize it to an empty string
+      f. `content` and initialize it to an empty string
 
     2. Create `openAddNoteModal` function
       a. Set `showAddNoteModal` to `true`
