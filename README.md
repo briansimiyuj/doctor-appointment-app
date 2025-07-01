@@ -1848,6 +1848,15 @@ Patient details page will show the patient's details; medical history, allergies
       b. Create a button to add a new note
         i. On click, call `openAddNoteModal` function from the Notes Tab Context
 
+    4. Create a AddNoteModal component and mount it on the Notes Tab component when `showAddNoteModal` from the Notes Tab Context is `true`
+
+  ### Add Note Modal Component
+
+  Add note modal component will be used to add a new note to the user's notes
+
+    1. Retrieve the `closeAddNoteModal` function from the Notes Tab Context
+    2. Reuse ModalHeader and pass title and `closeAddNoteModal` function
+
 
 
 ### Settings Context
