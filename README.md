@@ -1858,6 +1858,9 @@ Patient details page will show the patient's details; medical history, allergies
 
     1. Retrieve the `closeAddNoteModal` function from the Notes Tab Context
     2. Reuse ModalHeader and pass title and `closeAddNoteModal` function
+    3. Create a ModalBody component and mount it on the AddNoteModal component
+        a. Create a form with a title input and a textarea for the note content
+        b. Make it a controlled component and use the `title` and `content` state variables from the Notes Tab Context
 
 
 
