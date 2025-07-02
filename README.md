@@ -1884,6 +1884,15 @@ Patient details page will show the patient's details; medical history, allergies
 
     5. Create a NotesList component and mount it on the Notes Tab component if `notes` state variable is not empty. If `notes` state variable is empty, display a message saying "No notes available for this patient."
 
+    #### Notes List Component
+
+      Notes List component will be used to display the list of notes for a patient
+
+        1. Loop through the `notes` state from Patient Details Context and create a NoteItem component for each note
+        2. NoteItem component will display the title, content, doctor name and date of the note
+            
+          b. Display the truncated content of the note if it is longer than 120 characters
+
 
 
 ### Settings Context
