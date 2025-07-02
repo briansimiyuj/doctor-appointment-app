@@ -1905,6 +1905,7 @@ Patient details page will show the patient's details; medical history, allergies
       ViewNoteModal component will be used to display the full content of a note in a modal
 
         1. Reuse ModalHeader and pass title and `closeViewNote` function from Notes Tab Context as props
+        2. Create a ModalBody component and mount it on the ViewNoteModal component. It will display the full content of the note
 
 
 ### Settings Context
