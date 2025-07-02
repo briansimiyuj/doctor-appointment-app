@@ -1890,6 +1890,10 @@ Patient details page will show the patient's details; medical history, allergies
 
         1. Loop through the `notes` state from Patient Details Context and create a NoteItem component for each note
         2. NoteItem component will display the title, content, doctor name and date of the note
+          a. Create NoteItemAction component to display the action buttons for each note
+            i. Add a button to edit the note
+            ii. Add a button to delete the note
+            iii. Add a button to view the note in a modal
             
           b. Display the truncated content of the note if it is longer than 120 characters
 

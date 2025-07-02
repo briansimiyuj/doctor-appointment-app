@@ -1,4 +1,5 @@
 import { NoteType } from "../../../../assets/types/NoteType"
+import NoteItemAction from "./NoteItemAction"
 
 interface NoteItemProps{
 
@@ -23,8 +24,10 @@ const NoteItem: React.FC<NoteItemProps> = ({ note })=>{
                 <span>By: {note.doctorName}</span> ·{" "}
 
                 <span>{new Date(note.date).toLocaleDateString()}</span>
-                
+
             </div>
+            
+            <NoteItemAction note={note}/>
 
         </li>
 
