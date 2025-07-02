@@ -1867,6 +1867,19 @@ Patient details page will show the patient's details; medical history, allergies
          i. Make it disabled if the title or content is empty
         b. Create a button to close the modal
 
+  ### Add General Notes Hook
+
+  Add general notes hook will be used to update the `notes` state variable in the Notes Tab Context and save it to the database or local storage
+
+    1. Retrieve `addNote` function from Patient Details Context
+    2. Retrieve `title`, `content` states and `closeModals` function from Notes Tab Context
+    3. Create `handleAddNote` function to add a new note
+        a. If the title and content are empty, exit the function
+        b. Create a new note object with the title, content, _id, date, doctorID and doctorName
+        c. Call `addNote` function from Patient Details Context with the new note object
+        d. Reset the title and content states
+        e. Call `closeModals` function from Notes Tab Context
+
 
 
 ### Settings Context
