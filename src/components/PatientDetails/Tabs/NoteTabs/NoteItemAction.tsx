@@ -10,7 +10,7 @@ interface NoteCardItemActionProps{
 
 const NoteItemAction: React.FC<NoteCardItemActionProps> = ({ note })=>{
 
-    const { openViewNoteModal } = useNotesTabContext()
+    const { openViewNoteModal, openDeleteNoteModal } = useNotesTabContext()
 
     return(
 
@@ -35,7 +35,10 @@ const NoteItemAction: React.FC<NoteCardItemActionProps> = ({ note })=>{
 
             </button>
 
-            <button className="bg-red-500 hover:bg-red-600 text-white flex items-center gap-2 justify-center py-2 px-4 rounded-md transition-all duration-300 w-full sm:w-auto mt-2 sm:mt-0">
+            <button 
+                className="bg-red-500 hover:bg-red-600 text-white flex items-center gap-2 justify-center py-2 px-4 rounded-md transition-all duration-300 w-full sm:w-auto mt-2 sm:mt-0"
+                onClick={() => openDeleteNoteModal(note)}
+            >
 
                 <FiTrash2 className="w-4 h-4"/>
 

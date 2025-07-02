@@ -1893,6 +1893,7 @@ Patient details page will show the patient's details; medical history, allergies
           a. Create NoteItemAction component to display the action buttons for each note
             i. Add a button to edit the note
             ii. Add a button to delete the note
+              - Attach `openDeleteNoteModal` function from Notes Tab Context to the button click event
             iii. Add a button to view the note in a modal
               - Attach `openViewNoteModal` function from Notes Tab Context to the button click event
             
@@ -1906,6 +1907,14 @@ Patient details page will show the patient's details; medical history, allergies
 
         1. Reuse ModalHeader and pass title and `closeViewNote` function from Notes Tab Context as props
         2. Create a ModalBody component and mount it on the ViewNoteModal component. It will display the full content of the note
+
+    7. Create a DeleteNoteModal component and mount it on Notes Tab component when `showDeleteNoteModal` from the Notes Tab Context is `true`
+
+    #### DeleteNoteModal component
+
+      DeleteNoteModal component will be used to delete a note
+
+        1. Reuse ModalHeader and pass title and `closeDeleteNote` function from Notes Tab Context as props
 
 
 ### Settings Context
