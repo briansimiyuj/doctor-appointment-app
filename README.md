@@ -1852,35 +1852,37 @@ Patient details page will show the patient's details; medical history, allergies
 
     4. Create a AddNoteModal component and mount it on the Notes Tab component when `showAddNoteModal` from the Notes Tab Context is `true`
 
-  ### Add Note Modal Component
+      ### Add Note Modal Component
 
-  Add note modal component will be used to add a new note to the user's notes
+      Add note modal component will be used to add a new note to the user's notes
 
-    1. Retrieve the `closeAddNoteModal` function from the Notes Tab Context
-    2. Reuse ModalHeader and pass title and `closeAddNoteModal` function
-    3. Create a ModalBody component and mount it on the AddNoteModal component
-        a. Create a form with a title input and a textarea for the note content
-        b. Make it a controlled component and use the `title` and `content` state variables from the Notes Tab Context
+        1. Retrieve the `closeAddNoteModal` function from the Notes Tab Context
+        2. Reuse ModalHeader and pass title and `closeAddNoteModal` function
+        3. Create a ModalBody component and mount it on the AddNoteModal component
+            a. Create a form with a title input and a textarea for the note content
+            b. Make it a controlled component and use the `title` and `content` state variables from the Notes Tab Context
 
-    4. Create a ModalFooter component and mount it on the AddNoteModal component
-        a. Create a button to submit the note
-         i. Make it disabled if the title or content is empty
-         ii. Call `handleAddNote` function from AddGeneralNotes hook when clicked
-        b. Create a button to close the modal
-        i. Call `closeAddNoteModal` function from Notes Tab Context when clicked
+        4. Create a ModalFooter component and mount it on the AddNoteModal component
+            a. Create a button to submit the note
+            i. Make it disabled if the title or content is empty
+            ii. Call `handleAddNote` function from AddGeneralNotes hook when clicked
+            b. Create a button to close the modal
+            i. Call `closeAddNoteModal` function from Notes Tab Context when clicked
 
-  ### Add General Notes Hook
+      ### Add General Notes Hook
 
-  Add general notes hook will be used to update the `notes` state variable in the Notes Tab Context and save it to the database or local storage
+      Add general notes hook will be used to update the `notes` state variable in the Notes Tab Context and save it to the database or local storage
 
-    1. Retrieve `addNote` function from Patient Details Context
-    2. Retrieve `title`, `content` states and `closeModals` function from Notes Tab Context
-    3. Create `handleAddNote` function to add a new note
-        a. If the title and content are empty, exit the function
-        b. Create a new note object with the title, content, _id, date, doctorID and doctorName
-        c. Call `addNote` function from Patient Details Context with the new note object
-        d. Reset the title and content states
-        e. Call `closeModals` function from Notes Tab Context
+        1. Retrieve `addNote` function from Patient Details Context
+        2. Retrieve `title`, `content` states and `closeModals` function from Notes Tab Context
+        3. Create `handleAddNote` function to add a new note
+            a. If the title and content are empty, exit the function
+            b. Create a new note object with the title, content, _id, date, doctorID and doctorName
+            c. Call `addNote` function from Patient Details Context with the new note object
+            d. Reset the title and content states
+            e. Call `closeModals` function from Notes Tab Context
+
+    5. Create a NotesList component and mount it on the Notes Tab component if `notes` state variable is not empty. If `notes` state variable is empty, display a message saying "No notes available for this patient."
 
 
 

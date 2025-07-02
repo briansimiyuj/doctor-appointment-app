@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid"
 
 export const useAddGeneralNotes = () =>{
 
-    const { addNote, notes } = usePatientDetails(),
+    const { addNote } = usePatientDetails(),
           { title, setTitle, content, setContent, closeModals } = useNotesTabContext(),
           uuid = uuidv4()   
 
@@ -38,8 +38,6 @@ export const useAddGeneralNotes = () =>{
         closeModals()
 
         console.log('New note added:', newNote)
-
-        console.log('All notes:', notes)
 
     }
 
