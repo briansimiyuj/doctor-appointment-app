@@ -1919,6 +1919,17 @@ Patient details page will show the patient's details; medical history, allergies
         3. Create a cancel button and set its onClick event to `closeDeleteNote` function from Notes Tab Context
         4. Create a confirm delete button
 
+    #### Delete Note Hook
+
+      Delete Note Hook will be used to delete a note from the database/local storage and update the `notes` state variable
+
+        1. Retrieve `selectedNote` and `closeModal` from the Notes Tab Context
+        2. Retrieve `removeNote` from the Patient Details Context
+        3. Create a function `handleDeleteNote` 
+          a. If `selectedNote` is defined, 
+            - Call `removeNote` function Context with `selectedNote` as argument
+            - Call `closeModal` function 
+
 
 ### Settings Context
 
