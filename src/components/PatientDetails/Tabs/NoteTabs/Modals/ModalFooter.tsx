@@ -1,8 +1,10 @@
 import { useNotesTabContext } from "../../../../../context/NotesTabContext"
+import { useAddGeneralNotes } from "../../../../../hooks/useAddGeneralNotes"
 
 const ModalFooter: React.FC = ()=>{
 
-    const { closeModals, title, content } = useNotesTabContext()
+    const { closeModals } = useNotesTabContext(),
+          { canSave, handleAddNote } = useAddGeneralNotes()
 
     return(
 
@@ -15,8 +17,9 @@ const ModalFooter: React.FC = ()=>{
 
             <button 
                 type="submit" 
-                disabled={!title && !content}
-                className={`bg-primary-btn text-secondary-bg py-2 px-4 rounded-md transition-all duration-300 w-full sm:w-auto ${title && content ? "hover:bg-blue-600" : "cursor-not-allowed opacity-50"}`}
+                disabled={!canSave}
+                className={`bg-primary-btn text-secondary-bg py-2 px-4 rounded-md transition-all duration-300 w-full sm:w-auto ${canSave ? "hover:bg-blue-600" : "cursor-not-allowed opacity-50"}`}
+                onClick={handleAddNote}
             >Save Note</button>
 
         </div>

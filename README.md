@@ -1865,7 +1865,9 @@ Patient details page will show the patient's details; medical history, allergies
     4. Create a ModalFooter component and mount it on the AddNoteModal component
         a. Create a button to submit the note
          i. Make it disabled if the title or content is empty
+         ii. Call `handleAddNote` function from AddGeneralNotes hook when clicked
         b. Create a button to close the modal
+        i. Call `closeAddNoteModal` function from Notes Tab Context when clicked
 
   ### Add General Notes Hook
 
