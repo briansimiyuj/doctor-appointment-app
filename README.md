@@ -1894,9 +1894,17 @@ Patient details page will show the patient's details; medical history, allergies
             i. Add a button to edit the note
             ii. Add a button to delete the note
             iii. Add a button to view the note in a modal
+              - Attach `openViewNoteModal` function from Notes Tab Context to the button click event
             
           b. Display the truncated content of the note if it is longer than 120 characters
 
+    6. Create a ViewNoteModal component and mount it on Notes Tab component when `showViewNoteModal` from the Notes Tab Context is `true`
+
+    #### ViewNoteModal component
+
+      ViewNoteModal component will be used to display the full content of a note in a modal
+
+        1. Reuse ModalHeader and pass title and `closeViewNote` function from Notes Tab Context as props
 
 
 ### Settings Context

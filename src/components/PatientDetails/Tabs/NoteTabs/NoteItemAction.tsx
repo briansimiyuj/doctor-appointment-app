@@ -1,5 +1,6 @@
 import { FiEdit, FiEye, FiTrash2 } from "react-icons/fi"
 import { NoteType } from "../../../../assets/types/NoteType"
+import { useNotesTabContext } from "../../../../context/NotesTabContext"
 
 interface NoteCardItemActionProps{
 
@@ -9,11 +10,16 @@ interface NoteCardItemActionProps{
 
 const NoteItemAction: React.FC<NoteCardItemActionProps> = ({ note })=>{
 
+    const { openViewNoteModal } = useNotesTabContext()
+
     return(
 
         <div className="flex flex-col mt-6 gap-2">
 
-            <button className="bg-green-600 text-white py-2 px-4 rounded-md transition-all duration-300 flex items-center gap-2 justify-center w-full sm:w-auto mt-2 sm:mt-0">
+            <button 
+                className="bg-green-600 text-white py-2 px-4 rounded-md transition-all duration-300 flex items-center gap-2 justify-center w-full sm:w-auto mt-2 sm:mt-0"
+                onClick={() => openViewNoteModal(note)}
+            >
 
                 <FiEye className="w-4 h-4"/>
 
