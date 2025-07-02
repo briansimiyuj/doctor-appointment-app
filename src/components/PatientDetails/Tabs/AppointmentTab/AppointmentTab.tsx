@@ -12,6 +12,7 @@ const AppointmentTab: React.FC = ()=>{
 
             <AppointmentTabHeader/>
 
+              {/* // FIXME: add a state to show a message when there are no appointments */}
 
             {
 
