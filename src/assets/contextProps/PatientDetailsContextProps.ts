@@ -27,7 +27,7 @@ export interface PatientDetailsContextProps{
     // Notes management 
     notes: NoteType[]
     addNote: (note: NoteType) => void
-    removeNote: (index: number) => void
+    removeNote: (id: string) => void
 
     // Documents management
     documents: DocumentType[]

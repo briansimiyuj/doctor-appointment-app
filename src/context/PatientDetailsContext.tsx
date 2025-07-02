@@ -136,15 +136,13 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
         
       }
 
-      const removeNote = (index: number) =>{
+      const removeNote = (id: string) =>{
     
-            const updatedNotes = [...notes]
-     
-            updatedNotes.splice(index, 1)
+            const updatedNotes = notes.filter(note => note._id !== id)
      
             setNotes(updatedNotes)
      
-            localStorage.setItem(`note-${patientID}`, JSON.stringify(updatedNotes))
+            localStorage.setItem(`notes-${patientID}`, JSON.stringify(updatedNotes))
          
       }
 
