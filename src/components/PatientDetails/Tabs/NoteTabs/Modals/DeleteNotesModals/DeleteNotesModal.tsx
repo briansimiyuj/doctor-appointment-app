@@ -1,9 +1,11 @@
 import { useNotesTabContext } from "../../../../../../context/NotesTabContext"
+import { useDeleteNote } from "../../../../../../hooks/useDeleteNote"
 import ModalHeader from "../../../AppointmentTab/Modals/ModalHeader"
 
 const DeleteNotesModal: React.FC = ()=>{
 
-    const { closeModals, selectedNote } = useNotesTabContext()
+    const { closeModals, selectedNote } = useNotesTabContext(),
+          { handleDeleteNote } = useDeleteNote()
 
     return(
 
@@ -20,7 +22,7 @@ const DeleteNotesModal: React.FC = ()=>{
 
                     <button className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-md transition-all duration-300" onClick={closeModals}>Cancel</button>
 
-                    <button className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600">Confirm Delete</button>
+                    <button className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600" onClick={handleDeleteNote}>Confirm Delete</button>
 
                 </div>
 

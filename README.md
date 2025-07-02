@@ -1917,7 +1917,7 @@ Patient details page will show the patient's details; medical history, allergies
         1. Reuse ModalHeader and pass title and `closeDeleteNote` function from Notes Tab Context as props
         2. Display a message asking the user to confirm the deletion of the note
         3. Create a cancel button and set its onClick event to `closeDeleteNote` function from Notes Tab Context
-        4. Create a confirm delete button
+        4. Create a confirm delete button and set its onClick event to `handleDeleteNote` function from Delete Note Hook
 
     #### Delete Note Hook
 
