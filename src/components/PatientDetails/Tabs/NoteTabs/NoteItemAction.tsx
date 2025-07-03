@@ -10,7 +10,7 @@ interface NoteCardItemActionProps{
 
 const NoteItemAction: React.FC<NoteCardItemActionProps> = ({ note })=>{
 
-    const { openViewNoteModal, openDeleteNoteModal } = useNotesTabContext()
+    const { openViewNoteModal, openDeleteNoteModal, openEditNoteModal } = useNotesTabContext()
 
     return(
 
@@ -27,7 +27,10 @@ const NoteItemAction: React.FC<NoteCardItemActionProps> = ({ note })=>{
 
             </button>
 
-            <button className="bg-primary-btn hover:bg-blue-600 text-white py-2 px-4 rounded-md transition duration-300 flex items-center gap-2 justify-center w-full sm:w-auto">
+            <button 
+                className="bg-primary-btn hover:bg-blue-600 text-white py-2 px-4 rounded-md transition duration-300 flex items-center gap-2 justify-center w-full sm:w-auto"
+                onClick={() => openEditNoteModal(note)}
+            >
 
                 <FiEdit className="w-4 h-4"/>
 

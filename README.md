@@ -1903,6 +1903,7 @@ Patient details page will show the patient's details; medical history, allergies
         2. NoteItem component will display the title, content, doctor name and date of the note
           a. Create NoteItemAction component to display the action buttons for each note
             i. Add a button to edit the note
+             - Attach `openEditNoteModal` function from Notes Tab Context to the button click event
             ii. Add a button to delete the note
               - Attach `openDeleteNoteModal` function from Notes Tab Context to the button click event
             iii. Add a button to view the note in a modal
