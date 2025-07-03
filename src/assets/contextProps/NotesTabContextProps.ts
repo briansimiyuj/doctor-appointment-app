@@ -9,6 +9,7 @@ export interface NotesTabContextProps{
     openAddNoteModal: () => void
     openViewNoteModal: (note: NoteType) => void
     openDeleteNoteModal: (note: NoteType) => void
+    openEditNoteModal: (note: NoteType) => void
     closeModals: () => void
     title: string
     setTitle: (title: string) => void

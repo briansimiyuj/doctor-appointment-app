@@ -12,7 +12,9 @@ const NotesTabContext = createContext<NotesTabContextProps | undefined>(undefine
 
 export const NotesTabProvider: React.FC<NotesTabProviderProps> = ({ children }) =>{
     
-    const [showAddNoteModal, setShowAddNoteModal] = useState<boolean>(false),
+    const [showAddNoteModal, setShowAddNoteModal] = useState<boolean>(
+        import .meta.env.VITE_DEV_MODE === "true" ? true : false
+    ),
           [showDeleteNoteModal, setShowDeleteNoteModal] = useState<boolean>(false),
           [showViewNoteModal, setShowViewNoteModal] = useState<boolean>(false),
           [selectedNote, setSelectedNote] = useState<NoteType | null>(null),
@@ -55,6 +57,18 @@ export const NotesTabProvider: React.FC<NotesTabProviderProps> = ({ children }) 
 
     }
 
+    const openEditNoteModal = (note: NoteType) =>{
+
+        setSelectedNote(note)
+
+        setTitle(note.title)
+
+        setContent(note.content)
+
+        setShowAddNoteModal(true)
+
+    }
+
     const value: NotesTabContextProps ={
 
         showAddNoteModal,
@@ -64,6 +78,7 @@ export const NotesTabProvider: React.FC<NotesTabProviderProps> = ({ children }) 
         openAddNoteModal,
         openViewNoteModal,
         openDeleteNoteModal,
+        openEditNoteModal,
         closeModals,
         title,
         setTitle,
