@@ -1,8 +1,10 @@
 import { useNotesTabContext } from "../../../../../context/NotesTabContext"
+import { useEditGeneralNotes } from "../../../../../hooks/useEditGeneralNotes"
 
 const EditModalFooter: React.FC = ()=>{
 
-    const { closeModals } = useNotesTabContext()
+    const { closeModals } = useNotesTabContext(),
+          { canUpdate, handleUpdate } = useEditGeneralNotes()
 
     return(
 
@@ -15,7 +17,9 @@ const EditModalFooter: React.FC = ()=>{
 
             <button 
                 type="submit" 
-                className="bg-primary-btn text-secondary-bg py-2 px-4 rounded-md transition-all duration-300 w-full sm:w-auto hover:bg-blue-600"
+                className={`bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md transition-all duration-300 w-full sm:w-auto mt-2 sm:mt-0 ${canUpdate ? 'opacity-100 cursor-pointer' : 'opacity-50 cursor-not-allowed'}`}
+                disabled={!canUpdate}
+                onClick={handleUpdate}
             >Edit Note</button>
 
         </div>
