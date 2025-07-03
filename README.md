@@ -1942,6 +1942,15 @@ Patient details page will show the patient's details; medical history, allergies
             - Call `removeNote` function Context with `selectedNote` as argument
             - Call `closeModal` function 
 
+    #### Edit Note Modal component
+
+      Edit Note Modal component will be used to edit a note
+
+        1. Reuse Add Note Modal component but change the title to "Edit Note"
+        2. Create a footer similar to the Add Note Modal footer
+          a. Create a cancel button and set its onClick event to `closeModal` function from Notes Tab Context
+          b. Create a Edit button
+
 
 ### Settings Context
 

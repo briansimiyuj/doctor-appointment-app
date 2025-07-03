@@ -1,11 +1,12 @@
 import { useNotesTabContext } from "../../../../../context/NotesTabContext"
 import ModalHeader from "../../AppointmentTab/Modals/ModalHeader"
+import EditModalFooter from "./EditModalFooter"
 import ModalBody from "./ModalBody"
 import ModalFooter from "./ModalFooter"
 
 const AddNotesModal: React.FC = ()=>{
 
-    const { closeModals } = useNotesTabContext()
+    const { closeModals, selectedNote } = useNotesTabContext()
 
     return(
 
@@ -13,11 +14,14 @@ const AddNotesModal: React.FC = ()=>{
 
             <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-4 overflow-y-auto max-h-[90vh]">
 
-                <ModalHeader title="Add Notes" onClose={closeModals}/>
+                <ModalHeader 
+                    title={selectedNote ? "Edit Note" : "Add Note"}
+                    onClose={closeModals}
+                />
 
                 <ModalBody/>
 
-                <ModalFooter/>
+                { selectedNote ? <EditModalFooter/> : <ModalFooter/> }
 
             </div>
 
