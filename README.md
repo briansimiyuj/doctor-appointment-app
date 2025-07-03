@@ -1951,6 +1951,24 @@ Patient details page will show the patient's details; medical history, allergies
           a. Create a cancel button and set its onClick event to `closeModal` function from Notes Tab Context
           b. Create a Edit button
 
+    #### Edit General Note Hook
+
+    Edit General Note Hook will be used to edit a general note from the database/local storage and update the `notes` state variable
+
+      1. Retrieve `selectedNote`, `title`, `content`, `closeModal` from the Notes Tab Context
+      2. Retrieve `updateNote` from the Patient Details Context 
+      3. If there is no `selectedNote`, throw an error and exit the function
+      4. Prepare validation logic
+        a. Trim `title` and `content` 
+        b. Define `canEdit` as `title` and `content` are not empty and if either `title` or `content` is different from `selectedNote.title` or `selectedNote.content`
+
+      5. Create a function `handleEditNote` 
+        a. If `canEdit` is `false`, exit the function
+        b. Create `updateNote` object with `title`, `content`, `date` and previous `selectedNote` properties
+        c. Call `updateNote` function from Patient Details Context with `updateNote` as argument
+        d. Call `closeModal` function
+
+
 
 ### Settings Context
 
