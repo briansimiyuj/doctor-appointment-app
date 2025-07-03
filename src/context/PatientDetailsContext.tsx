@@ -146,6 +146,16 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
          
       }
 
+      const updateNote = (updatedNote: NoteType) =>{
+      
+         const updatedNotes = notes.map(note => note._id === updatedNote._id ? {...note, ...updatedNote } : note)
+    
+         setNotes(updatedNotes)
+    
+         localStorage.setItem(`notes-${patientID}`, JSON.stringify(updatedNotes))
+      
+      }
+
 
       useEffect(() =>{
     
@@ -246,6 +256,7 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             notes,
             addNote,
             removeNote,
+            updateNote,
             addMedicalCondition: () => {},
             removeMedicalCondition: () => {},
             addAllergy: () => {},

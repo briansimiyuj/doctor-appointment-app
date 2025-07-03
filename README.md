@@ -531,6 +531,11 @@ My appointments page will show the user's appointments. It will have a list of a
   13. Create a function to update the appointment details
     a. Create a setter function to update patient appointments array
 
+  14. Create a function to update the notes which takes updated note as a parameter
+     a. Loop through the notes array and find the note with the same id as the updated note parameter and assign a constant to it
+     b. Update the notes state with the updated note
+     c. Save the updated notes to localStorage using the patient ID as part of the key
+
 ### Patient Details Page
 
 Patient details page will show the patient's details; medical history, allergies, notes, prescription, name and contact information. The doctor will be able to add notes, prescription, allergies and medical history.
