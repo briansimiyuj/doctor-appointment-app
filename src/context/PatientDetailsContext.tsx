@@ -333,6 +333,27 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
 
       }
 
+      const addSurgery = (surgery: string) =>{
+      
+            const updatedSurgeries = [surgery, ...surgeries]
+
+            setSurgeries(updatedSurgeries)
+
+            localStorage.setItem(`surgeries-${patientID}`, JSON.stringify(updatedSurgeries))
+      
+      }
+
+      const removeSurgery = (index: number) =>{
+            
+
+            const updatedSurgeries = surgeries.filter((_, i) => i !== index)
+
+            setSurgeries(updatedSurgeries)
+
+            localStorage.setItem(`surgeries-${patientID}`, JSON.stringify(updatedSurgeries))
+
+      }
+
       const value ={
 
             activeTab,
@@ -350,8 +371,8 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             removeAllergy,
             addMedication,
             removeMedication,
-            addSurgery: () => {},
-            removeSurgery: () => {},
+            addSurgery,
+            removeSurgery,
             documents,
             addDocument,
             removeDocument,

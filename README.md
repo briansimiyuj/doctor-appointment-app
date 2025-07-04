@@ -573,6 +573,16 @@ My appointments page will show the user's appointments. It will have a list of a
       ii. Update the `medications` state with the new medications array
       iii. Save the updated medications to localStorage using the patient ID as part of the key
 
+    g. Create `addSurgery` function which takes a new surgery as a parameter
+      i. Create a new surgeries array with the new surgery and the existing surgeries
+      ii. Update the `surgeries` state with the new surgeries array
+      iii. Save the updated surgeries to localStorage using the patient ID as part of the key
+
+    h. Create `removeSurgery` function which takes a surgery index as a parameter
+      i. Create a new surgeries array with the existing surgeries excluding the surgery at the given index
+      ii. Update the `surgeries` state with the new surgeries array
+      iii. Save the updated surgeries to localStorage using the patient ID as part of the key
+
 ### Patient Details Page
 
 Patient details page will show the patient's details; medical history, allergies, notes, prescription, name and contact information. The doctor will be able to add notes, prescription, allergies and medical history.
