@@ -8,6 +8,8 @@ import DocumentTab from "../components/PatientDetails/Tabs/DocumentTab/DocumentT
 import { DocumentsTabContextProvider } from "../context/DocumentsTabContext"
 import { NotesTabProvider } from "../context/NotesTabContext"
 import NoteTab from "../components/PatientDetails/Tabs/NoteTabs/NoteTab"
+import MedicalHistoryTab from "../components/PatientDetails/Tabs/MedicalHistoryTab/MedicalHistoryTab"
+import { MedicalHistoryTabContextProvider } from "../context/MedicalHistoryTabContext"
 
 const PatientDetailsPage: React.FC = ()=>{
 
@@ -49,7 +51,13 @@ const PatientDetailsPage: React.FC = ()=>{
 
                             <div className="p-4">
 
-                                <h3 className="text-lg font-medium mb-4">Medical History</h3>
+                                <MedicalHistoryTabContextProvider>
+
+                                    <MedicalHistoryTab/>
+
+                                </MedicalHistoryTabContextProvider>
+
+                            
 
                             </div>
 

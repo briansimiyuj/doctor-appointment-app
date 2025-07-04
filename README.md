@@ -2039,6 +2039,15 @@ Patient details page will show the patient's details; medical history, allergies
         c. Call `updateNote` function from Patient Details Context with `updateNote` as argument
         d. Call `closeModal` function
 
+  ### Medical History Tab Component
+
+  Medical History Tab will be used to display the medical history of the patient
+
+    1. Set the active tab to `medical-history` in the Patient Details Context
+    2. Create a Medical History Tab component and mount it on the Tab Content component with id of `medical-history` and wrap it with Medical History Provider
+    3. Create a MedicalHistoryTabHeader component and mount it on the Medical History Tab component
+      a. Create a title for the tab    
+
 
 
 ### Settings Context
