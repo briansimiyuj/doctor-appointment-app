@@ -27,6 +27,10 @@ export interface PatientDetailsContextProps{
     allergies: string[]
     medications: string[]
     surgeries: string[]
+    updateMedicalConditions: (index: number, updatedCondition: string) => void
+    updateAllergies: (index: number, updatedAllergy: string) => void
+    updateMedications: (index: number, updatedMedication: string) => void
+    updateSurgeries: (index: number, updatedSurgery: string) => void
 
     // Notes management 
     notes: NoteType[]

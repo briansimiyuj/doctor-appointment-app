@@ -345,7 +345,6 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
 
       const removeSurgery = (index: number) =>{
             
-
             const updatedSurgeries = surgeries.filter((_, i) => i !== index)
 
             setSurgeries(updatedSurgeries)
@@ -354,7 +353,55 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
 
       }
 
-      const value ={
+      const updateMedicalConditions = (index: number, condition: string) =>{
+
+            const updatedMedicalConditions = [...medicalConditions]
+
+            updatedMedicalConditions[index] = condition
+            
+            setMedicalConditions(updatedMedicalConditions)
+
+            localStorage.setItem(`medicalConditions-${patientID}`, JSON.stringify(updatedMedicalConditions))
+      
+      }
+
+      const updateAllergies = (index: number, allergy: string) =>{
+            
+            const updatedAllergies = [...allergies]
+
+            updatedAllergies[index] = allergy
+
+            setAllergies(updatedAllergies)
+
+            localStorage.setItem(`allergies-${patientID}`, JSON.stringify(updatedAllergies))
+
+      }
+
+      const updateMedications = (index: number, medication: string) =>{
+
+            const updatedMedications = [...medications]
+
+            updatedMedications[index] = medication
+
+            setMedications(updatedMedications)
+
+            localStorage.setItem(`medications-${patientID}`, JSON.stringify(updatedMedications))
+
+      }
+
+      const updateSurgeries = (index: number, surgery: string) =>{
+
+            const updatedSurgeries = [...surgeries]
+
+            updatedSurgeries[index] = surgery
+
+            setSurgeries(updatedSurgeries)
+
+            localStorage.setItem(`surgeries-${patientID}`, JSON.stringify(updatedSurgeries))
+            
+      }
+
+      const value: PatientDetailsContextProps ={
 
             activeTab,
             setActiveTab,
@@ -376,7 +423,6 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             documents,
             addDocument,
             removeDocument,
-            updatePatientStatus: () => {},
             scheduleAppointment: () => {},
             cancelAppointment: () => {},
             rescheduleAppointment,
@@ -386,13 +432,13 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             patientID,
             updateAppointment,
             medicalConditions,
-            setMedicalConditions,
             allergies,
-            setAllergies,
             medications,
-            setMedications,
             surgeries,
-            setSurgeries
+            updateMedicalConditions,
+            updateAllergies,
+            updateMedications,
+            updateSurgeries
 
       }
 

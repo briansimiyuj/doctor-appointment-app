@@ -583,6 +583,30 @@ My appointments page will show the user's appointments. It will have a list of a
       ii. Update the `surgeries` state with the new surgeries array
       iii. Save the updated surgeries to localStorage using the patient ID as part of the key
 
+    i. Create `updateMedicalCondition` function which takes a medical condition index and a new medical condition as parameters
+      i. Create a new medical condition array with existing medical conditions
+      ii. Find the medical condition at the given index and update it with the new medical condition
+      iii. Update the `medicalConditions` state with the new medical condition array
+      iv. Save the updated medical conditions to localStorage using the patient ID as part of the key
+
+    j. Create `updateAllergies` function which takes an allergy index and a new allergy as parameters
+      i. Create a new allergies array with existing allergies
+      ii. Find the allergy at the given index and update it with the new allergy
+      iii. Update the `allergies` state with the new allergies array
+      iv. Save the updated allergies to localStorage using the patient ID as part of the key
+
+    k. Create `updateMedications` function which takes a medication index and a new medication as parameters
+      i. Create a new medications array with existing medications
+      ii. Find the medication at the given index and update it with the new medication
+      iii. Update the `medications` state with the new medications array
+      iv. Save the updated medications to localStorage using the patient ID as part of the key
+
+    l. Create `updateSurgeries` function which takes a surgery index and a new surgery as parameters
+      i. Create a new surgeries array with existing surgeries
+      ii. Find the surgery at the given index and update it with the new surgery
+      iii. Update the `surgeries` state with the new surgeries array
+      iv. Save the updated surgeries to localStorage using the patient ID as part of the key
+
 ### Patient Details Page
 
 Patient details page will show the patient's details; medical history, allergies, notes, prescription, name and contact information. The doctor will be able to add notes, prescription, allergies and medical history.
