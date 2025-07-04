@@ -542,6 +542,17 @@ My appointments page will show the user's appointments. It will have a list of a
     c. `medications` - an array of medications and initialize it with data from localStorage
     d. `surgeries` - an array of surgeries and initialize it with data from localStorage
 
+  16. Create a functions to update the medical history:
+    a. Create `addMedicalCondition` function which takes a new medical condition as a parameter
+      i. Create a new medical condition array with the new medical condition and the existing medical conditions
+      ii. Update the `medicalConditions` state with the new medical condition array
+      iii. Save the updated medical conditions to localStorage using the patient ID as part of the key
+
+    b. Create `removeMedicalCondition` function which takes a medical condition index as a parameter
+      i. Create a new medical condition array with the existing medical conditions excluding the medical condition at the given index
+      ii. Update the `medicalConditions` state with the new medical condition array
+      iii. Save the updated medical conditions to localStorage using the patient ID as part of the key
+
 ### Patient Details Page
 
 Patient details page will show the patient's details; medical history, allergies, notes, prescription, name and contact information. The doctor will be able to add notes, prescription, allergies and medical history.

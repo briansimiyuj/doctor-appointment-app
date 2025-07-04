@@ -274,6 +274,25 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
 
       }
 
+      const addMedicalCondition = (condition: string) =>{
+      
+         const updatedConditions = [condition, ...medicalConditions]
+
+         localStorage.setItem(`medicalConditions-${patientID}`, JSON.stringify(updatedConditions))
+
+         setMedicalConditions(updatedConditions)
+      
+      }
+
+      const removeMedicalCondition = (index: number) =>{
+
+            const updatedConditions = medicalConditions.filter((_, i) => i !== index)
+
+            localStorage.setItem(`medicalConditions-${patientID}`, JSON.stringify(updatedConditions))
+
+            setMedicalConditions(updatedConditions)
+      }
+
       const value ={
 
             activeTab,
@@ -285,8 +304,8 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             addNote,
             removeNote,
             updateNote,
-            addMedicalCondition: () => {},
-            removeMedicalCondition: () => {},
+            addMedicalCondition,
+            removeMedicalCondition,
             addAllergy: () => {},
             removeAllergy: () => {},
             addMedication: () => {},
