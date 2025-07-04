@@ -313,6 +313,26 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
 
       }
 
+      const addMedication = (medication: string) =>{
+                 
+            const updatedMedications = [medication, ...medications]
+
+            setMedications(updatedMedications)
+
+            localStorage.setItem(`medications-${patientID}`, JSON.stringify(updatedMedications))
+      
+      }
+
+      const removeMedication = (index: number) =>{
+
+            const updatedMedications = medications.filter((_, i) => i !== index)
+
+            setMedications(updatedMedications)
+
+            localStorage.setItem(`medications-${patientID}`, JSON.stringify(updatedMedications))
+
+      }
+
       const value ={
 
             activeTab,
@@ -328,8 +348,8 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             removeMedicalCondition,
             addAllergy,
             removeAllergy,
-            addMedication: () => {},
-            removeMedication: () => {},
+            addMedication,
+            removeMedication,
             addSurgery: () => {},
             removeSurgery: () => {},
             documents,
