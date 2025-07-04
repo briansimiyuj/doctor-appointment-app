@@ -45,6 +45,34 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
 
             return savedDocuments ? JSON.parse(savedDocuments) : []
             
+      }),
+      [medicalConditions, setMedicalConditions] = useState<string[]>(() =>{
+
+            const savedMedicalConditions = localStorage.getItem(`medical-conditions-${patientID}`)
+
+            return savedMedicalConditions ? JSON.parse(savedMedicalConditions) : []
+
+      }),
+      [allergies, setAllergies] = useState<string[]>(() =>{
+
+            const savedAllergies = localStorage.getItem(`allergies-${patientID}`)
+
+            return savedAllergies ? JSON.parse(savedAllergies) : []
+
+      }),
+      [medications, setMedications] = useState<string[]>(() =>{
+            
+            const savedMedications = localStorage.getItem(`medications-${patientID}`)
+
+            return savedMedications ? JSON.parse(savedMedications) : []
+
+      }),
+      [surgeries, setSurgeries] = useState<string[]>(() =>{
+
+            const savedSurgeries = localStorage.getItem(`surgeries-${patientID}`)
+
+            return savedSurgeries ? JSON.parse(savedSurgeries) : []
+
       })
 
 
@@ -276,7 +304,15 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             setPatientDetails,
             updateAppointmentStatus,
             patientID,
-            updateAppointment
+            updateAppointment,
+            medicalConditions,
+            setMedicalConditions,
+            allergies,
+            setAllergies,
+            medications,
+            setMedications,
+            surgeries,
+            setSurgeries
 
       }
 

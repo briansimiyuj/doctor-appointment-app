@@ -23,6 +23,10 @@ export interface PatientDetailsContextProps{
     removeMedication: (index: number) => void
     addSurgery: (surgery: string) => void
     removeSurgery: (index: number) => void
+    medicalConditions: string[]
+    allergies: string[]
+    medications: string[]
+    surgeries: string[]
 
     // Notes management 
     notes: NoteType[]

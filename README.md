@@ -536,6 +536,12 @@ My appointments page will show the user's appointments. It will have a list of a
      b. Update the notes state with the updated note
      c. Save the updated notes to localStorage using the patient ID as part of the key
 
+  15. Create the following states for medical history:
+    a. `medicalConditions` - an array of medical conditions and initialize it with data from localStorage
+    b. `allergies` - an array of allergies and initialize it with data from localStorage
+    c. `medications` - an array of medications and initialize it with data from localStorage
+    d. `surgeries` - an array of surgeries and initialize it with data from localStorage
+
 ### Patient Details Page
 
 Patient details page will show the patient's details; medical history, allergies, notes, prescription, name and contact information. The doctor will be able to add notes, prescription, allergies and medical history.
