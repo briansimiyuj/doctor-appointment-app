@@ -293,6 +293,26 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             setMedicalConditions(updatedConditions)
       }
 
+      const addAllergy = (allergy: string) =>{
+      
+         const updatedAllergies = [allergy, ...allergies]
+
+         setAllergies(updatedAllergies)
+
+         localStorage.setItem(`allergies-${patientID}`, JSON.stringify(updatedAllergies))
+      
+      }
+
+      const removeAllergy = (index: number) =>{
+            
+            const updatedAllergies = allergies.filter((_, i) => i !== index)
+
+            setAllergies(updatedAllergies)
+
+            localStorage.setItem(`allergies-${patientID}`, JSON.stringify(updatedAllergies))
+
+      }
+
       const value ={
 
             activeTab,
@@ -306,8 +326,8 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             updateNote,
             addMedicalCondition,
             removeMedicalCondition,
-            addAllergy: () => {},
-            removeAllergy: () => {},
+            addAllergy,
+            removeAllergy,
             addMedication: () => {},
             removeMedication: () => {},
             addSurgery: () => {},

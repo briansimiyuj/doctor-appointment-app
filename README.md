@@ -553,6 +553,16 @@ My appointments page will show the user's appointments. It will have a list of a
       ii. Update the `medicalConditions` state with the new medical condition array
       iii. Save the updated medical conditions to localStorage using the patient ID as part of the key
 
+    c. Create `addAllergy` function which takes a new allergy as a parameter
+      i. Create a new allergies array with the new allergy and the existing allergies
+      ii. Update the `allergies` state with the new allergies array
+      iii. Save the updated allergies to localStorage using the patient ID as part of the key
+
+    d. Create `removeAllergy` function which takes an allergy index as a parameter
+      i. Create a new allergies array with the existing allergies excluding the allergy at the given index
+      ii. Update the `allergies` state with the new allergies array
+      iii. Save the updated allergies to localStorage using the patient ID as part of the key
+
 ### Patient Details Page
 
 Patient details page will show the patient's details; medical history, allergies, notes, prescription, name and contact information. The doctor will be able to add notes, prescription, allergies and medical history.
