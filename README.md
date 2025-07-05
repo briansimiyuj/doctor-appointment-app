@@ -2048,6 +2048,40 @@ Patient details page will show the patient's details; medical history, allergies
     3. Create a MedicalHistoryTabHeader component and mount it on the Medical History Tab component
       a. Create a title for the tab    
 
+  ### Medical History Tab Context
+
+  Medical History Tab context will be used to open and close the modals for adding, editing, and deleting medical history
+
+    1. Create the following state variables:
+      a. `showModal` (boolean) to control the visibility of the modal
+      b. `editingIndex` (number) to store the index of the medical history item being edited or deleted
+      c. `editingValue` (string) to store the value being edited or deleted
+      d. `mode` (string) to store the mode of the modal (add, edit, delete)
+
+    2. Create the following functions:
+      a. `openAddModal` to open the add modal 
+        i. Set `showModal` to true
+        ii. Set `mode` to "add"
+        iii. Set `editingIndex` to null
+        iv. Set `editingValue` to empty string
+
+      b. `openEditModal` to open the edit modal with the given index and value as parameters 
+        i. Set `showModal` to true
+        ii. Set `mode` to "edit"
+        iii. Set `editingIndex` to the given index
+        iv. Set `editingValue` to the given value
+
+      c. `openDeleteModal` to open the delete modal with the given index and value as parameters 
+        i. Set `showModal` to true
+        ii. Set `mode` to "delete"
+        iii. Set `editingIndex` to the given index
+        iv. Set `editingValue` to the given value (text for delete modal)
+
+      d. `closeModal` to close the modal 
+        i. Set `showModal` to false
+        ii. Set `editingIndex` to null
+        iii. Set `editingValue` to empty string
+
 
 
 ### Settings Context
