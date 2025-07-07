@@ -2072,6 +2072,9 @@ Patient details page will show the patient's details; medical history, allergies
       Modal History Modal will be a reusable component that can be used to add, edit, and delete medical history items. 
 
         1. Reuse the Modal Header component and pass the title based on the mode of the modal (add, edit, delete) and `closeModal` function as props
+        2. Create a Modal Body component and mount it on the Modal History Modal component
+          a. Display a label based on the `targetSection` 
+          b. Display a text input field for the item name
 
   ### Medical History Tab Context
 

@@ -1,5 +1,6 @@
 import { useMedicalHistoryTabContext } from "../../../../../context/MedicalHistoryTabContext"
 import ModalHeader from "../../AppointmentTab/Modals/ModalHeader"
+import ModalBody from "./ModalBody"
 
 const MedicalHistoryModal: React.FC = ()=>{
 
@@ -15,6 +16,8 @@ const MedicalHistoryModal: React.FC = ()=>{
                     title={mode === "add" ? `Add ${targetSection ?.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}` : `Edit ${targetSection ?.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}`}
                     onClose={closeModal}
                 />
+
+                <ModalBody/>
 
             </div>
 
