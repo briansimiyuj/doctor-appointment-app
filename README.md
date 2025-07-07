@@ -2117,6 +2117,28 @@ Patient details page will show the patient's details; medical history, allergies
         ii. Set `editingIndex` to null
         iii. Set `editingValue` to empty string
 
+  ### Medical History Actions Hook
+
+  Medical history actions hook will be used to add, edit, and delete medical history items and update them in the database/local storage.
+
+    1. Retrieve the following from Patient Details Context:
+      a. `addMedicalCondition` to add a new medical condition
+      b. `updateMedicalCondition` to update a medical condition
+      c. `removeMedicalCondition` to remove a medical condition
+      d. `addMedication` to add a new medication
+      e. `updateMedication` to update a medication
+      f. `removeMedication` to remove a medication
+      g. `addAllergy` to add a new allergy
+      h. `updateAllergy` to update an allergy
+      i. `removeAllergy` to remove an allergy
+      j. `addSurgery` to add a new surgery
+      k. `updateSurgery` to update a surgery
+      l. `removeSurgery` to remove a surgery
+
+    2. Create a `addFunction` which will take `section` and `value` as parameters and call the appropriate function based on the section and value
+    3. Create a `removeFunction` which will take `section` and `id` as parameters and call the appropriate function based on the section and id
+    4. Create a `editFunction` which will take `section`, `id`, and `newValue` as parameters and call the appropriate function based on the section, id, and newValue
+
 
 
 ### Settings Context
