@@ -1,6 +1,7 @@
 import { useMedicalHistoryTabContext } from "../../../../../context/MedicalHistoryTabContext"
 import ModalHeader from "../../AppointmentTab/Modals/ModalHeader"
 import ModalBody from "./ModalBody"
+import ModalFooter from "./ModalFooter"
 
 const MedicalHistoryModal: React.FC = ()=>{
 
@@ -18,6 +19,8 @@ const MedicalHistoryModal: React.FC = ()=>{
                 />
 
                 <ModalBody/>
+
+                <ModalFooter/>
 
             </div>
 

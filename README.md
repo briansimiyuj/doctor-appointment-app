@@ -2076,6 +2076,9 @@ Patient details page will show the patient's details; medical history, allergies
           a. Display a label based on the `targetSection` 
           b. Display a text input field for the item name
 
+        3. Create a Modal Footer component and mount it on the Modal History Modal 
+          a. Display a button for adding, editing, and deleting the item based on the mode of the modal
+
   ### Medical History Tab Context
 
   Medical History Tab context will be used to open and close the modals for adding, editing, and deleting medical history
