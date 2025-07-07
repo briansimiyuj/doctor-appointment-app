@@ -20,6 +20,24 @@ const MedicalHistoryTab: React.FC = ()=>{
                 items={medicalConditions}
                 onAdd={() => openAddModal("medicalConditions" as unknown as MedicalHistoryType)}
             />
+
+            <MedicalHistorySection
+                title="Allergies"
+                items={allergies}
+                onAdd={() => openAddModal("allergies" as unknown as MedicalHistoryType)}
+            />
+
+            <MedicalHistorySection
+                title="Medications"
+                items={medications}
+                onAdd={() => openAddModal("medications" as unknown as MedicalHistoryType)}
+            />
+
+            <MedicalHistorySection
+                title="Surgeries"
+                items={surgeries}
+                onAdd={() => openAddModal("surgeries" as unknown as MedicalHistoryType)}
+            />
         
         </div>
 
