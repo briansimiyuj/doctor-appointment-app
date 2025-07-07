@@ -2048,6 +2048,19 @@ Patient details page will show the patient's details; medical history, allergies
     3. Create a MedicalHistoryTabHeader component and mount it on the Medical History Tab component
       a. Create a title for the tab    
 
+    4. Retrieve `openAddModal` function from Medical History Context
+    5. Retrieve medical history items from Patient Details Context (`medicalConditions`, `allergies`, `medications`, `surgeries`)
+    6. Create a MedicalHistorySection component and mount it on the Medical History Tab component multiple times with different props:
+      a. `title` prop will be the title of the section
+      b. `items` prop will be the medical history items
+      c. `onAdd` prop will be the `openAddModal` function with the title of the section as argument
+
+    #### Medical History Section Component
+
+    Medical History Section will be used to display the medical history of the patient (allergies, medications, etc). It will be a reuseable component that can be used to display any medical history section. 
+
+      1. Create a section title to display the title of the section and a button to add a new item
+
   ### Medical History Tab Context
 
   Medical History Tab context will be used to open and close the modals for adding, editing, and deleting medical history
