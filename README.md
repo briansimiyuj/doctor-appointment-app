@@ -2057,25 +2057,29 @@ Patient details page will show the patient's details; medical history, allergies
       b. `editingIndex` (number) to store the index of the medical history item being edited or deleted
       c. `editingValue` (string) to store the value being edited or deleted
       d. `mode` (string) to store the mode of the modal (add, edit, delete)
+      e. `targetSection` (array of strings) to store the target section of the medical history item being edited or deleted (e.g. "allergies", "medications", "surgeries" or "medical conditions")
 
     2. Create the following functions:
-      a. `openAddModal` to open the add modal 
+      a. `openAddModal` to open the add modal which takes `section` as a parameter
         i. Set `showModal` to true
         ii. Set `mode` to "add"
         iii. Set `editingIndex` to null
         iv. Set `editingValue` to empty string
+        v. Set `targetSection` to the given section
 
-      b. `openEditModal` to open the edit modal with the given index and value as parameters 
+      b. `openEditModal` to open the edit modal with the given index, section and value as parameters 
         i. Set `showModal` to true
         ii. Set `mode` to "edit"
         iii. Set `editingIndex` to the given index
         iv. Set `editingValue` to the given value
+        v. Set `targetSection` to the given section
 
-      c. `openDeleteModal` to open the delete modal with the given index and value as parameters 
+      c. `openDeleteModal` to open the delete modal with the given index, section and value as parameters 
         i. Set `showModal` to true
         ii. Set `mode` to "delete"
         iii. Set `editingIndex` to the given index
         iv. Set `editingValue` to the given value (text for delete modal)
+        v. Set `targetSection` to the given section
 
       d. `closeModal` to close the modal 
         i. Set `showModal` to false

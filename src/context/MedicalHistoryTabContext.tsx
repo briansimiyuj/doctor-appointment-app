@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react"
 import { MedicalHistoryTabContextProps } from "../assets/contextProps/MedicalHistoryTabContextProps"
+import { MedicalHistoryType } from "../assets/types/MedicalHistoryType"
 
 interface MedicalHistoryTabContextProviderProps{
 
@@ -14,9 +15,10 @@ export const MedicalHistoryTabContextProvider:React.FC<MedicalHistoryTabContextP
     const [showModal, setShowModal] = useState(false),
           [editingIndex, setEditingIndex] = useState<number | null>(null),
           [editingValue, setEditingValue] = useState(''),
-          [mode, setMode] = useState<"add" | "edit" | "delete">("add")
+          [mode, setMode] = useState<"add" | "edit" | "delete">("add"),
+          [targetSection, setTargetSection] = useState<MedicalHistoryType | null>(null)
 
-    const openAddModal = () =>{
+    const openAddModal = (section: MedicalHistoryType) =>{
     
        setMode("add")
        
@@ -25,10 +27,12 @@ export const MedicalHistoryTabContextProvider:React.FC<MedicalHistoryTabContextP
        setEditingIndex(null)
         
        setEditingValue('')
+
+       setTargetSection(section)
     
     }
 
-    const openEditModal = (index: number, value: string) =>{
+    const openEditModal = (index: number, value: string, section: MedicalHistoryType) =>{
 
         setMode("edit")
 
@@ -37,10 +41,12 @@ export const MedicalHistoryTabContextProvider:React.FC<MedicalHistoryTabContextP
         setEditingIndex(index)
 
         setEditingValue(value)
+
+        setTargetSection(section)
        
     }
 
-    const openDeleteModal = (index: number, value: string) =>{
+    const openDeleteModal = (index: number, value: string, section: MedicalHistoryType) =>{
 
         setMode("delete")
 
@@ -49,6 +55,8 @@ export const MedicalHistoryTabContextProvider:React.FC<MedicalHistoryTabContextP
         setEditingIndex(index)
 
         setEditingValue(value)
+
+        setTargetSection(section)
 
     }
 
@@ -73,6 +81,7 @@ export const MedicalHistoryTabContextProvider:React.FC<MedicalHistoryTabContextP
         openEditModal,
         closeModal,
         openDeleteModal,
+        targetSection
 
     }
 
