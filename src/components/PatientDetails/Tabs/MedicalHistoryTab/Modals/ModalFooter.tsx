@@ -1,8 +1,10 @@
 import { useMedicalHistoryTabContext } from "../../../../../context/MedicalHistoryTabContext"
+import { useMedicalHistoryActions } from "../../../../../hooks/useMedicalHistoryActions"
 
 const ModalFooter: React.FC = () =>{
 
-  const { mode, closeModal, editingValue, targetSection } = useMedicalHistoryTabContext()
+  const { mode, closeModal, editingValue, targetSection } = useMedicalHistoryTabContext(),
+        { addFunction, updateFunction, removeFunction } = useMedicalHistoryActions()
 
     return(
 
@@ -21,6 +23,9 @@ const ModalFooter: React.FC = () =>{
                         type="button"
                         className={`bg-primary-btn text-secondary-bg py-2 px-4 rounded-md transition duration-300 w-full sm:w-auto hover:bg-blue-600 ${!editingValue ? "opacity-50 cursor-not-allowed" : ""}`}
                         disabled={editingValue ? false : true}
+                        onClick={() =>{
+                            if(targetSection) addFunction(targetSection, editingValue)}
+                        } 
                     >Add {targetSection ?.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}</button>
 
                 )

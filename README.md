@@ -2078,6 +2078,7 @@ Patient details page will show the patient's details; medical history, allergies
 
         3. Create a Modal Footer component and mount it on the Modal History Modal 
           a. Display a button for adding, editing, and deleting the item based on the mode of the modal
+          b. Add an event listener to add button that calls the `addFunction` from the Medical History Action hook and passes the `targetSection` and `item` as arguments
 
   ### Medical History Tab Context
 
