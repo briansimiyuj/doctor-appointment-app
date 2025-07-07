@@ -2055,15 +2055,23 @@ Patient details page will show the patient's details; medical history, allergies
       b. `items` prop will be the medical history items
       c. `onAdd` prop will be the `openAddModal` function with the title of the section as argument
 
-    #### Medical History Section Component
+      #### Medical History Section Component
 
-    Medical History Section will be used to display the medical history of the patient (allergies, medications, etc). It will be a reuseable component that can be used to display any medical history section. 
+      Medical History Section will be used to display the medical history of the patient (allergies, medications, etc). It will be a reuseable component that can be used to display any medical history section. 
 
-      1. Create a section title to display the title of the section and a button to add a new item
-      2. Duplicate the Medical History Section component multiple times with different props:
-        a. `title` prop will be the title of the section
-        b. `items` prop will be the medical history items
-        c. `onAdd` prop will be the `openAddModal` function with the title of the section as argument
+        1. Create a section title to display the title of the section and a button to add a new item
+        2. Duplicate the Medical History Section component multiple times with different props:
+          a. `title` prop will be the title of the section
+          b. `items` prop will be the medical history items
+          c. `onAdd` prop will be the `openAddModal` function with the title of the section as argument
+
+    7. Create the Modal History Modal component and mount it on the Medical History Tab component if `showModal` from the Medical History Tab context is true
+
+      #### Modal History Modal Component
+
+      Modal History Modal will be a reusable component that can be used to add, edit, and delete medical history items. 
+
+        1. Reuse the Modal Header component and pass the title based on the mode of the modal (add, edit, delete) and `closeModal` function as props
 
   ### Medical History Tab Context
 

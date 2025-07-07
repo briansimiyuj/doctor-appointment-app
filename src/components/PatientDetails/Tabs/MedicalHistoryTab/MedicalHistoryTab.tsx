@@ -3,10 +3,11 @@ import { useMedicalHistoryTabContext } from "../../../../context/MedicalHistoryT
 import { usePatientDetails } from "../../../../context/PatientDetailsContext"
 import MedicalHistorySection from "./Sections/MedicalHistorySection" 
 import MedicalHistoryTabHeader from "./MedicalHistoryTabHeader"
+import MedicalHistoryModal from "./Modals/MedicalHistoryModal"
 
 const MedicalHistoryTab: React.FC = ()=>{
 
-    const { openAddModal } = useMedicalHistoryTabContext(),
+    const { openAddModal, showModal } = useMedicalHistoryTabContext(),
           { medicalConditions, allergies, medications, surgeries } = usePatientDetails()
 
     return(
@@ -38,6 +39,8 @@ const MedicalHistoryTab: React.FC = ()=>{
                 items={surgeries}
                 onAdd={() => openAddModal("surgeries" as unknown as MedicalHistoryType)}
             />
+
+            { showModal && <MedicalHistoryModal/> }
         
         </div>
 
