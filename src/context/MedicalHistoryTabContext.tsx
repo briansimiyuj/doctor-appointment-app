@@ -16,7 +16,8 @@ export const MedicalHistoryTabContextProvider:React.FC<MedicalHistoryTabContextP
           [editingIndex, setEditingIndex] = useState<number | null>(null),
           [editingValue, setEditingValue] = useState(''),
           [mode, setMode] = useState<"add" | "edit" | "delete">("add"),
-          [targetSection, setTargetSection] = useState<MedicalHistoryType | null>(null)
+          [targetSection, setTargetSection] = useState<MedicalHistoryType | null>(null),
+          [originalValue, setOriginalValue] = useState('')
 
     const openAddModal = (section: MedicalHistoryType) =>{
     
@@ -43,6 +44,8 @@ export const MedicalHistoryTabContextProvider:React.FC<MedicalHistoryTabContextP
         setEditingValue(value)
 
         setTargetSection(section)
+
+        setOriginalValue(value)
        
     }
 
@@ -81,7 +84,8 @@ export const MedicalHistoryTabContextProvider:React.FC<MedicalHistoryTabContextP
         openEditModal,
         closeModal,
         openDeleteModal,
-        targetSection
+        targetSection,
+        originalValue
 
     }
 

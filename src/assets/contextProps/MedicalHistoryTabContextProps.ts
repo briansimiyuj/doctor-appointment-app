@@ -6,6 +6,7 @@ export interface MedicalHistoryTabContextProps{
     editingIndex: number | null
     editingValue: string
     setEditingValue: (value: string) => void
+    originalValue: string
     mode: "add" | "edit" | "delete"
     openAddModal: (section: MedicalHistoryType) => void
     targetSection: MedicalHistoryType | null
