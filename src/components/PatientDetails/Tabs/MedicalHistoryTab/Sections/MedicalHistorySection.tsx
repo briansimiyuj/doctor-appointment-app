@@ -19,7 +19,7 @@ const MedicalHistorySection: React.FC<MedicalHistorySectionProps> = ({ title, it
 
         <>
         
-            <SectionHeader title={title} items={items} onAdd={onAdd}/>
+            <SectionHeader title={title} items={items} onAdd={onAdd} section={section} />
 
             <ul className="space-y-2 mb-5">
 

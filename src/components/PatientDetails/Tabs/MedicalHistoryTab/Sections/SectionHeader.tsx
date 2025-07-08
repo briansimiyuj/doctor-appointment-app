@@ -1,14 +1,16 @@
 import { FiPlus } from "react-icons/fi"
+import { MedicalHistoryType } from "../../../../../assets/types/MedicalHistoryType"
 
 interface SectionHeaderProps{
   
-    title: string
-    items: string[]
-    onAdd: () => void
+  title: string
+  items: string[]
+  onAdd: (section: MedicalHistoryType) => void
+  section: MedicalHistoryType
 
 }
 
-const SectionHeader: React.FC<SectionHeaderProps> = ({ title, items, onAdd }) =>{
+const SectionHeader: React.FC<SectionHeaderProps> = ({ title, items, onAdd, section }) =>{
 
   return(
 
@@ -23,15 +25,15 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({ title, items, onAdd }) =>
         </h4>
 
         <button
-            type="button"
-            aria-label={`Add ${title}`}
-            onClick={onAdd}
-            className=" flex items-center gap-2 bg-primary-bg text-secondary-bg px-4 py-2 rounded-md shadow-md hover:shadow-lg transition-all duration-300 hover:bg-blue-600 transform hover:-translate-y-1"
+          type="button"
+          aria-label={`Add ${title}`}
+          onClick={() => onAdd(section)}
+          className=" flex items-center gap-2 bg-primary-bg text-secondary-bg px-4 py-2 rounded-md shadow-md hover:shadow-lg transition-all duration-300 hover:bg-blue-600 transform hover:-translate-y-1"
         >
 
-            <FiPlus className="w-6 h-6"/>
+          <FiPlus className="w-6 h-6"/>
 
-            <span className="text-sm font-semibold">Add {title}</span>
+          <span className="text-sm font-semibold">Add {title}</span>
 
         </button>
 
