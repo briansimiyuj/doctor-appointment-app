@@ -4,27 +4,34 @@ import { usePatientDetails } from "../context/PatientDetailsContext"
 
 export const useMedicalHistoryActions = () =>{
 
-    const { addMedicalCondition, removeMedicalCondition, updateMedicalConditions, addAllergy, removeAllergy, updateAllergies, addMedication, removeMedication, updateMedications, addSurgery, removeSurgery, updateSurgeries } = usePatientDetails(),
+    const { addMedicalCondition, removeMedicalCondition, updateMedicalConditions, addAllergy, removeAllergy, updateAllergies, addMedication, removeMedication, updateMedications, addSurgery, removeSurgery, updateSurgeries, medicalConditions, allergies, medications, surgeries } = usePatientDetails(),
           { closeModal } = useMedicalHistoryTabContext()
 
     const addFunction = (section: MedicalHistoryType, value: string) =>{
+
+        let exists = false
     
         switch(section){
 
             case "medicalConditions":
-                addMedicalCondition(value)
+                exists = medicalConditions.includes(value)
+                if(!exists) addMedicalCondition(value)
+
                 break
 
             case "allergies":
-                addAllergy(value)
+                exists = allergies.includes(value)
+                if(!exists) addAllergy(value)
                 break
 
             case "medications":
-                addMedication(value)
+                exists = medications.includes(value)
+                if(!exists) addMedication(value)
                 break
 
             case "surgeries":   
-                addSurgery(value)
+                exists = surgeries.includes(value)
+                if(!exists) addSurgery(value)
                 break
 
             default:
@@ -32,7 +39,15 @@ export const useMedicalHistoryActions = () =>{
 
         }
 
-        closeModal()
+        if(!exists){
+
+            closeModal()
+
+        }else{
+            
+            alert("This item already exists in the list")
+
+        }
     
     }
 

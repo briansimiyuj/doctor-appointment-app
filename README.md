@@ -2152,6 +2152,7 @@ Patient details page will show the patient's details; medical history, allergies
     2. Create a `addFunction` which will take `section` and `value` as parameters and call the appropriate function based on the section and value
     3. Create a `removeFunction` which will take `section` and `id` as parameters and call the appropriate function based on the section and id
     4. Create a `editFunction` which will take `section`, `id`, and `newValue` as parameters and call the appropriate function based on the section, id, and newValue
+    5. Prevent `addFunction` to add a new item if it already exists in the state  
 
 
 
