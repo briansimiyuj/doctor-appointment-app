@@ -1,15 +1,19 @@
 import { FiEdit, FiTrash2 } from "react-icons/fi"
 import SectionHeader from "./SectionHeader"
+import { MedicalHistoryType } from "../../../../../assets/types/MedicalHistoryType"
 
 interface MedicalHistorySectionProps{
 
     title: string
     items: string[]
-    onAdd: () => void
+    section: MedicalHistoryType
+    onAdd: (section: MedicalHistoryType) => void
+    onEdit: (index: number, value: string, section: MedicalHistoryType) => void
+    onDelete: (index: number, value: string, section: MedicalHistoryType) => void
 
 }
 
-const MedicalHistorySection: React.FC<MedicalHistorySectionProps> = ({ title, items, onAdd }) =>{
+const MedicalHistorySection: React.FC<MedicalHistorySectionProps> = ({ title, items, onAdd, onEdit, onDelete, section }) =>{
 
     return(
 
@@ -41,6 +45,7 @@ const MedicalHistorySection: React.FC<MedicalHistorySectionProps> = ({ title, it
 
                                     <button
                                        className="text-primary-btn hover:text-blue-800 transition"
+                                       onClick={() => onEdit(index, item, section)}
                                     >
 
                                         <FiEdit className="w-4 h-4"/>
@@ -49,6 +54,7 @@ const MedicalHistorySection: React.FC<MedicalHistorySectionProps> = ({ title, it
 
                                     <button
                                        className="text-red-500 hover:text-red-700 transition"
+                                       onClick={() => onDelete(index, item, section)}
                                     >
 
                                         <FiTrash2 className="w-4 h-4"/>

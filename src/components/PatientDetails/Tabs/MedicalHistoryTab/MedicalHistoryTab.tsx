@@ -7,7 +7,7 @@ import MedicalHistoryModal from "./Modals/MedicalHistoryModal"
 
 const MedicalHistoryTab: React.FC = ()=>{
 
-    const { openAddModal, showModal } = useMedicalHistoryTabContext(),
+    const { openAddModal, showModal, openEditModal, openDeleteModal } = useMedicalHistoryTabContext(),
           { medicalConditions, allergies, medications, surgeries } = usePatientDetails()
 
     return(
@@ -19,25 +19,37 @@ const MedicalHistoryTab: React.FC = ()=>{
             <MedicalHistorySection
                 title="Medical Conditions"
                 items={medicalConditions}
-                onAdd={() => openAddModal("medicalConditions" as unknown as MedicalHistoryType)}
+                section="medicalConditions"
+                onAdd={openAddModal}
+                onEdit={openEditModal}
+                onDelete={openDeleteModal}  
             />
 
             <MedicalHistorySection
                 title="Allergies"
                 items={allergies}
-                onAdd={() => openAddModal("allergies" as unknown as MedicalHistoryType)}
+                section="allergies"
+                onAdd={openAddModal}
+                onEdit={openEditModal}
+                onDelete={openDeleteModal}
             />
 
             <MedicalHistorySection
                 title="Medications"
                 items={medications}
-                onAdd={() => openAddModal("medications" as unknown as MedicalHistoryType)}
+                section="medications"
+                onAdd={openAddModal}
+                onEdit={openEditModal}
+                onDelete={openDeleteModal}
             />
 
             <MedicalHistorySection
                 title="Surgeries"
                 items={surgeries}
-                onAdd={() => openAddModal("surgeries" as unknown as MedicalHistoryType)}
+                section="surgeries"
+                onAdd={openAddModal}
+                onEdit={openEditModal}
+                onDelete={openDeleteModal}
             />
 
             { showModal && <MedicalHistoryModal/> }

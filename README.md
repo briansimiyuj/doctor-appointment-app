@@ -2053,7 +2053,11 @@ Patient details page will show the patient's details; medical history, allergies
     6. Create a MedicalHistorySection component and mount it on the Medical History Tab component multiple times with different props:
       a. `title` prop will be the title of the section
       b. `items` prop will be the medical history items
-      c. `onAdd` prop will be the `openAddModal` function with the title of the section as argument
+      c. `onAdd` prop will be the `openAddModal` function
+      d. `section` prop will be the section of the medical history items (e.g. `medicalConditions`, `allergies`, `medications`, `surgeries`)
+      e. `onEdit` prop will be the `openEditModal` function
+      f. `onDelete` prop will be the `openDeleteModal` function
+       
 
       #### Medical History Section Component
 
@@ -2064,6 +2068,8 @@ Patient details page will show the patient's details; medical history, allergies
           a. `title` prop will be the title of the section
           b. `items` prop will be the medical history items
           c. `onAdd` prop will be the `openAddModal` function with the title of the section as argument
+          d. `section` prop will be the section of the medical history items (e.g. `medicalConditions`, `allergies`, `medications`, `surgeries`)
+          e. `onEdit` prop will be the `openEditModal` function  
 
         3. If the `items` is empty, display a message to the user to indicate that there is no medical history for the section
         4. If the `items` is not empty, display a list of items with a delete button and edit button for each item
