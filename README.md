@@ -2089,6 +2089,7 @@ Patient details page will show the patient's details; medical history, allergies
           a. Display a button for adding, editing, and deleting the item based on the mode of the modal
           b. Add an event listener to add button that calls the `addFunction` from the Medical History Action hook and passes the `targetSection` and `item` as arguments
           c. Add an event listener to delete button that calls the `deleteFunction` from the Medical History Action hook and passes the `targetSection` and `editingIndex` as arguments if there is `targetSection` and `editingIndex` is not null
+          d. Add an event listener to edit button that calls the `updateFunction` from the Medical History Action hook and passes the `targetSection`, `newValue`  and `editingIndex` as arguments if there is `targetSection` and `editingIndex` is not null
 
   ### Medical History Tab Context
 

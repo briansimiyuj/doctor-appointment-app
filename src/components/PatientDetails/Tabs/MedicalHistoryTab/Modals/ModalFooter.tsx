@@ -3,7 +3,7 @@ import { useMedicalHistoryActions } from "../../../../../hooks/useMedicalHistory
 
 const ModalFooter: React.FC = () =>{
 
-  const { mode, closeModal, editingValue, editingIndex, targetSection } = useMedicalHistoryTabContext(),
+  const { mode, closeModal, editingValue, editingIndex, targetSection, originalValue } = useMedicalHistoryTabContext(),
         { addFunction, updateFunction, removeFunction } = useMedicalHistoryActions()
 
 
@@ -53,7 +53,11 @@ const ModalFooter: React.FC = () =>{
 
                     <button
                         type="button"
-                        className={`bg-primary-btn text-secondary-bg py-2 px-4 rounded-md transition duration-300 w-full sm:w-auto hover:bg-blue-600 ${!editingValue ? "opacity-50 cursor-not-allowed" : ""}`}
+                        className={`bg-primary-btn text-secondary-bg py-2 px-4 rounded-md transition duration-300 w-full sm:w-auto hover:bg-blue-600 ${editingValue === originalValue ? "opacity-50 cursor-not-allowed" : ""}`}
+                        disabled={editingValue === originalValue ? true : false}
+                        onClick={() =>{
+                            if(targetSection && editingIndex !== null) updateFunction(targetSection, editingIndex, editingValue)
+                        }}
                     >Edit {getTargetSectionName()}</button>
 
                 )
