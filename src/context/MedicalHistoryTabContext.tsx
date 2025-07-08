@@ -12,15 +12,11 @@ export const MedicalHistoryTabContext=createContext<MedicalHistoryTabContextProp
 
 export const MedicalHistoryTabContextProvider:React.FC<MedicalHistoryTabContextProviderProps> = ({ children })=>{
 
-    const [showModal, setShowModal] = useState(
-        import .meta.env.VITE_DEV_MODE === "true" ? true : false
-    ),
+    const [showModal, setShowModal] = useState(false),
           [editingIndex, setEditingIndex] = useState<number | null>(null),
           [editingValue, setEditingValue] = useState(''),
           [mode, setMode] = useState<"add" | "edit" | "delete">("add"),
-          [targetSection, setTargetSection] = useState<MedicalHistoryType | null>(
-            import.meta.env.VITE_DEV_MODE === "true" ? ("allergies" as unknown as MedicalHistoryType) : null
-          )
+          [targetSection, setTargetSection] = useState<MedicalHistoryType | null>(null)
 
     const openAddModal = (section: MedicalHistoryType) =>{
     

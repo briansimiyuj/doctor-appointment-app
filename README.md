@@ -2065,6 +2065,9 @@ Patient details page will show the patient's details; medical history, allergies
           b. `items` prop will be the medical history items
           c. `onAdd` prop will be the `openAddModal` function with the title of the section as argument
 
+        3. If the `items` is empty, display a message to the user to indicate that there is no medical history for the section
+        4. If the `items` is not empty, display a list of items with a delete button and edit button for each item
+
     7. Create the Modal History Modal component and mount it on the Medical History Tab component if `showModal` from the Medical History Tab context is true
 
       #### Modal History Modal Component
