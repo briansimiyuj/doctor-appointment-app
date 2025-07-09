@@ -12,6 +12,12 @@ export const DoctorStatsContextProvider: React.FC<{ children: React.ReactNode }>
         todayAppointments: 10,
         completedAppointments: 120,
         cancelledAppointments: 5,
+        noShowAppointments: 2,
+        upcomingAppointments: 20,
+        newPatientsThisMonth: 12,
+        followUpAppointments: 6,
+        totalAppointments: 130,
+        totalRevenue: 45000,
 
     }),
 

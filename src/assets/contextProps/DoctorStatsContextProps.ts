@@ -6,6 +6,12 @@ export interface DoctorStatsContextProps{
         todayAppointments: number
         completedAppointments: number 
         cancelledAppointments: number
+        upcomingAppointments: number
+        noShowAppointments: number
+        newPatientsThisMonth: number
+        followUpAppointments: number
+        totalRevenue: number    
+        totalAppointments: number
 
     }
 
