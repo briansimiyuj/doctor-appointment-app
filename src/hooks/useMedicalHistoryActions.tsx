@@ -9,29 +9,64 @@ export const useMedicalHistoryActions = () =>{
 
     const addFunction = (section: MedicalHistoryType, value: string) =>{
 
-        let exists = false
+        const trimmedValue = value.trim()
     
         switch(section){
 
             case "medicalConditions":
-                exists = medicalConditions.includes(value)
-                if(!exists) addMedicalCondition(value)
+                
+                if(medicalConditions.includes(trimmedValue)){
+
+                    alert(`You already have ${trimmedValue} in your medical conditions list.`)
+
+                    return
+
+                }
+                         
+                addMedicalCondition(trimmedValue)
 
                 break
 
             case "allergies":
-                exists = allergies.includes(value)
-                if(!exists) addAllergy(value)
+
+                if(allergies.includes(trimmedValue)){
+                    
+                   alert(`You already have ${trimmedValue} in your allergies list.`)
+
+                   return
+                    
+                }   
+
+                addAllergy(trimmedValue)
+
                 break
 
             case "medications":
-                exists = medications.includes(value)
-                if(!exists) addMedication(value)
+                
+                if(medications.includes(trimmedValue)){
+
+                    alert(`You already have ${trimmedValue} in your medications list.`)
+
+                    return
+
+                }
+
+                addMedication(trimmedValue) 
+
                 break
 
             case "surgeries":   
-                exists = surgeries.includes(value)
-                if(!exists) addSurgery(value)
+            
+                if(surgeries.includes(trimmedValue)){
+
+                    alert(`You already have ${trimmedValue} in your surgeries list.`)
+
+                    return
+
+                }
+
+                addSurgery(trimmedValue)
+
                 break
 
             default:
@@ -39,15 +74,7 @@ export const useMedicalHistoryActions = () =>{
 
         }
 
-        if(!exists){
-
-            closeModal()
-
-        }else{
-            
-            alert("This item already exists in the list")
-
-        }
+        closeModal()
     
     }
 
@@ -81,27 +108,40 @@ export const useMedicalHistoryActions = () =>{
     }
 
     const updateFunction = (section: MedicalHistoryType, index: number, newValue: string) =>{
+
+        const trimmedValue = newValue.trim()
+        let currentValue = ''
     
-       switch(section){
+        switch(section){
 
             case "medicalConditions":
-                updateMedicalConditions(index, newValue)
+                currentValue = medicalConditions[index]
+                updateMedicalConditions(index, trimmedValue)
                 break
 
             case "allergies":
-                updateAllergies(index, newValue)
+                currentValue = allergies[index]
+                updateAllergies(index, trimmedValue)
                 break
 
             case "medications":
-                updateMedications(index, newValue)
+                currentValue = medications[index]
+                updateMedications(index, trimmedValue)
                 break
 
             case "surgeries":   
-                updateSurgeries(index, newValue)
+                currentValue = surgeries[index]
+                updateSurgeries(index, trimmedValue)
                 break
 
             default:
                 break
+
+        }
+
+        if(currentValue === trimmedValue){
+
+            alert('No changes were made')
 
         }
 
