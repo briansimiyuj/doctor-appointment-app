@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom"
 import { assets } from "../../assets/frontend/assets"
 import Logo from "../../assets/Logo"
+import { LoginContext } from "../../context/LoginContext"
+import { useContext } from "react"
 
 type MobileMenuPropa ={
 
@@ -11,6 +13,9 @@ type MobileMenuPropa ={
 
 
 const MobileMenu: React.FC<MobileMenuPropa> = ({ showMenu, setShowMenu }) =>{
+
+    const loginContext = useContext(LoginContext),
+          userType = loginContext?.userType
 
     return(
 
@@ -47,16 +52,38 @@ const MobileMenu: React.FC<MobileMenuPropa> = ({ showMenu, setShowMenu }) =>{
                 </NavLink>
 
 
-                <NavLink
-                    to="/doctors"
-                    onClick={() => setShowMenu(false)}
-                >
+                {
 
-                    <li className="inline-block px-4 py-2 rounded">All Doctors</li>
+                    userType === "patient" ?(
+                        
+                        <NavLink
+                            to="/doctors"
+                            onClick={() => setShowMenu(false)}
+                        >
 
-                    <hr className="border-none outline-none h-0.5 bg-primary-bg w-3/5 m-auto hidden"/>
-                    
-                </NavLink>
+                            <li className="inline-block px-4 py-2 rounded">All Doctors</li>
+
+                            <hr className="border-none outline-none h-0.5 bg-primary-bg w-3/5 m-auto hidden"/>
+                            
+                        </NavLink>
+
+                    ):(
+
+                        <NavLink
+                            to="/dashboard"
+                            onClick={() => setShowMenu(false)}
+                        >
+
+                            <li className="inline-block px-4 py-2 rounded">Dashboard</li>
+
+                            <hr className="border-none outline-none h-0.5 bg-primary-bg w-3/5 m-auto hidden"/>
+
+                        </NavLink>
+
+                    )
+
+                }
+
 
 
                 <NavLink

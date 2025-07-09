@@ -37,15 +37,23 @@ ThemeContext is a custom React context that provides a theme to the application.
 
 ### Navbar Component
 
-  The Navbar component is a reusable component that can be used in any React application. It includes a logo, a search bar, and a user profile dropdown.
+Navbar component will a reusable component that will be used in all pages. It will have the following features: logo, menu, dropdown menu and profile picture. 
 
-    1. Create Menu Icon to show mobile menu
-    2. Create a mobile menu component and mount it on Navbar component
-      a. Create cross icon to close mobile menu
-      b. Create a list of links for the mobile menu
-      c. Create a logo for the mobile menu and redirect to home page
-    3. Create a profile picture and a dropdown icon
-    4. Create a dropdown menu for the profile picture and mount it on Navbar component
+  1. Create a logo for the navbar component and mount it on Navbar component. It will be a link to the home page.
+  2. Create a menu list for the navbar component. It will be a list of links to the different pages of the application.
+    a. Home
+    b. About Us
+    c. Doctors (for patients users) 
+    d. Dashboard (for doctors users)
+    e. Contact Us
+
+  3. Create a dropdown menu for the navbar component. It will be a dropdown menu that will show when the user hovers on the profile picture. It will have the following options:
+    a. My Profile
+    b. My Appointments
+    c. Settings
+    d. Logout
+
+  4. Create a mobile menu for the navbar component. It will be similar to the menu list but will be displayed on mobile devices. 
 
 
 ### Home Page
@@ -2081,7 +2089,7 @@ Patient details page will show the patient's details; medical history, allergies
       Modal History Modal will be a reusable component that can be used to add, edit, and delete medical history items. 
 
         1. Reuse the Modal Header component and pass the title based on the mode of the modal (add, edit, delete) and `closeModal` function as props
-        2. Create a Modal Body component and mount it on the Modal History Modal component
+        2. Create a Mo\dal Body component and mount it on the Modal History Modal component
           a. Display a label based on the `targetSection` 
           b. Display a text input field for the item name
 

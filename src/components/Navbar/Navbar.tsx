@@ -12,7 +12,8 @@ const Navbar: React.FC = () =>{
           navigate = useNavigate(),
           location = useLocation(),
           loginContext = useContext(LoginContext),
-          isAuthenticated = loginContext?.isAuthenticated
+          isAuthenticated = loginContext?.isAuthenticated,
+          userType = loginContext?.userType
 
     return(
 
@@ -45,13 +46,33 @@ const Navbar: React.FC = () =>{
                 </NavLink>
 
 
-                <NavLink to="/doctors">
+                {
 
-                    <li className="py-1">Doctors</li>
+                    userType === "patient" ?(
 
-                    <hr className="border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden"/>
+                        <NavLink to="/doctors">
 
-                </NavLink>
+                            <li className="py-1">Doctors</li>
+
+                            <hr className="border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden"/>
+
+                        </NavLink>
+
+                    ):(
+
+                        <NavLink to="/dashboard">
+
+                            <li className="py-1">Dashboard</li>
+
+                            <hr className="border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden"/>
+
+                        </NavLink>
+
+                    )
+
+                }
+
+
 
 
                 <NavLink to="/contact-us">
