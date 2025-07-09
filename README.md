@@ -2350,3 +2350,10 @@ Schedule slots component will be used to display the doctor's schedule.
 
   1. Create a Schedule Slots Component and mount it on the Weekly Calendar Component
   2. Transfer the schedule UI from the Weekly Calendar Component to the Schedule Slots Component
+
+### Dashboard Page
+
+Dashboard page will be used to display the doctor's schedule, statistics, reviews, performance and other relevant information.
+
+  1. Create a Dashboard Page and mount it on the Script Component and provide a route for it
+  2. Wrap it with DoctorStatsProvider, AppointmentsProvider and ScheduleProvider

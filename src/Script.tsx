@@ -23,6 +23,9 @@ import { SettingsProvider } from "./context/SettingsContext"
 import PatientDetailsPage from "./pages/PatientDetailsPage"
 import { PatientDetailsProvider } from "./context/PatientDetailsContext"
 import DocumentFullViewPage from "./pages/DocumentFullViewPage"
+import { DoctorStatsContextProvider } from "./context/DoctorStatsContext"
+import DashboardPage from "./pages/DashboardPage"
+import { ScheduleProvider } from "./context/ScheduleContext"
 
 const Script: React.FC = () =>{
 
@@ -117,6 +120,24 @@ const Script: React.FC = () =>{
                         </AppointmentsContextProvider>
 
                       </BookingContextProvider>
+
+                    }/>
+
+                    <Route path="/dashboard" element={
+
+                      <DoctorStatsContextProvider>
+
+                        <AppointmentsContextProvider>
+
+                          <ScheduleProvider>
+
+                            <DashboardPage/>
+
+                          </ScheduleProvider>
+
+                        </AppointmentsContextProvider>
+
+                      </DoctorStatsContextProvider>
 
                     }/>
 
