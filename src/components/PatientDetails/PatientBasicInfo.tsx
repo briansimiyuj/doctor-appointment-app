@@ -2,17 +2,8 @@ import { usePatientDetails } from "../../context/PatientDetailsContext"
 
 const PatientBasicInfo: React.FC = ()=>{
 
-    const { patientDetails } = usePatientDetails(),
+    const { patientDetails, medicalConditions } = usePatientDetails(),
           patient = patientDetails?.patientInfo
-
-    const medicalConditons =[
-        
-        ...(patient?.medicalHistory?.diseases || []),
-        ...(patient?.medicalHistory?.allergies || []),
-        ...(patient?.medicalHistory?.medications || []),
-        ...(patient?.medicalHistory?.surgeries || [])
-
-    ]
 
     return(
 
@@ -31,16 +22,16 @@ const PatientBasicInfo: React.FC = ()=>{
             </div>
 
 
-            <div className="mt-4 md:mt-0">
+            <div className="mt-4 md:mt-0 ml-5">
 
                 {
-                    medicalConditons?.length > 0 ?(
+                    medicalConditions?.length > 0 ?(
 
                         <div className="flex flex-wrap gap-2">
 
                             {
 
-                                medicalConditons?.map((condition, index) =>(
+                                medicalConditions?.map((condition, index) =>(
 
                                     <div className="flex flex-wrap gap-2">
 

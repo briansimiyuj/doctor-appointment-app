@@ -48,7 +48,7 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
       }),
       [medicalConditions, setMedicalConditions] = useState<string[]>(() =>{
 
-            const savedMedicalConditions = localStorage.getItem(`medical-conditions-${patientID}`)
+            const savedMedicalConditions = localStorage.getItem(`medicalConditions-${patientID}`)
 
             return savedMedicalConditions ? JSON.parse(savedMedicalConditions) : []
 
