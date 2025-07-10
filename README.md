@@ -2391,3 +2391,5 @@ Dashboard page will be used to display the doctor's schedule, statistics, review
 
       1. Retrieve `reviews` and `ratings` from `DoctorStatsProvider`
       2. Create a SectionHeader component and mount it on the ReviewsSection Component and pass `average` as `rating.average` and `total` as `rating.total`
+      3. Create a ReviewsList component and mount it on the ReviewsSection Component and pass `reviews` as `reviews`
+         a. Loop through `reviews` and create a ReviewItem component for each review with `review` as `review` prop
