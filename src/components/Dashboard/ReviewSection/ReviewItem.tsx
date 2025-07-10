@@ -12,31 +12,35 @@ const ReviewItem: React.FC<ReviewItemProps> = ({ review })=>{
 
         <div className="block">
 
-            <div className="flex justify-between w-full">
+            <div className="flex justify-between w-full flex-col p-1">
 
-                <img
-                    src={review.patientImage}
-                    alt={`${review.patientName} Image`}
-                    className="w-10 h-10 rounded-full mr-2"
-                />
+                <div className="flex items-center">
 
-                <div className="flex flex-col w-1/4">
+                    <img
+                        src={review.patientImage}
+                        alt={`${review.patientName} Image`}
+                        className="w-10 h-10 rounded-full mr-2"
+                    />
+                    
+                    <div className="flex sm:gap-5 w-full flex-col sm:flex-row">
+                       
+                        <p className="font-semibocld">{review.patientName}</p>
+                        
+                        <p className="text-sm text-gray-500">{review.createdAt}</p>        
+                    
+                    </div>
 
-                    <div className="font-semibold">{review.patientName}</div>
-        
-                    <div className="text-sm text-gray-500">{review.createdAt}</div>
+                </div> 
+
+                <div className="text-yellow-500 mt-5">
+
+                    {"⭐️".repeat(review.ratings)}
                 
                 </div>
-
-                <p className="text-gray-700 ml-5">{review.comment}</p>
+                <p className="text-gray-700 mt-5">{review.comment}</p>
 
             </div>
 
-            <div className="text-yellow-500 mt-5">
-
-                {"⭐️".repeat(review.ratings)}
-            
-            </div>
             
 
         </div>

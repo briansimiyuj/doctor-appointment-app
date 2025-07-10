@@ -11,7 +11,7 @@ const ReviewList: React.FC<ReviewListProps> = ({ reviews })=>{
 
     return(
 
-        <div className="space-y-4 max-h-72 overflow-y-auto">
+        <div className="space-y-4 overflow-y-auto">
 
             {
 
