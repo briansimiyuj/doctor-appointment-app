@@ -2382,3 +2382,12 @@ Dashboard page will be used to display the doctor's schedule, statistics, review
       4. Create a `visibleSummary` state and initialize it to if `showAll` is true, `performanceSummaryArray` otherwise `performanceSummaryArray.slice(0, 3)`
       5. Loop through `visibleSummary` and create a card for each `summary` with the `label` and `value` displayed
       6. Create a button to toggle the `showAll` state and display all or less performance summary
+
+  5. Create a ReviewsSection component to display the doctor's reviews and mount it on the Dashboard Page
+
+    #### ReviewsSection Component
+
+    ReviewsSection component will be used to display the doctor's reviews.
+
+      1. Retrieve `reviews` and `ratings` from `DoctorStatsProvider`
+      2. Create a SectionHeader component and mount it on the ReviewsSection Component and pass `average` as `rating.average` and `total` as `rating.total`

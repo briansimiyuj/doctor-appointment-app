@@ -1,4 +1,5 @@
 import PerformanceSummary from "../components/Dashboard/PerformanceSummary"
+import ReviewsSection from "../components/Dashboard/ReviewSection/ReviewsSection"
 import StatsGrid from "../components/Dashboard/StatsGrid"
 
 const DashboardPage: React.FC = ()=>{
@@ -12,6 +13,8 @@ const DashboardPage: React.FC = ()=>{
             <StatsGrid/>
 
             <PerformanceSummary/>
+
+            <ReviewsSection/>
 
         </div>
 
