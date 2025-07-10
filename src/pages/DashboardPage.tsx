@@ -1,3 +1,4 @@
+import PerformanceSummary from "../components/Dashboard/PerformanceSummary"
 import StatsGrid from "../components/Dashboard/StatsGrid"
 
 const DashboardPage: React.FC = ()=>{
@@ -9,6 +10,8 @@ const DashboardPage: React.FC = ()=>{
             <h1 className="text-2xl font-bold mb-6 text-gray-900">Doctor Dashboard</h1>
 
             <StatsGrid/>
+
+            <PerformanceSummary/>
 
         </div>
 

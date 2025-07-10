@@ -2359,13 +2359,26 @@ Dashboard page will be used to display the doctor's schedule, statistics, review
   2. Wrap it with DoctorStatsProvider, AppointmentsProvider and ScheduleProvider
   3. Create a StatsGrid Component to display the doctor's statistics and mount it on the Dashboard Page
 
-  #### StatsGrid Component
+    #### StatsGrid Component
 
-  StatsGrid component will be used to display the doctor's statistics.
+    StatsGrid component will be used to display the doctor's statistics.
 
-    1. Retrieve `stats` from `DoctorStatsProvider`
-    2. Create an array of `stat` objects `statsArray` with the following structure: `label: string, value: number`
-    3. Create a `showAll` state and initialize it to false
-    4. Create a `visibleStats` state and initialize it to if `showAll` is true, `statsArray` otherwise `statsArray.slice(0, 3)`
-    5. Loop through `visibleStats` and create a card for each `stat` with the `label` and `value` displayed
-    6. Create a button to toggle the `showAll` state and display all or less statistics
+      1. Retrieve `stats` from `DoctorStatsProvider`
+      2. Create an array of `stat` objects `statsArray` with the following structure: `label: string, value: number`
+      3. Create a `showAll` state and initialize it to false
+      4. Create a `visibleStats` state and initialize it to if `showAll` is true, `statsArray` otherwise `statsArray.slice(0, 3)`
+      5. Loop through `visibleStats` and create a card for each `stat` with the `label` and `value` displayed
+      6. Create a button to toggle the `showAll` state and display all or less statistics
+
+  4. Create a PerformanceSummary Component to display the doctor's performance summary and mount it on the Dashboard Page
+
+    #### PerformanceSummary Component
+
+    PerformanceSummary component will be used to display the doctor's performance summary.
+
+      1. Retrieve `performance` from `DoctorStatsProvider`
+      2. Create a `performanceSummaryArray` with the following structure: `label: string, value: number`
+      3. Create a `showAll` state and initialize it to false
+      4. Create a `visibleSummary` state and initialize it to if `showAll` is true, `performanceSummaryArray` otherwise `performanceSummaryArray.slice(0, 3)`
+      5. Loop through `visibleSummary` and create a card for each `summary` with the `label` and `value` displayed
+      6. Create a button to toggle the `showAll` state and display all or less performance summary
