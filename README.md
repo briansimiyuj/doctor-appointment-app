@@ -2408,3 +2408,7 @@ Dashboard page will be used to display the doctor's schedule, statistics, review
 
       1. Create a title for the Section
       2. Create a button to go to the Schedule Page
+      3. Retrieve `schedule` from `ScheduleProvider` 
+      4. From the `schedule` object, retrieve the `todayWorkingHours` and `nextAvailableSlots` 
+      5. Display `todayWorkingHours` 
+      6. Create a SlotList component and mount it on the ScheduleSnapshot Component and pass `nextAvailableSlots` as `slots` prop
