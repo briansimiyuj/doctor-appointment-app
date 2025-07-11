@@ -2394,3 +2394,8 @@ Dashboard page will be used to display the doctor's schedule, statistics, review
       3. Create a ReviewsList component and mount it on the ReviewsSection Component and pass `reviews` as `reviews`
          a. Loop through `reviews` and create a ReviewItem component for each review with `review` as `review` prop
          b. Create a ReviewItem component to display the review's `review` and `rating` and mount it on the ReviewsList Component
+         c. Create a `visibleCount` state and initialize it to 3
+         d. Create a `loadMoreReviews` function to load more reviews and update the `visibleCount` state by adding 3 to it
+         e. Slice the `reviews` array by `visibleCount` and assign it to `visibleReviews` 
+         f. Loop through `visibleReviews` and create a ReviewItem component for each review with `review` as `review` prop
+         g. If `visibleCount` is less than the total number of reviews, display a "Load More" button and attach the `loadMoreReviews` function to it
