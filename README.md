@@ -2399,3 +2399,12 @@ Dashboard page will be used to display the doctor's schedule, statistics, review
          e. Slice the `reviews` array by `visibleCount` and assign it to `visibleReviews` 
          f. Loop through `visibleReviews` and create a ReviewItem component for each review with `review` as `review` prop
          g. If `visibleCount` is less than the total number of reviews, display a "Load More" button and attach the `loadMoreReviews` function to it
+
+  6. Create a ScheduleSnapshot component to display the doctor's schedule snapshot and mount it on the Dashboard Page
+
+    #### ScheduleSnapshot Component
+
+    ScheduleSnapshot component will be used to display the doctor's schedule snapshot.
+
+      1. Create a title for the Section
+      2. Create a button to go to the Schedule Page
