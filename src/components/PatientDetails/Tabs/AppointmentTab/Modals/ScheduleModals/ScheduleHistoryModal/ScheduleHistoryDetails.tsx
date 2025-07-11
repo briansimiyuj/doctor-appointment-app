@@ -1,4 +1,4 @@
-import { ScheduleHistoryItem } from "../../../../assets/types/ScheduleHistoryItem"
+import { ScheduleHistoryItem } from "../../../../../../../assets/types/ScheduleHistoryItem"
 
 interface ScheduleHistoryDetailsProp{
 

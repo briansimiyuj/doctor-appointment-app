@@ -1,4 +1,3 @@
-import { MedicalHistoryType } from "../../../../assets/types/MedicalHistoryType"
 import { useMedicalHistoryTabContext } from "../../../../context/MedicalHistoryTabContext"
 import { usePatientDetails } from "../../../../context/PatientDetailsContext"
 import MedicalHistorySection from "./Sections/MedicalHistorySection" 
