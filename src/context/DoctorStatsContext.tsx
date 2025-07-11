@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react"
 import { DoctorStatsContextProps } from "../assets/contextProps/DoctorStatsContextProps"
-import { assets } from "../assets/frontend/assets"
+import { dummyReviews } from "../assets/dummyData/DummyReviews"
 
 export const DoctorStatsContext = createContext<DoctorStatsContextProps | null>(null)
 
@@ -39,17 +39,7 @@ export const DoctorStatsContextProvider: React.FC<{ children: React.ReactNode }>
     }),
 
 
-    [reviews] = useState([{
-        
-        _id: 'rev123',
-        patientID: 'pat123',
-        patientName: 'John Doe',
-        patientImage: assets?.appointmentImage,
-        ratings: 5,
-        comment: 'Dr. Smith is very knowledgeable and caring. She took the time to explain my condition and treatment options in detail.',
-        createdAt: '2024-02-15',
-
-    }]),
+    [reviews] = useState(dummyReviews),
 
     [performance] = useState({
 
