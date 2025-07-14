@@ -464,13 +464,51 @@ Login page will be used to log in and sign up the user. A user can either log in
      d. Create a span to switch to the Sign Up component when the user does not have an account
 
   6. Create a section for the Google aunthentication button for both the Sign In and Sign Up components
+
+### Appointments Context
+
+The Appointments Context manages all appointment data in the app. It enriches raw appointment JSON with patient and doctor info, splits appointments into upcoming and past, and makes them globally available for any component to consume.
+
+  1. Create props for the Appointments context  
+    a. Define `AppointmentsContextProps` with:  
+        i. `appointments: AppointmentType[]`  
+        ii. `pastAppointments: AppointmentType[]`  
+        iii. `upcomingAppointments: AppointmentType[]`  
+
+  2. Create state variables for appointments  
+    a. `appointments` — initialized as an empty array `[]`  
+    b. `pastAppointments` — initialized as an empty array `[]`  
+    c. `upcomingAppointments` — initialized as an empty array `[]`  
+
+  3. Use `useEffect` to enrich and prepare data on mount  
+    a. Load raw data from `AppointmentData.json`  
+    b. For each appointment:  
+        i. Find the matching patient by name from `patients` data  
+        ii. If patient is not found, skip that appointment  
+        iii. Create a `doctor` object with `_id`, `name`, and `image`  
+        iv. Normalize `consultationType` to `"online"` or `"in-person"`  
+
+  4. Filter out invalid appointments  
+    a. Exclude any appointments that have `null` values  
+    b. Cast the result as `AppointmentType[]`  
+
+  5. Save enriched appointments to state  
+    a. Call `setAppointments` with the final array  
+
+  6. Split appointments into upcoming and past  
+    a. Get the current date  
+    b. Filter upcoming appointments:  
+        i. Date is equal to or after now and the status is `"pending"`, `"confirmed"`, `"approved"`, `"rescheduled"`, or `"follw-up"`.
+    c. Filter past appointments:  
+        i. Date is before now  and the status is `"completed"`, `"cancelled"` or `"rejected"`.
+    d. Update `pastAppointments` and `upcomingAppointments` using `setPastAppointments` and `setUpcomingAppointments`  
   
   
 ### My Appointments Page
 
 My appointments page will show the user's appointments. It will have a list of appointments with the doctor's name, date, time, and location. The user will be able pay for the appointment and cancel it.
 
-  1. Create a My Appointments Page and mount it on Script component and provide a route for it. Wrap the route with BookingContextProvider
+  1. Create a My Appointments Page and mount it on Script component and provide a route for it. Wrap the route with BookingContextProvider and AppointmentContextProvider
   2. Loop through the doctors array and create a card component and mount it on the My Appointments Page
     a. Create buttons to pay for the appointment and cancel it  
     b. Create Appointment photo component and mount it on the card component
