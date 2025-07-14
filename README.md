@@ -509,6 +509,10 @@ The Appointments Context manages all appointment data in the app. It enriches ra
 My appointments page will show the user's appointments. It will have a list of appointments with the doctor's name, date, time, and location. The user will be able pay for the appointment and cancel it.
 
   1. Create a My Appointments Page and mount it on Script component and provide a route for it. Wrap the route with BookingContextProvider and AppointmentContextProvider
+  2. Create a Tab Selector Buttons component and mount it on the My Appointments Page
+    a. Retrieve the `activeTab` state variable from the AppointmentContext
+    b. Display `Upcoming`, and `Past` buttons
+    c. When a button is clicked, update the `activeTab` state variable with the button's value
   2. Loop through the doctors array and create a card component and mount it on the My Appointments Page
     a. Create buttons to pay for the appointment and cancel it  
     b. Create Appointment photo component and mount it on the card component

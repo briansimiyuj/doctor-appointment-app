@@ -6,6 +6,7 @@ import { LoginContext } from "../context/LoginContext"
 import NotFoundPage from "./NotFoundPage"
 import { AppointedPatientType } from "../assets/types/AppointedPatientType"
 import PatientAppointmentCard from "../components/Appointments/PatientAppointmentCard"
+import TabSelectorButtons from "../components/Appointments/TabSelectorButtons"
 
 const MyAppointmentsPage: React.FC = ()=>{
 
@@ -25,6 +26,8 @@ const MyAppointmentsPage: React.FC = ()=>{
                     <>
 
                         <h2 className="pb-3 mt-12 font-medium text-zinc-700 boorder-b">My Appointments</h2>
+
+                        <TabSelectorButtons/>
 
                         {
 
