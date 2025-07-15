@@ -1,19 +1,43 @@
 import AppointmentCard from "../components/Appointments/AppointmentCard"
-import { AppointedDoctorType } from "../assets/types/AppointedDoctorType"
-import { BookingContext } from "../context/BookingContext"
 import { useContext } from "react"
 import { LoginContext } from "../context/LoginContext"
 import NotFoundPage from "./NotFoundPage"
-import { AppointedPatientType } from "../assets/types/AppointedPatientType"
 import PatientAppointmentCard from "../components/Appointments/PatientAppointmentCard"
 import TabSelectorButtons from "../components/Appointments/TabSelectorButtons"
+import { AppointmentsContext } from "../context/AppointmentContext"
 
 const MyAppointmentsPage: React.FC = ()=>{
 
-    const { appointedDoctors, appointedPatients } = useContext(BookingContext),
+    const { activeTab,  pastAppointments, upcomingAppointments } = useContext(AppointmentsContext),
           loginContext = useContext(LoginContext),
           isAuthenticated = loginContext?.isAuthenticated,
           userType = loginContext?.userType
+
+    const renderAppointments = () =>{
+    
+        const data = activeTab === "upcoming" ? upcomingAppointments : pastAppointments
+
+        if(data.length === 0){
+
+            return <p className="text-center text-gray-500">You have no {activeTab} appointments</p>
+
+        }
+
+        return data.map((appointment, index) =>(
+
+            userType === "patient" ?(
+
+                <AppointmentCard key={index} doctor={appointment.doctor}/>
+
+            ):(
+                
+                <PatientAppointmentCard key={index} patient={appointment.patient}/>
+
+            )
+
+        ))
+    
+    } 
 
     return(
 
@@ -29,42 +53,7 @@ const MyAppointmentsPage: React.FC = ()=>{
 
                         <TabSelectorButtons/>
 
-                        {
-
-                            userType === "patient" ?(
-
-                                appointedDoctors && appointedDoctors.length > 0 ?(
-
-                                    appointedDoctors.map((doctor: AppointedDoctorType, index: number) =>(
-
-                                        <AppointmentCard doctor={doctor} key={index}/>
-
-                                    ))
-
-                                ):(
-
-                                    <p className="text-center text-gray-500">You have no appointments</p>
-
-                                )
-
-                            ):(
-
-                                appointedPatients && appointedPatients.length > 0 ?(
-
-                                    appointedPatients.map((patient: AppointedPatientType, index: number) =>(
-
-                                        <PatientAppointmentCard key={index} patient={patient}/>
-
-                                    ))
-
-                                ):(
-
-                                    <p className="text-center text-gray-500">You have no appointments</p>
-                                )
-
-                            )
-                            
-                        }
+                        <div className="mt-6">{renderAppointments()}</div>
 
                     </>
 

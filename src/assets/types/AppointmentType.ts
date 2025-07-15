@@ -1,20 +1,11 @@
+import { AppointedDoctorType } from "./AppointedDoctorType"
+import { AppointedPatientType } from "./AppointedPatientType"
+
 export  interface AppointmentType{
 
-    patient:{
+    patient: AppointedPatientType
 
-        _id: string
-        name: string
-        image: string
-
-    }
-
-    doctor:{
-
-        _id: string
-        name: string
-        image: string
-
-    }
+    doctor: AppointedDoctorType
 
     _id: string
     date: string

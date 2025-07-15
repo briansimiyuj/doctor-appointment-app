@@ -518,6 +518,15 @@ My appointments page will show the user's appointments. It will have a list of a
     b. Create Appointment photo component and mount it on the card component
     c. Create Doctor information component and mount it on the card component
 
+  3. Retrieve the `activeTab` state, `pastAppointments`, and `upcomingAppointments` state variables from the AppointmentContext
+  4. Create `renderAppointment` function that will filter the appointments based on the `activeTab` state variable
+    a. If `activeTab` is `Upcoming`, return the `upcomingAppointments` otherwise return the `pastAppointments` and set it to `data` constant
+    b. If `data` is empty, return a message saying "No Appointments"
+    c. Loop through the `data` array and create a card component for appointment
+       i. If the user is patient, return AppointmentCard component and pass `key` and `doctor` as props
+       ii. If the user is doctor, return PatientAppointmentCard component and pass `key` and `patient` as props
+
+    d. Return the `renderAppointment` function as a JSX element
 
     #### Appointed Doctors
 
@@ -526,9 +535,9 @@ My appointments page will show the user's appointments. It will have a list of a
       1. Create a type for Appointed Doctors
       2. Create a state variable for the appointed doctors and initialize it with an empty array and pass as props
 
-  3. Get appointed doctors from the local storage
-  4. If there are no appointed doctors, display a message saying "No Appointments" 
-  5. If there are appointed doctors, loop through the appointed doctors array and create a card component and mount it on the Appointed Doctors Page
+  5. Get appointed doctors from the local storage
+  6. If there are no appointed doctors, display a message saying "No Appointments" 
+  7. If there are appointed doctors, loop through the appointed doctors array and create a card component and mount it on the Appointed Doctors Page
     a. Pass doctor info as props to the card component
     b. Display the doctor's name, date, time, and location
     c. Create a button to cancel the appointment 
