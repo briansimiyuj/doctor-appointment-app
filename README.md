@@ -484,8 +484,8 @@ The Appointments Context manages all appointment data in the app. It enriches ra
     a. Load raw data from `AppointmentData.json`  
     b. For each appointment:  
         i. Find the matching patient by name from `patients` data  
-        ii. If patient is not found, skip that appointment  
-        iii. Create a `doctor` object with `_id`, `name`, and `image`  
+        ii. Find the matching doctor by name from `doctors` data 
+        iii. If either patient or doctor is not found, skip that appointment
         iv. Normalize `consultationType` to `"online"` or `"in-person"`  
 
   4. Filter out invalid appointments  

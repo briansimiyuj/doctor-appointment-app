@@ -3,6 +3,9 @@ import appointmentsData from "../assets/frontend/AppointmentData.json"
 import { patients } from "../assets/frontend/patientsData"
 import { AppointmentType } from "../assets/types/AppointmentType"
 import { AppointmentsContextProps } from "../assets/contextProps/AppointmentsContextProps"
+import { AppointedPatientType } from "../assets/types/AppointedPatientType"
+import { AppointedDoctorType } from "../assets/types/AppointedDoctorType"
+import { doctors } from "../assets/frontend/doctorsData"
 
 interface AppointmentsContextProviderProps{
 
@@ -31,16 +34,56 @@ export const AppointmentsContextProvider: React.FC<AppointmentsContextProviderPr
 
         const enrichedAppointments = appointmentsData.map(appointment =>{
 
-            const patient = patients.find(p => p.name === appointment.patient)
+            const patient = patients.find(p => p.name === appointment.patient),
+                  doctor = doctors.find(d => d.name === appointment.doctor)
 
-            if(!patient) return null
+            if(!patient || !doctor) return null
 
-            const doctor = { _id: appointment.doctor, name: appointment.doctor, image: appointment.doctor }
+            const appointedPatient: AppointedPatientType ={
+
+                patientInfo:{
+
+                    _id: patient._id,
+                    name: patient.name,
+                    age: patient.age,
+                    gender: patient.gender,
+                    status: patient.status,
+                    image: patient.image,
+                    contact: patient.contact,
+                    address: patient.address,
+                    appointment: patient.appointment,
+                    medicalHistory: patient.medicalHistory
+
+                },
+
+                appointedTime:{
+                
+                    dateTime: new Date(appointment.date),
+                    time: appointment.time,
+                    slotTime: appointment.time,
+                    status: "booked",
+
+                }
+            
+            }
+
+            const appointedDoctor: AppointedDoctorType ={
+
+                doctorInfo: doctor,
+                appointmentTime:{
+
+                    dateTime: new Date(appointment.date),
+                    time: appointment.time,
+                    slotTime: appointment.time,
+                    status: "booked",
+
+                }
+
+            }
 
             const consultationType: "online" | "in-person" = appointment.consultationType?.toLowerCase() === "in-person" ? "in-person" : "online"
-
             
-            return { ...appointment, patient, doctor, consultationType }
+            return { ...appointment, patient: appointedPatient, doctor: appointedDoctor, consultationType }
 
 
         }).filter(appointment => appointment !== null)
