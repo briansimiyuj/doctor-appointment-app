@@ -1,50 +1,111 @@
 [
-    {
-        "_id": "appointment1",
-        "date": "2025-03-10",
-        "time": "10:30 AM",
-        "doctor": "Dr. Michael Johnson",
-        "speciality": "Cardiologist",
-        "patient": "John Doe",
-        "status": "confirmed",
-        "fees": 70,
-        "consultationType": "Online"
-    },
 
-    {
-        "_id": "appointment2",
-        "date": "2025-03-12",
-        "time": "2:00 PM",
-        "doctor": "Dr. Sophia Mwangi",
-        "speciality": "Gynecologist",
-        "patient": "Jane Wanjiru",
-        "status": "pending",
-        "fees": 70,
-        "consultationType": "In Person"
-    },
-
-    {
-        "_id": "appointment3",
-        "date": "2025-03-15",
-        "time": "11:00 AM",
-        "doctor": "Dr. Amina Hussein",
-        "speciality": "Dermatologist",
-        "patient": "Ali Mohammed",
-        "status": "approved",
-        "fees": 70,
-        "consultationType": "Online"
-    },
-
-    {
-        "_id": "appointment4",
-        "date": "2025-03-18",
-        "time": "9:30 AM",
-        "doctor": "Dr. David Smith",
-        "speciality": "Pediatrician",
-        "patient": "Mary Achieng",
-        "status": "pending",
-        "fees": 50,
-        "consultationType": "In Person"
-    }
+  {
+    "_id": "appointment1",
+    "date": "2025-06-10",
+    "time": "10:30 AM",
+    "doctor": "Dr. Michael Johnson",
+    "speciality": "Cardiologist",
+    "patient": "John Doe",
+    "status": "completed",
+    "fees": 70,
+    "consultationType": "online"
+  },
+  
+  {
+    "_id": "appointment2",
+    "date": "2025-07-10",
+    "time": "2:00 PM",
+    "doctor": "Dr. Sophia Mwangi",
+    "speciality": "Gynecologist",
+    "patient": "Jane Wanjiru",
+    "status": "cancelled",
+    "fees": 70,
+    "consultationType": "in-person"
+  },
+  
+  {
+    "_id": "appointment3",
+    "date": "2025-07-12",
+    "time": "11:00 AM",
+    "doctor": "Dr. Amina Hussein",
+    "speciality": "Dermatologist",
+    "patient": "Ali Mohammed",
+    "status": "rejected",
+    "fees": 70,
+    "consultationType": "online"
+  },
+  
+  {
+    "_id": "appointment4",
+    "date": "2025-07-14",
+    "time": "9:30 AM",
+    "doctor": "Dr. David Smith",
+    "speciality": "Pediatrician",
+    "patient": "Mary Achieng",
+    "status": "completed",
+    "fees": 50,
+    "consultationType": "in-person"
+  },
+  
+  {
+    "_id": "appointment5",
+    "date": "2025-07-20",
+    "time": "12:00 PM",
+    "doctor": "Dr. Peter Mwangi",
+    "speciality": "General Physician",
+    "patient": "Nancy Muthoni",
+    "status": "follow-up",
+    "fees": 40,
+    "consultationType": "in-person"
+  },
+  
+  {
+    "_id": "appointment6",
+    "date": "2025-07-25",
+    "time": "10:00 AM",
+    "doctor": "Dr. Emily Chebet",
+    "speciality": "Neurologist",
+    "patient": "Kevin Kiptoo",
+    "status": "rescheduled",
+    "fees": 90,
+    "consultationType": "online"
+  },
+  
+  {
+    "_id": "appointment7",
+    "date": "2025-07-28",
+    "time": "1:30 PM",
+    "doctor": "Dr. Samuel Kimani",
+    "speciality": "Orthopedic",
+    "patient": "Faith Njeri",
+    "status": "approved",
+    "fees": 60,
+    "consultationType": "in-person"
+  },
+  
+  {
+    "_id": "appointment8",
+    "date": "2025-07-30",
+    "time": "4:00 PM",
+    "doctor": "Dr. Grace Wambui",
+    "speciality": "ENT Specialist",
+    "patient": "James Karanja",
+    "status": "pending",
+    "fees": 55,
+    "consultationType": "online"
+  },
+  
+  {
+    "_id": "appointment9",
+    "date": "2025-08-02",
+    "time": "3:00 PM",
+    "doctor": "Dr. Fatma Ali",
+    "speciality": "Psychiatrist",
+    "patient": "Brian Otieno",
+    "status": "confirmed",
+    "fees": 80,
+    "consultationType": "online"
+  }
 
 ]
