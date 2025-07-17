@@ -20,7 +20,7 @@ const ScheduleHistoryDetails: React.FC<ScheduleHistoryDetailsProp> = ({ item })=
 
                 <p className="text-sm">Time: {item.appointment.time}</p>
 
-                <p className="text-sm">Doctor: {item.appointment.doctor.name}</p>
+                <p className="text-sm">Doctor: {item.appointment.doctor.doctorInfo.name}</p>
 
                 {
 

@@ -19,11 +19,9 @@ export const useCompleteAppointment = (onClose?: () => void) =>{
         updateAppointmentStatus(appointmentToManage, "completed")
         
         const performedBy ={
-    
             type: userType,
-            name: userType === "doctor" ? appointmentToManage?.doctor.name : appointmentToManage?.patient.name,
-            _id: userType === "doctor" ? appointmentToManage?.doctor._id : appointmentToManage?.patient._id
-    
+            name: userType === "doctor" ? appointmentToManage?.doctor.doctorInfo.name : appointmentToManage?.patient.patientInfo.name,
+            _id: userType === "doctor" ? appointmentToManage?.doctor.doctorInfo._id : appointmentToManage?.patient.patientInfo._id
         }
 
         addScheduleHistoryEntry(

@@ -28,12 +28,19 @@ export const useRescheduleAppointment = () =>{
             date: newDate,
             time: newTime,
             consultationType: consultationType,
-            doctor:{
-
-                _id: selectedDoctor._id,
-                name: selectedDoctor.name,
-                image: selectedDoctor.image
-
+            doctor: {
+                doctorInfo: {
+                    _id: selectedDoctor._id,
+                    name: selectedDoctor.name,
+                    image: selectedDoctor.image,
+                    speciality: selectedDoctor.speciality,
+                    degree: selectedDoctor.degree,
+                    experience: selectedDoctor.experience,
+                    about: selectedDoctor.about,
+                    fees: selectedDoctor.fees,
+                    address: selectedDoctor.address
+                },
+                appointmentTime: appointment.doctor.appointmentTime
             },
 
          status: "rescheduled"
@@ -42,7 +49,7 @@ export const useRescheduleAppointment = () =>{
 
         updateAppointment(updatedAppointment)
 
-        const patientID = appointment.patient._id || 'defaultPatientID',
+        const patientID = appointment.patient.patientInfo._id || 'defaultPatientID',
               storedAppointments = (localStorage.getItem(`appointments-${patientID}`) || "[]"),
               updatedAppointments = JSON.parse(storedAppointments).map((app: AppointmentType) => app._id === appointment._id ? updatedAppointment : app)
 
@@ -54,8 +61,8 @@ export const useRescheduleAppointment = () =>{
 
                 date: appointment.date,
                 time: appointment.time,
-                doctorID: appointment.doctor._id,
-                doctorName: appointment.doctor.name,
+                doctorID: appointment.doctor.doctorInfo._id,
+                doctorName: appointment.doctor.doctorInfo.name,
                 consultationType: appointment.consultationType
 
             }, 
@@ -83,8 +90,8 @@ export const useRescheduleAppointment = () =>{
         const performedBy ={
 
             type: userType,
-            name: userType === "doctor" ? appointment.doctor.name : appointment.patient.name,
-            _id: userType === "doctor" ? appointment.doctor._id : appointment.patient._id
+            name: userType === "doctor" ? appointment.doctor.doctorInfo.name : appointment.patient.patientInfo.name,
+            _id: userType === "doctor" ? appointment.doctor.doctorInfo._id : appointment.patient.patientInfo._id
 
         }   
 

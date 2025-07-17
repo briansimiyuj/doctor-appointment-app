@@ -21,12 +21,12 @@ export const useAddNotesSubmit = (appointment: AppointmentType | null) =>{
             _id: uuid(),
             appointmentID: appointment._id || `${appointment.date}-${appointment.time}`,
             patientID: patientDetails.patientInfo._id,
-            doctorID: appointment.doctor._id,
+            doctorID: appointment.doctor.doctorInfo._id,
             notes: notes.trim(),
             diagnosis: diagnosis.trim() || undefined,
             prescription: prescription.trim() || undefined,
             followUpDate: followUpDate.trim() || undefined,
-            doctorName: appointment.doctor.name,
+            doctorName: appointment.doctor.doctorInfo.name,
             createdAt: new Date().toISOString(),
 
         }

@@ -43,8 +43,8 @@ export const useScheduleAppointment = () =>{
         const performedBy ={
 
             type: userType,
-            name: userType === "doctor" ? appointment.doctor.name : patientDetails?.patientInfo?.name,
-            _id: userType === "doctor" ? appointment.doctor._id : patientDetails?.patientInfo?._id
+            name: userType === "doctor" ? appointment.doctor.doctorInfo.name : patientDetails?.patientInfo?.name,
+            _id: userType === "doctor" ? appointment.doctor.doctorInfo._id : patientDetails?.patientInfo?._id
 
         }
 

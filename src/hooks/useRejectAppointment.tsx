@@ -51,11 +51,11 @@ export const useRejectAppointment = () =>{
 
             type: userType,
             name: userType === "doctor" 
-                ? appointment.doctor.name || "Doctor"
-                : appointment.patient.name || "Patient",
+                ? appointment.doctor.doctorInfo.name || "Doctor"
+                : appointment.patient.patientInfo.name || "Patient",
             _id: userType === "doctor"
-                ? appointment.doctor._id
-                : appointment.patient._id
+                ? appointment.doctor.doctorInfo._id
+                : appointment.patient.patientInfo._id
 
         }
 
@@ -66,7 +66,7 @@ export const useRejectAppointment = () =>{
             reason,
             alternative,
             performedBy,
-            `Appointment rejected by ${userType}. ${appointment.doctor.name} on ${appointment.date} at ${appointment.time} due to ${reason}.`   
+            `Appointment rejected by ${userType}. ${appointment.doctor.doctorInfo.name} on ${appointment.date} at ${appointment.time} due to ${reason}.`   
 
         )
         

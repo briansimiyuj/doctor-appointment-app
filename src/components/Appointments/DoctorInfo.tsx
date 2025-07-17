@@ -32,7 +32,7 @@ const DoctorInfo: React.FC<DoctorInfoProps> = ({ doctors })=>{
 
                 <br/>
 
-                {new Date(doctors.appointmentTime.dateTime).toLocaleDateString()} <br /> {new Date(doctors.appointmentTime.dateTime).toLocaleTimeString()}
+                {new Date(doctors.appointmentTime?.dateTime).toLocaleDateString()} <br /> {new Date(doctors.appointmentTime?.dateTime).toLocaleTimeString()}
 
             </p>
 

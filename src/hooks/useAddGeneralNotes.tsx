@@ -24,8 +24,8 @@ export const useAddGeneralNotes = () =>{
             title: title.trim(),
             content: content.trim(),
             date: new Date(),
-            doctorID: DummyAppointment.doctor._id,
-            doctorName: DummyAppointment.doctor.name
+            doctorID: DummyAppointment.doctor.doctorInfo._id,
+            doctorName: DummyAppointment.doctor.doctorInfo.name,
 
         }
 

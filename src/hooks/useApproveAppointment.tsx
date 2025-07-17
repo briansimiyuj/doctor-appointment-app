@@ -24,11 +24,11 @@ export const useApproveAppointment = () =>{
 
                 type: userType,
                 name: userType === "doctor" 
-                    ? latestAppointment.doctor.name || "Doctor"
-                    : latestAppointment.patient.name || "Patient",
+                    ? latestAppointment.doctor.doctorInfo.name || "Doctor"
+                    : latestAppointment.patient.patientInfo.name || "Patient",
                 _id: userType === "doctor"
-                    ? latestAppointment.doctor._id
-                    : latestAppointment.patient._id
+                    ? latestAppointment.doctor.doctorInfo._id
+                    : latestAppointment.patient.patientInfo._id
 
             }
 

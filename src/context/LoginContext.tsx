@@ -1,21 +1,5 @@
 import { createContext, useState } from "react"
-
-interface LoginContextType{
-
-    email: string
-    setEmail: React.Dispatch<React.SetStateAction<string>>
-    name: string
-    setName: React.Dispatch<React.SetStateAction<string>>
-    password: string
-    setPassword: React.Dispatch<React.SetStateAction<string>>
-    confirmPassword: string
-    setConfirmPassword: React.Dispatch<React.SetStateAction<string>>
-    isAuthenticated: boolean
-    setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
-    userType: "patient" | "doctor"
-    setUserType: React.Dispatch<React.SetStateAction<"patient" | "doctor">>
-
-}
+import { LoginContextProps } from "../assets/contextProps/LoginContextProps"
 
 interface LoginContextProviderProps{
     
@@ -24,7 +8,7 @@ interface LoginContextProviderProps{
 }
 
 
-export const LoginContext = createContext<LoginContextType | undefined>(undefined)
+export const LoginContext = createContext<LoginContextProps | undefined>(undefined)
 
 
 export const LoginContextProvider = ({ children }: LoginContextProviderProps) =>{

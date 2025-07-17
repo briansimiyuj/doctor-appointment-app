@@ -73,7 +73,7 @@ export const useUploadFile = () =>{
                         type: normalizedType,
                         size: file.size,
                         uploadDate: new Date(),
-                        uploadedBy: DummyAppointment.doctor.name,
+                        uploadedBy: DummyAppointment.doctor.doctorInfo.name,
                         content: content
 
                     }
