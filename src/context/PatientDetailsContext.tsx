@@ -90,7 +90,7 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
 
             if(appointments){
 
-                  const filteredAppointments = appointments.filter(appointment => appointment.patient._id === patientID)
+                  const filteredAppointments = appointments.filter(appointment => appointment.patient.patientInfo?._id === patientID)
 
                   setPatientAppointments(filteredAppointments)
 
@@ -244,7 +244,13 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
                               ...updatedAppointments[appointmentIndex],
                               date: newDate.toISOString(),
                               time: newTime,
-                              doctor: newDoctor,
+                              doctor:{
+                                    doctorInfo: newDoctor,
+                                    appointmentTime:{
+                                          dateTime: newDate,  
+                                          time: newTime,
+                                    }
+                              },
                               status: "rescheduled",
                               consultationType: newConsultationType
                         }
