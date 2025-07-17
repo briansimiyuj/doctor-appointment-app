@@ -1,11 +1,11 @@
 import { createContext, useState, useEffect } from "react"
 import appointmentsData from "../assets/frontend/AppointmentData.json"
 import { patients } from "../assets/frontend/patientsData"
+import { doctors } from "../assets/frontend/doctorsData"
 import { AppointmentType } from "../assets/types/AppointmentType"
 import { AppointmentsContextProps } from "../assets/contextProps/AppointmentsContextProps"
 import { AppointedPatientType } from "../assets/types/AppointedPatientType"
 import { AppointedDoctorType } from "../assets/types/AppointedDoctorType"
-import { doctors } from "../assets/frontend/doctorsData"
 
 interface AppointmentsContextProviderProps{
 
@@ -14,10 +14,9 @@ interface AppointmentsContextProviderProps{
 }
 
 export const AppointmentsContext = createContext<AppointmentsContextProps>({
-
-    appointments: [], 
-    pastAppointments: [], 
-    upcomingAppointments: [], 
+    appointments: [],
+    pastAppointments: [],
+    upcomingAppointments: [],
     activeTab: "upcoming",
     setActiveTab: (_tab: "upcoming" | "past") => {}
 
@@ -34,10 +33,17 @@ export const AppointmentsContextProvider: React.FC<AppointmentsContextProviderPr
 
         const enrichedAppointments = appointmentsData.map(appointment =>{
 
-            const patient = patients.find(p => p.name === appointment.patient),
-                  doctor = doctors.find(d => d.name === appointment.doctor)
+            const patient = patients.find(patient => patient.name === appointment.patient),
+                doctor = doctors.find(doctor => doctor.name === appointment.doctor)
 
-            if(!patient || !doctor) return null
+            if(!doctor || !patient){
+
+                console.log("doctor or patient not found")
+
+                return appointment
+
+            }
+            
 
             const appointedPatient: AppointedPatientType ={
 
@@ -61,7 +67,7 @@ export const AppointmentsContextProvider: React.FC<AppointmentsContextProviderPr
                     dateTime: new Date(appointment.date),
                     time: appointment.time,
                     slotTime: appointment.time,
-                    status: "booked",
+                    status: "booked"
 
                 }
             
@@ -81,34 +87,50 @@ export const AppointmentsContextProvider: React.FC<AppointmentsContextProviderPr
 
             }
 
-            const consultationType: "online" | "in-person" = appointment.consultationType?.toLowerCase() === "in-person" ? "in-person" : "online"
+            const consultationType: "online" | "in-person" = appointment.consultationType?.toLowerCase() === "in-person" ? "in-person" : "online",
+                normalizedStatus = appointment.status.toLowerCase().trim()
             
-            return { ...appointment, patient: appointedPatient, doctor: appointedDoctor, consultationType }
+            return{
+                
+               _id: appointment._id,
+                date: appointment.date,
+                time: appointment.time,
+                consultationType,
+                status: normalizedStatus,
+                doctor: appointedDoctor,
+                patient: appointedPatient
 
+            }
+        
+        }).filter((appointment): appointment is AppointmentType => appointment !== null && typeof appointment === 'object') as AppointmentType[]
 
-        }).filter(appointment => appointment !== null)
-
-        setAppointments(enrichedAppointments as AppointmentType[])
+        setAppointments(enrichedAppointments)
 
         const now = new Date(),
-             upcoming = enrichedAppointments.filter(appointment =>{
+              today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+              today.setHours(0, 0, 0, 0)
 
-                const isFutureDate = new Date(appointment.date) > now,
-                      isActiveStatus = ["pending", "confirmed", "approved", "rescheduled", "follow-up"].includes(appointment.status)
+        const upcoming = enrichedAppointments.filter(appointment =>{
 
-                return isFutureDate && isActiveStatus
+            const [year, month, day] = appointment.date.split("-").map(Number),
+                  appointmentDate = new Date(year, month - 1, day)
+                  appointmentDate.setHours(0, 0, 0, 0)
+            const isFutureDate = appointmentDate > today
 
-             }),
+            return isFutureDate
+            
+        })
 
+        const past = enrichedAppointments.filter(appointment =>{
 
-             past = enrichedAppointments.filter(appointment =>{
+            const [year, month, day] = appointment.date.split("-").map(Number),
+                appointmentDate = new Date(year, month - 1, day)
+                appointmentDate.setHours(0, 0, 0, 0)
+            const    isPastDate = appointmentDate < today
 
-                const isPastDate = new Date(appointment.date) < now,
-                      isDoneStatus = ["cancelled",  "rejected", "completed"].includes(appointment.status)
+            return isPastDate 
 
-                return isPastDate && isDoneStatus
-
-             })
+        })
 
         setUpcomingAppointments(upcoming)
 
@@ -134,6 +156,7 @@ export const AppointmentsContextProvider: React.FC<AppointmentsContextProviderPr
             {children}
             
         </AppointmentsContext.Provider>
+
     )
 
 }
