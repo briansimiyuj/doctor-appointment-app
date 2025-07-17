@@ -20,19 +20,19 @@ const DoctorAppointments: React.FC = () =>{
 
                 {
 
-                    appointments.map((appointment, index) =>(
+                    appointments.slice(0, 3).map((appointment, index) =>(
 
                         <div key={index} className="flex flex-col items-center p-4 border rounded-lg hover:shadow-lg transition-all duration-300">
 
                             <img 
-                                src={appointment.patient?.image} 
+                                src={appointment.patient?.patientInfo?.image} 
                                 alt="patient" 
                                 className="w-24 h-24 rounded-full mb-4"
                             />
 
                             <div className="text-center">
 
-                                <h2 className="font-semibold text-lg">{appointment.patient?.name}</h2>
+                                <h2 className="font-semibold text-lg">{appointment.patient?.patientInfo?.name}</h2>
 
                                 <p className="text-sm text-gray-500">{appointment.date}</p>
 
