@@ -13,7 +13,7 @@ const AlternativeInput: React.FC = ()=>{
             <textarea
                 id="alternative"
                 rows={3}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-bg"
+                className="w-full px-3 py-2 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-primary-bg"
                 placeholder="Suggest an alternative time, doctor or treatment option"
                 value={alternative}
                 onChange={e => setAlternative(e.target.value)}

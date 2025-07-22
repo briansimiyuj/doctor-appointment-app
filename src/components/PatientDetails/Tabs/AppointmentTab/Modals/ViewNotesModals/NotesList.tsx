@@ -16,7 +16,7 @@ const NotesList: React.FC<NotesListProps> = ({ note, index })=>{
 
     return(
 
-        <div className="border rounded p-4 bg-gray-50">
+        <div className="border rounded p-4 bg-gray-50 dark:bg-gray-700">
 
             <NoteHeader
                 index={index}

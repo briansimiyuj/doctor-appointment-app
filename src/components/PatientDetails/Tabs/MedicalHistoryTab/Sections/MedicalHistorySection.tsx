@@ -36,7 +36,7 @@ const MedicalHistorySection: React.FC<MedicalHistorySectionProps> = ({ title, it
 
                             <li
                                 key={index}
-                                className="bg-gray-100 px-4 py-2 rounded-md flex justify-between items-center"
+                                className="bg-gray-200 dark:bg-gray-700  px-4 py-2 rounded-md flex justify-between items-center"
                             >
 
                                 <span className="text-sm text-gray-800">{item}</span>
@@ -44,7 +44,7 @@ const MedicalHistorySection: React.FC<MedicalHistorySectionProps> = ({ title, it
                                 <div className="flex items-center gap-2">
 
                                     <button
-                                       className="text-primary-btn hover:text-blue-800 transition"
+                                       className="text-primary-btn hover:text-blue-800 dark:hover:text-blue-300 transition"
                                        onClick={() => onEdit(index, item, section)}
                                     >
 

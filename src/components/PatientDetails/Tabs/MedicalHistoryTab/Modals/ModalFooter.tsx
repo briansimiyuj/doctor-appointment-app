@@ -27,7 +27,7 @@ const ModalFooter: React.FC = () =>{
 
             <button
                 onClick={closeModal}
-                className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-md transition duration-300 w-full sm:w-auto"
+                className="bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-500 text-gray-700 py-2 px-4 rounded-md transition duration-300 w-full sm:w-auto"
             >Back</button>
 
             {

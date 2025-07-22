@@ -20,12 +20,12 @@ const DeleteDocumentModal: React.FC = ()=>{
                 <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-3  mt-6">
 
                     <button
-                        className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-3 px-4 text-xl font-bold rounded-md transition-all duration-300 mr-2"
+                        className="bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 hover:dark:hover:bg-gray-700 text-gray-700 py-3 px-4 text-xl font-bold rounded-md transition-all duration-300 mr-2"
                         onClick={closeDeleteModal}
                     >Cancel</button>
 
                     <button
-                        className="bg-red-500 hover:bg-red-600 text-white py-3 px-4 text-xl font-bold rounded-md transition-all duration-300 mr-2"
+                        className="bg-red-500 hover:bg-red-600 text-white dark:text-white py-3 px-4 text-xl font-bold rounded-md transition-all duration-300 mr-2"
                         onClick={handleDeleteDocument}
                     >Delete</button>
 

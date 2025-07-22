@@ -32,7 +32,7 @@ const DayCell: React.FC<DayCellProps> = ({ date })=>{
 
     if(isPast){
 
-        cellStyle += " bg-gray-100 text-gray-400"
+        cellStyle += " bg-gray-100 dark:bg-gray-700 text-gray-400"
     
     }else if(isSelected){
 
@@ -48,7 +48,7 @@ const DayCell: React.FC<DayCellProps> = ({ date })=>{
     
     }else{
 
-        cellStyle += " bg-white text-gray-800 hover:bg-gray-200"
+        cellStyle += " bg-white dark:bg-gray-900 text-gray-800 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors duration-200"
 
     }
           

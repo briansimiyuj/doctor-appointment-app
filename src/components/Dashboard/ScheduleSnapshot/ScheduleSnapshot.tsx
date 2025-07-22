@@ -13,7 +13,7 @@ const ScheduleSnapshot: React.FC = ()=>{
 
         <div className="dark:bg-primary-bg bg-white p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 mt-5">
        
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Schedule Snapshot </h2>
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Schedule Snapshot</h2>
 
             <div className="mb-4">
 
@@ -27,7 +27,7 @@ const ScheduleSnapshot: React.FC = ()=>{
             <SlotList slots={nextAvailableSlot}/>
 
             <button 
-               className="bg-secondary-btn dark:text-white px-4 py-2 rounded hover:opacity-90"
+               className="bg-secondary-btn text-white dark:text-white px-4 py-2 rounded hover:opacity-90"
                onClick={() => navigate("/schedule")}
             >Manage Schedule</button>
         

@@ -14,7 +14,7 @@ const ReasonInput: React.FC = ()=>{
                 id="reason"
                 name="reason"
                 rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-bg"
+                className="w-full px-3 py-2 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-primary-bg"
                 placeholder="Please provide a reason for rejection"
                 value={reason}
                 onChange={e => setReason(e.target.value)}

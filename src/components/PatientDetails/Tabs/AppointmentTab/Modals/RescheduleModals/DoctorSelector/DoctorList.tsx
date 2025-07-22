@@ -31,7 +31,7 @@ const DoctorList: React.FC<DoctorListProps> = ({ doctors, selectedDoctorID, onDo
 
                     <div
                         key={doctor._id}
-                        className={`p-2 cursor-pointer hover:bg-gray-100 ${selectedDoctorID === doctor._id ? 'bg-blue-50' : ''}`}
+                        className={`p-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 ${selectedDoctorID === doctor._id ? 'bg-blue-50 dark:bg-gray-800' : ''}`}
                         onClick={() => onDoctorSelect(doctor._id)}
                     >
 

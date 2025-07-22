@@ -46,13 +46,13 @@ const PatientInfo: React.FC<PatientInfo> = ({ patients })=>{
                     activeTab === "upcoming" ?(
                         
                         <button 
-                            className="px-3 py-1.5 sm:px-4 sm:py-2 md:px-5 md:py-2.5 bg-red-500 dark:text-white rounded text-xs sm:text-sm hover:bg-red-600 transition-colors w-full sm:w-auto cursor-pointer"
+                            className="px-3 py-1.5 sm:px-4 sm:py-2 md:px-5 md:py-2.5 bg-red-500 text-white dark:text-white rounded text-xs sm:text-sm hover:bg-red-600 transition-colors w-full sm:w-auto cursor-pointer"
                         >Cancel Appointment</button>
 
                     ):(
 
                         <button 
-                            className="px-3 py-1.5 sm:px-4 sm:py-2 md:px-5 md:py-2.5 bg-secondary-btn dark:text-white rounded text-xs sm:text-sm hover:bg-red-600 transition-colors w-full sm:w-auto cursor-pointer"
+                            className="px-3 py-1.5 sm:px-4 sm:py-2 md:px-5 md:py-2.5 bg-secondary-btn text-white dark:text-white rounded text-xs sm:text-sm hover:bg-red-600 transition-colors w-full sm:w-auto cursor-pointer"
                         >View  History</button>
                     )
 

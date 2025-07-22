@@ -14,7 +14,7 @@ const ModalHeader: React.FC<ModalHeaderProps> = ({ title, onClose }) =>{
             <h2 className="text-xl font-bold text-gray-800">{title}</h2>
 
             <button
-                className="text-gray-500 hover:text-gray-700 focus:outline-none transition-colors"
+                className="text-gray-500 hover:text-gray-700 dark:text-gray-200 dark:hover:text-gray-400 focus:outline-none transition-colors"
                 aria-label="Close modal"
                 onClick={onClose}
             >

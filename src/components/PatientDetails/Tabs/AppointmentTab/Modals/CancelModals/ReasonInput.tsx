@@ -11,7 +11,7 @@ const ReasonInput: React.FC = ()=>{
             <label htmlFor="reason" className="block text-sm font-medium text-gray-700 mb-2">Reason for cancellation:</label>
 
             <textarea
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-bg"
+                className="w-full px-3 py-2 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-primary-bg"
                 rows={4}
                 placeholder="Please provide a reason for cancellation"
                 value={reason}

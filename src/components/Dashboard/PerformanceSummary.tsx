@@ -31,12 +31,12 @@ const PerformanceSummary: React.FC = ()=>{
 
                         <div
                             key={index}
-                            className="dark:bg-primary-bg bg-white p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700"
+                            className="bg-primary-bg p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700"
                         >
-                            <div className="text-xl font-bold text-gray-900 dark:text-white">{metric.value}</div>
+                            <div className="text-xl font-bold text-white dark:text-white">{metric.value}</div>
 
 
-                            <div className="text-gray-900 dark:text-white">{metric.label}</div>
+                            <div className="text-white dark:text-white">{metric.label}</div>
 
                         </div>
 
@@ -54,7 +54,7 @@ const PerformanceSummary: React.FC = ()=>{
 
                         <button
                             onClick={() => setShowAll(!showAll)}
-                            className="bg-secondary-btn dark:text-white px-4 py-2 rounded-md hover:bg-gray-700 transition"
+                            className="bg-secondary-btn text-white dark:text-white px-4 py-2 rounded-md hover:bg-gray-700 transition"
                         >
                             {showAll ? "Show Less" : "Show All"}
                         </button>

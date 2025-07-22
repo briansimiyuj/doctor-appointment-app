@@ -10,7 +10,7 @@ const CalendarHeader: React.FC = ()=>{
         <div className="flex items-center justify-between mb-4">
 
             <button
-                className="hover:bg-gray-200 p-2 rounded-full"
+                className="hover:bg-gray-200 p-2 rounded-full dark:hover:bg-gray-700"
                 onClick={prevMonth}
             >
                
@@ -31,7 +31,7 @@ const CalendarHeader: React.FC = ()=>{
 
 
             <button
-                className="hover:bg-gray-200 p-2 rounded-full"
+                className="hover:bg-gray-200 p-2 rounded-full dark:hover:bg-gray-700"
                 onClick={nextMonth}
             >
 

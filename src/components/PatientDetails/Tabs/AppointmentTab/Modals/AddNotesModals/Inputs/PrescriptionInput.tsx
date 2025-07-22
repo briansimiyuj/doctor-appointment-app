@@ -13,7 +13,7 @@ const PrescriptionInput: React.FC = () =>{
 
             <textarea
                 rows={3}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-bg"
+                className="w-full px-3 py-2 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-primary-bg"
                 placeholder="Enter prescription details..."
                 value={prescription}
                 onChange={e => setPrescription(e.target.value)}

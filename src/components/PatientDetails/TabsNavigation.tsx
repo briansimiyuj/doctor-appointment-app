@@ -22,8 +22,15 @@ const TabsNavigation: React.FC = ()=>{
 
                     <button
                         key={tab.id}
-                        className={`px-6 py-2 text-sm font-medium whitespace-nowrap ${activeTab === tab.id ? 'text-primary-bg border-b-2 border-primary-bg' : 'text-gray-600 hover:text-gray-800 hover:border-b-2 hover:border-gray-300'}`}
-                        onClick={() => setActiveTab(tab.id as "medical-history" | "appointments" | "notes" | "documents")}                    >{tab.label}</button>
+                        className={`px-6 py-2 text-sm font-medium whitespace-nowrap ${
+                            activeTab === tab.id
+                                ? 'text-primary-bg border-b-2 border-primary-bg'
+                                : 'text-gray-600 dark:text-gray-300 hover:text-primary-text dark:hover:text-primary-bg hover:border-b-2 hover:border-gray-300 dark:hover:border-primary-bg'
+                        }`}
+                        onClick={() => setActiveTab(tab.id as "medical-history" | "appointments" | "notes" | "documents")}
+                    >
+                        {tab.label}
+                    </button>
 
                 ))
 

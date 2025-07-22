@@ -14,7 +14,7 @@ const ScheduleConsultationTypeSelector: React.FC = ()=>{
 
                 <div className="flex justify-around gap-4">
 
-                    <label className={`flex items-center cursor-pointer gap-2 border rounded-md px-4 py-2 ${consultationType === "online" ? "bg-primary-bg text-white" : "hover:bg-gray-50"}`}>
+                    <label className={`flex items-center cursor-pointer gap-2 border rounded-md px-4 py-2 ${consultationType === "online" ? "bg-primary-bg text-white" : "hover:bg-gray-50 dark:hover:bg-gray-700"}`}>
 
                         <input
                             type="radio"
@@ -24,11 +24,11 @@ const ScheduleConsultationTypeSelector: React.FC = ()=>{
                             className="form-radio w-5"
                         />
 
-                        <span className={`${consultationType === "online" ? "text-white" : "text-gray-700"}`}>Online</span>    
+                        <span className={`${consultationType === "online" ? "text-white dark:text-white" : "text-gray-700"}`}>Online</span>    
 
                     </label>
 
-                    <label className={`flex items-center cursor-pointer gap-2 border rounded-md px-4 py-2 ${consultationType === "in-person" ? "bg-primary-bg text-white" : "hover:bg-gray-50"}`}>
+                    <label className={`flex items-center cursor-pointer gap-2 border rounded-md px-4 py-2 ${consultationType === "in-person" ? "bg-primary-bg text-white" : "hover:bg-gray-50 dark:hover:bg-gray-700"}`}>
 
                         <input
                             type="radio"
@@ -38,7 +38,7 @@ const ScheduleConsultationTypeSelector: React.FC = ()=>{
                             className="form-radio w-5"
                         />
 
-                        <span className={`${consultationType === "in-person" ? "text-white" : "text-gray-700"}`}>In-Person</span>    
+                        <span className={`${consultationType === "in-person" ? "text-white dark:text-white " : "text-gray-700"}`}>In-Person</span>    
 
                     </label>
 

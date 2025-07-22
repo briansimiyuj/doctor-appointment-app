@@ -20,9 +20,9 @@ const DeleteNotesModal: React.FC = ()=>{
 
                 <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-3  mt-6">
 
-                    <button className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-md transition-all duration-300" onClick={closeModals}>Cancel</button>
+                    <button className="bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 hover:dark:hover:bg-gray-700 text-gray-700 py-2 px-4 rounded-md transition-all duration-300" onClick={closeModals}>Cancel</button>
 
-                    <button className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600" onClick={handleDeleteNote}>Confirm Delete</button>
+                    <button className="bg-red-500 text-white dark:text-white py-2 px-4 rounded-md hover:bg-red-600" onClick={handleDeleteNote}>Confirm Delete</button>
 
                 </div>
 

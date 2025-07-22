@@ -43,7 +43,7 @@ const DocumentInfo: React.FC<DocumentInfoProps> = ({ document })=>{
 
     return(
 
-        <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
+        <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-500 rounded-lg">
 
             {fileIcon}
 

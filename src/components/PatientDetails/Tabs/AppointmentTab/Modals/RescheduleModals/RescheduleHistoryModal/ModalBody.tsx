@@ -25,7 +25,7 @@ const ModalBody: React.FC = ()=>{
 
                             rescheduleHistory.map((historyItem, index) =>(
 
-                                <div className="border rounded-lg p-4 bg-gray-50" key={index}>
+                                <div className="border rounded-lg p-4 bg-gray-50 dark:bg-gray-700 shadow-md" key={index}>
 
                                     <div className="flex items-start justify-between gap-4 mb-3">
 

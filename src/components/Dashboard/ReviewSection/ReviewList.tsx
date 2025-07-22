@@ -39,7 +39,7 @@ const ReviewList: React.FC<ReviewListProps> = ({ reviews })=>{
                 visibleCount < reviews.length &&(
 
                     <button
-                        className="px-4 py-2 bg-primary-btn dark:text-white rounded hover:bg-blue-700 transition"
+                        className="px-4 py-2 bg-primary-btn text-white dark:text-white rounded hover:bg-blue-700 transition"
                         onClick={loadMoreReviews}
                     >Load more reviews</button>
 

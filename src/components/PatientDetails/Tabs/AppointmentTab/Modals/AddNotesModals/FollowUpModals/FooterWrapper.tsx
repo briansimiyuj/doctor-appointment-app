@@ -51,7 +51,7 @@ const Footer: React.FC<FooterButtonProps> = ({ onCancel, onSave, disabled }) => 
         <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-3">
 
            <button 
-                className="bg-gray-200 text-gray-600 px-4 py-2 rounded-md"
+                className="bg-gray-300 dark:bg-gray-700 text-gray-600 font-medium px-4 py-2 rounded-md"
                 onClick={onCancel}
             >Cancel</button>
 

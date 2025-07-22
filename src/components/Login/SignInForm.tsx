@@ -52,7 +52,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ isSignUp, setIsSignUp }) =>{
 
             <button 
                 type="button"
-                className="flex items-center gap-2 border border-gray-300 rounded-md px-12 py-4 hover:bg-gray-50 transition-all duration-300"
+                className="flex items-center gap-2 border border-gray-300 rounded-md px-12 py-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300"
             >
 
                 <img 

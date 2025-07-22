@@ -17,7 +17,7 @@ const NoteItemAction: React.FC<NoteCardItemActionProps> = ({ note })=>{
         <div className="flex flex-col mt-6 gap-2">
 
             <button 
-                className="bg-green-600 text-white py-2 px-4 rounded-md transition-all duration-300 flex items-center gap-2 justify-center w-full sm:w-auto mt-2 sm:mt-0"
+                className="bg-green-600 text-white dark:text-white py-2 px-4 rounded-md transition-all duration-300 flex items-center gap-2 justify-center w-full sm:w-auto mt-2 sm:mt-0"
                 onClick={() => openViewNoteModal(note)}
             >
 
@@ -28,7 +28,7 @@ const NoteItemAction: React.FC<NoteCardItemActionProps> = ({ note })=>{
             </button>
 
             <button 
-                className="bg-primary-btn hover:bg-blue-600 text-white py-2 px-4 rounded-md transition duration-300 flex items-center gap-2 justify-center w-full sm:w-auto"
+                className="bg-primary-btn hover:bg-blue-600 text-white dark:text-white py-2 px-4 rounded-md transition duration-300 flex items-center gap-2 justify-center w-full sm:w-auto"
                 onClick={() => openEditNoteModal(note)}
             >
 
@@ -39,7 +39,7 @@ const NoteItemAction: React.FC<NoteCardItemActionProps> = ({ note })=>{
             </button>
 
             <button 
-                className="bg-red-500 hover:bg-red-600 text-white flex items-center gap-2 justify-center py-2 px-4 rounded-md transition-all duration-300 w-full sm:w-auto mt-2 sm:mt-0"
+                className="bg-red-500 hover:bg-red-600 text-white dark:text-white flex items-center gap-2 justify-center py-2 px-4 rounded-md transition-all duration-300 w-full sm:w-auto mt-2 sm:mt-0"
                 onClick={() => openDeleteNoteModal(note)}
             >
 

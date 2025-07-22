@@ -9,7 +9,7 @@ const DocumentUploadArea: React.FC = ()=>{
 
     return(
 
-        <div className="mb-6 p-6 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 overflow-x-auto w-full">
+        <div className="mb-6 p-6 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600 overflow-x-auto w-full">
 
             <BrowseFilesButton/>
 

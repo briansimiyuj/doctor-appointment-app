@@ -37,7 +37,7 @@ const ContactInfo:React.FC = () =>{
             <p className="text-gray-500">If you are interested in joining our team, please send us your CV to careers@medicarehub.co.ke</p>
 
             <button
-                className="border border-black px-8 py-4 text-sm hover:bg-black hover:text-white transition-all duration-500"
+                className="rounded-md bg-primary-btn px-8 py-4 text-sm text-white hover:bg-blue-600 dark:text-white transition-all duration-500"
                 onClick={() => navigate("/careers")}
             >Explore Careers</button>
 

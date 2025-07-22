@@ -45,7 +45,7 @@ const TimePicker: React.FC = ()=>{
 
                         <>
                         
-                            <div className="m2 bg-white rounded-lg shadow-md p-4">
+                            <div className="m-2 bg-white rounded-lg shadow-md p-4">
 
                                 <TimePickerHeader/>
 

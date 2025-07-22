@@ -39,7 +39,7 @@ const SelectedTimeDisplay: React.FC<SelectedTimeDisplayProps> = ({ useScheduleCo
     return(
 
         <div 
-            className="flex items-center justify-between p-2 border rounded-md cursor-pointer hover:border-primary-bg"
+            className="flex items-center justify-between p-2 border rounded-md cursor-pointer dark:hover:bg-gray-700"
             onClick={openTimePicker}
             role="button"
         >

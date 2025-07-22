@@ -30,7 +30,7 @@ const ModalBody: React.FC = ()=>{
                 <textarea 
                     id="content" 
                     rows={4} 
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-bg"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-primary-bg"
                     placeholder="Enter note content here..."
                     value={content}
                     onChange={e => setContent(e.target.value)}

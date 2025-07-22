@@ -19,7 +19,7 @@ const DocumentCardActions: React.FC<DocumentCardActionsProps> = ({ document })=>
         <div className="flex flex-col mt-6 gap-2">
 
             <button 
-                className="bg-primary-btn flex items-center gap-2 text-base px-4 py-2 rounded text-white justify-center"
+                className="bg-primary-btn flex items-center gap-2 text-base px-4 py-2 rounded dark:text-white text-white justify-center"
                 onClick={() => openViewModal(document)}
             >
 
@@ -30,7 +30,7 @@ const DocumentCardActions: React.FC<DocumentCardActionsProps> = ({ document })=>
             </button>
 
             <button 
-                className="bg-gray-800 flex items-center gap-2 text-base px-4 py-2 rounded text-white justify-center"
+                className="bg-gray-800 dark:bg-gray-300 flex items-center gap-2 text-base px-4 py-2 rounded text-white dark:text-black justify-center"
                 onClick={() => downloadDocument(document)}
             >
                 
@@ -41,7 +41,7 @@ const DocumentCardActions: React.FC<DocumentCardActionsProps> = ({ document })=>
             </button>
 
             <button 
-                className="bg-red-500 flex items-center gap-2 text-base px-4 py-2 rounded text-white justify-center"
+                className="bg-red-500 flex items-center gap-2 text-base px-4 py-2 rounded text-white dark:text-white  justify-center"
                 onClick={() => openDeleteModal(document)}
             >
 

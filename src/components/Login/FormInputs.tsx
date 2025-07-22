@@ -30,7 +30,7 @@ const FormInputs: React.FC<FormInputsProps> = ({ isSignUp }) =>{
 
                         <div 
                             className={`flex items-center gap-2 border rounded-md px-4 py-2 cursor-pointer ${
-                                userType === "patient" ? 'bg-primary-bg text-secondary-bg' : 'hover:bg-gray-50'
+                                userType === "patient" ? 'bg-primary-bg hover:bg-blue-600 transition text-secondary-bg' : 'hover:bg-gray-50 dark:hover:bg-gray-700'
                             }`}
                             onClick={() => setUserType("patient")}
                         >
@@ -49,7 +49,7 @@ const FormInputs: React.FC<FormInputsProps> = ({ isSignUp }) =>{
 
                         <div 
                             className={`flex items-center gap-2 border rounded-md px-4 py-2 cursor-pointer ${
-                                userType === "doctor" ? 'bg-primary-bg text-secondary-bg' : 'hover:bg-gray-50'
+                                userType === "doctor" ? 'bg-primary-bg hover:bg-blue-600 transition text-secondary-bg' : 'hover:bg-gray-50 dark:hover:bg-gray-700'
                             }`}
                             onClick={() => setUserType("doctor")}
                         >

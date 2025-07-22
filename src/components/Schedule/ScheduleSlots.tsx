@@ -10,7 +10,7 @@ const ScheduleSlots: React.FC = ()=>{
 
     return(
 
-        <div className="flex flex-col sm:grid sm:grid-cols-7 gap-4 ">
+        <div className="flex flex-col sm:grid sm:grid-cols-7 gap-4">
  
             {
 
@@ -44,23 +44,23 @@ const ScheduleSlots: React.FC = ()=>{
 
                                                 daySlots.includes("booked") ?(
 
-                                                    <span className="text-gray-600">{daySlots}</span>
+                                                    <span className="text-gray-600 dark:text-gray-900">{daySlots}</span>
 
                                                 ):(
 
                                                     <select 
-                                                        className={`outline-none w-full ${daySlots.includes("available") ? "bg-green-200" : daySlots.includes("break") ? "bg-yellow-200" : "bg-gray-200"}`}
+                                                        className={`outline-none text-gray-600 dark:text-gray-900 w-full ${daySlots.includes("available") ? "bg-green-200" : daySlots.includes("break") ? "bg-yellow-200" : "bg-gray-200"}`}
                                                         defaultValue={`${daySlots.includes("available") ? "available" : daySlots.includes("break") ? "break" : "blocked"} - ${time}`}
                                                         onChange={(e) => handleInputChange(e, day.date, index)}
                                                     >
                                                                                                             
-                                                    <option value={`available - ${time}`}>Available - {time}</option>
+                                                        <option value={`available - ${time}`}>Available - {time}</option>
 
-                                                    <option value={`break - ${time}`}>Break - {time}</option>
+                                                        <option value={`break - ${time}`}>Break - {time}</option>
 
-                                                    <option value={`blocked - ${time}`}>Blocked - {time}</option>
+                                                        <option value={`blocked - ${time}`}>Blocked - {time}</option>
                                                                                                             
-                                                </select>
+                                                    </select>
 
 
 

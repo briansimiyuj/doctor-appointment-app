@@ -32,7 +32,7 @@ const TabActionButton: React.FC = ()=>{
                 <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-2">
                 
                     <button 
-                    className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
+                    className="px-4 py-2 bg-green-600 text-white dark:text-white rounded-md hover:bg-green-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
                     onClick={handleApproveAppointment}
                     >
 
@@ -51,7 +51,7 @@ const TabActionButton: React.FC = ()=>{
                     </button>
                 
                     <button
-                        className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
+                        className="px-4 py-2 bg-red-600 text-white dark:text-white rounded-md hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
                         onClick={() => openRejectModal(latestAppointment)}
                     >
 
@@ -101,7 +101,7 @@ const TabActionButton: React.FC = ()=>{
                     </button>
                     
                     <button 
-                        className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
+                        className="px-4 py-2 bg-red-600 text-white dark:text-white rounded-md hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
                         onClick={() => openCancelModal(latestAppointment)}
                     >
 
@@ -149,7 +149,7 @@ const TabActionButton: React.FC = ()=>{
                     </button>
 
                     <button
-                        className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-greden-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
+                        className="px-4 py-2 bg-green-600 text-white dark:text-white rounded-md hover:bg-greden-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
                         onClick={() => openViewNotesModal(latestAppointment)}
                     >
 
@@ -170,7 +170,7 @@ const TabActionButton: React.FC = ()=>{
                     </button>
 
                     <button
-                        className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
+                        className="px-4 py-2 bg-gray-600 text-white dark:text-white rounded-md hover:bg-gray-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
                         onClick={openScheduleHistoryModal}
                     >
 
@@ -217,7 +217,7 @@ const TabActionButton: React.FC = ()=>{
                     </button>
 
                     <button
-                        className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-greden-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
+                        className="px-4 py-2 bg-green-600 text-white dark:text-white rounded-md hover:bg-green-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
                         onClick={() => openViewNotesModal(latestAppointment)}
                     >
 
@@ -238,7 +238,7 @@ const TabActionButton: React.FC = ()=>{
                     </button>
                     
                     <button
-                        className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
+                        className="px-4 py-2 bg-gray-600 text-white dark:text-white rounded-md hover:bg-gray-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
                         onClick={openScheduleHistoryModal}
                     >
 
@@ -361,7 +361,7 @@ const TabActionButton: React.FC = ()=>{
                     </button>
                     
                     <button 
-                        className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
+                        className="px-4 py-2 bg-red-600 text-white dark:text-white rounded-md hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
                         onClick={() => openCancelModal(latestAppointment)}
                     >
 

@@ -35,7 +35,7 @@ const PatientBasicInfo: React.FC = ()=>{
 
                                     <div className="flex flex-wrap gap-2">
 
-                                        <span className="bg-neutral-200 px-2 py-1 rounded-md text-sm" key={index}>{condition}</span>
+                                        <span className="bg-neutral-200 dark:bg-neutral-600 dark:text-white px-2 py-1 rounded-md text-sm" key={index}>{condition}</span>
 
                                     </div>
 
@@ -47,7 +47,7 @@ const PatientBasicInfo: React.FC = ()=>{
 
                     ):(
 
-                        <span className="bg-gray-100 px-3 py-1 rounded-full text-sm text-gray-800 font-medium">No medical history</span>
+                        <span className="bg-gray-700 dark:bg-white text-white dark:text-gray-900 px-3 py-1 rounded-full text-sm font-medium">No medical history</span>
                     
                     )
 
