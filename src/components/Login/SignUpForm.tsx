@@ -1,6 +1,8 @@
-import { FormEvent } from "react"
+import { FormEvent, useContext } from "react"
 import FormInputs from "./FormInputs"
 import { assets } from "../../assets/frontend/assets"
+import { useSignUp } from "../../hooks/useSignUp"
+import { LoginContext } from "../../context/LoginContext"
 
 interface SignUpFormProps{
 
@@ -11,9 +13,30 @@ interface SignUpFormProps{
 
 const SignUpForm: React.FC<SignUpFormProps> = ({ isSignUp, setIsSignUp }) =>{
 
+    const { signUp } = useSignUp(),
+          context = useContext(LoginContext)
+
+    if(!context) throw new Error("SignUpForm must be used within a LoginContextProvider")
+
+    const { name, email, password, confirmPassword, userType } = context
+
     const formSubmit = (e: FormEvent<HTMLFormElement>) =>{
     
        e.preventDefault()
+
+        if(userType === "patient" || userType === "doctor"){
+
+            signUp(email, name, password, confirmPassword, userType)
+
+        }else if(userType === "system"){
+
+           alert("Invalid user type selected.")
+
+        }else{
+
+           alert("Please select a user type.")
+
+        }
     
     }
 

@@ -430,7 +430,7 @@ Login context will be used to store the user login data and provide it to the Lo
     a. Add userType field with 'patient' | 'doctor' type
     b. Add setUserType function to update user type
   2. Create state variables to store the login data
-    a. Initialize userType state with 'patient' as default
+    a. Initialize userType state with null as the default value
     b. Add userType and setUserType to context value
   3. Wrap the routes in Script component with the LoginContext provider as the parent component
   4. For every render:
@@ -460,6 +460,12 @@ Login page will be used to log in and sign up the user. A user can either log in
     f. Create a component for the input labels and mount it on the Sign Up Form component 
     g. Create a button and a function to handle the sign up button click
     h. Create a span to switch to the Sign In component when the user already has an account
+    i. Retreive `name`, `email`, `userType`, `password` and `confirmPassword` from the Login Context
+    j. Retreive `signUp` function from the Sign Up Hook
+    k. Create a function to handle the form submission
+      i. if there is `userType` selected, call `signUp` function with the retrieved values as parameters
+    
+    j. Attach the form submission function to `onSubmit` event of the form
   
   5. Create a Sign In component and mount it on the Login page if isSignUp is false
      a. Render the Sign In title and description
