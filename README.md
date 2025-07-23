@@ -2471,3 +2471,16 @@ Dashboard page will be used to display the doctor's schedule, statistics, review
       4. From the `schedule` object, retrieve the `todayWorkingHours` and `nextAvailableSlots` 
       5. Display `todayWorkingHours` 
       6. Create a SlotList component and mount it on the ScheduleSnapshot Component and pass `nextAvailableSlots` as `slots` prop
+
+### Sign Up Hook
+
+Sign Up Hook will be used to handle the sign up process.
+
+  1. Retrieve `setName`, `setEmail`, `setPassword`, `setConfirmPassword`, `setIsAuthenticated` and `setUserType` from `LoginContext`
+  2. Create a `signUp` function that takes in `name`, `email`, `password`, `confirmPassword` and `userType` as parameters
+  3. If any of the parameters are empty, return an error message
+  4. If the password and confirm password do not match, return an error message
+  5. Create a `userData` object with the `name`, `email`, `password`, `confirmPassword` and `userType` as properties
+  6. Store the `userData` in `localStorage` with the key `userID`
+  7. Call `setName`, `setEmail`, `setPassword`, `setConfirmPassword`, `setIsAuthenticated` and `setUserType` with the values from `userData` and `true`
+  8. Navigate to the Home Page
