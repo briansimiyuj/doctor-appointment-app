@@ -10,7 +10,9 @@ export interface LoginContextProps{
     setConfirmPassword: (confirmPassword: string) => void
     isAuthenticated: boolean
     setIsAuthenticated: (isAuthenticated: boolean) => void
-    userType: "patient" | "doctor"
-    setUserType: (userType: "patient" | "doctor") => void
+    userType: "patient" | "doctor" | "system" | null
+    setUserType: (userType: "patient" | "doctor" | "system" | null) => void
+    userID: string | null
+    setUserID: (userID: string | null) => void
 
 }

@@ -8,7 +8,7 @@ export const useApproveAppointment = () =>{
     const { patientAppointments, updateAppointmentStatus } = usePatientDetails(),
           { addScheduleHistoryEntry } = useScheduleHistory(),
           loginContext = useContext(LoginContext),
-           { userType } = loginContext || { userType: "patient" },
+           { userType } = loginContext && loginContext.userType ? loginContext : { userType: "patient" },
           latestAppointment = patientAppointments && patientAppointments.length > 0 
             ? patientAppointments[0] 
             : null
@@ -22,7 +22,7 @@ export const useApproveAppointment = () =>{
 
             const performedBy ={
 
-                type: userType,
+                type: (userType ?? "patient") as "doctor" | "patient" | "system",
                 name: userType === "doctor" 
                     ? latestAppointment.doctor.doctorInfo.name || "Doctor"
                     : latestAppointment.patient.patientInfo.name || "Patient",
