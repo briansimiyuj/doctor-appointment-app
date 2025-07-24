@@ -2490,3 +2490,19 @@ Sign Up Hook will be used to handle the sign up process.
   6. Store the `userData` in `localStorage` with the key `userID`
   7. Call `setName`, `setEmail`, `setPassword`, `setConfirmPassword`, `setIsAuthenticated` and `setUserType` with the values from `userData` and `true`
   8. Navigate to the Home Page
+
+### Sign In Hook
+
+Sign In Hook will be used to handle the sign in process.
+
+  1. Retrieve `setName`, `setEmail`, `setPassword`, `setUserType`, `setIsAuthenticated` and `setUserID` from `LoginContext`
+  2. Create a `signIn` function that takes in `email` and `password` as parameters
+  3. If any of the parameters are empty, return an error message
+  4. Retrieve the `userData` from `localStorage` 
+  5. Loop through all user data in localStorage and check if the email and password match
+  6. If a match is found:
+    a. Set the context values (setName, setEmail, setPassword, setUserType, setUserID, setIsAuthenticated) with the user's data
+    b. Navigate to the home page
+    c. Return an object with success: true and userType
+    
+  7. If no match is found, return an object with success: false and an error message
