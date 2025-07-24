@@ -1,4 +1,7 @@
+import { useContext } from "react"
 import { assets } from "../../assets/frontend/assets"
+import { LoginContext } from "../../context/LoginContext"
+import { useSignIn } from "../../hooks/useSignIn"
 import FormInputs from "./FormInputs"
 
 interface SignInFormProps{
@@ -10,9 +13,24 @@ interface SignInFormProps{
 
 const SignInForm: React.FC<SignInFormProps> = ({ isSignUp, setIsSignUp }) =>{
 
+    const { signIn } = useSignIn(),
+          context = useContext(LoginContext)
+
+    if(!context) throw new Error("SignInForm must be used within a LoginContextProvider")
+
+    const { email, password } = context
+
+    const handleSignIn = (e: React.FormEvent<HTMLFormElement>) =>{
+
+        e.preventDefault()
+
+        signIn(email, password)
+
+    }
+
     return(
 
-        <form action="" className="flex items-center min-h-[80vh] flex-col gap-6 sm:gap-2">
+        <form action="" className="flex items-center min-h-[80vh] flex-col gap-6 sm:gap-2" onSubmit={handleSignIn}>
 
             <div>
 

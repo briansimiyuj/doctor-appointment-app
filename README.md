@@ -472,6 +472,12 @@ Login page will be used to log in and sign up the user. A user can either log in
      b. On Form input components, create labels and inputs for both the Sign In and Sign Up components
      c. Create a button and a function to handle the sign in button click
      d. Create a span to switch to the Sign Up component when the user does not have an account
+     e. Retreive `email` and `password` from the Login Context
+     f. Retreive `signIn` function from the Sign In Hook
+     g. Create a function to handle the form submission
+       i. Call `signIn` function with the retrieved values as parameters
+
+     h. Attach the form submission function to `onSubmit` event of the form
 
   6. Create a section for the Google aunthentication button for both the Sign In and Sign Up components
 
