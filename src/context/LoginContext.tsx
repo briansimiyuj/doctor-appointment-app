@@ -23,28 +23,9 @@ export const LoginContextProvider = ({ children }: LoginContextProviderProps) =>
           [userID, setUserID] = useState<string | null>(null),
           [showSignOutModal, setShowSignOutModal] = useState<boolean>(
             import .meta.env.VITE_DEV_MODE === "true" ? true : false
-          ),
+          )
 
-        value ={ 
-
-            email,
-            setEmail,
-            userID,
-            setUserID,
-            name,
-            setName,
-            password,
-            setPassword,
-            confirmPassword,
-            setConfirmPassword,
-            isAuthenticated  ,
-            setIsAuthenticated,
-            userType,
-            setUserType,
-            showSignOutModal,
-            setShowSignOutModal
-        }
-
+          
     useEffect(() =>{
 
         const keys = Object.keys(localStorage),
@@ -82,6 +63,32 @@ export const LoginContextProvider = ({ children }: LoginContextProviderProps) =>
     
     }, [])
 
+    const openSignOutModal = () => setShowSignOutModal(true)
+
+    const closeSignOutModal = () => setShowSignOutModal(false)
+    
+    const value ={ 
+
+        email,
+        setEmail,
+        userID,
+        setUserID,
+        name,
+        setName,
+        password,
+        setPassword,
+        confirmPassword,
+        setConfirmPassword,
+        isAuthenticated  ,
+        setIsAuthenticated,
+        userType,
+        setUserType,
+        showSignOutModal,
+        setShowSignOutModal,
+        closeSignOutModal,
+        openSignOutModal
+
+    }
     
     return(
 

@@ -441,6 +441,11 @@ Login context will be used to store the user login data and provide it to the Lo
   
   5. Create `showSignOutModal` state variable to store the sign out modal visibility
   6. If `showSignOutModal` and `isAuthenticated` are true, render the sign out modal
+  7. Create `closeSignOutModal` function to close the sign out modal
+    a. Set the `showSignOutModal` state to false
+  
+  8. Create `openSignOutModal` function to open the sign out modal
+    a. Set the `showSignOutModal` state to true`
 
 
 ### Login Page
