@@ -2512,3 +2512,20 @@ Sign In Hook will be used to handle the sign in process.
     c. Return an object with success: true and userType
     
   7. If no match is found, return an object with success: false and an error message
+
+### Sign Out Hook
+
+Sign Out Hook will be used to handle the sign out process.
+
+  1. Retrieve `setName`, `setEmail`, `setPassword`, `setUserType`, `setIsAuthenticated` and `setUserID` from `LoginContext`
+  2. Create a `signOut` function that takes no parameters
+  3. Set the context values (setName, setEmail, setPassword, setUserType, setUserID, setIsAuthenticated) to empty strings or false
+  4. Navigate to the Login Page
+  5. Close the sign out modal
+
+### Sign Out Modal Component
+
+Sign Out Modal Component will be used to display a modal when the user clicks on the sign out button. It will have two buttons, one for confirming the sign out and another for canceling it.
+
+  1. Retrieve `closeSignOutModal` from `LoginContext`
+  2. Retrieve `signOut` from Sign Out Hook
