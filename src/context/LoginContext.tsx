@@ -18,12 +18,10 @@ export const LoginContextProvider = ({ children }: LoginContextProviderProps) =>
           [name, setName] = useState<string>(''),
           [password, setPassword] = useState<string>(''),
           [confirmPassword, setConfirmPassword] = useState<string>(''),
-          [isAuthenticated , setIsAuthenticated] = useState<boolean>(true),
+          [isAuthenticated , setIsAuthenticated] = useState<boolean>(false),
           [userType, setUserType] = useState<"patient" | "doctor" | "system" | null>(null),
           [userID, setUserID] = useState<string | null>(null),
-          [showSignOutModal, setShowSignOutModal] = useState<boolean>(
-            import .meta.env.VITE_DEV_MODE === "true" ? true : false
-          )
+          [showSignOutModal, setShowSignOutModal] = useState<boolean>(false)
 
           
     useEffect(() =>{

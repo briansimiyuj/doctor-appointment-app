@@ -13,7 +13,7 @@ const DropdownMenu: React.FC = () =>{
 
     }
     
-    const { setIsAuthenticated } = loginContext
+    const { openSignOutModal } = loginContext
 
     return(
 
@@ -27,7 +27,7 @@ const DropdownMenu: React.FC = () =>{
 
                 <li className="cursor-pointer hover:text-primary" onClick={() => navigate("/settings")}>Settings</li>
 
-                <li className="cursor-pointer hover:text-primary" onClick={() => setIsAuthenticated(false)}>Logout</li>
+                <li className="cursor-pointer hover:text-primary" onClick={openSignOutModal}>Logout</li>
 
             </ul>
 
