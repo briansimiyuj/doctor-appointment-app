@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react"
 import { LoginContextProps } from "../assets/contextProps/LoginContextProps"
+import SignOutModal from "../components/Login/Modals/SignOutModal"
 
 interface LoginContextProviderProps{
     
@@ -20,8 +21,29 @@ export const LoginContextProvider = ({ children }: LoginContextProviderProps) =>
           [isAuthenticated , setIsAuthenticated] = useState<boolean>(true),
           [userType, setUserType] = useState<"patient" | "doctor" | "system" | null>(null),
           [userID, setUserID] = useState<string | null>(null),
+          [showSignOutModal, setShowSignOutModal] = useState<boolean>(
+            import .meta.env.VITE_DEV_MODE === "true" ? true : false
+          ),
 
-        value = { email, setEmail, userID, setUserID, name, setName, password, setPassword, confirmPassword, setConfirmPassword, isAuthenticated  , setIsAuthenticated, userType, setUserType }
+        value ={ 
+
+            email,
+            setEmail,
+            userID,
+            setUserID,
+            name,
+            setName,
+            password,
+            setPassword,
+            confirmPassword,
+            setConfirmPassword,
+            isAuthenticated  ,
+            setIsAuthenticated,
+            userType,
+            setUserType,
+            showSignOutModal,
+            setShowSignOutModal
+        }
 
     useEffect(() =>{
 
@@ -66,6 +88,8 @@ export const LoginContextProvider = ({ children }: LoginContextProviderProps) =>
         <LoginContext.Provider value={value}>
             
             {children}
+
+            { showSignOutModal && isAuthenticated && <SignOutModal/> }
         
         </LoginContext.Provider>
 

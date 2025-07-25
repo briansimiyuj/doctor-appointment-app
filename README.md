@@ -429,13 +429,18 @@ Login context will be used to store the user login data and provide it to the Lo
   1. Create an interface for login data       
     a. Add userType field with 'patient' | 'doctor' type
     b. Add setUserType function to update user type
+
   2. Create state variables to store the login data
     a. Initialize userType state with null as the default value
     b. Add userType and setUserType to context value
+
   3. Wrap the routes in Script component with the LoginContext provider as the parent component
   4. For every render:
     a. Retrieve stored user data from local storage
     b. If user data exists, update the state variables with the data
+  
+  5. Create `showSignOutModal` state variable to store the sign out modal visibility
+  6. If `showSignOutModal` and `isAuthenticated` are true, render the sign out modal
 
 
 ### Login Page

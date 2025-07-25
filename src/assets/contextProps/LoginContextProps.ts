@@ -14,5 +14,8 @@ export interface LoginContextProps{
     setUserType: (userType: "patient" | "doctor" | "system" | null) => void
     userID: string | null
     setUserID: (userID: string | null) => void
+    showSignOutModal: boolean
+    setShowSignOutModal: (showSignOutModal: boolean) => void
+    
 
 }
