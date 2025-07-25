@@ -2539,3 +2539,4 @@ Sign Out Modal Component will be used to display a modal when the user clicks on
 
   1. Retrieve `closeSignOutModal` from `LoginContext`
   2. Retrieve `signOut` from Sign Out Hook
+  3. Attach the `signOut` function to the confirm button and the `closeSignOutModal` function to the cancel button

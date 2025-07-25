@@ -9,7 +9,7 @@ export const useSignOut = () =>{
 
     if(!context) throw new Error("useSigOut must be used within a LoginContextProvider")
 
-    const { setName, setEmail, setPassword, setUserType, setIsAuthenticated, setUserID } = context
+    const { setName, setEmail, setPassword, setUserType, setIsAuthenticated, setUserID, closeSignOutModal } = context
 
     const signOut = () =>{
 
@@ -26,6 +26,8 @@ export const useSignOut = () =>{
         setUserID(null)
 
         console.log('User signed out successfully')
+
+        closeSignOutModal()
 
         navigate("/login")
 

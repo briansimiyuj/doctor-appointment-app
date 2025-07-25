@@ -1,4 +1,15 @@
+import { useContext } from "react"
+import { LoginContext } from "../../../context/LoginContext"
+import { useSignOut } from "../../../hooks/useSignOut"
+
 const SignOutModal: React.FC = ()=>{
+
+    const context = useContext(LoginContext) 
+
+    if(!context) return null
+
+    const { closeSignOutModal } = context,
+          { signOut } = useSignOut()
 
     return(
 
@@ -12,9 +23,15 @@ const SignOutModal: React.FC = ()=>{
 
                 <div className="flex justify-end space-x-2">
 
-                    <button className="px-4 py-2 bg-gray-300 dark:bg-gray-700 font-medium text-gray-800 rounded hover:bg-gray-400">Cancel</button>
+                    <button 
+                        className="px-4 py-2 bg-gray-300 dark:bg-gray-700 font-medium text-gray-800 rounded hover:bg-gray-400"
+                        onClick={closeSignOutModal}
+                    >Cancel</button>
 
-                    <button className="px-4 py-2 bg-red-600 text-white dark:text-white font-medium rounded hover:bg-red-700">Sign Out</button>
+                    <button 
+                        className="px-4 py-2 bg-red-600 text-white dark:text-white font-medium rounded hover:bg-red-700"
+                        onClick={signOut}
+                    >Sign Out</button>
 
                 </div>
 
