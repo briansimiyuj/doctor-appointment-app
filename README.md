@@ -447,6 +447,8 @@ Login context will be used to store the user login data and provide it to the Lo
   8. Create `openSignOutModal` function to open the sign out modal
     a. Set the `showSignOutModal` state to true`
 
+  9. Persist the `isAuthenticated` state to local storage
+
 
 ### Login Page
 

@@ -29,6 +29,8 @@ export const LoginContextProvider = ({ children }: LoginContextProviderProps) =>
         const keys = Object.keys(localStorage),
               matchingKeys = keys.filter(key => key.startsWith("userData-"))
 
+        let isSignedIn = false
+
         if(matchingKeys.length === 0) return
     
        const storedUserData = localStorage.getItem(matchingKeys[0])
@@ -58,6 +60,22 @@ export const LoginContextProvider = ({ children }: LoginContextProviderProps) =>
             }
 
         }
+
+        for(const key of matchingKeys){
+
+            const userData = JSON.parse(localStorage.getItem(key) as string)
+
+            if(userData?.isAuthenticated === true){
+
+                isSignedIn = true
+
+                break
+
+            }
+
+        }
+
+        setIsAuthenticated(isSignedIn)
     
     }, [])
 
