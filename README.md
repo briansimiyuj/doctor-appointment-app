@@ -2540,3 +2540,12 @@ Sign Out Modal Component will be used to display a modal when the user clicks on
   1. Retrieve `closeSignOutModal` from `LoginContext`
   2. Retrieve `signOut` from Sign Out Hook
   3. Attach the `signOut` function to the confirm button and the `closeSignOutModal` function to the cancel button
+
+### Private Route Component
+
+Private Route Component will be used to protect the routes that require authentication.
+
+  1. Retrieve `isAuthenticated` from `LoginContext`
+  2. If `isAuthenticated` is true, render the children
+  3. If `isAuthenticated` is false, redirect the user to the login page
+  4. Wrap all the routes that require authentication with the Private Route Component

@@ -26,6 +26,7 @@ import DocumentFullViewPage from "./pages/DocumentFullViewPage"
 import { DoctorStatsContextProvider } from "./context/DoctorStatsContext"
 import DashboardPage from "./pages/DashboardPage"
 import { ScheduleProvider } from "./context/ScheduleContext"
+import PrivateRoute from "./components/Login/PrivateRoute"
 
 const Script: React.FC = () =>{
 
@@ -73,81 +74,155 @@ const Script: React.FC = () =>{
 
                     <Route path="/about-us" element={<AboutPage/>}/>
 
-                    <Route path="/doctors" element={<DoctorPage/>}/>
+                    <Route path="/doctors" element={
 
-                    <Route path="/doctors/:specialityParam" element={<DoctorPage/>}/>
+                      <PrivateRoute>
 
-                    <Route path="appointments/:doctorID" element={<BookingPage/>}/>
+                        <DoctorPage/>
+
+                      </PrivateRoute>
+
+                    }/>
+
+                    <Route path="/doctors/:specialityParam" element={
+
+                        <PrivateRoute>
+
+                          <DoctorPage/>
+
+                        </PrivateRoute>
+
+                    }/>
+
+                    <Route path="appointments/:doctorID" element={
+
+                      <PrivateRoute>
+
+                        <BookingPage/>
+
+                      </PrivateRoute>
+
+                    }/>
 
                     <Route path="/contact-us" element={<ContactPage/>}/>
 
-                    <Route path="/profile" element={<ProfilePage/>}/>
+                    <Route path="/profile" element={
 
-                    <Route path="/profile/:id" element={<ProfilePage/>}/>
+                      <PrivateRoute>
+
+                        <ProfilePage/>
+
+                      </PrivateRoute>
+
+                    }/>
+
+                    <Route path="/profile/:id" element={
+
+                      <PrivateRoute>
+
+                        <ProfilePage/>
+
+                      </PrivateRoute>
+
+                    }/>
 
                     <Route path="/login" element={<LoginPage/>}/>
 
-                    <Route path="/schedule" element={<SchedulePage/>}/>
+                    <Route path="/schedule" element={
 
-                    <Route path="/document-viewer/:_id" element={<DocumentFullViewPage/>}/>
+                      <PrivateRoute>
+
+                        <SchedulePage/>
+
+                      </PrivateRoute>
+
+                    }/>
+
+                    <Route path="/document-viewer/:_id" element={
+
+                      <PrivateRoute>
+
+                        <DocumentFullViewPage/>
+
+                      </PrivateRoute>
+
+                    }/>
 
                     <Route path="/bookings" element={
+
+                      <PrivateRoute>
               
-                      <BookingContextProvider>
+                        <BookingContextProvider>
 
-                        <AppointmentsContextProvider>
+                          <AppointmentsContextProvider>
 
-                          <MyAppointmentsPage/>
+                            <MyAppointmentsPage/>
 
-                        </AppointmentsContextProvider>
+                          </AppointmentsContextProvider>
 
-                      </BookingContextProvider>
+                        </BookingContextProvider>
+
+                      </PrivateRoute>
 
                     }/>
 
                     <Route path="/appointment/:patientID" element={
 
-                      <BookingContextProvider>
+                      <PrivateRoute>
 
-                        <AppointmentsContextProvider>
+                        <BookingContextProvider>
 
-                          <PatientDetailsProvider>
+                          <AppointmentsContextProvider>
 
-                            <PatientDetailsPage/>
+                            <PatientDetailsProvider>
 
-                          </PatientDetailsProvider>
+                              <PatientDetailsPage/>
 
-                        </AppointmentsContextProvider>
+                            </PatientDetailsProvider>
 
-                      </BookingContextProvider>
+                          </AppointmentsContextProvider>
+
+                        </BookingContextProvider>
+
+                      </PrivateRoute>
+
+                    
 
                     }/>
 
                     <Route path="/dashboard" element={
 
-                      <DoctorStatsContextProvider>
+                      <PrivateRoute>
 
-                        <AppointmentsContextProvider>
+                        <DoctorStatsContextProvider>
 
-                          <ScheduleProvider>
+                          <AppointmentsContextProvider>
 
-                            <DashboardPage/>
+                            <ScheduleProvider>
 
-                          </ScheduleProvider>
+                              <DashboardPage/>
 
-                        </AppointmentsContextProvider>
+                            </ScheduleProvider>
 
-                      </DoctorStatsContextProvider>
+                          </AppointmentsContextProvider>
+
+                        </DoctorStatsContextProvider>
+
+                      </PrivateRoute>
 
                     }/>
 
                     <Route path="/settings" element={
 
-                      <SettingsProvider>
+                      <PrivateRoute>
 
-                        <SettingsPage/>
+                        <SettingsProvider>
 
-                      </SettingsProvider>
+                          <SettingsPage/>
+
+                        </SettingsProvider>
+
+                      </PrivateRoute>
 
                     }/>
 
