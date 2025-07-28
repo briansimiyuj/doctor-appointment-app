@@ -25,33 +25,36 @@ export const LoginContextProvider = ({ children }: LoginContextProviderProps) =>
 
           
     useEffect(() =>{
-
-        const keys = Object.keys(localStorage),
-              matchingKeys = keys.filter(key => key.startsWith("userData-"))
-
-        let isSignedIn = false
-
-        if(matchingKeys.length === 0) return
     
-       const storedUserData = localStorage.getItem(matchingKeys[0])
+       const storedUser = localStorage.getItem("currentUser"),
+             storedAuth = localStorage.getItem("isAuthenticated")
 
-        if(storedUserData){
+        if(storedUser && storedAuth){
 
             try{
             
-                const { email, name, password, userType, userID } = JSON.parse(storedUserData)   
+                const userData = JSON.parse(storedUser),
+                      auth = JSON.parse(storedAuth)
 
-                setEmail(email)
+                if(auth === true){
 
-                setName(name)
+                    setEmail(userData.email)
+                    
+                    setName(userData.name)
+                
+                    setPassword(userData.password)
 
-                setPassword(password)
+                    setIsAuthenticated(true)
 
-                setUserType(userType)
+                    setUserType(userData.userType)
 
-                setIsAuthenticated(true)
+                    setUserID(userData.userID)
 
-                setUserID(userID)
+                    setIsAuthenticated(true)
+
+                    console.log("User is authenticated:", userData)
+
+                }
 
             }catch(err){
             
@@ -61,21 +64,23 @@ export const LoginContextProvider = ({ children }: LoginContextProviderProps) =>
 
         }
 
-        for(const key of matchingKeys){
+        if(storedAuth !== null){
 
-            const userData = JSON.parse(localStorage.getItem(key) as string)
+            try{
+                
+                const parsedAuth = JSON.parse(storedAuth)
 
-            if(userData?.isAuthenticated === true){
+                console.log("Parsed isAuthenticated:", parsedAuth, isAuthenticated)
 
-                isSignedIn = true
+                setIsAuthenticated(parsedAuth === true)
 
-                break
-
+            }catch(err){
+            
+                console.error("Error parsing isAuthenticated from localStorage", err)
+            
             }
 
         }
-
-        setIsAuthenticated(isSignedIn)
     
     }, [])
 
