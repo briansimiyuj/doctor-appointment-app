@@ -52,7 +52,7 @@ export const LoginContextProvider = ({ children }: LoginContextProviderProps) =>
 
                     setIsAuthenticated(true)
 
-                    console.log("User is authenticated:", userData)
+                    // console.log("User is authenticated:", userData) FIXME: Add a toast
 
                 }
 
@@ -70,7 +70,7 @@ export const LoginContextProvider = ({ children }: LoginContextProviderProps) =>
                 
                 const parsedAuth = JSON.parse(storedAuth)
 
-                console.log("Parsed isAuthenticated:", parsedAuth, isAuthenticated)
+                // console.log("Parsed isAuthenticated:", parsedAuth, isAuthenticated)
 
                 setIsAuthenticated(parsedAuth === true)
 

@@ -25,6 +25,10 @@ export const useSignOut = () =>{
 
         setUserID(null)
 
+        localStorage.removeItem("currentUser")
+
+        localStorage.removeItem("isAuthenticated")
+
         console.log('User signed out successfully')
 
         closeSignOutModal()

@@ -2534,8 +2534,9 @@ Sign Out Hook will be used to handle the sign out process.
   1. Retrieve `setName`, `setEmail`, `setPassword`, `setUserType`, `setIsAuthenticated` and `setUserID` from `LoginContext`
   2. Create a `signOut` function that takes no parameters
   3. Set the context values (setName, setEmail, setPassword, setUserType, setUserID, setIsAuthenticated) to empty strings or false
-  4. Navigate to the Login Page
-  5. Close the sign out modal
+  4. Remove the `isAuthenticated` and `currentUser` from the `localStorage`
+  5. Navigate to the Login Page
+  6. Close the sign out modal
 
 ### Sign Out Modal Component
 
