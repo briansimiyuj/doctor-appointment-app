@@ -46,6 +46,10 @@ export const useSignIn = () =>{
                     
                     setUserID(userData.userID)
 
+                    localStorage.setItem("currentUser", JSON.stringify(userData))
+                    
+                    localStorage.setItem("isAuthenticated", JSON.stringify(true))
+                    
                     setIsAuthenticated(true)
 
                     navigate("/")

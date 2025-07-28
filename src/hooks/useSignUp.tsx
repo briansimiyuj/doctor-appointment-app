@@ -42,6 +42,10 @@ export const useSignUp = () =>{
 
         localStorage.setItem(`userData-${userID}`, JSON.stringify(userData))
 
+        localStorage.setItem("isAuthenticated", JSON.stringify(true))
+
+        localStorage.setItem("currentUser", JSON.stringify(userData))
+
         setEmail(email)
 
         setName(name)

@@ -2505,7 +2505,7 @@ Sign Up Hook will be used to handle the sign up process.
   3. If any of the parameters are empty, return an error message
   4. If the password and confirm password do not match, return an error message
   5. Create a `userData` object with the `name`, `email`, `password`, `confirmPassword` and `userType` as properties
-  6. Store the `userData` in `localStorage` with the key `userID`
+  6. Store the `userData`, `isAuthenticated` and `currentUser` in the `localStorage` 
   7. Call `setName`, `setEmail`, `setPassword`, `setConfirmPassword`, `setIsAuthenticated` and `setUserType` with the values from `userData` and `true`
   8. Navigate to the Home Page
 
@@ -2520,6 +2520,7 @@ Sign In Hook will be used to handle the sign in process.
   5. Loop through all user data in localStorage and check if the email and password match
   6. If a match is found:
     a. Set the context values (setName, setEmail, setPassword, setUserType, setUserID, setIsAuthenticated) with the user's data
+    b. Store the `isAuthenticated` and `currentUser` in the `localStorage`
     b. Navigate to the home page
     c. Return an object with success: true and userType
     
