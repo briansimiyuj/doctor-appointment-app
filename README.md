@@ -354,17 +354,13 @@ Contact page will show the contact information of the clinic and the doctors.
 
 
 ### Profile Context
+
 Profile context will be used to store the user profile data and provide it to the Profile page.
 
-  1. Create a type for userData and address
-  2. Create a state variable to store the user data and initialize it with a dummy user data
-  3. Create a state variable for editing and initialize it with false
-  4. Integrate `userType` from `LoginContext` to determine the type of profile to be rendered
-
-  #### New Update Profile Type
-
-    1. Create a type for doctor and patient data
-    2. Create state variables to store the doctor and patient data and initialize them with dummy data
+  1. Create a `profile` state and initialize it with null
+  2. Create a `isEditing` state and initialize it with false
+  3. Retreive `userType` from `LoginContext`
+  4. Create a `formData` state and initialize it with the `userType` data
 
 
 ### Profile Page
