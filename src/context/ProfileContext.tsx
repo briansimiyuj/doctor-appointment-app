@@ -1,6 +1,7 @@
-import { createContext, useState } from "react"
+import { createContext, useContext, useState } from "react"
 import { ProfileType } from "../assets/types/ProfileType"
 import { assets } from "../assets/frontend/assets"
+import { LoginContext } from "./LoginContext"
 
 interface ProfileContextType{
 
@@ -20,6 +21,12 @@ interface ProfileContextProviderProps{
 export const ProfileContext = createContext<ProfileContextType | undefined>(undefined)
 
 export const ProfileContextProvider = ({ children }: ProfileContextProviderProps) =>{
+
+    const context = useContext(LoginContext)
+    
+    if(!context) throw new Error("ProfileContextProvider must be used within a LoginContextProvider")
+
+    const { userType } = context
 
     const patientProfile: ProfileType ={
 
@@ -68,7 +75,12 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
 
         },
 
-        [profile, setProfile] = useState<ProfileType | null>(doctorProfile),
+        [profile, setProfile] = useState<ProfileType | null>(() =>{
+            if(userType === "doctor") return doctorProfile
+            if(userType === "patient") return patientProfile
+
+            return null
+        }),
         [isEditing, setIsEditing] = useState<boolean>(false),
         value = { profile, setProfile, isEditing, setIsEditing, doctorProfile, patientProfile };
 

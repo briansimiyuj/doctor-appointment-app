@@ -359,6 +359,7 @@ Profile context will be used to store the user profile data and provide it to th
   1. Create a type for userData and address
   2. Create a state variable to store the user data and initialize it with a dummy user data
   3. Create a state variable for editing and initialize it with false
+  4. Integrate `userType` from `LoginContext` to determine the type of profile to be rendered
 
   #### New Update Profile Type
 
