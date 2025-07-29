@@ -18,5 +18,7 @@ export interface LoginContextProps{
     setShowSignOutModal: (showSignOutModal: boolean) => void
     closeSignOutModal: () => void
     openSignOutModal: () => void
+    loading: boolean
+    setLoading: (loading: boolean) => void
 
 }

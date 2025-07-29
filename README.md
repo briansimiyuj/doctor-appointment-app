@@ -433,12 +433,14 @@ Login context will be used to store the user login data and provide it to the Lo
   2. Create state variables to store the login data
     a. Initialize userType state with null as the default value
     b. Add userType and setUserType to context value
+    c. Create a `loading` state and initialize it to true
 
   3. Wrap the routes in Script component with the LoginContext provider as the parent component
   4. For every render:
     a. Retrieve `storedUser` and `storedAuth` from `localStorage`
     b. If `storedAuth` and `storedUser` true, set the login data to the context value and `isAuthenticated` to true
     c. If `storedUser` is not null, set the user data to the context value and `isAuthenticated` to true
+    d. Set `loading` to false
   
   5. Create `showSignOutModal` state variable to store the sign out modal visibility
   6. If `showSignOutModal` and `isAuthenticated` are true, render the sign out modal

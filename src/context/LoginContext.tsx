@@ -21,7 +21,8 @@ export const LoginContextProvider = ({ children }: LoginContextProviderProps) =>
           [isAuthenticated , setIsAuthenticated] = useState<boolean>(false),
           [userType, setUserType] = useState<"patient" | "doctor" | "system" | null>(null),
           [userID, setUserID] = useState<string | null>(null),
-          [showSignOutModal, setShowSignOutModal] = useState<boolean>(false)
+          [showSignOutModal, setShowSignOutModal] = useState<boolean>(false),
+          [loading, setLoading] = useState<boolean>(true)
 
           
     useEffect(() =>{
@@ -81,6 +82,8 @@ export const LoginContextProvider = ({ children }: LoginContextProviderProps) =>
             }
 
         }
+
+        setLoading(false)
     
     }, [])
 
@@ -103,6 +106,8 @@ export const LoginContextProvider = ({ children }: LoginContextProviderProps) =>
         isAuthenticated  ,
         setIsAuthenticated,
         userType,
+        loading,
+        setLoading,
         setUserType,
         showSignOutModal,
         setShowSignOutModal,
