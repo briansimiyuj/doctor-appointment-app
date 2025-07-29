@@ -3,6 +3,7 @@ import { ProfileContext } from "../../context/ProfileContext"
 import EditFormInput from "./EditFormInput"
 import { useEditFormInput } from "../../hooks/useEditFormInput"
 import { assets } from "../../assets/frontend/assets"
+import { useFileSelection } from "../../hooks/useFileSelection"
 
 const EditForm: React.FC = () =>{
 
@@ -13,25 +14,12 @@ const EditForm: React.FC = () =>{
     if(!context) return null
 
     const { profile } = context,
+           { handleBrowseClick, handleDragOver, handleDrop } = useFileSelection(),
           editFormInput = useEditFormInput()
 
     if(!editFormInput) return null
 
     const { handleImageChange, isChanged } = editFormInput
-
-
-    const handleImageClick = () =>{
-
-        fileInputRef.current?.click()
-
-    }
-
-
-    const handleCoverImageClick = () =>{
-
-        coverImageRef.current?.click()
-
-    }
 
 
     return(
@@ -41,35 +29,33 @@ const EditForm: React.FC = () =>{
             <form className="flex flex-col gap-8 items-center justify-center w-full max-w-3xl mx-auto p-6">
 
                 <div className="w-full flex flex-col items-center gap-4">
-                      <div className="relative group rounded-lg overflow-hidden">
+
+                    <div 
+                        className="relative group rounded-lg overflow-hidden cursor-pointer"
+                        onDragOver={handleDragOver}
+                        onDrop={handleDrop}
+                        onClick={e =>{
+
+                            e.stopPropagation()
+                            handleBrowseClick(fileInputRef)
+
+                        }}
+                    >
+
+                        <img 
+                            src={profile?.image || assets.uploadIcon}
+                            alt="current user image" 
+                            className="w-full h-36 sm:h-48 object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105"
+                        />
 
 
-                          <img 
-                              src={profile?.image || assets.uploadIcon}
-                              alt="current user image" 
-                              className="w-full h-36 sm:h-48 object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105"
-                              onClick={handleImageClick}
-                          />
+                        <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
 
+                            <span className="text-white text-sm">Change Photo</span>
 
+                        </div>
 
-
-
-
-
-                          <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-
-
-                              <span className="text-white text-sm">Change Photo</span>
-
-
-                          </div>
-
-
-
-
-
-                      </div>
+                    </div>
 
                     <input 
                         type="file" 
@@ -91,13 +77,22 @@ const EditForm: React.FC = () =>{
 
                             <h2 className="text-neutral-500 font-semibold text-lg mb-4">Cover Image</h2>
 
-                            <div className="relative group rounded-lg overflow-hidden">
+                            <div 
+                                className="relative group rounded-lg overflow-hidden cursor-pointer"
+                                onClick={e =>{
+
+                                    e.stopPropagation()
+                                    coverImageRef.current?.click()
+
+                                }}
+                                onDragOver={handleDragOver}
+                                onDrop={handleDrop}
+                            >
 
                                 <img 
                                     src={profile.coverImage || assets.uploadIcon}
                                     alt="Cover Image" 
-                                    className="w-full h-36 sm:h-64 object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105"
-                                    onClick={handleCoverImageClick}
+                                    className="w-full h-36 sm:h-64 object-cover transition-transform duration-300 group-hover:scale-105"
                                 />
                 
                                 <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">

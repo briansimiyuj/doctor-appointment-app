@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { assets } from "../../assets/frontend/assets"
 import { ProfileContext } from "../../context/ProfileContext"
 import EditForm from "./EditForm"
+import { DocumentsTabContextProvider } from "../../context/DocumentsTabContext"
 
 const EditProfileModal: React.FC = ()=>{
 
@@ -32,7 +33,11 @@ const EditProfileModal: React.FC = ()=>{
                 </div>
 
 
-                <EditForm/>
+                <DocumentsTabContextProvider>
+
+                    <EditForm/>
+
+                </DocumentsTabContextProvider>
 
             </div>
 
