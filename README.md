@@ -369,10 +369,21 @@ Profile page will show the user profile data and allow the user to edit the data
 
   1. Create a Profile Page and mount it on Script component and provide a route for it
   2. Wrap the the routes in Script component with the ProfileContext provider as the parent component
-  3. Create a Profile Image component and mount it on Profile page
+  3. Retrieve `isEditing` and `profile` states from the `ProfileContext`
+  4. Retrieve `isAuthenticated` state from the `LoginContext`
+  5. If `isAuthenticated` is false, mount NotFound Page
+  6. If `profile` is null;
+    a. Display a message to the user that their profile is not found and they should create a new profile
+    b. Create a button to open edit profile modal by setting `isEditing` to true
+    c. If `isEditing` is true, display the edit profile modal
+
+  7. If `profile` is not null;
+    a. If `isEditing` is true, display the edit profile modal otherwise display the profile data
+
+  8. Create a Profile Image component and mount it on Profile page
     a. Get the user profile image from the ProfileContext and display it
 
-  4. Create a Profile Info component and mount it on Profile page
+  9. Create a Profile Info component and mount it on Profile page
     a. Get the user profile name from the ProfileContext and display it
     b. Create a Profile Contact component and mount it on Profile Info component
       i. Fill the contact details from the ProfileContext and display it
