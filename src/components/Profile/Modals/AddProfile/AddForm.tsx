@@ -1,6 +1,7 @@
 import { useContext, useRef } from "react"
 import { assets } from "../../../../assets/frontend/assets"
 import { LoginContext } from "../../../../context/LoginContext"
+import AddFormInput from "./AddFormInput"
 
 const AddForm: React.FC = ()=>{
 
@@ -78,6 +79,8 @@ const AddForm: React.FC = ()=>{
                 )
 
             }
+
+            <AddFormInput/>
 
             <button
                 type="submit"
