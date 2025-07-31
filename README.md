@@ -378,7 +378,7 @@ Profile page will show the user profile data and allow the user to edit the data
     c. If `isEditing` is true, display the edit profile modal
 
   7. If `profile` is not null;
-    a. If `isEditing` is true, display the edit profile modal otherwise display the profile data
+    a. If `isEditing` is true, display the add profile modal otherwise display the profile data
 
   8. Create a Profile Image component and mount it on Profile page
     a. Get the user profile image from the ProfileContext and display it
@@ -429,7 +429,14 @@ Profile page will show the user profile data and allow the user to edit the data
         h. Create useEditFormInput hook to handle all input change functions
         i. Create a submit button to submit the form
 
-      7. Initialize the editing state back to false### Login Context
+      7. Initialize the editing state back to false
+      
+    #### Add Profile Modal
+
+    Add a modal to allow users to add their profile data.  
+
+      1. Retrieve `setIsEditting` from `ProfileContext`
+      2. Mount ModalHeader and pass title and `setIsEditting` as `onClose` props
 
 ### Login Context
 

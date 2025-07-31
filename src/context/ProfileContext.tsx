@@ -28,7 +28,9 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
     if(!context) throw new Error("ProfileContextProvider must be used within a LoginContextProvider")
 
     const [profile, setProfile] = useState<ProfileType | null>(null),
-        [isEditing, setIsEditing] = useState<boolean>(false),
+        [isEditing, setIsEditing] = useState<boolean>(
+            import .meta.env.VITE_DEV_MODE === "true" ? true : false
+        ),
         { userType } = context, 
         [formData, setFormData] = useState<Partial<ProfileType>>({
             type: userType === "patient" || userType === "doctor" ? userType : undefined

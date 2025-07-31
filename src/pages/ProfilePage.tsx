@@ -5,6 +5,7 @@ import { ProfileContext } from "../context/ProfileContext"
 import EditProfileModal from "../components/Profile/EditProfileModal"
 import { LoginContext } from "../context/LoginContext"
 import NotFoundPage from "./NotFoundPage"
+import AddProfileModaL from "../components/Profile/Modals/AddProfile/AddProfileModaL"
 
 const ProfilePage: React.FC = () =>{
 
@@ -37,7 +38,7 @@ const ProfilePage: React.FC = () =>{
                             onClick={() => setIsEditing(true)}
                         >Add Profile</button>
 
-                        { isEditing && <EditProfileModal/> }
+                        { isEditing && <AddProfileModaL/> }
                         
                     </div>
 
