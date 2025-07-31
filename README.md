@@ -407,7 +407,7 @@ Profile page will show the user profile data and allow the user to edit the data
       3. Create the edit profile modal and mount it on the Profile page
       4. Initialize the editing state to true for a moment in order to design the modal
       5. Create a cancel button to close the modal
-      6. Create edit form component and mount it on the edit profile modal ans wrap it with the `DocumentTabProvider`
+      6. Create edit form component and mount it on the edit profile modal and wrap it with the `DocumentTabProvider`
         a. Create a file input to upload the profile picture
         b. Display the current profile picture
         c. Retrieve `handleBrowseClick`, `handleDragOver` and `handleDrop` functions from File Selection hook
@@ -437,6 +437,8 @@ Profile page will show the user profile data and allow the user to edit the data
 
       1. Retrieve `setIsEditting` from `ProfileContext`
       2. Mount ModalHeader and pass title and `setIsEditting` as `onClose` props
+      3. Create AddForm component and mount it on the Add Profile Modal. Wrap it the `DocumentTabProvider`
+      4. It will be similar to the `EditForm` component. It will be used to add profile data.
 
 ### Login Context
 
