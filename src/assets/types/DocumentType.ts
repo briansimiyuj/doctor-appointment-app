@@ -7,5 +7,6 @@ export type DocumentType ={
     uploadedBy: string
     size: number
     content?: string
+    file?: File
     
 }
