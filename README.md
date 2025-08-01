@@ -439,6 +439,7 @@ Profile page will show the user profile data and allow the user to edit the data
       2. Mount ModalHeader and pass title and `setIsEditting` as `onClose` props
       3. Create AddForm component and mount it on the Add Profile Modal. Wrap it the `DocumentTabProvider`
       4. It will be similar to the `EditForm` component. It will be used to add profile data.
+      5. Make the input fields controlled components
 
 ### Login Context
 

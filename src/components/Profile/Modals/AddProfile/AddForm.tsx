@@ -2,6 +2,7 @@ import { useContext, useRef } from "react"
 import { assets } from "../../../../assets/frontend/assets"
 import { LoginContext } from "../../../../context/LoginContext"
 import AddFormInput from "./AddFormInput"
+import { useAddFormInput } from "../../../../hooks/useAddFormInput"
 
 const AddForm: React.FC = ()=>{
 
@@ -10,7 +11,12 @@ const AddForm: React.FC = ()=>{
 
     if(!loginContext) return null
 
-    const { userType } = loginContext
+    const { userType } = loginContext,
+          addFornInput = useAddFormInput()
+
+    if(!addFornInput) return null
+
+    const { handleInputChange } = addFornInput
 
     return(
 
@@ -36,9 +42,11 @@ const AddForm: React.FC = ()=>{
 
                 <input
                     type="file"
+                    name="profileImage"
                     hidden
                     accept="image/*"
                     ref={fileInputRef}
+                    onChange={e => handleInputChange(e)}
                 />
 
             </div>
@@ -70,8 +78,10 @@ const AddForm: React.FC = ()=>{
                         <input
                             type="file"
                             hidden
+                            name="coverImage"
                             accept="image/*"
                             ref={fileInputRef}
+                            onChange={e => handleInputChange(e)}
                         />                
 
                     </div>

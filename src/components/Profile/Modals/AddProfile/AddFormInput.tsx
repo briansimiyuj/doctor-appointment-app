@@ -1,14 +1,17 @@
 import { useContext } from "react"
 import { LoginContext } from "../../../../context/LoginContext"
 import { specialityData } from "../../../../assets/frontend/assets"
+import { useAddFormInput } from "../../../../hooks/useAddFormInput"
 
 const AddFormInput: React.FC = ()=>{
 
-    const loginContext = useContext(LoginContext)
+    const loginContext = useContext(LoginContext),
+          addFormInput = useAddFormInput()
 
-    if(!loginContext) return null
+    if(!loginContext || !addFormInput) return null
 
-    const { userType } = loginContext
+    const { userType } = loginContext,
+           { nameValue, emailValue, phoneValue, specialityValue, experienceValue, feesValue, aboutValue , medicalHistoryValue, handleInputChange} = addFormInput
 
     return(
 
@@ -24,6 +27,8 @@ const AddFormInput: React.FC = ()=>{
                     id="name" 
                     placeholder="Enter your name"
                     className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
+                    value={nameValue}
+                    onChange={e => handleInputChange(e)}
                 />
 
             </div>
@@ -38,6 +43,8 @@ const AddFormInput: React.FC = ()=>{
                     id="email"
                     placeholder="Enter your email"
                     className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
+                    value={emailValue}
+                    onChange={e => handleInputChange(e)}
                 />
 
             </div>
@@ -52,6 +59,8 @@ const AddFormInput: React.FC = ()=>{
                     id="phone" 
                     placeholder="Enter your phone number"
                     className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
+                    value={phoneValue}
+                    onChange={e => handleInputChange(e)}
                 />
 
             </div>
@@ -71,7 +80,10 @@ const AddFormInput: React.FC = ()=>{
                                 name="speciality" 
                                 id="speciality"
                                 className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
+                                value={specialityValue}
+                                onChange={e => handleInputChange(e)}
                             >
+
                                 <option>Select speciality</option>
                                 
 
@@ -103,6 +115,8 @@ const AddFormInput: React.FC = ()=>{
                                 id="experience" 
                                 placeholder="Enter your experience"
                                 className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
+                                value={experienceValue}
+                                onChange={e => handleInputChange(e)}
                             />
 
                         </div>
@@ -117,6 +131,8 @@ const AddFormInput: React.FC = ()=>{
                                 id="fees" 
                                 placeholder="Enter your fees"
                                 className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
+                                value={feesValue}
+                                onChange={e => handleInputChange(e)}
                             />
 
                         </div>
@@ -130,6 +146,8 @@ const AddFormInput: React.FC = ()=>{
                                 id="about" 
                                 placeholder="Enter your description"
                                 className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
+                                value={aboutValue}
+                                onChange={e => handleInputChange(e)}    
                             />
 
                         </div>
@@ -147,6 +165,8 @@ const AddFormInput: React.FC = ()=>{
                             id="medicalHistory" 
                             placeholder="Enter your medical history"
                             className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
+                            value={medicalHistoryValue}
+                            onChange={e => handleInputChange(e)}
                         />
 
                     </div>  
