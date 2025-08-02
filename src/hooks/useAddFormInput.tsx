@@ -106,6 +106,8 @@ export const useAddFormInput = () =>{
         medicalHistoryValue,
         imageValue,
         coverImageValue,
+        setImageValue,
+        setCoverImageValue,
         handleInputChange,
         readyToSubmit
 

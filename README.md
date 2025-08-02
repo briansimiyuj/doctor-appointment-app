@@ -440,6 +440,7 @@ Profile page will show the user profile data and allow the user to edit the data
       3. Create AddForm component and mount it on the Add Profile Modal. Wrap it the `DocumentTabProvider`
       4. It will be similar to the `EditForm` component. It will be used to add profile data.
       5. Make the input fields controlled components
+      6. Preview selected profile image and cover image
 
 ### Login Context
 

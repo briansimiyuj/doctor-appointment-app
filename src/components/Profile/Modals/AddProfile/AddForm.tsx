@@ -1,13 +1,13 @@
-import { useContext, useRef } from "react"
+import { useContext, useEffect, useRef } from "react"
 import { assets } from "../../../../assets/frontend/assets"
 import { LoginContext } from "../../../../context/LoginContext"
 import AddFormInput from "./AddFormInput"
 import { useAddFormInput } from "../../../../hooks/useAddFormInput"
-import { useFileSelection } from "../../../../hooks/useFileSelection"
 
 const AddForm: React.FC = ()=>{
 
     const fileInputRef = useRef<HTMLInputElement>(null),
+          coverImageRef = useRef<HTMLInputElement>(null),
           loginContext = useContext(LoginContext)
 
     if(!loginContext) return null
@@ -17,10 +17,13 @@ const AddForm: React.FC = ()=>{
 
     if(!addFornInput) return null
 
-    const { handleInputChange } = addFornInput,
-          { handleBrowseClick, handleDragOver, handleDrop, selectedFiles } = useFileSelection()
+    const { handleInputChange, imageValue, coverImageValue } = addFornInput
 
-    console.log(selectedFiles)
+    useEffect(() =>{
+
+        console.log(coverImageValue, imageValue)
+
+    }, [imageValue, coverImageValue])
 
     return(
 
@@ -32,25 +35,18 @@ const AddForm: React.FC = ()=>{
 
                 <div 
                     className="relative group rounded-lg overflow-hidden cursor-pointer"
-                    onDragOver={handleDragOver}
-                    onDrop={handleDrop}
-                    onClick={e =>{
-
-                        e.stopPropagation()
-                        handleBrowseClick(fileInputRef)
-
-                    }}
+                    onClick={() => fileInputRef.current?.click()}                    
                 >
 
                     <img 
-                        src={selectedFiles.length > 0 && selectedFiles[0].file instanceof File ? URL.createObjectURL(selectedFiles[0].file) : assets.uploadIcon}
-                        alt="upload icon" 
-                        className="w-full h-12 sm:h-24 object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105 bg-gray-400 dark:bg-gray-600"
+                        src={imageValue ? URL.createObjectURL(imageValue) : assets.avatar}
+                        alt="avatar icon" 
+                        className="w-full h-12 sm:h-24 rounded-full object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105 bg-gray-400 dark:bg-gray-600"
                     />
 
                     <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
 
-                        <span className="text-white text-sm">Upload Photo</span>
+                        <span className="text-white dark:text-white text-sm">Upload Photo</span>
 
                     </div>
 
@@ -77,25 +73,19 @@ const AddForm: React.FC = ()=>{
 
                         <div 
                             className="relative group rounded-lg overflow-hidden cursor-pointer"
-                            onDragOver={handleDragOver}
-                            onDrop={handleDrop}
-                            onClick={e =>{
-                                
-                                e.stopPropagation()
-                                handleBrowseClick(fileInputRef)
-                            
-                            }}
+                            ref={coverImageRef}
+                            onClick={() => coverImageRef.current?.click()}                    
                         >
 
                             <img 
-                                src={selectedFiles.length > 0 && selectedFiles[0].file instanceof File ? URL.createObjectURL(selectedFiles[0].file) : assets.uploadIcon}
+                                src={coverImageValue ? URL.createObjectURL(coverImageValue) : assets.avatar}
                                 alt="upload icon" 
                                 className="w-full h-12 sm:h-24 object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105 bg-gray-400 dark:bg-gray-600"
                             />
 
                             <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
 
-                                <span className="text-white text-sm">Upload Cover</span>
+                                <span className="text-white dark:text-white text-sm">Upload Cover</span>
 
                             </div>    
                             
@@ -106,7 +96,7 @@ const AddForm: React.FC = ()=>{
                             hidden
                             name="coverImage"
                             accept="image/*"
-                            ref={fileInputRef}
+                            ref={coverImageRef}
                             onChange={e => handleInputChange(e)}
                         />                
 
