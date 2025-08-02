@@ -11,6 +11,7 @@ import verifiedIcon from "./verified_icon.svg"
 import arrowIcon from "./arrow_icon.svg"
 import infoIcon from "./info_icon.svg"
 import uploadIcon from "./upload_icon.png"
+import avatar from "./avatar.png"
 import profilePic from "./profile_pic.png"
 import coverImage from "./coverImage.jpg"
 import groupProfilePic from "./group_profiles.png"
@@ -75,6 +76,7 @@ export const assets ={
     razorpayLogo,
     heroImage,
     GoogleLogo,
+    avatar
 
 }
 
