@@ -7,10 +7,10 @@ export const useAddFormInput = () =>{
 
     if(!loginContext) return null
 
-    const { userType } = loginContext 
+    const { userType, name, email } = loginContext 
 
-    const [nameValue, setNameValue] = useState(''),
-          [emailValue, setEmailValue] = useState(''),
+    const [nameValue, setNameValue] = useState(name),
+          [emailValue, setEmailValue] = useState(email),
           [phoneValue, setPhoneValue] = useState(''),
           [specialityValue, setSpecialityValue] = useState(''),
           [aboutValue, setAboutValue] = useState(''),

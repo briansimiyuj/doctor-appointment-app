@@ -430,6 +430,46 @@ Profile page will show the user profile data and allow the user to edit the data
         i. Create a submit button to submit the form
 
       7. Initialize the editing state back to false
+
+    #### Add Form Input Hook
+      
+      The useAddFormInput custom hook is used to manage the state and logic for handling form inputs when adding a new profile (doctor or patient).
+
+      1. Initialize the hook with context
+        a. Import and use LoginContext to access current user data
+        b. Destructure `userType`, `name`, and `email` from the context
+
+      2. Create state variables for form input fields
+        a. Create `nameValue` and `emailValue` and initialize them using context values
+        b. Create `phoneValue`, `specialityValue`, `aboutValue`, `experienceValue`, `feesValue`, and `medicalHistoryValue` as empty strings
+        c. Create imageValue and coverImageValue state variables to handle profile and cover image uploads respectively, both initialized as null
+
+      3. Create `handleInputChange` function to update state on input change
+        a. Extract `name`, `value`, and `type` from the event target
+        b. If the input type is "file":
+          i. Cast the target as HTMLInputElement
+          ii.Check if the file exists
+            - If `name` is "profileImage", set `imageValue` to the file
+            - If `name` is "coverImage", set `coverImageValue` to the file
+    
+        c. For other input types, use a switch-case to update the corresponding state
+          i. For `name`, update `nameValue`
+          ii. For `email`, update `emailValue`
+          iii. For `phone`, update `phoneValue`
+          iv. For `speciality`, update `specialityValue`
+          v. For `about`, update `aboutValue`
+          vi. For `experience`, update `experienceValue`
+          vii. For `fees`, update `feesValue`
+          viii. For `medicalHistory`, update `medicalHistoryValue`
+
+      4.  Create readyToSubmit memoized boolean using useMemo
+        a. Always return false if `nameValue`, `emailValue`, `phoneValue`, or `imageValue` are missing
+        b. If the user is a doctor:
+          i. Require `specialityValue`, `aboutValue`, `experienceValue`, and `feesValue` to be truthy
+          ii. If `coverImageValue` is optional and should not block submission
+
+        c. If the user is a patient:
+          i. Require `medicalHistoryValue` to be truthy
       
     #### Add Profile Modal
 
