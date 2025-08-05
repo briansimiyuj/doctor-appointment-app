@@ -4,6 +4,7 @@ import { LoginContext } from "../../../../context/LoginContext"
 import AddFormInput from "./AddFormInput"
 import { ProfileContext } from "../../../../context/ProfileContext"
 import ModalFooter from "./ModalFooter"
+import { useSubmitProfile } from "../../../../hooks/useSubmitProfile"
 
 const AddForm: React.FC = ()=>{
 
@@ -15,12 +16,16 @@ const AddForm: React.FC = ()=>{
     if(!loginContext || !profileContext) return null
 
     const { userType } = loginContext,
-          { profileImage, setProfileImage, setCoverImage, coverImage } = profileContext
+          { profileImage, setProfileImage, setCoverImage, coverImage } = profileContext,
+          { submitProfile } = useSubmitProfile()
           
 
     return(
 
-        <form className="flex flex-col gap-8 items-center justify-center w-full max-w-3xl mx-auto p-6">
+        <form 
+            className="flex flex-col gap-8 items-center justify-center w-full max-w-3xl mx-auto p-6"
+            onSubmit={submitProfile}
+        >
 
             <div className="w-full flex flex-col items-center gap-4">
 
