@@ -502,9 +502,32 @@ Profile page will show the user profile data and allow the user to edit the data
       1. Retrieve `setIsEditting` from `ProfileContext`
       2. Mount ModalHeader and pass title and `setIsEditting` as `onClose` props
       3. Create AddForm component and mount it on the Add Profile Modal. Wrap it the `DocumentTabProvider`
-      4. It will be similar to the `EditForm` component. It will be used to add profile data.
-      5. Make the input fields controlled components
-      6. Preview selected profile image and cover image
+     
+     
+     ### Add Profile Form Component
+
+     1. Create a form component that will be used to add profile data. It will have the following fields:
+        a. `profileImage`: Image input field 
+        b. `name`: Text input field
+        c. `email`: Text input field
+        d. `phone`: Text input field
+
+        For doctors:
+        e. `coverImage`: Image input field
+        f. `speciality`: Select input field with options from `specialities`
+        g. `education`: Text input field
+        h. `experience`: Text input field
+        i. `fees`: Text input field
+        j. `certifications`: Text input field
+        k. `about`: Textarea input field
+
+        For patients:
+        e. `medicalHistory`: Textarea input field 
+
+     2. Make the input fields controllled components using the states in `ProfileContext`
+     3. Add a button to submit the form. It will be disabled if any of the fields are empty depending on the user type.
+
+
 
 ### Login Context
 

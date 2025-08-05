@@ -1,29 +1,22 @@
-import { useContext, useEffect, useRef } from "react"
+import { useContext, useRef } from "react"
 import { assets } from "../../../../assets/frontend/assets"
 import { LoginContext } from "../../../../context/LoginContext"
 import AddFormInput from "./AddFormInput"
-import { useAddFormInput } from "../../../../hooks/useAddFormInput"
+import { ProfileContext } from "../../../../context/ProfileContext"
+import ModalFooter from "./ModalFooter"
 
 const AddForm: React.FC = ()=>{
 
     const fileInputRef = useRef<HTMLInputElement>(null),
           coverImageRef = useRef<HTMLInputElement>(null),
-          loginContext = useContext(LoginContext)
+          loginContext = useContext(LoginContext),
+          profileContext = useContext(ProfileContext)
 
-    if(!loginContext) return null
+    if(!loginContext || !profileContext) return null
 
     const { userType } = loginContext,
-          addFornInput = useAddFormInput()
-
-    if(!addFornInput) return null
-
-    const { handleInputChange, imageValue, coverImageValue } = addFornInput
-
-    useEffect(() =>{
-
-        console.log(coverImageValue, imageValue)
-
-    }, [imageValue, coverImageValue])
+          { profileImage, setProfileImage, setCoverImage, coverImage } = profileContext
+          
 
     return(
 
@@ -39,9 +32,9 @@ const AddForm: React.FC = ()=>{
                 >
 
                     <img 
-                        src={imageValue ? URL.createObjectURL(imageValue) : assets.avatar}
+                        src={profileImage ? URL.createObjectURL(profileImage) : assets.avatar}
                         alt="avatar icon" 
-                        className="w-full h-12 sm:h-24 rounded-full object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105 bg-gray-400 dark:bg-gray-600"
+                        className="w-full h-24 sm:h-24 rounded-full object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105 bg-gray-400 dark:bg-gray-600"
                     />
 
                     <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -58,7 +51,11 @@ const AddForm: React.FC = ()=>{
                     hidden
                     accept="image/*"
                     ref={fileInputRef}
-                    onChange={e => handleInputChange(e)}
+                    onChange={e =>{
+                        const file = e.target.files?.[0]
+                        if(!file) return
+                        setProfileImage(file)
+                    }}
                 />
 
             </div>
@@ -78,7 +75,7 @@ const AddForm: React.FC = ()=>{
                         >
 
                             <img 
-                                src={coverImageValue ? URL.createObjectURL(coverImageValue) : assets.avatar}
+                                src={coverImage ? URL.createObjectURL(coverImage) : assets.avatar}
                                 alt="upload icon" 
                                 className="w-full h-12 sm:h-24 object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105 bg-gray-400 dark:bg-gray-600"
                             />
@@ -97,7 +94,11 @@ const AddForm: React.FC = ()=>{
                             name="coverImage"
                             accept="image/*"
                             ref={coverImageRef}
-                            onChange={e => handleInputChange(e)}
+                            onChange={e =>{
+                                const file = e.target.files?.[0]
+                                if(!file) return
+                                setCoverImage(file)
+                            }}
                         />                
 
                     </div>
@@ -108,10 +109,7 @@ const AddForm: React.FC = ()=>{
 
             <AddFormInput/>
 
-            <button
-                type="submit"
-                className={`bg-primary-bg text-secondary-bg hover:bg-opacity-90 cursor-pointer' : 'bg-gray-400 text-gray-200 cursor-not-allowed'} px-10 py-3 rounded-lg font-medium transition-colors duration-300 w-full max-w-md mt-4`}
-            >Add Profile</button>
+            <ModalFooter/>
 
         </form>
 

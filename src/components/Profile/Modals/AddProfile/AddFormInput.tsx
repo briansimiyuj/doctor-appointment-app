@@ -1,17 +1,17 @@
 import { useContext } from "react"
 import { LoginContext } from "../../../../context/LoginContext"
 import { specialityData } from "../../../../assets/frontend/assets"
-import { useAddFormInput } from "../../../../hooks/useAddFormInput"
+import { ProfileContext } from "../../../../context/ProfileContext"
 
 const AddFormInput: React.FC = ()=>{
 
     const loginContext = useContext(LoginContext),
-          addFormInput = useAddFormInput()
+          profileContext = useContext(ProfileContext)
 
-    if(!loginContext || !addFormInput) return null
+    if(!loginContext || !profileContext) return null
 
     const { userType } = loginContext,
-           { nameValue, emailValue, phoneValue, specialityValue, experienceValue, feesValue, aboutValue , medicalHistoryValue, handleInputChange} = addFormInput
+          { nameValue, setNameValue, emailValue, setEmailValue, phoneValue, setPhoneValue, specialityValue, setSpecialityValue, experienceValue, setExperienceValue, educationValue, setEducationValue, feesValue, setFeesValue, aboutValue, setAboutValue, medicalHistoryValue, setMedicalHistoryValue, certificationsValue, setCertificationsValue } = profileContext
 
     return(
 
@@ -28,7 +28,7 @@ const AddFormInput: React.FC = ()=>{
                     placeholder="Enter your name"
                     className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                     value={nameValue}
-                    onChange={e => handleInputChange(e)}
+                    onChange={e => setNameValue(e.target.value)}
                 />
 
             </div>
@@ -44,7 +44,7 @@ const AddFormInput: React.FC = ()=>{
                     placeholder="Enter your email"
                     className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                     value={emailValue}
-                    onChange={e => handleInputChange(e)}
+                    onChange={e => setEmailValue(e.target.value)}
                 />
 
             </div>
@@ -60,7 +60,7 @@ const AddFormInput: React.FC = ()=>{
                     placeholder="Enter your phone number"
                     className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                     value={phoneValue}
-                    onChange={e => handleInputChange(e)}
+                    onChange={e => setPhoneValue(e.target.value)}
                 />
 
             </div>
@@ -81,7 +81,7 @@ const AddFormInput: React.FC = ()=>{
                                 id="speciality"
                                 className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                                 value={specialityValue}
-                                onChange={e => handleInputChange(e)}
+                                onChange={e => setSpecialityValue(e.target.value)}
                             >
 
                                 <option>Select speciality</option>
@@ -107,6 +107,36 @@ const AddFormInput: React.FC = ()=>{
 
                         <div className="flex flex-col gap-2 w-full items-center">
 
+                            <label htmlFor="education" className="font-semibold text-sm sm:text-base">Education:</label>
+
+                            <input
+                                type="text"
+                                id="education"
+                                className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
+                                placeholder="Enter education separated by comma"
+                                value={educationValue}
+                                onChange={e => setEducationValue(e.target.value.split(',').map((item) => item.trim()))}
+                            />
+
+                        </div>
+
+                        <div className="flex flex-col gap-2 w-full items-center">
+
+                            <label htmlFor="certifications" className="font-semibold text-sm sm:text-base">Certifications:</label>
+
+                            <input
+                                type="text"
+                                id="certifications"
+                                placeholder="Enter certifications separated by comma"
+                                className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
+                                value={certificationsValue}
+                                onChange={e => setCertificationsValue(e.target.value.split(/\s*,\s*/).map((item) => item.trim()))}
+                            />
+
+                        </div>
+
+                        <div className="flex flex-col gap-2 w-full items-center">
+
                             <label htmlFor="experience" className="font-semibold text-sm sm:text-base">Experience:</label>
 
                             <input 
@@ -116,7 +146,7 @@ const AddFormInput: React.FC = ()=>{
                                 placeholder="Enter your experience"
                                 className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                                 value={experienceValue}
-                                onChange={e => handleInputChange(e)}
+                                onChange={e => setExperienceValue(e.target.value)}
                             />
 
                         </div>
@@ -132,7 +162,7 @@ const AddFormInput: React.FC = ()=>{
                                 placeholder="Enter your fees"
                                 className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                                 value={feesValue}
-                                onChange={e => handleInputChange(e)}
+                                onChange={e => setFeesValue(e.target.value)}
                             />
 
                         </div>
@@ -147,7 +177,7 @@ const AddFormInput: React.FC = ()=>{
                                 placeholder="Enter your description"
                                 className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                                 value={aboutValue}
-                                onChange={e => handleInputChange(e)}    
+                                onChange={e => setAboutValue(e.target.value)}
                             />
 
                         </div>
@@ -166,7 +196,7 @@ const AddFormInput: React.FC = ()=>{
                             placeholder="Enter your medical history"
                             className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                             value={medicalHistoryValue}
-                            onChange={e => handleInputChange(e)}
+                            onChange={e => setMedicalHistoryValue(e.target.value)}
                         />
 
                     </div>  
