@@ -14,7 +14,7 @@ export type UserData ={
     name: string,
     address: AdressType,
     gender: "male" | "female"
-    image: string
+    profileImage: string | undefined
     DOB: string
 
 }
@@ -23,7 +23,13 @@ type DoctorProfile = UserData & DoctorType &{
 
     type: "doctor"
     rating: number
-    coverImage: string
+    coverImage: string | undefined
+    aboutValue: string
+    specialityValue: string
+    experienceValue: string
+    feesValue: string
+    certifications: string[]
+    education: string[]
 
 }
 

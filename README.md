@@ -358,9 +358,33 @@ Contact page will show the contact information of the clinic and the doctors.
 Profile context will be used to store the user profile data and provide it to the Profile page.
 
   1. Create a `profile` state and initialize it with null
-  2. Create a `isEditing` state and initialize it with false
-  3. Retreive `userType` from `LoginContext`
-  4. Create a `formData` state and initialize it with the `userType` data
+  2. Create a `isEditing` state and initialize it with `false`
+  3. Retrieve `userType` from `LoginContext`
+  4. Create a `formData` state and initialize it with null
+  5. Create states for user input values:
+    a. `nameValue` for name
+    b. `emailValue` for email
+    c. `phoneValue` for phone
+    d. `emailValue` for email
+    e. `specialityValue` for speciality
+    f. `experienceValue` for experience
+    g. `aboutValue` for about
+    h. `educationValue` for education
+    i. `certificationsValue` for certifications
+    j. `feesValue` for fees
+    k. `medicalHistoryValue` for medical history
+    l. `addressValue` for address
+    m. `profileImage` for profile image
+    n. `coverImage` for cover image
+
+  6. Create a `loading` state and a `readyToSubmit` state, both initialized to `false`
+  7. Update `readyToSubmit` state based on field validation: 
+    a. For both patients and doctors, ensure `nameValue`, `emailValue`, `phoneValue`, `addressValue`, and `profileImage` are filled
+    b. For doctors, additionally validate: ensure `specialityValue`, `experienceValue`, `aboutValue`, `educationValue`, `certificationsValue`, `feesValue` and `coverImage` are filled
+    c. For patients, additionally validate: ensure `medicalHistoryValue` is filled
+
+  8. Retrieve `name` and `email` from `LoginContext`
+  9. If `name` and `email` change, update the `nameValue` and `emailValue` states accordingly
 
 
 ### Profile Page
