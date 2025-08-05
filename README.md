@@ -527,6 +527,17 @@ Profile page will show the user profile data and allow the user to edit the data
      2. Make the input fields controllled components using the states in `ProfileContext`
      3. Add a button to submit the form. It will be disabled if any of the fields are empty depending on the user type.
 
+### Submit Profile Hook
+
+Submit profile hook will be used to submit the profile data to the local storage.
+
+  1. Retrieve the profile data and `isEditting` state from the `ProfileContext`
+  2. Create `submitProfile` function that will be called when the submit button is clicked
+    a. Create a new object with the profile data
+    b. Save the object in the local storage with the key as the user's ID
+    c. Return the profile data object
+    d. Set `isEditting` to false 
+
 
 
 ### Login Context
