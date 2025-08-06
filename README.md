@@ -376,15 +376,24 @@ Profile context will be used to store the user profile data and provide it to th
     l. `addressValue` for address
     m. `profileImage` for profile image
     n. `coverImage` for cover image
+    o. `dateOfBirthValue` for date of birth
+    p. `genderValue` for gender
+    q. `residenceValue` for residence
+    r. `cityValue` for city
+    s. `stateValue` for state
+    t. `countryValue` for country
+    u. `hospitalValue` for hospital
+    v. `licenseCertificate` for license certificate  
 
   6. Create a `loading` state and a `readyToSubmit` state, both initialized to `false`
   7. Update `readyToSubmit` state based on field validation: 
-    a. For both patients and doctors, ensure `nameValue`, `emailValue`, `phoneValue`, `addressValue`, and `profileImage` are filled
-    b. For doctors, additionally validate: ensure `specialityValue`, `experienceValue`, `aboutValue`, `educationValue`, `certificationsValue`, `feesValue` and `coverImage` are filled
+    a. For both patients and doctors, ensure `nameValue`, `emailValue`, `phoneValue`, `addressValue`, `genderValue`, `dateOfBirthValue`, and `profileImage` are filled
+    b. For doctors, additionally validate: ensure `specialityValue`, `experienceValue`, `aboutValue`, `educationValue`, `certificationsValue`, `feesValue`, `hospitalValue`, `licenseCertificate` and `coverImage` are filled
     c. For patients, additionally validate: ensure `medicalHistoryValue` is filled
 
   8. Retrieve `name` and `email` from `LoginContext`
   9. If `name` and `email` change, update the `nameValue` and `emailValue` states accordingly
+  10. If `email`, `phone`, `residence`, `city`, `state`, `country` change, update the `addressValue` with their new values
 
 
 ### Profile Page

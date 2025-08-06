@@ -1,4 +1,4 @@
-import { AdressType, ProfileType } from "../types/ProfileType";
+import { AddressType, ProfileType } from "../types/ProfileType";
 
 export interface ProfileContextProps{
 
@@ -15,6 +15,18 @@ export interface ProfileContextProps{
     setEmailValue: (emailValue: string) => void
     phoneValue: string
     setPhoneValue: (phoneValue: string) => void
+    genderValue: "male" | "female" | null
+    setGenderValue: (genderValue: "male" | "female" | null) => void
+    dateOfBirthValue: string
+    setDateOfBirthValue: (dateOfBirthValue: string) => void
+    residenceValue: string
+    setResidenceValue: (residenceValue: string) => void
+    cityValue: string
+    setCityValue: (cityValue: string) => void
+    stateValue: string
+    setStateValue: (stateValue: string) => void
+    countryValue: string
+    setCountryValue: (countryValue: string) => void
     specialityValue: string
     setSpecialityValue: (specialityValue: string) => void
     experienceValue: string
@@ -29,10 +41,14 @@ export interface ProfileContextProps{
     setProfileImage: (profileImage: File | null) => void
     coverImage: File | null
     setCoverImage: (coverImage: File | null) => void
-    addressValue: AdressType | null
-    setAddressValue: (addressValue: AdressType | null) => void
+    addressValue: AddressType | null
+    setAddressValue: (addressValue: AddressType | null) => void
     certificationsValue: string[]
     setCertificationsValue: (certificationsValue: string[]) => void
+    hospitalValue: string
+    setHospitalValue: (hospitalValue: string) => void
+    licenseCertificate: File | null
+    setLicenseCertificate: (licenseCertificate: File | null) => void
     educationValue: string[]
     setEducationValue: (educationValue: string[]) => void
     readyToSubmit: boolean 

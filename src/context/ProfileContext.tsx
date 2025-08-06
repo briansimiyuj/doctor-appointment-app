@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import { AdressType, ProfileType } from "../assets/types/ProfileType"
+import { AddressType, ProfileType } from "../assets/types/ProfileType"
 import { LoginContext } from "./LoginContext"
 import { ProfileContextProps } from "../assets/contextProps/ProfileContextProps"
 
@@ -26,6 +26,12 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
             [nameValue, setNameValue] = useState<string>(name),
             [emailValue, setEmailValue] = useState<string>(email),
             [phoneValue, setPhoneValue] = useState<string>(''),
+            [genderValue, setGenderValue] = useState<"male" | "female" | null>(null),
+            [dateOfBirthValue, setDateOfBirthValue] = useState<string>(''),
+            [residenceValue, setResidenceValue] = useState<string>(''),
+            [cityValue, setCityValue] = useState<string>(''),
+            [stateValue, setStateValue] = useState<string>(''),
+            [countryValue, setCountryValue] = useState<string>(''),
             [specialityValue, setSpecialityValue] = useState<string>(''),
             [experienceValue, setExperienceValue] = useState<string>(''),
             [aboutValue, setAboutValue] = useState<string>(''),
@@ -33,9 +39,11 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
             [certificationsValue, setCertificationsValue] = useState<string[]>([]),
             [feesValue, setFeesValue] = useState<string>(''),
             [medicalHistoryValue, setMedicalHistoryValue] = useState<string>(''),
-            [addressValue, setAddressValue] = useState<AdressType | null>(null),
+            [addressValue, setAddressValue] = useState<AddressType | null>(null),
             [profileImage, setProfileImage] = useState<File | null>(null),
             [coverImage, setCoverImage] = useState<File | null>(null),
+            [licenseCertificate, setLicenseCertificate] = useState<File | null>(null),
+            [hospitalValue, setHospitalValue] = useState<string>(''),
             [readyToSubmit, setReadyToSubmit] = useState<boolean>(false),
             [loading, _setLoading] = useState<boolean>(false)
 
@@ -48,6 +56,26 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
     }, [name, email])
 
     useEffect(() =>{
+
+        if(emailValue && phoneValue && residenceValue && cityValue && stateValue && countryValue){
+
+            setAddressValue({
+
+                email: emailValue,
+                phone: phoneValue,
+                residence: residenceValue,
+                city: cityValue,
+                state: stateValue,
+                country: countryValue
+
+            })
+
+        }
+            
+        
+    }, [emailValue, phoneValue, residenceValue, cityValue, stateValue, countryValue])
+
+    useEffect(() =>{
     
         const isDoctor = userType === "doctor",
             isPatient = userType === "patient"
@@ -55,7 +83,8 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
         const basicValid = 
             nameValue.trim() !== '' &&
             emailValue.trim() !== '' &&
-            phoneValue.trim() !== '' &&
+            phoneValue.trim() !== '' && dateOfBirthValue.trim() !== '' &&
+            genderValue !== null &&
             profileImage !== null,
 
             doctorValid = 
@@ -65,7 +94,7 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
                 aboutValue.trim() !== '' &&
                 educationValue.length > 0 &&
                 certificationsValue.length > 0 &&
-                feesValue.trim() !== '' &&
+                feesValue.trim() !== '' && hospitalValue.trim() !== '' && licenseCertificate !== null &&
                 coverImage !== null,
 
             patientValid = isPatient && medicalHistoryValue.trim().length > 0,
@@ -108,10 +137,26 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
         setMedicalHistoryValue,
         addressValue,
         setAddressValue,
+        genderValue,
+        setGenderValue,
+        dateOfBirthValue,
+        setDateOfBirthValue,
+        residenceValue,
+        setResidenceValue,
+        cityValue,
+        setCityValue,
+        countryValue,
+        setCountryValue,
+        stateValue,
+        setStateValue, 
         profileImage,
         setProfileImage,
         coverImage,
         setCoverImage,
+        hospitalValue,
+        setHospitalValue,
+        licenseCertificate,
+        setLicenseCertificate,
         readyToSubmit
 
     }

@@ -1,18 +1,20 @@
 import { DoctorType } from "./DoctorType"
 
-export type AdressType ={
+export type AddressType ={
 
-    line1:string
-    line2?:string
-    email:string
-    phone:string
+    phone: string,
+    email: string,
+    residence: string,
+    city: string,
+    state: string,
+    country: string
     
 }
 
 export type UserData ={
     
     name: string,
-    address: AdressType,
+    address: AddressType,
     gender: "male" | "female"
     profileImage: string | undefined
     DOB: string
@@ -30,6 +32,8 @@ type DoctorProfile = UserData & DoctorType &{
     feesValue: string
     certifications: string[]
     education: string[]
+    hospital: string
+    licenseCertification: string
 
 }
 
