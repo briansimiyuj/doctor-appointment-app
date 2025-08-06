@@ -1,7 +1,8 @@
 import { useContext } from "react"
 import { LoginContext } from "../../../../context/LoginContext"
-import { specialityData } from "../../../../assets/frontend/assets"
 import { ProfileContext } from "../../../../context/ProfileContext"
+import DoctorFields from "./DoctorFields"
+import PatientFields from "./PatientFields"
 
 const AddFormInput: React.FC = ()=>{
 
@@ -11,7 +12,7 @@ const AddFormInput: React.FC = ()=>{
     if(!loginContext || !profileContext) return null
 
     const { userType } = loginContext,
-          { nameValue, setNameValue, emailValue, setEmailValue, phoneValue, setPhoneValue, specialityValue, setSpecialityValue, experienceValue, setExperienceValue, educationValue, setEducationValue, feesValue, setFeesValue, aboutValue, setAboutValue, medicalHistoryValue, setMedicalHistoryValue, certificationsValue, setCertificationsValue } = profileContext
+          { nameValue, setNameValue, emailValue, setEmailValue, phoneValue, setPhoneValue, genderValue, setGenderValue, dateOfBirthValue, setDateOfBirthValue } = profileContext
 
     return(
 
@@ -65,141 +66,78 @@ const AddFormInput: React.FC = ()=>{
 
             </div>
 
+            <div className="flex flex-col gap-2 w-full items-center py-2">
+
+                <span className="font-semibold text-sm sm:text-base">Gender:</span>
+
+                <div className="flex gap-4 w-full sm:w-[60%] items-center justify-center">
+
+                    <div 
+                        className={`flex items-center gap-2 border rounded-md px-4 py-2 cursor-pointer ${
+                            genderValue === "female" ? 'bg-primary-bg hover:bg-blue-600 transition text-secondary-bg' : 'hover:bg-gray-50 dark:hover:bg-gray-700'
+                        }`}
+                        onClick={() => setGenderValue("female")}
+                    >
+
+                        <input 
+                            type="radio"
+                            name="gender"
+                            checked={genderValue === "female"}
+                            onChange={() => setGenderValue("female")}
+                        />
+
+                        <span>Female</span>
+                    
+                    </div>
+
+
+                    <div 
+                        className={`flex items-center gap-2 border rounded-md px-4 py-2 cursor-pointer ${
+                            genderValue === "male" ? 'bg-primary-bg hover:bg-blue-600 transition text-secondary-bg' : 'hover:bg-gray-50 dark:hover:bg-gray-700'
+                        }`}
+                        onClick={() => setGenderValue("male")}
+                    >
+                        <input 
+                            type="radio"
+                            name="gender"
+                            checked={genderValue === "male"}
+                            onChange={() => setGenderValue("male")}
+                        />
+
+                        <span>Male</span>
+                    
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div className="flex flex-col gap-2 w-full items-center">
+
+                <label htmlFor="dob" className="font-semibold text-sm sm:text-base">Date of Birth:</label>
+
+                <input 
+                    type="date"
+                    name="dob"
+                    className="border rounded-md px-4 py-2 w-full sm:w-96"
+                    placeholder="Enter your date of birth"
+                    value={dateOfBirthValue}
+                    onChange={e => setDateOfBirthValue(e.target.value)}
+                />
+
+            </div>
+
             
             {
 
                 userType === "doctor" ?(
 
-                    <>
-
-                        <div className="flex flex-col gap-2 w-full items-center">
-
-                            <label htmlFor="speciality" className="font-semibold text-sm sm:text-base">Speciality:</label>
-
-                            <select 
-                                name="speciality" 
-                                id="speciality"
-                                className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
-                                value={specialityValue}
-                                onChange={e => setSpecialityValue(e.target.value)}
-                            >
-
-                                <option>Select speciality</option>
-                                
-
-                                {
-
-                                    specialityData.map((speciality, index) =>(
-
-                                        <option key={index} value={speciality.speciality}>
-                                            
-                                            {speciality.speciality}
-                                            
-                                        </option>
-
-                                    ))
-
-                                }
-
-                            </select>
-
-                        </div>
-
-                        <div className="flex flex-col gap-2 w-full items-center">
-
-                            <label htmlFor="education" className="font-semibold text-sm sm:text-base">Education:</label>
-
-                            <input
-                                type="text"
-                                id="education"
-                                className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
-                                placeholder="Enter education separated by comma"
-                                value={educationValue}
-                                onChange={e => setEducationValue(e.target.value.split(',').map((item) => item.trim()))}
-                            />
-
-                        </div>
-
-                        <div className="flex flex-col gap-2 w-full items-center">
-
-                            <label htmlFor="certifications" className="font-semibold text-sm sm:text-base">Certifications:</label>
-
-                            <input
-                                type="text"
-                                id="certifications"
-                                placeholder="Enter certifications separated by comma"
-                                className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
-                                value={certificationsValue}
-                                onChange={e => setCertificationsValue(e.target.value.split(/\s*,\s*/).map((item) => item.trim()))}
-                            />
-
-                        </div>
-
-                        <div className="flex flex-col gap-2 w-full items-center">
-
-                            <label htmlFor="experience" className="font-semibold text-sm sm:text-base">Experience:</label>
-
-                            <input 
-                                type="text"
-                                name="experience" 
-                                id="experience" 
-                                placeholder="Enter your experience"
-                                className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
-                                value={experienceValue}
-                                onChange={e => setExperienceValue(e.target.value)}
-                            />
-
-                        </div>
-
-                        <div className="flex flex-col gap-2 w-full items-center">
-
-                            <label htmlFor="fees" className="font-semibold text-sm sm:text-base">Fees:</label>
-
-                            <input 
-                                type="text"
-                                name="fees" 
-                                id="fees" 
-                                placeholder="Enter your fees"
-                                className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
-                                value={feesValue}
-                                onChange={e => setFeesValue(e.target.value)}
-                            />
-
-                        </div>
-
-                        <div className="flex flex-col gap-2 w-full items-center">
-
-                            <label htmlFor="about" className="font-semibold text-sm sm:text-base">About:</label>
-
-                            <textarea 
-                                name="about" 
-                                id="about" 
-                                placeholder="Enter your description"
-                                className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
-                                value={aboutValue}
-                                onChange={e => setAboutValue(e.target.value)}
-                            />
-
-                        </div>
-
-                    </>
+                    <DoctorFields/>
 
                 ):(
 
-                    <div className="flex flex-col gap-2 w-full items-center">
-
-                        <label htmlFor="medicalHistory" className="font-semibold text-sm sm:text-base">Medical History:</label>
-
-                        <textarea 
-                            name="medicalHistory" 
-                            id="medicalHistory" 
-                            placeholder="Enter your medical history"
-                            className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
-                            value={medicalHistoryValue}
-                            onChange={e => setMedicalHistoryValue(e.target.value)}
-                        />
-
-                    </div>  
+                    <PatientFields/>
 
                 )
 

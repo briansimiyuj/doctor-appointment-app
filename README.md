@@ -529,9 +529,15 @@ Profile page will show the user profile data and allow the user to edit the data
         i. `fees`: Text input field
         j. `certifications`: Text input field
         k. `about`: Textarea input field
+        l. `hospital`: Text input field
+        m. `licenseCertificate`: File input field
 
         For patients:
         e. `medicalHistory`: Textarea input field 
+        f. `residence`: Text input field
+        g. `city`: Text input field
+        h. `state`: Text input field
+        i. `country`: Text input field
 
      2. Make the input fields controllled components using the states in `ProfileContext`
      3. Add a button to submit the form. It will be disabled if any of the fields are empty depending on the user type.
