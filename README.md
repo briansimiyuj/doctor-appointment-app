@@ -394,6 +394,7 @@ Profile context will be used to store the user profile data and provide it to th
   8. Retrieve `name` and `email` from `LoginContext`
   9. If `name` and `email` change, update the `nameValue` and `emailValue` states accordingly
   10. If `email`, `phone`, `residence`, `city`, `state`, `country` change, update the `addressValue` with their new values
+  11. On every render, check if `profile` is stored in local storage and if so, update the state with the retrieved profile data
 
 
 ### Profile Page

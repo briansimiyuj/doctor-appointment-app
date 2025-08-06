@@ -105,6 +105,35 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
     
     }, [userType, nameValue, emailValue, phoneValue, addressValue, profileImage, specialityValue, experienceValue, aboutValue, educationValue, certificationsValue, feesValue, coverImage, medicalHistoryValue])
 
+    useEffect(() =>{
+    
+        const keys = Object.keys(localStorage),
+                profileKey = keys.find(key => key.startsWith("profileData-"))
+
+        if(profileKey){
+            
+            const storedProfile = localStorage.getItem(profileKey)
+            
+            if(storedProfile){
+                
+                try{
+
+                    const parsedProfile: ProfileType = JSON.parse(storedProfile)
+
+                    setProfile(parsedProfile)
+
+                }catch(err){
+
+                    console.log(err)
+
+                }
+
+            }
+
+        }
+    
+    }, [])
+
 
     const value: ProfileContextProps ={
     
