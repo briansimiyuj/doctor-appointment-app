@@ -8,7 +8,7 @@ const ProfileData: React.FC = () => {
 
     if(!context) return null
 
-    const { profile } = context
+    const { profile, licenseCertificateURL } = context
 
     return(
 
@@ -34,9 +34,9 @@ const ProfileData: React.FC = () => {
                         
                                 <p className="text-gray-400">{profile.experience}</p>
 
-                                <h3 className="font-medium">Degree:</h3>
+                                <h3 className="font-medium">Education:</h3>
                         
-                                <p className="text-gray-400">{profile.degree}</p>
+                                <p className="text-gray-400">{profile.education}</p>
 
                                 <h3 className="font-medium">Fees:</h3>
                         
@@ -49,6 +49,10 @@ const ProfileData: React.FC = () => {
                                 <h3 className="font-medium">About:</h3>
 
                                 <p className="text-gray-400">{profile.about}</p>
+
+                                <h3 className="font-medium">License Certificate:</h3>
+
+                                <a href={licenseCertificateURL ? licenseCertificateURL : ""} target="_blank" rel="noreferrer" className="text-blue-500 hover:underline">View License</a>
 
                             </div>
 
@@ -67,19 +71,7 @@ const ProfileData: React.FC = () => {
 
                         <div className="grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-neutral-700">
 
-                            {
-                                
-                                profile?.medicalHistory?.map((item, index) =>(
-
-                                    <div key={index} className="col-span-2">
-
-                                        <p className="text-gray-400">{item}</p>
-
-                                    </div>
-
-                                ))
-                                
-                            }
+                            <p className="font-medium">{profile ? profile.medicalHistory : "No medical history available."}</p>
 
                         </div>
 

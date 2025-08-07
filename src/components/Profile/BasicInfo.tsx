@@ -20,7 +20,7 @@ const BasicInfo: React.FC = () => {
 
                 <h3 className="font-medium">Date of Birth:</h3>
 
-                <p className="text-gray-400">{profile?.DOB}</p>
+                <p className="text-gray-400">{profile?.dateOfBirth}</p>
 
             </div>
 

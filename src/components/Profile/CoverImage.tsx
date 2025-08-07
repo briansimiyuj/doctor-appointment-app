@@ -6,13 +6,17 @@ const CoverImage: React.FC = ()=>{
     const context = useContext(ProfileContext),
          profile = context?.profile
 
+    if(!profile) return null
+    
+    const { coverImageURL } = profile
+
     return(
 
         <div className="mt-5">
 
             <h2 className="text-neutral-500 underline mt-3 mb-3">COVER IMAGE</h2>
 
-            <img src={profile?.coverImage}alt="Cover Image" className="w-full h-30 object-cover"/>
+            <img src={coverImageURL? coverImageURL : ""}alt="Cover Image" className="w-full h-30 object-cover"/>
 
         
 

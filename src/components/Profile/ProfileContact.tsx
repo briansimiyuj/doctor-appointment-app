@@ -16,23 +16,68 @@ const ProfileContact: React.FC = () =>{
 
                 <h3 className="font-medium">Email:</h3>
 
-                <p className="text-blue-500">{userData?.address.email}</p>
+                <p className="text-blue-500">{userData?.addressValue?.email}</p>
 
                 <h3 className="font-medium">Phone:</h3>
 
-                <p className="text-blue-400">{userData?.address.phone}</p>
+                <p className="text-blue-400">{userData?.addressValue.phone}</p>
 
-                <h3 className="font-medium">Address:</h3>
+                {
 
-                <p className="text-gray-500">
+                    userData?.type === "doctor" ?(
 
-                    {userData?.address.line1}
+                        <>
 
-                    <br/>
+                            <h4 className="font-medium">Hospital:</h4>
 
-                    {userData?.address.line2}
+                            <p>{userData?.hospital}</p>
 
-                </p>
+                            <h4 className="font-medium">Hospital Location:</h4>
+
+                            <p>{userData?.hospitalLocation}</p>
+
+                        </> 
+                        
+
+                    ):(
+
+                        <>
+                        
+                            <h4 className="font-medium">Residence:</h4>
+                            
+                            <p>{userData?.addressValue?.residence}</p>
+
+                            <h4 className="font-medium">City:</h4>
+
+                            <p>{userData?.addressValue?.city}</p>
+
+                            {
+
+                                userData?.addressValue?.state &&(
+
+                                    <>
+                                        
+                                        <h4 className="font-medium">State:</h4>
+
+                                        <p>{userData?.addressValue?.state}</p>
+
+                                    </>
+
+                                )
+
+                            }
+
+                            <h4 className="font-medium">Country:</h4>
+
+                            <p>{userData?.addressValue?.country}</p>
+                        
+                        
+                        </>
+
+                    )
+
+                }
+
 
             </div>
 

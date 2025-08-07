@@ -3,12 +3,15 @@ import { ProfileContext } from "../../context/ProfileContext"
 
 const ProfileImage: React.FC = () =>{
    
-    const context = useContext(ProfileContext),
-         profileImage = context?.profile?.image
+    const context = useContext(ProfileContext)
+
+    if(!context) return null
+
+    const { profileImageURL } = context
 
     return(
 
-        <img src={profileImage} alt="profile-image" className="w-24 rounded-full object-cover"/>
+        <img src={profileImageURL ? profileImageURL : ""} alt="profile-image" className="w-24 rounded-full object-cover"/>
         
     )
 }

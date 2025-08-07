@@ -14,10 +14,11 @@ export type AddressType ={
 export type UserData ={
     
     name: string,
-    address: AddressType,
+    addressValue: AddressType,
     gender: "male" | "female"
     profileImage: string | undefined
-    DOB: string
+    profileImageURL: string | null
+    dateOfBirth: string
 
 }
 
@@ -26,6 +27,7 @@ type DoctorProfile = UserData & DoctorType &{
     type: "doctor"
     rating: number
     coverImage: string | undefined
+    coverImageURL: string | null
     aboutValue: string
     specialityValue: string
     experienceValue: string
@@ -33,7 +35,7 @@ type DoctorProfile = UserData & DoctorType &{
     certifications: string[]
     education: string[]
     hospital: string
-    licenseCertification: string
+    licenseCertificate: string
 
 }
 
@@ -42,8 +44,9 @@ type PatientProfile = UserData &{
     _id: string
     type: "patient"
     appointments?: string[]
-    medicalHistory?: string[]
+    medicalHistory: string[]
     coverImage?: string
+    coverImageURL?: string | null
 
 }
 
