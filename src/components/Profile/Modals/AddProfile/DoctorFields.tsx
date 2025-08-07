@@ -8,7 +8,7 @@ const DoctorFields: React.FC = ()=>{
     
         if(!profileContext) return null
     
-        const { specialityValue, setSpecialityValue, experienceValue, setExperienceValue, educationValue, setEducationValue, feesValue, setFeesValue, aboutValue, setAboutValue, certificationsValue, setCertificationsValue,  hospitalValue, setHospitalValue, setLicenseCertificate } = profileContext
+        const { specialityValue, setSpecialityValue, experienceValue, setExperienceValue, educationValue, setEducationValue, feesValue, setFeesValue, aboutValue, setAboutValue, certificationsValue, setCertificationsValue,  hospitalValue, setHospitalValue, hospitalLocationValue, setHospitalLocationValue, setLicenseCertificate } = profileContext
 
     return(
 
@@ -105,6 +105,22 @@ const DoctorFields: React.FC = ()=>{
                     className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                     value={hospitalValue}
                     onChange={e => setHospitalValue(e.target.value)}
+                />
+
+            </div>
+
+            <div className="flex flex-col gap-2 w-full items-center">
+
+                <label htmlFor="hospitalLocation" className="font-semibold text-sm sm:text-base">Hospital Location:</label>
+
+                <input 
+                    type="text"
+                    name="hospitalLocation" 
+                    id="hospitalLocation" 
+                    placeholder="Where is your hospital located?"
+                    className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
+                    value={hospitalLocationValue}
+                    onChange={e => setHospitalLocationValue(e.target.value)}
                 />
 
             </div>

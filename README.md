@@ -535,6 +535,7 @@ Profile page will show the user profile data and allow the user to edit the data
         k. `about`: Textarea input field
         l. `hospital`: Text input field
         m. `licenseCertificate`: File input field
+        n. `hospitalLocation`: Text input field
 
         For patients:
         e. `medicalHistory`: Textarea input field 

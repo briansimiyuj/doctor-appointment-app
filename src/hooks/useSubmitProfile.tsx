@@ -10,7 +10,7 @@ export const useSubmitProfile = () =>{
 
     if(!loginContext || !profileContext) throw new Error("useSubmitProfile must be used within a LoginProvider and ProfileProvider")
 
-    const { nameValue, emailValue, phoneValue, specialityValue, experienceValue, profileImage, coverImage, certificationsValue, aboutValue, feesValue, educationValue, medicalHistoryValue, setIsEditing, licenseCertificate, hospitalValue, residenceValue, cityValue, stateValue, countryValue, genderValue, dateOfBirthValue,  } = profileContext,
+    const { nameValue, emailValue, phoneValue, specialityValue, experienceValue, profileImage, coverImage, certificationsValue, aboutValue, feesValue, educationValue, medicalHistoryValue, setIsEditing, licenseCertificate, hospitalValue, residenceValue, cityValue, stateValue, countryValue, genderValue, dateOfBirthValue, hospitalLocationValue } = profileContext,
           { userType } = loginContext,
           userID = `${userType}-${uuidv4()}`
 
@@ -36,6 +36,7 @@ export const useSubmitProfile = () =>{
             speciality: userType === "doctor" ? specialityValue : undefined,
             licenseCertificate: userType === "doctor" ? licenseCertificate : undefined,  
             hospital: userType === "doctor" ? hospitalValue : undefined,
+            hospitalLocation: userType === "doctor" ? hospitalLocationValue : undefined,
             certifications: userType === "doctor" ? certificationsValue : undefined,
             about: userType === "doctor" ? aboutValue : undefined,
             experience: userType === "doctor" ? experienceValue : undefined,
