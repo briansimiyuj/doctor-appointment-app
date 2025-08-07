@@ -39,8 +39,10 @@ export interface ProfileContextProps{
     setMedicalHistoryValue: (medicalHistoryValue: string) => void
     profileImage: File | null
     setProfileImage: (profileImage: File | null) => void
+    profileImageURL: string | null
     coverImage: File | null
     setCoverImage: (coverImage: File | null) => void
+    coverImageURL: string | null
     addressValue: AddressType | null
     setAddressValue: (addressValue: AddressType | null) => void
     certificationsValue: string[]
@@ -49,6 +51,7 @@ export interface ProfileContextProps{
     setHospitalValue: (hospitalValue: string) => void
     licenseCertificate: File | null
     setLicenseCertificate: (licenseCertificate: File | null) => void
+    licenseCertificateURL: string | null
     educationValue: string[]
     setEducationValue: (educationValue: string[]) => void
     readyToSubmit: boolean 

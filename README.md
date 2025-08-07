@@ -384,6 +384,7 @@ Profile context will be used to store the user profile data and provide it to th
     t. `countryValue` for country
     u. `hospitalValue` for hospital
     v. `licenseCertificate` for license certificate  
+    w. `licenseCertificateURL` for license certificate URL
 
   6. Create a `loading` state and a `readyToSubmit` state, both initialized to `false`
   7. Update `readyToSubmit` state based on field validation: 
@@ -395,6 +396,7 @@ Profile context will be used to store the user profile data and provide it to th
   9. If `name` and `email` change, update the `nameValue` and `emailValue` states accordingly
   10. If `email`, `phone`, `residence`, `city`, `state`, `country` change, update the `addressValue` with their new values
   11. On every render, check if `profile` is stored in local storage and if so, update the state with the retrieved profile data
+  12. Whenever `licenseCertificate` changes, update the `licenseCertificateURL` state with the URL of the uploaded file
 
 
 ### Profile Page

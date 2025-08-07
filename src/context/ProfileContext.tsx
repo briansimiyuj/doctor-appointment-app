@@ -19,9 +19,7 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
         
         const { name, email , userType} = context, 
             [profile, setProfile] = useState<ProfileType | null>(null),
-            [isEditing, setIsEditing] = useState<boolean>(
-                import .meta.env.VITE_DEV_MODE === "true" ? true : false
-            ),
+            [isEditing, setIsEditing] = useState<boolean>(false),
             [formData, setFormData] = useState<Partial<ProfileType | null>>(null),
             [nameValue, setNameValue] = useState<string>(name),
             [emailValue, setEmailValue] = useState<string>(email),
@@ -41,8 +39,11 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
             [medicalHistoryValue, setMedicalHistoryValue] = useState<string>(''),
             [addressValue, setAddressValue] = useState<AddressType | null>(null),
             [profileImage, setProfileImage] = useState<File | null>(null),
+            [profileImageURL, setProfileImageURL] = useState<string | null>(''),
             [coverImage, setCoverImage] = useState<File | null>(null),
+            [coverImageURL, setCoverImageURL] = useState<string | null>(''),
             [licenseCertificate, setLicenseCertificate] = useState<File | null>(null),
+            [licenseCertificateURL, setLicenseCertificateURL] = useState<string | null>(''),
             [hospitalValue, setHospitalValue] = useState<string>(''),
             [readyToSubmit, setReadyToSubmit] = useState<boolean>(false),
             [loading, _setLoading] = useState<boolean>(false)
@@ -134,6 +135,60 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
     
     }, [])
 
+    useEffect(() =>{
+    
+        if(licenseCertificate){
+
+            const url = URL.createObjectURL(licenseCertificate)
+
+            setLicenseCertificateURL(url)
+
+            return () => URL.revokeObjectURL(url)
+
+        }else{
+            
+            setLicenseCertificateURL(null)
+
+        }
+    
+    }, [licenseCertificate])
+
+    useEffect(() =>{
+    
+        if(coverImage){
+
+            const url = URL.createObjectURL(coverImage)
+
+            setCoverImageURL(url)
+
+            return () => URL.revokeObjectURL(url)
+
+        }else{
+
+            setCoverImageURL(null)
+
+        }
+    
+    }, [coverImage])
+
+    useEffect(() =>{
+    
+        if(profileImage){
+
+            const url = URL.createObjectURL(profileImage)
+
+            setProfileImageURL(url)
+
+            return () => URL.revokeObjectURL(url)
+
+        }else{
+
+            setProfileImageURL(null)
+
+        }
+    
+    }, [profileImage])
+
 
     const value: ProfileContextProps ={
     
@@ -186,6 +241,9 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
         setHospitalValue,
         licenseCertificate,
         setLicenseCertificate,
+        licenseCertificateURL,
+        profileImageURL,
+        coverImageURL,
         readyToSubmit
 
     }
