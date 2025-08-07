@@ -9,6 +9,8 @@ export interface ProfileContextProps{
     loading: boolean
     isEditing: boolean
     setIsEditing: (isEditing: boolean) => void
+    showModal: boolean
+    setShowModal: (showModal: boolean) => void
     nameValue: string
     setNameValue: (nameValue: string) => void
     emailValue: string

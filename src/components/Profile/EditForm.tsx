@@ -43,7 +43,7 @@ const EditForm: React.FC = () =>{
                     >
 
                         <img 
-                            src={profile?.image || assets.uploadIcon}
+                            src={profile?.profileImage || assets.uploadIcon}
                             alt="current user image" 
                             className="w-full h-36 sm:h-48 object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105"
                         />

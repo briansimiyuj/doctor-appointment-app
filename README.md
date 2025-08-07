@@ -386,6 +386,7 @@ Profile context will be used to store the user profile data and provide it to th
     v. `licenseCertificate` for license certificate  
     w. `licenseCertificateURL` for license certificate URL
     x. `hospitalLocation` for hospital location
+    y. `showModal` for showing modal
 
   6. Create a `loading` state and a `readyToSubmit` state, both initialized to `false`
   7. Update `readyToSubmit` state based on field validation: 
@@ -406,16 +407,17 @@ Profile page will show the user profile data and allow the user to edit the data
 
   1. Create a Profile Page and mount it on Script component and provide a route for it
   2. Wrap the the routes in Script component with the ProfileContext provider as the parent component
-  3. Retrieve `isEditing` and `profile` states from the `ProfileContext`
+  3. Retrieve `isEditing`, `showModal` and `profile` states from the `ProfileContext`
   4. Retrieve `isAuthenticated` state from the `LoginContext`
   5. If `isAuthenticated` is false, mount NotFound Page
   6. If `profile` is null;
     a. Display a message to the user that their profile is not found and they should create a new profile
-    b. Create a button to open edit profile modal by setting `isEditing` to true
-    c. If `isEditing` is true, display the edit profile modal
+    b. Create a button to open add profile modal by setting  `showModal` to true
+    c. If `showModal` is true, display the add profile modal
 
   7. If `profile` is not null;
-    a. If `isEditing` is true, display the add profile modal otherwise display the profile data
+    a. If `isEditing` is true, reuse the add profile modal otherwise display the profile data
+    b. Create a button to open edit profile modal by setting  `isEditing` and `showModal` to true
 
   8. Create a Profile Image component and mount it on Profile page
     a. Get the user profile image from the ProfileContext and display it

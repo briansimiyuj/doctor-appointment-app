@@ -2,7 +2,6 @@ import { useContext } from "react"
 import ProfileImage from "../components/Profile/ProfileImage"
 import ProfileInfo from "../components/Profile/ProfileInfo"
 import { ProfileContext } from "../context/ProfileContext"
-import EditProfileModal from "../components/Profile/EditProfileModal"
 import { LoginContext } from "../context/LoginContext"
 import NotFoundPage from "./NotFoundPage"
 import AddProfileModaL from "../components/Profile/Modals/AddProfile/AddProfileModaL"
@@ -14,7 +13,7 @@ const ProfilePage: React.FC = () =>{
 
     if(!profileContext || !loginContext) return null
 
-    const { isEditing, setIsEditing, profile } = profileContext,
+    const { showModal, setShowModal, setIsEditing, profile } = profileContext,
           { isAuthenticated } = loginContext
 
     if(!isAuthenticated) return <NotFoundPage/>
@@ -35,19 +34,19 @@ const ProfilePage: React.FC = () =>{
 
                         <button
                             className="bg-primary-btn p-2 px-6 text-secondary-bg cursor-pointer rounded-md shadow-md hover:bg-blue-700 transition-colors duration-200 font-semibold focus:outline-none focus:ring-2 focus:ring-primary-btn focus:ring-offset-2"
-                            onClick={() => setIsEditing(true)}
+                            onClick={() => setShowModal(true)}
                         >Add Profile</button>
 
-                        { isEditing && <AddProfileModaL/> }
+                        { showModal && <AddProfileModaL/> }
                         
                     </div>
 
                 ):(
 
 
-                    isEditing ?(
+                    showModal ?(
 
-                        <EditProfileModal/>
+                        <AddProfileModaL/>
 
                     ):(
 
@@ -64,7 +63,10 @@ const ProfilePage: React.FC = () =>{
 
                                 <button 
                                     className="bg-primary-btn p-2 text-secondary-bg cursor-pointer rounded-md"
-                                    onClick={() => setIsEditing(true)}
+                                    onClick={() =>{
+                                        setShowModal(true)
+                                        setIsEditing(true)
+                                    }}
                                 >Edit Profile</button>
 
                             </div>
