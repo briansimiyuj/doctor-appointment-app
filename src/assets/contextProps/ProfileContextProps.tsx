@@ -49,6 +49,8 @@ export interface ProfileContextProps{
     setCertificationsValue: (certificationsValue: string[]) => void
     hospitalValue: string
     setHospitalValue: (hospitalValue: string) => void
+    hospitalLocationValue: string
+    setHospitalLocationValue: (hospitalLocationValue: string) => void
     licenseCertificate: File | null
     setLicenseCertificate: (licenseCertificate: File | null) => void
     licenseCertificateURL: string | null

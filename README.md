@@ -385,6 +385,7 @@ Profile context will be used to store the user profile data and provide it to th
     u. `hospitalValue` for hospital
     v. `licenseCertificate` for license certificate  
     w. `licenseCertificateURL` for license certificate URL
+    x. `hospitalLocation` for hospital location
 
   6. Create a `loading` state and a `readyToSubmit` state, both initialized to `false`
   7. Update `readyToSubmit` state based on field validation: 

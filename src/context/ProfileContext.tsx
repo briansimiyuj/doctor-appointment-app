@@ -45,6 +45,7 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
             [licenseCertificate, setLicenseCertificate] = useState<File | null>(null),
             [licenseCertificateURL, setLicenseCertificateURL] = useState<string | null>(''),
             [hospitalValue, setHospitalValue] = useState<string>(''),
+            [hospitalLocationValue, setHospitalLocationValue] = useState<string>(''),
             [readyToSubmit, setReadyToSubmit] = useState<boolean>(false),
             [loading, _setLoading] = useState<boolean>(false)
 
@@ -238,6 +239,8 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
         coverImage,
         setCoverImage,
         hospitalValue,
+        hospitalLocationValue,
+        setHospitalLocationValue,
         setHospitalValue,
         licenseCertificate,
         setLicenseCertificate,

@@ -35,6 +35,7 @@ type DoctorProfile = UserData & DoctorType &{
     certifications: string[]
     education: string[]
     hospital: string
+    hospitalLocation: string
     licenseCertificate: string
 
 }
