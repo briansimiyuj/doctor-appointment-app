@@ -5,6 +5,7 @@ import AddFormInput from "./AddFormInput"
 import { ProfileContext } from "../../../../context/ProfileContext"
 import ModalFooter from "./ModalFooter"
 import { useSubmitProfile } from "../../../../hooks/useSubmitProfile"
+import { useFileSelection } from "../../../../hooks/useFileSelection"
 
 const AddForm: React.FC = ()=>{
 
@@ -17,8 +18,42 @@ const AddForm: React.FC = ()=>{
 
     const { userType } = loginContext,
           { profileImage, setProfileImage, setCoverImage, coverImage } = profileContext,
+          { handleFileSelection } = useFileSelection(),
           { submitProfile } = useSubmitProfile()
-          
+
+    const handleCoverImageInput = (e: React.ChangeEvent<HTMLInputElement>) =>{
+
+        console.log('working')
+    
+        const file = e.target.files?.[0]
+
+        if(!file) return
+
+        handleFileSelection(e, _doc =>{
+
+            setCoverImage(file)
+
+            console.log('Cover Image set:', file)
+
+        })
+    
+    }
+
+    const handleProfileImageInput = (e: React.ChangeEvent<HTMLInputElement>) =>{
+
+        const file = e.target.files?.[0]
+
+        if(!file) return
+
+        handleFileSelection(e, _doc =>{
+
+            setProfileImage(file)
+
+            console.log('Profile Image set:', file)
+
+        })
+
+    }
 
     return(
 
@@ -56,11 +91,7 @@ const AddForm: React.FC = ()=>{
                     hidden
                     accept="image/*"
                     ref={fileInputRef}
-                    onChange={e =>{
-                        const file = e.target.files?.[0]
-                        if(!file) return
-                        setProfileImage(file)
-                    }}
+                    onChange={handleProfileImageInput}
                 />
 
             </div>
@@ -75,8 +106,7 @@ const AddForm: React.FC = ()=>{
 
                         <div 
                             className="relative group rounded-lg overflow-hidden cursor-pointer"
-                            ref={coverImageRef}
-                            onClick={() => coverImageRef.current?.click()}                    
+                            onClick={() => coverImageRef.current?.click()}
                         >
 
                             <img 
@@ -99,11 +129,7 @@ const AddForm: React.FC = ()=>{
                             name="coverImage"
                             accept="image/*"
                             ref={coverImageRef}
-                            onChange={e =>{
-                                const file = e.target.files?.[0]
-                                if(!file) return
-                                setCoverImage(file)
-                            }}
+                            onChange={handleCoverImageInput}
                         />                
 
                     </div>

@@ -1,4 +1,5 @@
 import { DoctorType } from "./DoctorType"
+import { DocumentType } from "./DocumentType"
 
 export type AddressType ={
 
@@ -36,7 +37,7 @@ type DoctorProfile = UserData & DoctorType &{
     education: string[]
     hospital: string
     hospitalLocation: string
-    licenseCertificate: string
+    licenseCertificate: DocumentType
 
 }
 

@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { specialityData } from "../../../../assets/frontend/assets"
 import { ProfileContext } from "../../../../context/ProfileContext"
+import { useFileSelection } from "../../../../hooks/useFileSelection"
 
 const DoctorFields: React.FC = ()=>{
 
@@ -8,7 +9,20 @@ const DoctorFields: React.FC = ()=>{
     
         if(!profileContext) return null
     
-        const { specialityValue, setSpecialityValue, experienceValue, setExperienceValue, educationValue, setEducationValue, feesValue, setFeesValue, aboutValue, setAboutValue, certificationsValue, setCertificationsValue,  hospitalValue, setHospitalValue, hospitalLocationValue, setHospitalLocationValue, setLicenseCertificate } = profileContext
+        const { specialityValue, setSpecialityValue, experienceValue, setExperienceValue, educationValue, setEducationValue, feesValue, setFeesValue, aboutValue, setAboutValue, certificationsValue, setCertificationsValue, setLicenseCertificate, hospitalValue, setHospitalValue, hospitalLocationValue, setHospitalLocationValue } = profileContext,
+            { handleFileSelection }  = useFileSelection()
+
+    const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) =>{
+    
+        handleFileSelection(e, doc =>{
+
+            setLicenseCertificate(doc)   
+
+            console.log('license certificate set:', doc)
+
+        })
+        
+    }
 
     return(
 
@@ -143,22 +157,15 @@ const DoctorFields: React.FC = ()=>{
 
             <div className="flex flex-col gap-2 w-full items-center">
 
-                <label htmlFor="license certificate" className="font-semibold text-sm sm:text-base">License Certificate:</label>
+                <label htmlFor="licenseCertificate" className="font-semibold text-sm sm:text-base">License Certificate:</label>
 
                 <input 
                     type="file"
-                    name="license certificate" 
+                    name="licenseCertificate" 
                     id="license certificate" 
                     placeholder="Enter your license certificate"
                     className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white cursor-pointer"
-                    onChange={e =>{
-                        const file = e.target.files?.[0]
-                        
-                        if(file){
-                            setLicenseCertificate(file)     
-                        }
-    
-                    }}
+                    onChange={handleFileInput}  
                 />
 
             </div>

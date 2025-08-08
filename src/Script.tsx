@@ -27,6 +27,7 @@ import { DoctorStatsContextProvider } from "./context/DoctorStatsContext"
 import DashboardPage from "./pages/DashboardPage"
 import { ScheduleProvider } from "./context/ScheduleContext"
 import PrivateRoute from "./components/Login/PrivateRoute"
+import { DocumentsTabContextProvider } from "./context/DocumentsTabContext"
 
 const Script: React.FC = () =>{
 
@@ -66,8 +67,6 @@ const Script: React.FC = () =>{
 
                 <Navbar/>
 
-                <ProfileContextProvider>
-
                   <Routes>
 
                     <Route path="/" element={<HomePage/>}/>
@@ -106,15 +105,23 @@ const Script: React.FC = () =>{
 
                     <Route path="/contact-us" element={<ContactPage/>}/>
 
-                    <Route path="/profile" element={
+                      <Route path="/profile" element={
+                        
+                          <DocumentsTabContextProvider>
 
-                      <PrivateRoute>
+                            <ProfileContextProvider>
 
-                        <ProfilePage/>
+                              <PrivateRoute>
 
-                      </PrivateRoute>
+                                <ProfilePage/>
 
-                    }/>
+                              </PrivateRoute>
+
+                            </ProfileContextProvider>
+                          
+                          </DocumentsTabContextProvider>
+
+                      }/>                  
 
                     <Route path="/profile/:id" element={
 
@@ -229,9 +236,7 @@ const Script: React.FC = () =>{
                     <Route path="*" element={<NotFoundPage/>}/>
 
                   </Routes>
-          
-                </ProfileContextProvider>
-
+        
                 <Footer/>
 
               </>

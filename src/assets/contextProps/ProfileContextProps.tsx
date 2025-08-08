@@ -1,3 +1,4 @@
+import { DocumentType } from "../types/DocumentType";
 import { AddressType, ProfileType } from "../types/ProfileType";
 
 export interface ProfileContextProps{
@@ -53,8 +54,8 @@ export interface ProfileContextProps{
     setHospitalValue: (hospitalValue: string) => void
     hospitalLocationValue: string
     setHospitalLocationValue: (hospitalLocationValue: string) => void
-    licenseCertificate: File | null
-    setLicenseCertificate: (licenseCertificate: File | null) => void
+    licenseCertificate: DocumentType | null
+    setLicenseCertificate: (licenseCertificate: DocumentType | null) => void
     licenseCertificateURL: string | null
     educationValue: string[]
     setEducationValue: (educationValue: string[]) => void

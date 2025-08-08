@@ -66,7 +66,7 @@ export const useFileSelection = () =>{
     
     }
 
-    const handleFileSelection = (e: React.ChangeEvent<HTMLInputElement>) =>{
+    const handleFileSelection = (e: React.ChangeEvent<HTMLInputElement>, onFileSelected?: (doc: DocumentType) => void) =>{
 
         const files = e.target.files
 
@@ -74,7 +74,17 @@ export const useFileSelection = () =>{
 
             const validFiles = validateFiles(files)
 
-            setSelectedFiles([...selectedFiles, ...validFiles])
+            if(validFiles.length > 0){
+
+               setSelectedFiles([...selectedFiles, ...validFiles])
+
+                if(onFileSelected){
+
+                    onFileSelected(validFiles[0])
+
+                }
+               
+            }
 
         } 
 

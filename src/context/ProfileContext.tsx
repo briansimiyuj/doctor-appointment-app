@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { AddressType, ProfileType } from "../assets/types/ProfileType"
 import { LoginContext } from "./LoginContext"
 import { ProfileContextProps } from "../assets/contextProps/ProfileContextProps"
+import { DocumentType } from "../assets/types/DocumentType"
 
 interface ProfileContextProviderProps{
 
@@ -43,7 +44,7 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
             [profileImageURL, setProfileImageURL] = useState<string | null>(''),
             [coverImage, setCoverImage] = useState<File | null>(null),
             [coverImageURL, setCoverImageURL] = useState<string | null>(''),
-            [licenseCertificate, setLicenseCertificate] = useState<File | null>(null),
+            [licenseCertificate, setLicenseCertificate] = useState<DocumentType | null>(null),
             [licenseCertificateURL, setLicenseCertificateURL] = useState<string | null>(''),
             [hospitalValue, setHospitalValue] = useState<string>(''),
             [hospitalLocationValue, setHospitalLocationValue] = useState<string>(''),
@@ -138,21 +139,21 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
     }, [])
 
     useEffect(() =>{
-    
-        if(licenseCertificate){
+        
+        if(licenseCertificate?.file){
 
-            const url = URL.createObjectURL(licenseCertificate)
+            const url = URL.createObjectURL(licenseCertificate.file)
 
             setLicenseCertificateURL(url)
 
             return () => URL.revokeObjectURL(url)
 
         }else{
-            
+
             setLicenseCertificateURL(null)
 
-        }
-    
+        } 
+
     }, [licenseCertificate])
 
     useEffect(() =>{

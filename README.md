@@ -406,7 +406,7 @@ Profile context will be used to store the user profile data and provide it to th
 Profile page will show the user profile data and allow the user to edit the data.
 
   1. Create a Profile Page and mount it on Script component and provide a route for it
-  2. Wrap the the routes in Script component with the ProfileContext provider as the parent component
+  2. Wrap the Profile page with the `ProfileContext` and `DocumentTabProvider` as the parent components
   3. Retrieve `isEditing`, `showModal` and `profile` states from the `ProfileContext`
   4. Retrieve `isAuthenticated` state from the `LoginContext`
   5. If `isAuthenticated` is false, mount NotFound Page
