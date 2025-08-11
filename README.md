@@ -1987,19 +1987,20 @@ Patient details page will show the patient's details; medical history, allergies
         b. `selectedFiles` and `clearFiles` from File Selection hook
         c. `addDocument` from Patient Details Context
 
+      2. Create a reusable `processFile` function that will process the file and convert it to a `DocumentType` object which will have the following properties:
+        a. `_id`: unique identifier (generated with uuid)
+        b. `name`: file name
+        c. `type`: normalized MIME type (e.g., "application/pdf", "image/jpeg", etc.)
+        d. `size`: file size in bytes
+        e. `uploadDate`: current date
+        f. `uploadedBy`: uploader's name (from context or dummy data)
+        g. `content`: file content as a base64 string (from FileReader)
+
       2. Create a `handleFilesUpload` function that will be called when the "Upload" button is clicked
         a. Check if there are any files selected, if not, exit the function
         b. Set `isUploading` to true
         c. Simulate the upload process by using `setTimeout` to delay the upload by 2 seconds 
-        d. Convert file objects to `DocumentType` objects with the following properties:
-          - `_id`: unique identifier (generated with uuid)
-          - `name`: file name
-          - `type`: normalized MIME type (e.g., "application/pdf", "image/jpeg", etc.)
-          - `size`: file size in bytes
-          - `uploadDate`: current date
-          - `uploadedBy`: uploader's name (from context or dummy data)
-          - `content`: file content as a base64 string (from FileReader)
-
+        d. Map the selected files to the `processFile` function to create an array of `DocumentType` objects
         e. Add the converted documents to the patient's documents
         f. Clear the selected files
         g. Set `showUploadArea` to false

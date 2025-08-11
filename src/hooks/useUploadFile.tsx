@@ -11,6 +11,55 @@ export const useUploadFile = () =>{
           { selectedFiles, clearFiles } = useFileSelection(),
           { addDocument } = usePatientDetails()
 
+    const processFile = async(file: File): Promise<DocumentType> =>{
+        
+        const content = await new Promise<string>(resolve =>{
+
+            const reader = new FileReader()
+
+            reader.onload = () => resolve(reader.result as string)
+
+            reader.readAsDataURL(file)
+            
+        })
+        
+        let normalizedType = file.type
+        
+        if(!normalizedType){
+        
+            if(file.name.toLowerCase().endsWith(".pdf")){
+                
+                normalizedType = "application/pdf"
+        
+            }else if(file.name.toLowerCase().match(/\.(jpg|jpeg)$/)){
+        
+                normalizedType = "image/jpeg"
+        
+            }else if(file.name.toLowerCase().endsWith(".png")){
+        
+                normalizedType = "image/png"
+        
+            }else if(file.name.toLowerCase().endsWith(".webp")){
+        
+                normalizedType = "image/webp"
+        
+            }
+        }
+
+        return{
+
+            _id: uuidv4(),
+            name: file.name,
+            type: normalizedType,
+            content: content,
+            size: file.size,
+            uploadDate: new Date(),
+            uploadedBy: DummyAppointment.doctor.doctorInfo.name
+
+        }
+
+    }
+
     const handleFileUpload = async() =>{
     
         if(selectedFiles.length === 0){
@@ -29,58 +78,7 @@ export const useUploadFile = () =>{
 
             const uploadedDocuments: DocumentType[] = await Promise.all(
 
-                (selectedFiles as unknown as File[]).map(async (file: File): Promise<DocumentType> =>{
-
-                    let content = ''
-
-                    content = await new Promise<string>(resolve =>{
-
-                        const reader = new FileReader()
-
-                        reader.onload = () => resolve(reader.result as string)
-                        reader.readAsDataURL(file)
-
-                    })
-
-                    let normalizedType = file.type
-
-                    if(!normalizedType){
-
-                        if(file.name.toLowerCase().endsWith(".pdf")){
-                            
-                            normalizedType = "application/pdf"
-
-                        }else if(file.name.toLowerCase().match(/\.(jpg|jpeg)$/)){
-
-                            normalizedType = "image/jpeg"
-
-                        }else if(file.name.toLowerCase().endsWith(".png")){
-
-                            normalizedType = "image/png"
-
-                        }else if(file.name.toLowerCase().endsWith(".webp")){
-
-                            normalizedType = "image/webp"
-
-                        }
-                        
-                    }
-
-                    const document: DocumentType ={
-
-                        _id: uuidv4(),
-                        name: file.name,
-                        type: normalizedType,
-                        size: file.size,
-                        uploadDate: new Date(),
-                        uploadedBy: DummyAppointment.doctor.doctorInfo.name,
-                        content: content
-
-                    }
-
-                    return document
-
-                })
+                (selectedFiles as unknown as File[]).map(file => processFile(file))
 
             )
 
@@ -111,7 +109,8 @@ export const useUploadFile = () =>{
         handleFileUpload,
         isUploading,
         canUpload,
-        selectedFilesCount: selectedFiles.length
+        selectedFilesCount: selectedFiles.length,
+        processFile 
 
     }
 
