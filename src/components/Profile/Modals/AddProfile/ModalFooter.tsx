@@ -7,7 +7,7 @@ const ModalFooter: React.FC = ()=>{
 
     if(!profileContext) return null
 
-    const { readyToSubmit, setIsEditing, isEditing } = profileContext
+    const { readyToSubmit, setShowModal, isEditing } = profileContext
 
     return(
 
@@ -21,7 +21,7 @@ const ModalFooter: React.FC = ()=>{
             <button
                 type="button"
                 className="bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 py-3 px-10 rounded-lg w-full font-medium max-w-md mt-4"
-                onClick={() => setIsEditing(false)}
+                onClick={() => setShowModal(false)}
             >Cancel</button>
 
         </div>

@@ -515,8 +515,8 @@ Profile page will show the user profile data and allow the user to edit the data
 
     Add a modal to allow users to add their profile data.  
 
-      1. Retrieve `setIsEditting` from `ProfileContext`
-      2. Mount ModalHeader and pass title and `setIsEditting` as `onClose` props
+      1. Retrieve `isEditting` and `setShowModal` from `ProfileContext`
+      2. Mount ModalHeader and pass title and `setShowModal` as `onClose` props
       3. Create AddForm component and mount it on the Add Profile Modal. Wrap it the `DocumentTabProvider`
      
      
@@ -550,6 +550,7 @@ Profile page will show the user profile data and allow the user to edit the data
      2. Make the input fields controllled components using the states in `ProfileContext`
      3. Add a button to submit the form. It will be disabled if any of the fields are empty depending on the user type.
      4. Attach `onSubmit` event to the form to call the `submitProfile` function from `SubmitProfileHook`
+     5. Add a button to close the modal. Attach `onClose` event to the button to call the `setShowModal` function from `ProfileContext`
 
 ### Submit Profile Hook
 

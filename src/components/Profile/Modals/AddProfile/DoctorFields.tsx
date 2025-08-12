@@ -5,12 +5,12 @@ import { useFileSelection } from "../../../../hooks/useFileSelection"
 
 const DoctorFields: React.FC = ()=>{
 
-     const profileContext = useContext(ProfileContext)
+    const profileContext = useContext(ProfileContext)
     
-        if(!profileContext) return null
-    
-        const { specialityValue, setSpecialityValue, experienceValue, setExperienceValue, educationValue, setEducationValue, feesValue, setFeesValue, aboutValue, setAboutValue, certificationsValue, setCertificationsValue, setLicenseCertificate, hospitalValue, setHospitalValue, hospitalLocationValue, setHospitalLocationValue } = profileContext,
-            { handleFileSelection }  = useFileSelection()
+    if(!profileContext) return null
+
+    const { specialityValue, setSpecialityValue, experienceValue, setExperienceValue, educationValue, setEducationValue, feesValue, setFeesValue, aboutValue, setAboutValue, certificationsValue, setCertificationsValue, licenseCertificate, setLicenseCertificate, hospitalValue, setHospitalValue, hospitalLocationValue, setHospitalLocationValue } = profileContext,
+        { handleFileSelection }  = useFileSelection()
 
     const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) =>{
     
@@ -158,6 +158,38 @@ const DoctorFields: React.FC = ()=>{
             <div className="flex flex-col gap-2 w-full items-center">
 
                 <label htmlFor="licenseCertificate" className="font-semibold text-sm sm:text-base">License Certificate:</label>
+
+                {
+
+                    licenseCertificate  &&(
+
+                        <div className="mb-2">
+
+                            {
+
+                                licenseCertificate !== null && typeof licenseCertificate === "object" && "content" in licenseCertificate &&(
+
+                                    <a href={licenseCertificate.content} target="_blank" rel="noreferrer" className="text-blue-500 hover:underline">View Current License Certificate</a>
+
+                                )
+
+                            }
+
+                        </div>
+
+                    )
+
+                }
+
+                {
+
+                    licenseCertificate && !("content" in licenseCertificate) &&(
+
+                        <span className="text-gray-600">{licenseCertificate.name}</span>
+
+                    )
+
+                }
 
                 <input 
                     type="file"

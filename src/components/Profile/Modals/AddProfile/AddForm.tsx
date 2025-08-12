@@ -22,8 +22,6 @@ const AddForm: React.FC = ()=>{
           { submitProfile } = useSubmitProfile()
 
     const handleCoverImageInput = (e: React.ChangeEvent<HTMLInputElement>) =>{
-
-        console.log('working')
     
         const file = e.target.files?.[0]
 
@@ -72,8 +70,10 @@ const AddForm: React.FC = ()=>{
                 >
 
                     <img 
-                        src={profileImage ? URL.createObjectURL(profileImage) : assets.avatar}
-                        alt="avatar icon" 
+                        src={
+                            profileImage instanceof File ? URL.createObjectURL(profileImage) : profileImage?.content || assets.avatar
+                        }
+                        alt="Profile Image" 
                         className="w-full h-24 sm:h-24 rounded-full object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105 bg-gray-400 dark:bg-gray-600"
                     />
 
@@ -110,8 +110,10 @@ const AddForm: React.FC = ()=>{
                         >
 
                             <img 
-                                src={coverImage ? URL.createObjectURL(coverImage) : assets.avatar}
-                                alt="upload icon" 
+                                src={
+                                    coverImage instanceof File ? URL.createObjectURL(coverImage) : coverImage?.content || assets.avatar
+                                }
+                                alt="cover image" 
                                 className="w-full h-12 sm:h-24 object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105 bg-gray-400 dark:bg-gray-600"
                             />
 
