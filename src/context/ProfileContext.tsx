@@ -40,12 +40,9 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
             [feesValue, setFeesValue] = useState<string>(''),
             [medicalHistoryValue, setMedicalHistoryValue] = useState<string>(''),
             [addressValue, setAddressValue] = useState<AddressType | null>(null),
-            [profileImage, setProfileImage] = useState<File | null>(null),
-            [profileImageURL, setProfileImageURL] = useState<string | null>(''),
-            [coverImage, setCoverImage] = useState<File | null>(null),
-            [coverImageURL, setCoverImageURL] = useState<string | null>(''),
-            [licenseCertificate, setLicenseCertificate] = useState<DocumentType | null>(null),
-            [licenseCertificateURL, setLicenseCertificateURL] = useState<string | null>(''),
+            [profileImage, setProfileImage] = useState<DocumentType | File | null>(null),
+            [coverImage, setCoverImage] = useState<DocumentType | File | null>(null),
+            [licenseCertificate, setLicenseCertificate] = useState<DocumentType | File | null>(null),
             [hospitalValue, setHospitalValue] = useState<string>(''),
             [hospitalLocationValue, setHospitalLocationValue] = useState<string>(''),
             [readyToSubmit, setReadyToSubmit] = useState<boolean>(false),
@@ -138,59 +135,24 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
     
     }, [])
 
-    useEffect(() =>{
-        
-        if(licenseCertificate?.file){
-
-            const url = URL.createObjectURL(licenseCertificate.file)
-
-            setLicenseCertificateURL(url)
-
-            return () => URL.revokeObjectURL(url)
-
-        }else{
-
-            setLicenseCertificateURL(null)
-
-        } 
-
-    }, [licenseCertificate])
 
     useEffect(() =>{
     
-        if(coverImage){
+        if(profile){
 
-            const url = URL.createObjectURL(coverImage)
+            setProfileImage(profile.profileImage)
 
-            setCoverImageURL(url)
+            if(profile.type === "doctor"){
 
-            return () => URL.revokeObjectURL(url)
+                setCoverImage(profile.coverImage)
 
-        }else{
+                setLicenseCertificate(profile.licenseCertificate)
 
-            setCoverImageURL(null)
+            }
 
         }
     
-    }, [coverImage])
-
-    useEffect(() =>{
-    
-        if(profileImage){
-
-            const url = URL.createObjectURL(profileImage)
-
-            setProfileImageURL(url)
-
-            return () => URL.revokeObjectURL(url)
-
-        }else{
-
-            setProfileImageURL(null)
-
-        }
-    
-    }, [profileImage])
+    }, [profile])
 
 
     const value: ProfileContextProps ={
@@ -248,9 +210,6 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
         setHospitalValue,
         licenseCertificate,
         setLicenseCertificate,
-        licenseCertificateURL,
-        profileImageURL,
-        coverImageURL,
         readyToSubmit
 
     }

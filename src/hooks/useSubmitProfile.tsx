@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { LoginContext } from "../context/LoginContext"
 import { ProfileContext } from "../context/ProfileContext"
 import { v4 as uuidv4 } from 'uuid'
+import { useUploadFile } from "./useUploadFile"
 
 export const useSubmitProfile = () =>{
 
@@ -12,9 +13,14 @@ export const useSubmitProfile = () =>{
 
     const { nameValue, emailValue, phoneValue, specialityValue, experienceValue, profileImage, coverImage, certificationsValue, aboutValue, feesValue, educationValue, medicalHistoryValue, setIsEditing, licenseCertificate, hospitalValue, residenceValue, cityValue, stateValue, countryValue, genderValue, dateOfBirthValue, hospitalLocationValue } = profileContext,
           { userType } = loginContext,
+          { processFile } = useUploadFile(),
           userID = `${userType}-${uuidv4()}`
 
-    const submitProfile = () =>{
+    const submitProfile = async() =>{
+
+        const profileImageDoc = profileImage instanceof File ? await processFile(profileImage) : null,
+              coverImageDoc = coverImage instanceof File ? await processFile(coverImage) : null,
+              licenseCertificateDoc = licenseCertificate instanceof File ? await processFile(licenseCertificate) : null
     
         const profileData ={
 
@@ -31,10 +37,10 @@ export const useSubmitProfile = () =>{
             gender: genderValue,
             dateOfBirth: dateOfBirthValue,
             type: userType,
-            profileImage: profileImage ? profileImage.name : null,
-            coverImage: coverImage ? coverImage.name : null,
+            profileImage: profileImage ? profileImageDoc : null,
+            coverImage: coverImage ? coverImageDoc : null,
             speciality: userType === "doctor" ? specialityValue : undefined,
-            licenseCertificate: userType === "doctor" ? licenseCertificate : undefined,  
+            licenseCertificate: userType === "doctor" ? licenseCertificateDoc : undefined,  
             hospital: userType === "doctor" ? hospitalValue : undefined,
             hospitalLocation: userType === "doctor" ? hospitalLocationValue : undefined,
             certifications: userType === "doctor" ? certificationsValue : undefined,

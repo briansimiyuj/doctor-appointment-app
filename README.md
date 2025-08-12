@@ -384,9 +384,8 @@ Profile context will be used to store the user profile data and provide it to th
     t. `countryValue` for country
     u. `hospitalValue` for hospital
     v. `licenseCertificate` for license certificate  
-    w. `licenseCertificateURL` for license certificate URL
-    x. `hospitalLocation` for hospital location
-    y. `showModal` for showing modal
+    w. `hospitalLocation` for hospital location
+    x. `showModal` for showing modal
 
   6. Create a `loading` state and a `readyToSubmit` state, both initialized to `false`
   7. Update `readyToSubmit` state based on field validation: 
@@ -397,8 +396,8 @@ Profile context will be used to store the user profile data and provide it to th
   8. Retrieve `name` and `email` from `LoginContext`
   9. If `name` and `email` change, update the `nameValue` and `emailValue` states accordingly
   10. If `email`, `phone`, `residence`, `city`, `state`, `country` change, update the `addressValue` with their new values
-  11. On every render, check if `profile` is stored in local storage and if so, update the state with the retrieved profile data
-  12. Whenever `licenseCertificate` changes, update the `licenseCertificateURL` state with the URL of the uploaded file
+  11. Retrieve `profileData` from `localStorage` and set `profile` state with the retrieved data
+  12. If `profile` changes, update the `profileImage`, `coverImage` and `licenseCertificate` states with the new values from `profile`
 
 
 ### Profile Page
@@ -406,7 +405,7 @@ Profile context will be used to store the user profile data and provide it to th
 Profile page will show the user profile data and allow the user to edit the data.
 
   1. Create a Profile Page and mount it on Script component and provide a route for it
-  2. Wrap the Profile page with the `ProfileContext` and `DocumentTabProvider` as the parent components
+  2. Wrap the Profile page with the `ProfileContext`, `PatientDetailsProvider`, and `DocumentTabProvider` as the parent components
   3. Retrieve `isEditing`, `showModal` and `profile` states from the `ProfileContext`
   4. Retrieve `isAuthenticated` state from the `LoginContext`
   5. If `isAuthenticated` is false, mount NotFound Page
@@ -555,8 +554,10 @@ Profile page will show the user profile data and allow the user to edit the data
 Submit profile hook will be used to submit the profile data to the local storage.
 
   1. Retrieve the profile data and `isEditting` state from the `ProfileContext`
+  2. Retrieve `processFile` function from `UploadFile` hook
+  3. Call `processFile` function to upload the profile image, cover image and license certificate. The function will return a promise that resolves with the file properties.
   2. Create `submitProfile` function that will be called when the submit button is clicked
-    a. Create a new object with the profile data
+    a. Create a new object with the profile data and the file properties from the `processFile` function
     b. Save the object in the local storage with the key as the user's ID
     c. Return the profile data object
     d. Set `isEditting` to false 

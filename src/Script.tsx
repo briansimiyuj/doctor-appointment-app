@@ -109,15 +109,19 @@ const Script: React.FC = () =>{
                         
                           <DocumentsTabContextProvider>
 
-                            <ProfileContextProvider>
+                            <PatientDetailsProvider>
 
-                              <PrivateRoute>
+                              <ProfileContextProvider>
 
-                                <ProfilePage/>
+                                <PrivateRoute>
 
-                              </PrivateRoute>
+                                  <ProfilePage/>
 
-                            </ProfileContextProvider>
+                                </PrivateRoute>
+
+                              </ProfileContextProvider>
+
+                            </PatientDetailsProvider>
                           
                           </DocumentsTabContextProvider>
 

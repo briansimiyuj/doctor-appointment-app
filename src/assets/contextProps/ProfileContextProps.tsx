@@ -1,5 +1,5 @@
-import { DocumentType } from "../types/DocumentType";
-import { AddressType, ProfileType } from "../types/ProfileType";
+import { DocumentType } from "../types/DocumentType"
+import { AddressType, ProfileType } from "../types/ProfileType"
 
 export interface ProfileContextProps{
 
@@ -40,12 +40,10 @@ export interface ProfileContextProps{
     setFeesValue: (feesValue: string) => void
     medicalHistoryValue: string
     setMedicalHistoryValue: (medicalHistoryValue: string) => void
-    profileImage: File | null
-    setProfileImage: (profileImage: File | null) => void
-    profileImageURL: string | null
-    coverImage: File | null
-    setCoverImage: (coverImage: File | null) => void
-    coverImageURL: string | null
+    profileImage: DocumentType | File | null
+    setProfileImage: (profileImage: DocumentType | File | null) => void
+    coverImage: DocumentType | File | null
+    setCoverImage: (coverImage: DocumentType | File | null) => void
     addressValue: AddressType | null
     setAddressValue: (addressValue: AddressType | null) => void
     certificationsValue: string[]
@@ -54,9 +52,8 @@ export interface ProfileContextProps{
     setHospitalValue: (hospitalValue: string) => void
     hospitalLocationValue: string
     setHospitalLocationValue: (hospitalLocationValue: string) => void
-    licenseCertificate: DocumentType | null
-    setLicenseCertificate: (licenseCertificate: DocumentType | null) => void
-    licenseCertificateURL: string | null
+    licenseCertificate: DocumentType | File | null
+    setLicenseCertificate: (licenseCertificate: DocumentType | File | null) => void
     educationValue: string[]
     setEducationValue: (educationValue: string[]) => void
     readyToSubmit: boolean 

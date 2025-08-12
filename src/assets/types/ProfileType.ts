@@ -17,8 +17,7 @@ export type UserData ={
     name: string,
     addressValue: AddressType,
     gender: "male" | "female"
-    profileImage: string | undefined
-    profileImageURL: string | null
+    profileImage: DocumentType | File | null
     dateOfBirth: string
 
 }
@@ -27,8 +26,7 @@ type DoctorProfile = UserData & DoctorType &{
 
     type: "doctor"
     rating: number
-    coverImage: string | undefined
-    coverImageURL: string | null
+    coverImage: DocumentType | File | null
     aboutValue: string
     specialityValue: string
     experienceValue: string
@@ -47,8 +45,6 @@ type PatientProfile = UserData &{
     type: "patient"
     appointments?: string[]
     medicalHistory: string[]
-    coverImage?: string
-    coverImageURL?: string | null
 
 }
 
