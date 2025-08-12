@@ -1,14 +1,25 @@
 import { useContext } from "react"
+import { DocumentType } from "../../assets/types/DocumentType"
 import { ProfileContext } from "../../context/ProfileContext"
 import CoverImage from "./CoverImage"
+import { useDocumentFullView } from "../../hooks/useDocumentFullView"
 
 const ProfileData: React.FC = () => {
 
-    const context = useContext(ProfileContext)
+    const context = useContext(ProfileContext),
+         { openDocumentFullView } = useDocumentFullView()
 
     if(!context) return null
 
-    const { profile, licenseCertificateURL } = context
+    const { profile, licenseCertificate } = context
+
+    if(licenseCertificate instanceof File) return
+    
+    const handleOpenFullView = () =>{
+
+        if(licenseCertificate && "content" in licenseCertificate) openDocumentFullView(licenseCertificate as DocumentType)
+
+    }
 
     return(
 
@@ -52,7 +63,7 @@ const ProfileData: React.FC = () => {
 
                                 <h3 className="font-medium">License Certificate:</h3>
 
-                                <a href={licenseCertificateURL ? licenseCertificateURL : ""} target="_blank" rel="noreferrer" className="text-blue-500 hover:underline">View License</a>
+                                <button className="bg-none border-none text-blue-500" onClick={handleOpenFullView}>View License Certificate </button>
 
                             </div>
 

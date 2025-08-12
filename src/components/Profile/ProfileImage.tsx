@@ -7,11 +7,13 @@ const ProfileImage: React.FC = () =>{
 
     if(!context) return null
 
-    const { profileImageURL } = context
+    const { profileImage  } = context
+
+    if(profileImage instanceof File) return
 
     return(
 
-        <img src={profileImageURL ? profileImageURL : ""} alt="profile-image" className="w-24 rounded-full object-cover"/>
+        <img src={profileImage?.content ? profileImage?.content : ""} alt="profile-image" className="w-full h-full rounded-full object-cover"/>
         
     )
 }

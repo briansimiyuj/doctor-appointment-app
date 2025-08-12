@@ -54,7 +54,7 @@ const ProfilePage: React.FC = () =>{
 
                             <div className="flex justify-between items-center px-8">
 
-                                <div className="flex items-center gap-4">
+                                <div className="flex items-center gap-4 w-24 h-24">
 
                                     <ProfileImage/>
 

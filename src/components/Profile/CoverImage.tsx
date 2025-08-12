@@ -7,8 +7,12 @@ const CoverImage: React.FC = ()=>{
          profile = context?.profile
 
     if(!profile) return null
+
+    if(profile?.type === "patient") return
     
-    const { coverImageURL } = profile
+    const { coverImage } = profile
+
+    if(coverImage instanceof File) return 
 
     return(
 
@@ -16,9 +20,7 @@ const CoverImage: React.FC = ()=>{
 
             <h2 className="text-neutral-500 underline mt-3 mb-3">COVER IMAGE</h2>
 
-            <img src={coverImageURL? coverImageURL : ""}alt="Cover Image" className="w-full h-30 object-cover"/>
-
-        
+            <img src={coverImage? coverImage.content : ""}alt="Cover Image" className="w-full h-30 object-cover"/>
 
         </div>
 
