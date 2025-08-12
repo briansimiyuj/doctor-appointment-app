@@ -7,7 +7,7 @@ export type DoctorType ={
     degree: string
     experience: string
     about: string
-    fees: number
+    fees: string
 
     address:{
 

@@ -398,6 +398,8 @@ Profile context will be used to store the user profile data and provide it to th
   10. If `email`, `phone`, `residence`, `city`, `state`, `country` change, update the `addressValue` with their new values
   11. Retrieve `profileData` from `localStorage` and set `profile` state with the retrieved data
   12. If `profile` changes, update the `profileImage`, `coverImage` and `licenseCertificate` states with the new values from `profile`
+  13. Create a `loadProfileForEditing` function that retrieves the `profileData` from `localStorage` and sets the `profile` state with the retrieved data. This function will be used to load the profile data when the user clicks on the edit button on the profile page.
+  14. Call `loadProfileForEditing` function when the `profile` and `isEditing` states changes
 
 
 ### Profile Page

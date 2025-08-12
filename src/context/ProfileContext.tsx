@@ -154,6 +154,66 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
     
     }, [profile])
 
+    const loadProfileForEditing = () =>{
+    
+        if(!profile) return
+    
+        setNameValue(profile.name)
+  
+        setEmailValue(profile.addressValue.email)
+  
+        setPhoneValue(profile.addressValue.phone)
+  
+        setGenderValue(profile.gender)
+  
+        setDateOfBirthValue(profile.dateOfBirth)
+  
+        setResidenceValue(profile.addressValue.residence)
+   
+        setCityValue(profile.addressValue.city)
+   
+        setStateValue(profile.addressValue.state)
+  
+        setCountryValue(profile.addressValue.country)
+        
+        if(profile.type === "doctor"){
+
+            setSpecialityValue(profile.speciality)
+
+            setExperienceValue(profile.experience)
+            
+            setAboutValue(profile.about)
+
+            setEducationValue(profile.education)
+
+            setCertificationsValue(profile.certifications)
+
+            setFeesValue(profile.fees)
+
+            setHospitalValue(profile.hospital)
+
+            setHospitalLocationValue(profile.hospitalLocation)
+
+            setLicenseCertificate(profile.licenseCertificate)
+            
+        }else{
+
+            setMedicalHistoryValue(profile.medicalHistory)
+
+        }
+    
+    }
+
+    useEffect(() =>{
+    
+        if(isEditing && profile){
+
+            loadProfileForEditing()
+
+        }
+    
+    }, [isEditing, profile])
+
 
     const value: ProfileContextProps ={
     
