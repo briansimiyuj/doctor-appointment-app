@@ -76,6 +76,54 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
         
     }, [emailValue, phoneValue, residenceValue, cityValue, stateValue, countryValue])
 
+    const deepEqual = (obj1: any, obj2: any) => JSON.stringify(obj1) === JSON.stringify(obj2)
+
+    const profileHasChanged = (storedProfile: ProfileType | null) =>{
+
+        if (!storedProfile) return true
+
+        const basicChanged =
+            storedProfile.name.trim() !== nameValue.trim() ||
+            storedProfile.addressValue.email.trim() !== emailValue.trim() ||
+            storedProfile.addressValue.phone.trim() !== phoneValue.trim() ||
+            storedProfile.addressValue.residence.trim() !== residenceValue.trim() ||
+            storedProfile.addressValue.city.trim() !== cityValue.trim() ||
+            storedProfile.addressValue.state.trim() !== stateValue.trim() ||
+            storedProfile.addressValue.country.trim() !== countryValue.trim() ||
+            storedProfile.gender !== genderValue ||
+            storedProfile.dateOfBirth.trim() !== dateOfBirthValue.trim() ||
+            !deepEqual(storedProfile.profileImage, profileImage) 
+
+        const doctorChanged =
+            userType === "doctor" &&
+            storedProfile.type === "doctor" &&((() =>{
+            console.log("licenseCertificate changed?", storedProfile.licenseCertificate.name.trim(), licenseCertificate?.name.trim());
+
+            
+            return(
+                storedProfile.experience.trim() !== experienceValue.trim() ||
+                storedProfile.speciality.trim() !== specialityValue.trim() ||
+                storedProfile.about.trim() !== aboutValue.trim() ||
+                JSON.stringify(storedProfile.education) !== JSON.stringify(educationValue) ||
+                JSON.stringify(storedProfile.certifications) !== JSON.stringify(certificationsValue) ||
+                storedProfile.fees.trim() !== feesValue.trim() ||
+                storedProfile.hospital.trim() !== hospitalValue.trim() ||
+                storedProfile.hospitalLocation.trim() !== hospitalLocationValue.trim() ||
+                !deepEqual(storedProfile.licenseCertificate, licenseCertificate) ||
+                !deepEqual(storedProfile.coverImage, coverImage) 
+            )
+
+            })())
+
+        const patientChanged =
+            userType === "patient" &&
+            storedProfile.type === "patient" &&
+            storedProfile.medicalHistory.trim() !== medicalHistoryValue.trim()
+
+        return basicChanged || doctorChanged || patientChanged
+    }
+
+
     useEffect(() =>{
     
         const isDoctor = userType === "doctor",
@@ -102,9 +150,19 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
 
             valid = isDoctor ? basicValid && doctorValid : basicValid && patientValid
             
-        setReadyToSubmit(valid)
+        if(!isEditing){
+
+            setReadyToSubmit(valid)
+
+        }else{
+            
+            const hasChanges = profileHasChanged(profile)
+
+            setReadyToSubmit(valid && hasChanges)
+
+        }
     
-    }, [userType, nameValue, emailValue, phoneValue, addressValue, profileImage, specialityValue, experienceValue, aboutValue, educationValue, certificationsValue, feesValue, coverImage, medicalHistoryValue])
+    }, [userType, nameValue, emailValue, phoneValue, addressValue, profileImage, specialityValue, experienceValue, aboutValue, educationValue, certificationsValue, feesValue, coverImage, medicalHistoryValue, licenseCertificate])
 
     useEffect(() =>{
     

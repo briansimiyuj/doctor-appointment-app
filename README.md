@@ -392,6 +392,7 @@ Profile context will be used to store the user profile data and provide it to th
     a. For both patients and doctors, ensure `nameValue`, `emailValue`, `phoneValue`, `addressValue`, `genderValue`, `dateOfBirthValue`, and `profileImage` are filled
     b. For doctors, additionally validate: ensure `specialityValue`, `experienceValue`, `aboutValue`, `educationValue`, `certificationsValue`, `feesValue`, `hospitalValue`, `licenseCertificate` and `coverImage` are filled
     c. For patients, additionally validate: ensure `medicalHistoryValue` is filled
+    d. If `isEditing` is `true`, we update `readyToSubmit` state to `profileHasChanged` state 
 
   8. Retrieve `name` and `email` from `LoginContext`
   9. If `name` and `email` change, update the `nameValue` and `emailValue` states accordingly
@@ -400,6 +401,8 @@ Profile context will be used to store the user profile data and provide it to th
   12. If `profile` changes, update the `profileImage`, `coverImage` and `licenseCertificate` states with the new values from `profile`
   13. Create a `loadProfileForEditing` function that retrieves the `profileData` from `localStorage` and sets the `profile` state with the retrieved data. This function will be used to load the profile data when the user clicks on the edit button on the profile page.
   14. Call `loadProfileForEditing` function when the `profile` and `isEditing` states changes
+  15. Create a `deepEqual` function that compares two objects and returns `true` if they are deeply equal and `false` otherwise. This function will be used to compare `profileImage`, `coverImage` and `licenseCertificate` states with the new values from `profile`
+  16. Create a `profileHasChanged` function that returns `true` if any of the new values from `profile` are different from the current states and `false` otherwise. This function will be used to determine if the user has made any changes to the profile data.
 
 
 ### Profile Page
