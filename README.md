@@ -552,7 +552,7 @@ Profile page will show the user profile data and allow the user to edit the data
 
      2. Make the input fields controllled components using the states in `ProfileContext`
      3. Add a button to submit the form. It will be disabled if any of the fields are empty depending on the user type.
-     4. Attach `onSubmit` event to the form to call the `submitProfile` function from `SubmitProfileHook`
+     4. Attach `onSubmit` event to the form to call the `submitProfile` function from `SubmitProfileHook`. If `isEditting` is true, call `editProfile` function from `EditProfileHook` 
      5. Add a button to close the modal. Attach `onClose` event to the button to call the `setShowModal` function from `ProfileContext`
 
 ### Submit Profile Hook

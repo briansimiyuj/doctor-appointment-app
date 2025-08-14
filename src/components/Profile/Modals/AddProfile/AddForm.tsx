@@ -6,6 +6,7 @@ import { ProfileContext } from "../../../../context/ProfileContext"
 import ModalFooter from "./ModalFooter"
 import { useSubmitProfile } from "../../../../hooks/useSubmitProfile"
 import { useFileSelection } from "../../../../hooks/useFileSelection"
+import { useEditProfile } from "../../../../hooks/useEditProfile"
 
 const AddForm: React.FC = ()=>{
 
@@ -17,9 +18,10 @@ const AddForm: React.FC = ()=>{
     if(!loginContext || !profileContext) return null
 
     const { userType } = loginContext,
-          { profileImage, setProfileImage, setCoverImage, coverImage } = profileContext,
+          { profileImage, setProfileImage, setCoverImage, coverImage, isEditing } = profileContext,
           { handleFileSelection } = useFileSelection(),
-          { submitProfile } = useSubmitProfile()
+          { submitProfile } = useSubmitProfile(),
+          { editProfile } = useEditProfile()
 
     const handleCoverImageInput = (e: React.ChangeEvent<HTMLInputElement>) =>{
     
@@ -57,7 +59,7 @@ const AddForm: React.FC = ()=>{
 
         <form 
             className="flex flex-col gap-8 items-center justify-center w-full max-w-3xl mx-auto p-6"
-            onSubmit={submitProfile}
+            onSubmit={isEditing ? editProfile : submitProfile}
         >
 
             <div className="w-full flex flex-col items-center gap-4">
