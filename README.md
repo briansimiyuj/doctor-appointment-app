@@ -568,6 +568,21 @@ Submit profile hook will be used to submit the profile data to the local storage
     c. Return the profile data object
     d. Set `isEditting` to false 
 
+### Edit Profile Hook 
+
+Edit profile hook will be used to edit the profile data and update it in the local storage.
+
+  1. Retrieve the profile data and `isEditting` state from the `ProfileContext`
+  2. Retrieve `processFile` function from `UploadFile` hook
+  3. Retrieve saved profile data from the local storage
+  4. Create `editProfile` callback function that will be called when the edit button is clicked
+    a. Call `processFile` function to upload the profile image, cover image and license certificate. The function will return a promise that resolves with the file properties.
+    b. Create a new object with the updated profile data and the file properties from the `processFile` function
+    c. Update the saved profile data with the updated profile data
+    d. Save the updated profile data in the local storage with the key as the user's ID
+    e. Return the updated profile data object
+    f. Set `isEditting` to false 
+
 
 
 ### Login Context
