@@ -11,12 +11,40 @@ export const useSubmitProfile = () =>{
 
     if(!loginContext || !profileContext) throw new Error("useSubmitProfile must be used within a LoginProvider and ProfileProvider")
 
-    const { nameValue, emailValue, phoneValue, specialityValue, experienceValue, profileImage, coverImage, certificationsValue, aboutValue, feesValue, educationValue, medicalHistoryValue, setIsEditing, licenseCertificate, hospitalValue, residenceValue, cityValue, stateValue, countryValue, genderValue, dateOfBirthValue, hospitalLocationValue } = profileContext,
+    const { nameValue, emailValue, phoneValue, specialityValue, experienceValue, profileImage, coverImage, certificationsValue, aboutValue, feesValue, educationValue, medicalHistoryValue, setShowModal, licenseCertificate, hospitalValue, residenceValue, cityValue, stateValue, countryValue, genderValue, dateOfBirthValue, hospitalLocationValue } = profileContext,
           { userType } = loginContext,
           { processFile } = useUploadFile(),
           userID = `${userType}-${uuidv4()}`
 
-    const submitProfile = async() =>{
+    const submitProfile = async(e: React.FormEvent<HTMLFormElement>) =>{
+
+        e.preventDefault()
+
+        const isEmptyObject = (obj: any) => Object.keys(obj).length === 0 && obj.constructor === Object
+
+        if([nameValue, emailValue, phoneValue, genderValue, dateOfBirthValue].some(value => !value) || isEmptyObject(profileImage)){
+
+            console.log(nameValue, emailValue, phoneValue, genderValue, dateOfBirthValue, profileImage)
+            
+            return
+
+        }
+
+        if(userType === "doctor" && ([specialityValue, experienceValue, hospitalValue, hospitalLocationValue, certificationsValue, aboutValue, feesValue, educationValue].some(value => !value) || isEmptyObject(licenseCertificate) || isEmptyObject(coverImage))){
+
+            console.log(specialityValue, experienceValue, hospitalValue, hospitalLocationValue, certificationsValue, aboutValue, feesValue, educationValue, licenseCertificate, coverImage)
+
+            return
+
+        }
+
+        if(userType === "patient" && (!medicalHistoryValue || ([residenceValue, cityValue, countryValue]).some(value => !value))){
+
+            alert("Please fill in all required fields")
+
+            return
+
+        }
 
         const profileImageDoc = profileImage instanceof File ? await processFile(profileImage) : null,
               coverImageDoc = coverImage instanceof File ? await processFile(coverImage) : null,
@@ -57,7 +85,7 @@ export const useSubmitProfile = () =>{
 
         localStorage.setItem(`profileData-${userID}`, JSON.stringify(profileData))  
 
-        setIsEditing(false)
+        setShowModal(false)
         
         return profileData
     
