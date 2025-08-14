@@ -25,9 +25,9 @@ export const useEditProfile = () =>{
 
         if(!savedProfile || !profileKey) return null
 
-        const profileImageDoc = profileImage instanceof File ? await processFile(profileImage) : null,
-              coverImageDoc = coverImage instanceof File ? await processFile(coverImage) : null,
-              licenseCertificateDoc = licenseCertificate instanceof File ? await processFile(licenseCertificate) : null
+        const profileImageDoc = profileImage instanceof File ? await processFile(profileImage) : savedProfile.profileImage,
+              coverImageDoc = coverImage instanceof File ? await processFile(coverImage) : savedProfile.coverImage,
+              licenseCertificateDoc = licenseCertificate instanceof File ? await processFile(licenseCertificate) : savedProfile.licenseCertificate
 
         const updatedProfile ={
 
