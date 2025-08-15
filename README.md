@@ -573,16 +573,22 @@ Submit profile hook will be used to submit the profile data to the local storage
 
 Edit profile hook will be used to edit the profile data and update it in the local storage.
 
-  1. Retrieve the profile data and `isEditting` state from the `ProfileContext`
+  1. Retrieve the profile data and `setShowModal` state from the `ProfileContext`
   2. Retrieve `processFile` function from `UploadFile` hook
   3. Retrieve saved profile data from the local storage
   4. Create `editProfile` callback function that will be called when the edit button is clicked
     a. Call `processFile` function to upload the profile image, cover image and license certificate. The function will return a promise that resolves with the file properties.
-    b. Create a new object with the updated profile data and the file properties from the `processFile` function
-    c. Update the saved profile data with the updated profile data
-    d. Save the updated profile data in the local storage with the key as the user's ID
-    e. Return the updated profile data object
-    f. Set `isEditting` to false 
+    b. Create a logic hook check if the values are equal to the saved profile data. If they are equal, exit the function.
+    c. Create a new object with the updated profile data and the file properties from the `processFile` function
+    d. Update the saved profile data with the updated profile data
+    e. Save the updated profile data in the local storage with the key as the user's ID
+    f. Return the updated profile data object
+    g. Set `setShowModal` to false 
+
+  5. Create `handleEditProfile` function that will be called when the form is submitted
+    a. Disable the normal form submission behavior
+    b. Call `editProfile` function 
+
 
 
 
