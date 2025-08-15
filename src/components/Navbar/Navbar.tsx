@@ -5,6 +5,7 @@ import { assets } from "../../assets/frontend/assets"
 import MobileMenu from "./MobileMenu"
 import DropdownMenu from "./DropdownMenu"
 import { LoginContext } from "../../context/LoginContext"
+import { ProfileContext } from "../../context/ProfileContext"
 
 const Navbar: React.FC = () =>{
 
@@ -12,8 +13,14 @@ const Navbar: React.FC = () =>{
           navigate = useNavigate(),
           location = useLocation(),
           loginContext = useContext(LoginContext),
-          isAuthenticated = loginContext?.isAuthenticated,
-          userType = loginContext?.userType
+          profileContext = useContext(ProfileContext)
+
+    if(!loginContext || !profileContext) throw new Error("Login and Profile context not found")
+
+    const { isAuthenticated, userType } = loginContext,
+          { profileImage } = profileContext
+
+    if(profileImage instanceof File) return
 
     return(
 
@@ -95,7 +102,7 @@ const Navbar: React.FC = () =>{
 
                         <div className="flex items-center gap-2 cursor-pointer group relative">
 
-                            <img src={assets.profilePic} alt="profile-pic" className="w-10 h-10 rounded-full cursor-pointer"/>
+                            <img src={profileImage ? profileImage.content : assets.avatar} alt="profile-pic" className="w-10 h-10 rounded-full cursor-pointer"/>
 
                             <img src={assets.dropDownIcon} alt="drop-down-icon" className="w-25"/>
 

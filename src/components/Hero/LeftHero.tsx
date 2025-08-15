@@ -3,12 +3,15 @@ import { assets } from "../../assets/frontend/assets"
 import { LoginContext } from "../../context/LoginContext"
 import { createHeroContent } from "./heroContent"
 import { useNavigate } from "react-router-dom"
+import { ProfileContext } from "../../context/ProfileContext"
 
 const LeftHero: React.FC = ()=>{
 
     const loginContext = useContext(LoginContext),  
+          profileContext = useContext(ProfileContext),
           isAuthenticated = loginContext?.isAuthenticated,
           userType = loginContext?.userType,
+          name = profileContext?.nameValue,
           navigate = useNavigate(),
           { doctor, patient } = createHeroContent(navigate),
           content = isAuthenticated ? (userType === "patient" ? patient : doctor) : doctor
@@ -18,7 +21,7 @@ const LeftHero: React.FC = ()=>{
         <div className="md:w-1/2 flex flex-col items-start justify-center gap-4 m-auto md:py-[10vw] md:mb-[-30px]">
 
             <h3 className="text-3xl md:text-4xl lg:text-5xl text-white font-bold leading-tight md:leading-tight lg:leading-tight hero-heading"
-            >{content.heading}</h3>
+            >{`${content.heading} ${name}`}</h3>
 
 
             <div className="flex flex-col md:flex-row items-center gap-3 text-secondary-bg text-sm font-medium">

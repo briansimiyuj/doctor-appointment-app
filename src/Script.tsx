@@ -65,7 +65,11 @@ const Script: React.FC = () =>{
 
               <>
 
-                <Navbar/>
+                <ProfileContextProvider>
+                  
+                  <Navbar/>
+
+                </ProfileContextProvider>
 
                   <Routes>
 
