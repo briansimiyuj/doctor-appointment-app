@@ -2,6 +2,7 @@ import { useCallback, useContext } from "react"
 import { LoginContext } from "../context/LoginContext"
 import { ProfileContext } from "../context/ProfileContext"
 import { useUploadFile } from "./useUploadFile"
+import { useEditProfileLogic } from "./useEditProfileLogic"
 
 export const useEditProfile = () =>{
 
@@ -14,9 +15,10 @@ export const useEditProfile = () =>{
 
     }
 
-    const { nameValue, emailValue, phoneValue, specialityValue, profileImage, coverImage, educationValue, experienceValue,  certificationsValue, aboutValue, feesValue, medicalHistoryValue,  residenceValue, stateValue, cityValue, countryValue,  hospitalLocationValue, hospitalValue, licenseCertificate,  genderValue, dateOfBirthValue, setIsEditing } = profileContext, 
+    const { nameValue, emailValue, phoneValue, specialityValue, profileImage, coverImage, educationValue, experienceValue,  certificationsValue, aboutValue, feesValue, medicalHistoryValue,  residenceValue, stateValue, cityValue, countryValue,  hospitalLocationValue, hospitalValue, licenseCertificate,  genderValue, dateOfBirthValue, setShowModal } = profileContext, 
           { userType } = loginContext, 
           { processFile } = useUploadFile(),
+          { hasProfileChanged } = useEditProfileLogic(),
           keys = Object.keys(localStorage),
           profileKey = keys.find(key => key.startsWith("profileData-")),
           savedProfile = profileKey ? JSON.parse(localStorage.getItem(profileKey) as string): null
@@ -28,6 +30,8 @@ export const useEditProfile = () =>{
         const profileImageDoc = profileImage instanceof File ? await processFile(profileImage) : savedProfile.profileImage,
               coverImageDoc = coverImage instanceof File ? await processFile(coverImage) : savedProfile.coverImage,
               licenseCertificateDoc = licenseCertificate instanceof File ? await processFile(licenseCertificate) : savedProfile.licenseCertificate
+              
+        if(!hasProfileChanged) return null
 
         const updatedProfile ={
 
@@ -64,12 +68,24 @@ export const useEditProfile = () =>{
 
         localStorage.setItem(profileKey, JSON.stringify(updatedProfile))
 
-        setIsEditing(false)
+        setShowModal(false)
         
         return updatedProfile
 
-    }, [ savedProfile, profileKey, nameValue, emailValue, phoneValue, specialityValue, profileImage, coverImage, educationValue, experienceValue, certificationsValue, aboutValue, feesValue, medicalHistoryValue, residenceValue, stateValue, cityValue, countryValue,     hospitalLocationValue, hospitalValue, licenseCertificate, genderValue, dateOfBirthValue, userType, processFile, setIsEditing ])
+    }, [ savedProfile, profileKey, nameValue, emailValue, phoneValue, specialityValue, profileImage, coverImage, educationValue, experienceValue, certificationsValue, aboutValue, feesValue, medicalHistoryValue, residenceValue, stateValue, cityValue, countryValue,     hospitalLocationValue, hospitalValue, licenseCertificate, genderValue, dateOfBirthValue, userType, processFile, setShowModal ])
+    
+    const handleEditProfile = async(e: React.FormEvent<HTMLFormElement>) =>{
+    
+        e.preventDefault()
 
-    return { editProfile }
+        const updatedProfile = await editProfile()
+
+        if(!updatedProfile) return
+
+        console.log(updatedProfile)
+    
+    }
+
+    return { editProfile: handleEditProfile }
 
 }
