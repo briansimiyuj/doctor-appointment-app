@@ -1,6 +1,6 @@
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { LoginContext } from "../../context/LoginContext"
-import { useNavigate } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 
 interface PrivateRouteProps{
 
@@ -14,22 +14,13 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) =>{
 
     if(!context) throw new Error("PrivateRoute must be used within a LoginContextProvider")
 
-    const { isAuthenticated } = context,
-          navigate = useNavigate()
+    const { isAuthenticated, loading } = context
 
-    useEffect(() =>{
-
-        if(!isAuthenticated){
-
-            navigate("/login", { replace: true })
-
-        }
-
-    }, [isAuthenticated, navigate])
+    if(loading) return null
 
     if(!isAuthenticated){
 
-        return null
+        return <Navigate to="/login" />
         
     }
 

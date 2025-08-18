@@ -2701,7 +2701,6 @@ Sign Out Modal Component will be used to display a modal when the user clicks on
 
 Private Route Component will be used to protect the routes that require authentication.
 
-  1. Retrieve `isAuthenticated` from `LoginContext`
-  2. If `isAuthenticated` is true, render the children
-  3. If `isAuthenticated` is false, redirect the user to the login page
-  4. Wrap all the routes that require authentication with the Private Route Component
+  1. Retrieve `isAuthenticated` and `loading` from `LoginContext`
+  2. If `loading` is true, return null
+  3. If `isAuthenticated` is false, return a redirect to the Login Page
