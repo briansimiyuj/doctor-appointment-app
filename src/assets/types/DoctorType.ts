@@ -1,18 +1,24 @@
+import { dummyReviews } from "../dummyData/DummyReviews"
+import { DocumentType } from "./DocumentType"
+
 export type DoctorType ={
 
     _id: string
     name: string
     image: string
     speciality: string
-    degree: string
+    education: string
     experience: string
     about: string
     fees: string
+    coverImage: DocumentType
+    rating: string
+    reviews: typeof dummyReviews
 
     address:{
 
-        line1: string
-        line2: string
+        hospital: string
+        hospitalLocation: string
 
     }
 

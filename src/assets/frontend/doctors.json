@@ -1,5 +1,5 @@
-
 [
+
     {
         "_id": "doc1",
         "name": "Dr. Michael Johnson",
@@ -7,11 +7,12 @@
         "degree": "MBBS, MD",
         "experience": "5 Years",
         "about": "Dr. Michael is dedicated to ensuring heart health and providing advanced cardiac care through innovative treatment options.",
-        "fees": 70,
-        "address": {
-            "line1": "12th Street, Nairobi",
-            "line2": "Upper Hill, Kenya"
-        }
+        "fees": "70",
+        "address":{
+            "hospital": "12th Street, Nairobi",
+            "hospitalLocation": "Upper Hill, Kenya"
+        },
+        "coverImage": null
     },
 
     {
@@ -21,11 +22,12 @@
         "degree": "MBBS, MD",
         "experience": "6 Years",
         "about": "Dr. Sophia is passionate about women’s health, specializing in comprehensive care and prenatal services.",
-        "fees": 65,
-        "address": {
-            "line1": "5th Avenue, Nairobi",
-            "line2": "Westlands, Kenya"
-        }
+        "fees": "65",
+        "address":{
+            "hospital": "5th Avenue, Nairobi",
+            "hospitalLocation": "Westlands, Kenya"
+        },
+        "coverImage": null
     },
 
     {
@@ -35,11 +37,12 @@
         "degree": "MBBS",
         "experience": "2 Years",
         "about": "Dr. Amina focuses on skincare treatments, emphasizing early diagnosis of skin disorders and cosmetic dermatology.",
-        "fees": 40,
-        "address": {
-            "line1": "Eastside Road",
-            "line2": "Mombasa, Kenya"
-        }
+        "fees": "40",
+        "address":{
+            "hospital": "Eastside Road",
+            "hospitalLocation": "Mombasa, Kenya"
+        },
+        "coverImage": null
     },
 
     {
@@ -49,11 +52,12 @@
         "degree": "MBBS",
         "experience": "3 Years",
         "about": "Dr. David is passionate about child healthcare, ensuring kids grow healthy with personalized treatment plans.",
-        "fees": 50,
-        "address": {
-            "line1": "15th Main, Accra",
-            "line2": "Osu, Ghana"
-        }
+        "fees": "50",
+        "address":{
+            "hospital": "15th Main, Accra",
+            "hospitalLocation": "Osu, Ghana"
+        },
+        "coverImage": null
     },
 
     {
@@ -63,11 +67,12 @@
         "degree": "MBBS, DM",
         "experience": "7 Years",
         "about": "Dr. Marcus provides specialized care for neurological disorders with a focus on innovative diagnostic tools.",
-        "fees": 90,
-        "address": {
-            "line1": "Independence Avenue",
-            "line2": "Kigali, Rwanda"
-        }
+        "fees": "90",
+        "address":{
+            "hospital": "Independence Avenue",
+            "hospitalLocation": "Kigali, Rwanda"
+        },
+        "coverImage": null
     },
 
     {
@@ -77,11 +82,12 @@
         "degree": "MBBS, DM",
         "experience": "5 Years",
         "about": "Dr. Olivia combines advanced neurological techniques with compassionate care for her patients.",
-        "fees": 80,
-        "address": {
-            "line1": "Kilimani Road",
-            "line2": "Nairobi, Kenya"
-        }
+        "fees": "80",
+        "address":{
+            "hospital": "Kilimani Road",
+            "hospitalLocation": "Nairobi, Kenya"
+        },
+        "coverImage": null
     },
 
     {
@@ -91,11 +97,12 @@
         "degree": "MBBS",
         "experience": "4 Years",
         "about": "Dr. John focuses on delivering preventive and primary healthcare for all age groups.",
-        "fees": 40,
-        "address": {
-            "line1": "Southend Crescent",
-            "line2": "Cape Town, South Africa"
-        }
+        "fees": "40",
+        "address":{
+            "hospital": "Southend Crescent",
+            "hospitalLocation": "Cape Town, South Africa"
+        },
+        "coverImage": null
     },
 
     {
@@ -105,11 +112,12 @@
         "degree": "MBBS",
         "experience": "3 Years",
         "about": "Dr. Emily provides holistic gynecological care and emphasizes reproductive health education.",
-        "fees": 60,
-        "address": {
-            "line1": "3rd Lane, Kisumu",
-            "line2": "Central, Kenya"
-        }
+        "fees": "60",
+        "address":{
+            "hospital": "3rd Lane, Kisumu",
+            "hospitalLocation": "Central, Kenya"
+        },
+        "coverImage": null
     },
 
     {
@@ -119,11 +127,12 @@
         "degree": "MBBS",
         "experience": "2 Years",
         "about": "Dr. Fatima is an expert in treating skin conditions and promoting skincare for all skin types.",
-        "fees": 35,
-        "address": {
-            "line1": "Makupa Road",
-            "line2": "Mombasa, Kenya"
-        }
+        "fees": "35",
+        "address":{
+            "hospital": "Makupa Road",
+            "hospitalLocation": "Mombasa, Kenya"
+        },
+        "coverImage": null
     },
 
     {
@@ -133,11 +142,12 @@
         "degree": "MBBS",
         "experience": "4 Years",
         "about": "Dr. Peter provides exceptional medical care tailored to meet the unique needs of children.",
-        "fees": 45,
-        "address": {
-            "line1": "Rose Avenue",
-            "line2": "Durban, South Africa"
-        }
+        "fees": "45",
+        "address":{
+            "hospital": "Rose Avenue",
+            "hospitalLocation": "Durban, South Africa"
+        },
+        "coverImage": null
     },
 
     {
@@ -147,11 +157,12 @@
         "degree": "MBBS, DM",
         "experience": "4 Years",
         "about": "Dr. Grace specializes in diagnosing and treating neurological conditions with an empathetic approach.",
-        "fees": 75,
-        "address": {
-            "line1": "Limuru Road",
-            "line2": "Nairobi, Kenya"
-        }
+        "fees": "75",
+        "address":{
+            "hospital": "Limuru Road",
+            "hospitalLocation": "Nairobi, Kenya"
+        },
+        "coverImage": null
     },
 
     {
@@ -161,11 +172,12 @@
         "degree": "MBBS, DM",
         "experience": "6 Years",
         "about": "Dr. Robert provides expertise in treating complex neurological disorders using the latest techniques.",
-        "fees": 85,
-        "address": {
-            "line1": "Central Street",
-            "line2": "Pretoria, South Africa"
-        }
+        "fees": "85",
+        "address":{
+            "hospital": "Central Street",
+            "hospitalLocation": "Pretoria, South Africa"
+        },
+        "coverImage": null
     },
 
     {
@@ -175,11 +187,12 @@
         "degree": "MBBS",
         "experience": "4 Years",
         "about": "Dr. Stella is committed to promoting community health through accessible and inclusive care.",
-        "fees": 55,
-        "address": {
-            "line1": "12th Avenue, Nakuru",
-            "line2": "Kenya"
-        }
+        "fees": "55",
+        "address":{
+            "hospital": "12th Avenue, Nakuru",
+            "hospitalLocation": "Kenya"
+        },
+        "coverImage": null
     },
 
     {
@@ -189,10 +202,12 @@
         "degree": "MBBS, MD",
         "experience": "5 Years",
         "about": "Dr. Linda provides personalized care, focusing on promoting women’s reproductive health.",
-        "fees": 70,
-        "address": {
-            "line1": "5th Street, Nairobi",
-            "line2": "Lavington, Kenya"
-        }
+        "fees": "70",
+        "address":{
+            "hospital": "5th Street, Nairobi",
+            "hospitalLocation": "Lavington, Kenya"
+        },
+        "coverImage": null
     }
+
 ]
