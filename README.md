@@ -264,6 +264,9 @@ Booking page will have doctor details, booking slots and related doctors.
         ii. Provide doctor speciality, degree, and experience
         iii. Provide doctor about text
         iv. Provide doctor rate
+        v. Doctor's hospital name
+        vi. Hospital location
+        vii. Patients reviews and ratings
 
   4. Create a Booking Slots component and mount it on Booking page
 
