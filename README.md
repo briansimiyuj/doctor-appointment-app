@@ -559,12 +559,12 @@ Profile page will show the user profile data and allow the user to edit the data
 
 Submit profile hook will be used to submit the profile data to the local storage.
 
-  1. Retrieve the profile data and `setShowModal` state from the `ProfileContext`
+  1. Retrieve the profile data, `setProfile` and `setShowModal` state from the `ProfileContext`
   2. Retrieve `processFile` function from `UploadFile` hook
   3. Call `processFile` function to upload the profile image, cover image and license certificate. The function will return a promise that resolves with the file properties.
   4. Create `submitProfile` function that will be called when the submit button is clicked
     a. Create a validation logic to check if all the fields are filled. If any of the fields are empty, return an error message.
-    b. Create a new object with the profile data and the file properties from the `processFile` function
+    b. Create a new object with the profile data and the file properties from the `processFile` function. Each `userType` will be used to determine which fields to include in the object. 
     c. Save the object in the local storage with the key as the user's ID
     d. Return the profile data object
     e. Set `setShowModal` to false 
@@ -573,19 +573,22 @@ Submit profile hook will be used to submit the profile data to the local storage
 
 Edit profile hook will be used to edit the profile data and update it in the local storage.
 
-  1. Retrieve the profile data and `setShowModal` state from the `ProfileContext`
-  2. Retrieve `processFile` function from `UploadFile` hook
-  3. Retrieve saved profile data from the local storage
-  4. Create `editProfile` callback function that will be called when the edit button is clicked
+  1. Retrieve the profile data,  `setProfile` and `setShowModal` state from the `ProfileContext`
+  2. Retrieve `setName` and `userType`  from `LoginContext`
+  3. Retrieve `processFile` function from `UploadFile` hook
+  4. Retrieve saved profile data from the local storage
+  5. Create `editProfile` callback function that will be called when the edit button is clicked
     a. Call `processFile` function to upload the profile image, cover image and license certificate. The function will return a promise that resolves with the file properties.
     b. Create a logic hook check if the values are equal to the saved profile data. If they are equal, exit the function.
     c. Create a new object with the updated profile data and the file properties from the `processFile` function
     d. Update the saved profile data with the updated profile data
     e. Save the updated profile data in the local storage with the key as the user's ID
-    f. Return the updated profile data object
-    g. Set `setShowModal` to false 
+    f. Set `setProfile` to the updated profile data
+    g. Set `setName` to the updated profile data's name
+    h. Return the updated profile data object
+    i. Set `setShowModal` to false 
 
-  5. Create `handleEditProfile` function that will be called when the form is submitted
+  6 . Create `handleEditProfile` function that will be called when the form is submitted
     a. Disable the normal form submission behavior
     b. Call `editProfile` function 
 

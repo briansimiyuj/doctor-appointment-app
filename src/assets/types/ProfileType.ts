@@ -1,5 +1,6 @@
 import { DoctorType } from "./DoctorType"
 import { DocumentType } from "./DocumentType"
+import { PatientType } from "./PatientType"
 
 export type AddressType ={
 
@@ -25,7 +26,7 @@ export type UserData ={
 type DoctorProfile = UserData & DoctorType &{
 
     type: "doctor"
-    rating: number
+    rating?: number
     coverImage: DocumentType | File | null
     aboutValue: string
     specialityValue: string
@@ -39,7 +40,7 @@ type DoctorProfile = UserData & DoctorType &{
 
 }
 
-type PatientProfile = UserData &{
+type PatientProfile = UserData & PatientType &{
     
     _id: string
     type: "patient"

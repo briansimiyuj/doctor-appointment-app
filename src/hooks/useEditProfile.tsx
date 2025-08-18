@@ -15,8 +15,8 @@ export const useEditProfile = () =>{
 
     }
 
-    const { nameValue, emailValue, phoneValue, specialityValue, profileImage, coverImage, educationValue, experienceValue,  certificationsValue, aboutValue, feesValue, medicalHistoryValue,  residenceValue, stateValue, cityValue, countryValue,  hospitalLocationValue, hospitalValue, licenseCertificate,  genderValue, dateOfBirthValue, setShowModal } = profileContext, 
-          { userType } = loginContext, 
+    const { nameValue, emailValue, phoneValue, specialityValue, profileImage, coverImage, educationValue, experienceValue,  certificationsValue, aboutValue, setProfile, feesValue, medicalHistoryValue,  residenceValue, stateValue, cityValue, countryValue,  hospitalLocationValue, hospitalValue, licenseCertificate,  genderValue, dateOfBirthValue, setShowModal } = profileContext, 
+          { userType, setName } = loginContext, 
           { processFile } = useUploadFile(),
           { hasProfileChanged } = useEditProfileLogic(),
           keys = Object.keys(localStorage),
@@ -66,6 +66,10 @@ export const useEditProfile = () =>{
 
         console.log(updatedProfile)
 
+        setProfile(updatedProfile)
+
+        setName(updatedProfile.name)
+
         localStorage.setItem(profileKey, JSON.stringify(updatedProfile))
 
         setShowModal(false)
@@ -82,7 +86,7 @@ export const useEditProfile = () =>{
 
         if(!updatedProfile) return
 
-        console.log(updatedProfile)
+        console.log('Profile updated successfully')
     
     }
 

@@ -11,7 +11,12 @@ export const useSubmitProfile = () =>{
 
     if(!loginContext || !profileContext) throw new Error("useSubmitProfile must be used within a LoginProvider and ProfileProvider")
 
-    const { nameValue, emailValue, phoneValue, specialityValue, experienceValue, profileImage, coverImage, certificationsValue, aboutValue, feesValue, educationValue, medicalHistoryValue, setShowModal, licenseCertificate, hospitalValue, residenceValue, cityValue, stateValue, countryValue, genderValue, dateOfBirthValue, hospitalLocationValue } = profileContext,
+    const { 
+        nameValue, emailValue, phoneValue, specialityValue, experienceValue, profileImage, coverImage, 
+        certificationsValue, aboutValue, feesValue, educationValue, medicalHistoryValue, setShowModal, 
+        licenseCertificate, hospitalValue, residenceValue, cityValue, stateValue, countryValue, 
+        genderValue, dateOfBirthValue, hospitalLocationValue, setProfile 
+    } = profileContext,
           { userType } = loginContext,
           { processFile } = useUploadFile(),
           userID = `${userType}-${uuidv4()}`
@@ -46,49 +51,80 @@ export const useSubmitProfile = () =>{
 
         }
 
+        if(!genderValue) throw new Error("Please select a gender")  
+        if(!userType || (userType !== "doctor" && userType !== "patient")) throw new Error("Invalid user type")
+
         const profileImageDoc = profileImage instanceof File ? await processFile(profileImage) : null,
               coverImageDoc = coverImage instanceof File ? await processFile(coverImage) : null,
               licenseCertificateDoc = licenseCertificate instanceof File ? await processFile(licenseCertificate) : null
+
+        let profileData: any
+
+        if(userType === "doctor"){
+
+            profileData ={
+
+                name: nameValue!,
+                addressValue:{
+                    email: emailValue!,
+                    phone: phoneValue!,
+                    residence: residenceValue!,
+                    city: cityValue!,
+                    state: stateValue!,
+                    country: countryValue!
+                },
+                gender: genderValue,
+                dateOfBirth: dateOfBirthValue!,
+                type: "doctor",
+                profileImage: profileImage ? profileImageDoc : null,
+                coverImage: coverImage ? coverImageDoc : null,
+                speciality: specialityValue!,
+                rating: 0,
+                licenseCertificate: licenseCertificateDoc!,
+                hospital: hospitalValue!,
+                hospitalLocation: hospitalLocationValue!,
+                certifications: certificationsValue!,
+                about: aboutValue!,
+                experience: experienceValue!,
+                fees: feesValue!,
+                education: educationValue!,
+                createdAt: new Date().toISOString()
+
+            }
     
-        const profileData ={
+        }else{
 
-            userID,
-            name: nameValue,
-            addressValue:{
-                email: emailValue,
-                phone: phoneValue,
-                residence: residenceValue,
-                city: cityValue,
-                state: stateValue,
-                country: countryValue
-            },
-            gender: genderValue,
-            dateOfBirth: dateOfBirthValue,
-            type: userType,
-            profileImage: profileImage ? profileImageDoc : null,
-            coverImage: coverImage ? coverImageDoc : null,
-            speciality: userType === "doctor" ? specialityValue : undefined,
-            licenseCertificate: userType === "doctor" ? licenseCertificateDoc : undefined,  
-            hospital: userType === "doctor" ? hospitalValue : undefined,
-            hospitalLocation: userType === "doctor" ? hospitalLocationValue : undefined,
-            certifications: userType === "doctor" ? certificationsValue : undefined,
-            about: userType === "doctor" ? aboutValue : undefined,
-            experience: userType === "doctor" ? experienceValue : undefined,
-            fees: userType === "doctor" ? feesValue : undefined,
-            education: userType === "doctor" ? educationValue : undefined,
-            medicalHistory: userType === "patient" ? medicalHistoryValue : undefined,
-            createdAt: new Date().toISOString()
+            profileData ={
 
+                name: nameValue!,
+                addressValue:{
+                    email: emailValue!,
+                    phone: phoneValue!,
+                    residence: residenceValue!,
+                    city: cityValue!,
+                    state: stateValue!,
+                    country: countryValue!
+                },
+                gender: genderValue,
+                dateOfBirth: dateOfBirthValue!,
+                type: "patient",
+                profileImage: profileImage ? profileImageDoc : null,
+                medicalHistory: medicalHistoryValue!,
+                createdAt: new Date().toISOString()
+                
+            }
         }
 
-        console.log(profileData)
+        setProfile(profileData)
 
-        localStorage.setItem(`profileData-${userID}`, JSON.stringify(profileData))  
+        localStorage.setItem(`profileData-${userID}`, JSON.stringify(profileData))    
 
         setShowModal(false)
-        
+
+        console.log('Profile submitted successfully')
+
         return profileData
-    
+
     }
 
     return { submitProfile }
