@@ -249,6 +249,7 @@ Booking context will be used to store the booking data and provide it to the Boo
 
   11. The context provides methods to update both `appointedDoctors` and `appointedPatients` arrays, allowing for appointment management from both the patient and doctor perspectives
   12. Set a state to store a boolean to check if the doctor is booked or not and initialize it with false. This will be per doctor
+  13. Create a store slots which will derive from the `availableSlots` array from the `ScheduleContext` and filter out the slots that are already booked
 
 
 ### Booking Page
@@ -256,7 +257,7 @@ Booking context will be used to store the booking data and provide it to the Boo
 Booking page will have doctor details, booking slots and related doctors.
 
   1. Create a Booking page and mount it on Script component and provide a route for it
-  2. Wrap the Booking page with the BookingContext provider as the parent component
+  2. Wrap the Booking page with the `BookingContext` and `SheduleContext` provider as the parent component
   3. Create a Doctor Details component and mount it on Booking page
     a. Create a Doctor image component and mount it on Doctor Details component
     b. Create a Doctor info component and mount it on Doctor Details component

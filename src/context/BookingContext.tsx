@@ -2,32 +2,15 @@ import { createContext, useEffect, useState } from "react";
 import { DoctorType } from "../assets/types/DoctorType";
 import { useParams } from "react-router-dom";
 import { doctors } from "../assets/frontend/doctorsData";
-import { TimeSlotType } from "../assets/types/TimeSlotType";
 import { AppointedDoctorType } from "../assets/types/AppointedDoctorType";
 import { PatientType } from "../assets/types/PatientType";
 import { patients } from "../assets/frontend/patientsData";
 import { AppointedPatientType } from "../assets/types/AppointedPatientType";
+import { BookingContextProps } from "../assets/contextProps/BookingContextProps";
+import { TimeSlotType } from "../assets/types/TimeSlotType";
+import { useSchedule } from "./ScheduleContext";
 
-interface BookingContextProps{
 
-    doctorInfo: DoctorType | null
-    patientInfo: PatientType | null
-    doctorID: string | null
-    patientID: string | null
-    slotIndex: number
-    setSlotIndex: (index: number) => void
-    slotTime: string
-    setSlotTime: (time: string) => void
-    selectedTimeSlot: TimeSlotType | null
-    setSelectedTimeSlot: (slot: TimeSlotType | null) => void
-    appointedDoctors: AppointedDoctorType[]
-    setAppointedDoctors: (doctors: AppointedDoctorType[] | ((prev: AppointedDoctorType[]) => AppointedDoctorType[])) => void,
-    appointedPatients: AppointedPatientType[]
-    setAppointedPatients: (patients: AppointedPatientType[] | ((prev: AppointedPatientType[]) => AppointedPatientType[])) => void,
-    isBooked: { [doctorId: string]: boolean }
-    setIsBooked: (doctorId: string, status: boolean) => void
-
-}
 interface BookingContextProviderProps{
 
     children: React.ReactNode
@@ -51,7 +34,9 @@ export const BookingContext = createContext<BookingContextProps>({
     appointedPatients: [],
     setAppointedPatients: () => {},
     isBooked: {},
-    setIsBooked: () => {}
+    setIsBooked: () => {},
+    slots: [],
+    setSlots: () => {},
 
 })
 
@@ -59,6 +44,19 @@ export const BookingContext = createContext<BookingContextProps>({
 export const BookingContextProvider =  ({ children }: BookingContextProviderProps) =>{
 
     const { doctorID, patientID } = useParams(),
+          { schedule } = useSchedule(),
+          [slots, setSlots] = useState(
+            schedule.availableSlots.map(day =>{
+
+                return{
+ 
+                    date: new Date(day.date),
+                    slots: day.slots as unknown as TimeSlotType[]
+
+                }
+
+            })
+          ),
           [doctorInfo, setDoctorInfo] = useState<DoctorType | null>(null),
           [patientInfo, setPatientInfo] = useState<PatientType | null>(null),
           [slotIndex, setSlotIndex] = useState(0),
@@ -132,7 +130,7 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
     
        const docInfo = doctors.find(doc => doc._id === doctorID) || null
 
-       setDoctorInfo(docInfo)
+       setDoctorInfo(docInfo as unknown as DoctorType)
     
     }
 
@@ -202,7 +200,9 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
             appointedPatients,
             setAppointedPatients,
             isBooked,
-            setIsBooked: handleSetIsBooked
+            setIsBooked: handleSetIsBooked,
+            slots,
+            setSlots
         }}>
         
             {children}

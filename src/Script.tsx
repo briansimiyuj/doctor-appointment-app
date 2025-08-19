@@ -166,16 +166,20 @@ const Script: React.FC = () =>{
                     <Route path="/bookings" element={
 
                       <PrivateRoute>
+
+                        <ScheduleProvider>
               
-                        <BookingContextProvider>
+                          <BookingContextProvider>
 
-                          <AppointmentsContextProvider>
+                            <AppointmentsContextProvider>
 
-                            <MyAppointmentsPage/>
+                              <MyAppointmentsPage/>
 
-                          </AppointmentsContextProvider>
+                            </AppointmentsContextProvider>
 
-                        </BookingContextProvider>
+                          </BookingContextProvider>
+
+                        </ScheduleProvider>
 
                       </PrivateRoute>
 
@@ -185,19 +189,23 @@ const Script: React.FC = () =>{
 
                       <PrivateRoute>
 
-                        <BookingContextProvider>
+                        <ScheduleProvider>
 
-                          <AppointmentsContextProvider>
+                          <BookingContextProvider>
 
-                            <PatientDetailsProvider>
+                            <AppointmentsContextProvider>
 
-                              <PatientDetailsPage/>
+                              <PatientDetailsProvider>
 
-                            </PatientDetailsProvider>
+                                <PatientDetailsPage/>
 
-                          </AppointmentsContextProvider>
+                              </PatientDetailsProvider>
 
-                        </BookingContextProvider>
+                            </AppointmentsContextProvider>
+
+                          </BookingContextProvider>
+
+                        </ScheduleProvider>
 
                       </PrivateRoute>
 
