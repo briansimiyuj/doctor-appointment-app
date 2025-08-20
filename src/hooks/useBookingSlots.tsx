@@ -1,115 +1,45 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState, useMemo } from "react"
 import { BookingContext } from "../context/BookingContext"
 import { TimeSlotType } from "../assets/types/TimeSlotType"
 import { AppointedDoctorType } from "../assets/types/AppointedDoctorType"
+import { DoctorSlotType } from "../assets/types/DoctorSlotType"
 
 
 export const useBookingSlots = ()=>{
 
-    const [doctorSlots, setDoctorSlots] = useState<TimeSlotType[][]>([]),
-          { doctorInfo, slotIndex, setSlotIndex, selectedTimeSlot, setSelectedTimeSlot, slotTime, setSlotTime, appointedDoctors, setAppointedDoctors, isBooked, setIsBooked } = useContext(BookingContext),
+    const [selectedSlot, setSelectedSlot] = useState<TimeSlotType | null>(null),
+          { doctorInfo, slotIndex, setSlotIndex, selectedTimeSlot, setSelectedTimeSlot, appointedDoctors, setAppointedDoctors, isBooked, setIsBooked, slots } = useContext(BookingContext),
           days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-          selectedDate = doctorSlots[slotIndex]?.[0].dateTime
-
-
-    const getAvailableSlots = async(): Promise<void> =>{
-
-        let today = new Date(),
-            allSlots: TimeSlotType[][] = []
-
-        for(let i =0; i < days.length; i++){
-
-            let currentTime = new Date(today),
-                endTime = new Date(today)
-
-            currentTime.setDate(today.getDate() + i)
-
-            endTime.setDate(today.getDate() + i)
-
-            endTime.setHours(21, 0, 0, 0)
-
-
-            if(i === 0){
-
-                if(currentTime.getHours() < 8){
-
-                    currentTime.setHours(8, 0, 0, 0)
-
-                }else{
-                    
-                    let minutes = currentTime.getMinutes(),
-                        nextSlotMinutes = minutes < 30 ? 30 : 0,
-                        nextSlotHours = minutes >= 30 ? currentTime.getHours() + 1 : currentTime.getHours()
-
-                    currentTime.setHours(nextSlotHours, nextSlotMinutes, 0, 0)
-
-                }
-
-            }else{                
-
-                currentTime.setHours(8, 0, 0, 0)
-
-            }
-
-
-            const timeSlots: TimeSlotType[] = []
-
-            while(currentTime < endTime){
-
-                let formattedTime = currentTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
-
-                timeSlots.push({
-                    
-                    dateTime: new Date(currentTime),
-                    time: formattedTime
-
-                })
-
-                currentTime.setMinutes(currentTime.getMinutes() + 30)
-
-            }
-
-            allSlots.push(timeSlots)
-            
-        }       
-
-        setDoctorSlots(allSlots)
-    
-    }
-
+          selectedDate = slots[slotIndex]?.date
 
     const handleSlotIndexChange = (index: number) =>{
-        
-       setSlotIndex(index)
 
-       setSlotTime('')
+        setSlotIndex(index)
 
-       getAvailableSlots()
-    
+        setSelectedSlot(null)
+
     }
 
 
     const handleTimeSlotSelection = (slot: TimeSlotType) =>{
 
         if(doctorInfo && isBooked[doctorInfo._id]) return
-        
-        const selectedSlot = doctorSlots[slotIndex]?.find(timeSlot => timeSlot.time === slot.time)
-        
-        
-        if(doctorInfo){
 
-            const newAppointment: AppointedDoctorType ={
+        const selected = slots[slotIndex]?.slots.find(s => s.time === slot.time)
+
+        if(doctorInfo && selected){
+
+            const newAppointment: AppointedDoctorType = {
 
                 doctorInfo,
                 appointmentTime: slot
 
             }
 
+            setAppointedDoctors((prev: AppointedDoctorType[]) =>{
 
-            setAppointedDoctors((prevAppointments: AppointedDoctorType[]) =>{
-
-                const updatedAppointments: AppointedDoctorType[] = [...prevAppointments, newAppointment],
-                updatedIsBooked = { ...isBooked, [doctorInfo._id]: true }
+                const updatedAppointments = [...prev, newAppointment],
+                      updatedIsBooked = { ...isBooked, [doctorInfo._id]: true }
 
                 localStorage.setItem("appointedDoctors", JSON.stringify(updatedAppointments))
 
@@ -121,24 +51,20 @@ export const useBookingSlots = ()=>{
 
             })
 
-        }
+            setSelectedSlot(selected)
 
-        if(selectedSlot){
-            
-            setSelectedTimeSlot(selectedSlot)
+            setSelectedTimeSlot(selected)
 
-            setSlotTime(slot.time)
-        
         }
 
     }
 
 
-    const cancelAppointment = (time: TimeSlotType) =>{
+    const cancelAppointment = (slot: TimeSlotType) =>{
 
-       const updatedAppointments = appointedDoctors.filter(appointment => appointment.appointmentTime.time !== time.time)
+        const updatedAppointments = appointedDoctors.filter(a => a.appointmentTime.time !== slot.time)
 
-       setAppointedDoctors(updatedAppointments)
+        setAppointedDoctors(updatedAppointments)
 
         if(doctorInfo){
 
@@ -150,23 +76,18 @@ export const useBookingSlots = ()=>{
 
         }
 
-       localStorage.setItem("appointedDoctors", JSON.stringify(updatedAppointments))
-    
+        localStorage.setItem("appointedDoctors", JSON.stringify(updatedAppointments))
+
+        if(selectedSlot?.time === slot.time) setSelectedSlot(null)
+
     }
 
 
     const removePastAppointments = () =>{
-    
+
         const currentTime = new Date()
 
-        const updatedAppointments = appointedDoctors.filter(appointment =>{
-
-            const appointmentDateTime = new Date(appointment.appointmentTime.dateTime)
-
-            return appointmentDateTime > currentTime
-
-        })
-
+        const updatedAppointments = appointedDoctors.filter(appointment => new Date(appointment.appointmentTime.dateTime) > currentTime)
 
         if(updatedAppointments.length !== appointedDoctors.length){
 
@@ -177,11 +98,11 @@ export const useBookingSlots = ()=>{
             const updatedIsBooked = { ...isBooked }
 
             appointedDoctors.forEach(appointment =>{
-                
+
                 if(appointment.doctorInfo){
 
                     updatedIsBooked[appointment.doctorInfo._id] = false
-                     
+
                 }
 
             })
@@ -189,12 +110,12 @@ export const useBookingSlots = ()=>{
             localStorage.setItem("isBooked", JSON.stringify(updatedIsBooked))
 
         }
-    
+
     }
 
 
-    useEffect(() =>{
-        
+    useEffect(()=>{
+
         removePastAppointments()
 
         const interval = setInterval(removePastAppointments, 60000)
@@ -204,38 +125,83 @@ export const useBookingSlots = ()=>{
     }, [appointedDoctors])
 
 
-    useEffect(() =>{
-    
-        if(selectedTimeSlot){
+    const doctorSlots: DoctorSlotType[] = useMemo(() =>{
 
-            handleTimeSlotSelection(selectedTimeSlot)
-            
-        }
-    
-    }, [slotTime, selectedDate])
+        if(!slots || !slots.length) return []
 
-     
-    useEffect(() =>{
+        const now = new Date(),
+              todayDateStr = now.toDateString()
 
-        getAvailableSlots()
+        return slots.map(slot =>{
 
-    }, [doctorInfo])
+            const dayObj = new Date(slot.date),
+                  isToday = dayObj.toDateString() === todayDateStr
+
+            return{
+
+                ...slot,
+                day: dayObj.toLocaleDateString("en-US", { weekday: "long" }),
+                slots: (slot.slots as unknown as string[]).map(s => {
+
+                    const [time, status] = s.split(" - "),
+                          [hours, minutes] = time.split(":").map(Number),
+                          slotDateTime = new Date(slot.date)
+
+                    slotDateTime.setHours(hours, minutes, 0, 0)
+
+                    return{
+
+                        dateTime: slotDateTime,
+                        time,
+                        status: status as "available" | "booked" | "break" | "blocked"
+
+                    } as TimeSlotType
+
+                }).filter(slotObj =>{
+
+                    if(isToday){
+
+                        const slotWithBuffer = new Date(slotObj.dateTime.getTime() - 30 * 60 * 1000)
+
+                        return slotWithBuffer > now
+
+                    }
+
+                    return true
+
+                })
+
+            }
+
+        })
+
+    }, [slots])
 
 
-    return{ 
 
-        doctorSlots, 
-        slotIndex, 
-        setSlotIndex: handleSlotIndexChange, 
-        slotTime, 
-        setSlotTime, 
+
+
+    useEffect(()=>{
+
+        if(selectedTimeSlot) setSelectedSlot(selectedTimeSlot)
+
+    }, [selectedTimeSlot])
+
+
+    return{
+
+        doctorSlots,
+        slotIndex,
+        setSlotIndex: handleSlotIndexChange,
+        selectedSlot,
+        setSelectedSlot,
         days,
         handleTimeSlotSelection,
-        selectedTimeSlot,
         appointedDoctors,
         cancelAppointment,
         isBooked,
-        doctorInfo
+        doctorInfo,
+        selectedDate
 
     }
 

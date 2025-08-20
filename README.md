@@ -319,6 +319,9 @@ Booking page will have doctor details, booking slots and related doctors.
       1. Check if dynamic time slot management is updating based on day selection
 
     f. Create a function to remove past appointments from appointedDoctors array and update isBooked state
+    g. Create a memoization `doctorSlots` function to create slots for doctor
+      i. Loop through the `slots` array and create a new date object for each slot
+        - Return the new date object
 
 #### Booking Slots Component
 
