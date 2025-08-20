@@ -3,51 +3,68 @@ import { useBookingSlots } from "../../hooks/useBookingSlots"
 
 const BookingTime: React.FC = ()=>{
 
-    const { doctorSlots, slotIndex, slotTime, setSlotTime } = useBookingSlots()
+    const { doctorSlots, selectedSlot, handleTimeSlotSelection, setSelectedSlot, slotIndex } = useBookingSlots()
 
     const handleTimeChange = (slot: TimeSlotType) =>{
-    
-        setSlotTime(slot.time)
-    
+
+        setSelectedSlot(slot)
+
+        handleTimeSlotSelection(slot)
+
     }
-    
+
+    const selectedDaySlots = doctorSlots[slotIndex]?.slots || []
+
     return(
 
         <div className="w-full h-full">
 
             <div className="relative h-full overflow-y-auto">
 
-                <div className="flex flex-col  h-full  lg:flex-row items-center gap-5 pb-4 px-16 w-full overflow-x-scroll mt-4 overflow-scroll scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 scroll-smooth">
+                <div className="flex flex-col h-full lg:flex-row items-center gap-5 pb-4 px-16 w-full overflow-x-scroll mt-4 overflow-scroll scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 scroll-smooth">
 
                     {
 
-                        doctorSlots[slotIndex]?.map((slot, index)=>(
+                        selectedDaySlots.length > 0 && selectedDaySlots.map((slot, slotIndex) =>{
 
-                            <label
-                                key={index}
-                                className={`text-sm font-light flex-shrink-0 px-5 py-2 rounded-full cursor-pointer whitespace-nowrap transition-all duration-300 hover:shadow-md ${slot.time === slotTime ? 'bg-primary-bg text-white' : 'border border-gray-400'}`}
-                            >
+                            const time = slot.time,
+                                isSelected = selectedSlot?.time === time,
+                                status = slot.status
+                                
+                            const slotClasses = status === "available" 
+                                ? isSelected ? "bg-primary-bg text-white" : "border border-gray-400"
+                                : "bg-gray-200 text-gray-400 cursor-not-allowed"
 
-                                <input 
-                                    type="radio"
-                                    name="bookingTime"
-                                    value={slot.time}
-                                    checked={slot.time === slotTime}
-                                    onChange={() => handleTimeChange(slot)}                        className="hidden"
-                                />
+                            return(
 
-                                {slot.time}
+                                <label
+                                    key={slotIndex}
+                                    className={`text-sm font-light flex-shrink-0 px-5 py-2 rounded-full whitespace-nowrap transition-all duration-300 hover:shadow-md ${slotClasses} ${status === "available" ? "cursor-pointer" : "cursor-not-allowed"}`}
+                                >
 
-                            </label>
+                                    <input
+                                        type="radio"
+                                        name="bookingTime"
+                                        value={time}
+                                        checked={isSelected}
+                                        onChange={() => handleTimeChange(slot)}
+                                        className="hidden"
+                                        disabled={status !== "available"}
+                                    />{time} 
 
-                        ))
+                                </label>
+
+                            )
+
+                        })
+
 
                     }
 
                 </div>
 
                 <div className="absolute left-0 top-0 bottom-0 bg-gradient-to-r from-white w-8 pointer-events-none"></div>
-                
+
                 <div className="absolute right-0 top-0 bottom-0 bg-gradient-to-l from-white w-8 pointer-events-none"></div>
 
             </div>
