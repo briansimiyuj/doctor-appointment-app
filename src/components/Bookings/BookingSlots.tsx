@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom"
 
 const BookingSlots: React.FC = ()=>{
 
-    const { handleTimeSlotSelection, slotTime, doctorSlots, slotIndex, doctorInfo, isBooked } = useBookingSlots(),
-          isReady = doctorSlots.length > 0 && doctorSlots,
+    const { handleTimeSlotSelection, selectedSlot, doctorSlots, slotIndex, doctorInfo, isBooked, handleSubmitBooking, setSlotIndex, setSelectedSlot, days } = useBookingSlots(),
+          isReady = selectedSlot && slotIndex !== -1,
           isCurrentDoctorBooked = doctorInfo ? isBooked[doctorInfo._id] ?? false : false,
           loginContext = useContext(LoginContext),
           isAuthenticated = loginContext?.isAuthenticated,
@@ -18,11 +18,12 @@ const BookingSlots: React.FC = ()=>{
 
         e.preventDefault()
 
-        const currentSelectedSlot = doctorSlots[slotIndex]?.find(slot => slot.time === slotTime)
-
-        if(currentSelectedSlot){
+        console.log(selectedSlot, doctorInfo)
         
-            handleTimeSlotSelection(currentSelectedSlot)
+        if(selectedSlot && doctorInfo){
+              
+        
+            handleSubmitBooking()
     
         }
         
@@ -34,7 +35,7 @@ const BookingSlots: React.FC = ()=>{
 
         <div 
             className="sm:ml-72 md:ml-0 sm:pl-4 mt-6 font-medium to-gray-700"
-            key={slotTime}
+            key={selectedSlot?.time}
         >
 
             <h2>Booking Slots</h2>
@@ -43,9 +44,21 @@ const BookingSlots: React.FC = ()=>{
 
                 <div className="flex lg:flex-col gap-4 h-[900px] lg:h-[300px] overflow-hidden">
 
-                    <BookingDays/>
+                    <BookingDays
+                        doctorSlots={doctorSlots}
+                        days={days}
+                        slotIndex={slotIndex}
+                        setSlotIndex={setSlotIndex}
+                    />
 
-                    <BookingTime/>
+                    <BookingTime
+                        doctorSlots={doctorSlots}
+                        selectedSlot={selectedSlot}
+                        slotIndex={slotIndex}
+                        handleTimeSlotSelection={handleTimeSlotSelection}
+                        setSelectedSlot={setSelectedSlot}
+                    />
+
 
                 </div>
 
@@ -56,7 +69,7 @@ const BookingSlots: React.FC = ()=>{
 
                         <button 
                             type="submit"
-                            className={`${isCurrentDoctorBooked 
+                            className={`${isCurrentDoctorBooked && !isReady
                                 ? 'bg-gray-400 cursor-not-allowed p-4 m-4 rounded-full'
                                 : 'p-4 m-4 rounded-full text-sm sm:text-base font-medium shadow-md transition-all duration-300 ease-in-out bg-primary-bg text-white hover:bg-blue-600 hover:shadow-lg active:scale-95 disabled:bg-gray-400 disabled:cursor-not-allowed'
                             }`}                    

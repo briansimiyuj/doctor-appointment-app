@@ -1,15 +1,26 @@
+import { DoctorSlotType } from "../../assets/types/DoctorSlotType";
 import { TimeSlotType } from "../../assets/types/TimeSlotType"
-import { useBookingSlots } from "../../hooks/useBookingSlots"
 
-const BookingTime: React.FC = ()=>{
 
-    const { doctorSlots, selectedSlot, handleTimeSlotSelection, setSelectedSlot, slotIndex } = useBookingSlots()
+interface BookingTimeProps{
+
+    doctorSlots: DoctorSlotType[]
+    selectedSlot: TimeSlotType | null
+    slotIndex: number
+    handleTimeSlotSelection: (slot: TimeSlotType) => void
+    setSelectedSlot: (slot: TimeSlotType | null) => void
+}
+
+const BookingTime: React.FC<BookingTimeProps> = ({ doctorSlots, selectedSlot, slotIndex, handleTimeSlotSelection, setSelectedSlot }) =>{
+
 
     const handleTimeChange = (slot: TimeSlotType) =>{
 
-        setSelectedSlot(slot)
+        setSelectedSlot(slot)   
 
         handleTimeSlotSelection(slot)
+
+        // console.log('Selected slot:', slot)
 
     }
 

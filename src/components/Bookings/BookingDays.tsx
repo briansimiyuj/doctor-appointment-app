@@ -1,8 +1,16 @@
-import { useBookingSlots } from "../../hooks/useBookingSlots"
+import { DoctorSlotType } from "../../assets/types/DoctorSlotType"
 
-const BookingDays: React.FC = () =>{
+interface BookingDaysProps{
 
-    const { doctorSlots, slotIndex, setSlotIndex, days } = useBookingSlots()   
+    doctorSlots: DoctorSlotType[]
+    days: string[]
+    slotIndex: number
+    setSlotIndex: (index: number) => void
+
+}
+
+const BookingDays: React.FC<BookingDaysProps> = ({ days, slotIndex, setSlotIndex, doctorSlots }) =>{
+
 
     const handleDayClick = (index: number) =>{
 
@@ -19,10 +27,8 @@ const BookingDays: React.FC = () =>{
                 doctorSlots.length > 0 && doctorSlots.map((slot, index) =>{
 
                     const firstSlot = slot,
-                          dateTime = firstSlot ? new Date(firstSlot.date) : null 
-
-                    // Check if this day has any available slots
-                    const hasAvailable = firstSlot?.slots.some(s => s.status === "available")
+                          dateTime = firstSlot ? new Date(firstSlot.date) : null,
+                          hasAvailable = firstSlot?.slots.some(s => s.status === "available")
 
                     return(
 

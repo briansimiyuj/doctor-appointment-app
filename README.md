@@ -333,18 +333,36 @@ Booking page will have doctor details, booking slots and related doctors.
 
 #### Booking Slots Component
 
-  1. Create Booking Days component and mount it on Booking Slots component
-    a. Map through the days of the week and create a card for each day (form input)
-    b. Add a click event listener to each card that will set the slotIndex to the index of the day
+  1. Retreive `handleTimeSlotSelection`, `selectedSlot`, `doctorSlots`, `slotIndex`, `doctorInfo`, `isBooked`, `handleSubmitBooking`, `setSlotIndex`, `setSelectedSlot` and `days` from `BookingSlots` hook
+    b. Create a `isReady` state to check if both day and time slot are selected
+    c. Create a `isCurrentDoctorBooked` state to check if the current doctor is booked
+    d. Retreive `isAuthenticated` state from `LoginContext`
+
+  2. Create a `handleSubmit` function to handle the booking form submission
+    a. If `selectedSlot` and `doctorInfo` are not empty, call `handleSubmitBooking` function
+
+  3. Create a form to select the time slot
+    a. Attach `handleSubmit` function to the form's `onSubmit` event
+    b. Create Booking Days component and mount it on Booking Slots component and pass `days`, `doctorSlots`, `slotIndex` and `setSlotIndex` as props
+      i. Create a `handleDayClick` function which takes `index` as a parameter
+          - Set `slotIndex` to `index`
+      ii. Map through `doctorSlots` array and create a card for each time slot (form input)
+      iii. Check if slot is available and if it is, style it accordingly
+      iv. Add a click event listener to each card that will set the slotIndex to the index of the day
     
-  2. Create Booking Time component and mount it on Booking Slots component
-    a. Map through the time slots and create a card for each time slot (form input)
-    b. Add a scroll functionality (fixed)
-    c. Check if time slots are being updated based on day selection
-    d. Add a click event listener to each card that will set the slotTime to the time of the card
+    c. Create Booking Time component and mount it on Booking Slots component and pass `doctorSlots`, `slotIndex`, `setSlotIndex`, `selectedSlot`, `handleTimeSlotSelection` and `setSelectedSlot` as props
+      i. Create a `handleTimeChange` function which takes `slot` as a parameter
+        - Set `selectedSlot` to `slot`'
+        - Call `handleTimeSlotSelection` function with `slot` as a parameter 
+      
+      ii. Find the day in `doctorSlots` array that matches the `slotIndex` and assign it to `selectedDaySlots`
+      iii. Map through `selectedDaySlots` array and create a card for each time slot (form input)
+      iv. Check if slot is available and if it is, style it accordingly
+      v. Add a click event listener to each card that will set the slotIndex to the index of the day
     
-  3. Create a Booking Button
-  4. Create a submit function that will book the appointment
+  3. Check if the user is authenticated 
+    a. If the user is authenticated, create a Booking button and style it based on `isReady` and `isCurrentDoctorBooked` state
+    b. If the user is not authenticated, create a button that will redirect the user to the login page
 
 #### Related Doctors Component
 
