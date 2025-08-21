@@ -61,13 +61,26 @@ export const DummyAppointment: AppointmentType ={
             name: "Dr. Developer",
             image: doctorImages.doc13,
             speciality: "Dermatology",
-            degree: "MBChB",
+            education: "MBChB",
             experience: "5 years",
             about: "Skilled in skin conditions",
             fees: 1500,
+            rating: 4.5,
+            coverImage: {
+                _id: "cover-dev-doctor-id",
+                name: "cover-dev-doctor.jpg",
+                content: "image/jpeg",  
+                size: 204800, 
+                type: "image/jpeg",
+                uploadDate: new Date("2023-01-01"),
+                uploadedBy: "dev-doctor-id"
+            },
+
+            reviews: [],
+
             address:{
-                line1: "456 Clinic Street",
-                line2: "Room 101"
+                hospital: "456 Clinic Street",
+                hospitalLocation: "Room 101"
             }
 
         },

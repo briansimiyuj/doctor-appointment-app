@@ -10,9 +10,9 @@ export type DoctorType ={
     education: string
     experience: string
     about: string
-    fees: string
+    fees: number
     coverImage: DocumentType
-    rating: string
+    rating: number
     reviews: typeof dummyReviews
 
     address:{

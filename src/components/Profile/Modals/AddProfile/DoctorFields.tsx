@@ -150,7 +150,7 @@ const DoctorFields: React.FC = ()=>{
                     placeholder="Enter your fees"
                     className="w-full sm:w-[60%] p-2 rounded-md border border-gray-300 bg-white"
                     value={feesValue}
-                    onChange={e => setFeesValue(e.target.value)}
+                    onChange={e => setFeesValue(Number(e.target.value))}
                 />
 
             </div>

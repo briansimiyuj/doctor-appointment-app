@@ -28,22 +28,32 @@ export const useRescheduleAppointment = () =>{
             date: newDate,
             time: newTime,
             consultationType: consultationType,
-            doctor: {
-                doctorInfo: {
+
+            doctor:{
+            
+                doctorInfo:{
+
                     _id: selectedDoctor._id,
                     name: selectedDoctor.name,
                     image: selectedDoctor.image,
                     speciality: selectedDoctor.speciality,
-                    degree: selectedDoctor.degree,
+                    education: selectedDoctor.education,
+                    degree: selectedDoctor.education, 
                     experience: selectedDoctor.experience,
                     about: selectedDoctor.about,
                     fees: selectedDoctor.fees,
-                    address: selectedDoctor.address
+                    address: selectedDoctor.address,
+                    coverImage: selectedDoctor.coverImage,
+                    rating: selectedDoctor.rating,
+                    reviews: selectedDoctor.reviews
+
                 },
+
                 appointmentTime: appointment.doctor.appointmentTime
+            
             },
 
-         status: "rescheduled"
+           status: "rescheduled"
 
         }
 

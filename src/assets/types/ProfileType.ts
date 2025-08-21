@@ -31,7 +31,7 @@ type DoctorProfile = UserData & DoctorType &{
     aboutValue: string
     specialityValue: string
     experienceValue: string
-    feesValue: string
+    feesValue: number
     certifications: string[]
     education: string[]
     hospital: string

@@ -37,7 +37,7 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
             [aboutValue, setAboutValue] = useState<string>(''),
             [educationValue, setEducationValue] = useState<string[]>([]),
             [certificationsValue, setCertificationsValue] = useState<string[]>([]),
-            [feesValue, setFeesValue] = useState<string>(''),
+            [feesValue, setFeesValue] = useState<number>(0),
             [medicalHistoryValue, setMedicalHistoryValue] = useState<string>(''),
             [addressValue, setAddressValue] = useState<AddressType | null>(null),
             [profileImage, setProfileImage] = useState<DocumentType | File | null>(null),
@@ -97,7 +97,6 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
         const doctorChanged =
             userType === "doctor" &&
             storedProfile.type === "doctor" &&((() =>{
-            console.log("licenseCertificate changed?", storedProfile.licenseCertificate.name.trim(), licenseCertificate?.name.trim());
 
             
             return(
@@ -106,7 +105,7 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
                 storedProfile.about.trim() !== aboutValue.trim() ||
                 JSON.stringify(storedProfile.education) !== JSON.stringify(educationValue) ||
                 JSON.stringify(storedProfile.certifications) !== JSON.stringify(certificationsValue) ||
-                storedProfile.fees.trim() !== feesValue.trim() ||
+                storedProfile.fees !== feesValue ||
                 storedProfile.hospital.trim() !== hospitalValue.trim() ||
                 storedProfile.hospitalLocation.trim() !== hospitalLocationValue.trim() ||
                 !deepEqual(storedProfile.licenseCertificate, licenseCertificate) ||
@@ -143,7 +142,7 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
                 aboutValue.trim() !== '' &&
                 educationValue.length > 0 &&
                 certificationsValue.length > 0 &&
-                feesValue.trim() !== '' && hospitalValue.trim() !== '' && licenseCertificate !== null &&
+                feesValue !== 0 && hospitalValue.trim() !== '' && licenseCertificate !== null &&
                 coverImage !== null,
 
             patientValid = isPatient && medicalHistoryValue.trim().length > 0,

@@ -85,8 +85,6 @@ export const useBookingSlots = ()=>{
         localStorage.setItem("isBooked", JSON.stringify(updatedIsBooked))
 
         alert("Booking successful!")
-
-        console.log("Booking successful!", newAppointment)
     
     }
 

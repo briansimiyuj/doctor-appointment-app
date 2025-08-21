@@ -18,11 +18,8 @@ const BookingSlots: React.FC = ()=>{
 
         e.preventDefault()
 
-        console.log(selectedSlot, doctorInfo)
-        
         if(selectedSlot && doctorInfo){
-              
-        
+                      
             handleSubmitBooking()
     
         }

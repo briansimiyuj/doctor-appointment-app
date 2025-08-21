@@ -36,8 +36,8 @@ export interface ProfileContextProps{
     setExperienceValue: (experienceValue: string) => void
     aboutValue: string
     setAboutValue: (aboutValue: string) => void
-    feesValue: string
-    setFeesValue: (feesValue: string) => void
+    feesValue: number
+    setFeesValue: (feesValue: number) => void
     medicalHistoryValue: string
     setMedicalHistoryValue: (medicalHistoryValue: string) => void
     profileImage: DocumentType | File | null
