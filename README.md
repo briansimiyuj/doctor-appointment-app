@@ -323,6 +323,14 @@ Booking page will have doctor details, booking slots and related doctors.
       i. Loop through the `slots` array and create a new date object for each slot
         - Return the new date object
 
+    h. Create a `handleSubmitBooking` function to handle the booking form submission
+      i. If the doctor is booked, show an alert
+      ii. Create a new appointment object with `doctorInfo` and `appointmentTime`
+      iii. Update the `appointedDoctors` array with the new appointment object
+      iv. Create `updatedIsBooked` state to update the isBooked state based on the doctorID, set it to `true`  
+      iv. Store `appointedDoctors` array in local storage
+      v. Store `isBooked` state in local storage
+
 #### Booking Slots Component
 
   1. Create Booking Days component and mount it on Booking Slots component
