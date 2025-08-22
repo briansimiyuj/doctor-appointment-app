@@ -15,6 +15,8 @@ export interface BookingContextProps{
     setSlotTime: (time: string) => void
     selectedTimeSlot: TimeSlotType | null
     setSelectedTimeSlot: (slot: TimeSlotType | null) => void
+    consultationType: "online" | "in-person"
+    setConsultationType: (type: "online" | "in-person") => void
     appointedDoctors: AppointedDoctorType[]
     setAppointedDoctors: (doctors: AppointedDoctorType[] | ((prev: AppointedDoctorType[]) => AppointedDoctorType[])) => void,
     appointedPatients: AppointedPatientType[]

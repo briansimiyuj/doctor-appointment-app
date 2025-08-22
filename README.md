@@ -239,6 +239,7 @@ Booking context will be used to store the booking data and provide it to the Boo
     g. `isBooked` state initialize it with data from local storage
     h. `appointedDoctors` state initialize it with data from local storage
     i. `appointedPatients` state initialize it with data from local storage
+    j. `consultationType` state initialize it with `in-person`
   
   2. When `appointedDoctors` state changes, save it to local storage
   3. When `appointedPatients` state changes, save it to local storage
