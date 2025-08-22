@@ -224,32 +224,28 @@ The Doctors page is a page that lists all the doctors in the database. It will h
 
 Booking context will be used to store the booking data and provide it to the Booking page.
 
-  1. Get doctorID and patientID from the URL using useParams hook and store them in a constant
-  2. Set state variables to store the doctor info and patient info
-  3. Fetch and update the doctor info whenever the doctorID and 
-  doctors array changes
-  4. Fetch and update the patient info whenever the patientID and patients array changes
-  5. Set a state variable to store slot index
-  6. Set a state to store selected time slot and initialize it with empty array
-  7. Set a state to store slot time and initialize it with empty string
-  8. Set a state to store appointed doctors and initialize it with data from local storage
-  9. Set a state to store appointed patients and initialize it with data from local storage
-  10. For the `appointedPatients` state:
-    a. Initialize it with data from local storage if available
-    b. If no data exists in local storage, create sample data with the first 3 patients from the patients array
-    c. Each appointed patient object has a structure with:
-      i. `patientInfo`: Contains the full patient information object
-        - Add medical history to the patient object
-        
-      ii. `appointedTime`: Contains the appointment time slot information
-        - For sample data, times are set to "10:00 AM", "11:00 AM", and "12:00 PM" for the first three patients respectively
+  1. Get doctorID from the URL using useParams hook
+  2. Retrieve the following:
+    a. `schedule` from the `ScheduleContext`
+    b. `profile` from the `ProfileContext`  
 
-    d. This data structure allows doctors to view their appointed patients with relevant appointment details
-    e. The state is persisted to local storage whenever it changes, ensuring data persistence across page refreshes
-
-  11. The context provides methods to update both `appointedDoctors` and `appointedPatients` arrays, allowing for appointment management from both the patient and doctor perspectives
-  12. Set a state to store a boolean to check if the doctor is booked or not and initialize it with false. This will be per doctor
-  13. Create a store slots which will derive from the `availableSlots` array from the `ScheduleContext` and filter out the slots that are already booked
+  3. Create a `the following state variables:
+    a. `slots` state initialize it with `schedule`'s `availableSlots` data
+    b. `doctorInfo` state initialize it with null
+    c. `patientInfo` state initialize it with `profile` data or null
+    d. `slotIndex` state initialize it with 0
+    e. `slotTime` state initialize it with empty string
+    f. `selectedTimeSlot` state initialize it with null
+    g. `isBooked` state initialize it with data from local storage
+    h. `appointedDoctors` state initialize it with data from local storage
+    i. `appointedPatients` state initialize it with data from local storage
+  
+  2. When `appointedDoctors` state changes, save it to local storage
+  3. When `appointedPatients` state changes, save it to local storage
+  4. Create a `fetchDocInfo` function that fetches doctor info from the API using the `doctorID` and updates the `doctorInfo` state
+  5. Create a `handleSetIsBooked` function that updates the `isBooked` state based on the `isBooked` parameter
+  6. On intial render, retrieve the doctor info and patient info from the API and update the `appointedDoctors` and `appointedPatients` states
+  7. When `profile` and `doctorID` props change, call `fetchDocInfo` function to update the `patientInfo` state with `profile` data
 
 
 ### Booking Page

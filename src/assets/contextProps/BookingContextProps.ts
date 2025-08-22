@@ -1,13 +1,12 @@
 import { AppointedDoctorType } from "../types/AppointedDoctorType"
 import { AppointedPatientType } from "../types/AppointedPatientType"
 import { DoctorType } from "../types/DoctorType"
-import { PatientType } from "../types/PatientType"
 import { TimeSlotType } from "../types/TimeSlotType"
 
 export interface BookingContextProps{
 
     doctorInfo: DoctorType | null
-    patientInfo: PatientType | null
+    patientInfo: any
     doctorID: string | null
     patientID: string | null
     slotIndex: number

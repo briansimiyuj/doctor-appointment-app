@@ -1,14 +1,13 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { DoctorType } from "../assets/types/DoctorType";
 import { useParams } from "react-router-dom";
 import { doctors } from "../assets/frontend/doctorsData";
 import { AppointedDoctorType } from "../assets/types/AppointedDoctorType";
-import { PatientType } from "../assets/types/PatientType";
-import { patients } from "../assets/frontend/patientsData";
 import { AppointedPatientType } from "../assets/types/AppointedPatientType";
 import { BookingContextProps } from "../assets/contextProps/BookingContextProps";
 import { TimeSlotType } from "../assets/types/TimeSlotType";
-import { useSchedule } from "./ScheduleContext";
+import { useSchedule } from "./ScheduleContext"
+import { ProfileContext } from "./ProfileContext";
 
 
 interface BookingContextProviderProps{
@@ -18,7 +17,7 @@ interface BookingContextProviderProps{
 }
 
 export const BookingContext = createContext<BookingContextProps>({
-    
+
     doctorID: null,
     patientID: null,
     doctorInfo: null,
@@ -41,15 +40,17 @@ export const BookingContext = createContext<BookingContextProps>({
 })
 
 
-export const BookingContextProvider =  ({ children }: BookingContextProviderProps) =>{
+export const BookingContextProvider = ({ children }: BookingContextProviderProps) =>{
 
-    const { doctorID, patientID } = useParams(),
+    const { doctorID } = useParams(),
           { schedule } = useSchedule(),
+          profileContext = useContext(ProfileContext),
+          profile = profileContext?.profile,
           [slots, setSlots] = useState(
             schedule.availableSlots.map(day =>{
 
                 return{
- 
+
                     date: new Date(day.date),
                     slots: day.slots as unknown as TimeSlotType[]
 
@@ -58,94 +59,60 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
             })
           ),
           [doctorInfo, setDoctorInfo] = useState<DoctorType | null>(null),
-          [patientInfo, setPatientInfo] = useState<PatientType | null>(null),
+          [patientInfo, setPatientInfo] = useState(profile || null),
           [slotIndex, setSlotIndex] = useState(0),
           [slotTime, setSlotTime] = useState(''),
           [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlotType | null>(null),
           [isBooked, setIsBooked] = useState<{ [doctorId: string]: boolean }>(() =>{
-              
+
             const storedIsBooked = localStorage.getItem("isBooked")
 
             return storedIsBooked ? JSON.parse(storedIsBooked) : {}
+            
+          }),
+
+          [appointedDoctors, setAppointedDoctors] = useState<AppointedDoctorType[]>(() =>{
+
+              const storedAppointedDoctors = localStorage.getItem("appointedDoctors")
+
+              return storedAppointedDoctors ? JSON.parse(storedAppointedDoctors) : []
 
           }),
-         
-            [appointedDoctors, setAppointedDoctors] = useState<AppointedDoctorType[]>(() =>{
 
-                const storedAppointedDoctors = localStorage.getItem("appointedDoctors")
+          [appointedPatients, setAppointedPatients] = useState<AppointedPatientType[]>(() =>{
 
-                return storedAppointedDoctors ? JSON.parse(storedAppointedDoctors) : []
+              const storedAppointedPatients = localStorage.getItem("appointedPatients")
 
-            }),
+              return storedAppointedPatients ? JSON.parse(storedAppointedPatients) : []
 
-            [appointedPatients, setAppointedPatients] = useState<AppointedPatientType[]>(() =>{
+          })
 
 
-                const storedAppointedPatients = localStorage.getItem("appointedPatients")
-
-                if(storedAppointedPatients){
-
-                    return JSON.parse(storedAppointedPatients)
-
-                }else{
-
-                    return patients.slice(0, 3).map((patient, index) =>({
-
-                        patientInfo: patient,
-                        medicalHistory:{
-
-                            diseases: ["diabetes", "hypertension", "asthma"],
-                            allergies: ["penicillin", "latex"],
-                            medications: ["aspirin", "ibuprofen"]
-
-                        },
-
-                        appointedTime:{
-
-                            time: index === 0 ? "10:00 AM" : index === 1 ? "11:00 AM" : "12:00 PM",
-
-                        }
-
-                    }))
-
-                }
-
-            }) 
-    
     useEffect(() =>{
 
         localStorage.setItem("appointedDoctors", JSON.stringify(appointedDoctors))
 
     }, [appointedDoctors])
 
-    
+
     useEffect(() =>{
-    
-       localStorage.setItem("appointedPatients", JSON.stringify(appointedPatients))
-    
+
+        localStorage.setItem("appointedPatients", JSON.stringify(appointedPatients))
+
     }, [appointedPatients])
 
 
     const fetchDocInfo = () =>{
-    
+
        const docInfo = doctors.find(doc => doc._id === doctorID) || null
 
        setDoctorInfo(docInfo as unknown as DoctorType)
-    
-    }
 
-
-    const fetchPatientInfo = () =>{
-    
-       const patientInfo = patients.find(patient => patient._id === patientID) || null
-
-       setPatientInfo(patientInfo)
-    
     }
 
 
     const handleSetIsBooked = (doctorID: string, isBooked: boolean) =>{
-    
+
         setIsBooked(prev =>{
 
             const updatedIsBooked = { ...prev, [doctorID]: isBooked }
@@ -155,40 +122,46 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
             return updatedIsBooked
 
         })
-    
+
     }
 
 
-
     useEffect(() =>{
-        
-        const storedAppointedDoctors = localStorage.getItem("appointedDoctors")
+
+        const storedAppointedDoctors = localStorage.getItem("appointedDoctors"),
+               storedAppointedPatients = localStorage.getItem("appointedPatients")
 
         if(storedAppointedDoctors){
-            
+
             setAppointedDoctors(JSON.parse(storedAppointedDoctors))
 
         }
 
+        if(storedAppointedPatients){
+
+            setAppointedPatients(JSON.parse(storedAppointedPatients))
+
+        }   
+
     }, [])
 
-    
+
     useEffect(() =>{
-    
+
        fetchDocInfo()
 
-       fetchPatientInfo()
-    
-    }, [doctorID, doctors, patientID, patients])
+       setPatientInfo(profile || null)   
+
+    }, [doctorID, profile])
 
 
     return(
 
         <BookingContext.Provider value={{
-            doctorInfo, 
+            doctorInfo,
             patientInfo,
-            doctorID: doctorID || null, 
-            patientID: patientID || null,
+            doctorID: doctorID || null,
+            patientID: profile?._id || null,  
             slotIndex,
             setSlotIndex,
             slotTime,
@@ -204,9 +177,9 @@ export const BookingContextProvider =  ({ children }: BookingContextProviderProp
             slots,
             setSlots
         }}>
-        
+
             {children}
-        
+
         </BookingContext.Provider>
 
     )
