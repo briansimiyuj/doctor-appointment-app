@@ -254,7 +254,7 @@ Booking context will be used to store the booking data and provide it to the Boo
 Booking page will have doctor details, booking slots and related doctors.
 
   1. Create a Booking page and mount it on Script component and provide a route for it
-  2. Wrap the Booking page with the `BookingContext` and `SheduleContext` provider as the parent component
+  2. Wrap the Booking page with the `BookingContext` and `ScheduleContext` provider as the parent component
   3. Create a Doctor Details component and mount it on Booking page
     a. Create a Doctor image component and mount it on Doctor Details component
     b. Create a Doctor info component and mount it on Doctor Details component
@@ -356,6 +356,11 @@ Booking page will have doctor details, booking slots and related doctors.
       iii. Map through `selectedDaySlots` array and create a card for each time slot (form input)
       iv. Check if slot is available and if it is, style it accordingly
       v. Add a click event listener to each card that will set the slotIndex to the index of the day
+
+    d. Create Consultation Type component and mount it on Booking Slots component 
+      i. Retreive `consultationType` state from `BookingContext`
+      ii. Create radio buttons for each consultation type (online and in-person)
+      iii. Make them controlled components and set the value of each radio button to the corresponding consultation type
     
   3. Check if the user is authenticated 
     a. If the user is authenticated, create a Booking button and style it based on `isReady` and `isCurrentDoctorBooked` state

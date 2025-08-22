@@ -4,6 +4,7 @@ import BookingDays from "./BookingDays"
 import BookingTime from "./BookingTime"
 import { LoginContext } from "../../context/LoginContext"
 import { useNavigate } from "react-router-dom"
+import ConsultationType from "./ConsultationType"
 
 const BookingSlots: React.FC = ()=>{
 
@@ -37,7 +38,7 @@ const BookingSlots: React.FC = ()=>{
 
             <h2>Booking Slots</h2>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="flex flex-col items-center gap-3 md:block">
 
                 <div className="flex lg:flex-col gap-4 h-[900px] lg:h-[300px] overflow-hidden">
 
@@ -59,6 +60,7 @@ const BookingSlots: React.FC = ()=>{
 
                 </div>
 
+               <ConsultationType/>
 
                 {
 
