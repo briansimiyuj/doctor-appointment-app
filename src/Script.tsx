@@ -63,13 +63,9 @@ const Script: React.FC = () =>{
 
             <LoginContextProvider>
 
-              <>
+              <ProfileContextProvider>
 
-                <ProfileContextProvider>
-                  
                   <Navbar/>
-
-                </ProfileContextProvider>
 
                   <Routes>
 
@@ -115,15 +111,11 @@ const Script: React.FC = () =>{
 
                             <PatientDetailsProvider>
 
-                              <ProfileContextProvider>
-
                                 <PrivateRoute>
 
                                   <ProfilePage/>
 
                                 </PrivateRoute>
-
-                              </ProfileContextProvider>
 
                             </PatientDetailsProvider>
                           
@@ -255,7 +247,7 @@ const Script: React.FC = () =>{
         
                 <Footer/>
 
-              </>
+              </ProfileContextProvider>
 
             </LoginContextProvider>
 

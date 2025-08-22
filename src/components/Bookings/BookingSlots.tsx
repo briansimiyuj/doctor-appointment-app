@@ -8,8 +8,8 @@ import ConsultationType from "./ConsultationType"
 
 const BookingSlots: React.FC = ()=>{
 
-    const { handleTimeSlotSelection, selectedSlot, doctorSlots, slotIndex, doctorInfo, isBooked, handleSubmitBooking, setSlotIndex, setSelectedSlot, days } = useBookingSlots(),
-          isReady = selectedSlot && slotIndex !== -1,
+    const { handleTimeSlotSelection, selectedSlot, doctorSlots, slotIndex, doctorInfo, isBooked, handleSubmitBooking, setSlotIndex, setSelectedSlot, days, consultationType } = useBookingSlots(),
+          isReady = selectedSlot && slotIndex !== -1 &&  consultationType,
           isCurrentDoctorBooked = doctorInfo ? isBooked[doctorInfo._id] ?? false : false,
           loginContext = useContext(LoginContext),
           isAuthenticated = loginContext?.isAuthenticated,

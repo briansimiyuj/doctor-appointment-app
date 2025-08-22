@@ -3,12 +3,13 @@ import { BookingContext } from "../context/BookingContext"
 import { TimeSlotType } from "../assets/types/TimeSlotType"
 import { AppointedDoctorType } from "../assets/types/AppointedDoctorType"
 import { DoctorSlotType } from "../assets/types/DoctorSlotType"
-
+import { AppointmentType } from "../assets/types/AppointmentType"
+import { v4 as uuid } from "uuid"
 
 export const useBookingSlots = ()=>{
 
     const [selectedSlot, setSelectedSlot] = useState<TimeSlotType | null>(null),
-          { doctorInfo, slotIndex, setSlotIndex, selectedTimeSlot, setSelectedTimeSlot, appointedDoctors, setAppointedDoctors, isBooked, setIsBooked, slots } = useContext(BookingContext),
+          { doctorInfo, patientInfo, consultationType, slotIndex, setSlotIndex, selectedTimeSlot, setSelectedTimeSlot, appointedDoctors, setAppointedDoctors, isBooked, setIsBooked, slots } = useContext(BookingContext),
           days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
           selectedDate = slots[slotIndex]?.date
 
@@ -57,30 +58,39 @@ export const useBookingSlots = ()=>{
 
     const handleSubmitBooking = () =>{
     
-        if(!doctorInfo || !selectedSlot) return
+        if (!patientInfo || !doctorInfo || !selectedSlot || isBooked[doctorInfo._id]) return
 
-        if(isBooked[doctorInfo._id]) return
+        const newAppointment: AppointmentType ={
 
-        const newAppointment: AppointedDoctorType ={
+            _id: uuid(),
+            date: selectedSlot.dateTime.toDateString(),
+            time: selectedSlot.time,
+            status: "booked",
+            consultationType,
+            doctor: {
+                doctorInfo,
+                appointmentTime: selectedSlot
+            },
+            patient: patientInfo
 
-            doctorInfo,
-            appointmentTime: selectedSlot
-            
         }
 
-        setAppointedDoctors(prev =>{
+        setAppointedDoctors((prev: AppointedDoctorType[]) =>{
 
-            const updatedAppointments = [...prev, newAppointment]
+            const updatedAppointments = [...prev, newAppointment.doctor]
+
+            localStorage.setItem("appointedDoctors", JSON.stringify(updatedAppointments))
 
             return updatedAppointments
 
         })
 
+
         const updatedIsBooked = { ...isBooked, [doctorInfo._id]: true }
 
         setIsBooked(doctorInfo._id, true)
         
-        localStorage.setItem("appointedDoctors", JSON.stringify([...appointedDoctors, newAppointment]))
+        localStorage.setItem("appointments", JSON.stringify(newAppointment))
 
         localStorage.setItem("isBooked", JSON.stringify(updatedIsBooked))
 
@@ -230,6 +240,7 @@ export const useBookingSlots = ()=>{
         cancelAppointment,
         isBooked,
         doctorInfo,
+        consultationType,
         selectedDate,
         handleSubmitBooking,
 
