@@ -9,7 +9,7 @@ import { v4 as uuid } from "uuid"
 export const useBookingSlots = ()=>{
 
     const [selectedSlot, setSelectedSlot] = useState<TimeSlotType | null>(null),
-          { doctorInfo, patientInfo, consultationType, slotIndex, setSlotIndex, selectedTimeSlot, setSelectedTimeSlot, appointedDoctors, setAppointedDoctors, isBooked, setIsBooked, slots } = useContext(BookingContext),
+          { doctorInfo, patientInfo, consultationType, slotIndex, setSlotIndex, selectedTimeSlot, setSelectedTimeSlot, appointedDoctors, setAppointedDoctors, isBooked, setIsBooked, appointments, setAppointments, slots } = useContext(BookingContext),
           days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
           selectedDate = slots[slotIndex]?.date
 
@@ -63,9 +63,9 @@ export const useBookingSlots = ()=>{
         const newAppointment: AppointmentType ={
 
             _id: uuid(),
-            date: selectedSlot.dateTime.toDateString(),
+            date: selectedSlot.dateTime.toISOString(),
             time: selectedSlot.time,
-            status: "booked",
+            status: "pending",
             consultationType,
             doctor: {
                 doctorInfo,
@@ -85,19 +85,14 @@ export const useBookingSlots = ()=>{
 
         })
 
-
-        const updatedIsBooked = { ...isBooked, [doctorInfo._id]: true }
+        setAppointments(prev => [...prev, newAppointment])
 
         setIsBooked(doctorInfo._id, true)
+
         
-        localStorage.setItem("appointments", JSON.stringify(newAppointment))
-
-        localStorage.setItem("isBooked", JSON.stringify(updatedIsBooked))
-
         alert("Booking successful!")
     
     }
-
 
     const cancelAppointment = (slot: TimeSlotType) =>{
 
@@ -239,6 +234,7 @@ export const useBookingSlots = ()=>{
         appointedDoctors,
         cancelAppointment,
         isBooked,
+        appointments,
         doctorInfo,
         consultationType,
         selectedDate,
