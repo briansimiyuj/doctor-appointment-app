@@ -8,6 +8,7 @@ import { BookingContextProps } from "../assets/contextProps/BookingContextProps"
 import { TimeSlotType } from "../assets/types/TimeSlotType";
 import { useSchedule } from "./ScheduleContext"
 import { ProfileContext } from "./ProfileContext";
+import { AppointmentType } from "../assets/types/AppointmentType";
 
 
 interface BookingContextProviderProps{
@@ -38,6 +39,8 @@ export const BookingContext = createContext<BookingContextProps>({
     setIsBooked: () => {},
     slots: [],
     setSlots: () => {},
+    appointments: [],
+    setAppointments: () => {},
 
 })
 
@@ -88,6 +91,13 @@ export const BookingContextProvider = ({ children }: BookingContextProviderProps
 
               return storedAppointedPatients ? JSON.parse(storedAppointedPatients) : []
 
+          }),
+          [appointments, setAppointments] = useState<AppointmentType[]>(() =>{
+
+            const storedAppointments = localStorage.getItem("appointments")
+
+            return storedAppointments ? JSON.parse(storedAppointments) : []
+
           })
 
 
@@ -103,6 +113,12 @@ export const BookingContextProvider = ({ children }: BookingContextProviderProps
         localStorage.setItem("appointedPatients", JSON.stringify(appointedPatients))
 
     }, [appointedPatients])
+
+    useEffect(() =>{
+
+        localStorage.setItem("appointments", JSON.stringify(appointments))
+
+    }, [appointments])
 
 
     const fetchDocInfo = () =>{
@@ -177,6 +193,8 @@ export const BookingContextProvider = ({ children }: BookingContextProviderProps
             setAppointedDoctors,
             appointedPatients,
             setAppointedPatients,
+            appointments,
+            setAppointments,
             isBooked,
             setIsBooked: handleSetIsBooked,
             slots,

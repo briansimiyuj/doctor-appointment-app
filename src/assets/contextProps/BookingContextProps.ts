@@ -1,5 +1,6 @@
 import { AppointedDoctorType } from "../types/AppointedDoctorType"
 import { AppointedPatientType } from "../types/AppointedPatientType"
+import { AppointmentType } from "../types/AppointmentType"
 import { DoctorType } from "../types/DoctorType"
 import { TimeSlotType } from "../types/TimeSlotType"
 
@@ -17,6 +18,8 @@ export interface BookingContextProps{
     setSelectedTimeSlot: (slot: TimeSlotType | null) => void
     consultationType: "online" | "in-person"
     setConsultationType: (type: "online" | "in-person") => void
+    appointments: AppointmentType[]
+    setAppointments: (appointments: AppointmentType[] | ((prev: AppointmentType[]) => AppointmentType[])) => void
     appointedDoctors: AppointedDoctorType[]
     setAppointedDoctors: (doctors: AppointedDoctorType[] | ((prev: AppointedDoctorType[]) => AppointedDoctorType[])) => void,
     appointedPatients: AppointedPatientType[]

@@ -240,13 +240,15 @@ Booking context will be used to store the booking data and provide it to the Boo
     h. `appointedDoctors` state initialize it with data from local storage
     i. `appointedPatients` state initialize it with data from local storage
     j. `consultationType` state initialize it with `in-person`
+    k. `appointments` state initialize it with data from local storage
   
   2. When `appointedDoctors` state changes, save it to local storage
   3. When `appointedPatients` state changes, save it to local storage
-  4. Create a `fetchDocInfo` function that fetches doctor info from the API using the `doctorID` and updates the `doctorInfo` state
-  5. Create a `handleSetIsBooked` function that updates the `isBooked` state based on the `isBooked` parameter
-  6. On intial render, retrieve the doctor info and patient info from the API and update the `appointedDoctors` and `appointedPatients` states
-  7. When `profile` and `doctorID` props change, call `fetchDocInfo` function to update the `patientInfo` state with `profile` data
+  4. When `appointments` state changes, save it to local storage
+  5. Create a `fetchDocInfo` function that fetches doctor info from the API using the `doctorID` and updates the `doctorInfo` state
+  6. Create a `handleSetIsBooked` function that updates the `isBooked` state based on the `isBooked` parameter
+  7. On intial render, retrieve the doctor info and patient info from the API and update the `appointedDoctors` and `appointedPatients` states
+  8. When `profile` and `doctorID` props change, call `fetchDocInfo` function to update the `patientInfo` state with `profile` data
 
 
 ### Booking Page
