@@ -1,11 +1,6 @@
 import { createContext, useState, useEffect } from "react"
-import appointmentsData from "../assets/frontend/AppointmentData.json"
-import { patients } from "../assets/frontend/patientsData"
-import { doctors } from "../assets/frontend/doctorsData"
 import { AppointmentType } from "../assets/types/AppointmentType"
 import { AppointmentsContextProps } from "../assets/contextProps/AppointmentsContextProps"
-import { AppointedPatientType } from "../assets/types/AppointedPatientType"
-import { AppointedDoctorType } from "../assets/types/AppointedDoctorType"
 
 interface AppointmentsContextProviderProps{
 
@@ -31,110 +26,57 @@ export const AppointmentsContextProvider: React.FC<AppointmentsContextProviderPr
 
     useEffect(() =>{
 
-        const enrichedAppointments = appointmentsData.map(appointment =>{
+        const storedAppointments = localStorage.getItem("appointments")
 
-            const patient = patients.find(patient => patient.name === appointment.patient),
-                doctor = doctors.find(doctor => doctor.name === appointment.doctor)
+        if(storedAppointments){
 
-            if(!doctor || !patient){
+            try{
 
-                console.log("doctor or patient not found")
-
-                return appointment
-
-            }
-            
-
-            const appointedPatient: AppointedPatientType ={
-
-                patientInfo:{
-
-                    _id: patient._id,
-                    name: patient.name,
-                    age: patient.age,
-                    gender: patient.gender,
-                    status: patient.status,
-                    image: patient.image,
-                    contact: patient.contact,
-                    address: patient.address,
-                    appointment: patient.appointment,
-                    medicalHistory: patient.medicalHistory
-
-                },
-
-                appointedTime:{
+                const parsed = JSON.parse(storedAppointments) as AppointmentType[]
                 
-                    dateTime: new Date(appointment.date),
-                    time: appointment.time,
-                    slotTime: appointment.time,
-                    status: "booked"
+                setAppointments(parsed)
 
-                }
-            
-            }
+                const now = new Date()
 
-            const appointedDoctor: AppointedDoctorType ={
+                const upcoming = parsed.filter(appointment =>{
+                    
+                    const appointmentDate = new Date(appointment.date),
+                          validStatuses = ["pending", "approved", "rescheduled", "follow-up"]
 
-                doctorInfo: doctor,
-                appointmentTime:{
+                    return appointmentDate >= now && validStatuses.includes(appointment.status)
 
-                    dateTime: new Date(appointment.date),
-                    time: appointment.time,
-                    slotTime: appointment.time,
-                    status: "booked",
+                }), 
+                past = parsed.filter(appointment =>{
 
-                }
+                    const appointmentDate = new Date(appointment.date),
+                          validStatuses = ["completed", "cancelled", "rejected"]
 
-            }
+                    return appointmentDate < now && validStatuses.includes(appointment.status)
 
-            const consultationType: "online" | "in-person" = appointment.consultationType?.toLowerCase() === "in-person" ? "in-person" : "online",
-                normalizedStatus = appointment.status.toLowerCase().trim()
-            
-            return{
-                
-               _id: appointment._id,
-                date: appointment.date,
-                time: appointment.time,
-                consultationType,
-                status: normalizedStatus,
-                doctor: appointedDoctor,
-                patient: appointedPatient
+                })
+
+                setUpcomingAppointments(upcoming)
+
+                setPastAppointments(past)
+
+                console.log(upcoming, past)
+
+            }catch(error){
+
+                console.error("Error parsing appointments from local storage:", error)
 
             }
-        
-        }).filter((appointment): appointment is AppointmentType => appointment !== null && typeof appointment === 'object') as AppointmentType[]
 
-        setAppointments(enrichedAppointments)
 
-        const now = new Date(),
-              today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-              today.setHours(0, 0, 0, 0)
+        }else{
 
-        const upcoming = enrichedAppointments.filter(appointment =>{
+            setAppointments([])
 
-            const [year, month, day] = appointment.date.split("-").map(Number),
-                  appointmentDate = new Date(year, month - 1, day)
-                  appointmentDate.setHours(0, 0, 0, 0)
-            const isFutureDate = appointmentDate > today
+            setPastAppointments([])
 
-            return isFutureDate
-            
-        })
+            setUpcomingAppointments([])
 
-        const past = enrichedAppointments.filter(appointment =>{
-
-            const [year, month, day] = appointment.date.split("-").map(Number),
-                appointmentDate = new Date(year, month - 1, day)
-                appointmentDate.setHours(0, 0, 0, 0)
-            const    isPastDate = appointmentDate < today
-
-            return isPastDate 
-
-        })
-
-        setUpcomingAppointments(upcoming)
-
-        setPastAppointments(past)
+        }
 
     }, [])
 

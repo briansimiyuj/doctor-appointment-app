@@ -687,32 +687,17 @@ The Appointments Context manages all appointment data in the app. It enriches ra
     b. `pastAppointments` — initialized as an empty array `[]`  
     c. `upcomingAppointments` — initialized as an empty array `[]`  
 
-  3. Use useEffect to enrich and prepare data on mount
-    a. Load raw data from AppointmentData.json
-    b. For each appointment:
-        i. Find the matching patient by name from patients
-        ii. Find the matching doctor by name from doctors
-        iii. If the doctor is not found, skip the appointment (log a warning)
-        iv. Build AppointedPatientType using full patient details
-        v. Build AppointedDoctorType using full doctor details
-        vi. Normalize consultationType to "online" or "in-person"
-        vii. Normalize status to lowercase
-        viii. Combine everything into a valid AppointmentType object
-
-  4. Filter out invalid appointments
-    a. Exclude any appointments that don’t have a valid doctor or are missing key info
-    b. Cast the result as AppointmentType[]
-
-  5. Save enriched appointments to state  
-    a. Call `setAppointments` with the final array  
-
-  6. Split appointments into upcoming and past  
-    a. Get the current date  
-    b. Filter upcoming appointments:  
-        i. Date is equal to or after now and the status is `"pending"`, `"confirmed"`, `"approved"`, `"rescheduled"`, or `"follw-up"`.
-    c. Filter past appointments:  
-        i. Date is before now  and the status is `"completed"`, `"cancelled"` or `"rejected"`.
-    d. Update `pastAppointments` and `upcomingAppointments` using `setPastAppointments` and `setUpcomingAppointments`  
+  3. on every render;
+    a. Fetch appointments from the `localStorage` 
+    b. If appointments are found in the `localStorage`, parse them as JSON 
+    c.  Update the `appointments` state with the parsed appointments
+    d. Split appointments into upcoming and past  
+    e. Get the current date  
+      i. Filter upcoming appointments:  
+        - Date is equal to or after now and the status is `"pending"`, `"confirmed"`, `"approved"`, `"rescheduled"`, or `"follw-up"`.
+      ii. Filter past appointments:  
+        - Date is before now  and the status is `"completed"`, `"cancelled"` or `"rejected"`.
+      ii. Update `pastAppointments` and `upcomingAppointments` using `setPastAppointments` and `setUpcomingAppointments`  
   
   
 ### My Appointments Page
