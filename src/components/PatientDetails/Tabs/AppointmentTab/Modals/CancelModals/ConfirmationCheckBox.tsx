@@ -1,8 +1,15 @@
+import { useContext } from "react"
 import { useModalContext } from "../../../../../../context/ModalContext"
+import { ProfileContext } from "../../../../../../context/ProfileContext"
 
 const ConfirmationCheckBox: React.FC = ()=>{
 
-    const { isConfirmed, setIsConfirmed } = useModalContext()
+    const { isConfirmed, setIsConfirmed } = useModalContext(),
+          profileContext = useContext(ProfileContext)
+
+    if(!profileContext) return null
+
+    const { profile } = profileContext
 
     return(
 
@@ -17,7 +24,20 @@ const ConfirmationCheckBox: React.FC = ()=>{
                     onChange={e => setIsConfirmed(e.target.checked)}
                 />
 
-                <span className="ml-2 text-gray-700">I understand that cancelling this appointment may affect the patient's care plan.</span>
+                {
+
+                    profile?.type === "doctor" ?(
+
+                        <span className="ml-2 text-gray-700">I understand that cancelling this appointment may affect the patient's care plan.</span>
+
+                    ):(
+
+                        <span className="ml-2 text-gray-700">Are you sure you want to cancel this appointment?</span>
+
+                    )
+
+                }
+
 
             </label>
 

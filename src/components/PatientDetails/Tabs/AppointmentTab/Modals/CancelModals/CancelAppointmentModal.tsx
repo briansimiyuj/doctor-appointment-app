@@ -1,3 +1,4 @@
+import { TimeSlotType } from "../../../../../../assets/types/TimeSlotType"
 import { ModalProvider } from "../../../../../../context/ModalContext"
 import ModalHeader from "../ModalHeader"
 import ModalBody from "./ModalBody"
@@ -7,6 +8,7 @@ interface CancelAppointmentModalProps{
 
     appointment: any, 
     onClose: () => void
+    cancelAppointment: (slot: TimeSlotType) => void
 
 }
 

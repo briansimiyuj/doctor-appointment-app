@@ -27,7 +27,7 @@ const MyAppointmentsPage: React.FC = ()=>{
 
             userType === "patient" ?(
 
-                <AppointmentCard key={index} doctor={appointment.doctor}/>
+                <AppointmentCard key={index} doctor={appointment.doctor} appointment={appointment}/>
 
             ):(
                 

@@ -704,7 +704,7 @@ The Appointments Context manages all appointment data in the app. It enriches ra
 
 My appointments page will show the user's appointments. It will have a list of appointments with the doctor's name, date, time, and location. The user will be able pay for the appointment and cancel it.
 
-  1. Create a My Appointments Page and mount it on Script component and provide a route for it. Wrap the route with BookingContextProvider and AppointmentContextProvider
+  1. Create a My Appointments Page and mount it on Script component and provide a route for it. Wrap the route with ScheduleProvider, BookingContextProvider, AppointmentContextProvider and PatientDetailsProvider
   2. Create a Tab Selector Buttons component and mount it on the My Appointments Page
     a. Retrieve the `activeTab` state variable from the AppointmentContext
     b. Display `Upcoming`, and `Past` buttons
@@ -720,7 +720,7 @@ My appointments page will show the user's appointments. It will have a list of a
     b. If `data` is empty, return a message saying "No Appointments"
     c. Loop through the `data` array and create a card component for appointment
        i. If the user is patient, return AppointmentCard component and pass `key` and `doctor` as props
-       ii. If the user is doctor, return PatientAppointmentCard component and pass `key` and `patient` as props
+       ii. If the user is doctor, return PatientAppointmentCard component and pass `key`, `appointment` and `patient` as props
 
     d. Return the `renderAppointment` function as a JSX element
 
@@ -734,9 +734,14 @@ My appointments page will show the user's appointments. It will have a list of a
   5. Get appointed doctors from the local storage
   6. If there are no appointed doctors, display a message saying "No Appointments" 
   7. If there are appointed doctors, loop through the appointed doctors array and create a card component and mount it on the Appointed Doctors Page
-    a. Pass doctor info as props to the card component
-    b. Display the doctor's name, date, time, and location
-    c. Create a button to cancel the appointment if the appointment is upcoming otherwise a button to view the appointment history
+    a. Retreive `showCancelModal` and `closeCancelModal` state variables from `updatPatientDetails` hook
+    b. Retrieve `cancelAppointment` function from `BookingSlots` hook
+    c. Pass doctor info as props to the card component
+    d. Display the doctor's name, date, time, and location
+    e. Create two buttons, one for canceling the appointment and one for viewing the appointment details
+      i. On clicking the cancel button, call the `showCancelAppointmentModal` function and pass the appointment as a parameter
+
+    e. If `showCancelModal` is true, mount the Cancel Appointment Modal and pass `appointment`, `closeCancelModal`, and `cancelAppointment` as props
 
 
     #### Appointed Patients
