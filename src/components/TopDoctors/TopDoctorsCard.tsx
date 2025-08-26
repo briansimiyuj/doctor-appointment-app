@@ -20,7 +20,7 @@ const TopDoctorsCard: React.FC<TopDoctorsCardProps> = ({ key, doctor })=>{
             key={key}
             onClick={()=>{
 
-                navigate(`/appointments/${doctor._id}`)
+                navigate(`/bookings/${doctor._id}`)
                 scrollTo(0, 0)
                 
             }}

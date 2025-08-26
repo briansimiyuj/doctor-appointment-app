@@ -748,6 +748,7 @@ My appointments page will show the user's appointments. It will have a list of a
     d. Display the doctor's name, date, time, and location
     e. Create two buttons, one for canceling the appointment and one for viewing the appointment details
       i. On clicking the cancel button, call the `showCancelAppointmentModal` function and pass the appointment as a parameter
+      ii. On clicking the view button, navigate to the appointment details page
 
   8. If `showCancelModal` is true, mount the Cancel Appointment Modal and pass `appointmentToCancel`, `closeCancelModal`, and `cancelAppointment` as props
 
@@ -2731,3 +2732,9 @@ Private Route Component will be used to protect the routes that require authenti
   1. Retrieve `isAuthenticated` and `loading` from `LoginContext`
   2. If `loading` is true, return null
   3. If `isAuthenticated` is false, return a redirect to the Login Page
+
+### Appointment Details Page
+
+Appointment Details Page will be used to display the details of an appointment. This is a sister page to the Patient Details Page, whereby patients can view their appointments details.
+
+  1. Create Appointment Details Page Component , mount it on Script component, wrap it with AppointmentContextProvider and provide it with the route

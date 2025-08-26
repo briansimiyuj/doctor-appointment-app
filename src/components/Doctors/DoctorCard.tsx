@@ -19,7 +19,7 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor, key })=>{
             key={key}
             className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
             onClick={()=>{
-                navigate(`/appointments/${doctor._id}`)
+                navigate(`/bookings/${doctor._id}`)
                 scrollTo(0, 0)
             }}
         >

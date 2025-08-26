@@ -28,6 +28,7 @@ import DashboardPage from "./pages/DashboardPage"
 import { ScheduleProvider } from "./context/ScheduleContext"
 import PrivateRoute from "./components/Login/PrivateRoute"
 import { DocumentsTabContextProvider } from "./context/DocumentsTabContext"
+import AppointmentDetailsPage from "./pages/AppointmentDetailsPage"
 
 const Script: React.FC = () =>{
 
@@ -93,7 +94,7 @@ const Script: React.FC = () =>{
 
                     }/>
 
-                    <Route path="appointments/:doctorID" element={
+                    <Route path="bookings/:doctorID" element={
 
                       <PrivateRoute>
 
@@ -203,11 +204,23 @@ const Script: React.FC = () =>{
 
                         </ScheduleProvider>
 
-                      </PrivateRoute>
-
-                    
+                      </PrivateRoute>                    
 
                     }/>
+                    
+                    <Route path="/appointments/:appointmentID" element={
+
+                      <PrivateRoute>
+
+                        <AppointmentsContextProvider>
+
+                          <AppointmentDetailsPage/>
+
+                        </AppointmentsContextProvider>
+
+                      </PrivateRoute>
+                      
+                    }/>,
 
                     <Route path="/dashboard" element={
 
