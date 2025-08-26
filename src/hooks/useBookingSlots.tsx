@@ -5,11 +5,13 @@ import { AppointedDoctorType } from "../assets/types/AppointedDoctorType"
 import { DoctorSlotType } from "../assets/types/DoctorSlotType"
 import { AppointmentType } from "../assets/types/AppointmentType"
 import { v4 as uuid } from "uuid"
+import { useUpdatePatientDetails } from "./useUpdatePatientDetails"
 
 export const useBookingSlots = ()=>{
 
     const [selectedSlot, setSelectedSlot] = useState<TimeSlotType | null>(null),
           { doctorInfo, patientInfo, consultationType, slotIndex, setSlotIndex, selectedTimeSlot, setSelectedTimeSlot, appointedDoctors, setAppointedDoctors, isBooked, setIsBooked, appointments, setAppointments, slots } = useContext(BookingContext),
+          { closeCancelModal } = useUpdatePatientDetails(),
           days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
           selectedDate = slots[slotIndex]?.date
 
@@ -94,11 +96,28 @@ export const useBookingSlots = ()=>{
     
     }
 
-    const cancelAppointment = (slot: TimeSlotType) =>{
+    const cancelAppointment = (appointmentID: string) =>{
 
-        const updatedAppointments = appointedDoctors.filter(a => a.appointmentTime.time !== slot.time)
+        const storedAppointments = JSON.parse(localStorage.getItem("appointments") || "[]"),
+            appointmentToCancel = storedAppointments.find((a: AppointmentType) => a._id === appointmentID)
 
-        setAppointedDoctors(updatedAppointments)
+        if(!appointmentToCancel) return
+
+        const updatedAppointments = appointments.filter(a => a._id !== appointmentID)
+
+        setAppointments(updatedAppointments)
+
+        localStorage.setItem("appointments", JSON.stringify(updatedAppointments))
+
+        setAppointedDoctors(prev =>{
+
+            const updated = prev.filter(a => a.doctorInfo?._id !== appointmentToCancel?.doctor.doctorInfo?._id)
+
+            localStorage.setItem("appointedDoctors", JSON.stringify(updated))
+            
+            return updated
+
+        })
 
         if(doctorInfo){
 
@@ -110,11 +129,17 @@ export const useBookingSlots = ()=>{
 
         }
 
-        localStorage.setItem("appointedDoctors", JSON.stringify(updatedAppointments))
+        if(selectedSlot?.time === appointmentToCancel?.doctor.appointmentTime.time){
 
-        if(selectedSlot?.time === slot.time) setSelectedSlot(null)
+            setSelectedSlot(null)
+            
+        }
 
-    }
+        closeCancelModal()
+
+        alert("Appointment cancelled")
+}
+
 
 
     const removePastAppointments = () =>{

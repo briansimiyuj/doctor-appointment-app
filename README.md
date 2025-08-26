@@ -272,61 +272,67 @@ Booking page will have doctor details, booking slots and related doctors.
 
     #### Booking Slots Hook
 
-  Booking slots hook will be used to fetch the booking slots from the server and store them in a state variable. It will also provide a function to update the booking slots when the doctorID changes.
+    Booking slots hook will be used to fetch the booking slots from the server and store them in a state variable. It will also provide a function to update the booking slots when the doctorID changes.
 
-  a. Create a state variable to store doctor slots, slotIndex and slotTime
+      a. Create a state variable to store doctor slots, slotIndex and slotTime
 
-   ###### Bug fix 
+      ###### Bug fix 
 
-    - Retrieves slotIndex and setSlotIndex from BookingContext instead of managing internal state
+        - Retrieves slotIndex and setSlotIndex from BookingContext instead of managing internal state
 
-  b. Create an array of days of the week
-  c. Get doctor info from the BookingContext
+      b. Create an array of days of the week
+      c. Get doctor info from the BookingContext
 
-    d. Create a function to fetch the booking slots from the server
-      i. Set doctorSlots with an empty array
-      ii. Create a variable to store the date of the current day
-      iii. Create a loop to iterate over the days of the week
-            1. Create a variable to store current time using new Date()
-            2. Create a variable to store end time using new Date()
-            3. Set current time and end time to today + i days
-            4. Set end time hours to 21:00
-            5. For today (i=0): if current hour < 8, set to 8:00; else calculate next 30-min slot
-            6. For other days:/ set start time to 8:00
-            7. Create time slots array and populate with 30-minute intervals until end time
+      d. Create a function to fetch the booking slots from the server
+        i. Set doctorSlots with an empty array
+        ii. Create a variable to store the date of the current day
+        iii. Create a loop to iterate over the days of the week
+              1. Create a variable to store current time using new Date()
+              2. Create a variable to store end time using new Date()
+              3. Set current time and end time to today + i days
+              4. Set end time hours to 21:00
+              5. For today (i=0): if current hour < 8, set to 8:00; else calculate next 30-min slot
+              6. For other days:/ set start time to 8:00
+              7. Create time slots array and populate with 30-minute intervals until end time
 
+        iv. Create a variable to store the time slots and set it to an empty array
+        v. Create a while loop to check if the current time is before the end time
+          1. Set formatted time
+          2. Push the formatted time and dateTime to the time slots array
+          3. Increase the current time by 30 minutes
+        
+        vi. Update the doctorSlots state with the time slots array
+        vii. Run getAvailableSlots function when the doctor info is updated
+        viii. Create a function to handle the slot selection
+          - Add the selected time slot to local storage
+          - Update the isBooked state to true, based on the doctorID and previous isBooked state
 
-      iv. Create a variable to store the time slots and set it to an empty array
-      v. Create a while loop to check if the current time is before the end time
-        1. Set formatted time
-        2. Push the formatted time and dateTime to the time slots array
-        3. Increase the current time by 30 minutes
-      
-      vi. Update the doctorSlots state with the time slots array
-      vii. Run getAvailableSlots function when the doctor info is updated
-      viii. Create a function to handle the slot selection
-        - Add the selected time slot to local storage
-        - Update the isBooked state to true, based on the doctorID and previous isBooked state
+      e. Create a function to cancel the appointment that takes the appointmentID as a parameter
+        i. Retrieve appointments array from local storage
+        ii. Look for the appointment with the matching appointmentID
+        iii. If the appointment is not found, exit the function
+        iv. Create a new appointments array without the appointment
+        v. Update the appointments array with the new appointments 
+        vi. Update the local storage with the new appointments array
+        viii. Update the appointedDoctors array by removing the appointment doctor from the array
+          - Update the local storage with the new appointedDoctors array
 
-    e. Create a function to cancel the appointment
+        ix. Update the isBooked state to false, based on the doctorID and previous isBooked state
 
-      i. Remove the selected time slot from local storage
-      ii. Update the isBooked state to false based on the doctorID and previous isBooked state
+      #### Time slot management
 
-    #### Time slot management
+        1. Check if dynamic time slot management is updating based on day selection
 
-      1. Check if dynamic time slot management is updating based on day selection
+      f. Create a function to remove past appointments from appointedDoctors array and update isBooked state
+      g. Create a memoization `doctorSlots` function to create slots for doctor
+        i. Loop through the `slots` array and create a new date object for each slot
+          - Return the new date object
 
-    f. Create a function to remove past appointments from appointedDoctors array and update isBooked state
-    g. Create a memoization `doctorSlots` function to create slots for doctor
-      i. Loop through the `slots` array and create a new date object for each slot
-        - Return the new date object
-
-    h. Create a `handleSubmitBooking` function to handle the booking form submission
-      i. If the doctor is booked, show an alert
-      ii. Create a new appointment object of Appointment type
-      iii. Update the `appointments` state with the new appointment object
-      iv. Mark the doctor as booked in the `isBooked` state
+      h. Create a `handleSubmitBooking` function to handle the booking form submission
+        i. If the doctor is booked, show an alert
+        ii. Create a new appointment object of Appointment type
+        iii. Update the `appointments` state with the new appointment object
+        iv. Mark the doctor as booked in the `isBooked` state
 
 #### Booking Slots Component
 
