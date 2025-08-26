@@ -30,10 +30,10 @@ const AppointmentCard: React.FC<AppointmentCardProps> = ({ doctor, key, appointm
 
             <div className="flex flex-col gap-2 justify-end">
 
-               <button className="text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary-bg hover:text-white transition-all duration-300">View Appointment</button>
+               <button className="text-sm bg-primary-btn text-white dark:text-white text-center sm:min-w-48 py-2 rounded hover:bg-blue-600 transition-all duration-300">View Appointment</button>
 
                <button 
-                    className="text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red-600 hover:text-white transition-all duration-300"
+                    className="text-sm bg-red-500 text-white dark:text-white text-center sm:min-w-48 py-2 rounded hover:bg-red-600 hover:text-white transition-all duration-300"
                     onClick={() => openCancelModal(appointment)}
                 >Cancel Appointment</button>
 

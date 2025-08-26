@@ -20,8 +20,6 @@ const BookingTime: React.FC<BookingTimeProps> = ({ doctorSlots, selectedSlot, sl
 
         handleTimeSlotSelection(slot)
 
-        // console.log('Selected slot:', slot)
-
     }
 
     const selectedDaySlots = doctorSlots[slotIndex]?.slots || []
@@ -32,7 +30,7 @@ const BookingTime: React.FC<BookingTimeProps> = ({ doctorSlots, selectedSlot, sl
 
             <div className="relative h-full overflow-y-auto">
 
-                <div className="flex flex-col h-full lg:flex-row items-center gap-5 pb-4 px-16 w-full overflow-x-scroll mt-4 overflow-scroll scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 scroll-smooth">
+                <div className="flex flex-col h-full lg:flex-row items-center gap-5 pb-4 px-16 w-full overflow-x-scroll mt-4 overflow-scroll scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 dark:scrollbar-thumb-gray-700 dark:scrollbar-track-gray-700 scroll-smooth">
 
                     {
 
@@ -44,7 +42,7 @@ const BookingTime: React.FC<BookingTimeProps> = ({ doctorSlots, selectedSlot, sl
                                 
                             const slotClasses = status === "available" 
                                 ? isSelected ? "bg-primary-bg text-white" : "border border-gray-400"
-                                : "bg-gray-200 text-gray-400 cursor-not-allowed"
+                                : "bg-gray-200 text-gray-400 dark:text-gray-800 cursor-not-allowed"
 
                             return(
 
@@ -73,10 +71,6 @@ const BookingTime: React.FC<BookingTimeProps> = ({ doctorSlots, selectedSlot, sl
                     }
 
                 </div>
-
-                <div className="absolute left-0 top-0 bottom-0 bg-gradient-to-r from-white w-8 pointer-events-none"></div>
-
-                <div className="absolute right-0 top-0 bottom-0 bg-gradient-to-l from-white w-8 pointer-events-none"></div>
 
             </div>
 
