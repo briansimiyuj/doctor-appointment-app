@@ -1,8 +1,5 @@
 import { AppointedDoctorType } from "../../assets/types/AppointedDoctorType"
 import { AppointmentType } from "../../assets/types/AppointmentType"
-import { useBookingSlots } from "../../hooks/useBookingSlots"
-import { useUpdatePatientDetails } from "../../hooks/useUpdatePatientDetails"
-import CancelAppointmentModal from "../PatientDetails/Tabs/AppointmentTab/Modals/CancelModals/CancelAppointmentModal"
 import AppointmentPhoto from "./AppointmentPhoto"
 import DoctorInfo from "./DoctorInfo"
 
@@ -11,14 +8,12 @@ type AppointmentCardProps ={
     doctor: AppointedDoctorType
     key: number
     appointment: AppointmentType
+    openCancelModal: (appointment: AppointmentType) => void
 
 }
 
 
-const AppointmentCard: React.FC<AppointmentCardProps> = ({ doctor, key, appointment })=>{
-
-    const { cancelAppointment } = useBookingSlots(),
-          { showCancelModal, openCancelModal, closeCancelModal } = useUpdatePatientDetails()
+const AppointmentCard: React.FC<AppointmentCardProps> = ({ doctor, key, appointment, openCancelModal })=>{
 
     return(
 
@@ -43,8 +38,6 @@ const AppointmentCard: React.FC<AppointmentCardProps> = ({ doctor, key, appointm
                 >Cancel Appointment</button>
 
             </div>
-
-            { showCancelModal && <CancelAppointmentModal appointment={appointment} onClose={closeCancelModal} cancelAppointment={cancelAppointment} /> }
 
         </div>
 

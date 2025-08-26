@@ -720,8 +720,10 @@ My appointments page will show the user's appointments. It will have a list of a
     b. Create Appointment photo component and mount it on the card component
     c. Create Doctor information component and mount it on the card component
 
-  3. Retrieve the `activeTab` state, `pastAppointments`, and `upcomingAppointments` state variables from the AppointmentContext
-  4. Create `renderAppointment` function that will filter the appointments based on the `activeTab` state variable
+  3. Retrieve `activeTab` state, `pastAppointments`, and `upcomingAppointments` state variables from the AppointmentContext
+  4. Retrieve `showCancelModal`, `closeCancelModal`, `openCancelModal` and `appointmentToCancel` from `updatePatientDetails` custom hook
+  5. Retrieve `cancelAppointment` from `BookingSlots` custom hook
+  6. Create `renderAppointment` function that will filter the appointments based on the `activeTab` state variable
     a. If `activeTab` is `Upcoming`, return the `upcomingAppointments` otherwise return the `pastAppointments` and set it to `data` constant
     b. If `data` is empty, return a message saying "No Appointments"
     c. Loop through the `data` array and create a card component for appointment
@@ -747,8 +749,7 @@ My appointments page will show the user's appointments. It will have a list of a
     e. Create two buttons, one for canceling the appointment and one for viewing the appointment details
       i. On clicking the cancel button, call the `showCancelAppointmentModal` function and pass the appointment as a parameter
 
-    e. If `showCancelModal` is true, mount the Cancel Appointment Modal and pass `appointment`, `closeCancelModal`, and `cancelAppointment` as props
-
+  8. If `showCancelModal` is true, mount the Cancel Appointment Modal and pass `appointmentToCancel`, `closeCancelModal`, and `cancelAppointment` as props
 
     #### Appointed Patients
 
@@ -757,6 +758,8 @@ My appointments page will show the user's appointments. It will have a list of a
     1. Create a component for the PatientAppointmentCard component and mount it on the My Appointments Page
     2. Improvise the AppointmentPhoto component to display the patient's photo when the user is a doctor
     3. Create a component for the PatientInfo component and mount it on the PatientAppointmentCard component
+
+  
 
 
 ### Patient Details Context
@@ -1237,11 +1240,11 @@ Patient details page will show the patient's details; medical history, allergies
 
       2. Create a Modal Body component and mount it on the Cancel Appointment Modal component
       3. Wrap the Modal Body component with a Modal Provider
-      4. Create a Reason component and mount it on the Modal Body component
+      4. Create a Reason component and mount it on the Modal Body component if profileType is doctor
         a. It will have a text area to input the reason for cancellation
         b. If the reason is empty, show an error message
 
-      5. Create an Alternative Input component and mount it on the Modal Body component  
+      5. Create an Alternative Input component and mount it on the Modal Body component if profileType is doctor
       6. Make the the modal scrollable if the content is too long
       7. Create a Confirmation checkbox component and mount it on the Modal Body component
         a. It will have a checkbox to confirm the cancellation 

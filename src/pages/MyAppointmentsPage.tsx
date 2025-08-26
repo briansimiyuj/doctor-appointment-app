@@ -5,10 +5,15 @@ import NotFoundPage from "./NotFoundPage"
 import PatientAppointmentCard from "../components/Appointments/PatientAppointmentCard"
 import TabSelectorButtons from "../components/Appointments/TabSelectorButtons"
 import { AppointmentsContext } from "../context/AppointmentContext"
+import { useUpdatePatientDetails } from "../hooks/useUpdatePatientDetails"
+import CancelAppointmentModal from "../components/PatientDetails/Tabs/AppointmentTab/Modals/CancelModals/CancelAppointmentModal"
+import { useBookingSlots } from "../hooks/useBookingSlots"
 
 const MyAppointmentsPage: React.FC = ()=>{
 
     const { activeTab,  pastAppointments, upcomingAppointments } = useContext(AppointmentsContext),
+          { showCancelModal, closeCancelModal, openCancelModal, appointmentToCancel } = useUpdatePatientDetails(),
+          { cancelAppointment } = useBookingSlots(),
           loginContext = useContext(LoginContext),
           isAuthenticated = loginContext?.isAuthenticated,
           userType = loginContext?.userType
@@ -27,7 +32,12 @@ const MyAppointmentsPage: React.FC = ()=>{
 
             userType === "patient" ?(
 
-                <AppointmentCard key={index} doctor={appointment.doctor} appointment={appointment}/>
+                <AppointmentCard 
+                    key={index} 
+                    doctor={appointment.doctor} 
+                    appointment={appointment} 
+                    openCancelModal={openCancelModal}
+                />
 
             ):(
                 
@@ -54,6 +64,20 @@ const MyAppointmentsPage: React.FC = ()=>{
                         <TabSelectorButtons/>
 
                         <div className="mt-6">{renderAppointments()}</div>
+
+                        {
+                        
+                            showCancelModal && appointmentToCancel &&(
+
+                                <CancelAppointmentModal 
+                                    appointment={appointmentToCancel} 
+                                    onClose={closeCancelModal} 
+                                    cancelAppointment={cancelAppointment} 
+                                />
+                                
+                            )
+                            
+                        }
 
                     </>
 

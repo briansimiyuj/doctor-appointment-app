@@ -13,8 +13,6 @@ const ModalBody: React.FC = ()=>{
     if(!profileContext) return null
 
     const { profile } = profileContext
-
-    console.log(profile?.type)
  
     return(
 

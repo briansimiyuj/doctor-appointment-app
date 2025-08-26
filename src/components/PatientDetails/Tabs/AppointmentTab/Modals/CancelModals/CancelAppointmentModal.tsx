@@ -1,4 +1,4 @@
-import { TimeSlotType } from "../../../../../../assets/types/TimeSlotType"
+import { AppointmentType } from "../../../../../../assets/types/AppointmentType"
 import { ModalProvider } from "../../../../../../context/ModalContext"
 import ModalHeader from "../ModalHeader"
 import ModalBody from "./ModalBody"
@@ -6,13 +6,13 @@ import ModalFooter from "./ModalFooter"
 
 interface CancelAppointmentModalProps{
 
-    appointment: any, 
+    appointment: AppointmentType, 
     onClose: () => void
-    cancelAppointment: (slot: TimeSlotType) => void
+    cancelAppointment: (appointmentID: string) => void 
 
 }
 
-const CancelAppointmentModal: React.FC<CancelAppointmentModalProps> = ({ appointment, onClose })=>{
+const CancelAppointmentModal: React.FC<CancelAppointmentModalProps> = ({ appointment, onClose, cancelAppointment })=>{
 
     return(
 
@@ -26,7 +26,7 @@ const CancelAppointmentModal: React.FC<CancelAppointmentModalProps> = ({ appoint
 
                     <ModalBody/>
 
-                    <ModalFooter/>
+                    <ModalFooter cancelAppointment={cancelAppointment} appointment={appointment}/>
 
                 </ModalProvider>
 

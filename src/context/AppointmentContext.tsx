@@ -59,8 +59,6 @@ export const AppointmentsContextProvider: React.FC<AppointmentsContextProviderPr
 
                 setPastAppointments(past)
 
-                console.log(upcoming, past)
-
             }catch(error){
 
                 console.error("Error parsing appointments from local storage:", error)
