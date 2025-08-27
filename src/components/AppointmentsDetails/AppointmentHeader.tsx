@@ -1,3 +1,4 @@
+import DoctorBasicInfo from "./DoctorBasicInfo"
 import DoctorImage from "./DoctorImage"
 
 const AppointmentHeader: React.FC = ()=>{
@@ -9,6 +10,8 @@ const AppointmentHeader: React.FC = ()=>{
             <div className="flex flex-col md:flex-row gap-6 items-center">
 
                 <DoctorImage/>
+
+                <DoctorBasicInfo/>
 
             </div>
 

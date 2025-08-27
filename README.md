@@ -2761,3 +2761,7 @@ Appointment Details Page will be used to display the details of an appointment. 
       a. Create DoctorImage component and mount it on AppointmentHeader
         i. Retrieve `doctorInfo` from `AppointmentContext`
         ii. Display the doctor's image 
+
+      b. Create DoctorBasicInfo component and mount it on AppointmentHeader
+      i. Retrieve `doctorInfo` from `AppointmentContext`
+        ii. Display the doctor's basic information (name, speciality, fee, hospital and hospital location)

@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react"
+import { createContext, ReactNode, useContext, useState } from "react"
 
 interface CurrencyContextProps{
     
@@ -38,5 +38,15 @@ export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
         </CurrencyContext.Provider>
 
     )
+
+}
+
+export const useCurrencyContext = () =>{
+
+    const context = useContext(CurrencyContext)
+
+    if(!context) throw new Error('useCurrencyContext must be used within a CurrencyProvider') // if we are not using the context inside a CurrencyProvider, throw an error
+
+    return context
 
 }
