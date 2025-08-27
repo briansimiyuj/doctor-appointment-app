@@ -9,6 +9,7 @@ import { DocumentType } from "../assets/types/DocumentType"
 import { v4 as uuid } from "uuid"
 import { NoteType } from "../assets/types/NoteType"
 import { DoctorType } from "../assets/types/DoctorType"
+import { useProfileContext } from "./ProfileContext"
 
 interface PatientDetailsProviderProps{
 
@@ -21,7 +22,11 @@ export const PatientDetailsContext = createContext<PatientDetailsContextProps | 
 export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ children }) =>{
 
 const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null>(null), 
-      [activeTab, setActiveTab] =  useState<"medical-history" | "appointments" | "prescriptions" | "notes" | "documents">("medical-history"),
+      { profile } = useProfileContext(),
+      [activeTab, setActiveTab] =  useState<"medical-history" | "appointments" | "prescriptions" | "notes" | "documents">(
+            profile?.type === "doctor" ? "prescriptions" : "medical-history" 
+            
+      ),
       { patientID = "" } = useParams<{ patientID: string }>(),
       [patientAppointments, setPatientAppointments] = useState<AppointmentType[]>(() =>{
 

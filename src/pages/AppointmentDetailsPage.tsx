@@ -4,6 +4,8 @@ import NotFoundPage from "./NotFoundPage"
 import { LoginContext } from "../context/LoginContext"
 import { useAppointmentsContext } from "../context/AppointmentContext"
 import AppointmentHeader from "../components/AppointmentsDetails/AppointmentHeader"
+import TabsNavigation from "../components/PatientDetails/TabsNavigation"
+import { PatientDetailsProvider } from "../context/PatientDetailsContext"
 
 const AppointmentDetailsPage: React.FC = ()=>{
 
@@ -49,6 +51,16 @@ const AppointmentDetailsPage: React.FC = ()=>{
         <div className="container mx-auto px-4 py-8">
 
             <AppointmentHeader/>
+
+            <div className="bg-white rounded-lg shadow-md overflow-hidden mt-6">
+
+                <PatientDetailsProvider>
+
+                    <TabsNavigation/>
+
+                </PatientDetailsProvider>  
+
+            </div>
 
         </div>
 

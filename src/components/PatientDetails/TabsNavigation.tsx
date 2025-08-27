@@ -1,15 +1,21 @@
 import { usePatientDetails } from "../../context/PatientDetailsContext"
+import { useProfileContext } from "../../context/ProfileContext"
 
 const TabsNavigation: React.FC = ()=>{
+
+    const { profile } = useProfileContext()
+
+    console.log(profile?.type)
 
     const tabs =[
 
         { id: 'medical-history', label: 'Medical History' },
+        { id: 'prescriptions', label: 'Prescriptions' },
         { id: 'appointments', label: 'Appointments' },
         { id: 'notes', label: 'Notes' },
-        { id: 'documents', label: 'Documents' },
+        { id: 'documents', label: 'Documents' }
 
-    ],
+    ].filter(Boolean) as { id: string, label: string }[],
           { activeTab, setActiveTab } = usePatientDetails()
 
     return(
@@ -27,7 +33,7 @@ const TabsNavigation: React.FC = ()=>{
                                 ? 'text-primary-bg border-b-2 border-primary-bg'
                                 : 'text-gray-600 dark:text-gray-300 hover:text-primary-text dark:hover:text-primary-bg hover:border-b-2 hover:border-gray-300 dark:hover:border-primary-bg'
                         }`}
-                        onClick={() => setActiveTab(tab.id as "medical-history" | "appointments" | "notes" | "documents")}
+                        onClick={() => setActiveTab(tab.id as "prescriptions" | "medical-history" | "appointments" | "notes" | "documents")}
                     >
                         {tab.label}
                     </button>

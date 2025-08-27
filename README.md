@@ -774,7 +774,8 @@ My appointments page will show the user's appointments. It will have a list of a
 
   1. Create props for the Patient Details context
   2. Create a state variable for the patient and initialize it with null
-  3. Create a state variable for active tab and initialize it with "Medical History"
+  3. Create a state variable for active tab and initialize it with;
+    a. If `profile` type is `patient` then `prescriptions` else `Medical History`
   4. Create a state variable for patient appointment with `appointment type` and initialize it with: if there is saved appointment in local storage then the saved appointment else empty array
   5. Create a function to fetch the patient appointment based on patient id
   6. Find the appointed patient based on the patient id and set the patient details and appointment details
@@ -2765,3 +2766,6 @@ Appointment Details Page will be used to display the details of an appointment. 
       b. Create DoctorBasicInfo component and mount it on AppointmentHeader
       i. Retrieve `doctorInfo` from `AppointmentContext`
         ii. Display the doctor's basic information (name, speciality, fee, hospital and hospital location)
+
+  6. Mount PatientDetailsProvider on AppointmentDetailsPage, the page will reuse some of the components from PatientDetailsPage
+  7. Mount TabNavigation on AppointmentDetailsPage
