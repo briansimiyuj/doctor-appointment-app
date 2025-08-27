@@ -692,6 +692,7 @@ The Appointments Context manages all appointment data in the app. It enriches ra
     a. `appointments` — initialized as an empty array `[]`  
     b. `pastAppointments` — initialized as an empty array `[]`  
     c. `upcomingAppointments` — initialized as an empty array `[]`  
+    d. `appointment` — initialized as null  
 
   3. on every render;
     a. Fetch appointments from the `localStorage` 
@@ -704,6 +705,12 @@ The Appointments Context manages all appointment data in the app. It enriches ra
       ii. Filter past appointments:  
         - Date is before now  and the status is `"completed"`, `"cancelled"` or `"rejected"`.
       ii. Update `pastAppointments` and `upcomingAppointments` using `setPastAppointments` and `setUpcomingAppointments`  
+
+  4. Retreive `_id` from URL params
+  5. Whenever ` _id` changes;
+    a. Fetch appointments from the `localStorage`
+    b. If appointments and `_id` are found, find the appointment with the matching `_id` in the `appointments` array
+    c. Update `appointment` state with the found appointment
   
   
 ### My Appointments Page
