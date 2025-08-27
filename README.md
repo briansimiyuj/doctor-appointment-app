@@ -2745,3 +2745,19 @@ Private Route Component will be used to protect the routes that require authenti
 Appointment Details Page will be used to display the details of an appointment. This is a sister page to the Patient Details Page, whereby patients can view their appointments details.
 
   1. Create Appointment Details Page Component , mount it on Script component, wrap it with AppointmentContextProvider and provide it with the route
+  2. Retrieve:
+    i. `isAuthenticated` and `loading` from `LoginContext`
+    ii. `profile` from `ProfileContext`
+    iii. `activeTab` and `appointment` from `AppointmentContext`
+
+  3. If `loading` is true, return null, if `isAuthenticated` is false and `profile` type is a doctor, return a Not Found Page
+  4. If `appointment` is not found, return a message saying that there are no appointments
+  5. Create AppointmentHeader component and mount it on AppointmentDetailsPage
+
+    #### AppointmentHeader Component
+
+    AppointmentHeader Component will be used to display the header of the appointment details page.
+
+      a. Create DoctorImage component and mount it on AppointmentHeader
+        i. Retrieve `doctorInfo` from `AppointmentContext`
+        ii. Display the doctor's image 

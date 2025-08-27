@@ -53,12 +53,6 @@ export const AppointmentsContextProvider: React.FC<AppointmentsContextProviderPr
     }, [appointmentID])
 
     useEffect(() =>{
-    
-       console.log(appointment)
-    
-    }, [appointment])
-
-    useEffect(() =>{
 
         const storedAppointments = localStorage.getItem("appointments")
 
