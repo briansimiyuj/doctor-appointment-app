@@ -2188,6 +2188,10 @@ Patient details page will show the patient's details; medical history, allergies
       d. `selectedNote` and initialize it to `null`
       e. `title` and initialize it to an empty string
       f. `content` and initialize it to an empty string
+      g. `showAddPrescriptionModal` and initialize it to `false`
+      h. `showViewPrescriptionModal` and initialize it to `false`
+      i. `showDeletePrescriptionModal` and initialize it to `false`
+      j. `selectedPrescription` and initialize it to `null`
 
     2. Create `openAddNoteModal` function
       a. Set `showAddNoteModal` to `true`
@@ -2206,6 +2210,10 @@ Patient details page will show the patient's details; medical history, allergies
         b. Set `showViewNoteModal` to `false`
         c. Set `showDeleteNoteModal` to `false`
         d. Set `selectedNote` to `null`
+        e. Set `showAddPrescriptionModal` to `false`
+        f. Set `showViewPrescriptionModal` to `false`
+        g. Set `showDeletePrescriptionModal` to `false`
+        h. Set `selectedPrescription` to `null`
 
     6. Create `openEditNoteModal` function which takes a note as an argument
         a. Set `showAddNoteModal` to `true`

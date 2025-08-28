@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react"
 import { NotesTabContextProps } from "../assets/contextProps/NotesTabContextProps"
 import { NoteType } from "../assets/types/NoteType"
+import { PrescriptionType } from "../assets/types/PrescriptionType"
 
 interface NotesTabProviderProps{
 
@@ -15,6 +16,10 @@ export const NotesTabProvider: React.FC<NotesTabProviderProps> = ({ children }) 
     const [showAddNoteModal, setShowAddNoteModal] = useState<boolean>(false),
           [showDeleteNoteModal, setShowDeleteNoteModal] = useState<boolean>(false),
           [showViewNoteModal, setShowViewNoteModal] = useState<boolean>(false),
+          [showAddPrescriptionModal, setShowAddPrescriptionModal] = useState<boolean>(false),
+          [showViewPrescriptionModal, setShowViewPrescriptionModal] = useState<boolean>(false),
+          [showDeletePrescriptionModal, setShowDeletePrescriptionModal] = useState<boolean>(false),
+          [selectedPrescription, setSelectedPrescription] = useState<PrescriptionType | null>(null),
           [selectedNote, setSelectedNote] = useState<NoteType | null>(null),
           [title, setTitle] = useState<string>(''),         
           [content, setContent] = useState<string>('')
@@ -43,6 +48,38 @@ export const NotesTabProvider: React.FC<NotesTabProviderProps> = ({ children }) 
 
     }
 
+    const openAddPrescriptionModal = () =>{
+
+        setShowAddPrescriptionModal(true)
+
+        setSelectedPrescription(null)
+
+    }
+
+    const openViewPrescriptionModal = (prescription: PrescriptionType) =>{
+
+        setSelectedPrescription(prescription)
+
+        setShowViewPrescriptionModal(true)
+
+    }
+
+    const openEditPrescriptionModal = (prescription: PrescriptionType) =>{
+
+        setSelectedPrescription(prescription)
+
+        setShowAddPrescriptionModal(true)
+
+    }
+
+    const openDeletePrescriptionModal = (prescription: PrescriptionType) =>{
+
+        setSelectedPrescription(prescription)
+
+        setShowDeletePrescriptionModal(true)
+
+    }
+
     const closeModals = () =>{
 
         setShowAddNoteModal(false)
@@ -51,7 +88,13 @@ export const NotesTabProvider: React.FC<NotesTabProviderProps> = ({ children }) 
 
         setShowViewNoteModal(false)
 
+        setShowAddPrescriptionModal(false)
+
+        setShowDeletePrescriptionModal(false)
+
         setSelectedNote(null)
+
+        setSelectedPrescription(null)
 
     }
 
@@ -72,11 +115,19 @@ export const NotesTabProvider: React.FC<NotesTabProviderProps> = ({ children }) 
         showAddNoteModal,
         showDeleteNoteModal,
         showViewNoteModal,
+        showAddPrescriptionModal,
+        showViewPrescriptionModal,
+        showDeletePrescriptionModal,
         selectedNote,
+        selectedPrescription,
         openAddNoteModal,
         openViewNoteModal,
         openDeleteNoteModal,
         openEditNoteModal,
+        openAddPrescriptionModal,
+        openEditPrescriptionModal,
+        openViewPrescriptionModal,
+        openDeletePrescriptionModal,
         closeModals,
         title,
         setTitle,
