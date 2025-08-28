@@ -49,8 +49,8 @@ export interface PatientDetailsContextProps{
 
     prescriptions: PrescriptionType[]
     addPrescription: (prescription: PrescriptionType) => void
-    removePrescription: (index: number) => void
-    updatePrescription: (index: number, updatedPrescription: PrescriptionType) => void
+    removePrescription: (id: string) => void
+    updatePrescription: (id: string, updatedPrescription: PrescriptionType) => void
 
     //Patient appointments
     patientAppointments: AppointmentType[]

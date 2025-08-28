@@ -428,29 +428,27 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
 
             setPrescriptions(updatedPrescriptions)
 
-            localStorage.setItem(`prescriptions-${patientID}`, JSON.stringify(updatedPrescriptions))
+            localStorage.setItem("prescription", JSON.stringify(updatedPrescriptions))
 
       }
 
-      const removePrescription = (index: number) =>{
+      const removePrescription = (ID: string) =>{
 
-            const updatedPrescriptions = prescriptions.filter((_, i) => i !== index)
+            const updatedPrescriptions = prescriptions.filter(prescription => prescription._id !== ID)
 
             setPrescriptions(updatedPrescriptions)
 
-            localStorage.setItem(`prescriptions-${patientID}`, JSON.stringify(updatedPrescriptions))
+            localStorage.setItem("prescription", JSON.stringify(updatedPrescriptions))
       
       }
 
-      const updatePrescription = (index: number, prescription: PrescriptionType) =>{
+      const updatePrescription = (id: string, prescription: PrescriptionType) =>{
 
-            const updatedPrescriptions = [...prescriptions]
-
-            updatedPrescriptions[index] = prescription
+            const updatedPrescriptions = prescriptions.map(p => p._id === id ? prescription : p)
 
             setPrescriptions(updatedPrescriptions)
 
-            localStorage.setItem(`prescriptions-${patientID}`, JSON.stringify(updatedPrescriptions))
+            localStorage.setItem("prescription", JSON.stringify(updatedPrescriptions))
 
       }
 
