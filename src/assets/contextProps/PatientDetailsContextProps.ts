@@ -3,6 +3,7 @@ import { AppointmentType } from "../types/AppointmentType"
 import { DoctorType } from "../types/DoctorType"
 import { DocumentType } from "../types/DocumentType"
 import { NoteType } from "../types/NoteType"
+import { PrescriptionType } from "../types/PrescriptionType"
 
 export interface PatientDetailsContextProps{
 
@@ -43,6 +44,13 @@ export interface PatientDetailsContextProps{
 
     addDocument: (document: DocumentType) => void
     removeDocument: (index: string) => void
+
+    // Prescriptions
+
+    prescriptions: PrescriptionType[]
+    addPrescription: (prescription: PrescriptionType) => void
+    removePrescription: (index: number) => void
+    updatePrescription: (index: number, updatedPrescription: PrescriptionType) => void
 
     //Patient appointments
     patientAppointments: AppointmentType[]

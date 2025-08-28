@@ -10,6 +10,7 @@ import { v4 as uuid } from "uuid"
 import { NoteType } from "../assets/types/NoteType"
 import { DoctorType } from "../assets/types/DoctorType"
 import { useProfileContext } from "./ProfileContext"
+import { PrescriptionType } from "../assets/types/PrescriptionType"
 
 interface PatientDetailsProviderProps{
 
@@ -77,6 +78,13 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             const savedSurgeries = localStorage.getItem(`surgeries-${patientID}`)
 
             return savedSurgeries ? JSON.parse(savedSurgeries) : []
+
+      }),
+      [prescriptions, setPrescriptions] = useState<PrescriptionType[]>(() =>{
+
+            const savedPrescriptions = localStorage.getItem(`prescriptions-${patientID}`)
+
+            return savedPrescriptions ? JSON.parse(savedPrescriptions) : []
 
       })
 
@@ -412,6 +420,40 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             
       }
 
+      const addPrescription = (prescription: PrescriptionType) =>{
+
+            const updatedPrescriptions = [...prescriptions]
+
+            updatedPrescriptions.push(prescription)
+
+            setPrescriptions(updatedPrescriptions)
+
+            localStorage.setItem(`prescriptions-${patientID}`, JSON.stringify(updatedPrescriptions))
+
+      }
+
+      const removePrescription = (index: number) =>{
+
+            const updatedPrescriptions = prescriptions.filter((_, i) => i !== index)
+
+            setPrescriptions(updatedPrescriptions)
+
+            localStorage.setItem(`prescriptions-${patientID}`, JSON.stringify(updatedPrescriptions))
+      
+      }
+
+      const updatePrescription = (index: number, prescription: PrescriptionType) =>{
+
+            const updatedPrescriptions = [...prescriptions]
+
+            updatedPrescriptions[index] = prescription
+
+            setPrescriptions(updatedPrescriptions)
+
+            localStorage.setItem(`prescriptions-${patientID}`, JSON.stringify(updatedPrescriptions))
+
+      }
+
       const value: PatientDetailsContextProps ={
 
             activeTab,
@@ -440,6 +482,10 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             patientDetails,
             setPatientDetails,
             updateAppointmentStatus,
+            prescriptions,
+            addPrescription,
+            removePrescription,
+            updatePrescription,
             patientID,
             updateAppointment,
             medicalConditions,

@@ -885,6 +885,19 @@ My appointments page will show the user's appointments. It will have a list of a
       iii. Update the `surgeries` state with the new surgeries array
       iv. Save the updated surgeries to localStorage using the patient ID as part of the key
 
+  17. Create `prescriptions` state which will be an array of prescription objects. Initialize it with data from localStorage if available
+  18. Create `addPrescription` function which takes a new prescription as a parameter
+      i. Create a new prescriptions array with existing prescriptions
+      ii. Add the new prescription to the array
+      iii. Update the `prescriptions` state with the new prescriptions array
+      iv. Save the updated prescriptions to localStorage using the patient ID as part of the key
+
+  19. Create `updatePrescription` function which takes a prescription index and a new prescription as parameters
+      i. Create a new prescriptions array with existing prescriptions
+      ii. Find the prescription at the given index and update it with the new prescription
+      iii. Update the `prescriptions` state with the new prescriptions array
+      iv. Save the updated prescriptions to localStorage using the patient ID as part of the key
+
 ### Patient Details Page
 
 Patient details page will show the patient's details; medical history, allergies, notes, prescription, name and contact information. The doctor will be able to add notes, prescription, allergies and medical history.
