@@ -2510,6 +2510,25 @@ Patient details page will show the patient's details; medical history, allergies
       6. Create a ModalFooter component and mount it on the Add Prescription Modal component. Wrap it with `Prescription Provider`. It will have a submit button and a cancel button   
         
 
+      3. Create a ModalBody component and mount it on the Add Prescription Modal component. Wrap it with `Prescription Provider`. It will a form
+        a. Retrieve `prescriptions`, `updateField`, `addPrescription` and `removeField` from the Prescription Provider
+        b. Create a form with the following fields:
+          i. Medicine Name: text input
+          ii. Dose: text input
+          iii. Frequency: text input
+          iv. Duration: text input
+          v. Notes: text area
+      
+        c. Make the form controlled components and update the state variables accordingly
+        d. Create a button to add new prescription fields
+          i. Atach the `addPrescription` function to the button's onClick event
+
+        e. If `prescriptions` is not empty, create a button to remove all prescription fields
+          i. Atach the `removeField` function to the button's onClick event
+          
+      6. Create a ModalFooter component and mount it on the Add Prescription Modal component. Wrap it with `Prescription Provider`. It will have a submit button and a cancel button   
+        
+
 
 ### Settings Context
 

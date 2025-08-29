@@ -1,5 +1,7 @@
 import { useNotesTabContext } from "../../../../../context/NotesTabContext"
+import { PrescriptionContextProvider } from "../../../../../context/PrescriptionContext"
 import ModalHeader from "../../AppointmentTab/Modals/ModalHeader"
+import ModalBody from "./ModalBody"
 
 const AddPrescriptionModal: React.FC = ()=>{
 
@@ -15,6 +17,12 @@ const AddPrescriptionModal: React.FC = ()=>{
                     title={selectedPrescription ? "Edit Prescription" : "Add Prescription"}
                     onClose={closeModals}
                 />
+
+                <PrescriptionContextProvider>
+
+                    <ModalBody/>
+
+                </PrescriptionContextProvider>
 
             </div>
 
