@@ -2,6 +2,7 @@ import { useNotesTabContext } from "../../../../../context/NotesTabContext"
 import { PrescriptionContextProvider } from "../../../../../context/PrescriptionContext"
 import ModalHeader from "../../AppointmentTab/Modals/ModalHeader"
 import ModalBody from "./ModalBody"
+import ModalFooter from "./ModalFooter"
 
 const AddPrescriptionModal: React.FC = ()=>{
 
@@ -21,6 +22,8 @@ const AddPrescriptionModal: React.FC = ()=>{
                 <PrescriptionContextProvider>
 
                     <ModalBody/>
+
+                    <ModalFooter title={selectedPrescription ? "Update Prescription" : "Add Prescription"} onClose={closeModals}/>
 
                 </PrescriptionContextProvider>
 
