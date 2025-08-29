@@ -2476,6 +2476,13 @@ Patient details page will show the patient's details; medical history, allergies
     6. If `prescriptions` is not empty, create a PrescriptionList component and mount it on the Prescription Tab component
     7. If `showAddPrescriptionModal` is true, create a AddPrescriptionModal component and mount it on the Prescription Tab component
 
+    ##### Add Prescription Modal
+
+    Add prescription modal will be used to add a new prescription. It will have a form to add the prescription and a button to submit the form.
+
+      1. Retrieve `selectedPrescription` and `closeModals` from the Note Tab Provider
+      2. Mount the ModalHeader component on the Add Prescription Modal component and pass the title (if `selectedPrescription` is not null, pass "Edit Prescription", otherwise pass "Add Prescription"), and the closeModals function as the onClose function as props
+
 
 ### Settings Context
 
