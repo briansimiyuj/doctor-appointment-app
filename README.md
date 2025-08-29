@@ -1061,7 +1061,7 @@ Patient details page will show the patient's details; medical history, allergies
           b. Set the appointment to reject state to null
           c. Set the modal visibility state to false
 
-      *Reschedule Appointment Function*
+      *Reschedule Appoi1ntment Function*
 
       Reschedule appointment function will open a modal to confirm the rescheduling of the appointment.
 
@@ -2455,6 +2455,12 @@ Patient details page will show the patient's details; medical history, allergies
     5. Prevent `addFunction` to add a new item if it already exists in the state  
     6. Prevent `editFunction` to edit an item if it has the same value as the previous one
 
+  #### Prescription Tab
+
+  Prescription tab will be used to add, edit, and delete prescriptions. It will have a table to display the prescriptions and a button to add a new prescription.
+
+    1. Set the active tab to `prescriptions` in in the Patient Details Context
+    2. Create a Prescription Tab component and mount it on the Tab Content component with id of `prescriptions` and wrap it with Note Tab Provider
 
 
 ### Settings Context

@@ -3,7 +3,7 @@ import { usePatientDetails } from "../../../context/PatientDetailsContext"
 
 interface TabContentProps{
 
-    tabID: "medical-history" | "appointments" | "notes" | "documents"
+    tabID: "medical-history" | "appointments" | "notes" | "documents" | "prescriptions"
     children: ReactNode
 
 }
