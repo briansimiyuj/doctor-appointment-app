@@ -2483,6 +2483,33 @@ Patient details page will show the patient's details; medical history, allergies
       1. Retrieve `selectedPrescription` and `closeModals` from the Note Tab Provider
       2. Mount the ModalHeader component on the Add Prescription Modal component and pass the title (if `selectedPrescription` is not null, pass "Edit Prescription", otherwise pass "Add Prescription"), and the closeModals function as the onClose function as props
 
+      ##### Prescription Context
+
+      Prescription context will be used to store the prescription data and provide it to the Add Prescription Modal component
+
+        1. Create a `prescription` state variable of type `Prescription`, which is an object with the following properties:
+          a. `medicineName`: string
+          b. `dose`: string
+          c. `frequency`: string
+          d. `duration`: string
+          e. `notes`: string
+
+        2. Create a `updateField` function which will take `field` and `value` as parameters and update the state variable accordingly
+        3. Create a `addPrescription` function which will add a new prescription field in the form
+        4. Create a `removeField` function which will remove a prescription field from the form
+
+      3. Create a ModalBody component and mount it on the Add Prescription Modal component. Wrap it with `Prescription Provider`. It will a form
+      4. Create a form with the following fields:
+        a. Medicine Name: text input
+        b. Dose: text input
+        c. Frequency: text input
+        d. Duration: text input
+        e. Notes: text area
+      
+      5. Make the form controlled components and update the state variables accordingly
+      6. Create a ModalFooter component and mount it on the Add Prescription Modal component. Wrap it with `Prescription Provider`. It will have a submit button and a cancel button   
+        
+
 
 ### Settings Context
 
