@@ -1,8 +1,14 @@
+import PrescriptionTabHeader from "./PrescriptionTabHeader"
+
 const PrescriptionTab: React.FC = ()=>{
 
     return(
 
-        <h1>PrescriptionTab</h1>
+        <>
+
+           <PrescriptionTabHeader/>
+
+        </>
 
     )
 

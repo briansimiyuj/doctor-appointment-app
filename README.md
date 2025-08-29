@@ -2461,6 +2461,12 @@ Patient details page will show the patient's details; medical history, allergies
 
     1. Set the active tab to `prescriptions` in in the Patient Details Context
     2. Create a Prescription Tab component and mount it on the Tab Content component with id of `prescriptions` and wrap it with Note Tab Provider
+    3. Create a PrescriptionTabHeader component and mount it on the Prescription Tab component
+      a. Retrieve `openAddPrescriptionModal` from the Note Tab Provider
+      b. Display the title of the tab
+      c. Display the number of prescriptions in the tab
+      d. Create a button to add a new prescription
+        i. Call `openAddPrescriptionModal` when clicked
 
 
 ### Settings Context
