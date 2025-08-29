@@ -16,7 +16,9 @@ export const NotesTabProvider: React.FC<NotesTabProviderProps> = ({ children }) 
     const [showAddNoteModal, setShowAddNoteModal] = useState<boolean>(false),
           [showDeleteNoteModal, setShowDeleteNoteModal] = useState<boolean>(false),
           [showViewNoteModal, setShowViewNoteModal] = useState<boolean>(false),
-          [showAddPrescriptionModal, setShowAddPrescriptionModal] = useState<boolean>(false),
+          [showAddPrescriptionModal, setShowAddPrescriptionModal] = useState<boolean>(
+            import .meta.env.VITE_DEV_MODE === "true" ? true : false
+          ),
           [showViewPrescriptionModal, setShowViewPrescriptionModal] = useState<boolean>(false),
           [showDeletePrescriptionModal, setShowDeletePrescriptionModal] = useState<boolean>(false),
           [selectedPrescription, setSelectedPrescription] = useState<PrescriptionType | null>(null),

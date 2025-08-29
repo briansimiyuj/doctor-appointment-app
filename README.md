@@ -2468,9 +2468,13 @@ Patient details page will show the patient's details; medical history, allergies
       d. Create a button to add a new prescription
         i. Call `openAddPrescriptionModal` when clicked
 
-    4. Retrieve `prescriptions` from the Note Tab Provider
+    4. Retrieve:
+      a. `prescriptions` from the Note Tab Provider
+      b. `showAddPrescriptionModal` from the Note Tab Provider
+
     5. If `prescriptions` is empty, display a message saying "No prescriptions found"
     6. If `prescriptions` is not empty, create a PrescriptionList component and mount it on the Prescription Tab component
+    7. If `showAddPrescriptionModal` is true, create a AddPrescriptionModal component and mount it on the Prescription Tab component
 
 
 ### Settings Context
