@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react"
 import { PrescriptionContextProps } from "../assets/contextProps/PrescriptionContextProps"
 import { PrescriptionType } from "../assets/types/PrescriptionType"
+import { v4 as uuidv4 } from "uuid"
 
 interface PrescriptionContextProviderProps{
 
@@ -12,24 +13,46 @@ export const PrescriptionContext = createContext<PrescriptionContextProps | unde
 
 export const PrescriptionContextProvider:React.FC<PrescriptionContextProviderProps> = ({ children })=>{
 
-    const [prescriptions, setPrescriptions] = useState<PrescriptionType[]>([
-        { medicineName: '', dose: '', frequency: '', duration: '', notes: '' }
-    ])
+    const [prescriptions, setPrescriptions] = useState<PrescriptionType[]>([{ 
+        
+        _id: uuidv4(),
+        medicineName: '',
+        dose: '',
+        frequency: '',
+        duration: '',
+        notes: '',
+        appointmentID: '',
+        doctorID: '',
+        createdAt: new Date().toISOString()
+
+    }])
 
     const updateField = (index: number, field: keyof PrescriptionType, value: string) =>{
-    
+
        setPrescriptions(prescriptions.map((item, i) => i === index ? { ...item, [field]: value } : item))
-    
+
     }
 
     const addPrescription = () =>{
 
-        setPrescriptions([...prescriptions, { medicineName: '', dose: '', frequency: '', duration: '', notes: '' }])
+        setPrescriptions([...prescriptions, { 
+
+            _id: uuidv4(),
+            medicineName: '',
+            dose: '',
+            frequency: '',
+            duration: '',
+            notes: '',
+            appointmentID: '',
+            doctorID: '',
+            createdAt: new Date().toISOString()
+
+        }])
 
     }
 
     const removePrescription = (index: number) =>{
-        
+
         setPrescriptions(prescriptions.filter((_, i) => i !== index))
 
     }
@@ -56,12 +79,12 @@ export const PrescriptionContextProvider:React.FC<PrescriptionContextProviderPro
 
 }
 
-export const usePrescriptionContext=()=>{
+export const usePrescriptionContext = ()=>{
 
-      const context=useContext(PrescriptionContext)
+    const context = useContext(PrescriptionContext)
 
-      if(!context)throw new Error('usePrescriptionContext must be used within PrescriptionContextProvider')
+    if(!context) throw new Error('usePrescriptionContext must be used within PrescriptionContextProvider')
 
-      return context
+    return context
 
 }
