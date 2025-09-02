@@ -2514,6 +2514,55 @@ Patient details page will show the patient's details; medical history, allergies
       6. Create a ModalFooter component and mount it on the Add Prescription Modal component. Wrap it with `Prescription Provider`. It will have a submit button and a cancel button   
         
 
+      3. Create a ModalBody component and mount it on the Add Prescription Modal component. Wrap it with `Prescription Provider`. It will a form
+        a. Retrieve `prescriptions`, `updateField`, `addPrescription` and `removeField` from the Prescription Provider
+        b. Create a form with the following fields:
+          i. Medicine Name: text input
+          ii. Dose: text input
+          iii. Frequency: text input
+          iv. Duration: text input
+          v. Notes: text area
+      
+        c. Make the form controlled components and update the state variables accordingly
+        d. Create a button to add new prescription fields
+          i. Atach the `addPrescription` function to the button's onClick event
+
+        e. If `prescriptions` is not empty, create a button to remove all prescription fields
+          i. Atach the `removeField` function to the button's onClick event
+          
+      6. Create a ModalFooter component and mount it on the Add Prescription Modal component. Wrap it with `Prescription Provider`. It will have a submit button and a cancel button   
+        
+      ##### Add Prescription Hook
+
+      Add Prescription hook will be used to add a new prescription to `local storage` 
+
+        1. Retrieve the following:
+          a. `prescriptions` state from the `Prescription Provider`
+          b. `closeModals` function from the `Notes Tab Provider`
+          c. `profile` state from the `Profile Provider`
+          d. `appointmentID` state from the `Appointment Provider`
+          e. `addPrescription` function from the `Patient Details Provider`
+          
+        2. Create `currentPrescription` state variable to store the current prescription
+        3. Create `canSave` state variable to store whether the current prescription can be submitted; which checks if the current prescription properties are not empty (`medicineName`, `dose`, `frequency` and `duration`)
+        4. Create `handleAddPrescription` function to handle the addition of a new prescription
+          a. If `profile` type is not a doctor, `canSave` is false and `appointmentID` is not defined, exit the function
+          b. Create a new prescription object with the following properties:
+            i. `_id`: a unique identifier for the prescription
+            ii. `medicineName` from the current prescription
+            iii. `dose` from the current prescription
+            iv. `frequency` from the current prescription
+            iv. `duration` from the current prescription
+            v. `notes` from the current prescription or an empty string
+            vi. `appointmentID` from the `appointmentID` state
+            vii. `doctorID` from the `profile` state
+            viii. `createdAt`: the current date and time
+
+          c. Reset the current prescription properties to empty strings
+          d. Call `addPrescription` function with the new prescription object
+          e. Show a success message to the user
+          f. Call `closeModals` function to close the modal
+
 
 ### Settings Context
 

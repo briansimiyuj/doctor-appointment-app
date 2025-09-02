@@ -6,6 +6,7 @@ export interface AppointmentsContextProps{
     appointment: AppointmentType | null
     pastAppointments: AppointmentType[]
     upcomingAppointments: AppointmentType[]
+    appointmentID: string | undefined
     activeTab: "upcoming" | "past" 
     setActiveTab: (tab: "upcoming" | "past") => void
 

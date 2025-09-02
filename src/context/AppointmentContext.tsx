@@ -12,6 +12,7 @@ interface AppointmentsContextProviderProps{
 export const AppointmentsContext = createContext<AppointmentsContextProps>({
     appointments: [],
     appointment: {} as AppointmentType,
+    appointmentID: "",
     pastAppointments: [],
     upcomingAppointments: [],
     activeTab: "upcoming",
@@ -110,6 +111,7 @@ export const AppointmentsContextProvider: React.FC<AppointmentsContextProviderPr
 
         appointments,
         appointment,
+        appointmentID,
         pastAppointments,
         upcomingAppointments,
         activeTab,
