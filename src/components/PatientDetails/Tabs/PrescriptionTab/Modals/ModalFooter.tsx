@@ -1,3 +1,5 @@
+import { useAddPrescription } from "../../../../../hooks/useAddPrescription"
+
 interface ModalFooterProps{
 
     title: string
@@ -6,6 +8,8 @@ interface ModalFooterProps{
 }
 
 const ModalFooter: React.FC<ModalFooterProps> = ({ title, onClose })=>{
+
+    const { canSave, handleAddPrescription } = useAddPrescription()
 
     return(
 
@@ -17,8 +21,8 @@ const ModalFooter: React.FC<ModalFooterProps> = ({ title, onClose })=>{
             >Back</button>
 
             <button
-                className="bg-primary-btn text-secondary-bg py-2 px-4 rounded-md transition-all duration-300 w-full sm:w-auto"
-                // onClick={onSave}
+                className={`bg-primary-btn text-secondary-bg py-2 px-4 rounded-md transition-all duration-300 w-full sm:w-auto ${canSave ? "hover:bg-blue-600" : "cursor-not-allowed opacity-50"}`}
+                onClick={handleAddPrescription}
             >{title}</button>
 
         </div>

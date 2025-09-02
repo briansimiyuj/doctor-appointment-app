@@ -2531,6 +2531,10 @@ Patient details page will show the patient's details; medical history, allergies
           i. Atach the `removeField` function to the button's onClick event
           
       6. Create a ModalFooter component and mount it on the Add Prescription Modal component. Wrap it with `Prescription Provider`. It will have a submit button and a cancel button   
+        a. Retrieve `canSave` and `handleAddPrescription` from the `Add Prescription Hook`
+        b. Style the submit button to be disabled if `canSave` is false
+        c. Attach the `handleAddPrescription` function to the submit button's onClick event
+        d. Attach `onClose` prop to the cancel button's onClick event
         
       ##### Add Prescription Hook
 
