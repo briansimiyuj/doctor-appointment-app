@@ -13,81 +13,80 @@ import { useProfileContext } from "./ProfileContext"
 import { PrescriptionType } from "../assets/types/PrescriptionType"
 
 interface PatientDetailsProviderProps{
-
     children: React.ReactNode
-
 }
 
 export const PatientDetailsContext = createContext<PatientDetailsContextProps | undefined>(undefined)
 
 export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ children }) =>{
 
-const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null>(null), 
-      { profile } = useProfileContext(),
-      [activeTab, setActiveTab] =  useState<"medical-history" | "appointments" | "prescriptions" | "notes" | "documents">(
-            profile?.type === "doctor" ? "prescriptions" : "medical-history" 
+      const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null>(null), 
+            { profile } = useProfileContext(),
+            [activeTab, setActiveTab] =  useState<"medical-history" | "appointments" | "prescriptions" | "notes" | "documents">(
+                  profile?.type === "doctor" ? "prescriptions" : "medical-history" 
+            ),
+            { appointmentID = "" } = useParams<{ appointmentID: string }>(),
+            { patientID = "" } = useParams<{ patientID: string }>(),
+            { appointments } = useContext(AppointmentsContext),
+            { appointedPatients } = useContext(BookingContext),
+            [patientAppointments, setPatientAppointments] = useState<AppointmentType[]>([]),
+            [notes, setNotes] = useState<NoteType[]>([]),
+            [documents, setDocuments] = useState<DocumentType[]>([]),
+            [medicalConditions, setMedicalConditions] = useState<string[]>([]),
+            [allergies, setAllergies] = useState<string[]>([]),
+            [medications, setMedications] = useState<string[]>([]),
+            [surgeries, setSurgeries] = useState<string[]>([]),
+            [prescriptions, setPrescriptions] = useState<PrescriptionType[]>([])
+
+      useEffect(()=>{
             
-      ),
-      { patientID = "" } = useParams<{ patientID: string }>(),
-      [patientAppointments, setPatientAppointments] = useState<AppointmentType[]>(() =>{
+            if(appointmentID && appointments && appointments.length > 0){
 
-            const savedAppointments = localStorage.getItem(`appointments-${patientID}`)
+                  const foundAppointment = appointments.find(app => app._id === appointmentID)
 
-            return savedAppointments ? JSON.parse(savedAppointments) : []
+                  if(foundAppointment){
 
-      }),
-      { appointments } = useContext(AppointmentsContext),
-      { appointedPatients } = useContext(BookingContext),
-      [notes, setNotes] = useState<NoteType[]>(() =>{
+                        const patientID = foundAppointment.patient.patientInfo._id
 
-            const savedNotes = localStorage.getItem(`notes-${patientID}`)
+                        setPatientDetails(foundAppointment.patient)
 
-            return savedNotes ? JSON.parse(savedNotes) : []
+                        const savedAppointments = localStorage.getItem(`appointments-${patientID}`)
 
-      }),
-      [documents, setDocuments] = useState<DocumentType[]>(() =>{
+                        setPatientAppointments(savedAppointments ? JSON.parse(savedAppointments) : [foundAppointment])
 
-            const savedDocuments = localStorage.getItem(`documents-${patientID}`)
+                        const savedNotes = localStorage.getItem(`notes-${patientID}`)
 
-            return savedDocuments ? JSON.parse(savedDocuments) : []
-            
-      }),
-      [medicalConditions, setMedicalConditions] = useState<string[]>(() =>{
+                        setNotes(savedNotes ? JSON.parse(savedNotes) : [])
 
-            const savedMedicalConditions = localStorage.getItem(`medicalConditions-${patientID}`)
+                        const savedDocuments = localStorage.getItem(`documents-${patientID}`)
 
-            return savedMedicalConditions ? JSON.parse(savedMedicalConditions) : []
+                        setDocuments(savedDocuments ? JSON.parse(savedDocuments) : [])
+                        
+                        const savedMedicalConditions = localStorage.getItem(`medicalConditions-${patientID}`)
+                        
+                        setMedicalConditions(savedMedicalConditions ? JSON.parse(savedMedicalConditions) : [])
+                        
+                        const savedAllergies = localStorage.getItem(`allergies-${patientID}`)
+                        
+                        setAllergies(savedAllergies ? JSON.parse(savedAllergies) : [])
+                        
+                        const savedMedications = localStorage.getItem(`medications-${patientID}`)
+                        
+                        setMedications(savedMedications ? JSON.parse(savedMedications) : [])
+                        
+                        const savedSurgeries = localStorage.getItem(`surgeries-${patientID}`)
+                        
+                        setSurgeries(savedSurgeries ? JSON.parse(savedSurgeries) : [])
+                        
+                        const savedPrescriptions = localStorage.getItem(`prescriptions-${patientID}`)
+                        
+                        setPrescriptions(savedPrescriptions ? JSON.parse(savedPrescriptions) : [])
 
-      }),
-      [allergies, setAllergies] = useState<string[]>(() =>{
+                  }
 
-            const savedAllergies = localStorage.getItem(`allergies-${patientID}`)
+            }
 
-            return savedAllergies ? JSON.parse(savedAllergies) : []
-
-      }),
-      [medications, setMedications] = useState<string[]>(() =>{
-            
-            const savedMedications = localStorage.getItem(`medications-${patientID}`)
-
-            return savedMedications ? JSON.parse(savedMedications) : []
-
-      }),
-      [surgeries, setSurgeries] = useState<string[]>(() =>{
-
-            const savedSurgeries = localStorage.getItem(`surgeries-${patientID}`)
-
-            return savedSurgeries ? JSON.parse(savedSurgeries) : []
-
-      }),
-      [prescriptions, setPrescriptions] = useState<PrescriptionType[]>(() =>{
-
-            const savedPrescriptions = localStorage.getItem(`prescriptions-${patientID}`)
-
-            return savedPrescriptions ? JSON.parse(savedPrescriptions) : []
-
-      })
-
+      }, [appointments, appointedPatients, appointmentID])
 
       const fetchPatientAppointments = (patientID: string) =>{
 
@@ -112,119 +111,86 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
       }
 
 
-      useEffect(()=>{
-
-            if(patientID && appointedPatients && appointedPatients.length > 0){
-
-                  const foundPatient = appointedPatients.find(patient => patient.patientInfo._id === patientID)
-
-                  if(foundPatient){
-                        
-                        setPatientDetails(foundPatient)
-
-                        fetchPatientAppointments(patientID)
-
-                  }
-
-            }
-            
-      }, [appointments, appointedPatients, patientID])
-
-
-
       const addDocument = (document: DocumentType) =>{
-      
+            
+            if(!patientDetails) return
+           
+            const patientID = patientDetails.patientInfo._id
+            
             setDocuments(prevDocuments =>{
-                  
+           
                   const updatedDocuments = [...prevDocuments, document]
-                  
+           
                   localStorage.setItem(`documents-${patientID}`, JSON.stringify(updatedDocuments))
                   
                   return updatedDocuments
 
             })
-
       }
-
 
       const removeDocument = (index: string) =>{
-      
-         const updatedDocuments = documents.filter(document => document._id !== index)
+            
+            if(!patientDetails) return
 
-         setDocuments(updatedDocuments)
+            const patientID = patientDetails.patientInfo._id,
+                  updatedDocuments = documents.filter(document => document._id !== index)
 
-         localStorage.setItem(`documents-${patientID}`, JSON.stringify(updatedDocuments))
+            setDocuments(updatedDocuments)
+
+            localStorage.setItem(`documents-${patientID}`, JSON.stringify(updatedDocuments))
       
       }
 
-
-
       const addNote = (note: Omit<NoteType, "_id">) =>{
-    
-            const newNote ={
-    
-                _id: uuid(),
-                ...note,
-                date: new Date()
-    
-            }
-    
-            const updatedNotes = [newNote, ...notes]
+
+            if(!patientDetails) return
+
+            const patientID = patientDetails.patientInfo._id,
+                  newNote = { _id: uuid(), ...note, date: new Date() },
+                  updatedNotes = [newNote, ...notes]
 
             setNotes(updatedNotes)
-    
+
             localStorage.setItem(`notes-${patientID}`, JSON.stringify(updatedNotes))
-        
+
       }
 
       const removeNote = (id: string) =>{
-    
-            const updatedNotes = notes.filter(note => note._id !== id)
-     
+
+            if(!patientDetails) return
+
+            const patientID = patientDetails.patientInfo._id,
+                  updatedNotes = notes.filter(note => note._id !== id)
+
             setNotes(updatedNotes)
-     
+
             localStorage.setItem(`notes-${patientID}`, JSON.stringify(updatedNotes))
-         
+
       }
 
       const updateNote = (updatedNote: NoteType) =>{
-      
-         const updatedNotes = notes.map(note => note._id === updatedNote._id ? {...note, ...updatedNote } : note)
-    
-         setNotes(updatedNotes)
-    
-         localStorage.setItem(`notes-${patientID}`, JSON.stringify(updatedNotes))
-      
+
+            if(!patientDetails) return
+
+            const patientID = patientDetails.patientInfo._id,
+                  updatedNotes = notes.map(note => note._id === updatedNote._id ? {...note, ...updatedNote } : note)
+
+            setNotes(updatedNotes)
+
+            localStorage.setItem(`notes-${patientID}`, JSON.stringify(updatedNotes))
+
       }
 
-
-      useEffect(() =>{
-    
-            if(patientID){
-    
-                  const savedNotes = localStorage.getItem(`notes-${patientID}`)
-    
-                  if(savedNotes){
-    
-                    setNotes(JSON.parse(savedNotes))
-    
-                  }else{  
-    
-                        setNotes([])
-    
-                  }
-
-            }
-        
-      }, [patientID])
-
-
       const updateAppointmentStatus = (appointment: AppointmentType, newStatus: "pending" | "completed" | "cancelled" | "confirmed" | "approved" | "rescheduled" | "rejected" | "follow-up") =>{
-      
+
+            if(!patientDetails) return
+
+            const patientID = patientDetails.patientInfo._id
+            
             setPatientAppointments(prevAppointments =>{
 
                   const updatedAppointments = [...prevAppointments],
-                        appointmentIndex = updatedAppointments.findIndex(app => app.date === appointment.date && app.time === appointment.time)
+                        appointmentIndex = updatedAppointments.findIndex(app => app._id === appointment._id)
 
                   if(appointmentIndex !== -1){
 
@@ -239,16 +205,19 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
                   return prevAppointments
 
             })
-      
+
       }
 
-
       const rescheduleAppointment = (appointment: AppointmentType, newDate: Date, newTime: string, newDoctor: DoctorType, newConsultationType: "online" | "in-person") =>{
-      
+
+            if(!patientDetails) return
+
+            const patientID = patientDetails.patientInfo._id
+            
             setPatientAppointments(prevAppointments =>{
 
                   const updatedAppointments = [...prevAppointments],
-                        appointmentIndex = updatedAppointments.findIndex(app => app.date === appointment.date && app.time === appointment.time)
+                        appointmentIndex = updatedAppointments.findIndex(app => app._id === appointment._id)
 
                   if(appointmentIndex !== -1){
 
@@ -258,16 +227,16 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
                               date: newDate.toISOString(),
                               time: newTime,
                               doctor:{
+                                    
                                     doctorInfo: newDoctor,
-                                    appointmentTime:{
-                                          dateTime: newDate,  
-                                          time: newTime,
-                                    }
+                                    appointmentTime:{ dateTime: newDate, time: newTime }
+
                               },
                               status: "rescheduled",
                               consultationType: newConsultationType
+
                         }
-                                                
+
                         updatedAppointments[appointmentIndex] = updatedAppointment  
 
                         localStorage.setItem(`appointments-${patientID}`, JSON.stringify(updatedAppointments))
@@ -277,16 +246,15 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
                   }
 
                   return prevAppointments
-                  
+
             })
-      
 
       }
 
       const updateAppointment = (appointment: AppointmentType) =>{
 
             setPatientAppointments(prevAppointments =>{
-
+            
                   return prevAppointments.map(app => app._id === appointment._id ? appointment : app)
 
             })
@@ -294,61 +262,28 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
       }
 
       const addMedicalCondition = (condition: string) =>{
-      
-         const updatedConditions = [condition, ...medicalConditions]
 
-         localStorage.setItem(`medicalConditions-${patientID}`, JSON.stringify(updatedConditions))
+            if(!patientDetails) return
 
-         setMedicalConditions(updatedConditions)
-      
+            const patientID = patientDetails.patientInfo._id,
+                 updatedConditions = [condition, ...medicalConditions]
+
+            setMedicalConditions(updatedConditions)
+
+            localStorage.setItem(`medicalConditions-${patientID}`, JSON.stringify(updatedConditions))
+
       }
 
       const removeMedicalCondition = (index: number) =>{
 
-            const updatedConditions = medicalConditions.filter((_, i) => i !== index)
+            if(!patientDetails) return
 
-            localStorage.setItem(`medicalConditions-${patientID}`, JSON.stringify(updatedConditions))
+            const patientID = patientDetails.patientInfo._id,
+                 updatedConditions = medicalConditions.filter((_, i) => i !== index)
 
             setMedicalConditions(updatedConditions)
-      }
 
-      const addAllergy = (allergy: string) =>{
-      
-         const updatedAllergies = [allergy, ...allergies]
-
-         setAllergies(updatedAllergies)
-
-         localStorage.setItem(`allergies-${patientID}`, JSON.stringify(updatedAllergies))
-      
-      }
-
-      const removeAllergy = (index: number) =>{
-            
-            const updatedAllergies = allergies.filter((_, i) => i !== index)
-
-            setAllergies(updatedAllergies)
-
-            localStorage.setItem(`allergies-${patientID}`, JSON.stringify(updatedAllergies))
-
-      }
-
-      const addMedication = (medication: string) =>{
-                 
-            const updatedMedications = [medication, ...medications]
-
-            setMedications(updatedMedications)
-
-            localStorage.setItem(`medications-${patientID}`, JSON.stringify(updatedMedications))
-      
-      }
-
-      const removeMedication = (index: number) =>{
-
-            const updatedMedications = medications.filter((_, i) => i !== index)
-
-            setMedications(updatedMedications)
-
-            localStorage.setItem(`medications-${patientID}`, JSON.stringify(updatedMedications))
+            localStorage.setItem(`medicalConditions-${patientID}`, JSON.stringify(updatedConditions))
 
       }
 
@@ -372,6 +307,26 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
 
       }
 
+      const addMedication = (medication: string) =>{
+
+            const updatedMedications = [medication, ...medications]
+
+            setMedications(updatedMedications)
+
+            localStorage.setItem(`medications-${patientID}`, JSON.stringify(updatedMedications))
+
+      }
+
+      const removeMedication = (index: number) =>{
+
+            const updatedMedications = medications.filter((_, i) => i !== index)
+
+            setMedications(updatedMedications)
+
+            localStorage.setItem(`medications-${patientID}`, JSON.stringify(updatedMedications))
+
+      }
+
       const updateMedicalConditions = (index: number, condition: string) =>{
 
             const updatedMedicalConditions = [...medicalConditions]
@@ -382,6 +337,26 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
 
             localStorage.setItem(`medicalConditions-${patientID}`, JSON.stringify(updatedMedicalConditions))
       
+      }
+
+      const addAllergy = (allergy: string) =>{
+
+            const updatedAllergies = [allergy, ...allergies]
+
+            setAllergies(updatedAllergies)
+
+            localStorage.setItem(`allergies-${patientID}`, JSON.stringify(updatedAllergies))
+            
+      }
+
+      const removeAllergy = (index: number) =>{
+
+            const updatedAllergies = allergies.filter((_, i) => i !== index)
+
+            setAllergies(updatedAllergies)
+
+            localStorage.setItem(`allergies-${patientID}`, JSON.stringify(updatedAllergies))
+
       }
 
       const updateAllergies = (index: number, allergy: string) =>{
@@ -474,8 +449,6 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             documents,
             addDocument,
             removeDocument,
-            scheduleAppointment: () => {},
-            cancelAppointment: () => {},
             rescheduleAppointment,
             patientDetails,
             setPatientDetails,
@@ -484,7 +457,7 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             addPrescription,
             removePrescription,
             updatePrescription,
-            patientID,
+            patientID: patientDetails?.patientInfo._id || "",
             updateAppointment,
             medicalConditions,
             allergies,
@@ -494,10 +467,7 @@ const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null
             updateAllergies,
             updateMedications,
             updateSurgeries
-
       }
-
-
 
       return(
 

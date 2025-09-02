@@ -41,7 +41,7 @@ const MyAppointmentsPage: React.FC = ()=>{
 
             ):(
                 
-                <PatientAppointmentCard key={index} patient={appointment.patient}/>
+                <PatientAppointmentCard key={index} patient={appointment.patient} appointment={appointment} />
 
             )
 

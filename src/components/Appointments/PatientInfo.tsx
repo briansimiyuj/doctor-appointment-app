@@ -2,14 +2,16 @@ import { useNavigate } from "react-router-dom"
 import { AppointedPatientType } from "../../assets/types/AppointedPatientType"
 import { AppointmentsContext } from "../../context/AppointmentContext"
 import { useContext } from "react"
+import { AppointmentType } from "../../assets/types/AppointmentType"
 
 type PatientInfo ={
 
     patients: AppointedPatientType
+    appointment: AppointmentType
 
 }
 
-const PatientInfo: React.FC<PatientInfo> = ({ patients })=>{
+const PatientInfo: React.FC<PatientInfo> = ({ patients, appointment })=>{
 
     const patient = patients.patientInfo,
           navigate = useNavigate(),
@@ -17,7 +19,10 @@ const PatientInfo: React.FC<PatientInfo> = ({ patients })=>{
 
     if(!context) return null
 
-    const { activeTab } = context
+    const { activeTab } = context,
+         appointmentID = appointment?._id
+
+    console.log(appointment)
 
     return(
 
@@ -38,7 +43,7 @@ const PatientInfo: React.FC<PatientInfo> = ({ patients })=>{
 
                <button 
                     className="px-3 py-1.5 sm:px-4 sm:py-2 md:px-5 md:py-2.5 bg-primary-bg text-white rounded text-xs sm:text-sm hover:bg-blue-600 transition-colors w-full sm:w-auto cursor-pointer"
-                    onClick={() => navigate(`/appointment/${patient?._id}`)}
+                    onClick={() => navigate(`/appointment/view/${appointmentID}`)}
                 >View Patient Details</button>
 
                 {

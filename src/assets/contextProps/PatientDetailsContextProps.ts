@@ -58,8 +58,6 @@ export interface PatientDetailsContextProps{
     setPatientAppointments: (appointments: AppointmentType[] | ((prev: AppointmentType[]) => AppointmentType[])) => void
 
     // Appointment scheduling
-    scheduleAppointment: (appointment: { date: Date, time: string,  reason: string }) => void
-    cancelAppointment: (patientID: string, doctorID: string, date: Date, time: string, reason: string) => void
     rescheduleAppointment: (appointment: AppointmentType, newDate: Date, newTime: string, newDoctor: DoctorType, newConsultationType: "online" | "in-person") => void
 
     // Update appointment status

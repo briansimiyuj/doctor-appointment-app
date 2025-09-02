@@ -182,7 +182,7 @@ const Script: React.FC = () =>{
 
                     }/>
 
-                    <Route path="/appointment/:patientID" element={
+                    <Route path="/appointment/view/:appointmentID" element={
 
                       <PrivateRoute>
 
@@ -220,7 +220,7 @@ const Script: React.FC = () =>{
 
                       </PrivateRoute>
                       
-                    }/>,
+                    }/>
 
                     <Route path="/dashboard" element={
 
