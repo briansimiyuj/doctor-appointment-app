@@ -2596,6 +2596,8 @@ Patient details page will show the patient's details; medical history, allergies
       c. Display a message asking the user to confirm the deletion of the `selectedPrescription`  
       d. Create buttons for confirming and canceling the deletion
         i. On cancel, call `closeModals` function
+        ii. Retrieve `handleDeletePrescription` function from `DeletePrescription` hook
+        iii. On confirm, call `handleDeletePrescription` function
 
     #### Delete Prescription Hook
 
