@@ -2580,9 +2580,12 @@ Patient details page will show the patient's details; medical history, allergies
             a. view, edit, and delete the prescription if the  user is a doctor
             b. view, notify and export the prescription if the user is a patient
 
-    8. If `showViewPrescriptionModal` is true, create a ViewPrescriptionModal component and mount it on the PrescriptionsLTab component
+    8. If `showViewPrescriptionModal` is true, create a ViewPrescriptionModal component and mount it on the PrescriptionsList component
       a. Retrieve `closeModals` function from `Note Tab` context
       b. Mount ModalHeader on ViewPrescriptionModal component and pass title and `closeModals` function as props
+      c. Create a ModalBody component and mount it on ViewPrescriptionModal component
+        i. Display the prescription details (medicine name, dosage, frequency, duration, notes, doctor name and createdAt)
+      
 
 
 ### Settings Context

@@ -1,5 +1,6 @@
 import { useNotesTabContext } from "../../../../../../context/NotesTabContext"
 import ModalHeader from "../../../AppointmentTab/Modals/ModalHeader"
+import ModalBody from "./ModalBody"
 
 const ViewPrescriptionModal: React.FC = ()=>{
 
@@ -12,6 +13,8 @@ const ViewPrescriptionModal: React.FC = ()=>{
             <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-2xl mx-auto overflow-y-auto max-h-[90vh] flex flex-col">
 
                <ModalHeader title="View Prescription" onClose={closeModals}/>
+
+               <ModalBody/>
 
             </div>
 
