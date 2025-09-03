@@ -90,6 +90,8 @@ export const NotesTabProvider: React.FC<NotesTabProviderProps> = ({ children }) 
 
         setShowAddPrescriptionModal(false)
 
+        setShowViewPrescriptionModal(false)
+
         setShowDeletePrescriptionModal(false)
 
         setSelectedNote(null)
