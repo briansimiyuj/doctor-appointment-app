@@ -1,6 +1,7 @@
 import { useNotesTabContext } from "../../../../context/NotesTabContext"
 import { usePatientDetails } from "../../../../context/PatientDetailsContext"
 import AddPrescriptionModal from "./Modals/AddPrescriptionModal"
+import DeletePrescriptionModal from "./Modals/DeletePrescription/DeletePrescriptionModal"
 import ViewPrescriptionModal from "./Modals/ViewPrescription/ViewPrescriptionModal"
 import PrescriptionList from "./PrescriptionList"
 import PrescriptionTabHeader from "./PrescriptionTabHeader"
@@ -8,7 +9,7 @@ import PrescriptionTabHeader from "./PrescriptionTabHeader"
 const PrescriptionTab: React.FC = ()=>{
 
     const { prescriptions } = usePatientDetails(),
-          { showAddPrescriptionModal, showViewPrescriptionModal } = useNotesTabContext()
+          { showAddPrescriptionModal, showViewPrescriptionModal, showDeletePrescriptionModal } = useNotesTabContext()
 
     return(
 
@@ -37,6 +38,8 @@ const PrescriptionTab: React.FC = ()=>{
             { showAddPrescriptionModal && <AddPrescriptionModal/> }
 
             { showViewPrescriptionModal && <ViewPrescriptionModal/> }
+
+            { showDeletePrescriptionModal && <DeletePrescriptionModal/> }
 
         </>
 

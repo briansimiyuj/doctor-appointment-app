@@ -17,10 +17,10 @@ export const NotesTabProvider: React.FC<NotesTabProviderProps> = ({ children }) 
           [showDeleteNoteModal, setShowDeleteNoteModal] = useState<boolean>(false),
           [showViewNoteModal, setShowViewNoteModal] = useState<boolean>(false),
           [showAddPrescriptionModal, setShowAddPrescriptionModal] = useState<boolean>(false),
-          [showViewPrescriptionModal, setShowViewPrescriptionModal] = useState<boolean>(
+          [showViewPrescriptionModal, setShowViewPrescriptionModal] = useState<boolean>(false),
+          [showDeletePrescriptionModal, setShowDeletePrescriptionModal] = useState<boolean>(
             import .meta.env.VITE_DEV_MODE === "true" ? true : false
           ),
-          [showDeletePrescriptionModal, setShowDeletePrescriptionModal] = useState<boolean>(false),
           [selectedPrescription, setSelectedPrescription] = useState<PrescriptionType | null>(null),
           [selectedNote, setSelectedNote] = useState<NoteType | null>(null),
           [title, setTitle] = useState<string>(''),         

@@ -2472,6 +2472,7 @@ Patient details page will show the patient's details; medical history, allergies
       a. `prescriptions` from the Note Tab Provider
       b. `showAddPrescriptionModal` from the Note Tab Provider
       c. `showViewPrescriptionModal` from the Note Tab Provider
+      d. `showDeletePrescriptionModal` from the Note Tab Provider
 
     5. If `prescriptions` is empty, display a message saying "No prescriptions found"
     6. If `prescriptions` is not empty, create a PrescriptionList component and mount it on the Prescription Tab component
@@ -2585,7 +2586,16 @@ Patient details page will show the patient's details; medical history, allergies
       b. Mount ModalHeader on ViewPrescriptionModal component and pass title and `closeModals` function as props
       c. Create a ModalBody component and mount it on ViewPrescriptionModal component
         i. Display the prescription details (medicine name, dosage, frequency, duration, notes, doctor name and createdAt)
-      
+
+    9. If `showDeletePrescriptionModal` is true, create a DeletePrescriptionModal component and mount it on the PrescriptionsList component
+      a. Retrieve the following:
+        i. `closeModals` function from `Note Tab` context
+        ii. `selectPrescription` function from `Note Tab` context
+
+      b. Mount ModalHeader on DeletePrescriptionModal component and pass title and `closeModals` function as props
+      c. Display a message asking the user to confirm the deletion of the `selectedPrescription`  
+      d. Create buttons for confirming and canceling the deletion
+        i. On cancel, call `closeModals` function
 
 
 ### Settings Context
