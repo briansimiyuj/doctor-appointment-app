@@ -9,6 +9,8 @@ const PrescriptionTab: React.FC = ()=>{
     const { prescriptions } = usePatientDetails(),
           { showAddPrescriptionModal } = useNotesTabContext()
 
+    console.log(prescriptions)
+
     return(
 
         <>

@@ -2471,6 +2471,7 @@ Patient details page will show the patient's details; medical history, allergies
     4. Retrieve:
       a. `prescriptions` from the Note Tab Provider
       b. `showAddPrescriptionModal` from the Note Tab Provider
+      c. `showViewPrescriptionModal` from the Note Tab Provider
 
     5. If `prescriptions` is empty, display a message saying "No prescriptions found"
     6. If `prescriptions` is not empty, create a PrescriptionList component and mount it on the Prescription Tab component
@@ -2566,6 +2567,18 @@ Patient details page will show the patient's details; medical history, allergies
           d. Call `addPrescription` function with the new prescription object
           e. Show a success message to the user
           f. Call `closeModals` function to close the modal
+
+      ##### Prescription List Component
+
+      Prescription list component will be used to display the list of prescriptions for a given appointment
+
+        1. Retrieve `prescriptions` from `PatientDetails` context
+        2. Loop through the `prescriptions` array and create a PrescriptionItem component for each prescription
+        3. Mount the PrescriptionItem component on PrescriptionsList component and pass the prescription object as a prop. Wrap it with `Prescription Provider` 
+          a. Display the prescription details (medicine name, dosage, frequency, duration, notes, doctor name, createdAt and updatedAt)
+          b. Display buttons to 
+            a. view, edit, and delete the prescription if the  user is a doctor
+            b. view, notify and export the prescription if the user is a patient
 
 
 ### Settings Context

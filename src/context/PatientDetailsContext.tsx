@@ -76,9 +76,9 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
                         
                         const savedSurgeries = localStorage.getItem(`surgeries-${patientID}`)
                         
-                        setSurgeries(savedSurgeries ? JSON.parse(savedSurgeries) : [])
+      setSurgeries(savedSurgeries ? JSON.parse(savedSurgeries) : [])
                         
-                        const savedPrescriptions = localStorage.getItem(`prescriptions-${patientID}`)
+                        const savedPrescriptions = localStorage.getItem("prescriptions")
                         
                         setPrescriptions(savedPrescriptions ? JSON.parse(savedPrescriptions) : [])
 

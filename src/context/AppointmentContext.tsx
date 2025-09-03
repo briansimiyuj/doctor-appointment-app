@@ -71,8 +71,6 @@ export const AppointmentsContextProvider: React.FC<AppointmentsContextProviderPr
 
                 if(!doctor || !patient){
 
-                    console.log("doctor or patient not found")
-
                     return appointment
 
                 }
