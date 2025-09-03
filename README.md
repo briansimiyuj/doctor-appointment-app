@@ -2597,6 +2597,15 @@ Patient details page will show the patient's details; medical history, allergies
       d. Create buttons for confirming and canceling the deletion
         i. On cancel, call `closeModals` function
 
+    #### Delete Prescription Hook
+
+    Delete prescription hook will be used to delete the selected prescription and to remove from local storage
+
+      1. Retreive `selectedPrescription` and `closeModals` function from `Note Tab` context
+      2. Create a `handleDeletePrescription` function that will be called when the user confirms the deletion
+        a. If `selectedPrescription` is not null, delete it from local storage and call `closeModals` function
+        b. Show a toast message indicating that the prescription was deleted
+
 
 ### Settings Context
 
