@@ -1,8 +1,22 @@
+import { useEffect } from "react"
 import { usePrescriptionContext } from "../../../../../context/PrescriptionContext"
+import { useNotesTabContext } from "../../../../../context/NotesTabContext"
 
 const ModalBody: React.FC = () =>{
 
-    const { prescriptions, updateField, addPrescription, removePrescription } = usePrescriptionContext()
+    const { prescriptions, setPrescriptions, updateField, addPrescription, removePrescription } = usePrescriptionContext(),
+          { selectedPrescription } = useNotesTabContext()
+
+
+    useEffect(() =>{
+
+        if(selectedPrescription){
+
+            setPrescriptions([selectedPrescription])
+
+        }
+
+    }, [selectedPrescription, setPrescriptions])
 
     return(
 
@@ -104,11 +118,19 @@ const ModalBody: React.FC = () =>{
                 
             }
 
-            <button
-                type="button"
-                className="bg-primary-btn text-white dark:text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-                onClick={addPrescription}
-            >Add Medicine</button>
+            { 
+            
+                !selectedPrescription &&(
+               
+                    <button
+                       type="button"
+                       className="bg-primary-btn text-white dark:text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+                       onClick={addPrescription}
+                   >Add Medicine</button>
+                
+                )
+            
+            }
 
         </form>
 
