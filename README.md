@@ -2538,36 +2538,50 @@ Patient details page will show the patient's details; medical history, allergies
         c. Attach the `handleAddPrescription` function to the submit button's onClick event
         d. Attach `onClose` prop to the cancel button's onClick event
         
-      ##### Add Prescription Hook
+      ##### Add Prescription Hook  
 
-      Add Prescription hook will be used to add a new prescription to `local storage` 
+      The Add Prescription Hook is responsible for saving multiple prescriptions to `local storage` and syncing them across the application.  
 
-        1. Retrieve the following:
-          a. `prescriptions` state from the `Prescription Provider`
-          b. `closeModals` function from the `Notes Tab Provider`
-          c. `profile` state from the `Profile Provider`
-          d. `appointmentID` state from the `Appointment Provider`
-          e. `addPrescription` function from the `Patient Details Provider`
-          
-        2. Create `currentPrescription` state variable to store the current prescription
-        3. Create `canSave` state variable to store whether the current prescription can be submitted; which checks if the current prescription properties are not empty (`medicineName`, `dose`, `frequency` and `duration`)
-        4. Create `handleAddPrescription` function to handle the addition of a new prescription
-          a. If `profile` type is not a doctor, `canSave` is false and `appointmentID` is not defined, exit the function
-          b. Create a new prescription object with the following properties:
-            i. `_id`: a unique identifier for the prescription
-            ii. `medicineName` from the current prescription
-            iii. `dose` from the current prescription
-            iv. `frequency` from the current prescription
-            iv. `duration` from the current prescription
-            v. `notes` from the current prescription or an empty string
-            vi. `appointmentID` from the `appointmentID` state
-            vii. `doctorID` from the `profile` state
-            viii. `createdAt`: the current date and time
+        1. Retrieve Contexts  
+          a. `prescriptions` and `setPrescriptions` from the `Prescription Provider`  
+          b. `closeModals` function from the `Notes Tab Provider`  
+          c. `profile` state from the `Profile Provider`  
+          d. `appointmentID` state from the `Appointment Provider`  
+          e. `addPrescription` function from the `Patient Details Provider`  
 
-          c. Reset the current prescription properties to empty strings
-          d. Call `addPrescription` function with the new prescription object
-          e. Show a success message to the user
-          f. Call `closeModals` function to close the modal
+        2. Validation  
+          a. Instead of checking only the last prescription, evaluate all prescriptions in state  
+          b. A prescription is considered valid if the following properties are not empty:  
+              i. `medicineName`  
+              ii. `dose`  
+              iii. `frequency`  
+              iv. `duration`  
+
+        3. Create New Prescription Objects  
+          a. For each valid prescription, generate a new object with:  
+              i. `_id`: a unique identifier  
+              ii. `medicineName` (trimmed string)  
+              iii. `dose` (trimmed string)  
+              iv. `frequency` (trimmed string)  
+              v. `duration` (trimmed string)  
+              vi. `notes` (trimmed string or empty string)  
+              vii. `appointmentID` (from Appointment Provider)  
+              viii. `doctorID` (from Profile Provider)  
+              ix. `createdAt`: the current date and time in ISO format  
+
+        4. Handle Save (`handleAddPrescription`)  
+          a. Exit early if any of the following are true:  
+              i. `profile` type is not `"doctor"`  
+              ii. `appointmentID` is not defined  
+              iii. No valid prescriptions exist  
+          b. If conditions are met:  
+              i. Replace the prescriptions state with:  
+                - All valid prescriptions  
+                - A new empty prescription row for future input  
+              ii. Call `addPrescription` for each valid prescription  
+              iii. Display a success message to the user, indicating how many prescriptions were added  
+              iv. Call `closeModals` to close the modal  
+
 
       ##### Prescription List Component
 

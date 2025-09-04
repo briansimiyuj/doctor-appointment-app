@@ -23,6 +23,7 @@ export const PrescriptionContextProvider:React.FC<PrescriptionContextProviderPro
         notes: '',
         appointmentID: '',
         doctorID: '',
+        doctorName: '',
         createdAt: new Date().toISOString()
 
     }])
@@ -45,6 +46,7 @@ export const PrescriptionContextProvider:React.FC<PrescriptionContextProviderPro
             notes: '',
             appointmentID: '',
             doctorID: '',
+            doctorName: '',
             createdAt: new Date().toISOString()
 
         }])

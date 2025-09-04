@@ -1,4 +1,3 @@
-import { PrescriptionType } from "../assets/types/PrescriptionType"
 import { useAppointmentsContext } from "../context/AppointmentContext"
 import { useNotesTabContext } from "../context/NotesTabContext"
 import { usePatientDetails } from "../context/PatientDetailsContext"
@@ -23,24 +22,26 @@ export const useAddPrescription = () =>{
 
         if(profile?.type !== "doctor" || !canSave || !appointmentID) return
 
-        const newPrescription: PrescriptionType ={
+        const validPrescriptions = prescriptions.filter(prescription => prescription.medicineName.trim() && prescription.dose.trim() && prescription.frequency.trim() && prescription.duration.trim() && prescription.notes?.trim())
 
+          .map(prescription =>({
+
+            ...prescription,
             _id: uuidv4(),
-            medicineName: currentPrescription.medicineName.trim(),
-            dose: currentPrescription.dose.trim(),
-            frequency: currentPrescription.frequency.trim(),
-            duration: currentPrescription.duration.trim(),
-            notes: currentPrescription.notes?.trim() || '',
+            notes: prescription.notes?.trim() || "",
             createdAt: new Date().toISOString(),
             doctorID: profile._id,
+            doctorName: profile.name,
             appointmentID
 
-        }
+          }))
+
+        
 
         setPrescriptions([
 
-            ...prescriptions.slice(0, -1),
-            newPrescription,
+            ...validPrescriptions,
+
             {
                 _id: '',
                 medicineName: '',
@@ -50,15 +51,16 @@ export const useAddPrescription = () =>{
                 notes: '',
                 createdAt: '',
                 doctorID: '',
+                doctorName: '',
                 appointmentID: ''
             }
 
         ])
 
         
-        addPrescription(newPrescription)
+        validPrescriptions.forEach(prescription => addPrescription(prescription))
 
-        alert('New prescription added!')
+        alert(`${validPrescriptions.length} prescription(s) added successfully`)
 
         closeModals()
 

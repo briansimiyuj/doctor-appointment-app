@@ -8,6 +8,7 @@ export interface PrescriptionType{
     notes?: string
     appointmentID: string
     doctorID: string
+    doctorName: string
     createdAt: string
     updatedAt?: string
     
