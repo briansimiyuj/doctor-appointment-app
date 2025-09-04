@@ -2627,6 +2627,24 @@ Patient details page will show the patient's details; medical history, allergies
         a. If `selectedPrescription` is not null, delete it from local storage and call `closeModals` function
         b. Show a toast message indicating that the prescription was deleted
 
+        
+    #### Edit Prescription Hook
+
+    The Edit Prescription Hook will be used to edit an existing prescription from the database/local storage and update the `prescriptions` state variable
+
+      1. Retrieve `selectedPrescription`, `closeModals` from the `Notes Tab Context`
+      2. Retrieve `updatePrescription` from the Patient Details Context
+      3. If there is no `selectedPrescription`, throw an error and exit the function
+      4. Prepare validation logic
+        a. Trim `medicineName`, `dose`, `frequency`, `duration`, and `notes`
+        b. Define `canUpdate` as all fields being non-empty after trimming
+      5. Create a function `handleEditPrescription`
+        a. If `canUpdate` is `false`, exit the function
+        b. Create `updatedPrescription` object with trimmed values and previous `selectedPrescription` properties
+        c. Call `updatePrescription` function from Patient Details Context with `selectedPrescription._id` and `updatedPrescription` as arguments
+        d. Call `closeModals` function
+        e. Show success alert to the user
+
 
 ### Settings Context
 
