@@ -1,4 +1,6 @@
+import { useNotesTabContext } from "../../../../../context/NotesTabContext"
 import { useAddPrescription } from "../../../../../hooks/useAddPrescription"
+import { useEditPrescription } from "../../../../../hooks/useEditPrescription"
 
 interface ModalFooterProps{
 
@@ -9,7 +11,10 @@ interface ModalFooterProps{
 
 const ModalFooter: React.FC<ModalFooterProps> = ({ title, onClose })=>{
 
-    const { canSave, handleAddPrescription } = useAddPrescription()
+    const { canSave, handleAddPrescription } = useAddPrescription(),
+          { selectedPrescription } = useNotesTabContext(),
+          { canUpdate, handleEditPrescription } = useEditPrescription(),
+          canEdit = selectedPrescription ? canUpdate : canSave
 
     return(
 
@@ -21,8 +26,9 @@ const ModalFooter: React.FC<ModalFooterProps> = ({ title, onClose })=>{
             >Back</button>
 
             <button
-                className={`bg-primary-btn text-secondary-bg py-2 px-4 rounded-md transition-all duration-300 w-full sm:w-auto ${canSave ? "hover:bg-blue-600" : "cursor-not-allowed opacity-50"}`}
-                onClick={handleAddPrescription}
+                className={`bg-primary-btn text-secondary-bg py-2 px-4 rounded-md transition-all duration-300 w-full sm:w-auto ${canEdit ? "hover:bg-blue-600" : "cursor-not-allowed opacity-50"}`}
+                onClick={selectedPrescription ? handleEditPrescription : handleAddPrescription}
+                disabled={!canEdit}
             >{title}</button>
 
         </div>
