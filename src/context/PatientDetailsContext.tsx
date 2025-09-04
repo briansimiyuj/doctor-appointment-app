@@ -395,17 +395,21 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
             
       }
 
-      const addPrescription = (prescription: PrescriptionType) =>{
+      const addPrescription = (prescription: PrescriptionType | PrescriptionType[]) =>{
 
-            const updatedPrescriptions = [...prescriptions]
+            setPrescriptions(prev =>{
 
-            updatedPrescriptions.push(prescription)
+                  const items = Array.isArray(prescription) ? prescription : [prescription],
+                        updatedPrescriptions = [...prev, ...items]
 
-            setPrescriptions(updatedPrescriptions)
+                  localStorage.setItem("prescriptions", JSON.stringify(updatedPrescriptions))
 
-            localStorage.setItem("prescription", JSON.stringify(updatedPrescriptions))
+                  return updatedPrescriptions
+
+            })
 
       }
+
 
       const removePrescription = (ID: string) =>{
 
@@ -413,7 +417,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
             setPrescriptions(updatedPrescriptions)
 
-            localStorage.setItem("prescription", JSON.stringify(updatedPrescriptions))
+            localStorage.setItem("prescriptions", JSON.stringify(updatedPrescriptions))
       
       }
 
@@ -423,7 +427,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
             setPrescriptions(updatedPrescriptions)
 
-            localStorage.setItem("prescription", JSON.stringify(updatedPrescriptions))
+            localStorage.setItem("prescriptions", JSON.stringify(updatedPrescriptions))
 
       }
 

@@ -48,7 +48,7 @@ export interface PatientDetailsContextProps{
     // Prescriptions
 
     prescriptions: PrescriptionType[]
-    addPrescription: (prescription: PrescriptionType) => void
+    addPrescription: (prescription: PrescriptionType | PrescriptionType[]) => void
     removePrescription: (id: string) => void
     updatePrescription: (id: string, updatedPrescription: PrescriptionType) => void
 

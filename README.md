@@ -886,11 +886,11 @@ My appointments page will show the user's appointments. It will have a list of a
       iv. Save the updated surgeries to localStorage using the patient ID as part of the key
 
   17. Create `prescriptions` state which will be an array of prescription objects. Initialize it with data from localStorage if available
-  18. Create `addPrescription` function which takes a new prescription as a parameter
-      i. Create a new prescriptions array with existing prescriptions
-      ii. Add the new prescription to the array
-      iii. Update the `prescriptions` state with the new prescriptions array
-      iv. Save the updated prescriptions to localStorage using the patient ID as part of the key
+  18. Create `addPrescription` function which takes a new prescription or an array of prescriptions as a parameter  
+    a. Check if the input is an array or a single object  
+    b. Create a new prescriptions array by combining existing prescriptions with the new one(s)  
+    c. Update the `prescriptions` state with the new prescriptions array  
+    d. Save the updated prescriptions to `localStorage` using the patient ID as part of the key 
 
   19. Create `updatePrescription` function which takes a prescription index and a new prescription as parameters
       i. Create a new prescriptions array with existing prescriptions
