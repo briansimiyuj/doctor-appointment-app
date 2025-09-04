@@ -2984,3 +2984,5 @@ Appointment Details Page will be used to display the details of an appointment. 
 
   6. Mount PatientDetailsProvider on AppointmentDetailsPage, the page will reuse some of the components from PatientDetailsPage
   7. Mount TabNavigation on AppointmentDetailsPage
+    a. Retrieve `profile` from `ProfileContext`
+    b. If `profile` type is a patient, remove the `medicalHistory` tab from the `tabs` array

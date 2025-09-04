@@ -5,11 +5,9 @@ const TabsNavigation: React.FC = ()=>{
 
     const { profile } = useProfileContext()
 
-    console.log(profile?.type)
-
     const tabs =[
 
-        { id: 'medical-history', label: 'Medical History' },
+        profile?.type === "doctor" && { id: 'medical-history', label: 'Medical History' },
         { id: 'prescriptions', label: 'Prescriptions' },
         { id: 'appointments', label: 'Appointments' },
         { id: 'notes', label: 'Notes' },
