@@ -38,49 +38,51 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
             [surgeries, setSurgeries] = useState<string[]>([]),
             [prescriptions, setPrescriptions] = useState<PrescriptionType[]>([])
 
-      useEffect(()=>{
-            
+      useEffect(() => {
+      
             if(appointmentID && appointments && appointments.length > 0){
 
                   const foundAppointment = appointments.find(app => app._id === appointmentID)
 
-                  if(foundAppointment){
+                  if(profile?.type === "doctor"){
 
-                        const patientID = foundAppointment.patient.patientInfo._id
+                        if(foundAppointment){
 
-                        setPatientDetails(foundAppointment.patient)
+                              const patientID = foundAppointment.patient.patientInfo._id
 
-                        const savedAppointments = localStorage.getItem(`appointments-${patientID}`)
+                              setPatientDetails(foundAppointment.patient)
 
-                        setPatientAppointments(savedAppointments ? JSON.parse(savedAppointments) : [foundAppointment])
+                              const savedAppointments = localStorage.getItem(`appointments-${patientID}`)
+                              setPatientAppointments(savedAppointments ? JSON.parse(savedAppointments) : [foundAppointment])
 
-                        const savedNotes = localStorage.getItem(`notes-${patientID}`)
+                              const savedNotes = localStorage.getItem(`notes-${patientID}`)
+                              setNotes(savedNotes ? JSON.parse(savedNotes) : [])
 
-                        setNotes(savedNotes ? JSON.parse(savedNotes) : [])
+                              const savedDocuments = localStorage.getItem(`documents-${patientID}`)
+                              setDocuments(savedDocuments ? JSON.parse(savedDocuments) : [])
 
-                        const savedDocuments = localStorage.getItem(`documents-${patientID}`)
+                              const savedMedicalConditions = localStorage.getItem(`medicalConditions-${patientID}`)
+                              setMedicalConditions(savedMedicalConditions ? JSON.parse(savedMedicalConditions) : [])
 
-                        setDocuments(savedDocuments ? JSON.parse(savedDocuments) : [])
-                        
-                        const savedMedicalConditions = localStorage.getItem(`medicalConditions-${patientID}`)
-                        
-                        setMedicalConditions(savedMedicalConditions ? JSON.parse(savedMedicalConditions) : [])
-                        
-                        const savedAllergies = localStorage.getItem(`allergies-${patientID}`)
-                        
-                        setAllergies(savedAllergies ? JSON.parse(savedAllergies) : [])
-                        
-                        const savedMedications = localStorage.getItem(`medications-${patientID}`)
-                        
-                        setMedications(savedMedications ? JSON.parse(savedMedications) : [])
-                        
-                        const savedSurgeries = localStorage.getItem(`surgeries-${patientID}`)
-                        
-      setSurgeries(savedSurgeries ? JSON.parse(savedSurgeries) : [])
-                        
-                        const savedPrescriptions = localStorage.getItem("prescriptions")
-                        
-                        setPrescriptions(savedPrescriptions ? JSON.parse(savedPrescriptions) : [])
+                              const savedAllergies = localStorage.getItem(`allergies-${patientID}`)
+                              setAllergies(savedAllergies ? JSON.parse(savedAllergies) : [])
+
+                              const savedMedications = localStorage.getItem(`medications-${patientID}`)
+                              setMedications(savedMedications ? JSON.parse(savedMedications) : [])
+
+                              const savedSurgeries = localStorage.getItem(`surgeries-${patientID}`)
+                              setSurgeries(savedSurgeries ? JSON.parse(savedSurgeries) : [])
+
+                              const savedPrescriptions = localStorage.getItem("prescriptions")
+                              setPrescriptions(savedPrescriptions ? JSON.parse(savedPrescriptions) : [])
+
+                        }
+
+                  }else if(profile?.type === "patient"){
+
+                        const savedAppointments = localStorage.getItem("appointments")
+
+                        setPatientAppointments(savedAppointments ? JSON.parse(savedAppointments) : [])
 
                   }
 
