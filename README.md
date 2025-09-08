@@ -2465,8 +2465,10 @@ Patient details page will show the patient's details; medical history, allergies
       a. Retrieve `openAddPrescriptionModal` from the Note Tab Provider
       b. Display the title of the tab
       c. Display the number of prescriptions in the tab
-      d. Create a button to add a new prescription
-        i. Call `openAddPrescriptionModal` when clicked
+      d. Retreive `profile` from `Profile Context`
+      e. If `profile` type is `doctor`;
+        i. Create a button to add a new prescription
+          - Call `openAddPrescriptionModal` when clicked
 
     4. Retrieve:
       a. `prescriptions` from the Note Tab Provider
@@ -2985,3 +2987,12 @@ Appointment Details Page will be used to display the details of an appointment. 
   6. Mount TabNavigation on AppointmentDetailsPage
     a. Retrieve `profile` from `ProfileContext`
     b. If `profile` type is a patient, remove the `medicalHistory` tab from the `tabs` array
+
+  7. When `activeTab` is "prescription", reuse TabContent component as a container and pass the `tabID` prop as "prescription"
+    a. Create PrescriptionTab component and mount it on TabContent and wrap it with `NotesTabProvider`
+
+    #### PrescriptionTab Component
+
+    PrescriptionTab Component will be used to display the prescription tab of the appointment details page.
+
+      1. Reuse PrescriptionTabHeader component in doctor profile UI

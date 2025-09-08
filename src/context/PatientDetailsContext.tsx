@@ -22,9 +22,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
       const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null>(null), 
             { profile } = useProfileContext(),
-            [activeTab, setActiveTab] =  useState<"medical-history" | "appointments" | "prescriptions" | "notes" | "documents">(
-                  profile?.type === "doctor" ? "prescriptions" : "medical-history" 
-            ),
+            [activeTab, setActiveTab] =  useState<"medical-history" | "appointments" | "prescriptions" | "notes" | "documents">("prescriptions"),
             { appointmentID = "" } = useParams<{ appointmentID: string }>(),
             { patientID = "" } = useParams<{ patientID: string }>(),
             { appointments } = useContext(AppointmentsContext),

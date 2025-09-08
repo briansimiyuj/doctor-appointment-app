@@ -5,7 +5,10 @@ import { LoginContext } from "../context/LoginContext"
 import { useAppointmentsContext } from "../context/AppointmentContext"
 import AppointmentHeader from "../components/AppointmentsDetails/AppointmentHeader"
 import TabsNavigation from "../components/PatientDetails/TabsNavigation"
-import { PatientDetailsProvider } from "../context/PatientDetailsContext"
+import { usePatientDetails } from "../context/PatientDetailsContext"
+import TabContent from "../components/PatientDetails/Tabs/TabContent"
+import PrescriptionTab from "../components/AppointmentsDetails/Tabs/PrescriptionTab/PrescriptionTab"
+import { NotesTabProvider } from "../context/NotesTabContext"
 
 const AppointmentDetailsPage: React.FC = ()=>{
 
@@ -16,7 +19,8 @@ const AppointmentDetailsPage: React.FC = ()=>{
 
     const { profile } = profileContext, 
           { isAuthenticated, loading } = loginContext,
-          { appointment } = useAppointmentsContext()
+          { appointment } = useAppointmentsContext(),
+          { activeTab } = usePatientDetails()
 
     if(loading) return null
 
@@ -56,7 +60,28 @@ const AppointmentDetailsPage: React.FC = ()=>{
 
                 <TabsNavigation/>
 
-                </PatientDetailsProvider>  
+                {
+
+                    activeTab === "prescriptions" ?(
+
+                        <div className="p-4">
+
+                            <TabContent tabID="prescriptions">
+
+                                <NotesTabProvider>
+
+                                    <PrescriptionTab/>
+
+                                </NotesTabProvider>
+
+
+                            </TabContent>
+
+                        </div>
+
+                    ): null
+
+                }
 
             </div>
 

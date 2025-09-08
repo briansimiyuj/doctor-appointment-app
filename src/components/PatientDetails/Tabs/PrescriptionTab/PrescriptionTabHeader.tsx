@@ -1,11 +1,13 @@
 import { FiPlus } from "react-icons/fi"
 import { useNotesTabContext } from "../../../../context/NotesTabContext"
 import { usePatientDetails } from "../../../../context/PatientDetailsContext"
+import { useProfileContext } from "../../../../context/ProfileContext"
 
 const PrescriptionTabHeader: React.FC = ()=>{
 
     const { prescriptions } = usePatientDetails(),
-          { openAddPrescriptionModal } = useNotesTabContext()
+          { openAddPrescriptionModal } = useNotesTabContext(),
+          { profile } = useProfileContext()
 
     return(
 
@@ -25,16 +27,25 @@ const PrescriptionTabHeader: React.FC = ()=>{
 
                 </h4>
 
-                <button
-                    className="bg-primary-bg flex items-center gap-2 text-secondary-bg px-4 py-2 rounded-md hover:bg-blue-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
-                    onClick={openAddPrescriptionModal}
-                >
-                    
-                    <FiPlus className="w-4 h-4"/>
-                        
-                    <span className="text-sm font-semibold">Add Prescription</span>
+                {
 
-                </button>
+                    profile?.type === "doctor" &&(
+
+                        <button
+                            className="bg-primary-bg flex items-center gap-2 text-secondary-bg px-4 py-2 rounded-md hover:bg-blue-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
+                            onClick={openAddPrescriptionModal}
+                        >
+                            
+                            <FiPlus className="w-4 h-4"/>
+                                
+                            <span className="text-sm font-semibold">Add Prescription</span>
+
+                        </button>
+
+                    )
+
+                }
+
 
             </div>
 
