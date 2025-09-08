@@ -214,7 +214,11 @@ const Script: React.FC = () =>{
 
                         <AppointmentsContextProvider>
 
-                          <AppointmentDetailsPage/>
+                          <PatientDetailsProvider>
+
+                            <AppointmentDetailsPage/>
+
+                          </PatientDetailsProvider>
 
                         </AppointmentsContextProvider>
 

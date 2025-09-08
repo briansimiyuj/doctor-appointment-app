@@ -2960,7 +2960,7 @@ Private Route Component will be used to protect the routes that require authenti
 
 Appointment Details Page will be used to display the details of an appointment. This is a sister page to the Patient Details Page, whereby patients can view their appointments details.
 
-  1. Create Appointment Details Page Component , mount it on Script component, wrap it with AppointmentContextProvider and provide it with the route
+  1. Create Appointment Details Page Component , mount it on Script component, wrap it with AppointmentContextProvider and PatientDetailsProvider, then provide it with the route
   2. Retrieve:
     i. `isAuthenticated` and `loading` from `LoginContext`
     ii. `profile` from `ProfileContext`
@@ -2982,7 +2982,6 @@ Appointment Details Page will be used to display the details of an appointment. 
       i. Retrieve `doctorInfo` from `AppointmentContext`
         ii. Display the doctor's basic information (name, speciality, fee, hospital and hospital location)
 
-  6. Mount PatientDetailsProvider on AppointmentDetailsPage, the page will reuse some of the components from PatientDetailsPage
-  7. Mount TabNavigation on AppointmentDetailsPage
+  6. Mount TabNavigation on AppointmentDetailsPage
     a. Retrieve `profile` from `ProfileContext`
     b. If `profile` type is a patient, remove the `medicalHistory` tab from the `tabs` array

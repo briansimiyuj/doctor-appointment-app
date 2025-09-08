@@ -54,9 +54,7 @@ const AppointmentDetailsPage: React.FC = ()=>{
 
             <div className="bg-white rounded-lg shadow-md overflow-hidden mt-6">
 
-                <PatientDetailsProvider>
-
-                    <TabsNavigation/>
+                <TabsNavigation/>
 
                 </PatientDetailsProvider>  
 
