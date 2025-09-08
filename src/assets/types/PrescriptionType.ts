@@ -10,6 +10,6 @@ export interface PrescriptionType{
     doctorID: string
     doctorName: string
     createdAt: string
-    updatedAt?: string
+    updatedAt?: string | null
     
 }

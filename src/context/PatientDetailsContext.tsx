@@ -11,9 +11,12 @@ import { NoteType } from "../assets/types/NoteType"
 import { DoctorType } from "../assets/types/DoctorType"
 import { useProfileContext } from "./ProfileContext"
 import { PrescriptionType } from "../assets/types/PrescriptionType"
+import dummyPrescriptions from "../assets/dummyData/dummyPrescriptions.json"
 
 interface PatientDetailsProviderProps{
-    children: React.ReactNode
+    
+  children: React.ReactNode
+
 }
 
 export const PatientDetailsContext = createContext<PatientDetailsContextProps | undefined>(undefined)
@@ -34,7 +37,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
             [allergies, setAllergies] = useState<string[]>([]),
             [medications, setMedications] = useState<string[]>([]),
             [surgeries, setSurgeries] = useState<string[]>([]),
-            [prescriptions, setPrescriptions] = useState<PrescriptionType[]>([])
+            [prescriptions, setPrescriptions] = useState<PrescriptionType[]>(dummyPrescriptions)
 
       useEffect(() => {
       
@@ -70,9 +73,6 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
                               const savedSurgeries = localStorage.getItem(`surgeries-${patientID}`)
                               setSurgeries(savedSurgeries ? JSON.parse(savedSurgeries) : [])
-
-                              const savedPrescriptions = localStorage.getItem("prescriptions")
-                              setPrescriptions(savedPrescriptions ? JSON.parse(savedPrescriptions) : [])
 
                         }
 

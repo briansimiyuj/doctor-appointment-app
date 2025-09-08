@@ -1,0 +1,67 @@
+[
+  {
+    "_id": "pres_001",
+    "medicineName": "Amlodipine",
+    "dose": "5 mg",
+    "frequency": "Once daily",
+    "duration": "30 days",
+    "notes": "Take in the morning with or without food. Monitor blood pressure regularly.",
+    "appointmentID": "apt_123456",
+    "doctorID": "doc_789012",
+    "doctorName": "Dr. Smith",
+    "createdAt": "2025-09-01T09:00:00.000Z",
+    "updatedAt": null
+  },
+  {
+    "_id": "pres_002",
+    "medicineName": "Metformin",
+    "dose": "500 mg",
+    "frequency": "Twice daily",
+    "duration": "60 days",
+    "notes": "Take with meals to reduce gastrointestinal side effects. Check blood sugar levels as advised.",
+    "appointmentID": "apt_654321",
+    "doctorID": "doc_345678",
+    "doctorName": "Dr. Johnson",
+    "createdAt": "2025-09-02T14:30:00.000Z",
+    "updatedAt": "2025-09-03T10:15:00.000Z"
+  },
+  {
+    "_id": "pres_003",
+    "medicineName": "Ibuprofen",
+    "dose": "400 mg",
+    "frequency": "Every 6 hours as needed",
+    "duration": "7 days",
+    "notes": "Do not exceed 3200 mg per day. Take with food to avoid stomach upset.",
+    "appointmentID": "apt_987654",
+    "doctorID": "doc_123456",
+    "doctorName": "Dr. Lee",
+    "createdAt": "2025-09-04T11:00:00.000Z",
+    "updatedAt": null
+  },
+  {
+    "_id": "pres_004",
+    "medicineName": "Levothyroxine",
+    "dose": "50 mcg",
+    "frequency": "Once daily",
+    "duration": "90 days",
+    "notes": "Take on an empty stomach 30 minutes before breakfast. Monitor thyroid function.",
+    "appointmentID": "apt_456789",
+    "doctorID": "doc_901234",
+    "doctorName": "Dr. Patel",
+    "createdAt": "2025-09-05T08:45:00.000Z",
+    "updatedAt": "2025-09-06T09:30:00.000Z"
+  },
+  {
+    "_id": "pres_005",
+    "medicineName": "Amoxicillin",
+    "dose": "500 mg",
+    "frequency": "Three times daily",
+    "duration": "10 days",
+    "notes": "Complete the full course even if symptoms improve. Avoid if allergic to penicillin.",
+    "appointmentID": "apt_321654",
+    "doctorID": "doc_567890",
+    "doctorName": "Dr. Kim",
+    "createdAt": "2025-09-07T16:20:00.000Z",
+    "updatedAt": null
+  }
+]
