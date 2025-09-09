@@ -2996,6 +2996,10 @@ Appointment Details Page will be used to display the details of an appointment. 
     PrescriptionTab Component will be used to display the prescription tab of the appointment details page.
 
       1. Reuse PrescriptionTabHeader component in doctor profile UI
-      2. Retrieve `prescriptions` from `PatientDetailsContext`
+      2. Retrieve the following:
+        a. `prescriptions` from `PatientDetailsContext`
+        b. `showViewPrescriptionModal` from `NotesTabsContext`
+
       3. If `prescriptions` is empty, display a message saying that the patient has no prescriptions
       4. If `prescriptions` is not empty, reuse PrescriptionList component
+      5. If `showViewPrescriptionModal` is true, reuse ViewPrescriptionModal component
