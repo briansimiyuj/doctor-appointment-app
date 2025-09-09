@@ -2663,6 +2663,11 @@ Settings context will be used to store the user's settings and provide it to the
     a. Base notifications for all users (email, SMS, appointments, bookings)
     b. Additional settings for doctors (payments, system updates)
 
+  4. Create `handlePrescriptionReminderToggle` function which takes `prescriptionID` as a parameter
+    a. Calculate new reminder value 
+    b. Create an updated notification settings object with updated reminder value
+    c. Call `updateNotificationSettings` function with the updated notification settings object
+    d. Save the updated notification settings object to the local storage
 
 ### Dark Mode
 

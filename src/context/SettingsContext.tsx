@@ -2,6 +2,7 @@ import { createContext, useContext, useState } from "react"
 import { AvailabilitySettings, ConsultationSettings, NotificationSettings, SettingsContextProps } from "../assets/contextProps/SettingsContextProps"
 import { LoginContext } from "./LoginContext"
 import { dummySettingsData } from "../assets/dummyData/dummySettingsData"
+import { useAppointmentsContext } from "./AppointmentContext"
 
 const SettingsContext = createContext<SettingsContextProps | null>(null)
 
@@ -39,6 +40,7 @@ export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>
         return patientSettings
 
     }),
+          { appointmentID } = useAppointmentsContext(),
           [isChanged, setIsChanged] = useState(false)
 
 
@@ -60,21 +62,48 @@ export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>
 
     }
 
+    const handlePrescriptionReminderToggle = (prescriptionID: string) =>{
+    
+        const newValue = !notificationSettings.prescriptionReminders[prescriptionID],
 
+            newNotificationSettings ={
+
+                ...notificationSettings,
+                prescriptionReminders:{
+
+                    ...notificationSettings.prescriptionReminders,
+                    [prescriptionID]: newValue
+
+                }
+
+            }
+
+        updateNotificationSettings(newNotificationSettings)
+
+        const savedSettings = JSON.parse(localStorage.getItem(`prescriptionReminders-${appointmentID}`) || '{}')
+
+        localStorage.setItem(`prescriptionReminders-${appointmentID}`, JSON.stringify({ ...savedSettings, notificationSettings: newNotificationSettings }))
+        
+    }
+
+    const value: SettingsContextProps ={
+
+        consultationSettings,
+        availabilitySettings,
+        notificationSettings,
+        updateConsultationSettings,
+        updateAvailabilitySettings,
+        updateNotificationSettings,
+        isChanged,
+        setIsChanged,
+        handlePrescriptionReminderToggle
+
+    }
     
     return(
 
         <SettingsContext.Provider
-            value={{
-                consultationSettings,
-                availabilitySettings,
-                notificationSettings,
-                updateConsultationSettings,
-                updateAvailabilitySettings,
-                updateNotificationSettings,
-                isChanged,
-                setIsChanged
-            }}
+            value={value}
         >
           
             {children}

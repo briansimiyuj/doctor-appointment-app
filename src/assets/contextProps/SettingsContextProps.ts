@@ -38,6 +38,7 @@ export interface NotificationSettings{
 
     paymentNotifications: boolean
     systemUpdates: boolean
+    prescriptionReminders: { [prescriptionID: string]: boolean }
 
 }
 
@@ -51,5 +52,6 @@ export interface SettingsContextProps{
     updateNotificationSettings: (settings: NotificationSettings) => void
     isChanged: boolean
     setIsChanged: (value: boolean) => void
+    handlePrescriptionReminderToggle: (prescriptionID: string) => void
 
 }
