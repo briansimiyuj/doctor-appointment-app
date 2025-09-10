@@ -2502,21 +2502,11 @@ Patient details page will show the patient's details; medical history, allergies
           g. `appointmentID`: string
           h. `doctorID`: string
           i. `createdAt`: string
+          j. `prescriptionName`: string
 
         2. Create a `updateField` function which will take `field` and `value` as parameters and update the state variable accordingly
         3. Create a `addPrescription` function which will add a new prescription field in the form
         4. Create a `removeField` function which will remove a prescription field from the form
-
-      3. Create a ModalBody component and mount it on the Add Prescription Modal component. Wrap it with `Prescription Provider`. It will a form
-      4. Create a form with the following fields:
-        a. Medicine Name: text input
-        b. Dose: text input
-        c. Frequency: text input
-        d. Duration: text input
-        e. Notes: text area
-      
-      5. Make the form controlled components and update the state variables accordingly
-      6. Create a ModalFooter component and mount it on the Add Prescription Modal component. Wrap it with `Prescription Provider`. It will have a submit button and a cancel button   
         
 
       3. Create a ModalBody component and mount it on the Add Prescription Modal component. Wrap it with `Prescription Provider`. It will a form
@@ -2532,6 +2522,7 @@ Patient details page will show the patient's details; medical history, allergies
           iii. Frequency: text input
           iv. Duration: text input
           v. Notes: text area
+          vi. Prescription Name: text input
       
         d. Make the form controlled components and update the state variables accordingly
         e. Create a button to add new prescription fields
@@ -2569,6 +2560,7 @@ Patient details page will show the patient's details; medical history, allergies
               ii. `dose`  
               iii. `frequency`  
               iv. `duration`  
+              v. `prescriptionName`
 
         3. Create New Prescription Objects  
           a. For each valid prescription, generate a new object with:  
@@ -2581,6 +2573,7 @@ Patient details page will show the patient's details; medical history, allergies
               vii. `appointmentID` (from Appointment Provider)  
               viii. `doctorID` (from Profile Provider)  
               ix. `createdAt`: the current date and time in ISO format  
+              x. `prescriptionName` (trimmed string)
 
         4. Handle Save (`handleAddPrescription`)  
           a. Exit early if any of the following are true:  

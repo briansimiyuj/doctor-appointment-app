@@ -1,6 +1,7 @@
 export interface PrescriptionType{
 
     _id: string
+    prescriptionName: string
     medicineName: string
     dose: string
     frequency: string

@@ -16,6 +16,7 @@ export const PrescriptionContextProvider:React.FC<PrescriptionContextProviderPro
     const [prescriptions, setPrescriptions] = useState<PrescriptionType[]>([{ 
         
         _id: uuidv4(),
+        prescriptionName: '',
         medicineName: '',
         dose: '',
         frequency: '',
@@ -39,6 +40,7 @@ export const PrescriptionContextProvider:React.FC<PrescriptionContextProviderPro
         setPrescriptions([...prescriptions, { 
 
             _id: uuidv4(),
+            prescriptionName: '',
             medicineName: '',
             dose: '',
             frequency: '',

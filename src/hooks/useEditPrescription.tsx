@@ -20,6 +20,7 @@ export const useEditPrescription = () =>{
     const current = prescriptions[0]
 
     const canUpdate =
+        current.prescriptionName.trim() !== selectedPrescription.prescriptionName.trim() ||
         current.medicineName.trim() !== selectedPrescription.medicineName.trim() ||
         current.dose.trim() !== selectedPrescription.dose.trim() ||
         current.frequency.trim() !== selectedPrescription.frequency.trim() ||

@@ -15,6 +15,8 @@ const PrescriptionItem: React.FC<PrescriptionItemProps> = ({ prescription })=>{
 
         <li className="border rounded-md p-4 shadow hover:shadow-md transition duration-300" key={prescription._id}>
 
+            <h3 className="text-lg font-bold mb-1">{prescription.prescriptionName}</h3>
+
             <h4 className="text-base font-semibold mb-2">{prescription.medicineName}</h4>
 
             <p className="text-gray-700 mb-2">Dose: {prescription.dose}</p>

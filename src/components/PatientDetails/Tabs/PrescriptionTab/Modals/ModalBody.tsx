@@ -27,6 +27,20 @@ const ModalBody: React.FC = () =>{
                 prescriptions.map((prescription, index) =>(
                     
                     <div key={index} className=" p-4 rounded-lg space-y-4">
+
+                        <div>
+
+                            <label className="block mb-1 font-medium text-gray-700">Prescription Name</label>
+
+                            <input
+                                type="text"
+                                className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Enter Prescription Name"
+                                value={prescription.prescriptionName}
+                                onChange={e => updateField(index, "prescriptionName", e.target.value)}
+                            />
+
+                        </div>
                         
                         <div>
 

@@ -8,6 +8,8 @@ const ViewPrescriptionModalBody: React.FC = ()=>{
 
         <div className="p-4">
 
+            <h3 className="text-lg font-bold mb-1">{selectedPrescription?.prescriptionName}</h3>
+
             <h4 className="text-lg font-semibold mb-2">{selectedPrescription?.medicineName}</h4>
 
             <p className="text-gray-700 mb-2"><span className="font-semibold">Dose:</span> {selectedPrescription?.dose}</p>
@@ -18,7 +20,7 @@ const ViewPrescriptionModalBody: React.FC = ()=>{
 
             <p className="text-gray-700 mb-2"><span className="font-semibold">Notes:</span> {selectedPrescription?.notes || "No notes"}</p>
 
-            <p className="text-gray-700 mb-2"><span className="font-semibold">Doctor Name:</span> {selectedPrescription?.doctorID}</p>
+            <p className="text-gray-700 mb-2"><span className="font-semibold">Doctor Name:</span> {selectedPrescription?.doctorName}</p>
 
             <div className="text-sm text-gray-500">
 

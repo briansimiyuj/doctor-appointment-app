@@ -37,7 +37,11 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
             [allergies, setAllergies] = useState<string[]>([]),
             [medications, setMedications] = useState<string[]>([]),
             [surgeries, setSurgeries] = useState<string[]>([]),
-            [prescriptions, setPrescriptions] = useState<PrescriptionType[]>(dummyPrescriptions)
+            [prescriptions, setPrescriptions] = useState<PrescriptionType[]>(
+
+                  localStorage.getItem("prescriptions") ? JSON.parse(localStorage.getItem("prescriptions") as string) : dummyPrescriptions
+
+            )
 
       useEffect(() => {
       

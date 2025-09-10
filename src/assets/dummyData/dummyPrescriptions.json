@@ -1,6 +1,7 @@
 [
   {
     "_id": "pres_001",
+    "prescriptionName": "Blood Pressure Control",
     "medicineName": "Amlodipine",
     "dose": "5 mg",
     "frequency": "Once daily",
@@ -14,6 +15,7 @@
   },
   {
     "_id": "pres_002",
+    "prescriptionName": "Diabetes Management",
     "medicineName": "Metformin",
     "dose": "500 mg",
     "frequency": "Twice daily",
@@ -27,6 +29,7 @@
   },
   {
     "_id": "pres_003",
+    "prescriptionName": "Pain Relief",
     "medicineName": "Ibuprofen",
     "dose": "400 mg",
     "frequency": "Every 6 hours as needed",
@@ -40,6 +43,7 @@
   },
   {
     "_id": "pres_004",
+    "prescriptionName": "Thyroid Regulation",
     "medicineName": "Levothyroxine",
     "dose": "50 mcg",
     "frequency": "Once daily",
@@ -53,6 +57,7 @@
   },
   {
     "_id": "pres_005",
+    "prescriptionName": "Antibiotic Course",
     "medicineName": "Amoxicillin",
     "dose": "500 mg",
     "frequency": "Three times daily",

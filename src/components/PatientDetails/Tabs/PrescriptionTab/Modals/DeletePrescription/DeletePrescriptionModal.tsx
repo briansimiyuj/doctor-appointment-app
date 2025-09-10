@@ -15,7 +15,7 @@ const DeletePrescriptionModal: React.FC = ()=>{
     
                    <ModalHeader title="Delete Prescription" onClose={closeModals}/>
      
-                   <p className="text-center mt-4">Are you sure you want to permanently delete <span className="font-semibold">{selectedPrescription?.medicineName}</span> from the prescription list?</p>  
+                   <p className="text-center mt-4">Are you sure you want to permanently delete <span className="font-semibold">{selectedPrescription?.prescriptionName}</span> from the prescription list?</p>  
 
                     <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-3  mt-6">
 

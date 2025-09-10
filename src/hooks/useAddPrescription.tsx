@@ -16,13 +16,14 @@ export const useAddPrescription = () =>{
           canSave = !!currentPrescription.medicineName.trim() &&
                     !!currentPrescription.dose.trim() &&
                     !!currentPrescription.frequency.trim() &&
-                    !!currentPrescription.duration.trim()
+                    !!currentPrescription.duration.trim() &&
+                    !!currentPrescription.prescriptionName.trim()
 
     const handleAddPrescription = () =>{
 
-        if(profile?.type !== "doctor" || !canSave || !appointmentID) return
+      if(profile?.type !== "doctor" || !canSave || !appointmentID) return
 
-        const validPrescriptions = prescriptions.filter(prescription => prescription.medicineName.trim() && prescription.dose.trim() && prescription.frequency.trim() && prescription.duration.trim() && prescription.notes?.trim())
+      const validPrescriptions = prescriptions.filter(prescription => prescription.medicineName.trim() && prescription.dose.trim() && prescription.frequency.trim() && prescription.duration.trim() && prescription.notes?.trim())
 
           .map(prescription =>({
 
@@ -42,18 +43,19 @@ export const useAddPrescription = () =>{
 
             ...validPrescriptions,
 
-            {
-                _id: '',
-                medicineName: '',
-                dose: '',
-                frequency: '',
-                duration: '',
-                notes: '',
-                createdAt: '',
-                doctorID: '',
-                doctorName: '',
-                appointmentID: ''
-            }
+              {
+                  _id: '',
+                  medicineName: '',
+                  prescriptionName: '',
+                  dose: '',
+                  frequency: '',
+                  duration: '',
+                  notes: '',
+                  createdAt: '',
+                  doctorID: '',
+                  doctorName: '',
+                  appointmentID: ''
+              }
 
         ])
 
