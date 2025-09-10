@@ -194,7 +194,11 @@ const Script: React.FC = () =>{
 
                               <PatientDetailsProvider>
 
-                                <PatientDetailsPage/>
+                                <SettingsProvider>
+
+                                  <PatientDetailsPage/>
+
+                                </SettingsProvider>
 
                               </PatientDetailsProvider>
 
@@ -214,9 +218,13 @@ const Script: React.FC = () =>{
 
                         <AppointmentsContextProvider>
 
-                          <PatientDetailsProvider>
+                          <PatientDetailsProvider> 
 
-                            <AppointmentDetailsPage/>
+                            <SettingsProvider>
+
+                              <AppointmentDetailsPage/>
+
+                            </SettingsProvider>
 
                           </PatientDetailsProvider>
 
@@ -252,11 +260,15 @@ const Script: React.FC = () =>{
 
                       <PrivateRoute>
 
-                        <SettingsProvider>
+                        <PatientDetailsProvider>
+                          
+                          <SettingsProvider>
 
-                          <SettingsPage/>
+                            <SettingsPage/>
 
-                        </SettingsProvider>
+                          </SettingsProvider>
+
+                        </PatientDetailsProvider>
 
                       </PrivateRoute>
 

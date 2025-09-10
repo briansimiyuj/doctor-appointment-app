@@ -2,7 +2,8 @@ import { FiEdit, FiEye, FiTrash2 } from "react-icons/fi"
 import { PrescriptionType } from "../../../../assets/types/PrescriptionType"
 import { useNotesTabContext } from "../../../../context/NotesTabContext"
 import { useProfileContext } from "../../../../context/ProfileContext"
-import { MdNotifications, MdOutlineFileDownload } from "react-icons/md"
+import { MdNotifications, MdNotificationsOff, MdOutlineFileDownload } from "react-icons/md"
+import { useSettings } from "../../../../context/SettingsContext"
 
 
 interface PrescriptionItemActionProps{
@@ -14,7 +15,9 @@ interface PrescriptionItemActionProps{
 const PrescriptionItemAction: React.FC<PrescriptionItemActionProps> = ({ prescription })=>{
 
     const { openViewPrescriptionModal, openDeletePrescriptionModal, openEditPrescriptionModal } = useNotesTabContext(),
-          { profile } = useProfileContext()
+          { profile } = useProfileContext(),
+          { notificationSettings, handlePrescriptionReminderToggle } = useSettings(),
+          reminderOn = notificationSettings?.prescriptionReminders?.[prescription._id] || false
 
     return(
 
@@ -61,18 +64,16 @@ const PrescriptionItemAction: React.FC<PrescriptionItemActionProps> = ({ prescri
 
                     </>
 
-                
-
-
                 ):(
 
                     <>
-                    
+
                         <button 
                             className="bg-purple-600 text-secondary-bg dark:text-secondary-bg py-2 px-4 rounded-md transition-all duration-300 flex items-center gap-2 justify-center w-full sm:w-auto mt-2 sm:mt-0"
+                            onClick={() => handlePrescriptionReminderToggle(prescription?._id)}
                         >
 
-                            <MdNotifications className="w-6 h-6"/>
+                            { reminderOn ? <MdNotifications className="w-6 h-6"/> : <MdNotificationsOff className="w-6 h-6"/> }
 
                             Notify Me
 
@@ -85,15 +86,14 @@ const PrescriptionItemAction: React.FC<PrescriptionItemActionProps> = ({ prescri
                             <MdOutlineFileDownload className="w-6 h-6"/>
 
                             Export
+                            
                         </button>
-
                     
                     </>
 
                 )
 
             }
-
 
         </div>
 

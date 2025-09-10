@@ -1,18 +1,15 @@
 import { createContext, useContext, useState } from "react"
 import { AvailabilitySettings, ConsultationSettings, NotificationSettings, SettingsContextProps } from "../assets/contextProps/SettingsContextProps"
-import { LoginContext } from "./LoginContext"
 import { dummySettingsData } from "../assets/dummyData/dummySettingsData"
-import { useAppointmentsContext } from "./AppointmentContext"
+import { useProfileContext } from "./ProfileContext"
+import { usePatientDetails } from "./PatientDetailsContext"
 
 const SettingsContext = createContext<SettingsContextProps | null>(null)
 
 export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>{
 
-    const loginContext = useContext(LoginContext)
-
-    if(!loginContext) throw new Error('Login context not found')
-
-    const { userType } = loginContext
+    const { profile } = useProfileContext(),
+         { patientID } = usePatientDetails()
 
     const [consultationSettings, setConsultationSettings] = useState<ConsultationSettings>(() =>{
 
@@ -28,19 +25,24 @@ export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>
         return savedSettings ? JSON.parse(savedSettings).availabilitySettings : dummySettingsData.availabilitySettings
 
     })
+        
     const [notificationSettings, setNotificationSettings] = useState<NotificationSettings>(() =>{
 
-        const savedSettings = localStorage.getItem("doctorSettings"),
-              baseSettings = savedSettings ? JSON.parse(savedSettings).notificationSettings : dummySettingsData.notificationSettings
+        if(profile?.type === "doctor"){
 
-        if(userType === "doctor") return baseSettings
+            const savedSettings = localStorage.getItem("doctorSettings")
 
-        const { ...patientSettings } = baseSettings
+            return savedSettings ? JSON.parse(savedSettings).notificationSettings : dummySettingsData.notificationSettings
 
-        return patientSettings
+        }else{
+
+            const savedSettings = localStorage.getItem(`patientSettings-${patientID}`)
+
+            return savedSettings ? JSON.parse(savedSettings).notificationSettings : dummySettingsData.notificationSettings
+
+        }
 
     }),
-          { appointmentID } = useAppointmentsContext(),
           [isChanged, setIsChanged] = useState(false)
 
 
@@ -63,15 +65,16 @@ export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>
     }
 
     const handlePrescriptionReminderToggle = (prescriptionID: string) =>{
-    
-        const newValue = !notificationSettings.prescriptionReminders[prescriptionID],
 
+        const currentReminders = notificationSettings.prescriptionReminders || {},
+              newValue = !currentReminders[prescriptionID],
+              
             newNotificationSettings ={
 
                 ...notificationSettings,
                 prescriptionReminders:{
 
-                    ...notificationSettings.prescriptionReminders,
+                    ...currentReminders,
                     [prescriptionID]: newValue
 
                 }
@@ -80,9 +83,9 @@ export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>
 
         updateNotificationSettings(newNotificationSettings)
 
-        const savedSettings = JSON.parse(localStorage.getItem(`prescriptionReminders-${appointmentID}`) || '{}')
+        const savedSettings = JSON.parse(localStorage.getItem(`patientSettings-${patientID}`) || '{}')
 
-        localStorage.setItem(`prescriptionReminders-${appointmentID}`, JSON.stringify({ ...savedSettings, notificationSettings: newNotificationSettings }))
+        localStorage.setItem(`patientSettings-${patientID}`, JSON.stringify({ ...savedSettings, notificationSettings: newNotificationSettings }))
         
     }
 
