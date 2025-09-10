@@ -2653,6 +2653,39 @@ Patient details page will show the patient's details; medical history, allergies
         d. Call `closeModals` function
         e. Show success alert to the user
 
+    #### Export Document Hook
+
+    Export Document Hook will be used to export either a prescription or a note to a PDF file.
+
+      1. Create a `handleExportDocument` function with two arguments:
+        a. `docData`: the document data, either `PrescriptionType` or `NoteType`
+        b. `type`: a string indicating the type of document ("prescription" or "note")
+
+      2. Inside `handleExportDocument`:
+        a. Create an instance of `jsPDF` (`doc`)
+        b. Set the document title:
+            i. If `type` is "prescription", use `docData.prescriptionName`
+            ii. If `type` is "note", use `docData.title`
+
+        c. Set font size for content
+        d. Add document-specific details:
+            i. **Prescription**:
+              - Medicine Name
+              - Dose
+              - Frequency
+              - Duration
+              - Notes (if any)
+              - Prescribed By
+              - Prescribed On
+
+            ii. **Note**:
+              - Content
+              - Author/Doctor Name
+              - Date
+              
+        e. Construct a filename based on `type` and document title/ID
+        f. Save the PDF file
+        g. Show an alert confirming successful export
 
 ### Settings Context
 
