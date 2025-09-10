@@ -4,6 +4,7 @@ import { useNotesTabContext } from "../../../../context/NotesTabContext"
 import { useProfileContext } from "../../../../context/ProfileContext"
 import { MdNotifications, MdNotificationsOff, MdOutlineFileDownload } from "react-icons/md"
 import { useSettings } from "../../../../context/SettingsContext"
+import { useExportDocument } from "../../../../hooks/useExportDocument"
 
 
 interface PrescriptionItemActionProps{
@@ -17,6 +18,7 @@ const PrescriptionItemAction: React.FC<PrescriptionItemActionProps> = ({ prescri
     const { openViewPrescriptionModal, openDeletePrescriptionModal, openEditPrescriptionModal } = useNotesTabContext(),
           { profile } = useProfileContext(),
           { notificationSettings, handlePrescriptionReminderToggle } = useSettings(),
+          { handleExportDocument } = useExportDocument(),
           reminderOn = notificationSettings?.prescriptionReminders?.[prescription._id] || false
 
     return(
@@ -81,6 +83,7 @@ const PrescriptionItemAction: React.FC<PrescriptionItemActionProps> = ({ prescri
 
                         <button 
                             className="bg-primary-btn hover:bg-blue-600 text-secondary-bg dark:text-secondary-bg flex items-center gap-2 justify-center py-2 px-4 rounded-md transition-all duration-300 w-full sm:w-auto mt-2 sm:mt-0"
+                            onClick={() => handleExportDocument(prescription, "prescription")}
                         >
                             
                             <MdOutlineFileDownload className="w-6 h-6"/>
