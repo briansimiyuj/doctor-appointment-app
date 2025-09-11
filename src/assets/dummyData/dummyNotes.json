@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "note_001",
+    "title": "Follow-up on Chest Pain",
+    "content": "Patient reported mild chest pain during exertion. Recommended ECG and further tests.",
+    "date": "2025-09-01",
+    "doctorID": "doc_101",
+    "doctorName": "Dr. Brian Simiyu"
+  },
+  {
+    "_id": "note_002",
+    "title": "Diabetes Management",
+    "content": "Discussed diet control and prescribed Metformin 500mg twice daily.",
+    "date": "2025-09-05",
+    "doctorID": "doc_102",
+    "doctorName": "Dr. Jane Mwangi"
+  },
+  {
+    "_id": "note_003",
+    "title": "Annual Checkup",
+    "content": "General health checkup completed. All vitals normal. Blood test recommended.",
+    "date": "2025-09-08",
+    "doctorID": "doc_103",
+    "doctorName": "Dr. Samuel Otieno"
+  }
+]

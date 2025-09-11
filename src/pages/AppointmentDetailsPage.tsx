@@ -9,6 +9,7 @@ import { usePatientDetails } from "../context/PatientDetailsContext"
 import TabContent from "../components/PatientDetails/Tabs/TabContent"
 import PrescriptionTab from "../components/AppointmentsDetails/Tabs/PrescriptionTab/PrescriptionTab"
 import { NotesTabProvider } from "../context/NotesTabContext"
+import NoteTab from "../components/AppointmentsDetails/Tabs/NoteTab/NoteTab"
 
 const AppointmentDetailsPage: React.FC = ()=>{
 
@@ -74,6 +75,22 @@ const AppointmentDetailsPage: React.FC = ()=>{
 
                                 </NotesTabProvider>
 
+
+                            </TabContent>
+
+                        </div>
+
+                    ): activeTab === "notes" ?(
+
+                        <div className="p-4">
+
+                            <TabContent tabID="notes">
+
+                                <NotesTabProvider>
+
+                                    <NoteTab/>
+
+                                </NotesTabProvider>
 
                             </TabContent>
 

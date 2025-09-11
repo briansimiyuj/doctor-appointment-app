@@ -12,6 +12,7 @@ import { DoctorType } from "../assets/types/DoctorType"
 import { useProfileContext } from "./ProfileContext"
 import { PrescriptionType } from "../assets/types/PrescriptionType"
 import dummyPrescriptions from "../assets/dummyData/dummyPrescriptions.json"
+import dummyNotes from "../assets/dummyData/dummyNotes.json"
 
 interface PatientDetailsProviderProps{
     
@@ -25,23 +26,19 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
       const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null>(null), 
             { profile } = useProfileContext(),
-            [activeTab, setActiveTab] =  useState<"medical-history" | "appointments" | "prescriptions" | "notes" | "documents">("prescriptions"),
+            [activeTab, setActiveTab] =  useState<"medical-history" | "appointments" | "prescriptions" | "notes" | "documents">("notes"),
             { appointmentID = "" } = useParams<{ appointmentID: string }>(),
             { patientID = "" } = useParams<{ patientID: string }>(),
             { appointments } = useContext(AppointmentsContext),
             { appointedPatients } = useContext(BookingContext),
             [patientAppointments, setPatientAppointments] = useState<AppointmentType[]>([]),
-            [notes, setNotes] = useState<NoteType[]>([]),
+            [notes, setNotes] = useState<NoteType[]>(dummyNotes),
             [documents, setDocuments] = useState<DocumentType[]>([]),
             [medicalConditions, setMedicalConditions] = useState<string[]>([]),
             [allergies, setAllergies] = useState<string[]>([]),
             [medications, setMedications] = useState<string[]>([]),
             [surgeries, setSurgeries] = useState<string[]>([]),
-            [prescriptions, setPrescriptions] = useState<PrescriptionType[]>(
-
-                  localStorage.getItem("prescriptions") ? JSON.parse(localStorage.getItem("prescriptions") as string) : dummyPrescriptions
-
-            )
+            [prescriptions, setPrescriptions] = useState<PrescriptionType[]>(dummyPrescriptions)
 
       useEffect(() => {
       

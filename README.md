@@ -2236,7 +2236,7 @@ Patient details page will show the patient's details; medical history, allergies
     2. Create a component for the Notes Tab and mount it on the Tab Content component with id of "notes". Wrap it with the Notes Tab Context Provider
     3. Create a NoteTabHeader component and mount it on the Notes Tab component.
       a. Display a title and number of notes
-      b. Create a button to add a new note
+      b. Create a button to add a new note if the `profile` type is "doctor"
         i. On click, call `openAddNoteModal` function from the Notes Tab Context
 
     4. Create a AddNoteModal component and mount it on the Notes Tab component when `showAddNoteModal` from the Notes Tab Context is `true`
@@ -2280,12 +2280,20 @@ Patient details page will show the patient's details; medical history, allergies
         1. Loop through the `notes` state from Patient Details Context and create a NoteItem component for each note
         2. NoteItem component will display the title, content, doctor name and date of the note
           a. Create NoteItemAction component to display the action buttons for each note
-            i. Add a button to edit the note
-             - Attach `openEditNoteModal` function from Notes Tab Context to the button click event
-            ii. Add a button to delete the note
-              - Attach `openDeleteNoteModal` function from Notes Tab Context to the button click event
-            iii. Add a button to view the note in a modal
-              - Attach `openViewNoteModal` function from Notes Tab Context to the button click event
+           - If `profile` type is "doctor", 
+              i. Add a button to edit the note
+                - Attach `openEditNoteModal` function from Notes Tab Context to the button click event
+              ii. Add a button to delete the note
+                - Attach `openDeleteNoteModal` function from Notes Tab Context to the button click event
+              iii. Add a button to view the note in a modal
+                - Attach `openViewNoteModal` function from Notes Tab Context to the button click event
+
+            - If `profile` type is "patient",
+              i. Add a button to view the note in a modal
+                - Attach `openViewNoteModal` function from Notes Tab Context to the button click event
+              ii. Add a button to comment on the note
+              iii. Add a button to dowload the note
+                - Attach `handleExportDocument` function from Notes Tab Context to the button click event
             
           b. Display the truncated content of the note if it is longer than 120 characters
 
@@ -3041,3 +3049,19 @@ Appointment Details Page will be used to display the details of an appointment. 
       3. If `prescriptions` is empty, display a message saying that the patient has no prescriptions
       4. If `prescriptions` is not empty, reuse PrescriptionList component
       5. If `showViewPrescriptionModal` is true, reuse ViewPrescriptionModal component
+
+  8. When `activeTab` is "notes", reuse TabContent component as a container and pass the `tabID` prop as "notes"
+    a. Create NotesTab component and mount it on TabContent and wrap it with `NotesTabProvider`
+
+    #### NotesTab Component
+
+    NotesTab Component will be used to display the notes tab of the appointment details page.
+
+      1. Reuse NotesTabHeader component in doctor profile UI
+      2. Retrieve the following:
+        a. `notes` from `PatientDetailsContext`
+        b. `showViewNoteModal` from `NotesTabsContext`
+
+      3. If `notes` is empty, display a message saying that the patient has no notes
+      4. If `notes` is not empty, reuse NotesList component
+      a. If `showViewNoteModal` is true, reuse ViewNoteModal 

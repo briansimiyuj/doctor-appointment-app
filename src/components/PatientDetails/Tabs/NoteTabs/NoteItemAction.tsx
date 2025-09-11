@@ -1,6 +1,8 @@
-import { FiEdit, FiEye, FiTrash2 } from "react-icons/fi"
+import { FiEdit, FiEye, FiTrash2, FiDownload, FiMessageCircle } from "react-icons/fi"
 import { NoteType } from "../../../../assets/types/NoteType"
 import { useNotesTabContext } from "../../../../context/NotesTabContext"
+import { useProfileContext } from "../../../../context/ProfileContext"
+import { useExportDocument } from "../../../../hooks/useExportDocument"
 
 interface NoteCardItemActionProps{
 
@@ -8,9 +10,11 @@ interface NoteCardItemActionProps{
 
 }
 
-const NoteItemAction: React.FC<NoteCardItemActionProps> = ({ note })=>{
+const NoteItemAction: React.FC<NoteCardItemActionProps> = ({ note }) =>{
 
-    const { openViewNoteModal, openDeleteNoteModal, openEditNoteModal } = useNotesTabContext()
+    const { openViewNoteModal, openDeleteNoteModal, openEditNoteModal } = useNotesTabContext(),
+          { profile } = useProfileContext(),
+          { handleExportDocument } = useExportDocument()
 
     return(
 
@@ -27,32 +31,71 @@ const NoteItemAction: React.FC<NoteCardItemActionProps> = ({ note })=>{
 
             </button>
 
-            <button 
-                className="bg-primary-btn hover:bg-blue-600 text-white dark:text-white py-2 px-4 rounded-md transition duration-300 flex items-center gap-2 justify-center w-full sm:w-auto"
-                onClick={() => openEditNoteModal(note)}
-            >
+            {
 
-                <FiEdit className="w-4 h-4"/>
+                profile?.type === "doctor" ?(
 
-                Edit
+                    <>
 
-            </button>
+                        <button 
+                            className="bg-primary-btn hover:bg-blue-600 text-white dark:text-white py-2 px-4 rounded-md transition duration-300 flex items-center gap-2 justify-center w-full sm:w-auto"
+                            onClick={() => openEditNoteModal(note)}
+                        >
+                    
+                            <FiEdit className="w-4 h-4"/>
+                    
+                            Edit
 
-            <button 
-                className="bg-red-500 hover:bg-red-600 text-white dark:text-white flex items-center gap-2 justify-center py-2 px-4 rounded-md transition-all duration-300 w-full sm:w-auto mt-2 sm:mt-0"
-                onClick={() => openDeleteNoteModal(note)}
-            >
+                        </button>
 
-                <FiTrash2 className="w-4 h-4"/>
+                        <button 
+                            className="bg-red-500 hover:bg-red-600 text-white dark:text-white flex items-center gap-2 justify-center py-2 px-4 rounded-md transition-all duration-300 w-full sm:w-auto mt-2 sm:mt-0"
+                            onClick={() => openDeleteNoteModal(note)}
+                        >
+                            
+                            <FiTrash2 className="w-4 h-4"/>
+                            
+                            Delete
 
-                Delete
+                        </button>
 
-            </button>
+                    </>
+
+                ):(
+
+                    <>
+
+                        <button 
+                            className="bg-primary-btn hover:bg-blue-600 text-white dark:text-white py-2 px-4 rounded-md transition duration-300 flex items-center gap-2 justify-center w-full sm:w-auto"
+                            onClick={() => console.log("Comment on note", note._id)}
+                        >
+                            <FiMessageCircle className="w-4 h-4"/>
+
+                            Comment
+
+                        </button>
+
+                        <button 
+                            className="bg-gray-700 hover:bg-gray-800 text-white dark:text-white flex items-center gap-2 justify-center py-2 px-4 rounded-md transition-all duration-300 w-full sm:w-auto mt-2 sm:mt-0"
+                            onClick={() => handleExportDocument(note, "note")}
+                        >
+
+                            <FiDownload className="w-4 h-4"/>
+
+                            Download
+
+                        </button>
+
+                    </>
+
+                )
+                
+            }
 
         </div>
 
     )
-
+    
 }
 
 export default NoteItemAction
