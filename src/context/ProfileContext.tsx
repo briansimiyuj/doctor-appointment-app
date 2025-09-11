@@ -18,7 +18,7 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
     
     if(!context) throw new Error("ProfileContextProvider must be used within a LoginContextProvider")
         
-        const { name, email , userType} = context, 
+        const { name, email , userType, userID } = context, 
             [profile, setProfile] = useState<ProfileType | null>(null),
             [isEditing, setIsEditing] = useState<boolean>(false),
             [showModal, setShowModal] = useState<boolean>(false),   
@@ -165,12 +165,7 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
 
     useEffect(() =>{
     
-        const keys = Object.keys(localStorage),
-                profileKey = keys.find(key => key.startsWith("profileData-"))
-
-        if(profileKey){
-            
-            const storedProfile = localStorage.getItem(profileKey)
+        const storedProfile = localStorage.getItem(`profileData-${userID}`)
             
             if(storedProfile){
                 
@@ -186,11 +181,13 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
 
                 }
 
-            }
+            }else{
+                
+                setProfile(null)
 
-        }
+            }
     
-    }, [])
+    }, [userID])
 
 
     useEffect(() =>{

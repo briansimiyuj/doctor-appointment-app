@@ -569,8 +569,14 @@ Profile page will show the user profile data and allow the user to edit the data
 
 Submit profile hook will be used to submit the profile data to the local storage.
 
-  1. Retrieve the profile data, `setProfile` and `setShowModal` state from the `ProfileContext`
-  2. Retrieve `processFile` function from `UploadFile` hook
+  1. Retrieve the following:
+    a. `profile` and `showModal` states from the `ProfileContext`
+    b. `userID` state from the `LoginContext`
+    c. `processFile` function from `UploadFile` hook
+
+  2. Create `resolvedUserID` constant that will store the resolved user ID from the `userID` state or generate a new one if it's not available.
+    a. If `userID` is not available, set it to `resolvedUserID` 
+
   3. Call `processFile` function to upload the profile image, cover image and license certificate. The function will return a promise that resolves with the file properties.
   4. Create `submitProfile` function that will be called when the submit button is clicked
     a. Create a validation logic to check if all the fields are filled. If any of the fields are empty, return an error message.

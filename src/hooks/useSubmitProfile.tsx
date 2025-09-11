@@ -17,9 +17,11 @@ export const useSubmitProfile = () =>{
         licenseCertificate, hospitalValue, residenceValue, cityValue, stateValue, countryValue, 
         genderValue, dateOfBirthValue, hospitalLocationValue, setProfile 
     } = profileContext,
-          { userType } = loginContext,
+          { userType, userID, setUserID } = loginContext,
           { processFile } = useUploadFile(),
-          userID = `${userType}-${uuidv4()}`
+          resolvedUserID = userID ?? `${userType}-${uuidv4()}`
+
+    if(!userID) setUserID(resolvedUserID)
 
     const submitProfile = async(e: React.FormEvent<HTMLFormElement>) =>{
 
