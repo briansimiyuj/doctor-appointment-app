@@ -2199,6 +2199,7 @@ Patient details page will show the patient's details; medical history, allergies
       h. `showViewPrescriptionModal` and initialize it to `false`
       i. `showDeletePrescriptionModal` and initialize it to `false`
       j. `selectedPrescription` and initialize it to `null`
+      k. `showNoteCommentsModal` and initialize it to `false`
 
     2. Create `openAddNoteModal` function
       a. Set `showAddNoteModal` to `true`
@@ -2227,6 +2228,10 @@ Patient details page will show the patient's details; medical history, allergies
         b. Set `selectedNote` to the note passed in as an argument
         c. Set `title` to the title of the note passed in as an argument
         d. Set `content` to the content of the note passed in as an argument
+
+    7. Create `openNoteCommentsModal` function which takes a note as an argument
+        a. Set `showNoteCommentsModal` to `true`
+        b. Set `selectedNote` to the note passed in as an argument
 
   ### Notes Tab Component
 

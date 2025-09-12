@@ -19,6 +19,9 @@ export const NotesTabProvider: React.FC<NotesTabProviderProps> = ({ children }) 
           [showAddPrescriptionModal, setShowAddPrescriptionModal] = useState<boolean>(false),
           [showViewPrescriptionModal, setShowViewPrescriptionModal] = useState<boolean>(false),
           [showDeletePrescriptionModal, setShowDeletePrescriptionModal] = useState<boolean>(false),
+          [showNoteCommentsModal, setShowNoteCommentsModal] = useState<boolean>(
+                import .meta.env.VITE_DEV_MODE === "true" ? true : false
+          ),
           [selectedPrescription, setSelectedPrescription] = useState<PrescriptionType | null>(null),
           [selectedNote, setSelectedNote] = useState<NoteType | null>(null),
           [title, setTitle] = useState<string>(''),         
@@ -80,6 +83,14 @@ export const NotesTabProvider: React.FC<NotesTabProviderProps> = ({ children }) 
 
     }
 
+    const openNoteCommentsModal = (note: NoteType) =>{
+    
+       setSelectedNote(note)
+
+       setShowNoteCommentsModal(true)
+    
+    }
+
     const closeModals = () =>{
 
         setShowAddNoteModal(false)
@@ -93,6 +104,8 @@ export const NotesTabProvider: React.FC<NotesTabProviderProps> = ({ children }) 
         setShowViewPrescriptionModal(false)
 
         setShowDeletePrescriptionModal(false)
+
+        setShowNoteCommentsModal(false)
 
         setSelectedNote(null)
 
@@ -120,6 +133,7 @@ export const NotesTabProvider: React.FC<NotesTabProviderProps> = ({ children }) 
         showAddPrescriptionModal,
         showViewPrescriptionModal,
         showDeletePrescriptionModal,
+        showNoteCommentsModal,
         selectedNote,
         selectedPrescription,
         openAddNoteModal,
@@ -130,6 +144,7 @@ export const NotesTabProvider: React.FC<NotesTabProviderProps> = ({ children }) 
         openEditPrescriptionModal,
         openViewPrescriptionModal,
         openDeletePrescriptionModal,
+        openNoteCommentsModal,
         closeModals,
         title,
         setTitle,

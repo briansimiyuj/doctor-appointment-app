@@ -9,6 +9,7 @@ export interface NotesTabContextProps{
     showAddPrescriptionModal: boolean
     showViewPrescriptionModal: boolean
     showDeletePrescriptionModal: boolean
+    showNoteCommentsModal: boolean
     selectedNote: NoteType | null
     selectedPrescription: PrescriptionType | null
     openAddNoteModal: () => void
@@ -19,6 +20,7 @@ export interface NotesTabContextProps{
     openAddPrescriptionModal: () => void
     openEditPrescriptionModal: (prescription: PrescriptionType) => void
     openDeletePrescriptionModal: (prescription: PrescriptionType) => void
+    openNoteCommentsModal: (note: NoteType) => void
     closeModals: () => void
     title: string
     setTitle: (title: string) => void
