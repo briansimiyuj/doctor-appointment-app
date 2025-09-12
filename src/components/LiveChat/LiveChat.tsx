@@ -1,5 +1,6 @@
 import { NoteType } from "../../assets/types/NoteType"
 import LiveChatHeader from "./LiveChatHeader"
+import LiveChatInput from "./LiveChatInput"
 
 interface LiveChatProps{
 
@@ -14,6 +15,8 @@ const LiveChat: React.FC<LiveChatProps> = ({ note })=>{
         <div className="flex flex-col h-full p-4">
 
             <LiveChatHeader note={note}/>
+
+           <LiveChatInput/> 
 
         </div>
 

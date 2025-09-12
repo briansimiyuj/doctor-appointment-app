@@ -3096,3 +3096,15 @@ LiveChat Component is a component that displays a chat interface with a list of 
   1. Create a LiveChat component mount it on relevant parent component and wrap it with `LiveChatProvider`. The parent will either pass `selectedNote` prop or not.
   2. Create a LiveChatHeader component and mount it on LiveChat component and pass `selectedNote` prop to it.
     a. Provide a relevant title to the header
+
+    3. Create a LiveChatInput component and mount it on LiveChat component 
+
+      ### LiveChatInput Component
+
+      LiveChatInput Component will display an input field for sending messages and a button for sending the message
+
+        1. Retrieve the `input` state variable from the `LiveChatContext`
+        2. Create a textarea ref element and bind it to the `input` state variable
+        3. Adjust the textarea height dynamically based on the content
+        4. Create a textarea element and make it a controlled component by binding it to the `input` state variable
+        5. Create a button element to send the message
