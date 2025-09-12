@@ -2368,6 +2368,7 @@ Patient details page will show the patient's details; medical history, allergies
 
         1. Retrieve `selectedNote` and `closeModal` from the Notes Tab Context
         2. Reuse the ModalHeader component and pass `title` and `closeModal` as props
+        3. Create a LiveChat component and pass `selectedNote` as prop
 
   ### Medical History Tab Component
 

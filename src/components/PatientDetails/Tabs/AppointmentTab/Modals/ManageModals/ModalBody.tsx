@@ -1,4 +1,4 @@
-import LiveChat from "./LiveChat"
+import LiveChat from "../../../../../LiveChat/LiveChat"
 import StatusManagement from "./StatusManagement"
 import VideoCall from "./VideoCall"
 
