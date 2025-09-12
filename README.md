@@ -3108,3 +3108,27 @@ LiveChat Component is a component that displays a chat interface with a list of 
         3. Adjust the textarea height dynamically based on the content
         4. Create a textarea element and make it a controlled component by binding it to the `input` state variable
         5. Create a button element to send the message
+
+### Send Message Hook
+
+Send Message Hook will be used to handle sending chat messages in the LiveChat feature.
+
+  1. Retrieve  the following:
+    a. `input`, `setInput`, `messages`, and `setMessages` from `LiveChatContext`
+    b. `profile` from `ProfileContext`
+    c. `closeModal` from `NoteTabsContext`
+
+  2. Create a `sendMessage` function:
+    a. Return early if `input` is empty or only whitespace.
+    b. Construct a new `MessageType` object with
+      i. `_id`: a unique identifier
+      ii. `sender`: the type of user (`doctor`, `patient` or `admin`)
+      iii. `senderId`: the user's ID
+      iv. `senderName`: the user's name
+      v. `text`: the message content
+      vi `createdAt`: the current date and time
+      vii. `updatedAt`: the current date and time
+
+    c. Update the `messages` state variable by appending the new `MessageType` object to it.
+    d. Store the new message in the local storage.
+    e. Clear the `input` state variable.
