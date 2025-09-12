@@ -1,3 +1,4 @@
+import { LiveChatContextProvider } from "../../../../../context/LiveChatContext"
 import { useNotesTabContext } from "../../../../../context/NotesTabContext"
 import LiveChat from "../../../../LiveChat/LiveChat"
 import ModalHeader from "../../../../Profile/Modals/ModalHeader"
@@ -14,7 +15,11 @@ const NoteCommentModal: React.FC = ()=>{
 
                 <ModalHeader title={`Add a comment to ${selectedNote?.title}`} onClose={closeModals}/>
 
-                <LiveChat/>
+                <LiveChatContextProvider>
+
+                    <LiveChat note={selectedNote}/>
+
+                </LiveChatContextProvider>
 
             </div>
 

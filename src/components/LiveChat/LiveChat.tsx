@@ -1,4 +1,12 @@
-const LiveChat: React.FC = ()=>{
+import { NoteType } from "../../assets/types/NoteType"
+
+interface LiveChatProps{
+
+    note: NoteType | null
+
+}
+
+const LiveChat: React.FC<LiveChatProps> = ({ note })=>{
 
     return(
 

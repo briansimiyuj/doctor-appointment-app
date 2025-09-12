@@ -2368,7 +2368,7 @@ Patient details page will show the patient's details; medical history, allergies
 
         1. Retrieve `selectedNote` and `closeModal` from the Notes Tab Context
         2. Reuse the ModalHeader component and pass `title` and `closeModal` as props
-        3. Create a LiveChat component and pass `selectedNote` as prop
+        3. Create a LiveChat component and pass `selectedNote` as prop and wrap it with `LiveChatProvider`
 
   ### Medical History Tab Component
 
@@ -3081,3 +3081,10 @@ Appointment Details Page will be used to display the details of an appointment. 
       3. If `notes` is empty, display a message saying that the patient has no notes
       4. If `notes` is not empty, reuse NotesList component
       a. If `showViewNoteModal` is true, reuse ViewNoteModal 
+
+### Live Chat Context
+
+LiveChatContext is a context that provides messages and input state to the LiveChat component
+
+  1. Create a `messages` state variable and initialize it with an empty array of type `Message`
+  2. Create a `input` state variable and initialize it with an empty string
