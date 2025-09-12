@@ -12,7 +12,7 @@ interface NoteCardItemActionProps{
 
 const NoteItemAction: React.FC<NoteCardItemActionProps> = ({ note }) =>{
 
-    const { openViewNoteModal, openDeleteNoteModal, openEditNoteModal } = useNotesTabContext(),
+    const { openViewNoteModal, openDeleteNoteModal, openEditNoteModal, openNoteCommentsModal } = useNotesTabContext(),
           { profile } = useProfileContext(),
           { handleExportDocument } = useExportDocument()
 
@@ -67,7 +67,7 @@ const NoteItemAction: React.FC<NoteCardItemActionProps> = ({ note }) =>{
 
                         <button 
                             className="bg-primary-btn hover:bg-blue-600 text-white dark:text-white py-2 px-4 rounded-md transition duration-300 flex items-center gap-2 justify-center w-full sm:w-auto"
-                            onClick={() => console.log("Comment on note", note._id)}
+                            onClick={() => openNoteCommentsModal(note)}
                         >
                             <FiMessageCircle className="w-4 h-4"/>
 

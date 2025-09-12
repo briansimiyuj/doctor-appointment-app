@@ -2297,8 +2297,9 @@ Patient details page will show the patient's details; medical history, allergies
               i. Add a button to view the note in a modal
                 - Attach `openViewNoteModal` function from Notes Tab Context to the button click event
               ii. Add a button to comment on the note
+                - Attach `openNoteCommentsModal` function from Notes Tab Context to the button click event
               iii. Add a button to dowload the note
-                - Attach `handleExportDocument` function from Notes Tab Context to the button click event
+                - Attach `handleExportDocument` function from Export Document hook to the button click event
             
           b. Display the truncated content of the note if it is longer than 120 characters
 
@@ -2358,6 +2359,15 @@ Patient details page will show the patient's details; medical history, allergies
         b. Create `updateNote` object with `title`, `content`, `date` and previous `selectedNote` properties
         c. Call `updateNote` function from Patient Details Context with `updateNote` as argument
         d. Call `closeModal` function
+
+    7. Create a NoteCommentModal component and mount it to the Notes Tab component when `showNotesCommentModal` from the Notes Tab Context is `true`
+
+      #### NoteCommentModal component
+
+      NoteCommentModal will be used to display a chat component that will be used to display the comments of the note
+
+        1. Retrieve `selectedNote` and `closeModal` from the Notes Tab Context
+        2. Reuse the ModalHeader component and pass `title` and `closeModal` as props
 
   ### Medical History Tab Component
 
