@@ -3088,3 +3088,11 @@ LiveChatContext is a context that provides messages and input state to the LiveC
 
   1. Create a `messages` state variable and initialize it with an empty array of type `Message`
   2. Create a `input` state variable and initialize it with an empty string
+
+### Live Chat Component
+
+LiveChat Component is a component that displays a chat interface with a list of messages and an input field for sending messages.
+
+  1. Create a LiveChat component mount it on relevant parent component and wrap it with `LiveChatProvider`. The parent will either pass `selectedNote` prop or not.
+  2. Create a LiveChatHeader component and mount it on LiveChat component and pass `selectedNote` prop to it.
+    a. Provide a relevant title to the header
