@@ -3101,9 +3101,11 @@ LiveChat Component is a component that displays a chat interface with a list of 
 
       ### LiveChatInput Component
 
-      LiveChatInput Component will display an input field for sending messages and a button for sending the message
+      LiveChatInput Component will be a simple form that will have a textarea input field and a submit button.
 
-        1. Retrieve the `input` state variable from the `LiveChatContext`
+        1. Retrieve the the following:
+          a. `input` state variable from the `LiveChatContext`
+          b. `sendMessage` function from the `Send Message` hook 
         2. Create a textarea ref element and bind it to the `input` state variable
         3. Adjust the textarea height dynamically based on the content
         4. Create a textarea element and make it a controlled component by binding it to the `input` state variable

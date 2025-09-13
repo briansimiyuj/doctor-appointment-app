@@ -1,10 +1,12 @@
 import { useRef, useEffect } from "react"
 import { useLiveChatContext } from "../../context/LiveChatContext"
 import { FiSend } from "react-icons/fi"
+import { useSendMessage } from "../../hooks/useSendMessage"
 
 const LiveChatInput: React.FC = () =>{
 
     const { input, setInput } = useLiveChatContext(),
+          { sendMessage } = useSendMessage(), 
           textareaRef = useRef<HTMLTextAreaElement | null>(null)
 
     useEffect(() =>{
@@ -21,9 +23,17 @@ const LiveChatInput: React.FC = () =>{
 
     }, [input])
 
+    const submitForm = (e: React.FormEvent<HTMLFormElement>) =>{
+    
+       e.preventDefault()
+
+       sendMessage()
+    
+    }
+
     return(
 
-        <div className="relative p-2">
+        <form className="relative p-2" onSubmit={submitForm}>
 
             <textarea
                 ref={textareaRef}
@@ -34,16 +44,13 @@ const LiveChatInput: React.FC = () =>{
                 rows={1}
             />
 
-            <button
-                type="button"
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-blue-600 hover:text-blue-700"
-            >
+            <button type="submit" className="absolute right-4 top-1/2 -translate-y-1/2 text-blue-600 hover:text-blue-700">
 
                 <FiSend className="h-5 w-5"/>
 
             </button>
 
-        </div>       
+        </form>       
 
     )
 
