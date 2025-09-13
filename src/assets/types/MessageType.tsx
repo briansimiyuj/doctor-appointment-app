@@ -7,5 +7,6 @@ export interface MessageType{
     text: string
     createdAt: string
     updatedAt?: string | null
+    status?: "sent" | "delivered" | "read" | "error"
 
 }

@@ -3094,22 +3094,49 @@ LiveChatContext is a context that provides messages and input state to the LiveC
 LiveChat Component is a component that displays a chat interface with a list of messages and an input field for sending messages.
 
   1. Create a LiveChat component mount it on relevant parent component and wrap it with `LiveChatProvider`. The parent will either pass `selectedNote` prop or not.
-  2. Create a LiveChatHeader component and mount it on LiveChat component and pass `selectedNote` prop to it.
+  2. Create a LiveChatHeader component and mount it on LiveChat if `selectedNote` is not passed
     a. Provide a relevant title to the header
 
-    3. Create a LiveChatInput component and mount it on LiveChat component 
+  3. Create a LiveChatInput component and mount it on LiveChat component 
 
-      ### LiveChatInput Component
+    #### LiveChatInput Component
 
-      LiveChatInput Component will be a simple form that will have a textarea input field and a submit button.
+    LiveChatInput Component will be a simple form that will have a textarea input field and a submit button.
 
-        1. Retrieve the the following:
-          a. `input` state variable from the `LiveChatContext`
-          b. `sendMessage` function from the `Send Message` hook 
-        2. Create a textarea ref element and bind it to the `input` state variable
-        3. Adjust the textarea height dynamically based on the content
-        4. Create a textarea element and make it a controlled component by binding it to the `input` state variable
-        5. Create a button element to send the message
+      1. Retrieve the the following:
+        a. `input` state variable from the `LiveChatContext`
+        b. `sendMessage` function from the `Send Message` hook 
+      2. Create a textarea ref element and bind it to the `input` state variable
+      3. Adjust the textarea height dynamically based on the content
+      4. Create a textarea element and make it a controlled component by binding it to the `input` state variable
+      5. Create a button element to send the message
+
+  4. Create a LiveChatMessages component and mount it on LiveChat component
+
+    #### LiveChatMessages Component
+
+    LiveChatMessages Component will be a list of messages that will be displayed in the chat.
+
+      1. Retrieve the `messages` state variable from the `LiveChatContext`
+      2. Loop through the `messages` array and create a LiveChatMessage component for each message and mount it on the LiveChatMessages component and pass `message` as a prop
+
+      ##### LiveChatMessage Component
+      
+      LiveChatMessage Component will be a single message that will be displayed in the chat.
+
+        1. Retrieve `profile` from the `ProfileContext`
+        2. Create roles based on the `profile` and `message.sender`
+          a. `admin` if the `message.sender` profile is an admin
+          b. `receiver` if the `message.sender` profile is doctor, set it as patient. If the `message.sender` profile is patient, set it as doctor
+          c. `sender` if the `message.sender` profile is doctor, set it as doctor. If the `message.sender` profile is patient, set it as patient
+        3. If the `message.sender` is `sender`, display the message on the right side of the chat and the background color will be green
+        4. If the ` message.sender` is `receiver`, display the message on the left side of the chat and the background color will be gray
+        5. If the `message.sender` is `admin`, display the message on center of the chat and the background color will be green
+        6. Display ticks if `message.sender` is `sender` 
+          a. Single gray tick if the message is sent
+          b. Two gray ticks if the message is delivered
+          c. Two blue ticks if the message is read
+          d. A small clock icon if the message is not sent yet
 
 ### Send Message Hook
 
