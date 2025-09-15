@@ -3109,6 +3109,7 @@ LiveChat Component is a component that displays a chat interface with a list of 
       2. Create a textarea ref element and bind it to the `input` state variable
       3. Adjust the textarea height dynamically based on the content
       4. Create a textarea element and make it a controlled component by binding it to the `input` state variable
+        a. Add an `onKeyDown` event listener to the textarea to handle the enter key press
       5. Create a button element to send the message
 
   4. Create a LiveChatMessages component and mount it on LiveChat component
@@ -3118,7 +3119,9 @@ LiveChat Component is a component that displays a chat interface with a list of 
     LiveChatMessages Component will be a list of messages that will be displayed in the chat.
 
       1. Retrieve the `messages` state variable from the `LiveChatContext`
-      2. Loop through the `messages` array and create a LiveChatMessage component for each message and mount it on the LiveChatMessages component and pass `message` as a prop
+      2. Add a scroll to the bottom of the chat when a new message is added
+      3. If `messages` is empty, display a message saying "Start a conversation with a doctor"
+      4. Loop through the `messages` array and create a LiveChatMessage component for each message and mount it on the LiveChatMessages component and pass `message` as a prop
 
       ##### LiveChatMessage Component
       

@@ -42,6 +42,17 @@ const LiveChatInput: React.FC = () =>{
                 placeholder="Type a message..."
                 className="w-full resize-none overflow-y-auto rounded-full bg-white border pr-10 pl-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 rows={1}
+                onKeyDown={e =>{
+
+                    if(e.key === "Enter" && !e.shiftKey){
+
+                        e.preventDefault()
+
+                        sendMessage()
+                        
+                    }
+
+                }}
             />
 
             <button type="submit" className="absolute right-4 top-1/2 -translate-y-1/2 text-blue-600 hover:text-blue-700">
