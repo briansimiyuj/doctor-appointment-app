@@ -3157,6 +3157,7 @@ Send Message Hook will be used to handle sending chat messages in the LiveChat f
       v. `text`: the message content
       vi `createdAt`: the current date and time
       vii. `updatedAt`: the current date and time
+      viii. `status`: `sent`
 
     c. Update the `messages` state variable by appending the new `MessageType` object to it.
     d. Store the new message in the local storage.

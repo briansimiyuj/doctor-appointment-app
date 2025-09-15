@@ -1,6 +1,5 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import { MessageType } from "../assets/types/MessageType"
-import { dummyMessages } from "../assets/dummyData/dummyMessages"
 
 interface LiveChatContextProps{
 
@@ -21,8 +20,20 @@ export const LiveChatContext=createContext<LiveChatContextProps | undefined>(und
 
 export const LiveChatContextProvider:React.FC<LiveChatContextProviderProps> = ({ children })=>{
 
-    const [messages, setMessages] = useState<MessageType[]>(dummyMessages),
+    const [messages, setMessages] = useState<MessageType[]>(() =>{
+
+        const storedMessages = localStorage.getItem("messages")
+
+        return storedMessages ? JSON.parse(storedMessages) : []
+
+    }),
           [input, setInput] = useState('')
+
+    useEffect(() =>{
+    
+       localStorage.setItem("messages", JSON.stringify(messages))
+    
+    }, [messages])
 
     const contextValue: LiveChatContextProps ={
 
