@@ -1,14 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { MessageType } from "../assets/types/MessageType"
-
-interface LiveChatContextProps{
-
-    messages: MessageType[]
-    setMessages: (messages: MessageType[]) => void
-    input: string
-    setInput: (input: string) => void
-
-}
+import { dummyMessages } from "../assets/dummyData/dummyMessages"
+import { LiveChatContextProps } from "../assets/contextProps/LiveChatContextProps"
 
 interface LiveChatContextProviderProps{
 
@@ -22,12 +15,15 @@ export const LiveChatContextProvider:React.FC<LiveChatContextProviderProps> = ({
 
     const [messages, setMessages] = useState<MessageType[]>(() =>{
 
-        const storedMessages = localStorage.getItem("messages")
+        const savedMessages = localStorage.getItem("messages")
 
-        return storedMessages ? JSON.parse(storedMessages) : []
+        return savedMessages ? JSON.parse(savedMessages) : dummyMessages
 
     }),
-          [input, setInput] = useState('')
+          [input, setInput] = useState(''),
+          [messageMenuModal, setMessageMenuModal] = useState(false),
+          [selectedMessage, setSelectedMessage] = useState<MessageType | null>(null),
+          [hoveredMessage, setHoveredMessage] = useState<MessageType | null>(null)
 
     useEffect(() =>{
     
@@ -35,13 +31,42 @@ export const LiveChatContextProvider:React.FC<LiveChatContextProviderProps> = ({
     
     }, [messages])
 
+    const openMessageMenu = (message: MessageType) =>{
+
+        setSelectedMessage(message)
+        
+        setMessageMenuModal(true)
+        
+    }
+
+    const closeMessageMenu = () =>{
+
+        setMessageMenuModal(false)
+
+        setSelectedMessage(null)
+
+    }
+
+    const handleHoverMessage = (message: MessageType | null) =>{
+    
+       setHoveredMessage(message)
+    
+    }
+
     const contextValue: LiveChatContextProps ={
 
         messages,
         setMessages,
+        selectedMessage,
         input,
-        setInput
-        
+        setInput,
+        messageMenuModal,
+        setMessageMenuModal,
+        openMessageMenu,
+        closeMessageMenu,
+        hoveredMessage,
+        handleHoverMessage
+
     }
 
     return(

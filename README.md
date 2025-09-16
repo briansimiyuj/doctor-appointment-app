@@ -3086,8 +3086,17 @@ Appointment Details Page will be used to display the details of an appointment. 
 
 LiveChatContext is a context that provides messages and input state to the LiveChat component
 
-  1. Create a `messages` state variable and initialize it with an empty array of type `Message`
-  2. Create a `input` state variable and initialize it with an empty string
+  1. Create the following state variables:
+    a. `messages` - an array of messages of type `Message`. Initialize it with an empty array
+    b. `input` - a string representing the current input. Initialize it with an empty string
+    c. `messageMenuModal` - a boolean indicating whether the message menu modal is visible. Initialize it with false
+    d. `selectedMessage` - a `Message` object representing the currently selected message. Initialize it with null
+    e. `hoveredMessage` - a `Message` object representing the currently hovered message. Initialize it with null
+
+  2. Store `messages` in local storage when it changes
+  3. Create `openMessageMenu` function which takes `message` as an argument and sets `messageMenuModal` to true and `selectedMessage` to the `message` parameter
+  4. Create `closeMessageMenu` function which sets `messageMenuModal` to false and `selectedMessage` to null
+  5. Create `handleMessageHover` function which takes `message` as an argument and sets `hoveredMessage` to the `message` parameter
 
 ### Live Chat Component
 
