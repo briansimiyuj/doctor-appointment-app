@@ -3084,6 +3084,9 @@ Appointment Details Page will be used to display the details of an appointment. 
       4. If `notes` is not empty, reuse NotesList component
       a. If `showViewNoteModal` is true, reuse ViewNoteModal 
 
+  9. When `activeTab` is "documents", reuse TabContent component as a container and pass the `tabID` prop as "documents"
+    a. Reuse DocumentsTab component for the doctor profile UI, wrap it with `DocumentsTabProvider`
+
 ### Live Chat Context
 
 LiveChatContext is a context that provides messages and input state to the LiveChat component
