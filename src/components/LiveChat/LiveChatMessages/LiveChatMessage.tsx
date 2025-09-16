@@ -1,6 +1,7 @@
 import { MessageType } from "../../../assets/types/MessageType"
-import { FiCheck, FiClock } from "react-icons/fi"
+import { FiCheck, FiChevronDown, FiClock } from "react-icons/fi"
 import { useProfileContext } from "../../../context/ProfileContext"
+import { useLiveChatContext } from "../../../context/LiveChatContext"
 
 interface LiveChatMessageProps{
 
@@ -11,24 +12,25 @@ interface LiveChatMessageProps{
 const LiveChatMessage: React.FC<LiveChatMessageProps> = ({ message })=>{
 
     const { profile } = useProfileContext(),
+          { openMessageMenu, handleHoverMessage, hoveredMessage } = useLiveChatContext(),
           isAdmin = message.sender === "admin",
           sender = profile?.type === "doctor" ? "doctor" : profile?.type === "patient" ? "patient" : "admin",
-          receiver = profile?.type === "patient" ? "doctor" : profile?.type === "doctor" ? "patient" : "admin"
-
-    
+          receiver = profile?.type === "patient" ? "doctor" : profile?.type === "doctor" ? "patient" : "admin"    
 
     return(
 
         <div className={`flex ${message.sender !== sender ? "justify-start" : sender ? "justify-end" : "just-center"}`}>
 
             <div
-                className={`px-4 py-3 rounded-xl max-w-sm text-base shadow
+                className={`px-4 py-5 rounded-xl max-w-sm text-base shadow relative
                     ${message.sender === sender 
                         ? "bg-green-500 text-white dark:text-white rounded-br-none"
                         : message.sender === receiver
                         ? "bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-100 rounded-bl-none"
                         : message.sender === "admin" ? "bg-yellow-200 text-gray-800 dark:bg-yellow-600 dark:text-gray-100 text-center" : null
                 }`}
+                onMouseOver={() => handleHoverMessage(message)}
+                onMouseLeave={() => handleHoverMessage(null)}
             >
 
                 {
@@ -97,6 +99,20 @@ const LiveChatMessage: React.FC<LiveChatMessageProps> = ({ message })=>{
 
                                         </span>
                                         
+                                    )
+
+                                }
+
+                                {
+
+                                    hoveredMessage?._id === message._id && !isAdmin &&(
+
+                                        <span className="absolute top-1 right-2 cursor-pointer" onClick={() => openMessageMenu(message)}>
+
+                                           <FiChevronDown className="w-6 h-6 text-gray-500 dark:text-gray-900"
+                                           />                                        
+
+                                        </span>
                                     )
 
                                 }

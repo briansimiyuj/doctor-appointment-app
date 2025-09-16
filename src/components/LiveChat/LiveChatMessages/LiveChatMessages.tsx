@@ -1,10 +1,11 @@
 import { useEffect, useRef } from "react"
 import { useLiveChatContext } from "../../../context/LiveChatContext"
 import LiveChatMessage from "./LiveChatMessage"
+import MessageMenuModal from "./MessageMenuModal"
 
 const LiveChatMessages: React.FC = ()=>{
 
-    const { messages } = useLiveChatContext(),
+    const { messages, messageMenuModal, selectedMessage, closeMessageMenu } = useLiveChatContext(),
           bottomRef = useRef<HTMLDivElement>(null)
 
     useEffect(() =>{
@@ -15,7 +16,14 @@ const LiveChatMessages: React.FC = ()=>{
 
     return(
 
-        <div className="flex flex-col gap-2">
+        <div 
+            className="flex flex-col gap-2"
+            onClick={() =>{
+
+                if(messageMenuModal) closeMessageMenu()
+
+            }}
+        >
 
             {
 
@@ -30,8 +38,20 @@ const LiveChatMessages: React.FC = ()=>{
                 ):(
 
                     messages.map(msg =>(
+                        
+                        <div className="relative">
+
+                            <LiveChatMessage key={msg._id} message={msg}/>
+
+                            {
+
+                                messageMenuModal && selectedMessage?._id === msg._id && <MessageMenuModal message={msg}/>
+
+                            }
+
+
+                        </div>
     
-                        <LiveChatMessage key={msg._id} message={msg}/>
     
                     ))
 

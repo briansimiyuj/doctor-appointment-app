@@ -3127,16 +3127,21 @@ LiveChat Component is a component that displays a chat interface with a list of 
 
     LiveChatMessages Component will be a list of messages that will be displayed in the chat.
 
-      1. Retrieve the `messages` state variable from the `LiveChatContext`
+      1. Retrieve `messages`, `selectedMessage`, `messageMenuModal` and `closeMessageMenu` states variable from the `LiveChatContext`
       2. Add a scroll to the bottom of the chat when a new message is added
       3. If `messages` is empty, display a message saying "Start a conversation with a doctor"
       4. Loop through the `messages` array and create a LiveChatMessage component for each message and mount it on the LiveChatMessages component and pass `message` as a prop
+      5. If `messageMenuModal` is true and `selectedMessage` ID is equal to the message ID, create a message menu component and mount it on the LiveChatMessages component and pass `message` as a prop
+      6. On the parent div of the LiveChatMessage component, add an `onClick` event listener and call `closeMessageMenu` function if the `messageMenuModal` is true
 
       ##### LiveChatMessage Component
       
       LiveChatMessage Component will be a single message that will be displayed in the chat.
 
-        1. Retrieve `profile` from the `ProfileContext`
+        1. Retrieve
+          a. `profile` from the `ProfileContext`
+          b. `openMessageMenu`, `handleHoverMessage` and `hoveredMessage` from the `LiveChatContext`
+
         2. Create roles based on the `profile` and `message.sender`
           a. `admin` if the `message.sender` profile is an admin
           b. `receiver` if the `message.sender` profile is doctor, set it as patient. If the `message.sender` profile is patient, set it as doctor
@@ -3149,6 +3154,14 @@ LiveChat Component is a component that displays a chat interface with a list of 
           b. Two gray ticks if the message is delivered
           c. Two blue ticks if the message is read
           d. A small clock icon if the message is not sent yet
+
+        7. Display a chevron icon when the `hoveredMessage` is the current message
+          a. Attach a `onClick` event to the chevron icon and call the `openMessageMenu` function with the current message as argument
+
+      ##### Message Menu Modal
+
+      The MessageMenuModal component will be used to display message options when the user clicks on the chevron icon.
+        **We will document when we come to full livechat feature**
 
 ### Send Message Hook
 
