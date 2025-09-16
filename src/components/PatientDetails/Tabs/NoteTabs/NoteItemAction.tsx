@@ -31,6 +31,16 @@ const NoteItemAction: React.FC<NoteCardItemActionProps> = ({ note }) =>{
 
             </button>
 
+            <button 
+                className="bg-primary-btn hover:bg-blue-600 text-white dark:text-white py-2 px-4 rounded-md transition duration-300 flex items-center gap-2 justify-center w-full sm:w-auto"
+                onClick={() => openNoteCommentsModal(note)}
+            >
+                <FiMessageCircle className="w-4 h-4"/>
+
+                Comment
+
+            </button>
+
             {
 
                 profile?.type === "doctor" ?(
@@ -38,7 +48,7 @@ const NoteItemAction: React.FC<NoteCardItemActionProps> = ({ note }) =>{
                     <>
 
                         <button 
-                            className="bg-primary-btn hover:bg-blue-600 text-white dark:text-white py-2 px-4 rounded-md transition duration-300 flex items-center gap-2 justify-center w-full sm:w-auto"
+                            className="bg-yellow-800 hover:bg-yellow-900 text-white dark:text-white py-2 px-4 rounded-md transition duration-300 flex items-center gap-2 justify-center w-full sm:w-auto"
                             onClick={() => openEditNoteModal(note)}
                         >
                     
@@ -65,15 +75,6 @@ const NoteItemAction: React.FC<NoteCardItemActionProps> = ({ note }) =>{
 
                     <>
 
-                        <button 
-                            className="bg-primary-btn hover:bg-blue-600 text-white dark:text-white py-2 px-4 rounded-md transition duration-300 flex items-center gap-2 justify-center w-full sm:w-auto"
-                            onClick={() => openNoteCommentsModal(note)}
-                        >
-                            <FiMessageCircle className="w-4 h-4"/>
-
-                            Comment
-
-                        </button>
 
                         <button 
                             className="bg-gray-700 hover:bg-gray-800 text-white dark:text-white flex items-center gap-2 justify-center py-2 px-4 rounded-md transition-all duration-300 w-full sm:w-auto mt-2 sm:mt-0"

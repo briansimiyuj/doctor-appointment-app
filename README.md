@@ -2370,6 +2370,8 @@ Patient details page will show the patient's details; medical history, allergies
         2. Reuse the ModalHeader component and pass `title` and `closeModal` as props
         3. Create a LiveChat component and pass `selectedNote` as prop and wrap it with `LiveChatProvider`
 
+    8. Reuse the NoteCommentModal component in the Notes Tab component in Doctor UI
+
   ### Medical History Tab Component
 
   Medical History Tab will be used to display the medical history of the patient

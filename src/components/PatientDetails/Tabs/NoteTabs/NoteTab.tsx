@@ -1,5 +1,6 @@
 import { useNotesTabContext } from "../../../../context/NotesTabContext"
 import { usePatientDetails } from "../../../../context/PatientDetailsContext"
+import NoteCommentModal from "../../../AppointmentsDetails/Tabs/NoteTab/Modals/NoteCommentModal"
 import AddNotesModal from "./Modals/AddNotesModal"
 import DeleteNotesModal from "./Modals/DeleteNotesModals/DeleteNotesModal"
 import ViewNotesModal from "./Modals/ViewNotesModals/ViewNotesModal"
@@ -8,7 +9,7 @@ import NoteTabHeader from "./NoteTabHeader"
 
 const NoteTab: React.FC = ()=>{
 
-    const { showAddNoteModal, showViewNoteModal, showDeleteNoteModal } = useNotesTabContext(),
+    const { showAddNoteModal, showViewNoteModal, showDeleteNoteModal, showNoteCommentsModal } = useNotesTabContext(),
           { notes } = usePatientDetails()
 
     return(
@@ -40,6 +41,8 @@ const NoteTab: React.FC = ()=>{
             { showViewNoteModal && <ViewNotesModal/> }
 
             { showDeleteNoteModal && <DeleteNotesModal/> }
+
+            { showNoteCommentsModal && <NoteCommentModal/> }
         
         </div>
 
