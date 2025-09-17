@@ -787,7 +787,7 @@ My appointments page will show the user's appointments. It will have a list of a
   5. Create a function to fetch the patient appointment based on patient id
   6. Find the appointed patient based on the patient id and set the patient details and appointment details
   7. Create state variables for notes and documents with respective types and initialize them with data from local storage
-  8. Create functions to add and remove documents and update local storage
+  8. Create functions to add and remove documents and update local storage for both doctors and patients
   9. Create functions to add and remove notes and update local storage
   10. Add `updateAppointmentStatus` function to the patient details context props
     a. Create a deep copy of the patient's appointments array
@@ -904,6 +904,8 @@ My appointments page will show the user's appointments. It will have a list of a
       ii. Find the prescription at the given index and update it with the new prescription
       iii. Update the `prescriptions` state with the new prescriptions array
       iv. Save the updated prescriptions to localStorage using the patient ID as part of the key
+
+  20. When `patientDetails` and `appointmentID` changes, fetch the documents from `localStorage` based on the profile type and update the `documents` state accordingly
 
 ### Patient Details Page
 
@@ -2060,12 +2062,12 @@ Patient details page will show the patient's details; medical history, allergies
         g. `uploadedByID`: uploader's ID (from profile context or dummy data)
         h. `content`: file content as a base64 string (from FileReader)
 
-      2. Create a `handleFilesUpload` function that will be called when the "Upload" button is clicked
+      3. Create a `handleFilesUpload` function that will be called when the "Upload" button is clicked
         a. Check if there are any files selected, if not, exit the function
         b. Set `isUploading` to true
         c. Simulate the upload process by using `setTimeout` to delay the upload by 2 seconds 
-        d. Map the selected files to the `processFile` function to create an array of `DocumentType` objects
-        e. Add the converted documents to the patient's documents
+        d. Map the selected files to the `processFile` function to coreate an array of `DocumentType` objects
+        e. Loop through the array of `DocumentType` objects and call `addDocument` for each object
         f. Clear the selected files
         g. Set `showUploadArea` to false
 

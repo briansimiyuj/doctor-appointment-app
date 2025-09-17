@@ -60,9 +60,6 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
                               const savedNotes = localStorage.getItem(`notes-${patientID}`)
                               setNotes(savedNotes ? JSON.parse(savedNotes) : [])
 
-                              const savedDocuments = localStorage.getItem(`documents-${patientID}`)
-                              setDocuments(savedDocuments ? JSON.parse(savedDocuments) : [])
-
                               const savedMedicalConditions = localStorage.getItem(`medicalConditions-${patientID}`)
                               setMedicalConditions(savedMedicalConditions ? JSON.parse(savedMedicalConditions) : [])
 
@@ -89,6 +86,25 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
       }, [appointments, appointedPatients, appointmentID])
 
+      useEffect(() =>{
+      
+            if(patientDetails){
+
+                  const patientID = patientDetails.patientInfo._id,
+                        savedDocuments = JSON.parse(localStorage.getItem(`documents-${patientID}`) || "[]")
+
+                  setDocuments(savedDocuments)
+
+            }else{
+                  
+                  const savedDocuments = JSON.parse(localStorage.getItem("documents") || "[]")
+
+                  setDocuments(savedDocuments)
+
+            }
+      
+      }, [appointmentID, patientDetails])
+
       const fetchPatientAppointments = (patientID: string) =>{
 
             const savedAppointments = localStorage.getItem(`appointments-${patientID}`)
@@ -112,33 +128,47 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
       }
 
 
-      const addDocument = (document: DocumentType) =>{
+      const addDocument = (document: DocumentType | DocumentType[]) =>{
             
-            if(!patientDetails) return
-           
-            const patientID = patientDetails.patientInfo._id
-            
-            setDocuments(prevDocuments =>{
-           
-                  const updatedDocuments = [...prevDocuments, document]
-           
-                  localStorage.setItem(`documents-${patientID}`, JSON.stringify(updatedDocuments))
-                  
-                  return updatedDocuments
+            setDocuments(prev =>{
+
+                  const newDocuments = Array.isArray(document) ? document : [document]
+
+                  if(patientDetails){
+
+                        const patientID = patientDetails.patientInfo?._id
+
+                        localStorage.setItem(`documents-${patientID}`, JSON.stringify([...prev, ...newDocuments]))
+
+                  }else{
+                        
+                        localStorage.setItem("documents", JSON.stringify([...prev, ...newDocuments]))
+
+                  }
+
+                  return [...prev, ...newDocuments]
 
             })
+
       }
 
       const removeDocument = (index: string) =>{
             
-            if(!patientDetails) return
+            const filteredDocuments = documents.filter(document => document._id !== index)
 
-            const patientID = patientDetails.patientInfo._id,
-                  updatedDocuments = documents.filter(document => document._id !== index)
+            setDocuments(filteredDocuments)
 
-            setDocuments(updatedDocuments)
+            if(patientDetails){
+                  
+                  const patientID = patientDetails.patientInfo?._id
 
-            localStorage.setItem(`documents-${patientID}`, JSON.stringify(updatedDocuments))
+                  localStorage.setItem(`documents-${patientID}`, JSON.stringify(filteredDocuments))
+
+            }else{
+
+                  localStorage.setItem("documents", JSON.stringify(filteredDocuments))
+                  
+            }
       
       }
 

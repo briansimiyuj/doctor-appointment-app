@@ -14,7 +14,7 @@ export const useDeleteDocument = () =>{
 
         closeDeleteModal()
 
-        console.log(`Document ${documentToDelete.name} deleted successfully.`)
+        alert('Document deleted successfully')
     
     }
 

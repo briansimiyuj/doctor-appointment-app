@@ -1,4 +1,5 @@
 import { DocumentType } from "../assets/types/DocumentType"
+import { useAppointmentsContext } from "../context/AppointmentContext"
 import { useDocumentsTab } from "../context/DocumentsTabContext"
 import { usePatientDetails } from "../context/PatientDetailsContext"
 import { useProfileContext } from "../context/ProfileContext"
@@ -10,7 +11,8 @@ export const useUploadFile = () =>{
     const { isUploading, setIsUploading, setShowUploadArea } = useDocumentsTab(),
           { selectedFiles, clearFiles } = useFileSelection(),
           { addDocument } = usePatientDetails(),
-          { profile } = useProfileContext()
+          { profile } = useProfileContext(),
+          { appointmentID } = useAppointmentsContext()
 
     const processFile = async(file: File): Promise<DocumentType> =>{
         
@@ -53,6 +55,7 @@ export const useUploadFile = () =>{
             name: file.name,
             type: normalizedType,
             content: content,
+            appointmentID,
             size: file.size,
             uploadDate: new Date(),
             uploadedBy: profile?.name || "Anonymous", 
@@ -86,11 +89,13 @@ export const useUploadFile = () =>{
 
             uploadedDocuments.forEach(document => addDocument(document))
 
+            localStorage.setItem("documents", JSON.stringify(uploadedDocuments))
+
             clearFiles()
 
             setShowUploadArea(false)
 
-            console.log('Files uploaded successfully:', uploadedDocuments)
+            alert('Files uploaded successfully')
 
         }catch(error){
 
