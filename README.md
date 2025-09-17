@@ -2056,8 +2056,9 @@ Patient details page will show the patient's details; medical history, allergies
         c. `type`: normalized MIME type (e.g., "application/pdf", "image/jpeg", etc.)
         d. `size`: file size in bytes
         e. `uploadDate`: current date
-        f. `uploadedBy`: uploader's name (from context or dummy data)
-        g. `content`: file content as a base64 string (from FileReader)
+        f. `uploadedBy`: uploader's name (from profile context or dummy data)
+        g. `uploadedByID`: uploader's ID (from profile context or dummy data)
+        h. `content`: file content as a base64 string (from FileReader)
 
       2. Create a `handleFilesUpload` function that will be called when the "Upload" button is clicked
         a. Check if there are any files selected, if not, exit the function

@@ -1,7 +1,7 @@
-import { DummyAppointment } from "../assets/dummyData/DummyAppointment"
 import { DocumentType } from "../assets/types/DocumentType"
 import { useDocumentsTab } from "../context/DocumentsTabContext"
 import { usePatientDetails } from "../context/PatientDetailsContext"
+import { useProfileContext } from "../context/ProfileContext"
 import { useFileSelection } from "./useFileSelection"
 import { v4 as uuidv4 } from "uuid"
 
@@ -9,7 +9,8 @@ export const useUploadFile = () =>{
 
     const { isUploading, setIsUploading, setShowUploadArea } = useDocumentsTab(),
           { selectedFiles, clearFiles } = useFileSelection(),
-          { addDocument } = usePatientDetails()
+          { addDocument } = usePatientDetails(),
+          { profile } = useProfileContext()
 
     const processFile = async(file: File): Promise<DocumentType> =>{
         
@@ -54,7 +55,8 @@ export const useUploadFile = () =>{
             content: content,
             size: file.size,
             uploadDate: new Date(),
-            uploadedBy: DummyAppointment.doctor.doctorInfo.name
+            uploadedBy: profile?.name || "Anonymous", 
+            uploadedByID: profile?._id || "anonymous",
 
         }
 

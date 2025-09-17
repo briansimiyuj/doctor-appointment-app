@@ -5,6 +5,7 @@ export type DocumentType ={
     type: string
     uploadDate: Date
     uploadedBy: string
+    uploadedByID: string
     size: number
     content?: string
     file?: File
