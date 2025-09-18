@@ -22,7 +22,7 @@ const Appointment: React.FC = ()=>{
 
                                 <p className="font-medium">
 
-                                    {appointment.date} at {appointment.time}
+                                    {new Date(appointment.date).toDateString()} at {appointment.time}
 
                                 </p>
 

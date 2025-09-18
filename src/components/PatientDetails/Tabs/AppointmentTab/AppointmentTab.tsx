@@ -6,13 +6,13 @@ const AppointmentTab: React.FC = ()=>{
 
     const { patientAppointments } = usePatientDetails()
 
+    if(!patientAppointments) return null
+
     return(
 
         <div className="p-4">
 
             <AppointmentTabHeader/>
-
-              {/* // FIXME: add a state to show a message when there are no appointments */}
 
             {
 

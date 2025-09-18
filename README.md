@@ -3090,6 +3090,9 @@ Appointment Details Page will be used to display the details of an appointment. 
   9. When `activeTab` is "documents", reuse TabContent component as a container and pass the `tabID` prop as "documents"
     a. Reuse DocumentsTab component for the doctor profile UI, wrap it with `DocumentsTabProvider`
 
+  10. When `activeTab` is "appointments", reuse TabContent component as a container and pass the `tabID` prop as "appointments"
+    a. Reuse AppointmentsTab component for the doctor profile UI
+
 ### Live Chat Context
 
 LiveChatContext is a context that provides messages and input state to the LiveChat component

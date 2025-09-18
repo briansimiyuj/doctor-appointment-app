@@ -12,6 +12,7 @@ import { NotesTabProvider } from "../context/NotesTabContext"
 import NoteTab from "../components/AppointmentsDetails/Tabs/NoteTab/NoteTab"
 import { DocumentsTabContextProvider } from "../context/DocumentsTabContext"
 import DocumentTab from "../components/PatientDetails/Tabs/DocumentTab/DocumentTab"
+import AppointmentTab from "../components/PatientDetails/Tabs/AppointmentTab/AppointmentTab"
 
 const AppointmentDetailsPage: React.FC = ()=>{
 
@@ -114,6 +115,18 @@ const AppointmentDetailsPage: React.FC = ()=>{
 
                         </div>
 
+                    ): activeTab === "appointments" ?(
+
+                        <div className="p-4">
+
+                            <TabContent tabID="appointments">
+
+                                <AppointmentTab/>
+
+                            </TabContent>
+
+                        </div>
+                        
                     ): null
 
                 }
