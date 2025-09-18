@@ -155,6 +155,8 @@ export const dummyDocuments: DocumentType[] =[
         type: "application/pdf",
         uploadDate: new Date("2023-01-01"),
         uploadedBy: "Dr. Smith",
+        uploadedByID: "doctor-1",
+        appointmentID: "appointment-1",
         size: 1024,
         content: sampleRadiologyReport
     },
@@ -165,6 +167,8 @@ export const dummyDocuments: DocumentType[] =[
         type: "application/pdf",
         uploadDate: new Date("2023-01-02"),
         uploadedBy: "Dr. Johnson",
+        uploadedByID: "doctor-2",
+        appointmentID: "appointment-1",
         size: 2048,
         content: samplePrescription
     },
@@ -175,6 +179,8 @@ export const dummyDocuments: DocumentType[] =[
         type: "application/pdf",
         uploadDate: new Date("2023-01-03"),
         uploadedBy: "Dr. Lee",
+        uploadedByID: "doctor-3",
+        appointmentID: "appointment-2",
         size: 4096,
         content: sampleDischargeSummary
     },
@@ -185,6 +191,8 @@ export const dummyDocuments: DocumentType[] =[
         type: "image/jpeg",
         uploadDate: new Date("2023-01-04"),
         uploadedBy: "Dr. Brown",
+        uploadedByID: "doctor-4",
+        appointmentID: "appointment-2",
         size: 8192,
         content: sampleXray
     },
@@ -195,6 +203,8 @@ export const dummyDocuments: DocumentType[] =[
         type: "image/webp",
         uploadDate: new Date("2023-01-05"),
         uploadedBy: "Dr. Green",
+        uploadedByID: "doctor-5",
+        appointmentID: "appointment-3",
         size: 16384,
         content: sampleUltrasound
     },
@@ -205,6 +215,8 @@ export const dummyDocuments: DocumentType[] =[
         type: "image/jpeg",
         uploadDate: new Date("2023-01-06"),
         uploadedBy: "Dr. White",
+        uploadedByID: "doctor-6",
+        appointmentID: "appointment-3",
         size: 32768,
         content: sampleCTScan
     },
@@ -215,6 +227,8 @@ export const dummyDocuments: DocumentType[] =[
         type: "application/pdf",
         uploadDate: new Date("2023-01-07"),
         uploadedBy: "Dr. Black",
+        uploadedByID: "doctor-7",
+        appointmentID: "appointment-4",
         size: 65536,
         content: medicalReport
     },
@@ -225,6 +239,8 @@ export const dummyDocuments: DocumentType[] =[
         type: "application/pdf",
         uploadDate: new Date("2023-01-08"),
         uploadedBy: "Dr. Grey",
+        uploadedByID: "doctor-8",
+        appointmentID: "appointment-4",
         size: 131072,
         content: medicalCertificate
     }
