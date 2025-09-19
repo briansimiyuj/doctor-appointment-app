@@ -12,8 +12,8 @@ export type DoctorType ={
     about: string
     fees: number
     coverImage: DocumentType
-    rating: number
-    reviews: typeof dummyReviews
+    rating?: number
+    reviews?: typeof dummyReviews
 
     address:{
 

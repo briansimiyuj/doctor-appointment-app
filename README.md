@@ -196,12 +196,33 @@ The About page is a simple page that explains what MediCare is and what it does.
 <!-- Both about image and about text have the same parent div -->
     d. Create WhyChooseUs section and mount it on About page
 
+### Doctor Context
+
+The DoctorContext is a context that will be used to store the doctor data and provide it to the components that need it.
+
+  1. Create `doctors` state of type `DoctorType[]` and set it to an empty array
+  2. On component mount, fetch the doctor data from the local storage and set it to the `doctors` state
+  3. Once `doctors` state is updated, update the local storage with the new data
+  4. Create `addDoctor` function that will take a doctor object as a parameter
+    a. Use the `doctors` state to add the new doctor to the list
+
+  5. Create `updateDoctor` function that will take `id` and `updateDoctor` as parameters
+    a. Use the `doctors` state to find the doctor with the given `id` and update it with the new data
+
+  6. Create `removeDoctor` function that will take `id` as a parameter
+    a. Use the `doctors` state to find the doctor with the given `id` and remove it from the list
+
+  7. Create `getDoctorByID` function that will take `id` as a parameter
+    a. Use the `doctors` state to find the doctor with the given `id` and return it
+
+  8. Create `getDoctorByName` function that will take `id` and `name` as parameters
+    a. Use the `doctors` state to find the doctor with the given `id` and `name` and return it
 
 ### Doctors Page
 
 The Doctors page is a page that lists all the doctors in the database. It will have a filter menu, search bar, and a list of doctors.
 
-  1. Create a Doctors page and mount it on Script component and provide a route for it
+  1. Create a Doctors page and mount it on Script component and provide a route for it and wrap it with `DoctorsProvider`
     a. Create a search bar and mount it on Doctors page
 
   2. Create a filter menu and mount it on Doctors page
