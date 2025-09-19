@@ -9,7 +9,7 @@ type AppointmentPhotoProps ={
     
 }
 
-const AppointmentPhoto: React.FC<AppointmentPhotoProps> = ({ doctors, patients }) => {
+const AppointmentPhoto: React.FC<AppointmentPhotoProps> = ({ doctors, patients }) =>{
 
     if(doctors){
 
@@ -17,7 +17,7 @@ const AppointmentPhoto: React.FC<AppointmentPhotoProps> = ({ doctors, patients }
 
         return(
 
-            <img src={doctor?.image} alt={`${doctor?.name} photo`} className="w-32"/>
+            <img src={doctor?.coverImage.content} alt={`${doctor?.name} photo`} className="w-32"/>
 
         )
 
@@ -29,7 +29,7 @@ const AppointmentPhoto: React.FC<AppointmentPhotoProps> = ({ doctors, patients }
 
         return(
 
-            <img src={patient?.image} alt={`${patient?.name} photo`} className="w-32"/>
+            <img src={patient?.profileImage?.content} alt={`${patient?.name} photo`} className="w-32"/>
 
         )
 

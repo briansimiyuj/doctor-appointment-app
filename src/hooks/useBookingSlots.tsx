@@ -6,11 +6,13 @@ import { DoctorSlotType } from "../assets/types/DoctorSlotType"
 import { AppointmentType } from "../assets/types/AppointmentType"
 import { v4 as uuid } from "uuid"
 import { useUpdatePatientDetails } from "./useUpdatePatientDetails"
+import { useProfileContext } from "../context/ProfileContext"
 
 export const useBookingSlots = ()=>{
 
     const [selectedSlot, setSelectedSlot] = useState<TimeSlotType | null>(null),
           { doctorInfo, patientInfo, consultationType, slotIndex, setSlotIndex, selectedTimeSlot, setSelectedTimeSlot, appointedDoctors, setAppointedDoctors, isBooked, setIsBooked, appointments, setAppointments, slots } = useContext(BookingContext),
+          { profile } = useProfileContext(),
           { closeCancelModal } = useUpdatePatientDetails(),
           days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
           selectedDate = slots[slotIndex]?.date
@@ -73,7 +75,11 @@ export const useBookingSlots = ()=>{
                 doctorInfo,
                 appointmentTime: selectedSlot
             },
-            patient: patientInfo
+            patient:{
+                patientInfo,
+                appointedTime: selectedSlot,
+                profile: profile || undefined
+            }
 
         }
 
@@ -87,7 +93,14 @@ export const useBookingSlots = ()=>{
 
         })
 
-        setAppointments(prev => [...prev, newAppointment])
+        setAppointments((prev: AppointmentType[]) =>{
+
+            const updatedAppointments = [...prev, newAppointment]
+
+            localStorage.setItem("appointments", JSON.stringify(updatedAppointments))
+
+            return updatedAppointments
+        })
 
         setIsBooked(doctorInfo._id, true)
 

@@ -1,3 +1,5 @@
+import { DocumentType } from "./DocumentType"
+
 export type PatientType ={
 
     _id: string
@@ -5,7 +7,7 @@ export type PatientType ={
     age: number
     gender: string
     status: string
-    image: string
+    profileImage: DocumentType
     
     contact:{
         phone: string

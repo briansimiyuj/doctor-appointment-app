@@ -3,7 +3,7 @@ import { usePatientDetails } from "../../context/PatientDetailsContext"
 const PatientContactInfo: React.FC = ()=>{
 
     const { patientDetails } = usePatientDetails(),
-          patient = patientDetails?.patientInfo
+          contact = patientDetails?.profile?.addressValue
 
     return(
 
@@ -13,7 +13,7 @@ const PatientContactInfo: React.FC = ()=>{
 
                 <p className="text-sm text-gray-500">Phone:</p>
 
-                <p className="font-medium">{patient?.contact.phone}</p>
+                <p className="font-medium">{contact?.phone}</p>
 
             </div>
 
@@ -21,7 +21,7 @@ const PatientContactInfo: React.FC = ()=>{
 
                 <p className="text-sm text-gray-500">Email:</p>
 
-                <p className="font-medium">{patient?.contact.email}</p>
+                <p className="font-medium">{contact?.email}</p>
 
             </div>
 
@@ -31,9 +31,11 @@ const PatientContactInfo: React.FC = ()=>{
 
                 <p className="font-medium">
 
-                    {patient?.address?.line1}
+                    {contact?.residence}
 
-                    {patient?.address?.line2 ? `, ${patient?.address?.line2}` : ""}
+                    <br/>
+
+                    {contact?.city}, {contact?.state}, {contact?.country}
 
                 </p>
 

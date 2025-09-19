@@ -22,8 +22,6 @@ const PatientInfo: React.FC<PatientInfo> = ({ patients, appointment })=>{
     const { activeTab } = context,
          appointmentID = appointment?._id
 
-    console.log(appointment)
-
     return(
 
         <div className="flex-1 text-sm text-zinc-600">
@@ -34,9 +32,9 @@ const PatientInfo: React.FC<PatientInfo> = ({ patients, appointment })=>{
 
             <p>{patient?.contact?.phone}</p>
 
-            <p>{patient?.appointment?.date} at</p>
+            <p>{new Date(appointment?.date).toLocaleDateString()} at</p>
 
-            <p>{patient?.appointment?.time}</p>
+            <p>{appointment?.time}</p>
 
 
             <div className="mt-4 flex flex-col sm:flex-row gap-2">

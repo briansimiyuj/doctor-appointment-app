@@ -10,8 +10,8 @@ const PatientImage: React.FC = ()=>{
         <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-gray-200">
 
             <img 
-                src={patient?.image} 
-                alt={`${patient?.image}'s image`}
+                src={patient?.profileImage?.content} 
+                alt={`${patient?.name}'s image`}
                 className="w-full h-full object-cover"
             />
 

@@ -50,7 +50,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
                         if(foundAppointment){
 
-                              const patientID = foundAppointment.patient.patientInfo._id
+                              const patientID = foundAppointment.patient.patientInfo?._id
 
                               setPatientDetails(foundAppointment.patient)
 
@@ -90,7 +90,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
       
             if(patientDetails){
 
-                  const patientID = patientDetails.patientInfo._id,
+                  const patientID = patientDetails.patientInfo?._id,
                         savedDocuments = JSON.parse(localStorage.getItem(`documents-${patientID}`) || "[]")
 
                   setDocuments(savedDocuments)
@@ -176,7 +176,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
             if(!patientDetails) return
 
-            const patientID = patientDetails.patientInfo._id,
+            const patientID = patientDetails.patientInfo?._id,
                   newNote = { _id: uuid(), ...note, date: new Date() },
                   updatedNotes = [newNote, ...notes]
 
@@ -190,7 +190,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
             if(!patientDetails) return
 
-            const patientID = patientDetails.patientInfo._id,
+            const patientID = patientDetails.patientInfo?._id,
                   updatedNotes = notes.filter(note => note._id !== id)
 
             setNotes(updatedNotes)
@@ -203,7 +203,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
             if(!patientDetails) return
 
-            const patientID = patientDetails.patientInfo._id,
+            const patientID = patientDetails.patientInfo?._id,
                   updatedNotes = notes.map(note => note._id === updatedNote._id ? {...note, ...updatedNote } : note)
 
             setNotes(updatedNotes)
@@ -216,7 +216,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
             if(!patientDetails) return
 
-            const patientID = patientDetails.patientInfo._id
+            const patientID = patientDetails.patientInfo?._id
             
             setPatientAppointments(prevAppointments =>{
 
@@ -243,7 +243,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
             if(!patientDetails) return
 
-            const patientID = patientDetails.patientInfo._id
+            const patientID = patientDetails.patientInfo?._id
             
             setPatientAppointments(prevAppointments =>{
 
@@ -296,7 +296,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
             if(!patientDetails) return
 
-            const patientID = patientDetails.patientInfo._id,
+            const patientID = patientDetails.patientInfo?._id,
                  updatedConditions = [condition, ...medicalConditions]
 
             setMedicalConditions(updatedConditions)
@@ -309,7 +309,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
             if(!patientDetails) return
 
-            const patientID = patientDetails.patientInfo._id,
+            const patientID = patientDetails.patientInfo?._id,
                  updatedConditions = medicalConditions.filter((_, i) => i !== index)
 
             setMedicalConditions(updatedConditions)
@@ -492,7 +492,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
             addPrescription,
             removePrescription,
             updatePrescription,
-            patientID: patientDetails?.patientInfo._id || "",
+            patientID: patientDetails?.patientInfo?._id || "",
             updateAppointment,
             medicalConditions,
             allergies,
