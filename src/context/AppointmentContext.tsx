@@ -4,10 +4,10 @@ import { AppointmentsContextProps } from "../assets/contextProps/AppointmentsCon
 import { useParams } from "react-router-dom"
 import appointmentData from "../assets/frontend/AppointmentData.json"
 import { patients } from "../assets/frontend/patientsData"
-import { doctors } from "../assets/frontend/doctorsData"
 import { AppointedPatientType } from "../assets/types/AppointedPatientType"
 import { AppointedDoctorType } from "../assets/types/AppointedDoctorType"
 import { useProfileContext } from "./ProfileContext"
+import { useDoctorContext } from "./DoctorContext"
 
 interface AppointmentsContextProviderProps{
 
@@ -34,7 +34,8 @@ export const AppointmentsContextProvider: React.FC<AppointmentsContextProviderPr
           [activeTab, setActiveTab] = useState<"upcoming" | "past">("upcoming"),
           [appointment, setAppointment] = useState<AppointmentType | null>(null),
           { appointmentID } = useParams<{ appointmentID: string }>(),
-          { profile } = useProfileContext()
+          { profile } = useProfileContext(),
+          { doctors } = useDoctorContext()
 
     useEffect(() =>{
     

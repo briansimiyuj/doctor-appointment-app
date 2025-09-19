@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react"
 import { DoctorType } from "../../assets/types/DoctorType"
 import { BookingContext } from "../../context/BookingContext"
-import { doctors } from "../../assets/frontend/doctorsData"
 import TopDoctorsCard from "../TopDoctors/TopDoctorsCard"
+import { useDoctorContext } from "../../context/DoctorContext"
 
 const RelatedDoctors: React.FC = ()=>{
 
     const { doctorID, doctorInfo } = useContext(BookingContext),
+          { doctors } = useDoctorContext(),
           [relatedDoctors, setRelatedDoctors] = useState<DoctorType[]>([]) 
 
     

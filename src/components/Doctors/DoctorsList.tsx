@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { DoctorType } from "../../assets/types/DoctorType"
-import { doctors } from "../../assets/frontend/doctorsData";
 import DoctorCard from "./DoctorCard"
+import { useDoctorContext } from "../../context/DoctorContext"
 
 const DoctorsList: React.FC = ()=>{
 
     const { specialityParam } = useParams(),
+          { doctors } = useDoctorContext(),
           [filterDoctors, setFilterDoctors] = useState<Array<DoctorType>>([])
 
+    console.log(doctors)
 
     const applyFilter = () =>{
     

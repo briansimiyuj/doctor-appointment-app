@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { DoctorType } from "../assets/types/DoctorType";
 import { useParams } from "react-router-dom";
-import { doctors } from "../assets/frontend/doctorsData";
 import { AppointedDoctorType } from "../assets/types/AppointedDoctorType";
 import { AppointedPatientType } from "../assets/types/AppointedPatientType";
 import { BookingContextProps } from "../assets/contextProps/BookingContextProps";
@@ -9,6 +8,7 @@ import { TimeSlotType } from "../assets/types/TimeSlotType";
 import { useSchedule } from "./ScheduleContext"
 import { ProfileContext } from "./ProfileContext";
 import { AppointmentType } from "../assets/types/AppointmentType";
+import { useDoctorContext } from "./DoctorContext";
 
 
 interface BookingContextProviderProps{
@@ -49,6 +49,7 @@ export const BookingContextProvider = ({ children }: BookingContextProviderProps
 
     const { doctorID } = useParams(),
           { schedule } = useSchedule(),
+          { doctors } = useDoctorContext(),
           profileContext = useContext(ProfileContext),
           profile = profileContext?.profile,
           [slots, setSlots] = useState(

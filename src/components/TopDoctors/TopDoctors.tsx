@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom"
-import { doctors } from "../../assets/frontend/doctorsData"
 
 import TopDoctorsCard from "./TopDoctorsCard"
+import { useDoctorContext } from "../../context/DoctorContext"
 
 const TopDoctors: React.FC = ()=>{
 
-    const navigate = useNavigate()
+    const navigate = useNavigate(),
+          { doctors } = useDoctorContext()
 
     return(
 

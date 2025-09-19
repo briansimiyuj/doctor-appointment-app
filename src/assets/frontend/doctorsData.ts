@@ -4,7 +4,7 @@ import { dummyReviews } from "../dummyData/DummyReviews"
 import { DocumentType } from "../types/DocumentType"
 
 
-export const doctors = doctorsData.map((doctor, index) =>({
+export const doctorsList = doctorsData.map((doctor, index) =>({
 
     ...doctor,
     education: doctor.degree || "MBBS, MD",

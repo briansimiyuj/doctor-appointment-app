@@ -1,10 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { AppointmentType } from "../assets/types/AppointmentType"
 import { RescheduleModalContextProps } from "../assets/contextProps/RescheduleModalContextProps"
-import { doctors } from "../assets/frontend/doctorsData"
 import { DoctorType } from "../assets/types/DoctorType"
 import { useRescheduleAppointment } from "../hooks/useRescheduleAppointment"
 import { useDateTime } from "./DateTimeContext"
+import { useDoctorContext } from "./DoctorContext"
 
 interface RescheduleModalProviderProps{
 
@@ -20,6 +20,7 @@ export const RescheduleModalProvider: React.FC<RescheduleModalProviderProps> = (
 
     const { date: newDate, setDate: setNewDate, time: newTime, setTime: setNewTime }  = useDateTime(),
           { rescheduleAppointment } = useRescheduleAppointment(),
+          { doctors } = useDoctorContext(),
           [selectedDoctor, setSelectedDoctor] = useState<DoctorType | null>(null),
           [isConfirmed, setIsConfirmed] = useState(false),
           [availableDoctors, setAvailableDoctors] = useState<DoctorType[]>(doctors),

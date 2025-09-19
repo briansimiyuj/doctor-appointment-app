@@ -67,6 +67,8 @@ const Script: React.FC = () =>{
 
               <ProfileContextProvider>
 
+                <DoctorContextProvider>
+
                   <Navbar/>
 
                   <Routes>
@@ -79,11 +81,7 @@ const Script: React.FC = () =>{
 
                       <PrivateRoute>
 
-                        <DoctorContextProvider>
-
-                          <DoctorPage/>
-
-                        </DoctorContextProvider>                      
+                        <DoctorPage/>                 
 
                       </PrivateRoute>
 
@@ -93,11 +91,7 @@ const Script: React.FC = () =>{
 
                       <PrivateRoute>
 
-                        <DoctorContextProvider>
-
-                          <DoctorPage/>
-
-                        </DoctorContextProvider>                      
+                        <DoctorPage/>                     
 
                         </PrivateRoute>
 
@@ -287,7 +281,9 @@ const Script: React.FC = () =>{
 
                   </Routes>
         
-                <Footer/>
+                  <Footer/>
+
+                </DoctorContextProvider>
 
               </ProfileContextProvider>
 
