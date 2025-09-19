@@ -234,12 +234,14 @@ The Doctors page is a page that lists all the doctors in the database. It will h
       f. Make the menu responsive for both mobile and desktop views
 
     3. Create Doctors List component and mount it on Doctors page
-      a. Initialize a state variable to store the filtered doctors
-      b. Create a function to filter doctors based on speciality
-      c. Run the filter function when the speciality and doctors data change
-      d. Add a route for speciality page that will show all doctors with that speciality
-      e. Map through the filtered doctors and create a card for each doctor
-      f. Each card will have a doctor name, doctor image, availability status and doctor speciality
+      a. Retrieve `doctors` state from `DoctorContext`
+      b. Initialize a state variable to store the filtered doctors
+      c. Create a function to filter `doctors` based on speciality
+      d. Run the filter function when the speciality and `doctors` data change
+      e. Add a route for speciality page that will show all doctors with that speciality
+      f. If there are no doctors with that speciality, show a message saying "No doctors found"
+      g. Map through the filtered doctors and create a card for each doctor
+      h. Each card will have a doctor name, doctor image, availability status and doctor speciality
       
 
 ### Booking Context

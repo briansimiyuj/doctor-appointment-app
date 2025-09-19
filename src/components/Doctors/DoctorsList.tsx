@@ -10,8 +10,6 @@ const DoctorsList: React.FC = ()=>{
           { doctors } = useDoctorContext(),
           [filterDoctors, setFilterDoctors] = useState<Array<DoctorType>>([])
 
-    console.log(doctors)
-
     const applyFilter = () =>{
     
         if(specialityParam){
@@ -39,17 +37,29 @@ const DoctorsList: React.FC = ()=>{
 
             {
 
-                filterDoctors.map((doctor, index) =>(
+                filterDoctors.length === 0 ?(
 
-                    <DoctorCard 
-                        key={index} 
-                        doctor={{
-                            ...doctor,
-                            isAvailable: index % 2 === 0 ? true : false
-                        }}
-                    />
+                    <p className="col-span-full text-center text-gray-500 text-lg">
 
-                ))
+                        No doctors available {specialityParam ? `for ${specialityParam} category` : ""}
+
+                    </p>
+
+                ):(
+
+                    filterDoctors.map((doctor, index) =>(
+
+                        <DoctorCard 
+                            key={index} 
+                            doctor={{
+                                ...doctor,
+                                isAvailable: index % 2 === 0 ? true : false
+                            }}
+                        />
+
+                    ))
+
+                )
 
             }
 

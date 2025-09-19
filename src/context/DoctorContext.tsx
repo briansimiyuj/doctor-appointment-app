@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { DoctorContextProps } from "../assets/contextProps/DoctorContextProps"
 import { DoctorType } from "../assets/types/DoctorType"
-import { doctorsList } from "../assets/frontend/doctorsData"
 
 interface DoctorContextProviderProps{
 
@@ -49,10 +48,6 @@ export const DoctorContextProvider:React.FC<DoctorContextProviderProps> = ({ chi
 
             }
             
-        }else{
-
-            setDoctors(doctorsList)
-
         }
      
     }, [])
