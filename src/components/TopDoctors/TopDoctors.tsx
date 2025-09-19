@@ -21,7 +21,7 @@ const TopDoctors: React.FC = ()=>{
 
                 {
 
-                    doctors.slice(0, 5).map((doctor, index) =>(
+                      Array.isArray(doctors) && doctors.slice(0, 5).map((doctor, index) =>(
 
                         <TopDoctorsCard 
                             key={index} 

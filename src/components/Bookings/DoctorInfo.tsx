@@ -56,7 +56,7 @@ const DoctorInfo: React.FC = ()=>{
 
                 {
 
-                    doctorInfo?.reviews.map((review, index) =>(
+                    doctorInfo?.reviews?.map((review, index) =>(
 
                         <div key={index} className="flex items-center gap-2 mt-2">
 

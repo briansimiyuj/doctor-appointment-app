@@ -31,6 +31,8 @@ const DoctorsList: React.FC = ()=>{
     
     }, [doctors, specialityParam])
 
+    console.log(filterDoctors)
+
     return(
 
         <div className="w-full grid grid-cols-auto gap-4 pt-5 gap-y-6">
@@ -47,17 +49,21 @@ const DoctorsList: React.FC = ()=>{
 
                 ):(
 
-                    filterDoctors.map((doctor, index) =>(
+                    Array.isArray(filterDoctors) && filterDoctors.length > 0 ?(
 
-                        <DoctorCard 
-                            key={index} 
-                            doctor={{
-                                ...doctor,
-                                isAvailable: index % 2 === 0 ? true : false
-                            }}
-                        />
+                        filterDoctors.map((doctor, index) =>(
 
-                    ))
+                            <DoctorCard 
+                                key={index} 
+                                doctor={{
+                                    ...doctor,
+                                    isAvailable: index % 2 === 0 ? true : false
+                                }}
+                            />
+
+                        ))
+
+                    ):null
 
                 )
 

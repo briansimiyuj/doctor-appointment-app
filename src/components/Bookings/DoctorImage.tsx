@@ -11,7 +11,7 @@ const DoctorImage: React.FC = ()=>{
 
     return(
 
-        <img src={doctorInfo?.image} alt={`${doctorInfo?.name} image`} className="w-full sm:max-w-72 rounded-lg bg-primary-bg"/>
+        <img src={doctorInfo?.coverImage?.content} alt={`${doctorInfo?.name} image`} className="w-full sm:max-w-72 rounded-lg bg-primary-bg"/>
 
     )
 
