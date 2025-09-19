@@ -596,6 +596,7 @@ Submit profile hook will be used to submit the profile data to the local storage
     a. `profile` and `showModal` states from the `ProfileContext`
     b. `userID` state from the `LoginContext`
     c. `processFile` function from `UploadFile` hook
+    d. `addDoctor` function from `DoctorContext`
 
   2. Create `resolvedUserID` constant that will store the resolved user ID from the `userID` state or generate a new one if it's not available.
     a. If `userID` is not available, set it to `resolvedUserID` 
@@ -603,10 +604,12 @@ Submit profile hook will be used to submit the profile data to the local storage
   3. Call `processFile` function to upload the profile image, cover image and license certificate. The function will return a promise that resolves with the file properties.
   4. Create `submitProfile` function that will be called when the submit button is clicked
     a. Create a validation logic to check if all the fields are filled. If any of the fields are empty, return an error message.
-    b. Create a new object with the profile data and the file properties from the `processFile` function. Each `userType` will be used to determine which fields to include in the object. 
-    c. Save the object in the local storage with the key as the user's ID
-    d. Return the profile data object
-    e. Set `setShowModal` to false 
+    b. Create a new object with the profile data and the file properties from the `processFile` function. Each `userType` will be used to determine which fields to include in the object.
+    c. Create a new object for `DoctorType` 
+    d. Call `addDoctor` function and pass the new object as the argument. The function will return a promise that resolves with the doctor data.
+    e. Save the object in the local storage with the key as the user's ID
+    f. Return the profile data object
+    g. Set `setShowModal` to false 
 
 ### Edit Profile Hook 
 

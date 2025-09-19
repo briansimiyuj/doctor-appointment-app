@@ -117,7 +117,8 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
         const patientChanged =
             userType === "patient" &&
             storedProfile.type === "patient" &&
-            storedProfile.medicalHistory.trim() !== medicalHistoryValue.trim()
+            (storedProfile.medicalHistory?.trim() ?? "") !== (medicalHistoryValue?.trim() ?? "")
+
 
         return basicChanged || doctorChanged || patientChanged
     }
@@ -145,7 +146,7 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
                 feesValue !== 0 && hospitalValue.trim() !== '' && licenseCertificate !== null &&
                 coverImage !== null,
 
-            patientValid = isPatient && medicalHistoryValue.trim().length > 0,
+                patientValid = isPatient && (medicalHistoryValue?.trim().length ?? 0) > 0,
 
             valid = isDoctor ? basicValid && doctorValid : basicValid && patientValid
             

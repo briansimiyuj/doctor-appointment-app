@@ -3,6 +3,9 @@ import { LoginContext } from "../context/LoginContext"
 import { ProfileContext } from "../context/ProfileContext"
 import { v4 as uuidv4 } from 'uuid'
 import { useUploadFile } from "./useUploadFile"
+import { useDoctorContext } from "../context/DoctorContext"
+import { DoctorType } from "../assets/types/DoctorType"
+import { DocumentType } from "../assets/types/DocumentType"
 
 export const useSubmitProfile = () =>{
 
@@ -18,6 +21,7 @@ export const useSubmitProfile = () =>{
         genderValue, dateOfBirthValue, hospitalLocationValue, setProfile 
     } = profileContext,
           { userType, userID, setUserID } = loginContext,
+          { addDoctor } = useDoctorContext(),
           { processFile } = useUploadFile(),
           resolvedUserID = userID ?? `${userType}-${uuidv4()}`
 
@@ -115,9 +119,36 @@ export const useSubmitProfile = () =>{
                 createdAt: new Date().toISOString()
                 
             }
+        
+        }
+
+        const doctorData: DoctorType ={
+
+            _id: resolvedUserID,
+            name: profileData.name,
+            image: profileData.profileImage?.url || "",
+            speciality: profileData.speciality,
+            education: profileData.education.join(", "),
+            experience: profileData.experience,
+            about: profileData.about,
+            fees: profileData.fees,
+            coverImage: profileData.coverImage as DocumentType,
+            rating: profileData.rating,
+            reviews: profileData.reviews,
+            address:{
+
+                hospital: profileData.hospital,
+                hospitalLocation: profileData.hospitalLocation
+                
+            }
+
         }
 
         setProfile(profileData)
+
+        addDoctor(doctorData)
+
+        localStorage.setItem("doctors", JSON.stringify(doctorData))
 
         localStorage.setItem(`profileData-${userID}`, JSON.stringify(profileData))    
 
