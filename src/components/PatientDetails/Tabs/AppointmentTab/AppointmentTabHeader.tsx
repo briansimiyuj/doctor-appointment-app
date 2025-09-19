@@ -1,6 +1,10 @@
+import { useProfileContext } from "../../../../context/ProfileContext"
+import PatientTabActionButton from "./PatientTabActionButton"
 import TabActionButton from "./TabActionButton"
 
 const AppointmentTabHeader: React.FC = ()=>{
+
+    const { profile } = useProfileContext()
 
     return(
 
@@ -12,7 +16,7 @@ const AppointmentTabHeader: React.FC = ()=>{
 
             </h3>
 
-            <TabActionButton/>
+            { profile?.type === "doctor" ? <TabActionButton/> : <PatientTabActionButton/> }
 
         </div>
 

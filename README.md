@@ -983,7 +983,31 @@ Patient details page will show the patient's details; medical history, allergies
       - 🟣 **Rescheduled appointments** display a "Rescheduled History" button to display the rescheduled history.
       - 🟣 **Other statuses** show a generic "Manage Appointment" button as a fallback option.
 
-      1. Create a Tab Action Button component and mount it on the Appointment Tab Header component
+     ##### Patient Tab Action Button Component
+
+      The **Patient Tab Action Button** component displays context-specific actions a patient can take, based on the current appointment status.
+
+      - 🟢 **Pending appointments**  
+        Show a disabled **"Awaiting Doctor Approval"** button and an optional **"Cancel Appointment"** button.
+      - 🔵 **Approved appointments**  
+        Display **"Join Live Chat"** and **"Join Video Call"** buttons for managing the live session, plus **"Cancel Appointment"**.
+      - 🔵 **Follow-up appointments**  
+        Display **"Reschedule Follow-up"** and **"Cancel Follow-up"** buttons.
+      - ⚪ **Completed appointments**  
+        Offer **"View Doctor Notes"** and **"Rate & Review"** buttons. (Optionally a **"Book Follow-up"** if needed.)
+      - 🔴 **Cancelled appointments**  
+        Provide **"Schedule History"** and **"View Doctor Notes"** buttons (since doctor already rescheduled if needed).
+      - 🔴 **Rejected appointments**  
+        Provide a **"Schedule History"** and **"View Rejection Reasons"** button (system/admin handles next steps, not patient).
+      - 🟣 **Rescheduled appointments**  
+        Display a **"View Reschedule History"** button to review changes.
+      - 🟣 **Other statuses**  
+        Fall back to a generic **"Manage Appointment"** button.
+
+
+
+      1. Create a Tab Action Button component and mount it on the Appointment Tab Header component if the user is a doctor.
+      2. Create a Patient Tab Action Button component and mount it on the Appointment Tab Header component if the user is a patient.
 
      **Buttons Action**
 
