@@ -3257,3 +3257,13 @@ React Toastify is a library for displaying toast notifications in React applicat
   2. Add a toast container to the `Script` component
   3. Create `useToast` hook to manage the toast notifications 
   4. Add styles for the toast notifications in `styles.css`
+  5. Integrate the `useToast` hook to various hooks to display toast notifications
+
+### Firebase Integration
+
+Firebase is a cloud-based platform that provides a variety of services for building and managing web and mobile applications. In this project, we will use Firebase to store and retrieve data from a Firestore database.
+
+  1. Create a Firebase project and enable Firestore in the Firebase console.
+  2. Install the Firebase SDK in the project using npm or yarn.
+  3. Configure the Firebase SDK with the project's credentials.
+  4. Create a Firestore database and define the schema for the data to be stored.
