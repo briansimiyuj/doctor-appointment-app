@@ -606,7 +606,7 @@ Submit profile hook will be used to submit the profile data to the local storage
     a. Create a validation logic to check if all the fields are filled. If any of the fields are empty, return an error message.
     b. Create a new object with the profile data and the file properties from the `processFile` function. Each `userType` will be used to determine which fields to include in the object.
     c. Create a new object for `DoctorType` 
-    d. Call `addDoctor` function and pass the new object as the argument. The function will return a promise that resolves with the doctor data.
+    d. Call `addDoctor` function and pass the new object as the argument. The function will return a promise that resolves with the doctor data. Call `addDoctor` if the `userType` is a doctor.
     e. Save the object in the local storage with the key as the user's ID
     f. Return the profile data object
     g. Set `setShowModal` to false 

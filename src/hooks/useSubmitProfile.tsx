@@ -128,7 +128,7 @@ export const useSubmitProfile = () =>{
             name: profileData.name,
             image: profileData.profileImage?.url || "",
             speciality: profileData.speciality,
-            education: profileData.education.join(", "),
+            education: Array.isArray(profileData.education) ? profileData.education : [],
             experience: profileData.experience,
             about: profileData.about,
             fees: profileData.fees,
@@ -146,7 +146,7 @@ export const useSubmitProfile = () =>{
 
         setProfile(profileData)
 
-        addDoctor(doctorData)
+        if(userType === "doctor") addDoctor(doctorData)
 
         localStorage.setItem("doctors", JSON.stringify(doctorData))
 

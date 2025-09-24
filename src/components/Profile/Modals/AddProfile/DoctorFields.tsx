@@ -16,9 +16,7 @@ const DoctorFields: React.FC = ()=>{
     
         handleFileSelection(e, doc =>{
 
-            setLicenseCertificate(doc)   
-
-            console.log('license certificate set:', doc)
+            setLicenseCertificate(doc) 
 
         })
         
@@ -41,7 +39,6 @@ const DoctorFields: React.FC = ()=>{
                 >
 
                     <option>Select speciality</option>
-                    
 
                     {
 

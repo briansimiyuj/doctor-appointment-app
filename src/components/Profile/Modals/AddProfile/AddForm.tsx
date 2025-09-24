@@ -33,8 +33,6 @@ const AddForm: React.FC = ()=>{
 
             setCoverImage(file)
 
-            console.log('Cover Image set:', file)
-
         })
     
     }
@@ -48,8 +46,6 @@ const AddForm: React.FC = ()=>{
         handleFileSelection(e, _doc =>{
 
             setProfileImage(file)
-
-            console.log('Profile Image set:', file)
 
         })
 
