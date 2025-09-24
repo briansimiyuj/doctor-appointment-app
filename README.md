@@ -3248,3 +3248,12 @@ Send Message Hook will be used to handle sending chat messages in the LiveChat f
     c. Update the `messages` state variable by appending the new `MessageType` object to it.
     d. Store the new message in the local storage.
     e. Clear the `input` state variable.
+
+### React Toastify
+
+React Toastify is a library for displaying toast notifications in React applications. It provides a simple and customizable way to show notifications to the user, such as success messages, error messages, and loading indicators.
+ 
+  1. Import the library CSS in `index.tsx` file
+  2. Add a toast container to the `Script` component
+  3. Create `useToast` hook to manage the toast notifications 
+  4. Add styles for the toast notifications in `styles.css`

@@ -30,6 +30,7 @@ import PrivateRoute from "./components/Login/PrivateRoute"
 import { DocumentsTabContextProvider } from "./context/DocumentsTabContext"
 import AppointmentDetailsPage from "./pages/AppointmentDetailsPage"
 import { DoctorContextProvider } from "./context/DoctorContext"
+import { ToastContainer } from "react-toastify"
 
 const Script: React.FC = () =>{
 
@@ -292,6 +293,8 @@ const Script: React.FC = () =>{
           )
 
         }
+
+        <ToastContainer position="top-right" autoClose={3000}/>
 
       </div> 
 

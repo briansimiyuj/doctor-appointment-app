@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './style.css'
+import 'react-toastify/dist/ReactToastify.css'  
 import Script from './Script.tsx'
 import { BrowserRouter } from 'react-router-dom'
 import { CurrencyProvider } from './context/CurrencyContext'

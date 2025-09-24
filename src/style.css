@@ -169,3 +169,51 @@ input::placeholder{
     }
 
 }
+
+.Toastify__toast{
+    border-radius: 0.75rem; /* rounded-xl */
+    padding: 12px 16px;
+    font-family: "Outfit", sans-serif;
+    font-size: 14px;
+    color: var(--primary-text);
+    background-color: var(--secondary-bg);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Success */
+.Toastify__toast--success{
+    background-color: var(--primary-bg);
+    color: var(--white);
+}
+
+.Toastify__toast--error{
+    background-color: #dc2626;
+    color: var(--white);
+}
+
+.Toastify__toast--info{
+    background-color: #2563eb;
+    color: var(--white);
+}
+
+.Toastify__toast--warning{
+    background-color: #f59e0b; 
+    color: var(--black);
+}
+
+.Toastify__toast-body {
+  line-height: 1.4;
+}
+
+.Toastify__close-button{
+    color: var(--secondary-text);
+    opacity: 0.7;
+}
+
+.Toastify__close-button:hover{
+    opacity: 1;
+}
+
+.Toastify__progress-bar{
+    background: var(--primary-text);
+}
