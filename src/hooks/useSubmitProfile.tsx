@@ -6,6 +6,7 @@ import { useUploadFile } from "./useUploadFile"
 import { useDoctorContext } from "../context/DoctorContext"
 import { DoctorType } from "../assets/types/DoctorType"
 import { DocumentType } from "../assets/types/DocumentType"
+import { useToast } from "./useToast"
 
 export const useSubmitProfile = () =>{
 
@@ -23,6 +24,7 @@ export const useSubmitProfile = () =>{
           { userType, userID, setUserID } = loginContext,
           { addDoctor } = useDoctorContext(),
           { processFile } = useUploadFile(),
+          { showToast } = useToast(),
           resolvedUserID = userID ?? `${userType}-${uuidv4()}`
 
     if(!userID) setUserID(resolvedUserID)
@@ -154,7 +156,7 @@ export const useSubmitProfile = () =>{
 
         setShowModal(false)
 
-        console.log('Profile submitted successfully')
+        showToast("Profile submitted successfully", "success")
 
         return profileData
 

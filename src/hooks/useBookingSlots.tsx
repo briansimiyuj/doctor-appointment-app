@@ -7,6 +7,7 @@ import { AppointmentType } from "../assets/types/AppointmentType"
 import { v4 as uuid } from "uuid"
 import { useUpdatePatientDetails } from "./useUpdatePatientDetails"
 import { useProfileContext } from "../context/ProfileContext"
+import { useToast } from "./useToast"
 
 export const useBookingSlots = ()=>{
 
@@ -14,6 +15,7 @@ export const useBookingSlots = ()=>{
           { doctorInfo, patientInfo, consultationType, slotIndex, setSlotIndex, selectedTimeSlot, setSelectedTimeSlot, appointedDoctors, setAppointedDoctors, isBooked, setIsBooked, appointments, setAppointments, slots } = useContext(BookingContext),
           { profile } = useProfileContext(),
           { closeCancelModal } = useUpdatePatientDetails(),
+          { showToast } = useToast(),
           days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
           selectedDate = slots[slotIndex]?.date
 
@@ -105,7 +107,7 @@ export const useBookingSlots = ()=>{
         setIsBooked(doctorInfo._id, true)
 
         
-        alert("Booking successful!")
+        showToast("Appointment booked successfully", "success")
     
     }
 

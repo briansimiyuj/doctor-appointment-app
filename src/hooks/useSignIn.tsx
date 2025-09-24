@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { LoginContext } from "../context/LoginContext"
 import { useNavigate } from "react-router-dom"
+import { useToast } from "./useToast"
 
 export const useSignIn = () =>{
 
@@ -9,13 +10,14 @@ export const useSignIn = () =>{
     if(!context) throw new Error("useSignIn must be used within a LoginContextProvider")
 
     const { setEmail, setName, setPassword, setUserType, setIsAuthenticated, setUserID } = context,
-          navigate = useNavigate()
+          navigate = useNavigate(),
+          { showToast } = useToast()
 
     const signIn = (email:string, password:string) =>{
 
         if(!email || !password){
             
-            alert("Please fill in all fields")
+            showToast("Please fill in all fields", "error") 
             
             return
             
@@ -54,11 +56,9 @@ export const useSignIn = () =>{
 
                     navigate("/")
 
-                    return { success: true, userType: userData.userType }
+                    showToast("Signed in successfully", "success")
 
-                }else{
-                    
-                    alert("Invalid email or password")
+                    return { success: true, userType: userData.userType }
 
                 }
 
@@ -69,6 +69,8 @@ export const useSignIn = () =>{
             }
             
         }
+
+        showToast("Invalid email or password", "error")
 
         return { success: false, message: 'Invalid email or password' }
 

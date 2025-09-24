@@ -3,6 +3,7 @@ import { LoginContext } from "../context/LoginContext"
 import { ProfileContext } from "../context/ProfileContext"
 import { useUploadFile } from "./useUploadFile"
 import { useEditProfileLogic } from "./useEditProfileLogic"
+import { useToast } from "./useToast"
 
 export const useEditProfile = () =>{
 
@@ -19,8 +20,9 @@ export const useEditProfile = () =>{
           { userType, setName } = loginContext, 
           { processFile } = useUploadFile(),
           { hasProfileChanged } = useEditProfileLogic(),
+          { showToast } = useToast(),
           keys = Object.keys(localStorage),
-          profileKey = keys.find(key => key.startsWith("profileData-")),
+          profileKey = keys.find(key => key.startsWith(`profile-${userType}`)),
           savedProfile = profileKey ? JSON.parse(localStorage.getItem(profileKey) as string): null
 
     const editProfile = useCallback(async () =>{
@@ -86,10 +88,12 @@ export const useEditProfile = () =>{
 
         if(!updatedProfile) return
 
-        console.log('Profile updated successfully')
+        showToast("Profile updated successfully", "success")
     
     }
 
     return { editProfile: handleEditProfile }
 
 }
+
+//FIXME: There is a bug in the edit profile function. The profile is not being updated correctly for doctors

@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { LoginContext } from "../context/LoginContext"
 import { v4 as uuidv4 } from "uuid"
 import { useNavigate } from "react-router-dom"
+import { useToast } from "./useToast"
 
 export const useSignUp = () =>{
 
@@ -10,6 +11,7 @@ export const useSignUp = () =>{
     if(!context) throw new Error("useSignUp must be used within a LoginContextProvider")
 
     const { setEmail, setName, setPassword, setConfirmPassword, setIsAuthenticated, setUserType, setUserID } = context,
+          { showToast } = useToast(),
            navigate = useNavigate()
 
     const signUp = (
@@ -62,7 +64,7 @@ export const useSignUp = () =>{
 
         navigate("/")
 
-        console.log('User signed up successfully:', userData)
+        showToast("Signed up successfully", "success")
     
     }
 

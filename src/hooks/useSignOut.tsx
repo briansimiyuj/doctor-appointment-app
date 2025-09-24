@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { LoginContext } from "../context/LoginContext"
 import { useNavigate } from "react-router-dom"
+import { useToast } from "./useToast"
 
 export const useSignOut = () =>{
 
@@ -9,7 +10,8 @@ export const useSignOut = () =>{
 
     if(!context) throw new Error("useSigOut must be used within a LoginContextProvider")
 
-    const { setName, setEmail, setPassword, setUserType, setIsAuthenticated, setUserID, closeSignOutModal } = context
+    const { setName, setEmail, setPassword, setUserType, setIsAuthenticated, setUserID, closeSignOutModal } = context,
+          { showToast } = useToast()
 
     const signOut = () =>{
 
@@ -29,7 +31,7 @@ export const useSignOut = () =>{
 
         localStorage.removeItem("isAuthenticated")
 
-        console.log('User signed out successfully')
+        showToast("Signed out successfully", "success")
 
         closeSignOutModal()
 
