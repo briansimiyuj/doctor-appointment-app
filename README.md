@@ -3026,10 +3026,14 @@ Sign Up Hook will be used to handle the sign up process.
   2. Create a `signUp` function that takes in `name`, `email`, `password`, `confirmPassword` and `userType` as parameters
   3. If any of the parameters are empty, return an error message
   4. If the password and confirm password do not match, return an error message
-  5. Create a `userData` object with the `name`, `email`, `password`, `confirmPassword` and `userType` as properties
-  6. Store the `userData`, `isAuthenticated` and `currentUser` in the `localStorage` 
-  7. Call `setName`, `setEmail`, `setPassword`, `setConfirmPassword`, `setIsAuthenticated` and `setUserType` with the values from `userData` and `true`
-  8. Navigate to the Home Page
+  5. Check if the email has been used before, if so, return an error message
+  6. Check if the email is valid, if not, return an error message
+  7. Check if the password is strong enough, if not, return an error message
+  8. Create a `userData` object with the `name`, `email`, `password`, `confirmPassword` and `userType` as properties
+  9. Store the `isAuthenticated` and `currentUser` in the `localStorage` 
+  10. Store the `userData` in the firebase database
+  11. Call `setName`, `setEmail`, `setPassword`, `setConfirmPassword`, `setIsAuthenticated` and `setUserType` with the values from `userData` and `true`
+  12. Navigate to the Home Page
 
 ### Sign In Hook
 

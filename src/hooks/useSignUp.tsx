@@ -3,6 +3,9 @@ import { LoginContext } from "../context/LoginContext"
 import { v4 as uuidv4 } from "uuid"
 import { useNavigate } from "react-router-dom"
 import { useToast } from "./useToast"
+import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore"
+import { db } from "../firebaseConfig"
+import { isEmailValid, isPasswordStrong } from "../assets/utils/validation"
 
 export const useSignUp = () =>{
 
@@ -14,7 +17,7 @@ export const useSignUp = () =>{
           { showToast } = useToast(),
            navigate = useNavigate()
 
-    const signUp = (
+    const signUp = async(
         email: string,
         name: string,
         password: string,
@@ -24,47 +27,84 @@ export const useSignUp = () =>{
     
         if(!email || !name || !password || !confirmPassword || !userType){
             
-            alert("Please fill in all fields")
+            showToast("Please fill in all fields", "error")
          
             return
-            
+        
+        }
+
+        if(!isEmailValid(email)){
+
+            showToast("Please enter a valid email", "error")
+
+            return
+
+        }
+
+        if(!isPasswordStrong(password)){
+
+            showToast("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character", "error")
+
+            return
+
         }
 
         if(password !== confirmPassword){
             
-            alert("Passwords do not match")
+            showToast("Passwords do not match", "error")
             
             return
             
         }
 
-        const userID = `${userType}-${uuidv4()}`
+        const userID = `${userType}-${uuidv4()}`,
+              userData = { email, name, password, userType, userID }
 
-        const userData = { email, name, password, userType, userID }
+        try{
 
-        localStorage.setItem(`userData-${userID}`, JSON.stringify(userData))
+            const userRef = collection(db, "users"),
+                  q = query(userRef, where("email", "==", email)),
+                  querySnapshot = await getDocs(q)
 
-        localStorage.setItem("isAuthenticated", JSON.stringify(true))
+            if(!querySnapshot.empty){
 
-        localStorage.setItem("currentUser", JSON.stringify(userData))
+                showToast("Email already registered", "error")
 
-        setEmail(email)
+                return
 
-        setName(name)
+            }
 
-        setPassword(password)
+            await setDoc(doc(db, "users", userID), userData)
 
-        setConfirmPassword(confirmPassword)
+            localStorage.setItem("isAuthenticated", JSON.stringify(true))
 
-        setUserType(userType)
+            localStorage.setItem("currentUser", JSON.stringify(userData))
 
-        setUserID(userID)
+            setEmail(email)
 
-        setIsAuthenticated(true)
+            setName(name)
 
-        navigate("/")
+            setPassword(password)
 
-        showToast("Signed up successfully", "success")
+            setConfirmPassword(confirmPassword)
+
+            setUserType(userType)
+
+            setUserID(userID)
+
+            setIsAuthenticated(true)
+
+            setTimeout(() => navigate("/"), 1000)
+
+           showToast("Signed up successfully", "success")
+
+        }catch(error){
+
+            console.error("Error signing up:", error)
+
+            showToast("Error signing up. Please try again.", "error")
+
+        }
     
     }
 
