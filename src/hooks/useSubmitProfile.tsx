@@ -7,6 +7,8 @@ import { useDoctorContext } from "../context/DoctorContext"
 import { DoctorType } from "../assets/types/DoctorType"
 import { DocumentType } from "../assets/types/DocumentType"
 import { useToast } from "./useToast"
+import { doc, setDoc } from "firebase/firestore"
+import { db } from "../firebaseConfig"
 
 export const useSubmitProfile = () =>{
 
@@ -150,9 +152,9 @@ export const useSubmitProfile = () =>{
 
         if(userType === "doctor") addDoctor(doctorData)
 
-        localStorage.setItem("doctors", JSON.stringify(doctorData))
-
-        localStorage.setItem(`profileData-${userID}`, JSON.stringify(profileData))    
+        await setDoc(doc(db, "patients", resolvedUserID), profileData)
+        
+        if(userType === "doctor") await setDoc(doc(db, "doctors", resolvedUserID), doctorData)
 
         setShowModal(false)
 

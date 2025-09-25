@@ -607,7 +607,7 @@ Submit profile hook will be used to submit the profile data to the local storage
     b. Create a new object with the profile data and the file properties from the `processFile` function. Each `userType` will be used to determine which fields to include in the object.
     c. Create a new object for `DoctorType` 
     d. Call `addDoctor` function and pass the new object as the argument. The function will return a promise that resolves with the doctor data. Call `addDoctor` if the `userType` is a doctor.
-    e. Save the object in the local storage with the key as the user's ID
+    e. Save the object in the firestore database
     f. Return the profile data object
     g. Set `setShowModal` to false 
 
