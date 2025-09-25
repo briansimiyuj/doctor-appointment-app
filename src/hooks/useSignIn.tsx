@@ -2,6 +2,9 @@ import { useContext } from "react"
 import { LoginContext } from "../context/LoginContext"
 import { useNavigate } from "react-router-dom"
 import { useToast } from "./useToast"
+import { db } from "../firebaseConfig"
+import { collection, getDocs, query, where } from "firebase/firestore"
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 
 export const useSignIn = () =>{
 
@@ -11,9 +14,11 @@ export const useSignIn = () =>{
 
     const { setEmail, setName, setPassword, setUserType, setIsAuthenticated, setUserID } = context,
           navigate = useNavigate(),
+          auth = getAuth(),
           { showToast } = useToast()
 
-    const signIn = (email:string, password:string) =>{
+
+    const signIn = async (email:string, password:string) =>{
 
         if(!email || !password){
             
@@ -23,56 +28,55 @@ export const useSignIn = () =>{
             
         }
 
-        const keys = Object.keys(localStorage),
-              userKeys = keys.filter(key => key.startsWith("userData-"))
+        try{
+            
+            await signInWithEmailAndPassword(auth, email, password)
 
-        for(const key of userKeys){
+            const userRef = collection(db, "users"),
+                  q = query(userRef, where("email", "==", email)),
+                  querySnapshot = await getDocs(q)
 
-            const stored = localStorage.getItem(key)
+            if(querySnapshot.empty){
 
-            if(!stored) continue
+                showToast("Invalid email or password", "error")
 
-            try{
+                return { success: false, message: 'Invalid email or password' }
 
-                const userData = JSON.parse(stored)
-
-                if(userData.email === email && userData.password === password){
-
-                    setEmail(userData.email)
-                    
-                    setName(userData.name)
-
-                    setPassword(userData.password)
-                    
-                    setUserType(userData.userType)
-                    
-                    setUserID(userData.userID)
-
-                    localStorage.setItem("currentUser", JSON.stringify(userData))
-                    
-                    localStorage.setItem("isAuthenticated", JSON.stringify(true))
-                    
-                    setIsAuthenticated(true)
-
-                    navigate("/")
-
-                    showToast("Signed in successfully", "success")
-
-                    return { success: true, userType: userData.userType }
-
-                }
-
-            }catch(err){
-
-                console.error('Error parsing user data from localStorage', err)
-                
             }
+
+            const userData = querySnapshot.docs[0].data()
+
+            setEmail(userData.email)
+            
+            setName(userData.name)
+
+            setPassword(userData.password)
+            
+            setUserType(userData.userType)
+            
+            setUserID(userData.userID)
+
+            localStorage.setItem("currentUser", JSON.stringify(userData))
+            
+            localStorage.setItem("isAuthenticated", JSON.stringify(true))
+            
+            setIsAuthenticated(true)
+
+            navigate("/")
+
+            showToast("Signed in successfully", "success")
+
+            return { success: true, userType: userData.userType }
+
+        }catch(err){
+
+            console.error('Error signing in:', err)
+
+            showToast("Error signing in", "error")
+
+            return { success: false, message: 'Error signing in' }
             
         }
-
-        showToast("Invalid email or password", "error")
-
-        return { success: false, message: 'Invalid email or password' }
 
     }
 
