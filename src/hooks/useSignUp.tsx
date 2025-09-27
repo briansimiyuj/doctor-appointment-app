@@ -6,6 +6,7 @@ import { useToast } from "./useToast"
 import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore"
 import { db } from "../firebaseConfig"
 import { isEmailValid, isPasswordStrong } from "../assets/utils/validation"
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth"
 
 export const useSignUp = () =>{
 
@@ -15,7 +16,8 @@ export const useSignUp = () =>{
 
     const { setEmail, setName, setPassword, setConfirmPassword, setIsAuthenticated, setUserType, setUserID } = context,
           { showToast } = useToast(),
-           navigate = useNavigate()
+           navigate = useNavigate(),
+           auth = getAuth()
 
     const signUp = async(
         email: string,
@@ -73,6 +75,10 @@ export const useSignUp = () =>{
                 return
 
             }
+
+            await createUserWithEmailAndPassword(auth, email, password)
+
+            await signInWithEmailAndPassword(auth, email, password)
 
             await setDoc(doc(db, "users", userID), userData)
 
