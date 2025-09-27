@@ -3,12 +3,16 @@ import { AddressType, ProfileType } from "../assets/types/ProfileType"
 import { LoginContext } from "./LoginContext"
 import { ProfileContextProps } from "../assets/contextProps/ProfileContextProps"
 import { DocumentType } from "../assets/types/DocumentType"
+import { doc, getDoc } from "firebase/firestore"
+import { db } from "../firebaseConfig"
 
 interface ProfileContextProviderProps{
 
     children: React.ReactNode
 
 }
+
+type UserType = "patient" | "doctor" | "system" | null
 
 export const ProfileContext = createContext<ProfileContextProps | undefined>(undefined)
 
@@ -46,7 +50,7 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
             [hospitalValue, setHospitalValue] = useState<string>(''),
             [hospitalLocationValue, setHospitalLocationValue] = useState<string>(''),
             [readyToSubmit, setReadyToSubmit] = useState<boolean>(false),
-            [loading, _setLoading] = useState<boolean>(false)
+            [loading, setLoading] = useState<boolean>(false)
 
     useEffect(() =>{
     
@@ -164,29 +168,77 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
     
     }, [userType, nameValue, emailValue, phoneValue, addressValue, profileImage, specialityValue, experienceValue, aboutValue, educationValue, certificationsValue, feesValue, coverImage, medicalHistoryValue, licenseCertificate])
 
-    useEffect(() =>{
+    const fetchProfile = async(userID: string, userType: UserType) =>{
     
-        const storedProfile = localStorage.getItem(`profileData-${userID}`)
-            
-            if(storedProfile){
-                
-                try{
+        try{
 
-                    const parsedProfile: ProfileType = JSON.parse(storedProfile)
+            setLoading(true)
 
-                    setProfile(parsedProfile)
+            const docRef = doc(db, "profiles", userID),
+                  docSnap = await getDoc(docRef)
 
-                }catch(err){
+            if(docSnap.exists()){
 
-                    console.log(err)
+                const profileData = docSnap.data() as ProfileType
+
+                if(profileData.type === userType){
+
+                    return profileData
+
+                }else{
+
+                    console.error("User type does not match profile type!")
+
+                    return null
 
                 }
 
             }else{
-                
-                setProfile(null)
+
+                console.error("No such profile!")
+
+                return null
 
             }
+            
+
+        }catch(err){
+
+            console.error("Error fetching profile:", err)
+
+        }finally{
+
+            setLoading(false)
+
+        }
+    
+    }
+
+    useEffect(() =>{
+    
+        const loadProfile = async () =>{
+
+            if(!userID) return
+
+            const userProfile = await fetchProfile(userID, userType)
+
+            console.log("Fetched profile:", userProfile)
+
+            if(userProfile) setProfile(userProfile)
+
+            setLoading(false)
+
+        }
+
+        if(userID){
+
+            loadProfile()
+
+        }else{
+
+            setProfile(null)
+
+        }
     
     }, [userID])
 

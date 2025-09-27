@@ -462,12 +462,21 @@ Profile context will be used to store the user profile data and provide it to th
   8. Retrieve `name` and `email` from `LoginContext`
   9. If `name` and `email` change, update the `nameValue` and `emailValue` states accordingly
   10. If `email`, `phone`, `residence`, `city`, `state`, `country` change, update the `addressValue` with their new values
-  11. Retrieve `profileData` from `localStorage` and set `profile` state with the retrieved data
+  11. Create `fetchProfile` function takes `userID` and `userType` as parameters and fetches the profile data from the firestore API
+     a. Retrieve "profile" collection from firestore  
+     b. Retrieve the document object with reference to the collection
+     c. If the document exists, create a `profileData` object with the retrieved document
+     d. If `userType` matches `profileData.userType`, retrieve `profileData`. Otherwise, return null
+
   12. If `profile` changes, update the `profileImage`, `coverImage` and `licenseCertificate` states with the new values from `profile`
   13. Create a `loadProfileForEditing` function that retrieves the `profileData` from `localStorage` and sets the `profile` state with the retrieved data. This function will be used to load the profile data when the user clicks on the edit button on the profile page.
   14. Call `loadProfileForEditing` function when the `profile` and `isEditing` states changes
   15. Create a `deepEqual` function that compares two objects and returns `true` if they are deeply equal and `false` otherwise. This function will be used to compare `profileImage`, `coverImage` and `licenseCertificate` states with the new values from `profile`
   16. Create a `profileHasChanged` function that returns `true` if any of the new values from `profile` are different from the current states and `false` otherwise. This function will be used to determine if the user has made any changes to the profile data.
+  17. If `userID` changes, create `loadProfile` function
+    a. If `userID` is empty, exit the function
+    b. Call `fetchProfile` function with `userID` and `userType` as arguments and assign it to `userProfile` constant
+    c. If `userProfile` exists, set `profile` state to `userProfile` and `loading` state to `false`
 
 
 ### Profile Page

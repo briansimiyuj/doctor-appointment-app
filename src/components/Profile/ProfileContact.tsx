@@ -20,7 +20,7 @@ const ProfileContact: React.FC = () =>{
 
                 <h3 className="font-medium">Phone:</h3>
 
-                <p className="text-blue-400">{userData?.addressValue.phone}</p>
+                <p className="text-blue-400">{userData?.addressValue?.phone}</p>
 
                 {
 

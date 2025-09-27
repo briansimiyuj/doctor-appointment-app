@@ -13,10 +13,20 @@ const ProfilePage: React.FC = () =>{
 
     if(!profileContext || !loginContext) return null
 
-    const { showModal, setShowModal, setIsEditing, profile } = profileContext,
+    const { showModal, setShowModal, setIsEditing, profile, loading } = profileContext,
           { isAuthenticated } = loginContext
 
     if(!isAuthenticated) return <NotFoundPage/>
+
+    if(loading) return(
+
+        <div className="flex items-center justify-center min-h-[200px]">
+
+            <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-16 w-16"></div>
+
+        </div>
+
+    )
 
     return(
 
