@@ -14,6 +14,7 @@ export type DoctorType ={
     coverImage: DocumentType
     licenseCertificate?: DocumentType
     rating?: number
+    type: "doctor"
     reviews?: typeof dummyReviews
 
     address:{

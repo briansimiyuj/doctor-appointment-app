@@ -85,6 +85,7 @@ export const useSubmitProfile = () =>{
                     country: countryValue!
                 },
                 gender: genderValue,
+                _id: resolvedUserID,
                 dateOfBirth: dateOfBirthValue!,
                 type: "doctor",
                 profileImage: profileImage ? profileImageDoc : null,
@@ -108,6 +109,8 @@ export const useSubmitProfile = () =>{
             profileData ={
 
                 name: nameValue!,
+                _id: resolvedUserID!,
+                
                 addressValue:{
                     email: emailValue!,
                     phone: phoneValue!,
@@ -135,6 +138,7 @@ export const useSubmitProfile = () =>{
             speciality: profileData.speciality,
             education: Array.isArray(profileData.education) ? profileData.education : [],
             experience: profileData.experience,
+            type: profileData.type,
             about: profileData.about,
             fees: profileData.fees,
             coverImage: profileData.coverImage as DocumentType,
@@ -149,6 +153,8 @@ export const useSubmitProfile = () =>{
         }
 
         setProfile(profileData)
+        
+        await setDoc(doc(db, "profiles", resolvedUserID), profileData)
 
         if(userType === "doctor") addDoctor(doctorData)
 

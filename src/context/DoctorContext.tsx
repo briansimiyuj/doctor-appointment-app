@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { DoctorContextProps } from "../assets/contextProps/DoctorContextProps"
 import { DoctorType } from "../assets/types/DoctorType"
+import { collection, doc, getDocs, setDoc } from "firebase/firestore"
+import { db } from "../firebaseConfig"
 
 interface DoctorContextProviderProps{
 
@@ -16,50 +18,54 @@ export const DoctorContextProvider:React.FC<DoctorContextProviderProps> = ({ chi
 
     useEffect(() =>{
     
-        const storedDoctors = localStorage.getItem("doctors")
-
-        if(storedDoctors){
+        const fetchDoctors = async () =>{
 
             try{
 
-                const parsedDoctors = JSON.parse(storedDoctors) as DoctorType[]
+                const doctorsCollection = collection(db, "doctors"),
+                    doctorsSnapshot = await getDocs(doctorsCollection),
+                    doctorsList = doctorsSnapshot.docs.map(doc => doc.data() as DoctorType)
 
-                if(Array.isArray(parsedDoctors)){
-
-                    setDoctors(parsedDoctors)
-
-                }else{
-                    
-                    console.warn("Invalid doctors data in local storage")
-
-                    localStorage.setItem("doctors", JSON.stringify([]))
-
-                    setDoctors([])
-
-                }
+                setDoctors(doctorsList)
 
             }catch(error){
-                
-                console.error("Error parsing doctors data from local storage", error)
 
-                localStorage.setItem("doctors", JSON.stringify([]))
-
-                setDoctors([])
+                console.log(error)
 
             }
-            
+
         }
+
+        fetchDoctors()
      
     }, [])
 
     useEffect(() =>{
-    
-        if(doctors.length > 0){
 
-            localStorage.setItem("doctors", JSON.stringify(doctors))
+        const saveDoctors = async () =>{
 
+            if(doctors.length > 0){
+
+                for (const doctor of doctors){
+
+                    if(!doctor._id){
+
+                        console.error("Error: Doctor without id")
+
+                        continue
+
+                    }
+
+                    await setDoc(doc(db, "doctors", doctor._id), doctor)
+
+                }
+
+            }
+        
         }
-    
+
+        saveDoctors()
+
     }, [doctors])
 
     const addDoctor = (doctor: DoctorType) =>{
