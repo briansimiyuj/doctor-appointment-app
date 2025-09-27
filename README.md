@@ -595,19 +595,19 @@ Submit profile hook will be used to submit the profile data to the local storage
   1. Retrieve the following:
     a. `profile` and `showModal` states from the `ProfileContext`
     b. `userID` state from the `LoginContext`
-    c. `processFile` function from `UploadFile` hook
+    c. `uploadAndProcessFile` function from `UploadFile` hook
     d. `addDoctor` function from `DoctorContext`
 
   2. Create `resolvedUserID` constant that will store the resolved user ID from the `userID` state or generate a new one if it's not available.
     a. If `userID` is not available, set it to `resolvedUserID` 
 
-  3. Call `processFile` function to upload the profile image, cover image and license certificate. The function will return a promise that resolves with the file properties.
+  3. Call `uploadAndProcessFile` function to upload the profile image, cover image and license certificate. The function will return a promise that resolves with the file properties.
   4. Create `submitProfile` function that will be called when the submit button is clicked
     a. Create a validation logic to check if all the fields are filled. If any of the fields are empty, return an error message.
-    b. Create a new object with the profile data and the file properties from the `processFile` function. Each `userType` will be used to determine which fields to include in the object.
+    b. Create a new object with the profile data and the file properties from the `uploadAndProcessFile` function. Each `userType` will be used to determine which fields to include in the object.
     c. Create a new object for `DoctorType` 
     d. Call `addDoctor` function and pass the new object as the argument. The function will return a promise that resolves with the doctor data. Call `addDoctor` if the `userType` is a doctor.
-    e. Save the object in the firestore database
+    e. Save the object in the firestore database; if the `userType` is a doctor, save under the `doctors` collection. If the `userType` is a patient, save under the `patients` collection.
     f. Return the profile data object
     g. Set `setShowModal` to false 
 
@@ -2095,12 +2095,14 @@ Patient details page will show the patient's details; medical history, allergies
 
     ### File Upload Hook
 
-    Files upload hook will be used to upload the selected files to the local storage
+    Files upload hook will be used to upload the selected files to firebase storage and update local state with the uploaded files
 
       1. Retrieve the selected following:
         a. `isUploading`, `setIsUploading` and `setShowUploadArea` from Document Tab Context
         b. `selectedFiles` and `clearFiles` from File Selection hook
-        c. `addDocument` from Patient Details Context
+        c. `addDocument` from `Patient Details Context`
+        d. `profile` from `Profile Context`
+        e. `appointmentID` from `Appointment Context`
 
       2. Create a reusable `processFile` function that will process the file and convert it to a `DocumentType` object which will have the following properties:
         a. `_id`: unique identifier (generated with uuid)
@@ -2111,15 +2113,27 @@ Patient details page will show the patient's details; medical history, allergies
         f. `uploadedBy`: uploader's name (from profile context or dummy data)
         g. `uploadedByID`: uploader's ID (from profile context or dummy data)
         h. `content`: file content as a base64 string (from FileReader)
+        
+      3. Create a `uploadFileToFirebase` function that takes file and document as parameters and returns a promise of `DocumentType` object
+        a. Create unique file name by combining file name and random ID
+        b. Use `ref` from `storage` to create a reference to the file
+        c. Use `uploadBytes` to upload the file to Firebase Storage
+        d. Use `getDownloadURL` to get the download URL of the uploaded file
+
+      4. Create a `uploadAndProcessFile` function that takes file as parameter and returns a promise of `DocumentType` object
+        a. Call `processFile` to process the file and get the document
+        b. Call `uploadFileToFirebase` to upload the file to Firebase Storage and get the document
+        c. Return the document
 
       3. Create a `handleFilesUpload` function that will be called when the "Upload" button is clicked
         a. Check if there are any files selected, if not, exit the function
         b. Set `isUploading` to true
-        c. Simulate the upload process by using `setTimeout` to delay the upload by 2 seconds 
-        d. Map the selected files to the `processFile` function to coreate an array of `DocumentType` objects
-        e. Loop through the array of `DocumentType` objects and call `addDocument` for each object
-        f. Clear the selected files
-        g. Set `showUploadArea` to false
+        c. Use `Promise.all` to map all `selectedFiles` through the `processFile` function, creating an array of `DocumentType` objects.
+        d. Select the first file from `selectedFiles` object
+        e. Upload the file to firebase storage using the `uploadBytes` function from the `firebase/storage` module
+        f. Call `addDocument` and pass the `DocumentType` object to it
+        g. Clear the selected files
+        h. Set `showUploadArea` to false
 
       3. Create a `canUpload` boolean state that will be used to disable the "Upload" button if there are no files selected and the upload process is not in progress
 

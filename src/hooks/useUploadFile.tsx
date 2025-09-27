@@ -5,6 +5,8 @@ import { usePatientDetails } from "../context/PatientDetailsContext"
 import { useProfileContext } from "../context/ProfileContext"
 import { useFileSelection } from "./useFileSelection"
 import { v4 as uuidv4 } from "uuid"
+import { storage } from "../firebaseConfig"
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 
 export const useUploadFile = () =>{
 
@@ -54,7 +56,7 @@ export const useUploadFile = () =>{
             _id: uuidv4(),
             name: file.name,
             type: normalizedType,
-            content: content,
+            content, 
             appointmentID,
             size: file.size,
             uploadDate: new Date(),
@@ -64,6 +66,32 @@ export const useUploadFile = () =>{
         }
 
     }
+
+    const uploadFileToFirebase = async(file: File, document: DocumentType): Promise<DocumentType> =>{
+
+        const uniqueFilename = `${file.name}-${uuidv4()}`,
+              storageRef = ref(storage, `uploads/${uniqueFilename}`),
+              uploadResult = await uploadBytes(storageRef, file),
+              url = await getDownloadURL(uploadResult.ref)
+
+        return{
+
+            ...document, 
+            content: url,
+
+        }
+
+    }
+
+    const uploadAndProcessFile = async(file: File): Promise<DocumentType> =>{
+    
+        const initialDocument = await processFile(file),
+             finalDocument = await uploadFileToFirebase(file, initialDocument)
+
+        return finalDocument
+    
+    }
+
 
     const handleFileUpload = async() =>{
     
@@ -81,15 +109,25 @@ export const useUploadFile = () =>{
             
             await new Promise(resolve => setTimeout(resolve, 2000))
 
-            const uploadedDocuments: DocumentType[] = await Promise.all(
+            const filesArray = selectedFiles as unknown as File[]
 
-                (selectedFiles as unknown as File[]).map(file => processFile(file))
+            const initialDocuments: DocumentType[] = await Promise.all(
+
+                filesArray.map(file => processFile(file))
 
             )
+            
+            const uploadPromises = filesArray.map((file, index) =>{
 
-            uploadedDocuments.forEach(document => addDocument(document))
+                const initialDocument = initialDocuments[index]
+                
+                return uploadFileToFirebase(file, initialDocument)
 
-            localStorage.setItem("documents", JSON.stringify(uploadedDocuments))
+            })
+
+            const finalDocuments: DocumentType[] = await Promise.all(uploadPromises)
+
+            finalDocuments.forEach(document => addDocument(document))
 
             clearFiles()
 
@@ -117,7 +155,8 @@ export const useUploadFile = () =>{
         isUploading,
         canUpload,
         selectedFilesCount: selectedFiles.length,
-        processFile 
+        processFile,
+        uploadAndProcessFile
 
     }
 

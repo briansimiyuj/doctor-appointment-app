@@ -164,25 +164,19 @@ const DoctorFields: React.FC = ()=>{
 
                             {
 
-                                licenseCertificate !== null && typeof licenseCertificate === "object" && "content" in licenseCertificate &&(
+                                licenseCertificate instanceof File ?(
 
-                                    <a href={licenseCertificate.content} target="_blank" rel="noreferrer" className="text-blue-500 hover:underline">View Current License Certificate</a>
+                                    <span className="text-gray-600">{licenseCertificate.name}</span>
 
-                                )
+                                ):(typeof licenseCertificate === "object" && "content" in licenseCertificate) ?(
+
+                                    <a href={licenseCertificate.content} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline hover:text-blue-800">View License Certificate</a>
+
+                                ): null
 
                             }
 
                         </div>
-
-                    )
-
-                }
-
-                {
-
-                    licenseCertificate && !("content" in licenseCertificate) &&(
-
-                        <span className="text-gray-600">{licenseCertificate.name}</span>
 
                     )
 

@@ -25,7 +25,7 @@ export const useSubmitProfile = () =>{
     } = profileContext,
           { userType, userID, setUserID } = loginContext,
           { addDoctor } = useDoctorContext(),
-          { processFile } = useUploadFile(),
+          { uploadAndProcessFile } = useUploadFile(),
           { showToast } = useToast(),
           resolvedUserID = userID ?? `${userType}-${uuidv4()}`
 
@@ -62,11 +62,12 @@ export const useSubmitProfile = () =>{
         }
 
         if(!genderValue) throw new Error("Please select a gender")  
+     
         if(!userType || (userType !== "doctor" && userType !== "patient")) throw new Error("Invalid user type")
 
-        const profileImageDoc = profileImage instanceof File ? await processFile(profileImage) : null,
-              coverImageDoc = coverImage instanceof File ? await processFile(coverImage) : null,
-              licenseCertificateDoc = licenseCertificate instanceof File ? await processFile(licenseCertificate) : null
+        const profileImageDoc = profileImage instanceof File ? await uploadAndProcessFile(profileImage) : null,
+              coverImageDoc = coverImage instanceof File ? await uploadAndProcessFile(coverImage) : null,
+              licenseCertificateDoc = licenseCertificate instanceof File ? await uploadAndProcessFile(licenseCertificate) : null
 
         let profileData: any
 
@@ -138,7 +139,6 @@ export const useSubmitProfile = () =>{
             fees: profileData.fees,
             coverImage: profileData.coverImage as DocumentType,
             rating: profileData.rating,
-            reviews: profileData.reviews,
             address:{
 
                 hospital: profileData.hospital,
@@ -152,9 +152,15 @@ export const useSubmitProfile = () =>{
 
         if(userType === "doctor") addDoctor(doctorData)
 
-        await setDoc(doc(db, "patients", resolvedUserID), profileData)
-        
-        if(userType === "doctor") await setDoc(doc(db, "doctors", resolvedUserID), doctorData)
+        if(userType === "patient"){
+
+            await setDoc(doc(db, "patients", resolvedUserID), profileData)
+            
+        }else if(userType === "doctor"){
+
+            await setDoc(doc(db, "doctors", resolvedUserID), doctorData)
+
+        }
 
         setShowModal(false)
 
