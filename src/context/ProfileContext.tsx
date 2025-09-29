@@ -222,8 +222,6 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
 
             const userProfile = await fetchProfile(userID, userType)
 
-            console.log("Fetched profile:", userProfile)
-
             if(userProfile) setProfile(userProfile)
 
             setLoading(false)
@@ -326,6 +324,7 @@ export const ProfileContextProvider = ({ children }: ProfileContextProviderProps
     
         profile,
         loading,
+        setLoading,
         setProfile,
         isEditing,
         setIsEditing,

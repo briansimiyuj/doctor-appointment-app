@@ -4,6 +4,10 @@ import { ProfileContext } from "../context/ProfileContext"
 import { useUploadFile } from "./useUploadFile"
 import { useEditProfileLogic } from "./useEditProfileLogic"
 import { useToast } from "./useToast"
+import { doc, updateDoc } from "firebase/firestore"
+import { db } from "../firebaseConfig"
+import { ProfileType } from "../assets/types/ProfileType"
+import { useDoctorContext } from "../context/DoctorContext"
 
 export const useEditProfile = () =>{
 
@@ -16,84 +20,137 @@ export const useEditProfile = () =>{
 
     }
 
-    const { nameValue, emailValue, phoneValue, specialityValue, profileImage, coverImage, educationValue, experienceValue,  certificationsValue, aboutValue, setProfile, feesValue, medicalHistoryValue,  residenceValue, stateValue, cityValue, countryValue,  hospitalLocationValue, hospitalValue, licenseCertificate,  genderValue, dateOfBirthValue, setShowModal } = profileContext, 
-          { userType, setName } = loginContext, 
-          { processFile } = useUploadFile(),
+    const { nameValue, emailValue, phoneValue, specialityValue, profileImage, coverImage, educationValue, experienceValue,  certificationsValue, aboutValue, setProfile, feesValue, medicalHistoryValue,  residenceValue, stateValue, cityValue, countryValue,  hospitalLocationValue, hospitalValue, licenseCertificate,  genderValue, dateOfBirthValue, setShowModal, profile, setLoading, readyToSubmit } = profileContext,
+          { userType, setName, userID } = loginContext,
+          { uploadAndProcessFile } = useUploadFile(),
           { hasProfileChanged } = useEditProfileLogic(),
-          { showToast } = useToast(),
-          keys = Object.keys(localStorage),
-          profileKey = keys.find(key => key.startsWith(`profile-${userType}`)),
-          savedProfile = profileKey ? JSON.parse(localStorage.getItem(profileKey) as string): null
+          { updateDoctor } = useDoctorContext(),
+          { showToast } = useToast()
 
     const editProfile = useCallback(async () =>{
-
-        if(!savedProfile || !profileKey) return null
-
-        const profileImageDoc = profileImage instanceof File ? await processFile(profileImage) : savedProfile.profileImage,
-              coverImageDoc = coverImage instanceof File ? await processFile(coverImage) : savedProfile.coverImage,
-              licenseCertificateDoc = licenseCertificate instanceof File ? await processFile(licenseCertificate) : savedProfile.licenseCertificate
-              
-        if(!hasProfileChanged) return null
-
-        const updatedProfile ={
-
-            ...savedProfile,
-            name: nameValue,
-            
-            address:{
-              email: emailValue,
-              phone: phoneValue,
-              residence: residenceValue,
-              city: cityValue,
-              state: stateValue,
-              country: countryValue,
-            },
-
-            gender: genderValue,
-            dateOfBirth: dateOfBirthValue,
-            profileImage: profileImageDoc,
-            coverImage: userType === "doctor" ? coverImageDoc : null,
-            licenseCertificate: userType === "doctor" ? licenseCertificateDoc : null,
-            speciality: userType === "doctor" ? specialityValue : null,
-            education: userType === "doctor" ? educationValue : null,
-            experience: userType === "doctor" ? experienceValue : null,
-            about: userType === "doctor" ? aboutValue : null,
-            certifications: userType === "doctor" ? certificationsValue : null,
-            fees: userType === "doctor" ? feesValue : null,
-            hospital: userType === "doctor" ? hospitalValue : null,
-            hospitalLocation: userType === "doctor" ? hospitalLocationValue : null,
-            medicalHistory: userType === "patient" ? medicalHistoryValue : null,
-            updatedAt: new Date().toISOString()
-        }
-
-        console.log(updatedProfile)
-
-        setProfile(updatedProfile)
-
-        setName(updatedProfile.name)
-
-        localStorage.setItem(profileKey, JSON.stringify(updatedProfile))
-
-        setShowModal(false)
         
-        return updatedProfile
+        if(!profile || !userID) return null
+        
+        if(!hasProfileChanged(profile)) return null
 
-    }, [ savedProfile, profileKey, nameValue, emailValue, phoneValue, specialityValue, profileImage, coverImage, educationValue, experienceValue, certificationsValue, aboutValue, feesValue, medicalHistoryValue, residenceValue, stateValue, cityValue, countryValue,     hospitalLocationValue, hospitalValue, licenseCertificate, genderValue, dateOfBirthValue, userType, processFile, setShowModal ])
+        if(!readyToSubmit){
+
+            showToast("Please edit at least one field to update the profile", "error")
+
+            return null
+
+        }
+        
+        setLoading(true)
+
+        try{
+            
+            const profileImageDoc = profileImage instanceof File ? await uploadAndProcessFile(profileImage) : profile.profileImage,
+                  coverImageDoc = userType === "doctor" && coverImage instanceof File ? await uploadAndProcessFile(coverImage) : (profile as any).coverImage,
+                  licenseCertificateDoc = userType === "doctor" && licenseCertificate instanceof File ? await uploadAndProcessFile(licenseCertificate) : (profile as any).licenseCertificate
+            
+            let updatedProfile: ProfileType
+    
+            if(userType === "doctor"){
+
+                updatedProfile ={
+
+                    ...profile,
+                    name: nameValue,
+                    speciality: specialityValue || "", 
+                    education: educationValue || [], 
+                    experience: experienceValue || "", 
+                    about: aboutValue || "", 
+                    fees: feesValue || 0, 
+                    certifications: certificationsValue || [], 
+                    address:{
+                        ...profile.address,
+                        hospital: hospitalValue || "", 
+                        hospitalLocation: hospitalLocationValue || "" 
+                    },
+                    coverImage: coverImageDoc || null, 
+                    profileImage: profileImageDoc || null, 
+                    licenseCertificate: licenseCertificateDoc || null, 
+                    updatedAt: new Date().toISOString(),
+
+                } as unknown as ProfileType
+
+            }else{ 
+
+                updatedProfile ={
+
+                    ...profile,
+                    name: nameValue,
+                    profileImage: profileImageDoc || null,
+                    address:{
+                        ...profile.address,
+                        city: cityValue,
+                        state: stateValue,
+                        country: countryValue,
+                        residence: residenceValue,
+                        email: emailValue,
+                        phone: phoneValue
+                    },
+                    gender: genderValue,
+                    dateOfBirth: dateOfBirthValue,
+                    medicalHistory: medicalHistoryValue,
+                    updatedAt: new Date().toISOString()
+
+                } as unknown as ProfileType
+                 
+            }
+            
+            const profileDoc = doc(db, "profiles", userID),
+                  doctorDoc = doc(db, "doctors", userID),
+                  patientDoc = doc(db, "patients", userID)
+
+            await updateDoc(profileDoc, updatedProfile as any)
+
+            if(userType === "patient") await updateDoc(patientDoc, updatedProfile as any)
+
+            if(userType === "doctor"){
+
+                await updateDoc(doctorDoc, updatedProfile as any)
+
+                updateDoctor(userID, updatedProfile as any)
+
+            }
+            
+            setProfile(updatedProfile)
+
+            setName(updatedProfile.name)
+            
+            setShowModal(false)
+
+            showToast("Profile updated successfully", "success")
+
+            return updatedProfile
+
+        }catch(err){
+
+            console.error('Error updating profile:', err)
+
+            showToast("Error updating profile", "error")
+
+            return null
+
+        }finally{
+
+            setLoading(false)
+        }
+            
+
+
+    }, [ profile, userID, nameValue, specialityValue, profileImage, coverImage, educationValue, experienceValue, certificationsValue, aboutValue, feesValue, medicalHistoryValue, hospitalLocationValue, hospitalValue, licenseCertificate, userType, uploadAndProcessFile, setShowModal, hasProfileChanged, setProfile, setName, setLoading ])
     
     const handleEditProfile = async(e: React.FormEvent<HTMLFormElement>) =>{
     
         e.preventDefault()
 
-        const updatedProfile = await editProfile()
-
-        if(!updatedProfile) return
-
-        showToast("Profile updated successfully", "success")
+        await editProfile()
     
     }
 
     return { editProfile: handleEditProfile }
 
 }
-
-//FIXME: There is a bug in the edit profile function. The profile is not being updated correctly for doctors

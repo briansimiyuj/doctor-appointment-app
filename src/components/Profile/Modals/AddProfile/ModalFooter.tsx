@@ -7,7 +7,8 @@ const ModalFooter: React.FC = ()=>{
 
     if(!profileContext) return null
 
-    const { readyToSubmit, setShowModal, isEditing } = profileContext
+    const { readyToSubmit, setShowModal, isEditing, loading } = profileContext,
+          saveButtonText = loading ? (isEditing ? 'Saving Changes...' : 'Adding Profile...') : (isEditing ? 'Save Changes' : 'Add Profile')
 
     return(
 
@@ -16,7 +17,7 @@ const ModalFooter: React.FC = ()=>{
             <button
                 type="submit"
                 className={`${readyToSubmit ? ' bg-primary-bg text-secondary-bg hover:bg-opacity-90 cursor-pointer' : 'bg-gray-400 text-gray-200 cursor-not-allowed'} px-10 py-3 rounded-lg font-medium transition-colors duration-300 w-full max-w-md mt-4`}
-            >{isEditing ? 'Save Changes' : 'Add Profile'}</button>
+            >{saveButtonText}</button>
 
             <button
                 type="button"

@@ -46,6 +46,7 @@ type PatientProfile = UserData & PatientType &{
     type: "patient"
     appointments?: string[]
     medicalHistory: string
+    updatedAt?: string
 
 }
 

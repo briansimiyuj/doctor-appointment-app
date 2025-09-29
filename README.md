@@ -627,14 +627,14 @@ Edit profile hook will be used to edit the profile data and update it in the loc
 
   1. Retrieve the profile data,  `setProfile` and `setShowModal` state from the `ProfileContext`
   2. Retrieve `setName` and `userType`  from `LoginContext`
-  3. Retrieve `processFile` function from `UploadFile` hook
+  3. Retrieve `uploadAndProcessFile` function from `UploadFile` hook
   4. Retrieve saved profile data from the local storage
   5. Create `editProfile` callback function that will be called when the edit button is clicked
-    a. Call `processFile` function to upload the profile image, cover image and license certificate. The function will return a promise that resolves with the file properties.
+    a. Call `uploadAndProcessFile` function to upload the profile image, cover image and license certificate. The function will return a promise that resolves with the file properties.
     b. Create a logic hook check if the values are equal to the saved profile data. If they are equal, exit the function.
-    c. Create a new object with the updated profile data and the file properties from the `processFile` function
+    c. Create a new object with the updated profile data and the file properties from the `uploadAndProcessFile` function
     d. Update the saved profile data with the updated profile data
-    e. Save the updated profile data in the local storage with the key as the user's ID
+    e. Save the updated profile data in the firestore
     f. Set `setProfile` to the updated profile data
     g. Set `setName` to the updated profile data's name
     h. Return the updated profile data object
@@ -2114,7 +2114,7 @@ Patient details page will show the patient's details; medical history, allergies
         d. `profile` from `Profile Context`
         e. `appointmentID` from `Appointment Context`
 
-      2. Create a reusable `processFile` function that will process the file and convert it to a `DocumentType` object which will have the following properties:
+      2. Create a reusable `uploadAndProcessFile` function that will process the file and convert it to a `DocumentType` object which will have the following properties:
         a. `_id`: unique identifier (generated with uuid)
         b. `name`: file name
         c. `type`: normalized MIME type (e.g., "application/pdf", "image/jpeg", etc.)
@@ -2131,14 +2131,14 @@ Patient details page will show the patient's details; medical history, allergies
         d. Use `getDownloadURL` to get the download URL of the uploaded file
 
       4. Create a `uploadAndProcessFile` function that takes file as parameter and returns a promise of `DocumentType` object
-        a. Call `processFile` to process the file and get the document
+        a. Call `uploadAndProcessFile` to process the file and get the document
         b. Call `uploadFileToFirebase` to upload the file to Firebase Storage and get the document
         c. Return the document
 
       3. Create a `handleFilesUpload` function that will be called when the "Upload" button is clicked
         a. Check if there are any files selected, if not, exit the function
         b. Set `isUploading` to true
-        c. Use `Promise.all` to map all `selectedFiles` through the `processFile` function, creating an array of `DocumentType` objects.
+        c. Use `Promise.all` to map all `selectedFiles` through the `uploadAndProcessFile` function, creating an array of `DocumentType` objects.
         d. Select the first file from `selectedFiles` object
         e. Upload the file to firebase storage using the `uploadBytes` function from the `firebase/storage` module
         f. Call `addDocument` and pass the `DocumentType` object to it

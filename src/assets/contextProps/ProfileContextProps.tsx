@@ -8,6 +8,7 @@ export interface ProfileContextProps{
     formData: Partial<ProfileType> | null
     setFormData: (formData: Partial<ProfileType> | null) => void
     loading: boolean
+    setLoading: (loading: boolean) => void
     isEditing: boolean
     setIsEditing: (isEditing: boolean) => void
     showModal: boolean

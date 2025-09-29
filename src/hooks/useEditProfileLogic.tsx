@@ -1,8 +1,9 @@
-// useEditProfileLogic.ts
-import { useContext, useMemo } from "react"
+import { useCallback, useContext } from "react"
+import isEqual from "lodash/isEqual"
 import { ProfileContext } from "../context/ProfileContext"
 import { LoginContext } from "../context/LoginContext"
 import { useUploadFile } from "./useUploadFile"
+import { ProfileType } from "../assets/types/ProfileType"
 
 export const useEditProfileLogic = () =>{
 
@@ -16,91 +17,70 @@ export const useEditProfileLogic = () =>{
 
     }
 
-    const { nameValue, emailValue, phoneValue, specialityValue, profileImage, coverImage, educationValue, experienceValue, certificationsValue, aboutValue, feesValue, medicalHistoryValue, residenceValue, stateValue, cityValue, countryValue, hospitalLocationValue, hospitalValue, licenseCertificate, genderValue, dateOfBirthValue
+    const { nameValue, emailValue, phoneValue, specialityValue, profileImage, coverImage, educationValue, experienceValue, certificationsValue, aboutValue, feesValue, medicalHistoryValue, residenceValue, stateValue, cityValue, countryValue, hospitalLocationValue, hospitalValue, licenseCertificate, genderValue, dateOfBirthValue, profile
     } = profileContext
 
-    const { userType } = loginContext,
-          keys = Object.keys(localStorage),
-          profileKey = keys.find(key => key.startsWith("profileData-")),
-          savedProfile = profileKey
-        ? JSON.parse(localStorage.getItem(profileKey)!)
-        : null
+    const { userType } = loginContext
 
-    const hasProfileChanged = useMemo(() =>{
+    const hasProfileChanged = useCallback((profile: ProfileType) =>{
         
-        if(!savedProfile) return false
+        if(!profile) return false
 
-        const currentValues: any = { nameValue, emailValue, phoneValue, genderValue, dateOfBirthValue, residenceValue, cityValue, stateValue, countryValue, medicalHistoryValue, specialityValue, educationValue, experienceValue, certificationsValue, aboutValue, feesValue, hospitalLocationValue, hospitalValue, licenseCertificate, profileImage, coverImage }
+        const filesChanged = (profileImage instanceof File) || (userType === "doctor" && (coverImage instanceof File || licenseCertificate instanceof File))
 
-        const deepEqual = (a: any, b: any) => JSON.stringify(a) === JSON.stringify(b),
-              getValue = (obj: any, path: string) => path.split(".").reduce((o, key) => o?.[key], obj)
+        if(filesChanged) return true
 
-        const basicFields =[
+        const currentProfileData ={
 
-            ["name", "nameValue"],
-            ["address.email", "emailValue"],
-            ["address.phone", "phoneValue"],
-            ["dateOfBirth", "dateOfBirthValue"],
-            ["gender", "genderValue"],
-            ["profileImage", "profileImageValue"]
-
-        ]
-
-        const checkBasic = basicFields.some(([path, value]) => currentValues[value] !== getValue(savedProfile, path))
-
-        if(userType === "doctor"){
-        
-            const doctorFields =[
-
-                ["fees", "feesValue"],
-                ["speciality", "specialityValue"],
-                ["experience", "experienceValue"],
-                ["about", "aboutValue"],
-                ["hospital", "hospitalValue"],
-                ["hospitalLocation", "hospitalLocationValue"]
-
-            ]
-
-            const doctorArrayFields =[
-
-                ["education", "educationValue"],
-                ["certifications", "certificationsValue"]
-
-            ]
-
-            const doctorFileFields =[
-                
-                ["licenseCertificate", "licenseCertificate"],
-                ["coverImage", "coverImage"]
-
-            ]
-
-            const checkDoctor = checkBasic || doctorFields.some(([path, value]) => currentValues[value] !== savedProfile[path]) ||             
-                  doctorArrayFields.some(([path, value]) => !deepEqual(currentValues[value], savedProfile[path])) ||
-                  doctorFileFields.some(([path, value]) => currentValues[value] && savedProfile[path] && (currentValues[value] instanceof File || savedProfile[path].content) && currentValues[value]?.content !== savedProfile[path]?.content)
-
-            return checkDoctor
-
-        }else{
-
-            const patientFields =[
-
-                ["address.residence", "residenceValue"],
-                ["address.city", "cityValue"],
-                ["address.state", "stateValue"],
-                ["address.country", "countryValue"],
-                ["medicalHistory", "medicalHistoryValue"]
-
-            ]
-
-            const checkPatient = checkBasic || patientFields.some( ([path, value]) => currentValues[value] !== getValue(savedProfile, path) )
-
-            return checkPatient
+            name: nameValue,
+            email: emailValue,
+            phone: phoneValue,
+            gender: genderValue,
+            dateOfBirth: dateOfBirthValue,
+            residence: residenceValue,
+            city: cityValue,
+            state: stateValue,
+            country: countryValue,
+            medicalHistory: medicalHistoryValue,
+            speciality: specialityValue,
+            education: educationValue,
+            experience: experienceValue,
+            certifications: certificationsValue,
+            aboutValue: aboutValue,
+            fees: feesValue,
+            hospitalLocation: hospitalLocationValue,
+            hospital: hospitalValue,
+            licenseCertificate,
+            profileImage,
+            coverImage
 
         }
 
-    }, [ savedProfile, userType, nameValue, emailValue, phoneValue, genderValue, dateOfBirthValue, residenceValue, cityValue, stateValue, countryValue, medicalHistoryValue, specialityValue, educationValue, experienceValue, certificationsValue, aboutValue, feesValue, hospitalLocationValue, hospitalValue, licenseCertificate, profileImage, coverImage ])
+        const basicChanged = currentProfileData.name !== profile.name || currentProfileData.email !== profile.addressValue.email || currentProfileData.phone !== profile.addressValue.phone || currentProfileData.gender !== profile.gender || currentProfileData.dateOfBirth !== profile.dateOfBirth 
 
-    return { hasProfileChanged, savedProfile, profileKey, processFile }
+        if(basicChanged) return true
+
+        if(userType === "doctor"){
+
+            const doctorFieldsChanged = currentProfileData.speciality !== (profile as any).speciality ||
+                                        currentProfileData.experience !== (profile as any).experience ||
+                                        currentProfileData.aboutValue !== (profile as any).aboutValue || currentProfileData.fees !== (profile as any).fees || currentProfileData.hospital !== (profile as any).address.hospital || currentProfileData.hospitalLocation !== (profile as any).address.hospitalLocation,
+                    doctorArrayFieldsChanged = !isEqual(currentProfileData.education, (profile as any).education) || !isEqual(currentProfileData.certifications, (profile as any).certifications)
+
+            return doctorFieldsChanged || doctorArrayFieldsChanged
+                                    
+
+        }else{
+
+            const patientFieldsChanged = currentProfileData.medicalHistory !== (profile as any).medicalHistory || currentProfileData.residence !== (profile as any).address.residence || currentProfileData.city !== (profile as any).address.city || currentProfileData.state !== (profile as any).address.state || currentProfileData.country !== (profile as any).address.country
+
+            return patientFieldsChanged
+
+        }
+
+        
+    }, [ profile, userType, nameValue, emailValue, phoneValue, genderValue, dateOfBirthValue, residenceValue, cityValue, stateValue, countryValue, medicalHistoryValue, specialityValue, educationValue, experienceValue, certificationsValue, aboutValue, feesValue, hospitalLocationValue, hospitalValue, licenseCertificate, profileImage, coverImage ])
+
+    return { hasProfileChanged, profile, processFile }
 
 }
