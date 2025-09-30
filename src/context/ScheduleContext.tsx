@@ -21,7 +21,8 @@ export const ScheduleProvider = ({ children }: ScheduleProviderProps ) =>{
           [isChanged, setIsChanged] = useState(false),
           [slotIndex, setSlotIndex] = useState(0),
           [slotTime, setSlotTime] = useState(''),
-          [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlotType | null>(null)
+          [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlotType | null>(null),
+          [loading, setLoading] = useState(false)
 
     return(
 
@@ -44,7 +45,9 @@ export const ScheduleProvider = ({ children }: ScheduleProviderProps ) =>{
                 setSlotTime,
                 setSchedule, 
                 isChanged,
-                setIsChanged
+                setIsChanged,
+                loading,
+                setLoading
 
             }}
         >

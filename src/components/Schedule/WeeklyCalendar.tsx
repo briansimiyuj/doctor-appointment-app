@@ -1,9 +1,11 @@
+import { useSchedule } from "../../context/ScheduleContext"
 import { useScheduleManagement } from "../../hooks/useScheduleManagement"
 import ScheduleSlots from "./ScheduleSlots"
 
 const WeeklyCalendar: React.FC = ()=>{
 
-    const { isChanged, handleSave } = useScheduleManagement()
+    const { isChanged, handleSaveSchedule } = useScheduleManagement(),
+          { loading } = useSchedule()
 
 
     return(
@@ -21,8 +23,8 @@ const WeeklyCalendar: React.FC = ()=>{
                         ? "bg-secondary-bg text-primary-bg hover:bg-white" 
                         : "bg-gray-300 text-gray-500 cursor-not-allowed"
                 }`}
-                onClick={handleSave}
-            >Save</button>
+                onClick={handleSaveSchedule}
+            >{loading ? "Saving..." : "Save"}</button>
 
         </div>
 

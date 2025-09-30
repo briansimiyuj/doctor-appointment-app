@@ -65,6 +65,8 @@ export interface ScheduleContextProps {
     setSelectedTimeSlot: (slot: TimeSlotType | null) => void
     isChanged: boolean
     setIsChanged: (changed: boolean) => void 
+    loading: boolean
+    setLoading: (loading: boolean) => void
     appointment?: AppointmentType
 
 }

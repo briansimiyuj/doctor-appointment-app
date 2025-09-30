@@ -2916,7 +2916,7 @@ Schedule Context manages the doctor's schedule configuration and time slot avail
     b. Initialize state variables with dummy data
        - Check if the schedule is saved in localStorage, if yes, use it as the initial state. Otherwise, use the dummy data.
     c. Create a state variable for isChanged and set it to false
-    d. Provide context values to children components
+    d. Create a `loading` state variable and set it to false
 
 
 ### Schedule Page
@@ -2950,28 +2950,33 @@ Weekly Calendar Component will be a component that will show the doctor's schedu
 Schedule management hook handles all schedule-related operations and state management.
 
   1. Initialize state variables
-    a. Create tempSchedule state to store schedule changes
-    b. Create isChanged state to track modifications
-    c. Get schedule data from ScheduleContext
+    a. Get schedule data, setSchedule, isChanged, setIsChanged, and setLoading from ScheduleContext
+    b. Get userID from LoginContext
+    c. Get showToast function from useToast hook
 
   2. Handle status updates
     a. Create handleInputChange function that:
       i. Takes event, date and slotIndex as parameters
       ii. Extracts status and time from selected value
       iii. Formats value to match data structure (time - status)
-      iv. Updates tempSchedule with new formatted value
-      v. Updates main schedule state
-      vi. Sets isChanged flag for save button activation
+      iv. Maps through `schedule.availableSlots` to find matching date
+      v. Updates the specific slot at slotIndex with new formatted value
+      vi. Updates main schedule state with setSchedule
+      vii. Sets isChanged flag to true for save button activation
 
   3. Track state changes
-    a. Monitor tempSchedule updates
-    b. Compare with original schedule
-    c. Enable/disable save functionality based on changes
+    a. Monitor schedule updates through context
+    b. Use isChanged flag to enable/disable save functionality
     
-  4. Save schedule changes
-     a. Save updated schedule to local storage once schedule data and isChanged flag change
-     b. Set schedule data with updated tempSchedule 
-     c. Reset isChanged flag
+  4. Create `handleSaveSchedule` function to send updated schedule to firebase
+    a. If userID is not available, exit function
+    b. Set loading to true
+    c. Create reference to schedule document in firebase using userID
+    d. Save current schedule state to firebase using setDoc
+    e. Set isChanged to false to disable save button
+    f. Show success toast notification
+    g. Handle errors by logging and showing error toast
+    h. Set loading to false in finally block
 
 ### Schedule Slots Component
 
