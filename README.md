@@ -2955,8 +2955,9 @@ Weekly Calendar Component will be a component that will show the doctor's schedu
 
   6. Add time to selected element
   7. Create a button to save the schedule
-  8. Make the button disabled if the schedule is not changed
+  8. Make the button disabled if the schedule is not changed. And add a loading text while the schedule is being saved
   9. On button click, send the updated schedule to the backend
+  10. Retrieve `loading` from ScheduleContext and display a loading spinner while the component is fetching data
 
 
 ### Schedule Management Hook
@@ -2967,6 +2968,7 @@ Schedule management hook handles all schedule-related operations and state manag
     a. Get schedule data, setSchedule, isChanged, setIsChanged, and setLoading from ScheduleContext
     b. Get userID from LoginContext
     c. Get showToast function from useToast hook
+    d. Create a `isSaving` state variable to track whether the schedule is being saved
 
   2. Handle status updates
     a. Create handleInputChange function that:
@@ -2984,13 +2986,13 @@ Schedule management hook handles all schedule-related operations and state manag
     
   4. Create `handleSaveSchedule` function to send updated schedule to firebase
     a. If userID is not available, exit function
-    b. Set loading to true
+    b. Set `loading` and `isSaving` to true
     c. Create reference to schedule document in firebase using userID
     d. Save current schedule state to firebase using setDoc
     e. Set isChanged to false to disable save button
     f. Show success toast notification
     g. Handle errors by logging and showing error toast
-    h. Set loading to false in finally block
+    h. Set `loading` and `isSaving` to false
 
 ### Schedule Slots Component
 

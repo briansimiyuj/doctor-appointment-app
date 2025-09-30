@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { useSchedule } from "../context/ScheduleContext"
 import { LoginContext } from "../context/LoginContext"
 import { doc, setDoc } from "firebase/firestore"
@@ -9,6 +9,7 @@ export const useScheduleManagement = () =>{
 
     const { schedule, setSchedule, isChanged, setIsChanged, setLoading }  = useSchedule(),
           { showToast } = useToast(),
+          [isSaving, setIsSaving] = useState(false),
           loginContext = useContext(LoginContext)
 
     if(!loginContext) throw new Error("Login context not found")
@@ -63,6 +64,8 @@ export const useScheduleManagement = () =>{
 
             setLoading(true)
 
+            setIsSaving(true)
+
             const scheduleDocRef = doc(db, "schedules", userID)
 
             await setDoc(scheduleDocRef, schedule)
@@ -81,10 +84,12 @@ export const useScheduleManagement = () =>{
 
             setLoading(false)
 
+            setIsSaving(false)
+
         }
         
     }
     
-    return { handleInputChange, isChanged, handleSaveSchedule }
+    return { handleInputChange, isChanged, handleSaveSchedule, isSaving }
 
 }

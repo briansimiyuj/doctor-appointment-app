@@ -4,8 +4,18 @@ import ScheduleSlots from "./ScheduleSlots"
 
 const WeeklyCalendar: React.FC = ()=>{
 
-    const { isChanged, handleSaveSchedule } = useScheduleManagement(),
+    const { isChanged, handleSaveSchedule, isSaving } = useScheduleManagement(),
           { loading } = useSchedule()
+
+    if(loading && !isSaving) return(
+
+        <div className="flex items-center justify-center min-h-[200px]">
+
+            <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-16 w-16"></div>
+
+        </div>
+
+    )
 
 
     return(
@@ -24,7 +34,7 @@ const WeeklyCalendar: React.FC = ()=>{
                         : "bg-gray-300 text-gray-500 cursor-not-allowed"
                 }`}
                 onClick={handleSaveSchedule}
-            >{loading ? "Saving..." : "Save"}</button>
+            >{isSaving ? "Saving..." : "Save"}</button>
 
         </div>
 
