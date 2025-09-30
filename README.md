@@ -2913,10 +2913,24 @@ Schedule Context manages the doctor's schedule configuration and time slot avail
       - schedule: workingHours, availableSlots, blockedDates, breakTime
       - preferences: slotDuration, maxPatientsPerDay, autoConfirmation
       - slot management: index, time, selected slot
+      - Retrieve `userID` from `LoginContext`
+
     b. Initialize state variables with dummy data
        - Check if the schedule is saved in localStorage, if yes, use it as the initial state. Otherwise, use the dummy data.
     c. Create a state variable for isChanged and set it to false
     d. Create a `loading` state variable and set it to false
+
+  3. Create `fetchSchedule` function to fetch the schedule from the firebase database and call it whenever the `userID` changes
+    a. If `userID` is not available, exit the function
+    b. Set `loading` to true
+    c. Use `getDoc` to fetch the schedule from the firebase database and assign it to the `scheduleDoc` variable
+    d. If `scheduleDoc` exists;
+      i. Set `schedule` to the `scheduleDoc` data
+
+    e. If `scheduleDoc` does not exist;
+      i. Set `schedule` to the dummy data
+
+    f. Set `loading` to false
 
 
 ### Schedule Page

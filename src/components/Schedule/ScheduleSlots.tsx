@@ -50,7 +50,7 @@ const ScheduleSlots: React.FC = ()=>{
 
                                                     <select 
                                                         className={`outline-none text-gray-600 dark:text-gray-900 w-full ${daySlots.includes("available") ? "bg-green-200" : daySlots.includes("break") ? "bg-yellow-200" : "bg-gray-200"}`}
-                                                        defaultValue={`${daySlots.includes("available") ? "available" : daySlots.includes("break") ? "break" : "blocked"} - ${time}`}
+                                                        value={`${daySlots.includes("available") ? "available" : daySlots.includes("break") ? "break" : "blocked"} - ${time}`}
                                                         onChange={(e) => handleInputChange(e, day.date, index)}
                                                     >
                                                                                                             
