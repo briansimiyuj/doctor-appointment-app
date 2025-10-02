@@ -41,6 +41,8 @@ export const BookingContext = createContext<BookingContextProps>({
     setSlots: () => {},
     appointments: [],
     setAppointments: () => {},
+    loading: false,
+    setLoading: () => {}
 
 })
 
@@ -70,6 +72,7 @@ export const BookingContextProvider = ({ children }: BookingContextProviderProps
           [consultationType, setConsultationType] = useState<"online" | "in-person">("in-person"),
           [slotTime, setSlotTime] = useState(''),
           [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlotType | null>(null),
+          [loading, setLoading] = useState(false),
           [isBooked, setIsBooked] = useState<{ [doctorId: string]: boolean }>(() =>{
 
             const storedIsBooked = localStorage.getItem("isBooked")
@@ -185,6 +188,8 @@ export const BookingContextProvider = ({ children }: BookingContextProviderProps
             slotIndex,
             setSlotIndex,
             consultationType,
+            loading,
+            setLoading,
             setConsultationType,
             slotTime,
             setSlotTime,
@@ -207,5 +212,15 @@ export const BookingContextProvider = ({ children }: BookingContextProviderProps
         </BookingContext.Provider>
 
     )
+
+}
+
+export const useBookingContext = () =>{
+
+    const context = useContext(BookingContext)
+
+    if(!context) throw new Error('BookingContext must be used within a BookingProvider')
+
+    return context
 
 }

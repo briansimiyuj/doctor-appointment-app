@@ -6,14 +6,15 @@ import { DoctorSlotType } from "../assets/types/DoctorSlotType"
 import { AppointmentType } from "../assets/types/AppointmentType"
 import { v4 as uuid } from "uuid"
 import { useUpdatePatientDetails } from "./useUpdatePatientDetails"
-import { useProfileContext } from "../context/ProfileContext"
 import { useToast } from "./useToast"
+import { arrayUnion, doc, setDoc } from "firebase/firestore"
+import { db } from "../firebaseConfig"
+import { AppointedPatientType } from "../assets/types/AppointedPatientType"
 
 export const useBookingSlots = ()=>{
 
     const [selectedSlot, setSelectedSlot] = useState<TimeSlotType | null>(null),
-          { doctorInfo, patientInfo, consultationType, slotIndex, setSlotIndex, selectedTimeSlot, setSelectedTimeSlot, appointedDoctors, setAppointedDoctors, isBooked, setIsBooked, appointments, setAppointments, slots } = useContext(BookingContext),
-          { profile } = useProfileContext(),
+          { doctorInfo, patientInfo, consultationType, slotIndex, setSlotIndex, selectedTimeSlot, setSelectedTimeSlot, appointedDoctors, setAppointedDoctors, setAppointedPatients, isBooked, setIsBooked, appointments, setAppointments, slots, setLoading } = useContext(BookingContext),
           { closeCancelModal } = useUpdatePatientDetails(),
           { showToast } = useToast(),
           days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -62,52 +63,133 @@ export const useBookingSlots = ()=>{
     }
 
 
-    const handleSubmitBooking = () =>{
+    const handleSubmitBooking = async() =>{
     
-        if (!patientInfo || !doctorInfo || !selectedSlot || isBooked[doctorInfo._id]) return
+       setLoading(true)
 
-        const newAppointment: AppointmentType ={
+        if(!patientInfo || !doctorInfo || !selectedSlot || !consultationType){
 
-            _id: uuid(),
-            date: selectedSlot.dateTime.toISOString(),
-            time: selectedSlot.time,
-            status: "pending",
-            consultationType,
-            doctor: {
-                doctorInfo,
-                appointmentTime: selectedSlot
-            },
-            patient:{
-                patientInfo,
-                appointedTime: selectedSlot,
-                profile: profile || undefined
-            }
+            showToast("Please select a doctor, time slot and consultation type", "error")
+
+            setLoading(false)
+
+            return
 
         }
 
-        setAppointedDoctors((prev: AppointedDoctorType[]) =>{
+        if(isBooked[doctorInfo._id]){
 
-            const updatedAppointments = [...prev, newAppointment.doctor]
+            showToast("You have already booked an appointment with this doctor", "error")
 
-            localStorage.setItem("appointedDoctors", JSON.stringify(updatedAppointments))
+            setLoading(false)
 
-            return updatedAppointments
+            return
 
-        })
+        }
 
-        setAppointments((prev: AppointmentType[]) =>{
+        try{
 
-            const updatedAppointments = [...prev, newAppointment]
+            const appointmentID = uuid()
 
-            localStorage.setItem("appointments", JSON.stringify(updatedAppointments))
+            const newAppointment: AppointmentType ={
 
-            return updatedAppointments
-        })
+                _id: appointmentID,
+                date: selectedSlot.dateTime.toISOString(),
+                time: selectedSlot.time,
+                status: "pending",
+                consultationType,
+                doctor:{
+                    doctorInfo,
+                    appointmentTime: selectedSlot
+                },
+                patient:{
+                    patientInfo,
+                    appointedTime: selectedSlot
+                }
 
-        setIsBooked(doctorInfo._id, true)
+            }
 
-        
-        showToast("Appointment booked successfully", "success")
+            setAppointments((prev: AppointmentType[]) =>{
+
+                const updatedAppointments = [...prev, newAppointment]
+
+                return updatedAppointments
+
+            })
+
+            setAppointedDoctors((prev: AppointedDoctorType[]) =>{
+
+                const updatedAppointedDoctors = [...prev, newAppointment.doctor]
+
+                return updatedAppointedDoctors
+
+            })
+
+            setAppointedPatients((prev: AppointedPatientType[]) =>{
+
+                const updatedAppointedPatients = [...prev, newAppointment.patient]
+
+                return updatedAppointedPatients
+            })
+
+            const dateTimeID = `${selectedSlot.dateTime.toISOString()}-${selectedSlot.time}`,
+                  appointmentDocRef = doc(db, "appointments", newAppointment._id),
+                  isBookedDocRef = doc(db, "bookedDoctors", `${newAppointment.doctor.doctorInfo._id}_${dateTimeID}`),
+                  doctorDocRef = doc(db, "doctors", newAppointment.doctor.doctorInfo._id),
+                  patientDocRef = doc(db, "patients", newAppointment.patient.patientInfo._id)
+
+            await setDoc(appointmentDocRef, newAppointment)
+
+            await setDoc(isBookedDocRef, { 
+                isBooked: true,
+                appointmentID,
+                doctorID: newAppointment.doctor.doctorInfo._id,
+                patientID: newAppointment.patient.patientInfo._id,
+                dateTime: selectedSlot.dateTime.toISOString(),
+                time: selectedSlot.time
+            })
+
+            await setDoc(doctorDocRef, {
+
+                appointments: arrayUnion({
+                    appointmentID,
+                    date: newAppointment.date,
+                    time: newAppointment.time,
+                    patientID: newAppointment.patient.patientInfo._id,
+                    patientName: newAppointment.patient.patientInfo.name,
+                })
+
+            }, { merge: true })
+
+            await setDoc(patientDocRef, {
+
+                appointments: arrayUnion({
+                    appointmentID,
+                    date: newAppointment.date,
+                    time: newAppointment.time,
+                    doctorID: newAppointment.doctor.doctorInfo._id,
+                    doctorName: newAppointment.doctor.doctorInfo.name,
+                })
+
+            }, { merge: true })
+
+            setIsBooked(doctorInfo._id, true)
+
+            showToast("Appointment booked successfully!", "success")
+
+            setSelectedSlot(null)
+
+        }catch(err){
+
+            console.error('Error booking appointment:', err)
+
+            showToast("An error occured while booking appointment", "error")
+
+        }finally{
+
+            setLoading(false)
+
+        }
     
     }
 
@@ -153,7 +235,7 @@ export const useBookingSlots = ()=>{
         closeCancelModal()
 
         alert("Appointment cancelled")
-}
+    }
 
 
 

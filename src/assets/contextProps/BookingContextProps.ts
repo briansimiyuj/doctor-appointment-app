@@ -26,6 +26,8 @@ export interface BookingContextProps{
     setAppointedPatients: (patients: AppointedPatientType[] | ((prev: AppointedPatientType[]) => AppointedPatientType[])) => void,
     isBooked: { [doctorId: string]: boolean }
     setIsBooked: (doctorId: string, status: boolean) => void
+    loading: boolean
+    setLoading: (loading: boolean) => void
 
     slots:{
 

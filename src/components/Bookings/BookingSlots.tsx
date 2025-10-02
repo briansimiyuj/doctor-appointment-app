@@ -5,15 +5,18 @@ import BookingTime from "./BookingTime"
 import { LoginContext } from "../../context/LoginContext"
 import { useNavigate } from "react-router-dom"
 import ConsultationType from "./ConsultationType"
+import { useBookingContext } from "../../context/BookingContext"
 
 const BookingSlots: React.FC = ()=>{
 
-    const { handleTimeSlotSelection, selectedSlot, doctorSlots, slotIndex, doctorInfo, isBooked, handleSubmitBooking, setSlotIndex, setSelectedSlot, days, consultationType } = useBookingSlots(),
+    const { handleTimeSlotSelection, selectedSlot, doctorSlots, slotIndex, doctorInfo, handleSubmitBooking, setSlotIndex, setSelectedSlot, days, consultationType } = useBookingSlots(),
+          { loading, isBooked } = useBookingContext(),
           isReady = selectedSlot && slotIndex !== -1 &&  consultationType,
-          isCurrentDoctorBooked = doctorInfo ? isBooked[doctorInfo._id] ?? false : false,
+          isCurrentDoctorBooked = doctorInfo ? isBooked[doctorInfo._id] ?? false : true,
           loginContext = useContext(LoginContext),
           isAuthenticated = loginContext?.isAuthenticated,
-          navigate = useNavigate()
+          navigate = useNavigate(),
+          buttonText = loading ? "Booking Appointment..." : isCurrentDoctorBooked ? 'Appointment Booked' : 'Book Appointment'
     
     const handleSubmit = (e: React.FormEvent) =>{
 
@@ -74,7 +77,7 @@ const BookingSlots: React.FC = ()=>{
                             }`}                    
                             disabled={!isReady || isCurrentDoctorBooked}
                         >    
-                            { isCurrentDoctorBooked ? 'Appointment Booked' : 'Book Appointment'  }
+                            { buttonText }
                         </button>
                         
                     ):(
