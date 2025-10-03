@@ -12,8 +12,8 @@ const BookingSlots: React.FC = ()=>{
     const { handleTimeSlotSelection, selectedSlot, doctorSlots, slotIndex, doctorInfo, handleSubmitBooking, setSlotIndex, setSelectedSlot, days, consultationType } = useBookingSlots(),
           { loading, isBooked } = useBookingContext(),
           isReady = selectedSlot && slotIndex !== -1 &&  consultationType,
-          isCurrentDoctorBooked = doctorInfo ? isBooked[doctorInfo._id] ?? false : true,
           loginContext = useContext(LoginContext),
+          isCurrentDoctorBooked = !!(doctorInfo && isBooked[doctorInfo._id]),
           isAuthenticated = loginContext?.isAuthenticated,
           navigate = useNavigate(),
           buttonText = loading ? "Booking Appointment..." : isCurrentDoctorBooked ? 'Appointment Booked' : 'Book Appointment'

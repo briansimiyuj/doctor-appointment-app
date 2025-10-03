@@ -9,6 +9,8 @@ import { useSchedule } from "./ScheduleContext"
 import { ProfileContext } from "./ProfileContext";
 import { AppointmentType } from "../assets/types/AppointmentType";
 import { useDoctorContext } from "./DoctorContext";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { db } from "../firebaseConfig";
 
 
 interface BookingContextProviderProps{
@@ -73,56 +75,10 @@ export const BookingContextProvider = ({ children }: BookingContextProviderProps
           [slotTime, setSlotTime] = useState(''),
           [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlotType | null>(null),
           [loading, setLoading] = useState(false),
-          [isBooked, setIsBooked] = useState<{ [doctorId: string]: boolean }>(() =>{
-
-            const storedIsBooked = localStorage.getItem("isBooked")
-
-            return storedIsBooked ? JSON.parse(storedIsBooked) : {}
-            
-          }),
-
-          [appointedDoctors, setAppointedDoctors] = useState<AppointedDoctorType[]>(() =>{
-
-              const storedAppointedDoctors = localStorage.getItem("appointedDoctors")
-
-              return storedAppointedDoctors ? JSON.parse(storedAppointedDoctors) : []
-
-          }),
-
-          [appointedPatients, setAppointedPatients] = useState<AppointedPatientType[]>(() =>{
-
-              const storedAppointedPatients = localStorage.getItem("appointedPatients")
-
-              return storedAppointedPatients ? JSON.parse(storedAppointedPatients) : []
-
-          }),
-          [appointments, setAppointments] = useState<AppointmentType[]>(() =>{
-
-            const storedAppointments = localStorage.getItem("appointments")
-
-            return storedAppointments ? JSON.parse(storedAppointments) : []
-
-          })
-
-
-    useEffect(() =>{
-
-        localStorage.setItem("appointedDoctors", JSON.stringify(appointedDoctors))
-
-    }, [appointedDoctors])
-
-
-    useEffect(() =>{
-
-        localStorage.setItem("appointedPatients", JSON.stringify(appointedPatients))
-
-    }, [appointedPatients])
-
-    useEffect(() =>{
-
-        localStorage.setItem("appointments", JSON.stringify(appointments))
-
-    }, [appointments])
+          [isBooked, setIsBooked] = useState<{ [doctorId: string]: boolean }>({}),
+          [appointedDoctors, setAppointedDoctors] = useState<AppointedDoctorType[]>([]),
+          [appointedPatients, setAppointedPatients] = useState<AppointedPatientType[]>([]),
+          [appointments, setAppointments] = useState<AppointmentType[]>([])
 
 
     const fetchDocInfo = () =>{
@@ -134,39 +90,145 @@ export const BookingContextProvider = ({ children }: BookingContextProviderProps
     }
 
 
-    const handleSetIsBooked = (doctorID: string, isBooked: boolean) =>{
+    const handleSetIsBooked = (doctorID: string, status: boolean) =>{
 
-        setIsBooked(prev =>{
+        setIsBooked(prev =>({
 
-            const updatedIsBooked = { ...prev, [doctorID]: isBooked }
+            ...prev,
+            [doctorID]: status
 
-            localStorage.setItem("isBooked", JSON.stringify(updatedIsBooked))
-
-            return updatedIsBooked
-
-        })
+        }))
 
     }
 
 
     useEffect(() =>{
 
-        const storedAppointedDoctors = localStorage.getItem("appointedDoctors"),
-               storedAppointedPatients = localStorage.getItem("appointedPatients")
+        if(!profile?._id) return
 
-        if(storedAppointedDoctors){
+        const appointmentsRef = collection(db, "appointments"),
+              q = query(appointmentsRef, where("patient.patientInfo._id", "==", profile._id))
 
-            setAppointedDoctors(JSON.parse(storedAppointedDoctors))
+        const unsubscribe = onSnapshot(q, (snapshot) =>{
 
-        }
+            const fetchedAppointments: AppointmentType[] = []
 
-        if(storedAppointedPatients){
+            snapshot.forEach((doc) =>{
 
-            setAppointedPatients(JSON.parse(storedAppointedPatients))
+                fetchedAppointments.push(doc.data() as AppointmentType)
 
-        }   
+            })
 
-    }, [])
+            setAppointments(fetchedAppointments)
+
+        }, (error) =>{
+
+            console.error("Error fetching appointments:", error)
+
+        })
+
+        return () => unsubscribe()
+
+    }, [profile?._id])
+
+
+    useEffect(() =>{
+
+        if(!profile?._id) return
+
+        const appointmentsRef = collection(db, "appointments"),
+              q = query(appointmentsRef, where("patient.patientInfo._id", "==", profile._id))
+
+        const unsubscribe = onSnapshot(q, (snapshot) =>{
+
+            const fetchedAppointedDoctors: AppointedDoctorType[] = []
+
+            snapshot.forEach((doc) =>{
+
+                const appointment = doc.data() as AppointmentType
+
+                fetchedAppointedDoctors.push(appointment.doctor)
+
+            })
+
+            setAppointedDoctors(fetchedAppointedDoctors)
+
+        }, (error) =>{
+
+            console.error("Error fetching appointed doctors:", error)
+
+        })
+
+        return () => unsubscribe()
+
+    }, [profile?._id])
+
+
+    useEffect(() =>{
+
+        if(!doctorID) return
+
+        const appointmentsRef = collection(db, "appointments"),
+              q = query(appointmentsRef, where("doctor.doctorInfo._id", "==", doctorID))
+
+        const unsubscribe = onSnapshot(q, (snapshot) =>{
+
+            const fetchedAppointedPatients: AppointedPatientType[] = []
+
+            snapshot.forEach((doc) =>{
+
+                const appointment = doc.data() as AppointmentType
+
+                fetchedAppointedPatients.push(appointment.patient)
+
+            })
+
+            setAppointedPatients(fetchedAppointedPatients)
+
+        }, (error) =>{
+
+            console.error("Error fetching appointed patients:", error)
+
+        })
+
+        return () => unsubscribe()
+
+    }, [doctorID])
+
+
+    useEffect(() =>{
+
+        if(!profile?._id) return
+
+        const bookedDoctorsRef = collection(db, "bookedDoctors")
+
+        const unsubscribe = onSnapshot(bookedDoctorsRef, (snapshot) =>{
+
+            const bookedStatus: { [doctorId: string]: boolean } = {}
+
+            snapshot.forEach((doc) =>{
+
+                const data = doc.data()
+
+                if(data.isBooked && data.patientID === profile._id && data.doctorID){
+
+                    bookedStatus[data.doctorID] = true
+
+                }
+
+            })
+
+            setIsBooked(bookedStatus)
+
+        }, (error) =>{
+
+            console.error("Error fetching booked status:", error)
+
+        })
+
+        return () => unsubscribe()
+
+    }, [profile?._id])
 
 
     useEffect(() =>{

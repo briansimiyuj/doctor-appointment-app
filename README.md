@@ -251,29 +251,65 @@ Booking context will be used to store the booking data and provide it to the Boo
 
   1. Get doctorID from the URL using useParams hook
   2. Retrieve the following:
-    a. `schedule` from the `ScheduleContext`
-    b. `profile` from the `ProfileContext`  
+    i. `schedule` from the `ScheduleContext`
+    ii. `profile` from the `ProfileContext`
+    iii. `doctors` from the `DoctorContext`
 
-  3. Create a `the following state variables:
-    a. `slots` state initialize it with `schedule`'s `availableSlots` data
-    b. `doctorInfo` state initialize it with null
-    c. `patientInfo` state initialize it with `profile` data or null
-    d. `slotIndex` state initialize it with 0
-    e. `slotTime` state initialize it with empty string
-    f. `selectedTimeSlot` state initialize it with null
-    g. `isBooked` state initialize it with data from local storage
-    h. `appointedDoctors` state initialize it with data from local storage
-    i. `appointedPatients` state initialize it with data from local storage
-    j. `consultationType` state initialize it with `in-person`
-    k. `appointments` state initialize it with data from local storage
+  3. Create the following state variables:
+    i. `slots` state - initialize it with `schedule`'s `availableSlots` data mapped to proper format
+    ii. `doctorInfo` state - initialize it with null
+    iii. `patientInfo` state - initialize it with `profile` data or null
+    iv. `slotIndex` state - initialize it with 0
+    v. `slotTime` state - initialize it with empty string
+    vi. `selectedTimeSlot` state - initialize it with null
+    vii. `consultationType` state - initialize it with `in-person`
+    viii. `loading` state - initialize it with false
+    ix. `isBooked` state - initialize it with empty object
+    x. `appointedDoctors` state - initialize it with empty array
+    xi. `appointedPatients` state - initialize it with empty array
+    xii. `appointments` state - initialize it with empty array
   
-  2. When `appointedDoctors` state changes, save it to local storage
-  3. When `appointedPatients` state changes, save it to local storage
-  4. When `appointments` state changes, save it to local storage
-  5. Create a `fetchDocInfo` function that fetches doctor info from the API using the `doctorID` and updates the `doctorInfo` state
-  6. Create a `handleSetIsBooked` function that updates the `isBooked` state based on the `isBooked` parameter
-  7. On intial render, retrieve the doctor info and patient info from the API and update the `appointedDoctors` and `appointedPatients` states
-  8. When `profile` and `doctorID` props change, call `fetchDocInfo` function to update the `patientInfo` state with `profile` data
+  4. Create a `fetchDocInfo` function that:
+    i. Finds the doctor from the `doctors` array using `doctorID`
+    ii. Updates the `doctorInfo` state with the found doctor
+
+  5. Create a `handleSetIsBooked` function that:
+    i. Takes `doctorID` and `status` as parameters
+    ii. Updates the `isBooked` state object with the new status for that doctor
+
+  6. Set up real-time Firestore listeners:
+    
+    i. **Fetch appointments** (triggered when `profile._id` changes):
+       - Query `appointments` collection where `patient.patientInfo._id` equals current user's ID
+       - Use `onSnapshot` for real-time updates
+       - Update `appointments` state with fetched data
+       - Return unsubscribe function for cleanup
+    
+    ii. **Fetch appointed doctors** (triggered when `profile._id` changes):
+       - Query `appointments` collection where `patient.patientInfo._id` equals current user's ID
+       - Use `onSnapshot` for real-time updates
+       - Extract `doctor` objects from each appointment
+       - Update `appointedDoctors` state with extracted doctors
+       - Return unsubscribe function for cleanup
+    
+    iii. **Fetch appointed patients** (triggered when `doctorID` changes):
+       - Query `appointments` collection where `doctor.doctorInfo._id` equals current doctor's ID
+       - Use `onSnapshot` for real-time updates
+       - Extract `patient` objects from each appointment
+       - Update `appointedPatients` state with extracted patients
+       - Return unsubscribe function for cleanup
+    
+    iv. **Fetch isBooked status** (triggered when `profile._id` changes):
+       - Query all documents from `bookedDoctors` collection
+       - Use `onSnapshot` for real-time updates
+       - Filter documents where `patientID` equals current user's ID and `isBooked` is true
+       - Build object with `doctorID` as keys and `true` as values
+       - Update `isBooked` state with the built object
+       - Return unsubscribe function for cleanup
+
+  7. When `profile` and `doctorID` change:
+    i. Call `fetchDocInfo` function to get doctor details
+    ii. Update `patientInfo` state with current `profile` data or null
 
 
 ### Booking Page
