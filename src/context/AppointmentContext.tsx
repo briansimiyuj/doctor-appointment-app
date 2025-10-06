@@ -2,6 +2,10 @@ import { createContext, useState, useEffect, useContext } from "react"
 import { AppointmentType } from "../assets/types/AppointmentType"
 import { AppointmentsContextProps } from "../assets/contextProps/AppointmentsContextProps"
 import { useParams } from "react-router-dom"
+import { collection, query, where, onSnapshot, doc, getDoc } from "firebase/firestore"
+import { useProfileContext } from "./ProfileContext"
+import { db } from "../firebaseConfig"
+import { useLoginContext } from "./LoginContext"
 
 interface AppointmentsContextProviderProps{
 
@@ -27,84 +31,103 @@ export const AppointmentsContextProvider: React.FC<AppointmentsContextProviderPr
           [upcomingAppointments, setUpcomingAppointments] = useState<AppointmentType[]>([]),
           [activeTab, setActiveTab] = useState<"upcoming" | "past">("upcoming"),
           [appointment, setAppointment] = useState<AppointmentType | null>(null),
-          { appointmentID } = useParams<{ appointmentID: string }>()
+          { appointmentID } = useParams<{ appointmentID: string }>(),
+          { profile, loading } = useProfileContext(),
+          { userType }  = useLoginContext()
+
 
     useEffect(() =>{
     
-        const storedAppointments = localStorage.getItem("appointments")
+        if(!appointmentID) return
 
-
-        if(storedAppointments && appointmentID){
+        const fetchAppointment = async() =>{
 
             try{
 
-                const parsed = JSON.parse(storedAppointments) as AppointmentType[],
-                      foundAppointment = parsed.find(appointment => appointment._id === appointmentID) || null
+                const appointmentDocRef = doc(db, "appointments", appointmentID),
+                      appointmentDoc = await getDoc(appointmentDocRef)
 
-                setAppointment(foundAppointment)
+                if(appointmentDoc.exists()){
+
+                    setAppointment(appointmentDoc.data() as AppointmentType)
+
+                }else{
+
+                    setAppointment(null)
+
+                    console.log("No appointment found with ID:", appointmentID)
+
+                }
 
             }catch(error){
 
-                console.error("Error parsing appointments from local storage:", error)
+                console.error("Error fetching appointment:", error)
 
             }
 
         }
+
+        fetchAppointment()
     
     }, [appointmentID])
 
+
     useEffect(() =>{
 
-       const storedAppointments = localStorage.getItem("appointments")
+        if(loading) return
 
-        if(storedAppointments){
+        if(!profile?._id || !userType) return
 
-            try{
+            const appointmentsRef = collection(db, "appointments"),
+                q = userType === "patient" 
+                    ? query(appointmentsRef, where("patient.patientInfo._id", "==", profile._id)) 
+                    : query(appointmentsRef, where("doctor.doctorInfo._id", "==", profile._id))
 
-                const parsed = JSON.parse(storedAppointments) as AppointmentType[]
+        const unsubscribe = onSnapshot(q, (snapshot) =>{
+
+            const fetchedAppointments: AppointmentType[] = []
+
+            snapshot.forEach((doc) =>{
+
+                fetchedAppointments.push(doc.data() as AppointmentType)
+
+            })
+
+            setAppointments(fetchedAppointments)
+
+            const now = new Date()
+            
+
+            const upcoming = fetchedAppointments.filter(appointment =>{
                 
-                setAppointments(parsed)
+                const appointmentDate = new Date(appointment.date),
+                    validStatuses = ["pending", "approved", "rescheduled", "follow-up"]
 
-                const now = new Date()
+                return appointmentDate >= now && validStatuses.includes(appointment.status)
 
-                const upcoming = parsed.filter(appointment =>{
-                    
-                    const appointmentDate = new Date(appointment.date),
-                        validStatuses = ["pending", "approved", "rescheduled", "follow-up"]
+            }), 
+            past = fetchedAppointments.filter(appointment =>{
 
-                    return appointmentDate >= now && validStatuses.includes(appointment.status)
+                const appointmentDate = new Date(appointment.date),
+                    validStatuses = ["completed", "cancelled", "rejected"]
 
-                }), 
-                past = parsed.filter(appointment =>{
+                return appointmentDate < now || validStatuses.includes(appointment.status)
 
-                    const appointmentDate = new Date(appointment.date),
-                        validStatuses = ["completed", "cancelled", "rejected"]
+            })
 
-                    return appointmentDate < now && validStatuses.includes(appointment.status)
+            setUpcomingAppointments(upcoming)
 
-                })
+            setPastAppointments(past)
 
-                setUpcomingAppointments(upcoming)
+        }, (error) =>{
 
-                setPastAppointments(past)
+            console.error("Error fetching appointments:", error)
 
-            }catch(error){
+        })
 
-                console.error("Error parsing appointments from local storage:", error)
+        return () => unsubscribe()
 
-            }
-
-        }else{
-
-            setAppointments([])
-
-            setPastAppointments([])
-
-            setUpcomingAppointments([])
-
-        }
-
-    }, [])
+    }, [profile?._id, userType])
 
 
     const contextValue: AppointmentsContextProps ={

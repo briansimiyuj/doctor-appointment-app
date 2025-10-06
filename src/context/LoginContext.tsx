@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import { LoginContextProps } from "../assets/contextProps/LoginContextProps"
 import SignOutModal from "../components/Login/Modals/SignOutModal"
 
@@ -127,5 +127,15 @@ export const LoginContextProvider = ({ children }: LoginContextProviderProps) =>
         </LoginContext.Provider>
 
     )
+
+}
+
+export const useLoginContext = () =>{
+
+    const context = useContext(LoginContext)
+
+    if(!context) throw new Error("useLoginContext must be used within a LoginProvider")
+
+    return context
 
 }
