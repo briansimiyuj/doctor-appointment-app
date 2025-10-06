@@ -41,7 +41,12 @@ const MyAppointmentsPage: React.FC = ()=>{
 
             ):(
                 
-                <PatientAppointmentCard key={index} patient={appointment.patient} appointment={appointment} />
+                <PatientAppointmentCard 
+                    key={index} 
+                    patient={appointment.patient} 
+                    appointment={appointment} 
+                    openCancelModal={openCancelModal}
+                />
 
             )
 
