@@ -193,48 +193,75 @@ export const useBookingSlots = ()=>{
     
     }
 
-    const cancelAppointment = (appointmentID: string) =>{
+    const cancelAppointment = async(appointmentID: string) =>{
 
-        const storedAppointments = JSON.parse(localStorage.getItem("appointments") || "[]"),
-            appointmentToCancel = storedAppointments.find((a: AppointmentType) => a._id === appointmentID)
+        setLoading(true)
 
-        if(!appointmentToCancel) return
+        const appointmentToCancel = appointments.find((a: AppointmentType) => a._id === appointmentID)
 
-        const updatedAppointments = appointments.filter(a => a._id !== appointmentID)
+        if(!appointmentToCancel){
 
-        setAppointments(updatedAppointments)
+            showToast("Appointment not found", "error")
 
-        localStorage.setItem("appointments", JSON.stringify(updatedAppointments))
+            setLoading(false)
 
-        setAppointedDoctors(prev =>{
+            closeCancelModal() 
 
-            const updated = prev.filter(a => a.doctorInfo?._id !== appointmentToCancel?.doctor.doctorInfo?._id)
-
-            localStorage.setItem("appointedDoctors", JSON.stringify(updated))
-            
-            return updated
-
-        })
-
-        if(doctorInfo){
-
-            const updatedIsBooked = { ...isBooked, [doctorInfo._id]: false }
-
-            localStorage.setItem("isBooked", JSON.stringify(updatedIsBooked))
-
-            setIsBooked(doctorInfo._id, false)
+            return
 
         }
 
-        if(selectedSlot?.time === appointmentToCancel?.doctor.appointmentTime.time){
-
-            setSelectedSlot(null)
+        try{
             
+
+            const appointmentDocRef = doc(db, "appointments", appointmentID)
+
+            await setDoc(appointmentDocRef, {
+
+                ...appointmentToCancel,
+                status: "cancelled"
+
+            })
+
+            
+            const dateTimeID = `${appointmentToCancel.date}-${appointmentToCancel.time}`,
+                isBookedDocRef = doc(db, "bookedDoctors", `${appointmentToCancel.doctor.doctorInfo._id}_${dateTimeID}`)
+
+            await setDoc(isBookedDocRef, {
+
+                isBooked: false,
+                appointmentID,
+                doctorID: appointmentToCancel.doctor.doctorInfo._id,
+                patientID: appointmentToCancel.patient.patientInfo._id,
+                dateTime: appointmentToCancel.date,
+                time: appointmentToCancel.time
+
+            })
+
+            setIsBooked(appointmentToCancel.doctor.doctorInfo._id, false)
+
+            if(selectedSlot?.time === appointmentToCancel?.doctor.appointmentTime.time){
+
+                setSelectedSlot(null)
+                
+            }
+
+            showToast("Appointment cancelled successfully", "success")
+
+        }catch(error){
+
+            console.error("Error cancelling appointment:", error)
+
+            showToast("Failed to cancel appointment", "error")
+
+        }finally{
+
+            setLoading(false)
+
+            closeCancelModal() // FIXME: The modal is not closing
+
         }
 
-        closeCancelModal()
-
-        alert("Appointment cancelled")
     }
 
 
