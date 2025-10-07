@@ -26,7 +26,7 @@ const AppointmentCard: React.FC<AppointmentCardProps> = ({ doctor, key, appointm
 
                 <AppointmentPhoto doctors={doctor}/>
 
-                <DoctorInfo doctors={doctor}/>
+                <DoctorInfo doctors={doctor} appointment={appointment}/>
 
             </div>
 

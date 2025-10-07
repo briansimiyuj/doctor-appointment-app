@@ -1,13 +1,15 @@
 import { AppointedDoctorType } from "../../assets/types/AppointedDoctorType"
+import { AppointmentType } from "../../assets/types/AppointmentType"
 
 type DoctorInfoProps ={
 
     doctors: AppointedDoctorType
+    appointment: AppointmentType
     
 }
 
 
-const DoctorInfo: React.FC<DoctorInfoProps> = ({ doctors })=>{
+const DoctorInfo: React.FC<DoctorInfoProps> = ({ doctors, appointment })=>{
 
     const doctor = doctors?.doctorInfo
 
@@ -32,7 +34,7 @@ const DoctorInfo: React.FC<DoctorInfoProps> = ({ doctors })=>{
 
                 <br/>
 
-                {new Date(doctors.appointmentTime?.dateTime).toLocaleDateString()} <br /> {new Date(doctors.appointmentTime?.dateTime).toLocaleTimeString()}
+                {new Date(appointment.date).toLocaleDateString()} <br /> {appointment.time}
 
             </p>
 
