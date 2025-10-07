@@ -7,6 +7,8 @@ import { useProfileContext } from "./ProfileContext"
 import { db } from "../firebaseConfig"
 import { useLoginContext } from "./LoginContext"
 
+type TabType = "upcoming" | "past" | "cancelled"
+
 interface AppointmentsContextProviderProps{
 
     children: React.ReactNode
@@ -17,11 +19,11 @@ export const AppointmentsContext = createContext<AppointmentsContextProps>({
     appointments: [],
     appointment: {} as AppointmentType,
     pastAppointments: [],
-    appointmentID:  "",
+    cancelledAppointments: [],
+    appointmentID: "",
     upcomingAppointments: [],
     activeTab: "upcoming",
-    setActiveTab: (_tab: "upcoming" | "past") => {}
-
+    setActiveTab: (_tab: TabType) => {}
 })
 
 export const AppointmentsContextProvider: React.FC<AppointmentsContextProviderProps> = ({ children }) =>{
@@ -29,12 +31,12 @@ export const AppointmentsContextProvider: React.FC<AppointmentsContextProviderPr
     const [appointments, setAppointments] = useState<AppointmentType[]>([]),
           [pastAppointments, setPastAppointments] = useState<AppointmentType[]>([]),
           [upcomingAppointments, setUpcomingAppointments] = useState<AppointmentType[]>([]),
-          [activeTab, setActiveTab] = useState<"upcoming" | "past">("upcoming"),
+          [cancelledAppointments, setCancelledAppointments] = useState<AppointmentType[]>([]),
+          [activeTab, setActiveTab] = useState<TabType>("upcoming"),
           [appointment, setAppointment] = useState<AppointmentType | null>(null),
           { appointmentID } = useParams<{ appointmentID: string }>(),
           { profile, loading } = useProfileContext(),
-          { userType }  = useLoginContext()
-
+          { userType } = useLoginContext()
 
     useEffect(() =>{
     
@@ -89,7 +91,7 @@ export const AppointmentsContextProvider: React.FC<AppointmentsContextProviderPr
 
             snapshot.forEach((doc) =>{
 
-                fetchedAppointments.push(doc.data() as AppointmentType)
+                fetchedAppointments.push({ ...doc.data(), _id: doc.id } as AppointmentType)
 
             })
 
@@ -98,6 +100,12 @@ export const AppointmentsContextProvider: React.FC<AppointmentsContextProviderPr
             const now = new Date()
             
 
+            const cancelled = fetchedAppointments.filter(appointment =>{
+
+                return appointment.status === "cancelled" || appointment.status === "rejected"
+
+            })
+
             const upcoming = fetchedAppointments.filter(appointment =>{
                 
                 const appointmentDate = new Date(appointment.date),
@@ -105,19 +113,25 @@ export const AppointmentsContextProvider: React.FC<AppointmentsContextProviderPr
 
                 return appointmentDate >= now && validStatuses.includes(appointment.status)
 
-            }), 
-            past = fetchedAppointments.filter(appointment =>{
+            })
+            
+            const past = fetchedAppointments.filter(appointment =>{
 
                 const appointmentDate = new Date(appointment.date),
-                    validStatuses = ["completed", "cancelled", "rejected"]
+                    isPast = appointmentDate < now,
+                    isCompleted = appointment.status === "completed"
 
-                return appointmentDate < now || validStatuses.includes(appointment.status)
+                const isNotCancelled = appointment.status !== "cancelled" && appointment.status !== "rejected"
+
+                return (isPast || isCompleted) && isNotCancelled
 
             })
 
             setUpcomingAppointments(upcoming)
 
             setPastAppointments(past)
+
+            setCancelledAppointments(cancelled)
 
         }, (error) =>{
 
@@ -137,6 +151,7 @@ export const AppointmentsContextProvider: React.FC<AppointmentsContextProviderPr
         appointmentID,
         pastAppointments,
         upcomingAppointments,
+        cancelledAppointments, // 👈 ADD NEW ARRAY TO CONTEXT
         activeTab,
         setActiveTab
 
@@ -145,7 +160,7 @@ export const AppointmentsContextProvider: React.FC<AppointmentsContextProviderPr
     
     return(
 
-        <AppointmentsContext.Provider value={contextValue}>
+        <AppointmentsContext.Provider value={contextValue as AppointmentsContextProps}>
 
             {children}
             
