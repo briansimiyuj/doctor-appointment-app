@@ -76,9 +76,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
                   }else if(profile?.type === "patient"){
 
-                        const savedAppointments = localStorage.getItem("appointments")
-
-                        setPatientAppointments(savedAppointments ? JSON.parse(savedAppointments) : [])
+                        if(foundAppointment) setPatientAppointments([foundAppointment])
 
                   }
 
@@ -107,19 +105,9 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
       const fetchPatientAppointments = (patientID: string) =>{
 
-            const savedAppointments = localStorage.getItem(`appointments-${patientID}`)
-
-            if(savedAppointments){
-
-                  setPatientAppointments(JSON.parse(savedAppointments))
-
-                  return
-
-            }
-
             if(appointments){
 
-                  const filteredAppointments = appointments.filter(appointment => appointment.patient.patientInfo?._id === patientID)
+                  const filteredAppointments = appointments.filter(appointment => appointment.patient.patientInfo._id === patientID)
 
                   setPatientAppointments(filteredAppointments)
 
