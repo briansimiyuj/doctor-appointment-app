@@ -3,7 +3,7 @@ import { usePatientDetails } from "../../context/PatientDetailsContext"
 const PatientContactInfo: React.FC = ()=>{
 
     const { patientDetails } = usePatientDetails(),
-          contact = patientDetails?.profile?.addressValue
+          contact = patientDetails?.patientInfo?.addressValue
 
     return(
 
