@@ -9,7 +9,7 @@ type AppointmentCardProps ={
     doctor: AppointedDoctorType
     key: number
     appointment: AppointmentType
-    openCancelModal: (appointment: AppointmentType) => void
+    openCancelModal?: (appointment: AppointmentType) => void
 
 }
 
@@ -40,7 +40,7 @@ const AppointmentCard: React.FC<AppointmentCardProps> = ({ doctor, key, appointm
 
                <button 
                     className="text-sm bg-red-500 text-white dark:text-white text-center sm:min-w-48 py-2 rounded hover:bg-red-600 hover:text-white transition-all duration-300"
-                    onClick={() => openCancelModal(appointment)}
+                    onClick={() => openCancelModal?.(appointment)}
                 >Cancel Appointment</button>
 
             </div>

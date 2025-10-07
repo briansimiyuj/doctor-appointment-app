@@ -4,14 +4,14 @@ import { LoginContext } from "../context/LoginContext"
 import NotFoundPage from "./NotFoundPage"
 import PatientAppointmentCard from "../components/Appointments/PatientAppointmentCard"
 import TabSelectorButtons from "../components/Appointments/TabSelectorButtons"
-import { AppointmentsContext } from "../context/AppointmentContext"
+import { useAppointmentsContext } from "../context/AppointmentContext"
 import { useUpdatePatientDetails } from "../hooks/useUpdatePatientDetails"
 import CancelAppointmentModal from "../components/PatientDetails/Tabs/AppointmentTab/Modals/CancelModals/CancelAppointmentModal"
 import { useBookingSlots } from "../hooks/useBookingSlots"
 
 const MyAppointmentsPage: React.FC = ()=>{
 
-    const { activeTab,  pastAppointments, upcomingAppointments } = useContext(AppointmentsContext),
+    const { activeTab, pastAppointments, upcomingAppointments, cancelledAppointments } = useAppointmentsContext(),
           { showCancelModal, closeCancelModal, openCancelModal, appointmentToCancel } = useUpdatePatientDetails(),
           { cancelAppointment } = useBookingSlots(),
           loginContext = useContext(LoginContext),
@@ -20,7 +20,25 @@ const MyAppointmentsPage: React.FC = ()=>{
 
     const renderAppointments = () =>{
     
-        const data = activeTab === "upcoming" ? upcomingAppointments : pastAppointments
+        let data
+
+        if(activeTab === "upcoming"){
+
+            data = upcomingAppointments
+
+        }else if(activeTab === "past"){
+
+            data = pastAppointments
+
+        }else if(activeTab === "cancelled"){
+
+            data = cancelledAppointments
+
+        }else{
+
+            data = upcomingAppointments
+            
+        }
 
         if(data.length === 0){
 
@@ -36,7 +54,7 @@ const MyAppointmentsPage: React.FC = ()=>{
                     key={index} 
                     doctor={appointment.doctor} 
                     appointment={appointment} 
-                    openCancelModal={openCancelModal}
+                    openCancelModal={activeTab === "upcoming" ? openCancelModal : undefined}
                 />
 
             ):(
@@ -45,7 +63,7 @@ const MyAppointmentsPage: React.FC = ()=>{
                     key={index} 
                     patient={appointment.patient} 
                     appointment={appointment} 
-                    openCancelModal={openCancelModal}
+                    openCancelModal={activeTab === "upcoming" ? openCancelModal : undefined}
                 />
 
             )
@@ -91,7 +109,7 @@ const MyAppointmentsPage: React.FC = ()=>{
                     <NotFoundPage/>
 
                 )
-                                                                        
+                                        
             }
 
         </>
