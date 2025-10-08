@@ -3,17 +3,20 @@ import { useScheduleHistory } from "./useScheduleHistory"
 import { useContext } from "react"
 import { LoginContext } from "../context/LoginContext"
 import { useUpdatePatientDetails } from "./useUpdatePatientDetails"
+import { useToast } from "./useToast"
+import { doc, setDoc } from "firebase/firestore"
+import { db } from "../firebaseConfig"
 
 export const useRejectAppointment = () =>{
 
-    const { patientDetails, updateAppointmentStatus } = usePatientDetails(),
-          { appointmentToReject } = useUpdatePatientDetails(),
+    const { updateAppointmentStatus } = usePatientDetails(),
+          { appointmentToReject, closeRejectModal } = useUpdatePatientDetails(),
           { addScheduleHistoryEntry } = useScheduleHistory(),
           loginContext = useContext(LoginContext),
           userType = loginContext?.userType || "doctor",
-          patientID = patientDetails?.patientInfo?._id
+          { showToast } = useToast()
 
-    const handleRejectAppointment = (reason: string, alternative?: string) =>{
+    const handleRejectAppointment = async(reason: string, alternative?: string) =>{
    
         const appointment = appointmentToReject || (() =>{
 
@@ -27,25 +30,11 @@ export const useRejectAppointment = () =>{
 
             console.error('No appointment to reject')
 
+            showToast("No appointment to reject", "error")
+
             return
 
         }
-
-        const appointmentID = `${appointment.date}-${appointment.time}`,
-              rejectionReason = JSON.parse(localStorage.getItem(`rejection-reason-${patientID}`) || '{}')
-
-        rejectionReason[appointmentID] ={
-
-            reason,
-            alternative: alternative || '',
-            rejectedAt: new Date().toISOString(),
-            appointmentDetails: appointmentToReject
-
-        }
-
-        localStorage.setItem(`rejectionReason-${patientID}`, JSON.stringify(rejectionReason))
-
-        updateAppointmentStatus(appointment, "rejected")
 
         const performedBy ={
 
@@ -59,16 +48,59 @@ export const useRejectAppointment = () =>{
 
         }
 
-        addScheduleHistoryEntry(
-            
-            { ...appointment, status: "rejected" },
-            "rejected",
-            reason,
-            alternative,
-            performedBy,
-            `Appointment rejected by ${userType}. ${appointment.doctor.doctorInfo.name} on ${appointment.date} at ${appointment.time} due to ${reason}.`   
+        try{
 
-        )
+            const appointmentDocRef = doc(db, "appointments", appointment._id)
+
+            await setDoc(appointmentDocRef, {
+
+                status: "rejected",
+                rejectionReason: reason,
+                rejectionAlternative: alternative,
+                rejectedBy: performedBy.type,
+                performedBy:{
+                    type: performedBy.type,
+                    name: performedBy.name,
+                    _id: performedBy._id,
+                    timestamp: new Date().getTime()
+                }
+
+            }, { merge: true })
+
+            const dateTimeID = `${appointment.date}-${appointment.time}`,
+                isBookedDocRef = doc(db, "bookedDoctors", `${appointment.doctor.doctorInfo._id}_${dateTimeID}`)
+
+            await setDoc(isBookedDocRef, {
+                isBooked: false,
+            }, { merge: true })
+
+            updateAppointmentStatus(appointment, "rejected")
+
+            addScheduleHistoryEntry(
+                
+                { ...appointment, status: "rejected" },
+                "rejected",
+                reason,
+                alternative,
+                performedBy,
+                `Appointment rejected by ${userType}. ${appointment.doctor.doctorInfo.name} on ${appointment.date} at ${appointment.time} due to ${reason}.`   
+    
+            )
+
+            showToast("Appointment rejected successfully", "success")
+
+        }catch(error){
+
+            console.error("Error rejecting appointment:", error)
+            
+            showToast("Error rejecting appointment", "error")            
+
+        }finally{
+            
+            closeRejectModal()
+
+        }
+        
         
     }
 

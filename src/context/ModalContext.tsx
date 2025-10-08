@@ -3,7 +3,6 @@ import { ModalContextProps } from "../assets/contextProps/ModalContextProps"
 import { usePatientDetails } from "./PatientDetailsContext"
 import { AppointmentType } from "../assets/types/AppointmentType"
 import { useCancelAppointment } from "../hooks/useCancelAppointment"
-import { useRejectAppointment } from "../hooks/useRejectAppointment"
 import { ProfileContext } from "./ProfileContext"
 
 interface ModalProviderProps{
@@ -21,7 +20,6 @@ export const ModalContext = createContext<ModalContextProps | undefined>(undefin
 export const ModalProvider: React.FC<ModalProviderProps> = ({ children, appointment, onClose, onReject, onCancel }) =>{
 
     const { updateAppointmentStatus } = usePatientDetails(),
-          { handleRejectAppointment: rejectAppointment } = useRejectAppointment(),
           { handleCancelAppointment: cancelAppointment } = useCancelAppointment(), 
           profileContext = useContext(ProfileContext),
             [reason, setReason] = useState<string>(''),
@@ -55,11 +53,9 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children, appointm
 
         updateAppointmentStatus(appointment, "rejected")
 
-        rejectAppointment(reason, alternative)
-
         if(onReject){
 
-            onReject(reason)
+            onReject(reason, alternative)
 
         }
 
