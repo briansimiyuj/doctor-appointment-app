@@ -13,6 +13,8 @@ import { useProfileContext } from "./ProfileContext"
 import { PrescriptionType } from "../assets/types/PrescriptionType"
 import dummyPrescriptions from "../assets/dummyData/dummyPrescriptions.json"
 import dummyNotes from "../assets/dummyData/dummyNotes.json"
+import { updateAppointmentStatusInFirebase } from "../firebase/firebaseApi"
+import { useToast } from "../hooks/useToast"
 
 interface PatientDetailsProviderProps{
     
@@ -31,6 +33,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
             { patientID = "" } = useParams<{ patientID: string }>(),
             { appointments } = useContext(AppointmentsContext),
             { appointedPatients } = useContext(BookingContext),
+            { showToast } = useToast(),
             [patientAppointments, setPatientAppointments] = useState<AppointmentType[]>([]),
             [notes, setNotes] = useState<NoteType[]>(dummyNotes),
             [documents, setDocuments] = useState<DocumentType[]>([]),
@@ -200,30 +203,41 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
       }
 
-      const updateAppointmentStatus = (appointment: AppointmentType, newStatus: "pending" | "completed" | "cancelled" | "confirmed" | "approved" | "rescheduled" | "rejected" | "follow-up") =>{
+      const updateAppointmentStatus = async(appointment: AppointmentType, newStatus: "pending" | "completed" | "cancelled" | "confirmed" | "approved" | "rescheduled" | "rejected" | "follow-up") =>{
 
             if(!patientDetails) return
 
-            const patientID = patientDetails.patientInfo?._id
+            const appointmentIndex = patientAppointments.findIndex(appt => appt._id === appointment._id)
+
+            if(appointmentIndex === -1) return
+
+            const originalAppointments: AppointmentType[] = [...patientAppointments]
             
             setPatientAppointments(prevAppointments =>{
 
-                  const updatedAppointments = [...prevAppointments],
-                        appointmentIndex = updatedAppointments.findIndex(app => app._id === appointment._id)
+                  const updatedAppointments = [...prevAppointments]
 
-                  if(appointmentIndex !== -1){
-
-                        updatedAppointments[appointmentIndex] = {...updatedAppointments[appointmentIndex], status: newStatus}
-
-                        localStorage.setItem(`appointments-${patientID}`, JSON.stringify(updatedAppointments))
-
-                        return updatedAppointments
-
-                  }
+                  updatedAppointments[appointmentIndex] = {...appointment, status: newStatus}
 
                   return prevAppointments
 
             })
+
+            try{
+
+                  await updateAppointmentStatusInFirebase(newStatus, appointment._id)
+
+                  showToast("Appointment status updated successfully", "success")
+
+            }catch(err){
+
+                  console.error("Error updating appointment status in Firebase: ", err)
+
+                  setPatientAppointments(originalAppointments)
+
+                  showToast("Error updating appointment status", "error")
+
+            }
 
       }
 
