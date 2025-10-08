@@ -1,5 +1,6 @@
 import { AppointmentType } from "../types/AppointmentType"
 import { doctorImages, patientImages } from "../frontend/assets"
+import { DocumentType } from "../types/DocumentType"
 
 export const DummyAppointment: AppointmentType ={
   
@@ -18,15 +19,15 @@ export const DummyAppointment: AppointmentType ={
             age: 30,
             gender: "male",
             status: "active",
-            image: patientImages.patient5,
-            contact:{
+            profileImage: patientImages.patient5 as unknown as DocumentType,
+            addressValue:{
                 phone: "0700123456",
                 email: "devpatient@example.com",
-            },
-
-            address:{
-                line1: "123 Test Lane",
-                line2: "Unit 5",
+                country: "Nigeria",
+                state: "Lagos",
+                city: "Lagos",
+                residence: "Lekki",
+                
             },
 
             appointment:{

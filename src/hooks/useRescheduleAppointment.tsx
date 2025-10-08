@@ -22,7 +22,7 @@ export const useRescheduleAppointment = () =>{
     
         if(!appointment || !newDate || !newTime || !selectedDoctor) return false
 
-        const updatedAppointment ={
+        const updatedAppointment: AppointmentType ={
 
             ...appointment,
             date: newDate,
@@ -38,7 +38,6 @@ export const useRescheduleAppointment = () =>{
                     image: selectedDoctor.image,
                     speciality: selectedDoctor.speciality,
                     education: selectedDoctor.education,
-                    degree: selectedDoctor.education, 
                     experience: selectedDoctor.experience,
                     about: selectedDoctor.about,
                     fees: selectedDoctor.fees,

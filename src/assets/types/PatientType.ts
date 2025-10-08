@@ -17,16 +17,6 @@ export type PatientType ={
     gender: string
     status: string
     profileImage: DocumentType
-    
-    contact:{
-        phone: string
-        email: string
-    }
-    
-    address:{
-        line1: string
-        line2: string
-    }
 
     addressValue: ContactAddressType
 

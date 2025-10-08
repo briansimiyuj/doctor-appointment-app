@@ -25,7 +25,7 @@ const DoctorAppointments: React.FC = () =>{
                         <div key={index} className="flex flex-col items-center p-4 border rounded-lg hover:shadow-lg transition-all duration-300">
 
                             <img 
-                                src={appointment.patient?.patientInfo?.image} 
+                                src={appointment.patient?.patientInfo?.profileImage.content} 
                                 alt="patient" 
                                 className="w-24 h-24 rounded-full mb-4"
                             />

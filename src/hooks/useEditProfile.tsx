@@ -64,7 +64,7 @@ export const useEditProfile = () =>{
                     fees: feesValue || 0, 
                     certifications: certificationsValue || [], 
                     address:{
-                        ...profile.address,
+                        ...profile.addressValue,
                         hospital: hospitalValue || "", 
                         hospitalLocation: hospitalLocationValue || "" 
                     },
@@ -83,7 +83,7 @@ export const useEditProfile = () =>{
                     name: nameValue,
                     profileImage: profileImageDoc || null,
                     address:{
-                        ...profile.address,
+                        ...profile.addressValue,
                         city: cityValue,
                         state: stateValue,
                         country: countryValue,

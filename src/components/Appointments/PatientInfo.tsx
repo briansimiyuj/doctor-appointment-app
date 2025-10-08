@@ -20,7 +20,7 @@ const PatientInfo: React.FC<PatientInfo> = ({ patients, appointment })=>{
 
             <p>{patient?.gender}, {patient?.age} years old</p>
 
-            <p>{patient?.contact?.phone}</p>
+            <p>{patient?.addressValue.phone}</p>
 
             <p>{new Date(appointment?.date).toLocaleDateString()} at</p>
 

@@ -2,9 +2,9 @@ import patientsData from "./patients.json"
 import { PatientType } from "../types/PatientType"
 import { patientImages } from "./assets"
 
-export const patients = (patientsData as PatientType[]).map(patient =>({
-
+export const patients: PatientType[] = (patientsData as any[]).map(patient =>({
+    
     ...patient,
-    image: patientImages[patient._id as keyof typeof patientImages]
-
+    profileImage: patientImages[patient._id as keyof typeof patientImages]
+    
 }))

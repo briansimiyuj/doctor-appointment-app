@@ -5,125 +5,148 @@
         "age": 32,
         "gender": "Male",
         "status": "confirmed",
-        "contact": {
+        "profileImage": null,
+        "addressValue":{
             "phone": "+254712345678",
-            "email": "johndoe@example.com"
+            "email": "johndoe@example.com",
+            "country": "Kenya",
+            "state": "Nairobi",
+            "city": "Nairobi",
+            "residence": "Westlands Avenue"
         },
 
-        "address": {
-            "line1": "Westlands Avenue",
-            "line2": "Nairobi, Kenya"
-        },
-
-        "appointment": {
+        "appointment":{
             "date": "2025-02-10",
             "time": "10:30 AM",
             "doctor": "Dr. Michael Johnson",
             "speciality": "Cardiologist"
+        },
+
+        "medicalHistory":{
+            "diseases": [],
+            "allergies": [],
+            "surgeries": [],
+            "medications": []
         }
-
     },
-
-
     {
         "_id": "patient2",
         "name": "Jane Wanjiru",
         "age": 28,
         "gender": "Female",
         "status": "pending",
-        "contact": {
+        "profileImage": null,
+        "addressValue":{
             "phone": "+254798765432",
-            "email": "janewanjiru@example.com"
+            "email": "janewanjiru@example.com",
+            "country": "Kenya",
+            "state": "Nairobi",
+            "city": "Kilimani",
+            "residence": "Ngong Road"
         },
 
-        "address": {
-            "line1": "Ngong Road",
-            "line2": "Kilimani, Nairobi"
-        },
-
-        "appointment": {
+        "appointment":{
             "date": "2025-02-12",
             "time": "2:00 PM",
             "doctor": "Dr. Sophia Mwangi",
             "speciality": "Gynecologist"
+        },
+
+        "medicalHistory":{
+            "diseases": [],
+            "allergies": [],
+            "surgeries": [],
+            "medications": []
         }
-
     },
-
-    
     {
         "_id": "patient3",
         "name": "Ali Mohammed",
         "age": 40,
         "gender": "Male",
         "status": "approved",
-        "contact": {
+        "profileImage": null,
+        "addressValue":{
             "phone": "+255765432198",
-            "email": "alimohammed@example.com"
+            "email": "alimohammed@example.com",
+            "country": "Tanzania",
+            "state": "Dar es Salaam",
+            "city": "Dar es Salaam",
+            "residence": "Kariakoo Street"
         },
 
-        "address": {
-            "line1": "Kariakoo Street",
-            "line2": "Dar es Salaam, Tanzania"
-        },
-
-        "appointment": {
+        "appointment":{
             "date": "2025-02-15",
             "time": "11:00 AM",
             "doctor": "Dr. Amina Hussein",
             "speciality": "Dermatologist"
+        },
+
+        "medicalHistory":{
+            "diseases": [],
+            "allergies": [],
+            "surgeries": [],
+            "medications": []
         }
-
     },
-
     {
         "_id": "patient4",
         "name": "Mary Achieng",
         "age": 35,
         "gender": "Female",
         "status": "pending",
-        "contact": {
+        "profileImage": null,
+        "addressValue":{
             "phone": "+256714567890",
-            "email": "maryachieng@example.com"
+            "email": "maryachieng@example.com",
+            "country": "Uganda",
+            "state": "Kampala",
+            "city": "Kampala",
+            "residence": "Nakasero Road"
         },
 
-        "address": {
-            "line1": "Nakasero Road",
-            "line2": "Kampala, Uganda"
-        },
-
-        "appointment": {
+        "appointment":{
             "date": "2025-02-18",
             "time": "9:30 AM",
             "doctor": "Dr. David Smith",
             "speciality": "Pediatrician"
+        },
+
+        "medicalHistory":{
+            "diseases": [],
+            "allergies": [],
+            "surgeries": [],
+            "medications": []
         }
-
     },
-
     {
         "_id": "patient5",
         "name": "Peter Otieno",
         "age": 45,
         "gender": "Male",
         "status": "approved",
-        "contact": {
+        "profileImage": null,
+        "addressValue":{
             "phone": "+254723456789",
-            "email": "peterotieno@example.com"
+            "email": "peterotieno@example.com",
+            "country": "Kenya",
+            "state": "Mombasa",
+            "city": "Mombasa",
+            "residence": "Moi Avenue"
         },
 
-        "address": {
-            "line1": "Moi Avenue",
-            "line2": "Mombasa, Kenya"
-        },
-
-        "appointment": {
+        "appointment":{
             "date": "2025-02-22",
             "time": "4:00 PM",
             "doctor": "Dr. Marcus Brown",
             "speciality": "Neurologist"
+        },
+
+        "medicalHistory":{
+            "diseases": [],
+            "allergies": [],
+            "surgeries": [],
+            "medications": []
         }
-
     }
-
 ]
