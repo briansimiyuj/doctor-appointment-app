@@ -8,9 +8,9 @@ interface ScheduleHistoryMetadataProps{
 
     }
 
-    reason?: string
-    alternative?: string
-    notes?: string
+    reason?: string | null
+    alternative?: string | null
+    notes?: string | null
 
 }
 

@@ -1,13 +1,10 @@
-import { AppointmentType } from "./AppointmentType"
-
 export interface ScheduleHistoryItem{
 
-    _id: string
-    appointment: AppointmentType
+    appointmentID: string
     actionType: "cancelled" | "rescheduled" | "rejected" | "approved" | "pending" | "cancelled" | "completed" | "follow-up"
     timeStamp: string
-    reason?: string
-    alternative?: string
+    reason?: string | null
+    alternative?: string | null
 
     previousValues?:{
 
@@ -50,7 +47,7 @@ export interface ScheduleHistoryItem{
 
     }
 
-    notes?: string
+    notes?: string | null
 
 }   
 

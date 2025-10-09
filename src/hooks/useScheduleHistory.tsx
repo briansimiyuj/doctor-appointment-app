@@ -1,13 +1,18 @@
+import { addDoc, collection } from "firebase/firestore"
 import { AppointmentType } from "../assets/types/AppointmentType"
 import { ScheduleHistoryItem } from "../assets/types/ScheduleHistoryItem"
 import { usePatientDetails } from "../context/PatientDetailsContext"
-import { v4 as uuid } from "uuid"
+import { db } from "../firebaseConfig"
+import { useToast } from "./useToast"
+
+type HistoryPayload = Omit<ScheduleHistoryItem, '_id'>
 
 export const useScheduleHistory = ()=>{
 
-    const { patientDetails } = usePatientDetails()
+    const { patientDetails } = usePatientDetails(),
+          { showToast } = useToast()
 
-    const addScheduleHistoryEntry =(
+    const addScheduleHistoryEntry = async(
         appointment: AppointmentType,
         actionType: "cancelled" | "rescheduled" | "rejected" | "approved" | "pending" | "completed" | "follow-up",
         reason?: string,
@@ -20,42 +25,41 @@ export const useScheduleHistory = ()=>{
         notes?: string
     ) =>{
     
-       if(!patientDetails) return
+        if(!patientDetails) return
 
-       const patientID = patientDetails.patientInfo._id,
-             existingHistory = localStorage.getItem(`scheduleHistory-${patientID}`),
-             scheduleHistory: ScheduleHistoryItem[] = existingHistory ? JSON.parse(existingHistory) : [],
+        const firebaseHistoryEntry: HistoryPayload ={
 
-            newEntry: ScheduleHistoryItem ={
+            appointmentID: appointment._id, 
+            actionType,
+            timeStamp: new Date().toISOString(),           
+            reason: reason ?? null, 
+            alternative: alternative ?? null,
+            performedBy: performedBy || { type: "system" },
+            notes: notes ?? null,
+            previousValues: undefined, 
+            rescheduleDetails: undefined
 
-                _id: uuid(),
-                appointment,
-                actionType,
-                timeStamp: new Date().toISOString(),
-                reason,
-                alternative,
-                performedBy,
-                notes
+        }
 
-            }
-    
-        const updatedHistory = [newEntry, ...scheduleHistory]
+        const cleanEntry = Object.fromEntries(Object.entries(firebaseHistoryEntry).filter(([_, v]) => v !== undefined)),
+              historyCollectionRef = collection(db, "appointments", appointment._id, "history") 
 
-        localStorage.setItem(`scheduleHistory-${patientID}`, JSON.stringify(updatedHistory))
+        try{
+
+            await addDoc(historyCollectionRef, cleanEntry) 
+
+            console.log('History logged successfully.')
+
+        }catch(error){
+
+            console.error('Error adding document: ', error)
+            
+            showToast("Failed to log history entry. Check console for details.", "error")
+
+        }
 
     }
 
-    const getScheduleHistory = (): ScheduleHistoryItem[] =>{
-
-        if(!patientDetails) return []
-
-        const patientID = patientDetails.patientInfo._id,
-              scheduleHistory = localStorage.getItem(`scheduleHistory-${patientID}`)
-
-        return scheduleHistory ? JSON.parse(scheduleHistory) : []
-
-    }
-
-    return { addScheduleHistoryEntry, getScheduleHistory }
+    return { addScheduleHistoryEntry }
 
 }
