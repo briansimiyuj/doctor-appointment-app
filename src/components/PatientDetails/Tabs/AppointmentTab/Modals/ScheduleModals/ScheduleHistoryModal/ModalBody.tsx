@@ -1,11 +1,10 @@
-import { useScheduleHistory } from "../../../../../../../hooks/useScheduleHistory"
+import { useFetchScheduleHistory } from "../../../../../../../hooks/useFetchScheduleHistory"
 import ScheduleHistoryCard from "./ScheduleHistoryCard"
 
 
 const ModalBody: React.FC = ()=>{
 
-    const { getScheduleHistory } = useScheduleHistory(),
-          scheduleHistory = getScheduleHistory()
+    const { history } = useFetchScheduleHistory()
 
     return(
 
@@ -13,7 +12,7 @@ const ModalBody: React.FC = ()=>{
         
             {
 
-                scheduleHistory.length === 0 ?(
+                history.length === 0 ?(
 
                     <div className="text-center text-gray-600 py-8">
                         
@@ -27,7 +26,7 @@ const ModalBody: React.FC = ()=>{
 
                         {
 
-                            scheduleHistory.map((item, index) =>(
+                            history.map((item, index) =>(
 
                                 <ScheduleHistoryCard
                                     key={index}
