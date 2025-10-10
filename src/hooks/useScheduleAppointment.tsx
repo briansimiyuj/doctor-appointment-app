@@ -3,6 +3,9 @@ import { AppointmentType } from "../assets/types/AppointmentType"
 import { LoginContext } from "../context/LoginContext"
 import { usePatientDetails } from "../context/PatientDetailsContext"
 import { useScheduleHistory } from "./useScheduleHistory"
+import { doc, setDoc } from "firebase/firestore"
+import { db } from "../firebaseConfig" 
+import { useToast } from "./useToast"
 
 interface scheduleAppointmentParams{
 
@@ -16,13 +19,14 @@ interface scheduleAppointmentParams{
 
 export const useScheduleAppointment = () =>{
 
-    const  { patientDetails, updateAppointment } = usePatientDetails(),
+    const  { patientDetails, updateAppointment } = usePatientDetails(),
            { addScheduleHistoryEntry } = useScheduleHistory(),
+           { showToast } = useToast(),
            loginContext = useContext(LoginContext),
            userType = loginContext?.userType || "patient"
 
 
-    const scheduleAppointment = (params: scheduleAppointmentParams) =>{
+    const scheduleAppointment = async (params: scheduleAppointmentParams) =>{
     
         const { appointment, newDate, newTime, consultationType, status } = params
 
@@ -33,13 +37,11 @@ export const useScheduleAppointment = () =>{
             ...appointment,
             date: newDate,
             time: newTime,
-            status: status || "pending",
+            status: status || "rescheduled",
             consultationType: consultationType
 
         }
         
-        updateAppointment(newAppointment)
-
         const performedBy ={
 
             type: userType,
@@ -48,25 +50,37 @@ export const useScheduleAppointment = () =>{
 
         }
 
-        addScheduleHistoryEntry(
+        try{
 
-            newAppointment,
-            newAppointment.status as "pending" | "completed" | "cancelled" | "approved" | "rescheduled" | "rejected" | "follow-up",
-            `New appointment scheduled by ${userType}`,
-            undefined,
-            performedBy,
-            `New appointment scheduled for ${newDate} at ${newTime} (${consultationType} consultation)`
+            const appointmentDocRef = doc(db, "appointments", newAppointment._id)
+            
+            await setDoc(appointmentDocRef, newAppointment) 
 
-        )
+            addScheduleHistoryEntry(
+                newAppointment,
+                newAppointment.status as "pending" | "completed" | "cancelled" | "approved" | "rescheduled" | "rejected" | "follow-up",
+                `Appointment updated by ${userType}`,
+                undefined,
+                performedBy,
+                `Appointment changed to ${newDate} at ${newTime} (${consultationType} consultation). Status set to ${newAppointment.status}.`
+            )
+            
+            updateAppointment(newAppointment)
 
-        const patientID = patientDetails?.patientInfo?._id || 'defaultPatientID',
-        storedAppointments = (localStorage.getItem(`appointments-${patientID}`) || "[]"),
-        updatedAppointments = JSON.parse(storedAppointments).map((app: AppointmentType) => app._id === appointment._id ? newAppointment : app)
+            showToast("Appointment updated successfully.", "success")
 
-        localStorage.setItem(`appointments-${patientID}`, JSON.stringify(updatedAppointments))
+            return true
 
-        return true
+        }catch(error){
 
+            console.error("Error scheduling appointment:", error)
+
+            showToast("Failed to update appointment schedule.", "error")
+
+            return false
+
+        }
+        
     }
     
     return { scheduleAppointment }

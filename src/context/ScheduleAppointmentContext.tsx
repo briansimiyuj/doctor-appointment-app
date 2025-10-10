@@ -25,13 +25,13 @@ export const ScheduleAppointmentProvider: React.FC<ScheduleAppointmentProviderPr
           { patientDetails } = usePatientDetails(),
           isvalid = Boolean(newDate && newTime && consultationType && isConfirmed)
           
-    const handleScheduleConfirm = () =>{
+    const handleScheduleConfirm = async() =>{
     
         if(!isvalid || !patientDetails) return
 
         if(newDate && newTime && consultationType && isConfirmed){
 
-            const scheduleSuccess = scheduleAppointment({ newDate,newTime, consultationType,appointment })
+            const scheduleSuccess = await scheduleAppointment({ newDate, newTime, consultationType, appointment })
 
             if(scheduleSuccess){
 
