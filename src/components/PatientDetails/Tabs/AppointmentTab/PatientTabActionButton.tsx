@@ -5,11 +5,12 @@ import CancelAppointmentModal from "./Modals/CancelModals/CancelAppointmentModal
 import ViewNotesModal from "./Modals/ViewNotesModals/ViewNotesModal"
 import ManageAppointmentModal from "./Modals/ManageModals/ManageAppointmentModal"
 import ScheduleHistoryModal from "./Modals/ScheduleModals/ScheduleHistoryModal/ScheduleHistoryModal"
+import RescheduleHistoryModal from "./Modals/RescheduleModals/RescheduleHistoryModal/RescheduleHistoryModal"
 
 const PatientTabActionButton: React.FC = () =>{
 
   const { patientAppointments } = usePatientDetails(),
-        { appointmentToCancel, openCancelModal, showCancelModal, closeCancelModal, openRescheduleModal, showScheduleHistoryModal, openScheduleHistoryModal, closeScheduleHistoryModal, showManageModal, openManageModal, closeManageModal, showViewNotesModal, openViewNotesModal, closeViewNotesModal } = useUpdatePatientDetails() as any,
+        { appointmentToCancel, openCancelModal, showCancelModal, closeCancelModal, openRescheduleModal, showScheduleHistoryModal, openScheduleHistoryModal, closeScheduleHistoryModal, showManageModal, openManageModal, closeManageModal, showViewNotesModal, openViewNotesModal, closeViewNotesModal, showRescheduleHistoryModal, openRescheduleHistoryModal, closeRescheduleHistoryModal } = useUpdatePatientDetails() as any,
         latestAppointment = patientAppointments && patientAppointments.length > 0 ? patientAppointments[0] : null
  
   const renderActionButton = () =>{
@@ -129,14 +130,19 @@ const PatientTabActionButton: React.FC = () =>{
           <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
 
             <button
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white dark:text-white rounded-md hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
+              onClick={() => openManageModal(latestAppointment)}
+            ><FaComments /> View Appointment Details</button>
+
+            <button
               className="flex items-center justify-center gap-2 px-4 py-2 bg-gray-600 text-white dark:text-white rounded-md hover:bg-gray-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
-              onClick={openScheduleHistoryModal}
+              onClick={openRescheduleHistoryModal}
             ><FaRedo /> Reschedule History</button>
 
             <button
-              className="flex items-center justify-center gap-2 px-4 py-2 bg-green-600 text-white dark:text-white rounded-md hover:bg-green-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
-              onClick={() => openViewNotesModal(latestAppointment)}
-            ><FaStickyNote /> View Doctor Notes</button>
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-red-600 text-white dark:text-white rounded-md hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
+              onClick={() => openCancelModal(latestAppointment)}
+            ><FaTimes /> Cancel Appointment</button>
 
           </div>  
 
@@ -180,6 +186,8 @@ const PatientTabActionButton: React.FC = () =>{
       { showViewNotesModal && <ViewNotesModal onClose={closeViewNotesModal}/> }
       { showManageModal && <ManageAppointmentModal onClose={closeManageModal}/> }
       { showScheduleHistoryModal && <ScheduleHistoryModal onClose={closeScheduleHistoryModal}/> }
+
+      { showRescheduleHistoryModal && <RescheduleHistoryModal onClose={closeRescheduleHistoryModal}/> }
     
     </>
 
