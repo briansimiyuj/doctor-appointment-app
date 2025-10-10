@@ -13,11 +13,13 @@ export interface AddNotesContextProps{
     isSubmitting: boolean
     setIsSubmitting: (isSubmitting: boolean) => void
     appointmentNotes: AppointmentNoteType[]
+    setAppointmentNotes: (appointmentNotes: AppointmentNoteType[]) => void
     addAppointmentNotes: (note: AppointmentNoteType) => void
     getAppointmentNotes: (appointmentID: string) => AppointmentNoteType[]
-    fetchNotesForAppointment: (appointmentID: string) => void
     subscribeToAppointmentNotes: (appointmentID: string) => void
+    formatFirebaseTimestamp: (timestamp: any) => void
     loading: boolean
+    setLoading: (loading: boolean) => void
     resetForm: () => void
 
 }

@@ -1,6 +1,6 @@
 interface NoteFollowUpProps{
 
-    followUpDate?: string
+    followUpDate?: string | null
 
 }
 

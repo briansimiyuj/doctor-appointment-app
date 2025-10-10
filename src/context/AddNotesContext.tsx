@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react"
 import { AddNotesContextProps } from "../assets/contextProps/AddNotesContextProps"
 import { AppointmentNoteType } from "../assets/types/AppointmentNoteType"
-import { collection, addDoc, getDocs, onSnapshot, Timestamp } from "firebase/firestore"
+import { collection, addDoc, onSnapshot, Timestamp } from "firebase/firestore"
 import { db } from "../firebaseConfig"
 import { useToast } from "../hooks/useToast"
 
@@ -23,39 +23,6 @@ export const AddNotesProvider: React.FC<AddNotesProviderProps> = ({ children }) 
           [loading, setLoading] = useState<boolean>(false),
           [appointmentNotes, setAppointmentNotes] = useState<AppointmentNoteType[]>([]),
           { showToast } = useToast()
-
-    const fetchNotesForAppointment = async (appointmentID: string) =>{
-
-        try{
-
-            setLoading(true)
-
-            const notesRef = collection(db, "appointments", appointmentID, "notes"),
-                  snapshot = await getDocs(notesRef),
-                  fetchedNotes = snapshot.docs.map(doc => ({
-                ...doc.data(),
-                _id: doc.id,
-            })) as AppointmentNoteType[]
-
-            setAppointmentNotes(fetchedNotes)
-            
-            return fetchedNotes
-
-        }catch(error){
-
-            console.error("Error fetching appointment notes:", error)
-
-            showToast("Error fetching appointment notes", "error")
-
-            return []
-
-        }finally{
-
-            setLoading(false)
-
-        }
-
-    }
 
     const subscribeToAppointmentNotes = (appointmentID: string) =>{
 
@@ -148,6 +115,25 @@ export const AddNotesProvider: React.FC<AddNotesProviderProps> = ({ children }) 
     
     }
 
+    const formatFirebaseTimestamp = (timestamp: any) =>{
+
+        try{
+
+            const date = timestamp?.toDate?.() ? timestamp.toDate() : new Date(timestamp),
+                  dateStr = date.toLocaleDateString(),
+                  timeStr = date.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })
+            
+           return `${dateStr} ${timeStr}`
+
+        }catch(error){
+
+            console.error("Error formatting timestamp:", error)
+            return "Invalid date"
+
+        }
+
+    }
+
     const contextValue: AddNotesContextProps ={
 
         notes,
@@ -161,12 +147,14 @@ export const AddNotesProvider: React.FC<AddNotesProviderProps> = ({ children }) 
         isSubmitting,
         setIsSubmitting,
         appointmentNotes,
+        setAppointmentNotes,
         addAppointmentNotes,
         getAppointmentNotes: getNotesForAppointment,
         resetForm,
-        fetchNotesForAppointment,
         subscribeToAppointmentNotes,
-        loading
+        formatFirebaseTimestamp,
+        loading,
+        setLoading
 
     }
 

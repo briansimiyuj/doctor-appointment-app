@@ -1,11 +1,11 @@
-import { useUpdatePatientDetails } from "../../../../../../hooks/useUpdatePatientDetails"
+import { useAddNotes } from "../../../../../../context/AddNotesContext"
 import { useViewNotes } from "../../../../../../hooks/useViewNotes"
 import NotesList from "./NotesList"
 
 const ModalBody: React.FC = ()=>{
 
-    const { appointmentToViewNotes: appointment } = useUpdatePatientDetails(), 
-          { hasNotes, appointmentNotes } = useViewNotes(appointment)
+    const { hasNotes} = useViewNotes(),
+          { appointmentNotes } = useAddNotes()
 
     return(
 

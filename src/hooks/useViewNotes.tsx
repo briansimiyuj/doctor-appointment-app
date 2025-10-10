@@ -1,57 +1,66 @@
-import { useEffect, useState } from "react";
 import { AppointmentNoteType } from "../assets/types/AppointmentNoteType";
-import { AppointmentType } from "../assets/types/AppointmentType";
-import { usePatientDetails } from "../context/PatientDetailsContext";
+import { useAddNotes } from "../context/AddNotesContext";
+import { useToast } from "./useToast";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebaseConfig";
+import { useEffect } from "react";
+import { useAppointmentsContext } from "../context/AppointmentContext";
 
-export const useViewNotes = (appointment: AppointmentType | null) =>{
+export const useViewNotes = () =>{
 
-    const [appointmentNotes, setAppointmentNotes] = useState<AppointmentNoteType[]>([]),
-          { patientDetails } = usePatientDetails()
+    const { setLoading, setAppointmentNotes, appointmentNotes } = useAddNotes(),
+          { showToast } = useToast(),
+          { appointmentID } = useAppointmentsContext()
+
+    const fetchNotesForAppointment = async (appointmentID: string) =>{
+    
+            try{
+    
+                setLoading(true)
+    
+                const notesRef = collection(db, "appointments", appointmentID, "notes"),
+                      snapshot = await getDocs(notesRef),
+                      fetchedNotes = snapshot.docs.map(doc => ({
+                    ...doc.data(),
+                    _id: doc.id,
+                })) as AppointmentNoteType[]
+    
+                setAppointmentNotes(fetchedNotes)
+                
+                return fetchedNotes
+    
+            }catch(error){
+    
+                console.error("Error fetching appointment notes:", error)
+    
+                showToast("Error fetching appointment notes", "error")
+    
+                return []
+    
+            }finally{
+    
+                setLoading(false)
+    
+            }
+    
+        }
+
+    const hasNotes = appointmentNotes.length > 0
 
     useEffect(() =>{
     
-        if(!appointment || !patientDetails){
+        if(appointmentID){
 
-            setAppointmentNotes([])
-
-            return
-
-        }
-
-        const patientID = patientDetails.patientInfo._id,
-              appointmentID = appointment._id || `${appointment.date}-${appointment.time}`
-
-        try{
-
-            const savedNotes = localStorage.getItem(`appointmentNotes-${patientID}`)
-
-            if(savedNotes){
-                
-                const allNotes: AppointmentNoteType[] = JSON.parse(savedNotes),
-                    filteredNotes = allNotes.filter(note => note.appointmentID === appointmentID)
-
-                setAppointmentNotes(filteredNotes)
-
-            }else{ 
-
-                setAppointmentNotes([])
-
-            }
-
-        }catch(error){
-
-            console.error('Error fetching appointment notes:', error)
-
-            setAppointmentNotes([])
+            fetchNotesForAppointment(appointmentID)
 
         }
     
-    }, [patientDetails, appointment])
+    }, [])
 
     return{
 
-        appointmentNotes,
-        hasNotes: appointmentNotes.length > 0
+        fetchNotesForAppointment,
+        hasNotes
 
     }
 

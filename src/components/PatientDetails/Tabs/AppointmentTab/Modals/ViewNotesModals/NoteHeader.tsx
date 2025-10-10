@@ -1,3 +1,5 @@
+import { useAddNotes } from "../../../../../../context/AddNotesContext"
+
 interface NotesListProps{
     
     index: number
@@ -6,6 +8,8 @@ interface NotesListProps{
 }
 
 const NoteHeader: React.FC<NotesListProps> = ({ index, createdAt })=>{
+
+    const { formatFirebaseTimestamp } =  useAddNotes()
 
     return(
 
@@ -23,7 +27,7 @@ const NoteHeader: React.FC<NotesListProps> = ({ index, createdAt })=>{
 
                     <span className="text-gray-500 text-sm">
 
-                        {`${new Date(createdAt).toLocaleDateString()} ${new Date(createdAt).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })}`}
+                        {`${formatFirebaseTimestamp(createdAt)}`}
 
                     </span>
 
