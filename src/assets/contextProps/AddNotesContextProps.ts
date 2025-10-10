@@ -15,6 +15,9 @@ export interface AddNotesContextProps{
     appointmentNotes: AppointmentNoteType[]
     addAppointmentNotes: (note: AppointmentNoteType) => void
     getAppointmentNotes: (appointmentID: string) => AppointmentNoteType[]
+    fetchNotesForAppointment: (appointmentID: string) => void
+    subscribeToAppointmentNotes: (appointmentID: string) => void
+    loading: boolean
     resetForm: () => void
 
 }

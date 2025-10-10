@@ -1,7 +1,9 @@
 import { createContext, useContext, useState } from "react"
 import { AddNotesContextProps } from "../assets/contextProps/AddNotesContextProps"
 import { AppointmentNoteType } from "../assets/types/AppointmentNoteType"
-import { usePatientDetails } from "./PatientDetailsContext"
+import { collection, addDoc, getDocs, onSnapshot, Timestamp } from "firebase/firestore"
+import { db } from "../firebaseConfig"
+import { useToast } from "../hooks/useToast"
 
 interface AddNotesProviderProps{
 
@@ -18,23 +20,111 @@ export const AddNotesProvider: React.FC<AddNotesProviderProps> = ({ children }) 
           [diagnosis, setDiagnosis] = useState<string>(''),
           [followUpDate, setFollowUpDate] = useState<string>(''),
           [isSubmitting, setIsSubmitting] = useState<boolean>(false),
-          { patientDetails } = usePatientDetails(),
-          patientID = patientDetails?.patientInfo._id,
-            [appointmentNotes, setAppointmentNotes] = useState<AppointmentNoteType[]>(() =>{
+          [loading, setLoading] = useState<boolean>(false),
+          [appointmentNotes, setAppointmentNotes] = useState<AppointmentNoteType[]>([]),
+          { showToast } = useToast()
 
-              const savedNotes = localStorage.getItem(`appointmentNotes-${patientID}`)
+    const fetchNotesForAppointment = async (appointmentID: string) =>{
 
-              return savedNotes ? JSON.parse(savedNotes) : []
+        try{
+
+            setLoading(true)
+
+            const notesRef = collection(db, "appointments", appointmentID, "notes"),
+                  snapshot = await getDocs(notesRef),
+                  fetchedNotes = snapshot.docs.map(doc => ({
+                ...doc.data(),
+                _id: doc.id,
+            })) as AppointmentNoteType[]
+
+            setAppointmentNotes(fetchedNotes)
+            
+            return fetchedNotes
+
+        }catch(error){
+
+            console.error("Error fetching appointment notes:", error)
+
+            showToast("Error fetching appointment notes", "error")
+
+            return []
+
+        }finally{
+
+            setLoading(false)
+
+        }
+
+    }
+
+    const subscribeToAppointmentNotes = (appointmentID: string) =>{
+
+        try{
+
+            const notesRef = collection(db, "appointments", appointmentID, "notes")
+
+            const unsubscribe = onSnapshot(notesRef, (snapshot) =>{
+
+                const updatedNotes = snapshot.docs.map(doc => ({
+                    ...doc.data(),
+                    _id: doc.id,
+                })) as AppointmentNoteType[]
+
+                setAppointmentNotes(updatedNotes)
 
             })
 
-    const addAppointmentNotes = (note: AppointmentNoteType) =>{
+            return unsubscribe
 
-        const updatedNotes = [...appointmentNotes, note]
+        }catch(error){
 
-        setAppointmentNotes(updatedNotes)
+            console.error("Error subscribing to appointment notes:", error)
 
-        localStorage.setItem(`appointmentNotes-${patientID}`, JSON.stringify(updatedNotes))
+            return () => {}
+
+        }
+
+    }
+
+    const addAppointmentNotes = async (noteData: Omit<AppointmentNoteType, "_id">) =>{
+
+        try{
+
+            setIsSubmitting(true)
+
+            const appointmentID = noteData.appointmentID,
+                  notesRef = collection(db, "appointments", appointmentID, "notes")
+
+            const docRef = await addDoc(notesRef, {
+                ...noteData,
+                createdAt: Timestamp.fromDate(new Date()),
+                updatedAt: Timestamp.fromDate(new Date()),
+            })
+
+            const newNote: AppointmentNoteType ={
+
+                ...noteData,
+                _id: docRef.id,
+                
+            }
+
+            setAppointmentNotes(prev => [...prev, newNote])
+
+            showToast("Note added successfully", "success")
+
+            return newNote
+
+        }catch(error){
+
+            console.error("Error adding appointment notes:", error)
+
+            throw error
+
+        }finally{
+
+            setIsSubmitting(false)
+
+        }
 
     }
 
@@ -73,7 +163,10 @@ export const AddNotesProvider: React.FC<AddNotesProviderProps> = ({ children }) 
         appointmentNotes,
         addAppointmentNotes,
         getAppointmentNotes: getNotesForAppointment,
-        resetForm
+        resetForm,
+        fetchNotesForAppointment,
+        subscribeToAppointmentNotes,
+        loading
 
     }
 

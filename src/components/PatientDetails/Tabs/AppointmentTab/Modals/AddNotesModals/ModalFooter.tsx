@@ -51,7 +51,7 @@ const ModalFooter: React.FC<ModalFooterProps> = ({ onClose, triggerFollowUpSched
                 className={`bg-primary-btn text-white dark:text-white dark:hover:bg-blue-700 px-4 py-2 rounded-md transition-all duration-300 w-full sm:w-auto mt-2 sm:mt-0 ${!canSubmit ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
                 disabled={!canSubmit || isSubmitting}
                 onClick={() => handleSubmit(onClose)}
-            >Save</button>
+            >{ isSubmitting ? "Saving..." : "Save" }</button>
             
         </div>
 

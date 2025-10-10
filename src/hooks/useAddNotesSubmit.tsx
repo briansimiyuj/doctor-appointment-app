@@ -23,9 +23,9 @@ export const useAddNotesSubmit = (appointment: AppointmentType | null) =>{
             patientID: patientDetails.patientInfo._id,
             doctorID: appointment.doctor.doctorInfo._id,
             notes: notes.trim(),
-            diagnosis: diagnosis.trim() || undefined,
-            prescription: prescription.trim() || undefined,
-            followUpDate: followUpDate.trim() || undefined,
+            diagnosis: diagnosis.trim() ,
+            prescription: prescription.trim() ,
+            followUpDate: followUpDate.trim() || null,
             doctorName: appointment.doctor.doctorInfo.name,
             createdAt: new Date().toISOString(),
 

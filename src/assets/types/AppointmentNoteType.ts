@@ -8,8 +8,8 @@ export interface AppointmentNoteType{
     doctorName: string
     createdAt: string
     updatedAt?: string
-    prescription?: string
-    diagnosis?: string
-    followUpDate?: string
+    prescription: string
+    diagnosis: string
+    followUpDate?: string | null
 
 }
