@@ -6,11 +6,12 @@ import ViewNotesModal from "./Modals/ViewNotesModals/ViewNotesModal"
 import ManageAppointmentModal from "./Modals/ManageModals/ManageAppointmentModal"
 import ScheduleHistoryModal from "./Modals/ScheduleModals/ScheduleHistoryModal/ScheduleHistoryModal"
 import RescheduleHistoryModal from "./Modals/RescheduleModals/RescheduleHistoryModal/RescheduleHistoryModal"
+import ViewReasonsModals from "./Modals/ViewReasonsModals/ViewReasonsModals"
 
 const PatientTabActionButton: React.FC = () =>{
 
   const { patientAppointments } = usePatientDetails(),
-        { appointmentToCancel, openCancelModal, showCancelModal, closeCancelModal, openRescheduleModal, showScheduleHistoryModal, openScheduleHistoryModal, closeScheduleHistoryModal, showManageModal, openManageModal, closeManageModal, showViewNotesModal, openViewNotesModal, closeViewNotesModal, showRescheduleHistoryModal, openRescheduleHistoryModal, closeRescheduleHistoryModal } = useUpdatePatientDetails() as any,
+        { appointmentToCancel, openCancelModal, showCancelModal, closeCancelModal, openRescheduleModal, showScheduleHistoryModal, openScheduleHistoryModal, closeScheduleHistoryModal, showManageModal, openManageModal, closeManageModal, showViewNotesModal, openViewNotesModal, closeViewNotesModal, showRescheduleHistoryModal, openRescheduleHistoryModal, closeRescheduleHistoryModal, showViewReasonsModal, openViewReasonModal, closeViewReasonModal } = useUpdatePatientDetails() as any,
         latestAppointment = patientAppointments && patientAppointments.length > 0 ? patientAppointments[0] : null
  
   const renderActionButton = () =>{
@@ -96,8 +97,8 @@ const PatientTabActionButton: React.FC = () =>{
 
             <button
               className="flex items-center justify-center gap-2 px-4 py-2 bg-green-600 text-white dark:text-white rounded-md hover:bg-green-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
-              onClick={() => openViewNotesModal(latestAppointment)}
-            ><FaStickyNote /> View Doctor Notes</button>
+              onClick={() => openViewReasonModal(latestAppointment)}
+            ><FaEye/> View Cancellation Reasons</button>
 
           </div>
 
@@ -116,7 +117,7 @@ const PatientTabActionButton: React.FC = () =>{
 
             <button
               className="flex items-center justify-center gap-2 px-4 py-2 bg-green-600 text-white dark:text-white rounded-md hover:bg-green-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
-              onClick={() => openViewNotesModal(latestAppointment)}
+              onClick={() => openViewReasonModal(latestAppointment)}
             ><FaEye /> View Rejection Reasons</button>
 
           </div>
@@ -188,6 +189,8 @@ const PatientTabActionButton: React.FC = () =>{
       { showScheduleHistoryModal && <ScheduleHistoryModal onClose={closeScheduleHistoryModal}/> }
 
       { showRescheduleHistoryModal && <RescheduleHistoryModal onClose={closeRescheduleHistoryModal}/> }
+
+      { showViewReasonsModal && <ViewReasonsModals onClose={closeViewReasonModal}/> }
     
     </>
 
