@@ -19,7 +19,7 @@ export const ModalContext = createContext<ModalContextProps | undefined>(undefin
 
 export const ModalProvider: React.FC<ModalProviderProps> = ({ children, appointment, onClose, onReject, onCancel }) =>{
 
-    const { updateAppointmentStatus } = usePatientDetails(),
+    const { updateAppointmentDataAndStatus } = usePatientDetails(),
           { handleCancelAppointment: cancelAppointment } = useCancelAppointment(), 
           profileContext = useContext(ProfileContext),
             [reason, setReason] = useState<string>(''),
@@ -31,11 +31,17 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children, appointm
     const { profile } = profileContext,
             isValid = profile?.type === "doctor" ? reason.trim() !== '' && isConfirmed : isConfirmed
 
+    const getAlternativeValue = (alt: string): string | null =>{
+    
+        return alt.trim() !== '' ? alt : null
+    
+    }
+
     const handleCancelAppointment = () =>{
     
         if(!appointment || !isValid) return
 
-        cancelAppointment(reason, alternative)
+        cancelAppointment(reason, getAlternativeValue(alternative))
 
         if(onCancel){
 
@@ -51,7 +57,7 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children, appointm
 
         if(!appointment || !isValid) return
 
-        updateAppointmentStatus(appointment, "rejected")
+        updateAppointmentDataAndStatus(appointment, "rejected", reason, getAlternativeValue(alternative)) 
 
         if(onReject){
 

@@ -9,14 +9,14 @@ import { useToast } from "./useToast"
 
 export const useCancelAppointment = () =>{
 
-    const { updateAppointmentStatus } = usePatientDetails(),
+    const { updateAppointmentDataAndStatus } = usePatientDetails(),
             { appointmentToCancel, closeCancelModal} = useUpdatePatientDetails(),
             { addScheduleHistoryEntry } = useScheduleHistory(),
             loginContext = useContext(LoginContext),
             userType = loginContext?.userType || "patient",
             { showToast } = useToast()
 
-    const handleCancelAppointment = async (reason: string, alternative?: string) =>{
+    const handleCancelAppointment = async (reason: string, alternative: string | null = null) =>{
 
         const appointment = appointmentToCancel || (() =>{
 
@@ -68,7 +68,7 @@ export const useCancelAppointment = () =>{
                 isBooked: false,
             }, { merge: true })
 
-            updateAppointmentStatus(appointment, "cancelled")
+            updateAppointmentDataAndStatus(appointment, "cancelled", reason, alternative)
 
             addScheduleHistoryEntry(
 

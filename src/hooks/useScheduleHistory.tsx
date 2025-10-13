@@ -16,7 +16,7 @@ export const useScheduleHistory = ()=>{
         appointment: AppointmentType,
         actionType: "cancelled" | "rescheduled" | "rejected" | "approved" | "pending" | "completed" | "follow-up",
         reason?: string,
-        alternative?: string,
+        alternative?: string | null,
         performedBy?:{
             type: "doctor" | "patient" | "system"
             name?: string
