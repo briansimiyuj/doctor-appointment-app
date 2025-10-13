@@ -12,5 +12,9 @@ export  interface AppointmentType{
     time: string
     status: string
     consultationType: "online" | "in-person"
+    cancellationReason?: string 
+    cancellationAlternative?: string | null
+    rejectionReason?: string 
+    rejectionAlternative?: string | null
     
 }

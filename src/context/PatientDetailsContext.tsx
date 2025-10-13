@@ -219,7 +219,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
                   updatedAppointments[appointmentIndex] = {...appointment, status: newStatus}
 
-                  return prevAppointments
+                  return updatedAppointments
 
             })
 
@@ -239,6 +239,60 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
             }
 
+      }
+
+      const updateAppointmentDataAndStatus = async(
+            appointment: AppointmentType,
+            newStatus: "cancelled" | "rejected",
+            reason: string,
+            alternative: string | null = null
+      ) =>{
+      
+            if(!patientDetails) return
+
+            const appointmentIndex = patientAppointments.findIndex(a => a._id === appointment._id)
+
+            if(appointmentIndex === -1) return
+
+            const originalAppointments: AppointmentType[] = [...patientAppointments]
+
+            setPatientAppointments(prevAppointments =>{
+
+                  const updatedAppointments = [...prevAppointments],
+                        reasonFields = newStatus === "cancelled" ?  
+                              { cancellationReason: reason, cancellationAlternative: alternative } :
+                              { rejectionReason: reason, rejectionAlternative: alternative }
+
+                  updatedAppointments[appointmentIndex] ={
+
+                        ...appointment,
+                        status: newStatus,
+                        ...reasonFields
+                        
+                  }
+
+                  localStorage.setItem(`appointments-${patientID}`, JSON.stringify(updatedAppointments))
+
+                  return updatedAppointments
+                  
+            })
+
+            try{
+
+                  await updateAppointmentStatusInFirebase(newStatus, appointment._id, reason, alternative) 
+
+                  showToast("Appointment status updated successfully", "success")
+
+            }catch(err){
+
+                  console.error("Error updating appointment status: ", err)
+
+                  setPatientAppointments(originalAppointments)
+
+                  showToast("Error updating appointment status", "error")
+
+            }
+      
       }
 
       const rescheduleAppointment = (appointment: AppointmentType, newDate: Date, newTime: string, newDoctor: DoctorType, newConsultationType: "online" | "in-person") =>{
@@ -490,6 +544,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
             patientDetails,
             setPatientDetails,
             updateAppointmentStatus,
+            updateAppointmentDataAndStatus,
             prescriptions,
             addPrescription,
             removePrescription,

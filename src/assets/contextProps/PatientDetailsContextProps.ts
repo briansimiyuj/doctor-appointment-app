@@ -63,5 +63,6 @@ export interface PatientDetailsContextProps{
     // Update appointment status
     updateAppointmentStatus: (appointment: AppointmentType, newStatus: "pending" | "confirmed" | "cancelled" | "completed" | "approved" | "rescheduled" | "rejected" | "follow-up") => void
     updateAppointment: (appointment: AppointmentType) => void
+    updateAppointmentDataAndStatus: (appointment: AppointmentType, newStatus: "cancelled" | "rejected", reason: string, alternative: string | null) => void
 
 }
