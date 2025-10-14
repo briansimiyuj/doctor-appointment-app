@@ -57,8 +57,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
                               setPatientDetails(foundAppointment.patient)
 
-                              const savedAppointments = localStorage.getItem(`appointments-${patientID}`)
-                              setPatientAppointments(savedAppointments ? JSON.parse(savedAppointments) : [foundAppointment])
+                              setPatientAppointments([foundAppointment])
 
                               const savedNotes = localStorage.getItem(`notes-${patientID}`)
                               setNotes(savedNotes ? JSON.parse(savedNotes) : [])
