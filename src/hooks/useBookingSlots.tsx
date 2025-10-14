@@ -10,13 +10,18 @@ import { useToast } from "./useToast"
 import { arrayUnion, doc, setDoc } from "firebase/firestore"
 import { db } from "../firebaseConfig"
 import { AppointedPatientType } from "../assets/types/AppointedPatientType"
+import { useScheduleHistory } from "./useScheduleHistory"
+import { LoginContext } from "../context/LoginContext"
 
 export const useBookingSlots = ()=>{
 
     const [selectedSlot, setSelectedSlot] = useState<TimeSlotType | null>(null),
           { doctorInfo, patientInfo, consultationType, slotIndex, setSlotIndex, selectedTimeSlot, setSelectedTimeSlot, appointedDoctors, setAppointedDoctors, setAppointedPatients, isBooked, setIsBooked, appointments, setAppointments, slots, setLoading } = useContext(BookingContext),
           { closeCancelModal } = useUpdatePatientDetails(),
+          { addScheduleHistoryEntry } = useScheduleHistory(),
           { showToast } = useToast(),
+          loginContext = useContext(LoginContext),
+          userType = loginContext?.userType || "patient",
           days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
           selectedDate = slots[slotIndex]?.date
 
@@ -197,7 +202,15 @@ export const useBookingSlots = ()=>{
 
         setLoading(true)
 
-        const appointmentToCancel = appointments.find((a: AppointmentType) => a._id === appointmentID)
+        const appointmentCancel = appointments.find((a: AppointmentType) => a._id === appointmentID),
+              savedAppointment = localStorage.getItem('CurrentAppointmentToCancel'),
+              appointmentToCancel = appointmentCancel ? appointmentCancel : (savedAppointment ? JSON.parse(savedAppointment) : null),
+              performedBy ={
+                  type: userType,
+                  name: appointmentToCancel?.patient.patientInfo.name,
+                  _id: appointmentToCancel?.patient.patientInfo._id
+                }
+        
 
         if(!appointmentToCancel){
 
@@ -239,6 +252,16 @@ export const useBookingSlots = ()=>{
             })
 
             setIsBooked(appointmentToCancel.doctor.doctorInfo._id, false)
+
+            addScheduleHistoryEntry(
+
+                appointmentToCancel,
+                "cancelled",
+                null,
+                null,
+                performedBy,
+
+            )
 
             if(selectedSlot?.time === appointmentToCancel?.doctor.appointmentTime.time){
 

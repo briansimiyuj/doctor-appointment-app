@@ -1,7 +1,6 @@
 import { addDoc, collection } from "firebase/firestore"
 import { AppointmentType } from "../assets/types/AppointmentType"
 import { ScheduleHistoryItem } from "../assets/types/ScheduleHistoryItem"
-import { usePatientDetails } from "../context/PatientDetailsContext"
 import { db } from "../firebaseConfig"
 import { useToast } from "./useToast"
 
@@ -9,13 +8,12 @@ type HistoryPayload = Omit<ScheduleHistoryItem, '_id'>
 
 export const useScheduleHistory = ()=>{
 
-    const { patientDetails } = usePatientDetails(),
-          { showToast } = useToast()
+    const { showToast } = useToast()
 
     const addScheduleHistoryEntry = async(
         appointment: AppointmentType,
         actionType: "cancelled" | "rescheduled" | "rejected" | "approved" | "pending" | "completed" | "follow-up",
-        reason?: string,
+        reason?: string | null,
         alternative?: string | null,
         performedBy?:{
             type: "doctor" | "patient" | "system"
@@ -24,8 +22,6 @@ export const useScheduleHistory = ()=>{
         },
         notes?: string
     ) =>{
-    
-        if(!patientDetails) return
 
         const firebaseHistoryEntry: HistoryPayload ={
 

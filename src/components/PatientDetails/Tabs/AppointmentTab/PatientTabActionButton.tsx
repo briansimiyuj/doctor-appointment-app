@@ -7,11 +7,13 @@ import ManageAppointmentModal from "./Modals/ManageModals/ManageAppointmentModal
 import ScheduleHistoryModal from "./Modals/ScheduleModals/ScheduleHistoryModal/ScheduleHistoryModal"
 import RescheduleHistoryModal from "./Modals/RescheduleModals/RescheduleHistoryModal/RescheduleHistoryModal"
 import ViewReasonsModals from "./Modals/ViewReasonsModals/ViewReasonsModals"
+import { useBookingSlots } from "../../../../hooks/useBookingSlots"
 
 const PatientTabActionButton: React.FC = () =>{
 
   const { patientAppointments } = usePatientDetails(),
         { appointmentToCancel, openCancelModal, showCancelModal, closeCancelModal, openRescheduleModal, showScheduleHistoryModal, openScheduleHistoryModal, closeScheduleHistoryModal, showManageModal, openManageModal, closeManageModal, showViewNotesModal, openViewNotesModal, closeViewNotesModal, showRescheduleHistoryModal, openRescheduleHistoryModal, closeRescheduleHistoryModal, showViewReasonsModal, openViewReasonModal, closeViewReasonModal } = useUpdatePatientDetails() as any,
+        { cancelAppointment } = useBookingSlots(),
         latestAppointment = patientAppointments && patientAppointments.length > 0 ? patientAppointments[0] : null
  
   const renderActionButton = () =>{
@@ -183,7 +185,7 @@ const PatientTabActionButton: React.FC = () =>{
       
       {renderActionButton()}
 
-      { showCancelModal && <CancelAppointmentModal appointment={appointmentToCancel} onClose={closeCancelModal} cancelAppointment={() => {}}/> } {/* TODO: Implement cancelAppointment function */}
+      { showCancelModal && <CancelAppointmentModal appointment={appointmentToCancel} onClose={closeCancelModal} cancelAppointment={cancelAppointment}/> }
       { showViewNotesModal && <ViewNotesModal onClose={closeViewNotesModal}/> }
       { showManageModal && <ManageAppointmentModal onClose={closeManageModal}/> }
       { showScheduleHistoryModal && <ScheduleHistoryModal onClose={closeScheduleHistoryModal}/> }

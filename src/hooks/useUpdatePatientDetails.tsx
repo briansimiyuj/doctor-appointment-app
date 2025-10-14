@@ -38,9 +38,7 @@ export const useUpdatePatientDetails = () =>{
 
             return savedAppointment ? JSON.parse(savedAppointment) : null
          }),
-         [showViewReasonsModal, setShowViewReasonsModal] = useState(
-            import .meta.env.VITE_DEV_MODE === "true" ? true : false
-         ),
+         [showViewReasonsModal, setShowViewReasonsModal] = useState(false),
          [appointmentToViewReasons, setAppointmentToViewReasons] = useState<AppointmentType | null>(() =>{
             const savedAppointment = localStorage.getItem('CurrentAppointmentToViewReasons')
 
