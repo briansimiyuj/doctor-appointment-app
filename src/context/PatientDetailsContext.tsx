@@ -60,9 +60,6 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
                               setPatientAppointments([foundAppointment])
 
-                              const savedNotes = localStorage.getItem(`notes-${patientID}`)
-                              setNotes(savedNotes ? JSON.parse(savedNotes) : [])
-
                               const savedMedicalConditions = localStorage.getItem(`medicalConditions-${patientID}`)
                               setMedicalConditions(savedMedicalConditions ? JSON.parse(savedMedicalConditions) : [])
 
@@ -148,7 +145,48 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
             }
 
+            const fetchGeneralNotes = async() =>{
+            
+                  if(!appointmentID) return
+
+                  try{
+
+                        setLoading(true)
+
+                        const notesRef = collection(db, "appointments", appointmentID, "generalNotes"),
+                              notesQuery = query(notesRef, orderBy("date", "desc")),
+                              querySnapshot = await getDocs(notesQuery),
+                              fetchedNotes: any[] = []
+
+                        querySnapshot.forEach((doc) =>{
+
+                              fetchedNotes.push({
+
+                                    ...doc.data() as NoteType,
+                                    _id: doc.id
+
+                              })
+                        })
+
+                        setNotes(fetchedNotes)
+                        
+                  }catch(err){
+
+                        console.error("Error fetching general notes:", err)
+
+                        showToast("Failed to load general notes", "error")
+                  
+                  }finally{
+
+                        setLoading(false)
+
+                  }
+            
+            }
+
             fetchPrescriptions()
+
+            fetchGeneralNotes()     
 
       }, [appointmentID])
 
