@@ -1,24 +1,48 @@
 import { useNotesTabContext } from "../context/NotesTabContext"
+import { useAppointmentsContext } from "../context/AppointmentContext"
 import { usePatientDetails } from "../context/PatientDetailsContext"
+import { useToast } from "./useToast"
+import { doc, deleteDoc } from "firebase/firestore"
+import { db } from "../firebaseConfig"
 
 export const useDeleteNote = () =>{
 
     const { selectedNote, closeModals } = useNotesTabContext(),
-          { removeNote  } = usePatientDetails()
+          { removeNote } = usePatientDetails(),
+          { appointmentID } = useAppointmentsContext(),
+          { showToast } = useToast()
 
-    const handleDeleteNote = () =>{
-    
-        if(selectedNote){
+    if(!selectedNote){
+        console.error("No note selected for deletion.")
+        return { handleDeleteNote: () => {} }
+    }
+
+    const handleDeleteNote = async() =>{
         
+        if(!appointmentID) return
+
+        try{
+
+            const noteRef = doc(db, "appointments", appointmentID, "generalNotes", selectedNote._id)
+
+            await deleteDoc(noteRef)
+
             removeNote(selectedNote._id)
-    
+
             closeModals()
-    
-            console.log(`Note ${selectedNote.title} deleted successfully.`)
+
+            showToast("Note deleted successfully", "success")
+            
+        }catch(err){
+
+            const error = err as Error
+
+            console.error('Failed to delete note: ', error.message)
+
+            showToast(`Failed to delete note: ${error.message}`, "error")
 
         }
-    
-    }          
+    }
 
     return { handleDeleteNote }
 
