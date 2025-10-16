@@ -13,7 +13,7 @@ import { useProfileContext } from "./ProfileContext"
 import { PrescriptionType } from "../assets/types/PrescriptionType"
 import { updateAppointmentStatusInFirebase } from "../firebase/firebaseApi"
 import { useToast } from "../hooks/useToast"
-import { collection, query, getDocs, orderBy } from "firebase/firestore"
+import { collection, query, getDocs, orderBy, onSnapshot } from "firebase/firestore"
 import { db } from "../firebaseConfig"
 
 interface PatientDetailsProviderProps{
@@ -85,25 +85,6 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
       }, [appointments, appointedPatients, appointmentID])
 
       useEffect(() =>{
-      
-            if(patientDetails){
-
-                  const patientID = patientDetails.patientInfo?._id,
-                        savedDocuments = JSON.parse(localStorage.getItem(`documents-${patientID}`) || "[]")
-
-                  setDocuments(savedDocuments)
-
-            }else{
-                  
-                  const savedDocuments = JSON.parse(localStorage.getItem("documents") || "[]")
-
-                  setDocuments(savedDocuments)
-
-            }
-      
-      }, [appointmentID, patientDetails])
-
-      useEffect(() =>{
 
             const fetchPrescriptions = async() =>{
 
@@ -145,48 +126,44 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
             }
 
-            const fetchGeneralNotes = async() =>{
-            
-                  if(!appointmentID) return
+            if(!appointmentID) return
 
-                  try{
+            setLoading(true)
 
-                        setLoading(true)
-
-                        const notesRef = collection(db, "appointments", appointmentID, "generalNotes"),
-                              notesQuery = query(notesRef, orderBy("date", "desc")),
-                              querySnapshot = await getDocs(notesQuery),
-                              fetchedNotes: any[] = []
-
-                        querySnapshot.forEach((doc) =>{
-
-                              fetchedNotes.push({
-
-                                    ...doc.data() as NoteType,
-                                    _id: doc.id
-
-                              })
-                        })
-
-                        setNotes(fetchedNotes)
-                        
-                  }catch(err){
-
-                        console.error("Error fetching general notes:", err)
-
-                        showToast("Failed to load general notes", "error")
+            const notesRef = collection(db, "appointments", appointmentID, "generalNotes"),
+                  notesQuery = query(notesRef, orderBy("date", "desc"))
                   
-                  }finally{
+            const unsubscribeNotes = onSnapshot(notesQuery, (querySnapshot) =>{
 
-                        setLoading(false)
+                  const fetchedNotes: any[] = []
 
-                  }
+                  querySnapshot.forEach(doc =>{
+
+                        fetchedNotes.push({
+
+                              ...doc.data() as NoteType,
+                              _id: doc.id
+                              
+                        })
+                  })
+
+                  setNotes(fetchedNotes)
+
+                  setLoading(false)
+                    
+            }, (err) => {
+                
+                console.error("Error fetching general notes:", err)
+
+                showToast("Failed to load general notes", "error")
+                
+                setLoading(false)
+
+            })
             
-            }
-
             fetchPrescriptions()
 
-            fetchGeneralNotes()     
+            return () => unsubscribeNotes()
 
       }, [appointmentID])
 
@@ -275,12 +252,10 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
             if(!patientDetails) return
 
-            const patientID = patientDetails.patientInfo?._id,
-                  updatedNotes = notes.map(note => note._id === updatedNote._id ? {...note, ...updatedNote } : note)
+            const updatedNotes = notes.map(note => note._id === updatedNote._id ? {...note, ...updatedNote } : note)
 
             setNotes(updatedNotes)
 
-            localStorage.setItem(`notes-${patientID}`, JSON.stringify(updatedNotes))
 
       }
 
