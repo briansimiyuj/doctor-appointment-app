@@ -65,4 +65,7 @@ export interface PatientDetailsContextProps{
     updateAppointment: (appointment: AppointmentType) => void
     updateAppointmentDataAndStatus: (appointment: AppointmentType, newStatus: "cancelled" | "rejected", reason: string, alternative: string | null) => void
 
+    loading: boolean
+    setLoading: (loading: boolean) => void
+
 }

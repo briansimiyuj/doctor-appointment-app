@@ -11,10 +11,11 @@ import { NoteType } from "../assets/types/NoteType"
 import { DoctorType } from "../assets/types/DoctorType"
 import { useProfileContext } from "./ProfileContext"
 import { PrescriptionType } from "../assets/types/PrescriptionType"
-import dummyPrescriptions from "../assets/dummyData/dummyPrescriptions.json"
 import dummyNotes from "../assets/dummyData/dummyNotes.json"
 import { updateAppointmentStatusInFirebase } from "../firebase/firebaseApi"
 import { useToast } from "../hooks/useToast"
+import { collection, query, getDocs, orderBy } from "firebase/firestore"
+import { db } from "../firebaseConfig"
 
 interface PatientDetailsProviderProps{
     
@@ -28,7 +29,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
       const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null>(null), 
             { profile } = useProfileContext(),
-            [activeTab, setActiveTab] =  useState<"medical-history" | "appointments" | "prescriptions" | "notes" | "documents">("appointments"),
+            [activeTab, setActiveTab] =  useState<"medical-history" | "appointments" | "prescriptions" | "notes" | "documents">("prescriptions"),
             { appointmentID = "" } = useParams<{ appointmentID: string }>(),
             { patientID = "" } = useParams<{ patientID: string }>(),
             { appointments } = useContext(AppointmentsContext),
@@ -41,7 +42,8 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
             [allergies, setAllergies] = useState<string[]>([]),
             [medications, setMedications] = useState<string[]>([]),
             [surgeries, setSurgeries] = useState<string[]>([]),
-            [prescriptions, setPrescriptions] = useState<PrescriptionType[]>(dummyPrescriptions)
+            [prescriptions, setPrescriptions] = useState<PrescriptionType[]>([]),
+            [loading, setLoading] = useState<boolean>(false)      
 
       useEffect(() => {
       
@@ -104,6 +106,52 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
             }
       
       }, [appointmentID, patientDetails])
+
+      useEffect(() =>{
+
+            const fetchPrescriptions = async() =>{
+
+                  if(!appointmentID) return
+
+                  try{
+
+                        setLoading(true)
+
+                        const prescriptionsRef = collection(db, "appointments", appointmentID, "prescriptions"),
+                              prescriptionsQuery = query(prescriptionsRef, orderBy("createdAt", "desc")),
+                              querySnapshot = await getDocs(prescriptionsQuery),
+                              fetchedPrescriptions: PrescriptionType[] = []
+
+                        querySnapshot.forEach((doc) =>{
+
+                              fetchedPrescriptions.push({
+
+                                    ...doc.data() as PrescriptionType,
+                                    _id: doc.id
+
+                              })
+
+                        })
+
+                        setPrescriptions(fetchedPrescriptions)
+
+                  }catch(err){
+
+                        console.error("Error fetching prescriptions:", err)
+
+                        showToast("Failed to load prescriptions", "error")
+
+                  }finally{
+
+                        setLoading(false)
+
+                  }
+
+            }
+
+            fetchPrescriptions()
+
+      }, [appointmentID])
 
       const fetchPatientAppointments = (patientID: string) =>{
 
@@ -488,8 +536,6 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
                   const items = Array.isArray(prescription) ? prescription : [prescription],
                         updatedPrescriptions = [...prev, ...items]
 
-                  localStorage.setItem("prescriptions", JSON.stringify(updatedPrescriptions))
-
                   return updatedPrescriptions
 
             })
@@ -537,6 +583,8 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
             addSurgery,
             removeSurgery,
             documents,
+            loading,
+            setLoading,
             addDocument,
             removeDocument,
             rescheduleAppointment,
