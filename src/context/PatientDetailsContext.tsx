@@ -11,7 +11,6 @@ import { NoteType } from "../assets/types/NoteType"
 import { DoctorType } from "../assets/types/DoctorType"
 import { useProfileContext } from "./ProfileContext"
 import { PrescriptionType } from "../assets/types/PrescriptionType"
-import dummyNotes from "../assets/dummyData/dummyNotes.json"
 import { updateAppointmentStatusInFirebase } from "../firebase/firebaseApi"
 import { useToast } from "../hooks/useToast"
 import { collection, query, getDocs, orderBy } from "firebase/firestore"
@@ -29,14 +28,14 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
       const [patientDetails, setPatientDetails] = useState<AppointedPatientType | null>(null), 
             { profile } = useProfileContext(),
-            [activeTab, setActiveTab] =  useState<"medical-history" | "appointments" | "prescriptions" | "notes" | "documents">("prescriptions"),
+            [activeTab, setActiveTab] =  useState<"medical-history" | "appointments" | "prescriptions" | "notes" | "documents">("notes"),
             { appointmentID = "" } = useParams<{ appointmentID: string }>(),
             { patientID = "" } = useParams<{ patientID: string }>(),
             { appointments } = useContext(AppointmentsContext),
             { appointedPatients } = useContext(BookingContext),
             { showToast } = useToast(),
             [patientAppointments, setPatientAppointments] = useState<AppointmentType[]>([]),
-            [notes, setNotes] = useState<NoteType[]>(dummyNotes),
+            [notes, setNotes] = useState<NoteType[]>([]),
             [documents, setDocuments] = useState<DocumentType[]>([]),
             [medicalConditions, setMedicalConditions] = useState<string[]>([]),
             [allergies, setAllergies] = useState<string[]>([]),
@@ -214,13 +213,10 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
             if(!patientDetails) return
 
-            const patientID = patientDetails.patientInfo?._id,
-                  newNote = { _id: uuid(), ...note, date: new Date() },
+            const newNote = { _id: uuid(), ...note, date: new Date() },
                   updatedNotes = [newNote, ...notes]
 
             setNotes(updatedNotes)
-
-            localStorage.setItem(`notes-${patientID}`, JSON.stringify(updatedNotes))
 
       }
 
