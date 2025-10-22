@@ -5,8 +5,10 @@ import { usePatientDetails } from "../context/PatientDetailsContext"
 import { useProfileContext } from "../context/ProfileContext"
 import { useFileSelection } from "./useFileSelection"
 import { v4 as uuidv4 } from "uuid"
-import { storage } from "../firebaseConfig"
+import { db, storage } from "../firebaseConfig"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
+import { useToast } from "./useToast"
+import { doc, setDoc } from "firebase/firestore"
 
 export const useUploadFile = () =>{
 
@@ -14,7 +16,55 @@ export const useUploadFile = () =>{
           { selectedFiles, clearFiles } = useFileSelection(),
           { addDocument } = usePatientDetails(),
           { profile } = useProfileContext(),
+          { showToast } = useToast(),
           { appointmentID } = useAppointmentsContext()
+
+    const getDocumentPaths = (documentID: string, isAppointmentSpecific: boolean) =>{
+    
+        if(isAppointmentSpecific && appointmentID){
+
+            const storagePath = `appointments/${appointmentID}/documents/${documentID}`,
+                  firestorePathArray = ["appointments", appointmentID, "documents", documentID]
+
+            return { storagePath, firestorePathArray }
+
+        }else{
+
+            const storagePath = "uploads",
+                  firestorePathArray = ["generalDocuments", documentID]
+
+            return { storagePath, firestorePathArray }
+            
+        }
+    
+    }
+
+    const saveDocumentMetaData = async(document: DocumentType) =>{
+    
+        const isAppointmentSpecific = !!document._id,
+              { firestorePathArray } = getDocumentPaths(document._id, isAppointmentSpecific)
+
+        try{
+
+            const documentRef = doc(db, firestorePathArray[0], ...firestorePathArray.slice(1))
+
+            await setDoc(documentRef, {
+
+                ...document,
+                uploadDate: document.uploadDate.toISOString(),
+                content: document.content,
+
+            })
+
+        }catch(error){
+
+            console.error('Error saving document metadata: ', error)
+
+            showToast("Error saving document metadata", "error")
+
+        }
+    
+    }
 
     const processFile = async(file: File): Promise<DocumentType> =>{
         
@@ -69,8 +119,11 @@ export const useUploadFile = () =>{
 
     const uploadFileToFirebase = async(file: File, document: DocumentType): Promise<DocumentType> =>{
 
+        const isAppointmentSpecific = !!document._id,
+              { storagePath } = getDocumentPaths(document._id, isAppointmentSpecific)
+
         const uniqueFilename = `${file.name}-${uuidv4()}`,
-              storageRef = ref(storage, `uploads/${uniqueFilename}`),
+              storageRef = ref(storage, `${storagePath}/${uniqueFilename}`),
               uploadResult = await uploadBytes(storageRef, file),
               url = await getDownloadURL(uploadResult.ref)
 
@@ -129,15 +182,21 @@ export const useUploadFile = () =>{
 
             finalDocuments.forEach(document => addDocument(document))
 
+            const saveMetadataPromises = finalDocuments.map(document => saveDocumentMetaData(document))
+
+            await Promise.all(saveMetadataPromises)
+
             clearFiles()
 
             setShowUploadArea(false)
 
-            alert('Files uploaded successfully')
+            showToast("Files uploaded successfully", "success")
 
         }catch(error){
 
             console.error('Error uploading files: ', error) 
+
+            showToast("Error uploading files", "error")
 
         }finally{
 
