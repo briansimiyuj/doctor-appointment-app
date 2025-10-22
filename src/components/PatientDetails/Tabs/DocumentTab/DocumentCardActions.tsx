@@ -1,7 +1,8 @@
-import { FiDownload, FiEye, FiTrash2 } from "react-icons/fi";
+import { FiDownload, FiEye, FiTrash2, FiShare2 } from "react-icons/fi";
 import { DocumentType } from "../../../../assets/types/DocumentType";
 import { useDocumentsTab } from "../../../../context/DocumentsTabContext";
 import { useDownloadDocument } from "../../../../hooks/useDownloadDocument";
+import { useProfileContext } from "../../../../context/ProfileContext";
 
 interface DocumentCardActionsProps{
 
@@ -12,7 +13,15 @@ interface DocumentCardActionsProps{
 const DocumentCardActions: React.FC<DocumentCardActionsProps> = ({ document })=>{
 
     const { openViewModal, openDeleteModal } = useDocumentsTab(),
-          { downloadDocument } = useDownloadDocument()
+          { downloadDocument } = useDownloadDocument(),
+          { profile } = useProfileContext(),
+          canDelete = profile?._id === document.uploadedByID
+
+    const handleShare = () =>{
+
+        console.log(`User ${profile?._id} requested to share document ${document._id}`)
+
+    }
 
     return(
 
@@ -40,16 +49,37 @@ const DocumentCardActions: React.FC<DocumentCardActionsProps> = ({ document })=>
 
             </button>
 
-            <button 
-                className="bg-red-500 flex items-center gap-2 text-base px-4 py-2 rounded text-white dark:text-white  justify-center"
-                onClick={() => openDeleteModal(document)}
-            >
+            {
+            
+                canDelete ? (
 
-                <FiTrash2 className="w-6 h-6"/>
+                    <button 
+                        className="bg-red-500 flex items-center gap-2 text-base px-4 py-2 rounded text-white dark:text-white justify-center"
+                        onClick={() => openDeleteModal(document)}
+                    >
 
-                Delete
+                        <FiTrash2 className="w-6 h-6"/>
 
-            </button>
+                        Delete
+
+                    </button>
+                
+                ):(
+                    
+                    <button 
+                        className="bg-green-600 hover:bg-green-700 flex items-center gap-2 text-base px-4 py-2 rounded text-white dark:text-white justify-center"
+                        onClick={handleShare}
+                    >
+
+                        <FiShare2 className="w-6 h-6"/>
+
+                        Share
+
+                    </button>
+
+                )
+                
+            }
 
         </div>
 
