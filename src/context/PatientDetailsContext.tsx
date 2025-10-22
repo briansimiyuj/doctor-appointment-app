@@ -170,11 +170,42 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
             })
 
+            const documentsRef = collection(db, "appointments", appointmentID, "documents"),
+                  documentsQuery = query(documentsRef, orderBy("uploadDate", "desc"))
+
+            const unsubscribeDocuments = onSnapshot(documentsQuery, (querySnapshot) =>{
+
+                  const fetchedDocuments: DocumentType[] = []
+
+                  querySnapshot.forEach(doc =>{
+
+                        fetchedDocuments.push({
+
+                              ...doc.data() as DocumentType,
+                              _id: doc.id
+
+                        })
+
+                  })    
+
+                  setDocuments(fetchedDocuments)
+
+            }, (err) =>{
+
+
+                  console.error("Error fetching documents:", err)
+
+                  showToast("Failed to load documents", "error")
+
+            })
+
             return () =>{
                   
                   unsubscribeNotes()
 
                   unsubscribePrescriptions()
+
+                  unsubscribeDocuments()
 
             }
 
