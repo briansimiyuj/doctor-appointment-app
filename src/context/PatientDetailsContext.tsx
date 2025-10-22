@@ -161,9 +161,23 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
             })
             
-            fetchPrescriptions()
+            const prescriptionRef = collection(db, "appointments", appointmentID, "prescriptions"),
+                  prescriptionQuery = query(prescriptionRef, orderBy("createdAt", "desc"))
 
-            return () => unsubscribeNotes()
+            const unsubscribePrescriptions = onSnapshot(prescriptionQuery, () =>{
+
+                  fetchPrescriptions()
+
+            })
+
+            return () =>{
+                  
+                  unsubscribeNotes()
+
+                  unsubscribePrescriptions()
+
+            }
+
 
       }, [appointmentID])
 
