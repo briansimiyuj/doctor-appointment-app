@@ -1,49 +1,82 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useState, useEffect } from "react"
 import { AvailabilitySettings, ConsultationSettings, NotificationSettings, SettingsContextProps } from "../assets/contextProps/SettingsContextProps"
 import { dummySettingsData } from "../assets/dummyData/dummySettingsData"
 import { useProfileContext } from "./ProfileContext"
-import { usePatientDetails } from "./PatientDetailsContext"
+import { db } from "../firebaseConfig"
+import { doc, getDoc, setDoc } from "firebase/firestore"
 
 const SettingsContext = createContext<SettingsContextProps | null>(null)
 
 export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>{
 
     const { profile } = useProfileContext(),
-         { patientID } = usePatientDetails()
+        [consultationSettings, setConsultationSettings] = useState<ConsultationSettings>(dummySettingsData.consultationSettings),
+        [availabilitySettings, setAvailabilitySettings] = useState<AvailabilitySettings>(dummySettingsData.availabilitySettings),
+        [notificationSettings, setNotificationSettings] = useState<NotificationSettings>(dummySettingsData.notificationSettings),
+        [isChanged, setIsChanged] = useState(false),
+        [isLoading, setIsLoading] = useState(false)
 
-    const [consultationSettings, setConsultationSettings] = useState<ConsultationSettings>(() =>{
 
-        const savedSettings = localStorage.getItem("doctorSettings")
+    useEffect(() =>{
 
-        return savedSettings ? JSON.parse(savedSettings).consultationSettings : dummySettingsData.consultationSettings
+        const fetchSettingsFromFirebase = async() =>{
 
-    })
-    const [availabilitySettings, setAvailabilitySettings] = useState<AvailabilitySettings>(() =>{
+            if(!profile?._id) return
 
-        const savedSettings = localStorage.getItem("doctorSettings")
+            setIsLoading(true)
 
-        return savedSettings ? JSON.parse(savedSettings).availabilitySettings : dummySettingsData.availabilitySettings
+            try{
 
-    })
-        
-    const [notificationSettings, setNotificationSettings] = useState<NotificationSettings>(() =>{
+                const settingsRef = doc(db, "userSettings", profile._id),
+                      settingsDoc = await getDoc(settingsRef)
 
-        if(profile?.type === "doctor"){
+                if(settingsDoc.exists()){
 
-            const savedSettings = localStorage.getItem("doctorSettings")
+                    const data = settingsDoc.data()
 
-            return savedSettings ? JSON.parse(savedSettings).notificationSettings : dummySettingsData.notificationSettings
+                    if(profile.type === "doctor"){
 
-        }else{
+                        if(data.consultationSettings){
+                            
+                            setConsultationSettings(data.consultationSettings)
+                            
+                        }
 
-            const savedSettings = localStorage.getItem(`patientSettings-${patientID}`)
+                        if(data.availabilitySettings){
+                            
+                            setAvailabilitySettings(data.availabilitySettings)
+                            
+                        }
 
-            return savedSettings ? JSON.parse(savedSettings).notificationSettings : dummySettingsData.notificationSettings
+                    }
+
+                    if(data.notificationSettings){
+                        
+                        setNotificationSettings(data.notificationSettings)
+                        
+                    }
+
+                }else{
+
+                    console.log("No settings found, using defaults")
+
+                }
+
+            }catch(error){
+
+                console.error("Error fetching settings from Firebase:", error)
+
+            }finally{
+
+                setIsLoading(false)
+
+            }
 
         }
 
-    }),
-          [isChanged, setIsChanged] = useState(false)
+        fetchSettingsFromFirebase()
+
+    }, [profile?._id, profile?.type])
 
 
     const updateConsultationSettings = (settings: ConsultationSettings) =>{
@@ -64,7 +97,9 @@ export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>
 
     }
 
-    const handlePrescriptionReminderToggle = (prescriptionID: string) =>{
+    const handlePrescriptionReminderToggle = async(prescriptionID: string) =>{
+
+        if(!profile?._id) return
 
         const currentReminders = notificationSettings.prescriptionReminders || {},
               newValue = !currentReminders[prescriptionID],
@@ -83,9 +118,24 @@ export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>
 
         updateNotificationSettings(newNotificationSettings)
 
-        const savedSettings = JSON.parse(localStorage.getItem(`patientSettings-${patientID}`) || '{}')
+        try{
 
-        localStorage.setItem(`patientSettings-${patientID}`, JSON.stringify({ ...savedSettings, notificationSettings: newNotificationSettings }))
+            const settingsRef = doc(db, "userSettings", profile._id)
+
+            await setDoc(settingsRef, {
+
+                notificationSettings: newNotificationSettings,
+                userType: "patient",
+                updatedAt: new Date().toISOString(),
+                updatedBy: profile._id
+
+            }, { merge: true })
+
+        }catch(error){
+
+            console.error("Error updating prescription reminder:", error)
+
+        }
         
     }
 
@@ -99,7 +149,8 @@ export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>
         updateNotificationSettings,
         isChanged,
         setIsChanged,
-        handlePrescriptionReminderToggle
+        handlePrescriptionReminderToggle,
+        isLoading
 
     }
     

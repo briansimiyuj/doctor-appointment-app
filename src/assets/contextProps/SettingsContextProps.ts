@@ -51,6 +51,7 @@ export interface SettingsContextProps{
     updateAvailabilitySettings:(settings: AvailabilitySettings) => void
     updateNotificationSettings: (settings: NotificationSettings) => void
     isChanged: boolean
+    isLoading: boolean
     setIsChanged: (value: boolean) => void
     handlePrescriptionReminderToggle: (prescriptionID: string) => void
 

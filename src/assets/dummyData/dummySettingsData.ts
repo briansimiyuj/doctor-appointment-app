@@ -30,7 +30,7 @@ export const dummySettingsData ={
 
         },
 
-        boookingUpdates:{
+        bookingUpdates:{
 
             confirmation: true,
             cancellation: true,
@@ -39,7 +39,8 @@ export const dummySettingsData ={
         },
 
         paymentNotifications: true,
-        systemUpdates: true
+        systemUpdates: true,
+        prescriptionReminders: {}
         
     }
     
