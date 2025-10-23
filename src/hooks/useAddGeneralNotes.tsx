@@ -48,10 +48,9 @@ export const useAddGeneralNotes = () =>{
 
         try{
 
-            const notesRef = collection(db, "appointments", appointmentID, "generalNotes"),
-                  docRef = await addDoc(notesRef, newNote)
+            const notesRef = collection(db, "appointments", appointmentID, "generalNotes")
 
-            console.log('Note written to Firestore with ID:', docRef.id)
+            await addDoc(notesRef, newNote)
 
             addNote(newNote)
 
@@ -62,8 +61,6 @@ export const useAddGeneralNotes = () =>{
             closeModals()
 
             showToast("Note added successfully", "success")
-
-            console.log('New note added:', newNote)
 
         }catch(err){
 

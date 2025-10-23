@@ -5,7 +5,7 @@ import ModalHeader from "../../../AppointmentTab/Modals/ModalHeader"
 const DeleteDocumentModal: React.FC = ()=>{
 
     const { closeDeleteModal, documentToDelete } = useDocumentsTab(),
-          { handleDeleteDocument } = useDeleteDocument()
+          { handleDeleteDocument, isDeleting } = useDeleteDocument()
 
     return(
 
@@ -27,7 +27,7 @@ const DeleteDocumentModal: React.FC = ()=>{
                     <button
                         className="bg-red-500 hover:bg-red-600 text-white dark:text-white py-3 px-4 text-xl font-bold rounded-md transition-all duration-300 mr-2"
                         onClick={handleDeleteDocument}
-                    >Delete</button>
+                    >{isDeleting ? 'Deleting...' : 'Delete'}</button>
 
                 </div>
 
