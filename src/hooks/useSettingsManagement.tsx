@@ -1,26 +1,71 @@
 import { useState } from "react"
 import { useSettings } from "../context/SettingsContext"
+import { db } from "../firebaseConfig"
+import { doc, setDoc } from "firebase/firestore"
+import { useToast } from "./useToast"
+import { useProfileContext } from "../context/ProfileContext"
 
 export const useSettingsManagement = () =>{
 
     const { consultationSettings, updateConsultationSettings, availabilitySettings, updateAvailabilitySettings, notificationSettings, updateNotificationSettings, isChanged, setIsChanged } = useSettings(),
-          [initialSettings] = useState({ consultationSettings, availabilitySettings, notificationSettings })
+          { profile } = useProfileContext(),
+          { showToast } = useToast(),
+          [initialSettings] = useState({ consultationSettings, availabilitySettings, notificationSettings }),
+          [isSaving, setIsSaving] = useState(false)
 
 
-    const handleSettingsUpdate = () =>{
+    const handleSettingsUpdate = async() =>{
     
-        if(isChanged){
+        if(!isChanged || !profile?._id){
 
-            localStorage.setItem("doctorSettings", JSON.stringify({ consultationSettings, availabilitySettings, notificationSettings }))
+            return
+
+        }
+
+        setIsSaving(true)
+
+        try{
+
+            const settingsRef = doc(db, "userSettings", profile._id),
+                  isDoctor = profile.type === "doctor"
+
+            const settingsToSave = isDoctor ?{
+
+                consultationSettings,
+                availabilitySettings,
+                notificationSettings,
+                userType: "doctor",
+                updatedAt: new Date().toISOString(),
+                updatedBy: profile._id
+
+            }:{
+
+                notificationSettings,
+                userType: "patient",
+                updatedAt: new Date().toISOString(),
+                updatedBy: profile._id
+
+            }
+
+            await setDoc(settingsRef, settingsToSave)
 
             setIsChanged(false)
 
-            console.log("Settings updated")
+            showToast("Settings updated successfully", "success")
+
+        }catch(error){
+
+            console.error("Error updating settings:", error)
+
+            showToast("Error updating settings", "error")
+
+        }finally{
+
+            setIsSaving(false)
 
         }
     
     }
-
 
 
     const checkIfChanged = (newSettings: any) =>{
@@ -43,7 +88,6 @@ export const useSettingsManagement = () =>{
 
                 }
                 
-        console.log('New consultation settings:', newSettings.currency)
 
         updateConsultationSettings(newSettings)
 
@@ -92,7 +136,8 @@ export const useSettingsManagement = () =>{
         handleAvailabilityUpdate,
         handleNotificationUpdate,
         isChanged,
-        handleSettingsUpdate
+        handleSettingsUpdate,
+        isSaving
 
     }
 
