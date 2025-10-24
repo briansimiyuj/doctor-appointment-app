@@ -47,7 +47,7 @@ export const useSettingsManagement = () =>{
 
             }
 
-            await setDoc(settingsRef, settingsToSave)
+            await setDoc(settingsRef, settingsToSave, { merge: true }) // Added merge for safety
 
             setIsChanged(false)
 
@@ -116,12 +116,24 @@ export const useSettingsManagement = () =>{
     const handleNotificationUpdate = (e: React.ChangeEvent<HTMLInputElement>) =>{
 
         const { name, checked } = e.target,
-                newSettings ={
+              path = name.split('.'),
+              newSettings = JSON.parse(JSON.stringify(notificationSettings))
 
-                    ...notificationSettings,
-                    [name]: checked
+        if(path.length === 2){
 
-                }
+            const [parentKey, childKey] = path
+            
+            if(newSettings[parentKey]){
+                
+                newSettings[parentKey][childKey] = checked
+
+            }
+
+        }else{
+        
+            newSettings[name] = checked
+            
+        }
 
         updateNotificationSettings(newSettings)
 
