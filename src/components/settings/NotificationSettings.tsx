@@ -64,7 +64,7 @@ const NotificationSettings: React.FC = () =>{
 
                         <input 
                             type="checkbox" 
-                            name="appointmentReminders.dayBefore"
+                            name="appointmentReminders.daysBefore"
                             className="form-checkbox"
                             checked={notificationSettings.appointmentReminders.daysBefore}
                             onChange={handleNotificationUpdate}
@@ -85,6 +85,20 @@ const NotificationSettings: React.FC = () =>{
                         />
 
                         <span>Morning of appointment</span>
+
+                    </label>
+
+                    <label className="flex items-center space-x-3">
+
+                        <input 
+                            type="checkbox" 
+                            name="appointmentReminders.hoursBefore"
+                            className="form-checkbox"
+                            checked={notificationSettings.appointmentReminders.hoursBefore}
+                            onChange={handleNotificationUpdate}
+                        />
+
+                        <span>2 hours before appointment</span>
 
                     </label>
 
