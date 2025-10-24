@@ -1,16 +1,17 @@
 import { useDoctorReviewsContext } from "../../../../../../context/DoctorReviewsContext"
+import { useSubmitReview } from "../../../../../../hooks/useSubmitReview"
 
 interface ModalFooterProps{
     
     onClose: () => void
-    
+
 }
 
 const ModalFooter: React.FC<ModalFooterProps> = ({ onClose }) => {
 
-    const { ratings, isSubmitting } = useDoctorReviewsContext()
-
-    const readyToSubmit = ratings > 0,
+    const { ratings, isSubmitting } = useDoctorReviewsContext(),
+          { handleSubmitReview } = useSubmitReview(),
+          readyToSubmit = ratings > 0,
           submitButtonText = isSubmitting ? 'Submitting Review...' : 'Submit Review'
 
     return(
@@ -21,6 +22,7 @@ const ModalFooter: React.FC<ModalFooterProps> = ({ onClose }) => {
                 type="submit"
                 disabled={!readyToSubmit || isSubmitting}
                 className={`${readyToSubmit && !isSubmitting ? 'bg-primary-bg text-secondary-bg hover:bg-opacity-90 cursor-pointer' : 'bg-gray-400 text-gray-200 cursor-not-allowed'} px-10 py-3 rounded-lg font-medium transition-colors duration-300 w-full max-w-md mt-4`}
+                onClick={handleSubmitReview}
             >{submitButtonText}</button>
 
             <button
