@@ -1,4 +1,6 @@
+import { DoctorReviewsContextProvider } from "../../../../../../context/DoctorReviewsContext"
 import ModalHeader from "../ModalHeader"
+import ModalBody from "./ModalBody"
 
 interface ReviewModalProps{
 
@@ -15,6 +17,12 @@ const ReviewModal: React.FC<ReviewModalProps> = ({ onClose }) => {
             <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
 
                 <ModalHeader title="Rate And Review This Doctor" onClose={onClose}/>
+
+                <DoctorReviewsContextProvider>
+
+                    <ModalBody/>
+
+                </DoctorReviewsContextProvider>
 
             </div>
 
