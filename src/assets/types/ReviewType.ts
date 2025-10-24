@@ -1,11 +1,15 @@
+import { DocumentType } from "./DocumentType"
+
 export interface ReviewType{
 
-    _id: string
+  _id: string
   patientID: string
   patientName: string
-  patientImage: string
+  patientImage: File | DocumentType | null
+  appointmentID: string
+  doctorID: string
   ratings: number
-  comment: string
+  comment?: string
   createdAt: string
 
 }
