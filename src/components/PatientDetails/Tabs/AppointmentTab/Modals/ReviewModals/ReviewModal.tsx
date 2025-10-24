@@ -1,6 +1,7 @@
 import { DoctorReviewsContextProvider } from "../../../../../../context/DoctorReviewsContext"
 import ModalHeader from "../ModalHeader"
 import ModalBody from "./ModalBody"
+import ModalFooter from "./ModalFooter"
 
 interface ReviewModalProps{
 
@@ -22,7 +23,10 @@ const ReviewModal: React.FC<ReviewModalProps> = ({ onClose }) => {
 
                     <ModalBody/>
 
+                    <ModalFooter onClose={onClose}/>
+                    
                 </DoctorReviewsContextProvider>
+
 
             </div>
 
