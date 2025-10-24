@@ -5,6 +5,7 @@ import { useTheme } from "../context/ThemeContext"
 import DoctorSettings from "../components/settings/DoctorSettings"
 import { useSettingsManagement } from "../hooks/useSettingsManagement"
 import NotificationSettings from "../components/settings/NotificationSettings"
+import { useSettings } from "../context/SettingsContext"
 
 const SettingsPage: React.FC = () =>{
 
@@ -12,7 +13,22 @@ const SettingsPage: React.FC = () =>{
           isAuthenticated = loginContext?.isAuthenticated,
           userType = loginContext?.userType,
           { toggleTheme } = useTheme(),
-          { isChanged, handleSettingsUpdate } = useSettingsManagement()
+          { isLoading } = useSettings(),
+          { isChanged, handleSettingsUpdate, isSaving } = useSettingsManagement()
+
+    if(isLoading){
+
+        return(
+
+            <div className="flex items-center justify-center h-screen">
+
+                <div className="loader">Loading...</div>
+
+            </div>
+
+        )
+
+    }
 
     return(
 
@@ -59,9 +75,9 @@ const SettingsPage: React.FC = () =>{
 
                             <button 
                                 className={`bg-primary-bg px-4 py-2 mt-5 rounded-lg text-white ${!isChanged ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'}`}
-                                disabled={!isChanged}
+                                disabled={!isChanged || isSaving}
                                 onClick={handleSettingsUpdate}
-                            >Save Changes</button>
+                            >{isSaving ? 'Saving...' : 'Save Changes'}</button>
             
                         </div>
             

@@ -14,7 +14,7 @@ export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>
         [availabilitySettings, setAvailabilitySettings] = useState<AvailabilitySettings>(dummySettingsData.availabilitySettings),
         [notificationSettings, setNotificationSettings] = useState<NotificationSettings>(dummySettingsData.notificationSettings),
         [isChanged, setIsChanged] = useState(false),
-        [isLoading, setIsLoading] = useState(false)
+        [isLoading, setIsLoading] = useState(true)
 
 
     useEffect(() =>{
