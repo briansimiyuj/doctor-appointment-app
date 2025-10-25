@@ -13,7 +13,7 @@ export interface DoctorReviewsContextProps{
     addReview: (review: ReviewType) => void
     deleteReview: (reviewID: string) => void
     updateReview: (reviewID: string, updatedReview: Partial<ReviewType>) => void
-    getDoctorReviews: (doctorID: string) => ReviewType[]
+    getDoctorReviews: (doctorID: string) => Promise<ReviewType[]>
     subscribeToDoctorReviews: (doctorID: string) => void
     averageRating: number
     totalReviews: number

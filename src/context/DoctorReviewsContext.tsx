@@ -1,6 +1,8 @@
 import { createContext, useContext, useState } from "react"
 import { DoctorReviewsContextProps } from "../assets/contextProps/DoctorReviewsContextProps"
 import { ReviewType } from "../assets/types/ReviewType"
+import { db } from "../firebaseConfig"
+import { collection, getDocs, orderBy, query } from "firebase/firestore"
 
 interface DoctorReviewsContextProviderProps{
 
@@ -38,10 +40,42 @@ export const DoctorReviewsContextProvider:React.FC<DoctorReviewsContextProviderP
     
     }
     
-    const getDoctorReviews = (_doctorID: string): ReviewType[] =>{
+    const getDoctorReviews = async(doctorID: string): Promise<ReviewType[]> =>{
     
-       // TODO: Implement get doctor reviews logic
-       return []
+        try{
+
+            setLoading(true)
+           
+            const doctorReviewsRef = collection(db, "doctors", doctorID, "reviews"),
+                  q = query(doctorReviewsRef, orderBy("createdAt", "desc")),    
+                  snapshot = await getDocs(q),
+                  fetchedReviews: ReviewType[] = []
+
+            snapshot.forEach(doc =>{
+
+                const data = doc.data() as ReviewType
+
+                fetchedReviews.push(data)
+
+            })
+
+            console.log("Fetched doctor reviews:", fetchedReviews)
+
+            setReviews(fetchedReviews)
+
+            return fetchedReviews
+
+        }catch(error){
+
+            console.error("Error fetching doctor reviews:", error)
+
+            return []
+
+        }finally{
+
+            setLoading(false)
+
+        }
     
     }
     
