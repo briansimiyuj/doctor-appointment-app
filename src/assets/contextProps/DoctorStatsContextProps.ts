@@ -1,3 +1,5 @@
+import { DocumentType } from "../types/DocumentType"
+
 export interface DoctorStatsContextProps{
 
     stats:{
@@ -36,7 +38,7 @@ export interface DoctorStatsContextProps{
         _id: string
         patientID: string
         patientName: string
-        patientImage: string
+        patientImage: File | DocumentType | null
         ratings: number
         comment: string
         createdAt: string

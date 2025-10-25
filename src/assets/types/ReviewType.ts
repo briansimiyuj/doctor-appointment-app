@@ -6,8 +6,8 @@ export interface ReviewType{
   patientID: string
   patientName: string
   patientImage: File | DocumentType | null
-  appointmentID: string
-  doctorID: string
+  appointmentID?: string
+  doctorID?: string
   ratings: number
   comment?: string
   createdAt: string

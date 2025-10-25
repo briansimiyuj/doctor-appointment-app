@@ -8,6 +8,8 @@ interface ReviewItemProps{
 
 const ReviewItem: React.FC<ReviewItemProps> = ({ review })=>{
 
+    if(review.patientImage instanceof File) return null
+
     return(
 
         <div className="block">
@@ -17,7 +19,7 @@ const ReviewItem: React.FC<ReviewItemProps> = ({ review })=>{
                 <div className="flex items-center">
 
                     <img
-                        src={review.patientImage}
+                        src={review.patientImage?.content}
                         alt={`${review.patientName} Image`}
                         className="w-10 h-10 rounded-full mr-2"
                     />
