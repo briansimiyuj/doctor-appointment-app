@@ -9,11 +9,12 @@ import RescheduleHistoryModal from "./Modals/RescheduleModals/RescheduleHistoryM
 import ViewReasonsModals from "./Modals/ViewReasonsModals/ViewReasonsModals"
 import { useBookingSlots } from "../../../../hooks/useBookingSlots"
 import ReviewModal from "./Modals/ReviewModals/ReviewModal"
+import ViewReviewModal from "./Modals/ReviewModals/ViewReview/ViewReviewModal"
 
 const PatientTabActionButton: React.FC = () =>{
 
   const { patientAppointments } = usePatientDetails(),
-        { appointmentToCancel, openCancelModal, showCancelModal, closeCancelModal, openRescheduleModal, showScheduleHistoryModal, openScheduleHistoryModal, closeScheduleHistoryModal, showManageModal, openManageModal, closeManageModal, showViewNotesModal, openViewNotesModal, closeViewNotesModal, showRescheduleHistoryModal, openRescheduleHistoryModal, closeRescheduleHistoryModal, showViewReasonsModal, openViewReasonModal, closeViewReasonModal, showReviewModal, openReviewModal, closeReviewModal } = useUpdatePatientDetails() as any,
+        { appointmentToCancel, openCancelModal, showCancelModal, closeCancelModal, openRescheduleModal, showScheduleHistoryModal, openScheduleHistoryModal, closeScheduleHistoryModal, showManageModal, openManageModal, closeManageModal, showViewNotesModal, openViewNotesModal, closeViewNotesModal, showRescheduleHistoryModal, openRescheduleHistoryModal, closeRescheduleHistoryModal, showViewReasonsModal, openViewReasonModal, closeViewReasonModal, showReviewModal, openReviewModal, closeReviewModal, showViewReviewsModal, openViewReviewModal, closeViewReviewModal } = useUpdatePatientDetails() as any,
         { cancelAppointment } = useBookingSlots(),
         latestAppointment = patientAppointments && patientAppointments.length > 0 ? patientAppointments[0] : null
  
@@ -87,6 +88,7 @@ const PatientTabActionButton: React.FC = () =>{
 
                 <button
                   className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white dark:text-white rounded-md hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
+                  onClick={() => openViewReviewModal(latestAppointment)}
                 ><FaEye/> View Reviews</button>
 
               ):(
@@ -210,6 +212,7 @@ const PatientTabActionButton: React.FC = () =>{
       { showRescheduleHistoryModal && <RescheduleHistoryModal onClose={closeRescheduleHistoryModal}/> }
       { showViewReasonsModal && <ViewReasonsModals onClose={closeViewReasonModal}/> }
       { showReviewModal && <ReviewModal onClose={closeReviewModal}/> }
+      { showViewReviewsModal && <ViewReviewModal onClose={closeViewReviewModal}/> }
     
     </>
 

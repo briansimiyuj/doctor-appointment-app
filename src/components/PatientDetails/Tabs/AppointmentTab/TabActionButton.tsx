@@ -11,12 +11,13 @@ import ScheduleAppointmentModal from "./Modals/ScheduleModals/ScheduleAppointmen
 
 import ViewNotesModal from "./Modals/ViewNotesModals/ViewNotesModal"
 import ScheduleHistoryModal from "./Modals/ScheduleModals/ScheduleHistoryModal/ScheduleHistoryModal"
+import ViewReviewModal from "./Modals/ReviewModals/ViewReview/ViewReviewModal"
 
 const TabActionButton: React.FC = ()=>{
 
     const { patientAppointments } = usePatientDetails(),
           { handleApproveAppointment } = useApproveAppointment(),
-          { appointmentToCancel, openCancelModal, showCancelModal, closeCancelModal, openRejectModal, showRejectModal, closeRejectModal, openRescheduleModal, showRescheduleModal, appointmentToReschedule, closeRescheduleModal, showRescheduleHistoryModal, appointmentToReject, openRescheduleHistoryModal, closeRescheduleHistoryModal, showScheduleNewAppointmentModal, openScheduleNewAppointmentModal, closeScheduleNewAppointmentModal, appointmentToSchedule, showScheduleHistoryModal, openScheduleHistoryModal, closeScheduleHistoryModal, showManageModal, openManageModal, closeManageModal, openAddNotesModal, showAddNotesModal, closeAddNotesModal, showViewNotesModal, openViewNotesModal, closeViewNotesModal } = useUpdatePatientDetails() as any,
+          { appointmentToCancel, openCancelModal, showCancelModal, closeCancelModal, openRejectModal, showRejectModal, closeRejectModal, openRescheduleModal, showRescheduleModal, appointmentToReschedule, closeRescheduleModal, showRescheduleHistoryModal, appointmentToReject, openRescheduleHistoryModal, closeRescheduleHistoryModal, showScheduleNewAppointmentModal, openScheduleNewAppointmentModal, closeScheduleNewAppointmentModal, appointmentToSchedule, showScheduleHistoryModal, openScheduleHistoryModal, closeScheduleHistoryModal, showManageModal, openManageModal, closeManageModal, openAddNotesModal, showAddNotesModal, closeAddNotesModal, showViewNotesModal, openViewNotesModal, closeViewNotesModal, showViewReviewsModal, openViewReviewModal, closeViewReviewModal } = useUpdatePatientDetails() as any,
          latestAppointment = patientAppointments && patientAppointments.length > 0 
         ? patientAppointments[0] 
         : null
@@ -196,6 +197,7 @@ const TabActionButton: React.FC = ()=>{
 
                             <button
                                 className="px-4 py-2 bg-green-600 text-white dark:text-white rounded-md hover:bg-green-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
+                                onClick={() => openViewReviewModal(latestAppointment)}
                             >
 
                                 <span className="flex items-center justify-center gap-2">
@@ -523,6 +525,8 @@ const TabActionButton: React.FC = ()=>{
             { showAddNotesModal && <AddNotesModal onClose={closeAddNotesModal}/> }
 
             { showViewNotesModal && <ViewNotesModal onClose={closeViewNotesModal}/> }
+
+            { showViewReviewsModal && <ViewReviewModal onClose={closeViewReviewModal}/> }
         
         </>
 
