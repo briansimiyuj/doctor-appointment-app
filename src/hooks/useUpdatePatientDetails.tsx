@@ -50,6 +50,14 @@ export const useUpdatePatientDetails = () =>{
 
             return savedAppointment ? JSON.parse(savedAppointment) : null
          }),
+         [showViewReviewsModal, setShowViewReviewsModal] = useState(
+            import .meta.env.VITE_DEV_MODE === "true" ? true : false
+         ),
+         [appointmentToViewReviews, setAppointmentToViewReviews] = useState<AppointmentType | null>(() =>{
+            const savedAppointment = localStorage.getItem('CurrentAppointmentToViewReviews')
+
+            return savedAppointment ? JSON.parse(savedAppointment) : null
+         }),
          [appointmentToSchedule, setAppointmentToSchedule] = useState<AppointmentType | null>(null),
          [showScheduleHistoryModal, setShowcheduleHistoryModal] = useState<boolean>(false),
          [newDate, setNewDate] = useState<string | null>(null),
@@ -263,6 +271,26 @@ export const useUpdatePatientDetails = () =>{
 
    }
 
+   const openViewReviewModal = (appointment: AppointmentType) =>{
+   
+      localStorage.setItem('CurrentAppointmentToViewReviews', JSON.stringify(appointment))
+
+      setShowViewReviewsModal(true)
+
+      setAppointmentToViewReviews(appointment)
+   
+   }
+
+   const closeViewReviewModal = () =>{
+
+      localStorage.removeItem('CurrentAppointmentToViewReviews')
+
+      setShowViewReviewsModal(false)
+
+      setAppointmentToViewReviews(null)
+
+   }
+
    return{
 
       openCancelModal,
@@ -311,7 +339,11 @@ export const useUpdatePatientDetails = () =>{
       showReviewModal,
       openReviewModal,
       closeReviewModal,
-      appointmentToReview
+      appointmentToReview,
+      showViewReviewsModal,
+      openViewReviewModal,
+      closeViewReviewModal,
+      appointmentToViewReviews
 
    }
 
