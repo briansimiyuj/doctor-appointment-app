@@ -18,7 +18,9 @@ export const DoctorReviewsContextProvider:React.FC<DoctorReviewsContextProviderP
           [comment, setComment] = useState(''),
           [isSubmitting, setIsSubmitting] = useState(false),
           [loading, setLoading] = useState(false),
-          [reviews, setReviews] = useState<ReviewType[]>([])
+          [reviews, setReviews] = useState<ReviewType[]>([]),
+          [isEditing, setIsEditing] = useState(false),
+          [editingReviewID, setEditingReviewID] = useState<string | null>(null)
 
     const addReview = (review: ReviewType) =>{
     
@@ -87,15 +89,37 @@ export const DoctorReviewsContextProvider:React.FC<DoctorReviewsContextProviderP
     
     const formatTimestamp = (timestamp: string): string =>{
     
-       // TODO: Implement timestamp formatting
-       return timestamp
+       const date = new Date(timestamp)
+
+       return date.toLocaleDateString('en-US', { 
+           year: 'numeric', 
+           month: 'short', 
+           day: 'numeric' 
+       })
     
     }
     
     const resetForm = () =>{
     
        setRatings(0)
+
        setComment('')
+
+       setIsEditing(false)
+
+       setEditingReviewID(null)
+    
+    }
+
+    const handleEditReview = (review: ReviewType) =>{
+    
+       setRatings(review.ratings)
+
+       if(review.comment) setComment(review.comment)
+
+       setIsEditing(true)
+
+       setEditingReviewID(review._id)
     
     }
 
@@ -124,7 +148,12 @@ export const DoctorReviewsContextProvider:React.FC<DoctorReviewsContextProviderP
         formatTimestamp,
         loading,
         setLoading,
-        resetForm
+        resetForm, 
+        isEditing,
+        setIsEditing,
+        editingReviewID,
+        setEditingReviewID,
+        handleEditReview
 
     }
 

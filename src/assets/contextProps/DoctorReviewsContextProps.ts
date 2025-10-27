@@ -22,5 +22,10 @@ export interface DoctorReviewsContextProps{
     loading: boolean
     setLoading: (loading: boolean) => void
     resetForm: () => void
+    isEditing: boolean
+    setIsEditing: (isEditing: boolean) => void
+    editingReviewID: string | null
+    setEditingReviewID: (reviewID: string | null) => void
+    handleEditReview: (review: ReviewType) => void
 
 }
