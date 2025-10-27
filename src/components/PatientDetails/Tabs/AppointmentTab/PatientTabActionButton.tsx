@@ -21,6 +21,8 @@ const PatientTabActionButton: React.FC = () =>{
 
     if (!latestAppointment) return null
 
+    const { isReviewed = false } = latestAppointment
+
     switch(latestAppointment.status){
 
       case "pending":
@@ -79,11 +81,25 @@ const PatientTabActionButton: React.FC = () =>{
               onClick={() => openViewNotesModal(latestAppointment)}
             ><FaStickyNote /> View Doctor Notes</button>
 
-            <button
-              className="flex items-center justify-center gap-2 px-4 py-2 bg-yellow-600 text-white dark:text-white rounded-md hover:bg-yellow-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
-              onClick={() => openReviewModal(latestAppointment)}
-            ><FaStar /> Rate & Review</button>
-            
+            {
+
+              isReviewed ?(
+
+                <button
+                  className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white dark:text-white rounded-md hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
+                ><FaEye/> View Reviews</button>
+
+              ):(
+
+                <button
+                  className="flex items-center justify-center gap-2 px-4 py-2 bg-yellow-600 text-white dark:text-white rounded-md hover:bg-yellow-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
+                  onClick={() => openReviewModal(latestAppointment)}
+                ><FaStar /> Rate & Review</button>
+
+              )
+
+            }
+
           </div>
 
         )
