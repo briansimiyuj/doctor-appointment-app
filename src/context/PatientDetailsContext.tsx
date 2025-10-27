@@ -15,6 +15,7 @@ import { updateAppointmentStatusInFirebase } from "../firebase/firebaseApi"
 import { useToast } from "../hooks/useToast"
 import { collection, query, getDocs, orderBy, onSnapshot } from "firebase/firestore"
 import { db } from "../firebaseConfig"
+import { useDoctorReviewsContext } from "./DoctorReviewsContext"
 
 interface PatientDetailsProviderProps{
     
@@ -34,6 +35,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
             { appointments } = useContext(AppointmentsContext),
             { appointedPatients } = useContext(BookingContext),
             { showToast } = useToast(),
+            { getDoctorReviews } = useDoctorReviewsContext(),
             [patientAppointments, setPatientAppointments] = useState<AppointmentType[]>([]),
             [notes, setNotes] = useState<NoteType[]>([]),
             [documents, setDocuments] = useState<DocumentType[]>([]),
@@ -79,6 +81,10 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
                         if(foundAppointment) setPatientAppointments([foundAppointment])
 
                   }
+
+                  const doctorID = foundAppointment?.doctor.doctorInfo._id
+
+                  if(doctorID) getDoctorReviews(doctorID)
 
             }
 

@@ -31,6 +31,7 @@ import { DocumentsTabContextProvider } from "./context/DocumentsTabContext"
 import AppointmentDetailsPage from "./pages/AppointmentDetailsPage"
 import { DoctorContextProvider } from "./context/DoctorContext"
 import { ToastContainer } from "react-toastify"
+import { DoctorReviewsContextProvider } from "./context/DoctorReviewsContext"
 
 const Script: React.FC = () =>{
 
@@ -196,15 +197,19 @@ const Script: React.FC = () =>{
 
                             <AppointmentsContextProvider>
 
-                              <PatientDetailsProvider>
+                              <DoctorReviewsContextProvider>
 
-                                <SettingsProvider>
+                                <PatientDetailsProvider>
 
-                                  <PatientDetailsPage/>
+                                  <SettingsProvider>
 
-                                </SettingsProvider>
+                                    <PatientDetailsPage/>
 
-                              </PatientDetailsProvider>
+                                  </SettingsProvider>
+
+                                </PatientDetailsProvider>
+
+                              </DoctorReviewsContextProvider>
 
                             </AppointmentsContextProvider>
 
@@ -222,6 +227,8 @@ const Script: React.FC = () =>{
 
                         <AppointmentsContextProvider>
 
+                          <DoctorReviewsContextProvider>
+
                           <PatientDetailsProvider> 
 
                             <SettingsProvider>
@@ -231,6 +238,8 @@ const Script: React.FC = () =>{
                             </SettingsProvider>
 
                           </PatientDetailsProvider>
+
+                          </DoctorReviewsContextProvider>
 
                         </AppointmentsContextProvider>
 
