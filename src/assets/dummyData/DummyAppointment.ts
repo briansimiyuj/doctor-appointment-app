@@ -7,6 +7,7 @@ export const DummyAppointment: AppointmentType ={
     _id: "fc",
     date: "2023-06-15",
     time: "10:00 AM",
+    isReviewed: false,
     status: "cancelled",
     consultationType: "in-person",
 

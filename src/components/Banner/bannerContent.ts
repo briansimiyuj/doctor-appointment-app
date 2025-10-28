@@ -22,7 +22,7 @@ export const createBannerContent = (navigate: Function) =>{
             heading: "Book Appointment",
             subHeading: "With 100+ Trusted Doctors",    
             buttonText: isAuthenticated ? "Book Now" : "Create Account",
-            buttonAction: () => navigate(isAuthenticated ? "/book-appointment" : "/login")
+            buttonAction: () => navigate(isAuthenticated ? "/doctors" : "/login")
 
         }
 

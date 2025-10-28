@@ -26,7 +26,7 @@ const TopDoctorsCard: React.FC<TopDoctorsCardProps> = ({ key, doctor })=>{
             }}
         >
 
-            <img src={doctor.image} alt={`${doctor.name}'s name`} className="bg-blue-50"/>
+            <img src={doctor.coverImage.content} alt={`${doctor.name}'s name`} className="bg-blue-50"/>
 
 
             <div className="p-4">
