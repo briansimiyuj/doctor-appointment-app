@@ -123,9 +123,21 @@ export const DoctorReviewsContextProvider:React.FC<DoctorReviewsContextProviderP
     
     }
 
-    const averageRating = 0,
-          totalReviews = 0,
-          ratingDistribution: { [key: number]: number } = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }
+    const totalReviews = reviews.length,
+          averageRating = totalReviews === 0 ? 0 : parseFloat((reviews.reduce((sum, review) => sum + review.ratings, 0) / totalReviews).toFixed(1)),
+            ratingDistribution: { [key: number]: number } = reviews.reduce((acc, review) =>{
+
+                const rating = Math.floor(review.ratings) 
+
+                if(rating >= 1 && rating <= 5){
+
+                    acc[rating] = (acc[rating] || 0) + 1
+
+                }
+
+                return acc
+
+            }, {1:0, 2:0, 3:0, 4:0, 5:0} as { [key: number]: number })
 
     const contextValue: DoctorReviewsContextProps ={
 
