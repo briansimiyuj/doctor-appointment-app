@@ -113,7 +113,9 @@ const Script: React.FC = () =>{
 
                       <Route path="/profile" element={
                         
-                          <DocumentsTabContextProvider>
+                        <DocumentsTabContextProvider>
+
+                          <DoctorReviewsContextProvider>
 
                             <PatientDetailsProvider>
 
@@ -124,8 +126,10 @@ const Script: React.FC = () =>{
                                 </PrivateRoute>
 
                             </PatientDetailsProvider>
-                          
-                          </DocumentsTabContextProvider>
+
+                          </DoctorReviewsContextProvider>
+                        
+                        </DocumentsTabContextProvider>
 
                       }/>                  
 

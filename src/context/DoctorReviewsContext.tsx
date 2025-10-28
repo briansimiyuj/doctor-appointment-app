@@ -1,8 +1,8 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useState, useEffect } from "react"
 import { DoctorReviewsContextProps } from "../assets/contextProps/DoctorReviewsContextProps"
 import { ReviewType } from "../assets/types/ReviewType"
 import { db } from "../firebaseConfig"
-import { collection, getDocs, orderBy, query } from "firebase/firestore"
+import { collection, getDocs, orderBy, query, doc, updateDoc } from "firebase/firestore"
 
 interface DoctorReviewsContextProviderProps{
 
@@ -20,7 +20,8 @@ export const DoctorReviewsContextProvider:React.FC<DoctorReviewsContextProviderP
           [loading, setLoading] = useState(false),
           [reviews, setReviews] = useState<ReviewType[]>([]),
           [isEditing, setIsEditing] = useState(false),
-          [editingReviewID, setEditingReviewID] = useState<string | null>(null)
+          [editingReviewID, setEditingReviewID] = useState<string | null>(null),
+          [currentDoctorID, setCurrentDoctorID] = useState<string | null>(null)
 
     const addReview = (review: ReviewType) =>{
     
@@ -47,6 +48,8 @@ export const DoctorReviewsContextProvider:React.FC<DoctorReviewsContextProviderP
         try{
 
             setLoading(true)
+
+            setCurrentDoctorID(doctorID)
            
             const doctorReviewsRef = collection(db, "doctors", doctorID, "reviews"),
                   q = query(doctorReviewsRef, orderBy("createdAt", "desc")),    
@@ -79,6 +82,22 @@ export const DoctorReviewsContextProvider:React.FC<DoctorReviewsContextProviderP
 
         }
     
+    }
+
+    const updateDoctorProfileRating = async(doctorID: string, rating: number) =>{
+
+        try{
+
+            const profileRef = doc(db, "profiles", doctorID)
+
+            await updateDoc(profileRef, { rating })
+
+        }catch(error){
+
+            console.error("Error updating doctor profile rating:", error)
+
+        }
+        
     }
     
     const subscribeToDoctorReviews = (_doctorID: string) =>{
@@ -138,6 +157,16 @@ export const DoctorReviewsContextProvider:React.FC<DoctorReviewsContextProviderP
                 return acc
 
             }, {1:0, 2:0, 3:0, 4:0, 5:0} as { [key: number]: number })
+
+    useEffect(() =>{
+
+        if(currentDoctorID && reviews.length > 0){
+
+            updateDoctorProfileRating(currentDoctorID, averageRating)
+
+        }
+
+    }, [averageRating, currentDoctorID])
 
     const contextValue: DoctorReviewsContextProps ={
 

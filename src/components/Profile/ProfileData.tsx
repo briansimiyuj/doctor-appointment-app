@@ -3,6 +3,7 @@ import { DocumentType } from "../../assets/types/DocumentType"
 import { ProfileContext } from "../../context/ProfileContext"
 import CoverImage from "./CoverImage"
 import { useDocumentFullView } from "../../hooks/useDocumentFullView"
+import { FaStar } from "react-icons/fa"
 
 const ProfileData: React.FC = () => {
 
@@ -55,7 +56,13 @@ const ProfileData: React.FC = () => {
 
                                 <h3 className="font-medium">Rating:</h3>
                         
-                                <p className="text-gray-400">{profile.rating}</p>
+                                <div className="flex items-center gap-1">
+                                
+                                    <span className="text-sm font-medium text-gray-700">{profile.rating}</span>
+
+                                    <FaStar className="text-yellow-500" size={16}/>
+
+                                </div>
 
                                 <h3 className="font-medium">About:</h3>
 

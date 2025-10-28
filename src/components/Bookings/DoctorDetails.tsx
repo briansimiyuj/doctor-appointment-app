@@ -1,3 +1,4 @@
+import { DoctorReviewsContextProvider } from "../../context/DoctorReviewsContext"
 import DoctorImage from "./DoctorImage"
 import DoctorInfo from "./DoctorInfo"
 
@@ -9,7 +10,11 @@ const DoctorDetails: React.FC = ()=>{
 
             <DoctorImage/>
 
-            <DoctorInfo/>   
+            <DoctorReviewsContextProvider>
+
+                <DoctorInfo/>   
+
+            </DoctorReviewsContextProvider> 
 
         </div>
 
