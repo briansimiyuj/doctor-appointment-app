@@ -12,6 +12,7 @@ import ScheduleAppointmentModal from "./Modals/ScheduleModals/ScheduleAppointmen
 import ViewNotesModal from "./Modals/ViewNotesModals/ViewNotesModal"
 import ScheduleHistoryModal from "./Modals/ScheduleModals/ScheduleHistoryModal/ScheduleHistoryModal"
 import ViewReviewModal from "./Modals/ReviewModals/ViewReview/ViewReviewModal"
+import { useNavigate } from "react-router-dom"
 
 const TabActionButton: React.FC = ()=>{
 
@@ -20,7 +21,8 @@ const TabActionButton: React.FC = ()=>{
           { appointmentToCancel, openCancelModal, showCancelModal, closeCancelModal, openRejectModal, showRejectModal, closeRejectModal, openRescheduleModal, showRescheduleModal, appointmentToReschedule, closeRescheduleModal, showRescheduleHistoryModal, appointmentToReject, openRescheduleHistoryModal, closeRescheduleHistoryModal, showScheduleNewAppointmentModal, openScheduleNewAppointmentModal, closeScheduleNewAppointmentModal, appointmentToSchedule, showScheduleHistoryModal, openScheduleHistoryModal, closeScheduleHistoryModal, showManageModal, openManageModal, closeManageModal, openAddNotesModal, showAddNotesModal, closeAddNotesModal, showViewNotesModal, openViewNotesModal, closeViewNotesModal, showViewReviewsModal, openViewReviewModal, closeViewReviewModal } = useUpdatePatientDetails() as any,
          latestAppointment = patientAppointments && patientAppointments.length > 0 
         ? patientAppointments[0] 
-        : null
+        : null,
+        navigate = useNavigate()
     
     const renderActionButton = () =>{
 
@@ -84,7 +86,7 @@ const TabActionButton: React.FC = ()=>{
 
                     <button 
                         className="px-4 py-2 bg-primary-btn text-white rounded-md hover:bg-primary-bg transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
-                        onClick={() => openManageModal(latestAppointment)}
+                        onClick={() => navigate(`/manage-appointment/${latestAppointment._id}`)}
                     >
 
                         <span className="flex items-center justify-center gap-2">
@@ -348,7 +350,7 @@ const TabActionButton: React.FC = ()=>{
 
                     <button 
                         className="px-4 py-2 bg-primary-bg text-white rounded-md hover:bg-primary-bg-darker transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
-                        onClick={() => openManageModal(latestAppointment)}
+                        onClick={() => navigate(`/manage-appointment/${latestAppointment._id}`)}
                     >
                 
                         <span className="flex items-center justify-center gap-2">
