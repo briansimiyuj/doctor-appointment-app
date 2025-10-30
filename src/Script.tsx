@@ -259,19 +259,23 @@ const Script: React.FC = () =>{
 
                       <PrivateRoute>
 
-                        <DoctorStatsContextProvider>
+                        <DoctorReviewsContextProvider>
 
-                          <AppointmentsContextProvider>
+                          <DoctorStatsContextProvider>
 
-                            <ScheduleProvider>
+                            <AppointmentsContextProvider>
 
-                              <DashboardPage/>
+                              <ScheduleProvider>
 
-                            </ScheduleProvider>
+                                <DashboardPage/>
 
-                          </AppointmentsContextProvider>
+                              </ScheduleProvider>
 
-                        </DoctorStatsContextProvider>
+                            </AppointmentsContextProvider>
+
+                          </DoctorStatsContextProvider>
+
+                        </DoctorReviewsContextProvider>
 
                       </PrivateRoute>
 
