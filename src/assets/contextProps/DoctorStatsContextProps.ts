@@ -56,4 +56,7 @@ export interface DoctorStatsContextProps{
 
     }
 
+    fetchDoctorRating: (doctorID: string) => Promise<void>
+    loadingRating: boolean
+
 }

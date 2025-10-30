@@ -7,6 +7,7 @@ import { LoginContext } from "../context/LoginContext"
 import DoctorAppointments from "../components/Doctors/DoctorAppointments"
 import { AppointmentsContextProvider } from "../context/AppointmentContext"
 import DoctorStats from "../components/DoctorStats/DoctorStats"
+import { DoctorReviewsContextProvider } from "../context/DoctorReviewsContext"
 
 const HomePage: React.FC = ()=>{
 
@@ -34,7 +35,19 @@ const HomePage: React.FC = ()=>{
 
             {
 
-                userType === "doctor" ? <DoctorStats/> : <TopDoctors/>
+                userType === "doctor" ?(
+
+                    <DoctorReviewsContextProvider>
+                    
+                        <DoctorStats/>
+
+                    </DoctorReviewsContextProvider>
+                    
+                ):(
+                    
+                    <TopDoctors/>
+                
+                )
 
             }
 
