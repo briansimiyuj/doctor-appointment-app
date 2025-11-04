@@ -1,4 +1,5 @@
 import ExtendSessionControls from "./ExtendSessionControls"
+import FollowUpButtons from "./FollowUpButtons"
 
 const QuickActionsAside: React.FC = ()=>{
 
@@ -9,6 +10,8 @@ const QuickActionsAside: React.FC = ()=>{
             <h2 className="text-xl font-bold text-gray-800 border-b pb-3 mb-4">Quick Actions</h2>
 
             <ExtendSessionControls/>
+
+            <FollowUpButtons/>
 
         </div>
 
