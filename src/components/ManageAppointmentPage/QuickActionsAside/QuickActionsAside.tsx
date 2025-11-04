@@ -1,5 +1,6 @@
 import ExtendSessionControls from "./ExtendSessionControls"
 import FollowUpButtons from "./FollowUpButtons"
+import NoShowControl from "./NoShowControl"
 
 const QuickActionsAside: React.FC = ()=>{
 
@@ -12,6 +13,8 @@ const QuickActionsAside: React.FC = ()=>{
             <ExtendSessionControls/>
 
             <FollowUpButtons/>
+
+            <NoShowControl/>
 
         </div>
 
