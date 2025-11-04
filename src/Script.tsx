@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, useParams } from "react-router-dom"
 import Navbar from "./components/Navbar/Navbar"
 import HomePage from "./pages/HomePage"
 import Footer from "./components/Footer/Footer"
@@ -32,6 +32,8 @@ import AppointmentDetailsPage from "./pages/AppointmentDetailsPage"
 import { DoctorContextProvider } from "./context/DoctorContext"
 import { ToastContainer } from "react-toastify"
 import { DoctorReviewsContextProvider } from "./context/DoctorReviewsContext"
+import { ManageAppointmentContextProvider } from "./context/ManageAppointmentContext"
+import ManageAppointmentPage from "./pages/ManageAppointmentPage"
 
 const Script: React.FC = () =>{
 
@@ -46,6 +48,36 @@ const Script: React.FC = () =>{
     }, 2000)
 
   }, [])
+
+  const ManageRouteWrapper = () =>{
+
+    const { appointmentID } = useParams<{ appointmentID: string }>()
+
+    if(!appointmentID) return <NotFoundPage/>
+
+    return(
+
+      <AppointmentsContextProvider>
+
+        <DoctorReviewsContextProvider>
+
+          <PatientDetailsProvider>
+
+            <ManageAppointmentContextProvider appointmentID={appointmentID}>
+
+              <ManageAppointmentPage/>
+
+            </ManageAppointmentContextProvider>
+
+          </PatientDetailsProvider>
+
+        </DoctorReviewsContextProvider>
+
+      </AppointmentsContextProvider>
+
+    )
+
+  }
 
   return(
 
@@ -285,21 +317,36 @@ const Script: React.FC = () =>{
 
                       <PrivateRoute>
 
-                        <PatientDetailsProvider>
-                          
-                          <SettingsProvider>
+                        <DoctorReviewsContextProvider>
 
-                            <SettingsPage/>
+                          <PatientDetailsProvider>
+                            
+                            <SettingsProvider>
 
-                          </SettingsProvider>
+                              <SettingsPage/>
 
-                        </PatientDetailsProvider>
+                            </SettingsProvider>
+
+                          </PatientDetailsProvider>
+
+                        </DoctorReviewsContextProvider>
+
+                      </PrivateRoute>
+
+                    }/>
+
+                    <Route path="manage-appointment/:appointmentID" element={
+
+                      <PrivateRoute>
+
+                        <ManageRouteWrapper/>
 
                       </PrivateRoute>
 
                     }/>
 
                     <Route path="*" element={<NotFoundPage/>}/>
+
 
                   </Routes>
         
