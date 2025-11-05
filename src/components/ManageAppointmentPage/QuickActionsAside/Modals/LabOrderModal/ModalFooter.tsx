@@ -1,4 +1,5 @@
 import { useLabTestContext } from "../../../../../context/LabTestContext"
+import { useSubmitLabOrder } from "../../../../../hooks/useSubmitLabOrder"
 
 interface ModalFooterProps{
 
@@ -8,8 +9,8 @@ interface ModalFooterProps{
 
 const ModalFooter: React.FC<ModalFooterProps> = ({ onClose })=>{
 
-    const { loading, testsOrdered, clinicalJustification, preferredLab, labAddress, labEmail, labPhone, urgency } = useLabTestContext(),
-          readyToSubmit = testsOrdered.length > 0 && clinicalJustification && preferredLab && labAddress && labEmail && labPhone && urgency,
+    const { loading } = useLabTestContext(),
+          { readyToSubmit, handleSubmitLabOrder } = useSubmitLabOrder(),
           submitButtonText = loading ? 'Submitting...' : 'Submit'
 
 
@@ -21,6 +22,7 @@ const ModalFooter: React.FC<ModalFooterProps> = ({ onClose })=>{
                 type="submit"
                 disabled={!readyToSubmit || loading}
                 className={`${readyToSubmit && !loading ? 'bg-primary-bg text-secondary-bg hover:bg-opacity-90 cursor-pointer' : 'bg-gray-400 text-gray-200 cursor-not-allowed'} px-10 py-3 rounded-lg font-medium transition-colors duration-300 w-full max-w-md mt-4`}
+                onClick={handleSubmitLabOrder}
             >{submitButtonText}</button>
 
             <button
