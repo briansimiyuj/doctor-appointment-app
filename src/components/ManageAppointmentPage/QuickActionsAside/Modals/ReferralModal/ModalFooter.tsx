@@ -1,4 +1,5 @@
 import { useReferralContext } from "../../../../../context/ReferralContext"
+import { useSubmitReferral } from "../../../../../hooks/useSubmitReferral"
 
 interface ModalFooterProps{
 
@@ -8,8 +9,8 @@ interface ModalFooterProps{
 
 const ModalFooter: React.FC<ModalFooterProps> = ({ onClose })=>{
 
-    const { urgency, recipientName, speciality, recipientEmail, recipientPhone, recipientHospital, recipientHospitalLocation, clinicalReason, loading } = useReferralContext(),
-           readyToSubmit = urgency && recipientName && speciality && recipientEmail && recipientPhone && recipientHospital && recipientHospitalLocation && clinicalReason,
+    const { loading } = useReferralContext(),
+           { readyToSubmit, handleSubmitReferral } = useSubmitReferral(),
            submitButtonText = loading ? 'Submitting...' : 'Submit'
 
     return(
@@ -20,6 +21,7 @@ const ModalFooter: React.FC<ModalFooterProps> = ({ onClose })=>{
                 type="submit"
                 disabled={!readyToSubmit || loading}
                 className={`${readyToSubmit && !loading ? 'bg-primary-bg text-secondary-bg hover:bg-opacity-90 cursor-pointer' : 'bg-gray-400 text-gray-200 cursor-not-allowed'} px-10 py-3 rounded-lg font-medium transition-colors duration-300 w-full max-w-md mt-4`}
+                onClick={handleSubmitReferral}
             >{submitButtonText}</button>
 
             <button
