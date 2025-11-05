@@ -1,11 +1,12 @@
 import { useManageAppointmentContext } from "../../context/ManageAppointmentContext"
 import AppointmentHeader from "./AppointmentHeader"
+import LabOrderModal from "./QuickActionsAside/Modals/LabOrderModal/LabOrderModal"
 import ReferralModal from "./QuickActionsAside/Modals/ReferralModal/ReferralModal"
 import QuickActionsAside from "./QuickActionsAside/QuickActionsAside"
 
 const ManageAppointmentContent: React.FC = () =>{
 
-    const { showReferralModal } = useManageAppointmentContext()
+    const { showReferralModal, showLabOrderModal } = useManageAppointmentContext()
 
     return(
 
@@ -32,6 +33,8 @@ const ManageAppointmentContent: React.FC = () =>{
             </main>
 
             { showReferralModal && <ReferralModal/> }
+
+            { showLabOrderModal && <LabOrderModal/> }
 
         </div>
 
