@@ -25,7 +25,6 @@ export interface ReferralType{
     }
 
     clinicalReason: string
-    patientInstructions: string
     urgency: ReferralUrgency
 
 }
