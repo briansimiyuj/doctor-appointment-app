@@ -1,5 +1,7 @@
 import { useManageAppointmentContext } from "../../../../../context/ManageAppointmentContext"
+import { ReferralContextProvider } from "../../../../../context/ReferralContext"
 import ModalHeader from "../../../../PatientDetails/Tabs/AppointmentTab/Modals/ModalHeader"
+import ModalBody from "./ModalBody"
 
 const ReferralModal: React.FC = ()=>{
 
@@ -12,6 +14,12 @@ const ReferralModal: React.FC = ()=>{
             <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-4 overflow-y-auto max-h-[90vh]">
 
                 <ModalHeader title="Refer To A Specialist" onClose={closeReferralModal}/>
+
+                <ReferralContextProvider>
+
+                    <ModalBody/>
+
+                </ReferralContextProvider>
 
             </div>
 
