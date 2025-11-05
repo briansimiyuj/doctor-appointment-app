@@ -2,6 +2,7 @@ import { useManageAppointmentContext } from "../../../../../context/ManageAppoin
 import { ReferralContextProvider } from "../../../../../context/ReferralContext"
 import ModalHeader from "../../../../PatientDetails/Tabs/AppointmentTab/Modals/ModalHeader"
 import ModalBody from "./ModalBody"
+import ModalFooter from "./ModalFooter"
 
 const ReferralModal: React.FC = ()=>{
 
@@ -18,6 +19,8 @@ const ReferralModal: React.FC = ()=>{
                 <ReferralContextProvider>
 
                     <ModalBody/>
+
+                    <ModalFooter onClose={closeReferralModal}/>
 
                 </ReferralContextProvider>
 
