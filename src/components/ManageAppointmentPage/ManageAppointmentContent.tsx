@@ -1,7 +1,11 @@
+import { useManageAppointmentContext } from "../../context/ManageAppointmentContext"
 import AppointmentHeader from "./AppointmentHeader"
+import ReferralModal from "./QuickActionsAside/Modals/ReferralModal/ReferralModal"
 import QuickActionsAside from "./QuickActionsAside/QuickActionsAside"
 
 const ManageAppointmentContent: React.FC = () =>{
+
+    const { showReferralModal } = useManageAppointmentContext()
 
     return(
 
@@ -26,6 +30,8 @@ const ManageAppointmentContent: React.FC = () =>{
                 </div>
 
             </main>
+
+            { showReferralModal && <ReferralModal/> }
 
         </div>
 

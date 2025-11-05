@@ -64,8 +64,6 @@ export const DoctorReviewsContextProvider:React.FC<DoctorReviewsContextProviderP
 
             })
 
-            console.log("Fetched doctor reviews:", fetchedReviews)
-
             setReviews(fetchedReviews)
 
             return fetchedReviews
