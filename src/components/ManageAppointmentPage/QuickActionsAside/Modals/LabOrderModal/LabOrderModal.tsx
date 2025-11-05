@@ -2,6 +2,7 @@ import { LabTestContextProvider } from "../../../../../context/LabTestContext"
 import { useManageAppointmentContext } from "../../../../../context/ManageAppointmentContext"
 import ModalHeader from "../../../../Profile/Modals/ModalHeader"
 import ModalBody from "./ModalBody"
+import ModalFooter from "./ModalFooter"
 
 const LabOrderModal: React.FC = ()=>{
 
@@ -18,6 +19,8 @@ const LabOrderModal: React.FC = ()=>{
                 <LabTestContextProvider>
 
                     <ModalBody/>
+
+                    <ModalFooter onClose={closeLabOrderModal}/>
 
                 </LabTestContextProvider>
 
