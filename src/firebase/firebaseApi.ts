@@ -43,3 +43,31 @@ export const updateAppointmentStatusInFirebase = async (
     }
 
 }
+
+
+export const updateAppointmentSessionDataInFirebase = async (
+    appointmentID: string,
+    data: { [key: string]: any }
+): Promise<void> =>{
+
+    if(!appointmentID || !Object.keys(data).length){
+
+        throw new Error("Missing appointment ID or data to update.")
+
+    }
+
+    try{
+
+        const appointmentRef = doc(db, "appointments", appointmentID)
+
+        await updateDoc(appointmentRef, data)
+        
+    }catch(err){
+        
+        console.error("Error updating appointment session data in Firebase:", err)
+
+        throw new Error("Failed to update appointment session data in Firebase.")
+
+    }
+
+}

@@ -26,9 +26,7 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
           [pauseReason, setPauseReason] = useState<string | null>(null),
           [isSessionActive, setIsSessionActive] = useState(false),
           [showCompletionModal, setShowCompletionModal] = useState(false),
-          [showLabOrderModal, setShowLabOrderModal] = useState(
-            import .meta.env.VITE_DEV_MODE === "true" ? true : false
-          ),
+          [showLabOrderModal, setShowLabOrderModal] = useState(false),
           [showReferralModal, setShowReferralModal] = useState(false),
           [scheduledDuration, setScheduledDuration] = useState(30),
           timeIntervalRef = useRef<NodeJS.Timeout | null>(null),
