@@ -111,6 +111,7 @@ const AppointmentHeader: React.FC = () =>{
                     pauseSession={pauseSession}
                     resumeSession={resumeSession}
                     openCompletionModal={openCompletionModal}
+                    sessionStatus={appointment?.sessionStatus}
                 />
 
             </div>

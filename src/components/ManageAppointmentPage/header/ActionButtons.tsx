@@ -6,6 +6,7 @@ interface ActionButtonsProps{
     isSessionActive: boolean
     isPaused: boolean
     appointmentExists: boolean
+    sessionStatus: "active" | "completed" | undefined
     startSession: () => void
     endSession: () => void
     pauseSession: () => void
@@ -17,6 +18,7 @@ interface ActionButtonsProps{
 const ActionButtons: React.FC<ActionButtonsProps> = ({
     isSessionActive,
     isPaused,
+    sessionStatus,
     appointmentExists,
     startSession,
     endSession,
@@ -25,13 +27,26 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
     openCompletionModal,
 }) =>{
 
+    console.log(sessionStatus)
+
     return(
 
         <div className="flex justify-center mt-6 space-x-3 flex-wrap gap-3">
 
             {
             
-                !isSessionActive ?(
+                sessionStatus === "completed" ?(
+
+                    <button
+                        onClick={openCompletionModal}
+                        className="flex items-center px-4 py-2 bg-purple-600 text-white dark:text-white rounded-lg shadow-md hover:bg-purple-700 transition"
+                    >
+
+                        <FaCheckCircle className="mr-2"/> Complete Appointment
+                        
+                    </button>
+
+                ):!isSessionActive ?(
 
                     <button
                         onClick={startSession}
@@ -84,7 +99,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
 
             {
             
-                isSessionActive &&(
+                isSessionActive && sessionStatus !== "completed" &&(
 
                     <button
                         onClick={endSession}

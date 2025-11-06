@@ -47,7 +47,7 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
 
             }
 
-            if(appointment.status === "active" && appointment.actualStartTime){
+            if(appointment.sessionStatus === "active" && appointment.actualStartTime){
                 
                 const storedStartTime = new Date(appointment.actualStartTime),
                       now = new Date(),
@@ -67,7 +67,7 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
 
             } 
             
-            else if(appointment.status === "completed" && appointment.actualDurationSeconds !== undefined){
+            else if(appointment.sessionStatus === "completed" && appointment.actualDurationSeconds !== undefined){
 
                 setIsSessionActive(false)
 
@@ -148,7 +148,7 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
                  startTimeISO = startTime.toISOString()
 
             await updateAppointmentSessionDataInFirebase(appointment._id, {
-                status: "active",
+                sessionStatus: "active",
                 actualStartTime: startTimeISO,
                 isStarted: true
             })
@@ -204,11 +204,10 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
                   finalDuration = elapsedTime
 
             await updateAppointmentSessionDataInFirebase(appointment._id, {
+                sessionStatus: "completed",
                 actualEndTime: endTimeISO,
                 actualDurationSeconds: finalDuration
             })
-        
-            await updateAppointmentStatusInFirebase("completed", appointment._id)
 
             setSessionEndTime(endTime)
 
