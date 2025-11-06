@@ -351,6 +351,7 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
 
         appointment,
         loading,
+        setLoading,
         error,       
         consultationType,
         sessionStartTime,

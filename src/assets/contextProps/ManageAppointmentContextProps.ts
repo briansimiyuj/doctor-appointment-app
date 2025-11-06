@@ -4,6 +4,7 @@ export interface ManageAppointmentContextProps{
     
     appointment: AppointmentType | null
     loading: boolean
+    setLoading: (loading: boolean) => void
     error: string | null
     consultationType: 'online' | 'in-person'
 
