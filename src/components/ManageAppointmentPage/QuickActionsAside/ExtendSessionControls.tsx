@@ -3,7 +3,8 @@ import { useManageAppointmentContext } from "../../../context/ManageAppointmentC
 
 const ExtendSessionControls: React.FC = ()=>{
 
-    const { isSessionActive, loading } = useManageAppointmentContext()
+    const { isSessionActive, loading, minutesToExtend, setMinutesToExtend, extendSession } = useManageAppointmentContext(),
+          buttonText = loading ? `Adding ${minutesToExtend} min...` : minutesToExtend ? `Add ${minutesToExtend} min` : 'Add min';
 
     return(
 
@@ -21,6 +22,8 @@ const ExtendSessionControls: React.FC = ()=>{
                     name="minutesToExtend"
                     className={`w-1/3 p-2 border bg-gray-50 dark:bg-gray-700 rounded-lg text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 ${isSessionActive ? 'cursor-pointer' : 'cursor-not-allowed'}`}
                     disabled={!isSessionActive}
+                    value={minutesToExtend}
+                    onChange={e => setMinutesToExtend(Number(e.target.value))}
                 >
 
                     <option value={5}>5 min</option>
@@ -34,13 +37,10 @@ const ExtendSessionControls: React.FC = ()=>{
                 </select>
 
                 <button
-                disabled={!isSessionActive || loading}
+                    disabled={!isSessionActive || loading}
                     className={`flex-grow p-2 bg-indigo-600 text-white dark:text-white font-semibold rounded-lg hover:bg-indigo-700 transition disabled:bg-gray-400 ${isSessionActive ? 'cursor-pointer' : 'cursor-not-allowed'}`}
-                >
-
-                    Add {/* {minutesToExtend} */} Min
-                    
-                </button>
+                    onClick={() => extendSession(minutesToExtend)}
+                >{buttonText}</button>
 
             </div> 
 

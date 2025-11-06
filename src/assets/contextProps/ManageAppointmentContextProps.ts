@@ -14,6 +14,8 @@ export interface ManageAppointmentContextProps{
     remainingTime: number
     isOvertime: boolean
     isSessionActive: boolean
+    minutesToExtend: number
+    setMinutesToExtend: (minutes: number) => void   
 
     startSession: () => Promise<void>
     endSession: () => Promise<void>

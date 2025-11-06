@@ -25,6 +25,7 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
           [isPaused, setIsPaused] = useState(false),
           [pauseReason, setPauseReason] = useState<string | null>(null),
           [isSessionActive, setIsSessionActive] = useState(false),
+          [minutesToExtend, setMinutesToExtend] = useState(0),
           [showCompletionModal, setShowCompletionModal] = useState(false),
           [showLabOrderModal, setShowLabOrderModal] = useState(false),
           [showReferralModal, setShowReferralModal] = useState(false),
@@ -310,7 +311,7 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
 
     const closeLabOrderModal = () => setShowLabOrderModal(false)
 
-    const markkNoShow = useCallback(async (reason?: string) =>{
+    const markNoShow = useCallback(async (reason?: string) =>{
 
         if(!appointment){
 
@@ -376,8 +377,9 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
         openLabOrderModal,
         closeLabOrderModal,
         showLabOrderModal,
-        markNoShow: markkNoShow,
-        
+        markNoShow,
+        minutesToExtend,
+        setMinutesToExtend,
 
     }
 
