@@ -27,8 +27,6 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
     openCompletionModal,
 }) =>{
 
-    console.log(sessionStatus)
-
     return(
 
         <div className="flex justify-center mt-6 space-x-3 flex-wrap gap-3">
