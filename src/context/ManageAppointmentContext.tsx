@@ -35,6 +35,49 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
           remainingTime = Math.max(scheduledDuration * 60 - elapsedTime, 0),
           isOvertime = elapsedTime > (scheduledDuration * 60)
 
+    
+    useEffect(() =>{
+
+        if(appointment){
+            
+            if(appointment.scheduledDurationMinutes && appointment.scheduledDurationMinutes !== scheduledDuration){
+
+                setScheduledDuration(appointment.scheduledDurationMinutes)
+
+            }
+
+            if(appointment.status === "active" && appointment.actualStartTime){
+                
+                const storedStartTime = new Date(appointment.actualStartTime),
+                      now = new Date(),
+                      timeDifferenceSeconds = Math.floor((now.getTime() - storedStartTime.getTime()) / 1000)
+                
+                setSessionStartTime(storedStartTime)
+
+                setIsSessionActive(true)
+                
+                setElapsedTime(timeDifferenceSeconds) 
+                
+                if(!isSessionActive){
+
+                    showToast("Active session restored.", "info")
+
+                }
+
+            } 
+            
+            else if(appointment.status === "completed" && appointment.actualDurationSeconds !== undefined){
+
+                setIsSessionActive(false)
+
+                setElapsedTime(appointment.actualDurationSeconds)
+
+            }
+        
+        }
+
+    }, [appointment]) 
+
     useEffect(() =>{
     
         if(isSessionActive && !isPaused){

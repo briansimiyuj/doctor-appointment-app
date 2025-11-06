@@ -17,5 +17,11 @@ export  interface AppointmentType{
     cancellationAlternative?: string | null
     rejectionReason?: string 
     rejectionAlternative?: string | null
+
+    scheduledDurationMinutes?: number
+    actualStartTime?: string
+    actualEndTime?: string
+    actualDurationSeconds?: number
+    isStarted?: boolean 
     
 }
