@@ -2,7 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useRef, useState } f
 import { ManageAppointmentContextProps } from "../assets/contextProps/ManageAppointmentContextProps"
 import { usePatientDetails } from "./PatientDetailsContext"
 import { useToast } from "../hooks/useToast"
-import { updateAppointmentStatusInFirebase } from "../firebase/firebaseApi"
+import { updateAppointmentSessionDataInFirebase, updateAppointmentStatusInFirebase } from "../firebase/firebaseApi"
 
 interface ManageAppointmentContextProviderProps{
 
@@ -88,11 +88,28 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
 
     const startSession = useCallback(async() =>{
 
+        if(!appointment || !appointment._id){
+
+            showToast("Error: Cannot start session without appointment data.", "error")
+
+            return
+            
+        }
+        
         try{
 
             setLoading(true)
 
-            setSessionStartTime(new Date())
+            const startTime = new Date(),
+                 startTimeISO = startTime.toISOString()
+
+            await updateAppointmentSessionDataInFirebase(appointment._id, {
+                status: "active",
+                actualStartTime: startTimeISO,
+                isStarted: true
+            })
+
+            setSessionStartTime(startTime)
 
             setIsSessionActive(true)
 
@@ -108,6 +125,10 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
 
             console.error("Failed to start session: ", err)
 
+            setIsSessionActive(false) 
+
+            setSessionStartTime(null)
+
             setError("Failed to start session.")
 
             showToast("Failed to start session.", "error")
@@ -118,19 +139,37 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
 
         }
 
-    }, [appointmentID, showToast])
+    }, [appointment, showToast])
 
     const endSession = useCallback(async() =>{
+    
+        if(!appointment || !appointment._id){
 
+            showToast("Error: Cannot end session without appointment data.", "error")
+
+            return
+
+        }
 
         try{
 
             setLoading(true)
+            
+            const endTime = new Date(),
+                  endTimeISO = endTime.toISOString(),
+                  finalDuration = elapsedTime
 
-            setSessionEndTime(new Date())
+            await updateAppointmentSessionDataInFirebase(appointment._id, {
+                actualEndTime: endTimeISO,
+                actualDurationSeconds: finalDuration
+            })
+        
+            await updateAppointmentStatusInFirebase("completed", appointment._id)
+
+            setSessionEndTime(endTime)
 
             setIsSessionActive(false)
-
+            
             setIsPaused(false)
 
             if(timeIntervalRef.current){
@@ -156,14 +195,27 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
             setLoading(false)
 
         }
-
-    }, [appointmentID, elapsedTime, showToast])
+    }, [appointment, elapsedTime, showToast])
 
     const extendSession = useCallback(async(minutes: number) =>{
+
+        if(!appointment || !appointment._id){
+
+            showToast("Error: Cannot extend session without appointment data.", "error")
+
+            return
+
+        }
 
         try{
 
             setLoading(true)
+            
+            const newDurationMinutes = scheduledDuration + minutes
+
+            await updateAppointmentSessionDataInFirebase(appointment._id, {
+                scheduledDurationMinutes: newDurationMinutes
+            })
 
             setScheduledDuration(prev => prev + minutes)
 
@@ -182,8 +234,7 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
             setLoading(false)
 
         }
-
-    }, [appointmentID, showToast])
+    }, [appointment, scheduledDuration, showToast])
 
     const pauseSession = useCallback((reason?: string) =>{
 
