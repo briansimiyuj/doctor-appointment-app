@@ -4,13 +4,8 @@ import { useAppointmentsContext } from "../../../context/AppointmentContext"
 
 const FollowUpButtons: React.FC = () =>{
     
-    const { openReferralModal, openLabOrderModal, loading } = useManageAppointmentContext(),
+    const { openReferralModal, openLabOrderModal, loading,openViewReferralModal, openViewLabOrderModal } = useManageAppointmentContext(),
           { appointment } = useAppointmentsContext()
-
-    console.log(appointment)
-
-    const onViewReferral = () => console.log('Viewing existing referral...'),
-          onViewLabOrder = () => console.log('Viewing existing lab order...')
 
     return(
 
@@ -23,7 +18,7 @@ const FollowUpButtons: React.FC = () =>{
                 appointment?.hasReferral ?(
                 
                     <button
-                        onClick={onViewReferral}
+                        onClick={openViewReferralModal}
                         className="flex items-center justify-center w-full px-4 py-2 bg-blue-500 text-white dark:text-white font-semibold rounded-lg hover:bg-blue-600 transition disabled:bg-gray-400"
                         disabled={loading}
                     >
@@ -52,7 +47,7 @@ const FollowUpButtons: React.FC = () =>{
                 appointment?.hasLabOrder ?(
                 
                     <button
-                        onClick={onViewLabOrder}
+                        onClick={openViewLabOrderModal}
                         className="flex items-center justify-center w-full px-4 py-2 bg-amber-500 text-white dark:text-white font-semibold rounded-lg hover:bg-amber-600 transition disabled:bg-gray-400"
                         disabled={loading}
                     >
