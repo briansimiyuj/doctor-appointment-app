@@ -104,6 +104,7 @@ const AppointmentHeader: React.FC = () =>{
 
                 <ActionButtons
                     isSessionActive={isSessionActive}
+                    appointmentStatus={appointment?.status}
                     isPaused={isPaused}
                     appointmentExists={!!appointment}
                     startSession={startSession}
