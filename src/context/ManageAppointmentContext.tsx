@@ -28,7 +28,9 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
           [minutesToExtend, setMinutesToExtend] = useState(0),
           [showCompletionModal, setShowCompletionModal] = useState(false),
           [showLabOrderModal, setShowLabOrderModal] = useState(false),
+          [showViewLabOrderModal, setShowViewLabOrderModal] = useState(false),
           [showReferralModal, setShowReferralModal] = useState(false),
+          [showViewReferralModal, setShowViewReferralModal] = useState(false),
           [scheduledDuration, setScheduledDuration] = useState(30),
           timeIntervalRef = useRef<NodeJS.Timeout | null>(null),
           appointment = patientAppointments.find(app => app._id === appointmentID) || null,
@@ -310,6 +312,14 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
 
     const closeLabOrderModal = () => setShowLabOrderModal(false)
 
+    const openViewLabOrderModal = () => setShowViewLabOrderModal(true)
+
+    const closeViewLabOrderModal = () => setShowViewLabOrderModal(false)
+
+    const openViewReferralModal = () => setShowViewReferralModal(true)
+
+    const closeViewReferralModal = () => setShowViewReferralModal(false)
+
     const markNoShow = useCallback(async (reason?: string) =>{
 
         if(!appointment){
@@ -380,6 +390,12 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
         markNoShow,
         minutesToExtend,
         setMinutesToExtend,
+        showViewLabOrderModal,
+        showViewReferralModal,
+        openViewLabOrderModal,
+        closeViewLabOrderModal,
+        openViewReferralModal,
+        closeViewReferralModal
 
     }
 

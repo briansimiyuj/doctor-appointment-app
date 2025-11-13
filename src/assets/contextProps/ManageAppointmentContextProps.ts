@@ -33,10 +33,16 @@ export interface ManageAppointmentContextProps{
     showLabOrderModal: boolean
     openLabOrderModal: () => void
     closeLabOrderModal: () => void
+    showViewLabOrderModal: boolean
+    openViewLabOrderModal: () => void
+    closeViewLabOrderModal: () => void
     
     showReferralModal: boolean
     openReferralModal: () => void
     closeReferralModal: () => void
+    showViewReferralModal: boolean
+    openViewReferralModal: () => void
+    closeViewReferralModal: () => void
 
     markNoShow: (reason: string) => Promise<void>
 
