@@ -13,7 +13,7 @@ export const useCompleteAppointment = () =>{
 
     const { updateAppointmentStatus } = usePatientDetails(),
           { addScheduleHistoryEntry } = useScheduleHistory(),
-          { appointmentID } = useAppointmentsContext(),
+          { appointmentID, appointment } = useAppointmentsContext(),
           { appointmentToManage } = useUpdatePatientDetails(),
           { showToast } = useToast(),
           { closeCompletionModal, setLoading } = useManageAppointmentContext(),
@@ -22,11 +22,16 @@ export const useCompleteAppointment = () =>{
 
     const handleMarkAsCompleted = async () =>{
 
-        if(!appointmentToManage || !appointmentID) return
+        const targetAppointment = appointmentToManage || appointment
+
+        if(!targetAppointment || !appointmentID){
+            showToast("Missing appointment information", "error")
+            return
+        }
+
+        setLoading(true)
 
         try{
-
-            setLoading(true)
 
             const appointmentRef = doc(db, "appointments", appointmentID)
 
@@ -35,29 +40,26 @@ export const useCompleteAppointment = () =>{
                 updatedAt: new Date().toISOString()
             })
 
-
-            updateAppointmentStatus(appointmentToManage, "completed")
+            updateAppointmentStatus(targetAppointment, "completed")
             
             const performedBy ={
-
                 type: userType,
-                name: userType === "doctor" ? appointmentToManage?.doctor.doctorInfo.name : appointmentToManage?.patient.patientInfo.name,
-                _id: userType === "doctor" ? appointmentToManage?.doctor.doctorInfo._id : appointmentToManage?.patient.patientInfo._id
-
+                name: userType === "doctor" ? targetAppointment?.doctor.doctorInfo.name : targetAppointment?.patient.patientInfo.name,
+                _id: userType === "doctor" ? targetAppointment?.doctor.doctorInfo._id : targetAppointment?.patient.patientInfo._id
             }
 
-            addScheduleHistoryEntry(
-
-                { ...appointmentToManage, status: "completed" },
+            await addScheduleHistoryEntry(
+                { ...targetAppointment, status: "completed" },
                 "completed",
                 undefined,
-                appointmentToManage?.status,
+                targetAppointment?.status,
                 performedBy,
-                `Appointment for ${appointmentToManage?.date} at ${appointmentToManage?.time} marked as completed`
-
+                `Appointment for ${targetAppointment?.date} at ${targetAppointment?.time} marked as completed`
             )
 
             showToast("Appointment marked as completed successfully", "success")
+
+            await new Promise(resolve => setTimeout(resolve, 300))
 
             closeCompletionModal()
 
