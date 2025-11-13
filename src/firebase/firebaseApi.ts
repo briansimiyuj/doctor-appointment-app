@@ -1,5 +1,7 @@
-import { doc, updateDoc } from "firebase/firestore"
+import { collection, doc, onSnapshot, query, updateDoc } from "firebase/firestore"
 import { db } from "../firebaseConfig"
+import { ReferralType } from "../assets/types/ReferralType"
+import { LabTestType } from "../assets/types/LabTestType"
 
 type StatusType = "pending" | "completed" | "cancelled" | "confirmed" | "approved" | "rescheduled" | "rejected" | "follow-up"
 
@@ -69,5 +71,64 @@ export const updateAppointmentSessionDataInFirebase = async (
         throw new Error("Failed to update appointment session data in Firebase.")
 
     }
+
+}
+
+export const getReferralByAppointmentID = async (
+    appointmentID: string,
+    setDataCallback: (data: ReferralType | null) => void,
+    onErrorCallback: (error: Error) => void
+): Promise<() => void> =>{
+
+    const referralCollection = collection(db, "appointments", appointmentID, "referrals"),
+           q = query(referralCollection)
+
+    const unsubscribe = onSnapshot(q, (snapshot) =>{
+
+        if(!snapshot.empty){
+
+            const referralData = snapshot.docs[0].data() as ReferralType
+
+            setDataCallback(referralData)
+
+        }else{
+
+            setDataCallback(null)
+
+        }
+
+
+    }, (error) => onErrorCallback(error))
+
+    return unsubscribe
+
+}
+
+export const getLabOrderByAppointmentID = async (
+    appointmentID: string,
+    setDataCallback: (data: LabTestType | null) => void,
+    onErrorCallback: (error: Error) => void
+): Promise<() => void> =>{
+
+    const labOrderCollection = collection(db, "appointments", appointmentID, "labOrders"),
+           q = query(labOrderCollection)
+
+    const unsubscribe = onSnapshot(q, (snapshot) =>{
+
+        if(!snapshot.empty){
+        
+            const labOrderData = snapshot.docs[0].data() as LabTestType
+
+            setDataCallback(labOrderData)
+
+        }else{
+
+            setDataCallback(null)
+
+        }   
+
+    }, (error) => onErrorCallback(error))
+
+    return unsubscribe
 
 }
