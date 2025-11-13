@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid"
-import { doc, updateDoc } from "firebase/firestore"
+import { collection, addDoc, doc, updateDoc } from "firebase/firestore"
 import { db } from "../firebaseConfig"
 import { useToast } from "./useToast"
 import { useProfileContext } from "../context/ProfileContext"
@@ -56,11 +56,11 @@ export const useSubmitLabOrder = () =>{
             appointmentID,
 
             senderDoctor:{
-                _id: profile._id || '',
-                name: profile.name || 'Ordering Doctor',
-                email: profile.addressValue.email || '',
-                phone: profile.addressValue.phone || '',
-                hospital: profile.hospital || '',
+                _id: profile._id || "",
+                name: profile.name || "Ordering Doctor",
+                email: profile.addressValue.email || "",
+                phone: profile.addressValue.phone || "",
+                hospital: profile.hospital || "",
             },
 
             testsOrdered,
@@ -74,21 +74,19 @@ export const useSubmitLabOrder = () =>{
                 address: labAddress,
             },
 
-            preparationInstructions
+            preparationInstructions,
+            createdAt: new Date().toISOString()
 
         }
 
         try{
             
-            const appointmentRef = doc(db, "appointments", appointmentID)
+            const labOrdersRef = collection(db, "appointments", appointmentID, "labOrders"),
+                  appointmentRef = doc(db, "appointments", appointmentID)
 
-            await updateDoc(appointmentRef, {
+            await addDoc(labOrdersRef, newLabOrder)
 
-                labOrder: newLabOrder,
-                hasLabOrder: true,
-                labOrderDate: new Date().toISOString()
-                
-            })
+            await updateDoc(appointmentRef, { hasLabOrder: true })
             
             showToast(`Lab test order for ${newLabOrder.testsOrdered.length} test(s) submitted successfully!`, "success")
 
@@ -98,7 +96,7 @@ export const useSubmitLabOrder = () =>{
 
             const error = err as Error
 
-            console.error('Failed to submit lab order: ', error.message)
+            console.error("Failed to submit lab order: ", error.message)
 
             showToast(`Failed to submit lab order: ${error.message}`, "error")
 

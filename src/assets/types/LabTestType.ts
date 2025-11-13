@@ -27,5 +27,6 @@ export interface LabTestType{
     }
 
     preparationInstructions: string
+    createdAt: string   
     
 }

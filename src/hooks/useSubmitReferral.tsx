@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid"
-import { doc, updateDoc } from "firebase/firestore"
+import { collection, addDoc, updateDoc, doc } from "firebase/firestore"
 import { db } from "../firebaseConfig"
 import { useToast } from "./useToast"
 import { useManageAppointmentContext } from "../context/ManageAppointmentContext"
@@ -59,11 +59,11 @@ export const useSubmitReferral = () =>{
             appointmentID,
             
             senderDoctor:{
-                _id: profile._id || '',
-                name: profile.name || 'Referring Doctor',
-                email: profile.addressValue.email || '',
-                phone: profile.addressValue.phone || '',
-                hospital: profile.hospital || '',
+                _id: profile._id || "",
+                name: profile.name || "Referring Doctor",
+                email: profile.addressValue.email || "",
+                phone: profile.addressValue.phone || "",
+                hospital: profile.hospital || "",
             },
 
             speciality,
@@ -78,18 +78,18 @@ export const useSubmitReferral = () =>{
 
             clinicalReason,
             urgency,
+            createdAt: new Date().toISOString(),
 
         }
 
         try{
             
-            const appointmentRef = doc(db, "appointments", appointmentID)
+            const referralsRef = collection(db, "appointments", appointmentID, "referrals"),
+                  appointmentsRef = doc(db, "appointments", appointmentID)
 
-            await updateDoc(appointmentRef, {
-                referral: newReferral,
-                hasReferral: true,
-                referralDate: new Date().toISOString()
-            })
+            await addDoc(referralsRef, newReferral)
+
+            await updateDoc(appointmentsRef, { hasReferral: true })
             
             showToast(`Referral to ${newReferral.speciality} submitted successfully!`, "success")
 
@@ -99,7 +99,7 @@ export const useSubmitReferral = () =>{
 
             const error = err as Error
 
-            console.error('Failed to submit referral: ', error.message)
+            console.error("Failed to submit referral: ", error.message)
 
             showToast(`Failed to submit referral: ${error.message}`, "error")
 

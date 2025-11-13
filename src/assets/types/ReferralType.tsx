@@ -26,5 +26,6 @@ export interface ReferralType{
 
     clinicalReason: string
     urgency: ReferralUrgency
+    createdAt: string
 
 }

@@ -18,6 +18,9 @@ export  interface AppointmentType{
     rejectionReason?: string 
     rejectionAlternative?: string | null
 
+    hasLabOrder: boolean
+    hasReferral: boolean
+
     scheduledDurationMinutes?: number
     actualStartTime?: string
     actualEndTime?: string
