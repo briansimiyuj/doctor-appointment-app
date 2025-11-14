@@ -1,5 +1,7 @@
 import { useManageAppointmentContext } from "../../../../../../context/ManageAppointmentContext"
 import ModalHeader from "../../../../../Profile/Modals/ModalHeader"
+import ModalBody from "./ModalBody"
+import ModalFooter from "./ModalFooter"
 
 const ViewReferralModal: React.FC = ()=>{
 
@@ -12,6 +14,10 @@ const ViewReferralModal: React.FC = ()=>{
             <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-4 overflow-y-auto max-h-[90vh]">
 
                 <ModalHeader title="View Referral" onClose={closeViewReferralModal}/>
+
+                <ModalBody/>
+
+                <ModalFooter/>
 
             </div>
 
