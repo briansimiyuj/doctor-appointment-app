@@ -2,7 +2,9 @@ import { createContext, useCallback, useContext, useEffect, useRef, useState } f
 import { ManageAppointmentContextProps } from "../assets/contextProps/ManageAppointmentContextProps"
 import { usePatientDetails } from "./PatientDetailsContext"
 import { useToast } from "../hooks/useToast"
-import { updateAppointmentSessionDataInFirebase, updateAppointmentStatusInFirebase } from "../firebase/firebaseApi"
+import { getLabOrderByAppointmentID, getReferralByAppointmentID, updateAppointmentSessionDataInFirebase, updateAppointmentStatusInFirebase } from "../firebase/firebaseApi"
+import { ReferralType } from "../assets/types/ReferralType"
+import { LabTestType } from "../assets/types/LabTestType"
 
 interface ManageAppointmentContextProviderProps{
 
@@ -34,6 +36,8 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
             import .meta.env.VITE_DEV_MODE === "true" ? true : false
           ),
           [scheduledDuration, setScheduledDuration] = useState(30),
+          [refferalData, setReferralData] = useState<ReferralType | null>(null),
+          [labOrderData, setLabOrderData] = useState<LabTestType | null>(null),
           timeIntervalRef = useRef<NodeJS.Timeout | null>(null),
           appointment = patientAppointments.find(app => app._id === appointmentID) || null,
           consultationType = appointment?.consultationType || "in-person",
@@ -133,6 +137,110 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
         }
         
     }, [elapsedTime, isOvertime, isSessionActive, isPaused, scheduledDuration, showToast])
+
+    useEffect(() =>{
+    
+       let unsubscribeReferral: (() => void) | undefined,
+           unsubscribeLabOrder: (() => void) | undefined,
+           mounted = true
+
+        if(appointment && appointment._id){
+
+            if(appointment.hasReferral){
+                
+                getReferralByAppointmentID(
+    
+                    appointment._id,
+                    setReferralData,
+                    (err)  => setError(`Failed to load referral: ${err.message}`)
+                    
+                ).then(unsub =>{
+
+                    if(!mounted){
+
+                        if(typeof unsub === "function") unsub()
+
+                        return
+
+                    }
+
+                    unsubscribeReferral = unsub
+
+                }).catch(err =>{
+
+                    setError(`Failed to load referral: ${err.message}`)
+
+                })
+                
+            }
+            
+
+            if(appointment.hasLabOrder){
+
+                getLabOrderByAppointmentID(
+
+                    appointment._id,
+                    setLabOrderData,
+                    (err)  => setError(`Failed to load lab order: ${err.message}`)
+
+                ).then(unsub =>{
+
+                    if(!mounted){
+
+                        if(typeof unsub === "function") unsub()
+
+                        return   
+
+                    }
+
+                    unsubscribeLabOrder = unsub
+
+                }).catch(err =>{
+
+                    setError(`Failed to load lab order: ${err.message}`)
+
+                })
+
+                
+                        
+            }
+
+            
+        }
+
+        console.log(refferalData, labOrderData)
+
+        return () =>{
+
+            mounted = false
+
+            if(unsubscribeReferral){
+
+                try{ 
+
+                    unsubscribeReferral() 
+                
+                }catch{}
+
+                unsubscribeReferral = undefined
+
+            }
+
+            if(unsubscribeLabOrder){
+
+                try{
+                    
+                    unsubscribeLabOrder()
+
+                }catch{}
+
+                unsubscribeLabOrder = undefined
+                
+            }
+
+        }
+        
+    }, [appointment, appointmentID, refferalData, labOrderData])
 
     const startSession = useCallback(async() =>{
 
@@ -397,7 +505,9 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
         openViewLabOrderModal,
         closeViewLabOrderModal,
         openViewReferralModal,
-        closeViewReferralModal
+        closeViewReferralModal,
+        refferalData,
+        labOrderData
 
     }
 

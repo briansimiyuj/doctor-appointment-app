@@ -1,4 +1,6 @@
 import { AppointmentType } from "../types/AppointmentType"
+import { LabTestType } from "../types/LabTestType"
+import { ReferralType } from "../types/ReferralType"
 
 export interface ManageAppointmentContextProps{
     
@@ -43,6 +45,9 @@ export interface ManageAppointmentContextProps{
     showViewReferralModal: boolean
     openViewReferralModal: () => void
     closeViewReferralModal: () => void
+
+    refferalData: ReferralType | null
+    labOrderData: LabTestType | null
 
     markNoShow: (reason: string) => Promise<void>
 
