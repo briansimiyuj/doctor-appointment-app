@@ -102,6 +102,9 @@ export const useBookingSlots = ()=>{
                 date: selectedSlot.dateTime.toISOString(),
                 time: selectedSlot.time,
                 status: "pending",
+                hasLabOrder: false,
+                hasReferral: false,
+                sessionStatus: undefined,
                 isReviewed: false,
                 consultationType,
                 doctor:{

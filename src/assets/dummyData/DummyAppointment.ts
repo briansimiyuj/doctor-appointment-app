@@ -10,6 +10,9 @@ export const DummyAppointment: AppointmentType ={
     isReviewed: false,
     status: "cancelled",
     consultationType: "in-person",
+    hasLabOrder: false,
+    hasReferral: false,
+    sessionStatus: undefined,
 
     patient:{
         

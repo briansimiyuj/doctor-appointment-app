@@ -17,7 +17,7 @@ const ManageAppointmentModal: React.FC<ManageAppointmentModalProps> = ({ onClose
 
                 <ModalHeader title="Manage Appointment" onClose={onClose}/>
 
-                <ModalBody onClose={onClose}/>
+                <ModalBody/>
 
             </div>
             

@@ -3,13 +3,7 @@ import LiveChat from "../../../../../LiveChat/LiveChat"
 import StatusManagement from "./StatusManagement"
 import VideoCall from "./VideoCall"
 
-interface ModalBodyProps{
-
-    onClose: () => void
-
-}
-
-const ModalBody: React.FC<ModalBodyProps> = ({ onClose }) =>{
+const ModalBody: React.FC = () =>{
 
     return(
 
@@ -23,7 +17,7 @@ const ModalBody: React.FC<ModalBodyProps> = ({ onClose }) =>{
 
             <VideoCall/>
 
-            <StatusManagement onClose={onClose}/>
+            <StatusManagement/>
 
         </div>
 
