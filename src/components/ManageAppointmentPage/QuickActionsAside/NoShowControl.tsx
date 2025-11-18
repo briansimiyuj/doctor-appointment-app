@@ -3,7 +3,7 @@ import { useManageAppointmentContext } from "../../../context/ManageAppointmentC
 
 const NoShowControl: React.FC = () =>{
     
-    const { loading, isSessionActive } = useManageAppointmentContext()
+    const { loading, isSessionActive, noShowReason, setNoShowReason, markNoShow } = useManageAppointmentContext()
 
     return(
 
@@ -14,11 +14,14 @@ const NoShowControl: React.FC = () =>{
                 placeholder="Optional No-Show Reason"
                 className="w-full p-2 mb-2 border border-gray-300 rounded-lg text-sm"
                 disabled={loading || isSessionActive}
+                value={noShowReason}
+                onChange={e => setNoShowReason(e.target.value)}
             />
 
             <button
                 className="flex items-center justify-center w-full px-4 py-2 bg-red-700 text-white dark:text-white font-semibold rounded-lg hover:bg-red-800 transition disabled:bg-gray-400"
                 disabled={loading || isSessionActive}
+                onClick={() => markNoShow(noShowReason)}
             >
 
                 <FaUserSlash className="mr-2"/> Mark as No-Show

@@ -50,5 +50,7 @@ export interface ManageAppointmentContextProps{
     labOrderData: LabTestType | null
 
     markNoShow: (reason: string) => Promise<void>
+    noShowReason: string 
+    setNoShowReason: (reason: string) => void
 
 }
