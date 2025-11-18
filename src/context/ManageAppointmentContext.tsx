@@ -30,7 +30,9 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
           [minutesToExtend, setMinutesToExtend] = useState(0),
           [showCompletionModal, setShowCompletionModal] = useState(false),
           [showLabOrderModal, setShowLabOrderModal] = useState(false),
-          [showViewLabOrderModal, setShowViewLabOrderModal] = useState(false),
+          [showViewLabOrderModal, setShowViewLabOrderModal] = useState(
+            import .meta.env.VITE_DEV_MODE === "true" ? true : false    
+          ),
           [showReferralModal, setShowReferralModal] = useState(false),
           [showViewReferralModal, setShowViewReferralModal] = useState(false),
           [scheduledDuration, setScheduledDuration] = useState(30),

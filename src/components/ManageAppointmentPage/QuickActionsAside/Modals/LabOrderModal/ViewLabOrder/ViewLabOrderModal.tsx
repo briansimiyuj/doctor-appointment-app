@@ -1,5 +1,6 @@
 import { useManageAppointmentContext } from "../../../../../../context/ManageAppointmentContext"
 import ModalHeader from "../../../../../Profile/Modals/ModalHeader"
+import ModalBody from "./ModalBody"
 
 const ViewLabOrderModal: React.FC = ()=>{
 
@@ -12,6 +13,8 @@ const ViewLabOrderModal: React.FC = ()=>{
             <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-4 overflow-y-auto max-h-[90vh]">
 
                 <ModalHeader title="View Lab Order" onClose={closeViewLabOrderModal}/>
+
+                <ModalBody/>
 
             </div>
 
