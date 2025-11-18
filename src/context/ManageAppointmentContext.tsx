@@ -32,9 +32,7 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
           [showLabOrderModal, setShowLabOrderModal] = useState(false),
           [showViewLabOrderModal, setShowViewLabOrderModal] = useState(false),
           [showReferralModal, setShowReferralModal] = useState(false),
-          [showViewReferralModal, setShowViewReferralModal] = useState(
-            import .meta.env.VITE_DEV_MODE === "true" ? true : false
-          ),
+          [showViewReferralModal, setShowViewReferralModal] = useState(false),
           [scheduledDuration, setScheduledDuration] = useState(30),
           [refferalData, setReferralData] = useState<ReferralType | null>(null),
           [labOrderData, setLabOrderData] = useState<LabTestType | null>(null),
@@ -208,7 +206,6 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
             
         }
 
-        console.log(refferalData, labOrderData)
 
         return () =>{
 
