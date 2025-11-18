@@ -1,4 +1,5 @@
 import ClinicalJustification from "./ClinicalJustification/ClinicalJustification"
+import OrderingDoctor from "./OrderingDoctor/OrderingDoctor"
 import OrderSummary from "./OrderSummary/OrderSummary"
 
 const ModalBody: React.FC = ()=>{
@@ -10,6 +11,8 @@ const ModalBody: React.FC = ()=>{
             <OrderSummary/>
 
             <ClinicalJustification/>
+
+            <OrderingDoctor/>
 
         </div>
 
