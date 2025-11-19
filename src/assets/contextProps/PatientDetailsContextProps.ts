@@ -61,7 +61,7 @@ export interface PatientDetailsContextProps{
     rescheduleAppointment: (appointment: AppointmentType, newDate: Date, newTime: string, newDoctor: DoctorType, newConsultationType: "online" | "in-person") => void
 
     // Update appointment status
-    updateAppointmentStatus: (appointment: AppointmentType, newStatus: "pending" | "confirmed" | "cancelled" | "completed" | "approved" | "rescheduled" | "rejected" | "follow-up") => void
+    updateAppointmentStatus: (appointment: AppointmentType, newStatus: "pending" | "confirmed" | "cancelled" | "completed" | "approved" | "rescheduled" | "rejected" | "follow-up" | "no-show") => void
     updateAppointment: (appointment: AppointmentType) => void
     updateAppointmentDataAndStatus: (appointment: AppointmentType, newStatus: "cancelled" | "rejected", reason: string, alternative: string | null) => void
 

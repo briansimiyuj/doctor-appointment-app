@@ -444,7 +444,9 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
 
             if(isSessionActive) await endSession()
 
-            await updateAppointmentStatusInFirebase("cancelled", appointment._id)
+            await updateAppointmentStatusInFirebase("no-show", appointment._id, reason)
+
+            setNoShowReason('')
 
             showToast(`Appointment marked as no-show ${reason ? `: with  ${reason}` : ''}`, "success")
 

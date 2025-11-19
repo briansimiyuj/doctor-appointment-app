@@ -310,7 +310,7 @@ export const PatientDetailsProvider: React.FC<PatientDetailsProviderProps> = ({ 
 
       }
 
-      const updateAppointmentStatus = async(appointment: AppointmentType, newStatus: "pending" | "completed" | "cancelled" | "confirmed" | "approved" | "rescheduled" | "rejected" | "follow-up") =>{
+      const updateAppointmentStatus = async(appointment: AppointmentType, newStatus: "pending" | "completed" | "cancelled" | "confirmed" | "approved" | "rescheduled" | "rejected" | "follow-up" | "no-show") =>{
 
             if(!patientDetails) return
 

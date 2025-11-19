@@ -3,7 +3,7 @@ import { db } from "../firebaseConfig"
 import { ReferralType } from "../assets/types/ReferralType"
 import { LabTestType } from "../assets/types/LabTestType"
 
-type StatusType = "pending" | "completed" | "cancelled" | "confirmed" | "approved" | "rescheduled" | "rejected" | "follow-up"
+type StatusType = "pending" | "completed" | "cancelled" | "confirmed" | "approved" | "rescheduled" | "rejected" | "follow-up"  | "no-show"
 
 export const updateAppointmentStatusInFirebase = async (
     status: StatusType, 
@@ -31,6 +31,12 @@ export const updateAppointmentStatusInFirebase = async (
             updateData.rejectionReason = reason
 
             updateData.rejectionAlternative = alternative || null
+
+        }
+
+        if(status === "no-show"){
+
+            updateData.noShowReason = reason
 
         }
 
