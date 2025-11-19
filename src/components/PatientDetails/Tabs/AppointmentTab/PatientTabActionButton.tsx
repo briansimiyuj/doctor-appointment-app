@@ -1,6 +1,6 @@
 import { usePatientDetails } from "../../../../context/PatientDetailsContext"
 import { useUpdatePatientDetails } from "../../../../hooks/useUpdatePatientDetails"
-import { FaClock, FaTimes, FaVideo, FaComments, FaStickyNote, FaHistory, FaRedo, FaStar, FaEye } from "react-icons/fa"
+import { FaClock, FaTimes, FaComments, FaStickyNote, FaHistory, FaRedo, FaStar, FaEye, FaStethoscope } from "react-icons/fa"
 import CancelAppointmentModal from "./Modals/CancelModals/CancelAppointmentModal"
 import ViewNotesModal from "./Modals/ViewNotesModals/ViewNotesModal"
 import ManageAppointmentModal from "./Modals/ManageModals/ManageAppointmentModal"
@@ -10,13 +10,15 @@ import ViewReasonsModals from "./Modals/ViewReasonsModals/ViewReasonsModals"
 import { useBookingSlots } from "../../../../hooks/useBookingSlots"
 import ReviewModal from "./Modals/ReviewModals/ReviewModal"
 import ViewReviewModal from "./Modals/ReviewModals/ViewReview/ViewReviewModal"
+import { useNavigate } from "react-router-dom"
 
 const PatientTabActionButton: React.FC = () =>{
 
   const { patientAppointments } = usePatientDetails(),
         { appointmentToCancel, openCancelModal, showCancelModal, closeCancelModal, openRescheduleModal, showScheduleHistoryModal, openScheduleHistoryModal, closeScheduleHistoryModal, showManageModal, openManageModal, closeManageModal, showViewNotesModal, openViewNotesModal, closeViewNotesModal, showRescheduleHistoryModal, openRescheduleHistoryModal, closeRescheduleHistoryModal, showViewReasonsModal, openViewReasonModal, closeViewReasonModal, showReviewModal, openReviewModal, closeReviewModal, showViewReviewsModal, openViewReviewModal, closeViewReviewModal } = useUpdatePatientDetails() as any,
         { cancelAppointment } = useBookingSlots(),
-        latestAppointment = patientAppointments && patientAppointments.length > 0 ? patientAppointments[0] : null
+        latestAppointment = patientAppointments && patientAppointments.length > 0 ? patientAppointments[0] : null,
+        navigate = useNavigate()
  
   const renderActionButton = () =>{
 
@@ -59,13 +61,8 @@ const PatientTabActionButton: React.FC = () =>{
             
             <button
               className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white dark:text-white rounded-md hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
-              onClick={() => openManageModal(latestAppointment)}
-            ><FaComments /> Join Live Chat</button>
-
-            <button
-              className="flex items-center justify-center gap-2 px-4 py-2 bg-green-600 text-white dark:text-white rounded-md hover:bg-green-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
-              onClick={() => openManageModal(latestAppointment)}
-            ><FaVideo /> Join Video Call</button>
+              onClick={() => navigate(`/appointments/${latestAppointment._id}/session`)}
+            ><FaStethoscope/> Join Consultation</button>
 
           </div>
 
