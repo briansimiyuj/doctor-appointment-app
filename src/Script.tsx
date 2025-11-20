@@ -34,6 +34,7 @@ import { ToastContainer } from "react-toastify"
 import { DoctorReviewsContextProvider } from "./context/DoctorReviewsContext"
 import { ManageAppointmentContextProvider } from "./context/ManageAppointmentContext"
 import ManageAppointmentPage from "./pages/ManageAppointmentPage"
+import SessionPage from "./pages/SessionPage"
 
 const Script: React.FC = () =>{
 
@@ -49,7 +50,7 @@ const Script: React.FC = () =>{
 
   }, [])
 
-  const ManageRouteWrapper = () =>{
+  const ManageRouteWrapper = ({ children }: { children: React.ReactNode }) =>{
 
     const { appointmentID } = useParams<{ appointmentID: string }>()
 
@@ -65,7 +66,7 @@ const Script: React.FC = () =>{
 
             <ManageAppointmentContextProvider appointmentID={appointmentID}>
 
-              <ManageAppointmentPage/>
+              {children}
 
             </ManageAppointmentContextProvider>
 
@@ -339,7 +340,25 @@ const Script: React.FC = () =>{
 
                       <PrivateRoute>
 
-                        <ManageRouteWrapper/>
+                        <ManageRouteWrapper>
+
+                          <ManageAppointmentPage/>
+
+                        </ManageRouteWrapper>
+
+                      </PrivateRoute>
+
+                    }/>
+                   
+                    <Route path="/appointments/:appointmentID/session" element={
+
+                      <PrivateRoute>
+
+                        <ManageRouteWrapper>
+
+                          <SessionPage/>
+
+                        </ManageRouteWrapper>
 
                       </PrivateRoute>
 
