@@ -2,49 +2,13 @@ import { TbClockHour4 } from 'react-icons/tb'
 import { BiHourglass, BiSolidTimeFive } from 'react-icons/bi'
 import { FaCheckCircle, FaChevronLeft } from 'react-icons/fa'
 import { useManageAppointmentContext } from '../../context/ManageAppointmentContext'
-import { useMemo } from 'react'
 import StatusBadge from './header/StatusBadge'
 import TimeCard from './header/TimeCard'
 import ActionButtons from './header/ActionButtons'
 
 const AppointmentHeader: React.FC = () =>{
 
-    const { appointment, elapsedTime, scheduledDuration, remainingTime, isOvertime, isSessionActive, isPaused, startSession, endSession, pauseSession, resumeSession, openCompletionModal, } = useManageAppointmentContext()
-
-    const formatTime = (totalSeconds: number): string =>{
-
-        const minutes = Math.floor(totalSeconds / 60),
-              seconds = totalSeconds % 60
-
-        return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart( 2, '0', )}`
-
-    }
-
-    const durationInMinutes = scheduledDuration
-    
-    const sessionStatus = useMemo(() =>{
-
-        if (!appointment) return 'Loading...'
-
-        if (isPaused) return 'Paused'
-
-        if (isSessionActive) return isOvertime ? 'Overtime' : 'Active'
-       
-        return 'Ready'
-
-    }, [appointment, isSessionActive, isPaused, isOvertime])
-
-    const statusColor = useMemo(() =>{
-
-        if (isPaused) return 'bg-yellow-500'
-
-        if (isOvertime) return 'bg-red-600'
-
-        if (isSessionActive) return 'bg-green-600'
-
-        return 'bg-gray-500'
-        
-    }, [isPaused, isOvertime, isSessionActive])
+    const { appointment, elapsedTime, scheduledDuration, remainingTime, isOvertime, isSessionActive, isPaused, startSession, endSession, pauseSession, resumeSession, openCompletionModal, formatTime, sessionStatus, statusColorClass: statusColor } = useManageAppointmentContext()
 
     return(
 
@@ -70,14 +34,14 @@ const AppointmentHeader: React.FC = () =>{
 
                     <StatusBadge status={sessionStatus} colorClass={statusColor}/>
 
-                </div>
+                </div>      
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center border-t pt-4">
 
                     <TimeCard
                         icon={<TbClockHour4 className="text-2xl text-blue-600 mb-1"/>}
                         label="Scheduled"
-                        value={`${durationInMinutes} min`}
+                        value={`${scheduledDuration} min`}
                     />
 
                     <TimeCard

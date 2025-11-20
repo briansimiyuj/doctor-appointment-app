@@ -1,5 +1,5 @@
-import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react"
-import { ManageAppointmentContextProps } from "../assets/contextProps/ManageAppointmentContextProps"
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
+import { ManageAppointmentContextProps, SessionStatus } from "../assets/contextProps/ManageAppointmentContextProps"
 import { usePatientDetails } from "./PatientDetailsContext"
 import { useToast } from "../hooks/useToast"
 import { getLabOrderByAppointmentID, getReferralByAppointmentID, updateAppointmentSessionDataInFirebase, updateAppointmentStatusInFirebase } from "../firebase/firebaseApi"
@@ -465,6 +465,41 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
         }
 
     }, [appointment, isSessionActive, endSession, updateAppointmentStatusInFirebase, showToast])
+
+    const sessionStatus: SessionStatus = useMemo (() =>{
+    
+        if(!appointment) return "Loading..."
+
+        if(isPaused) return "Paused"
+
+        if(isSessionActive) return isOvertime ? "Overtime" : "Active"
+
+        if(appointment.sessionStatus === "completed") return "Completed"
+        
+        return "Ready"
+    
+    }, [appointment, isSessionActive, isPaused, isOvertime])
+
+    const statusColorClass = useMemo(() =>{
+
+        if (isPaused) return 'bg-yellow-500'
+
+        if (isOvertime) return 'bg-red-600'
+
+        if (isSessionActive) return 'bg-green-600'
+
+        return 'bg-gray-500'
+        
+    }, [isPaused, isOvertime, isSessionActive])
+
+    const formatTime = (totalSeconds: number): string =>{
+
+        const minutes = Math.floor(totalSeconds / 60),
+              seconds = totalSeconds % 60
+
+        return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart( 2, '0', )}`
+
+    }
           
 
     const contextValue: ManageAppointmentContextProps ={
@@ -509,7 +544,10 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
         openViewReferralModal,
         closeViewReferralModal,
         refferalData,
-        labOrderData
+        labOrderData,
+        sessionStatus,
+        statusColorClass,
+        formatTime
 
     }
 

@@ -2,6 +2,8 @@ import { AppointmentType } from "../types/AppointmentType"
 import { LabTestType } from "../types/LabTestType"
 import { ReferralType } from "../types/ReferralType"
 
+export type SessionStatus = 'Loading...' | 'Ready' | 'Active' | 'Overtime' | 'Paused' | 'Completed'
+
 export interface ManageAppointmentContextProps{
     
     appointment: AppointmentType | null
@@ -52,5 +54,9 @@ export interface ManageAppointmentContextProps{
     markNoShow: (reason: string) => Promise<void>
     noShowReason: string 
     setNoShowReason: (reason: string) => void
+
+    sessionStatus: SessionStatus
+    statusColorClass: string
+    formatTime: (seconds: number) => string
 
 }
