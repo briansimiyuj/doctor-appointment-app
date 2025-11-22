@@ -9,6 +9,7 @@ export const DummyAppointment: AppointmentType ={
     time: "10:00 AM",
     isReviewed: false,
     status: "cancelled",
+    paymentStatus: "unpaid",
     consultationType: "in-person",
     hasLabOrder: false,
     hasReferral: false,
