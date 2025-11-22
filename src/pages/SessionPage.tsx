@@ -1,11 +1,15 @@
+import ViewLabOrderModal from "../components/ManageAppointmentPage/QuickActionsAside/Modals/LabOrderModal/ViewLabOrder/ViewLabOrderModal"
+import ViewReferralModal from "../components/ManageAppointmentPage/QuickActionsAside/Modals/ReferralModal/ViewReferral/ViewReferralModal"
 import SessionHeader from "../components/SessionPage/SessionHeader"
 import SessionStatusSidebar from "../components/SessionPage/SessionStatusSidebar"
 import { useLoginContext } from "../context/LoginContext"
+import { useManageAppointmentContext } from "../context/ManageAppointmentContext"
 import NotFoundPage from "./NotFoundPage"
 
 const SessionPage: React.FC = ()=>{
 
-    const { userType } = useLoginContext()
+    const { userType } = useLoginContext(),
+          { showViewLabOrderModal, showViewReferralModal } = useManageAppointmentContext()
 
     if(userType === "doctor") return  <NotFoundPage/>
 
@@ -28,6 +32,10 @@ const SessionPage: React.FC = ()=>{
                 </div>
 
             </main>
+
+            { showViewLabOrderModal && <ViewLabOrderModal/> }
+
+            { showViewReferralModal && <ViewReferralModal/> }
             
         </div>
 
