@@ -1,5 +1,6 @@
 import { useManageAppointmentContext } from "../../../context/ManageAppointmentContext"
 import SessionComplete from "./SessionComplete"
+import WaitingRoom from "./WaitingRoom"
 
 const SessionContent: React.FC = ()=>{
 
@@ -41,6 +42,8 @@ const SessionContent: React.FC = ()=>{
         )
 
     }
+
+    return <WaitingRoom/>
 
 }
 
