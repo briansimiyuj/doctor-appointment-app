@@ -7,8 +7,6 @@ const SessionStatusSidebar: React.FC = ()=>{
     const { appointment, openViewLabOrderModal, openViewReferralModal } = useManageAppointmentContext(),
          doctor = appointment?.doctor
 
-    console.log(appointment?.hasLabOrder, appointment?.hasReferral)
-
     return(
 
         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md sticky top-24 space-y-6">
