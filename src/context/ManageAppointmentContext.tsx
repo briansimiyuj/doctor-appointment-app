@@ -497,7 +497,7 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
         const minutes = Math.floor(totalSeconds / 60),
               seconds = totalSeconds % 60
 
-        return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart( 2, '0', )}`
+        return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart( 2, '0', )}`;
 
     }
           

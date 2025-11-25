@@ -1,4 +1,5 @@
 import { useManageAppointmentContext } from "../../../context/ManageAppointmentContext"
+import LiveSession from "./LiveSession/LiveSession"
 import SessionComplete from "./SessionComplete"
 import WaitingRoom from "./WaitingRoom"
 
@@ -31,6 +32,16 @@ const SessionContent: React.FC = ()=>{
 
         )
     
+    }
+
+    if(sessionStatus === "Active" || sessionStatus === "Paused" || sessionStatus === "Overtime"){
+
+        return(
+
+            <LiveSession/>
+
+        )
+
     }
 
     if(sessionStatus === "Completed"){
