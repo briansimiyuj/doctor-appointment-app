@@ -1,4 +1,5 @@
 import { useManageAppointmentContext } from "../../../context/ManageAppointmentContext"
+import { VideoCallContextProvider } from "../../../context/VideoCallContext"
 import LiveSession from "./LiveSession/LiveSession"
 import SessionComplete from "./SessionComplete"
 import WaitingRoom from "./WaitingRoom"
@@ -38,7 +39,11 @@ const SessionContent: React.FC = ()=>{
 
         return(
 
-            <LiveSession/>
+            <VideoCallContextProvider>
+
+              <LiveSession/>
+
+            </VideoCallContextProvider>
 
         )
 
