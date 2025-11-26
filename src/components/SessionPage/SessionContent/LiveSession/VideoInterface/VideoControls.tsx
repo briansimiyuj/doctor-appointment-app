@@ -1,9 +1,11 @@
-import { FaMicrophone, FaVideo } from "react-icons/fa"
+import { FaCompress, FaExpand, FaMicrophone, FaMicrophoneSlash, FaVideo, FaVideoSlash } from "react-icons/fa"
 import { useManageAppointmentContext } from "../../../../../context/ManageAppointmentContext"
+import { useVideoCallContext } from "../../../../../context/VideoCallContext"
 
 const VideoControls: React.FC = ()=>{
 
     const { formatTime, sessionStatus, elapsedTime } = useManageAppointmentContext(),
+           { isMicMuted, isCamOff, toggleMic, toggleCam, isFullScreen, toggleFullScreen } = useVideoCallContext(),
           isOvertime = sessionStatus === "Overtime"
 
     return(
@@ -21,22 +23,38 @@ const VideoControls: React.FC = ()=>{
             <div className="flex items-center space-x-3">
                 
                 <button 
-                    /* onClick={toggleMic}
-                    className={`p-3 rounded-full text-white transition ${isMicMuted ? 'bg-red-600 hover:bg-red-700' : 'bg-gray-700 hover:bg-gray-600'}`}
-                    title={isMicMuted ? "Unmute" : "Mute"} */
+                    onClick={toggleMic}
+                    className={`p-3 rounded-full text-white dark:text-white transition ${isMicMuted ? 'bg-red-600 hover:bg-red-700' : 'bg-gray-700 hover:bg-gray-600'}`}
+                    title={isMicMuted ? "Unmute" : "Mute"}
                 >
+
+                    {
+
+
+                        isMicMuted ? <FaMicrophoneSlash className="w-5 h-5"/> : <FaMicrophone className="w-5 h-5"/> 
+
+                    }
                     
-                    <FaMicrophone className="w-5 h-5"/> 
 
                 </button>
 
                 <button 
-                    /* onClick={toggleCam}
-                    className={`p-3 rounded-full text-white transition ${isCamOff ? 'bg-red-600 hover:bg-red-700' : 'bg-gray-700 hover:bg-gray-600'}`}
-                    title={isCamOff ? "Turn Video On" : "Turn Video Off"} */
+                    onClick={toggleCam}
+                    className={`p-3 rounded-full text-white dark:text-white transition ${isCamOff ? 'bg-red-600 hover:bg-red-700' : 'bg-gray-700 hover:bg-gray-600'}`}
+                    title={isCamOff ? "Turn Video On" : "Turn Video Off"}
                 >
    
-                    <FaVideo className="w-5 h-5"/>
+                    { isCamOff ? <FaVideoSlash className="w-5 h-5 line-through"/> : <FaVideo className="w-5 h-5"/> }
+
+                </button>
+
+                <button 
+                    onClick={toggleFullScreen}
+                    className="p-3 rounded-full text-white dark:text-white bg-gray-700 hover:bg-gray-600 transition"
+                    title={isFullScreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+                >
+
+                    { isFullScreen ? <FaCompress className="w-5 h-5"/> : <FaExpand className="w-5 h-5"/> }
 
                 </button>
             </div>
