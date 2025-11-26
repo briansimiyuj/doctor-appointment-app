@@ -5,7 +5,7 @@ import VideoControls from "./VideoControls"
 
 const VideoInterface: React.FC = ()=>{
 
-    const { appointment, formatTime, sessionStatus, elapsedTime } = useManageAppointmentContext(),
+    const { sessionStatus } = useManageAppointmentContext(),
             { profile } = useProfileContext(),
             isDoctor = profile?.type === "doctor",
             isPaused = sessionStatus === "Paused"
