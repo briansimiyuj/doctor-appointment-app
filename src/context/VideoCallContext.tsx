@@ -1,6 +1,7 @@
-import { createContext, useCallback, useContext, useEffect, useState } from "react"
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react"
 import { VideoCallContextProps } from "../assets/contextProps/VideoCallContextProps"
 import { useToast } from "../hooks/useToast"
+import { io, Socket } from "socket.io-client"
 
 interface VideoCallContextProviderProps{
 
@@ -19,7 +20,183 @@ export const VideoCallContextProvider:React.FC<VideoCallContextProviderProps> = 
           [localStream, setLocalStream] = useState<MediaStream | null>(null),
           [remoteStream, setRemoteStream] = useState<MediaStream | null>(null),
           [videoContainer, setVideoContainer] = useState<HTMLElement | null>(null),
-          { showToast } = useToast()
+          { showToast } = useToast(),
+          socketRef = useRef<Socket | null>(null),
+          peerConnectionRef = useRef<RTCPeerConnection | null>(null),
+          currentRoomRef = useRef<string | null>(null)
+
+    const ICE_SERVERS ={
+
+        iceServers:[
+
+            { urls: "stun:stun.l.google.com:19302" },
+            { urls: "stun:stun1.l.google.com:19302" }
+
+        ]
+
+    }
+
+    useEffect(() =>{
+    
+        socketRef.current = io("http://localhost:3001", {
+
+            transports: ["websocket"],
+            reconnection: true
+
+        })
+
+        socketRef.current.on("connect", () =>{
+
+            console.log("Connected to signaling server")
+
+        })
+
+        socketRef.current.on("disconnect", () =>{
+
+            console.log("Disconnected from signaling server")
+
+        })
+
+        return () =>{
+
+            socketRef.current?.disconnect()
+
+        }
+    
+    }, [])
+
+    useEffect(() =>{
+    
+        if(!socketRef.current) return
+
+        const socket = socketRef.current
+
+        socket.on("user-joined", async (data) =>{
+
+            console.log("User joined", data.userID)
+
+            showToast("A user has joined the session.", "info")
+
+        })
+
+        socket.on("ice-candidate", async (data) =>{
+
+            console.log('Received ICE candidate', data.candidate)
+            
+        })
+
+        socket.on("user-left", (data) =>{
+
+            console.log("User left", data.userID)
+
+            showToast("The other user has left the session.", "info")
+
+        })
+
+        return () =>{
+
+            socket.off("user-joined")
+
+            socket.off("offer")
+
+            socket.off("answer")
+
+            socket.off("ice-candidate")
+
+            socket.off("user-left")
+
+        }
+    
+    }, [showToast])
+
+    const createPeerConnection = useCallback(() =>{
+
+        try{
+        
+            const peerConnection = new RTCPeerConnection(ICE_SERVERS)
+
+            if(localStream){
+
+                localStream.getTracks().forEach(track =>{
+                    
+                    peerConnection.addTrack(track, localStream)
+
+                })
+
+            }
+
+            peerConnection.ontrack = (event) =>{
+
+                console.log('Received remote track', event.streams[0])
+
+                setRemoteStream(event.streams[0])
+
+                setConnectionStatus("connected")
+
+            }
+
+            peerConnection.onicecandidate = (event) =>{
+                
+                if(event.candidate){
+
+                    console.log('Sending ICE candidate', event.candidate)
+
+                    socketRef.current?.emit("ice-candidate", {
+
+                        candidate: event.candidate,
+                        room: currentRoomRef.current
+
+                    })
+
+                }
+
+            }
+
+            peerConnection.onconnectionstatechange = () =>{
+
+                console.log('Peer connection state changed:', peerConnection.connectionState)
+
+                switch(peerConnection.connectionState){
+
+                    case "connected":
+
+                        setConnectionStatus("connected")
+                        showToast("Connected to the other user.", "success")
+                    
+                    break
+
+                    case "disconnected":
+                    case "failed":
+
+                        setConnectionStatus("failed")
+                        showToast("Disconnected from the other user.", "error")
+
+                    break
+
+                    case "closed":
+
+                        setConnectionStatus("disconnected")
+                    
+                    break
+
+                }
+            }
+            
+            peerConnectionRef.current = peerConnection
+
+            return peerConnection
+
+        }catch(error){
+
+            console.error("Error creating RTCPeerConnection:", error)
+            
+            setConnectionStatus("failed")
+
+            return null
+
+        }
+
+    }, [localStream, showToast])
 
     useEffect(() =>{
     
