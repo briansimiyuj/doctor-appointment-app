@@ -1,4 +1,6 @@
 import { useManageAppointmentContext } from "../../context/ManageAppointmentContext"
+import { VideoCallContextProvider } from "../../context/VideoCallContext"
+import LiveSession from "../SessionPage/SessionContent/LiveSession/LiveSession"
 import AppointmentHeader from "./AppointmentHeader"
 import CompleteModal from "./QuickActionsAside/Modals/CompleteModal/CompleteModal"
 import LabOrderModal from "./QuickActionsAside/Modals/LabOrderModal/LabOrderModal"
@@ -9,7 +11,7 @@ import QuickActionsAside from "./QuickActionsAside/QuickActionsAside"
 
 const ManageAppointmentContent: React.FC = () =>{
 
-    const { showReferralModal, showLabOrderModal, showCompletionModal, showViewReferralModal, showViewLabOrderModal } = useManageAppointmentContext()
+    const { showReferralModal, showLabOrderModal, showCompletionModal, showViewReferralModal, showViewLabOrderModal, sessionStatus } = useManageAppointmentContext()
 
     return(
 
@@ -22,7 +24,22 @@ const ManageAppointmentContent: React.FC = () =>{
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
                     <div className="lg:col-span-2">
-                        {/* <MainContentArea /> */}
+                        
+                        {
+
+                            (sessionStatus === "Active" || sessionStatus === "Paused" || sessionStatus === "Overtime") &&(
+
+                                <VideoCallContextProvider>
+                                
+                                    <LiveSession/>
+                    
+                                </VideoCallContextProvider>
+                                            
+
+                            )
+
+                        }
+
                     </div>
 
                     <aside className="lg:col-span-1 hidden lg:block"> 
