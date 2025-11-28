@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useState } from "react"
+import { createContext, useCallback, useContext, useEffect, useState } from "react"
 import { VideoCallContextProps } from "../assets/contextProps/VideoCallContextProps"
 import { useToast } from "../hooks/useToast"
 
@@ -18,7 +18,37 @@ export const VideoCallContextProvider:React.FC<VideoCallContextProviderProps> = 
           [connectionStatus, setConnectionStatus] = useState<"connected" | "connecting" | "disconnected" | "failed">("disconnected"),
           [localStream, setLocalStream] = useState<MediaStream | null>(null),
           [remoteStream, setRemoteStream] = useState<MediaStream | null>(null),
+          [videoContainer, setVideoContainer] = useState<HTMLElement | null>(null),
           { showToast } = useToast()
+
+    useEffect(() =>{
+    
+        const handleFullScreenChange = () =>{
+        
+            setIsFullScreen(!!document.fullscreenElement)
+        
+        }
+
+        document.addEventListener("fullscreenchange", handleFullScreenChange)
+
+        document.addEventListener("webkitfullscreenchange", handleFullScreenChange)
+
+        document.addEventListener("mozfullscreenchange", handleFullScreenChange)
+
+        document.addEventListener("MSFullscreenChange", handleFullScreenChange)
+
+        return () =>{
+            
+            document.removeEventListener("fullscreenchange", handleFullScreenChange)
+
+            document.removeEventListener("webkitfullscreenchange", handleFullScreenChange)
+
+            document.removeEventListener("mozfullscreenchange", handleFullScreenChange)
+
+            document.removeEventListener("MSFullscreenChange", handleFullScreenChange)
+        }
+    
+    }, [])
 
     const toggleMic = useCallback(() =>{
 
@@ -61,14 +91,52 @@ export const VideoCallContextProvider:React.FC<VideoCallContextProviderProps> = 
             return !prev
 
         })
-    
+     
     }, [localStream])
 
     const toggleFullScreen = useCallback(() =>{
 
-        setIsFullScreen(prev => !prev)
+        if(!document.fullscreenElement){
 
-    }, [])
+            const targetElement = videoContainer 
+
+            if(targetElement){
+
+                if(targetElement.requestFullscreen){
+
+                    targetElement.requestFullscreen()
+
+                }else if((targetElement as any).webkitRequestFullscreen){
+
+                    (targetElement as any).webkitRequestFullscreen()
+
+                }else if((targetElement as any).mozRequestFullScreen){
+
+                    (targetElement as any).mozRequestFullScreen()
+
+                }
+
+            }
+
+        }else{
+
+            if(document.exitFullscreen){
+
+                document.exitFullscreen()
+
+            }else if((document as any).webkitExitFullscreen){
+
+                (document as any).webkitExitFullscreen()
+
+            }else if((document as any).mozCancelFullScreen){
+
+                (document as any).mozCancelFullScreen()
+
+            }
+
+        }
+
+    }, [videoContainer])
 
     const joinSessionRoom = useCallback(async (appointmentID: string) =>{
 
@@ -121,7 +189,9 @@ export const VideoCallContextProvider:React.FC<VideoCallContextProviderProps> = 
         joinSessionRoom,
         leaveSessionRoom,
         localStream,
-        remoteStream
+        remoteStream,
+        videoContainer,
+        setVideoContainer
 
     }
 

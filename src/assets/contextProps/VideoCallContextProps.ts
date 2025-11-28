@@ -11,5 +11,7 @@ export interface VideoCallContextProps{
     remoteStream: MediaStream | null
     joinSessionRoom: (appointmentID: string) => Promise<void>
     leaveSessionRoom: () => Promise<void>
+    videoContainer: HTMLElement | null
+    setVideoContainer: (element: HTMLElement | null) => void
 
 }
