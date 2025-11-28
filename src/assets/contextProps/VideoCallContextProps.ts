@@ -13,7 +13,5 @@ export interface VideoCallContextProps{
     leaveSessionRoom: () => Promise<void>
     videoContainer: HTMLElement | null
     setVideoContainer: (element: HTMLElement | null) => void
-    peerConnection: RTCPeerConnection | null
-    socket: any | null
 
 }

@@ -77,11 +77,31 @@ export const VideoCallContextProvider:React.FC<VideoCallContextProviderProps> = 
 
             showToast("A user has joined the session.", "info")
 
+            await createOffer()
+
+        })
+
+        socket.on("offer", async (data) =>{
+
+            console.log("Received offer")
+
+            await handleOffer(data.offer, data.from)
+
+        })
+
+        socket.on("answer", async (data) =>{
+
+            console.log("Received answer")
+
+            await handleAnswer(data.answer)
+
         })
 
         socket.on("ice-candidate", async (data) =>{
 
             console.log('Received ICE candidate', data.candidate)
+
+            await handleIceCandidate(data.candidate)
             
         })
 
@@ -90,6 +110,8 @@ export const VideoCallContextProvider:React.FC<VideoCallContextProviderProps> = 
             console.log("User left", data.userID)
 
             showToast("The other user has left the session.", "info")
+
+            cleanupPeerConnection()
 
         })
 
@@ -198,6 +220,137 @@ export const VideoCallContextProvider:React.FC<VideoCallContextProviderProps> = 
 
     }, [localStream, showToast])
 
+    const createOffer = async() =>{
+    
+        try{
+
+            const peerConnection = peerConnectionRef.current || createPeerConnection(),
+                  socket = socketRef.current
+
+            if(!peerConnection) return
+
+            console.log('Creating offer')
+
+            const offer = await peerConnection.createOffer({
+
+                offerToReceiveAudio: true,
+                offerToReceiveVideo: true  
+
+            })
+
+            await peerConnection.setLocalDescription(offer)
+
+            socket?.emit("offer", {
+
+                offer,
+                room: currentRoomRef.current
+
+            })
+
+        }catch(error){
+
+            console.error("Error creating offer:", error)
+
+            showToast("Failed to create offer.", "error")
+
+        }
+    
+    }
+
+    const handleOffer = async (offer: RTCSessionDescriptionInit, from: string) =>{
+
+        try{
+
+            const peerConnection = peerConnectionRef.current || createPeerConnection(),
+                  socket = socketRef.current
+
+            if(!peerConnection) return
+
+            console.log('Received offer from', from)
+
+            await peerConnection.setRemoteDescription(new RTCSessionDescription(offer))
+
+            const answer = await peerConnection.createAnswer()
+
+            await peerConnection.setLocalDescription(answer)
+
+            socket?.emit("answer", {
+
+                answer,
+                to: from,
+                room: currentRoomRef.current
+
+            })
+
+        }catch(error){
+
+            console.error("Error handling offer:", error)
+
+            showToast("Failed to handle offer.", "error")
+
+        }
+        
+    }
+
+    const handleAnswer = async (answer: RTCSessionDescriptionInit) =>{
+
+        try{
+
+            const peerConnection = peerConnectionRef.current
+
+            if(!peerConnection) return
+
+            console.log('Received answer')
+
+            await peerConnection.setRemoteDescription(new RTCSessionDescription(answer))
+
+        }catch(error){
+
+            console.error("Error handling answer:", error)
+
+            showToast("Failed to handle answer.", "error")
+
+        }
+
+    }
+
+    const handleIceCandidate = async (candidate: RTCIceCandidateInit) =>{
+        
+
+        try{
+
+            const peerConnection = peerConnectionRef.current
+
+            if(!peerConnection) return
+
+            console.log('Received ICE candidate')
+
+            await peerConnection.addIceCandidate(new RTCIceCandidate(candidate))
+
+        }catch(error){
+
+            console.error("Error handling ICE candidate:", error)
+
+        }
+
+    }
+
+    const cleanupPeerConnection = () =>{
+
+        if(peerConnectionRef.current){
+
+            peerConnectionRef.current.close()
+
+            peerConnectionRef.current = null
+
+        }
+
+        setRemoteStream(null)
+
+        setConnectionStatus("disconnected")
+
+    }
+
     useEffect(() =>{
     
         const handleFullScreenChange = () =>{
@@ -255,7 +408,7 @@ export const VideoCallContextProvider:React.FC<VideoCallContextProviderProps> = 
 
             if(localStream){
 
-                const videoTrack = localStream.getVideoTracks()[0]
+               const videoTrack = localStream.getVideoTracks()[0]
 
                 if(videoTrack){
 
@@ -341,7 +494,11 @@ export const VideoCallContextProvider:React.FC<VideoCallContextProviderProps> = 
 
     const joinSessionRoom = useCallback(async (appointmentID: string) =>{
 
+        const socket = socketRef.current
+
         setConnectionStatus("connecting")
+
+        currentRoomRef.current = appointmentID
 
         console.log(`Attempting to join session room for appointment ID: ${appointmentID}`)
 
@@ -353,6 +510,8 @@ export const VideoCallContextProvider:React.FC<VideoCallContextProviderProps> = 
 
             showToast("Successfully accessed media devices.", "success")
 
+            socket?.emit("join-room", { room: appointmentID })
+
         }catch(error){
 
             console.error("Error accessing media devices:", error)
@@ -363,18 +522,27 @@ export const VideoCallContextProvider:React.FC<VideoCallContextProviderProps> = 
 
         }
 
-    }, [])
+    }, [showToast])
 
     const leaveSessionRoom = useCallback(async () =>{
 
+        const socket = socketRef.current
+
         showToast("Leaving session room...", "info")
+
+        if(currentRoomRef.current){
+
+            socket?.emit("leave-room", { room: currentRoomRef.current })
+
+        }
 
         localStream?.getTracks().forEach(track => track.stop())
 
+        cleanupPeerConnection()
+
         setLocalStream(null)
 
-        setRemoteStream(null)
-
+        currentRoomRef.current = null
 
     }, [localStream, showToast])
 
