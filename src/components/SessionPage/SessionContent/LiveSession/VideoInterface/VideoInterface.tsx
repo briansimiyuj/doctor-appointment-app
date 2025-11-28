@@ -9,12 +9,49 @@ const VideoInterface: React.FC = ()=>{
 
     const { sessionStatus, appointment } = useManageAppointmentContext(),
             { profile } = useProfileContext(),
-            { localStream, remoteStream, connectionStatus, joinSessionRoom, leaveSessionRoom } = useVideoCallContext(),
+            { localStream, remoteStream, connectionStatus, joinSessionRoom, leaveSessionRoom, setVideoContainer, isFullScreen } = useVideoCallContext(),
             isDoctor = profile?.type === "doctor",
             isPaused = sessionStatus === "Paused",
             localVideoRef = useRef<HTMLVideoElement>(null),
             remoteVideoRef = useRef<HTMLVideoElement>(null),
-            appointmentID = appointment?._id || ""
+            appointmentID = appointment?._id || "",
+            videoContainerRef = useRef<HTMLDivElement>(null)
+
+    const setVideoSource = (videoElement: HTMLVideoElement | null, stream: MediaStream | null) =>{
+
+        if(videoElement && stream){
+
+            videoElement.srcObject = stream
+
+            videoElement.play().catch(err => console.error("Error playing video:", err))
+
+        } 
+
+    }
+
+    useEffect(() =>{
+    
+        if(videoContainerRef.current){
+
+            setVideoContainer(videoContainerRef.current)
+
+        }
+
+        setVideoSource(localVideoRef.current, localStream)
+
+        setVideoSource(remoteVideoRef.current, remoteStream)
+
+        return () =>{
+
+            setVideoContainer(null)
+
+        }
+    
+    }, [setVideoContainer, localStream, remoteStream])
+
+    const containerClasses = isFullScreen
+        ? "fixed top-0 left-0 w-full h-full bg-gray-900 z-[1000] flex flex-col"
+        : "relative w-full h-full bg-gray-900 rounded-lg overflow-hidden flex flex-col"
 
     useEffect(() =>{
     
@@ -72,7 +109,10 @@ const VideoInterface: React.FC = ()=>{
 
     return(
 
-        <div className="flex-1 min-w-0 bg-gray-900 relative">
+        <div
+            ref={videoContainerRef}
+            className={containerClasses}
+        >
 
             <div 
                 className="absolute inset-0 flex items-center justify-center"
