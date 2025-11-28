@@ -26,6 +26,8 @@ This is a simple doctor's appointment booking system. It allows users to book ap
   7. UUID
   8. JSPDF
   9. Loadash
+  10. Socket.IO
+  11. Socket.IO-client
 
 ### Tailwind Configuration:
 
