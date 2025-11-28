@@ -138,6 +138,30 @@ export const VideoCallContextProvider:React.FC<VideoCallContextProviderProps> = 
 
     }, [videoContainer])
 
+    useEffect(() =>{
+    
+        const handleKeyDown = (e: KeyboardEvent) =>{
+        
+            if(e.key === "f" || e.key === "F"){
+
+                e.preventDefault()
+
+                toggleFullScreen()
+
+            }
+        
+        }
+
+        document.addEventListener("keydown", handleKeyDown)
+
+        return () =>{
+
+            document.removeEventListener("keydown", handleKeyDown)
+            
+        }
+    
+    }, [toggleFullScreen])
+
     const joinSessionRoom = useCallback(async (appointmentID: string) =>{
 
         setConnectionStatus("connecting")
