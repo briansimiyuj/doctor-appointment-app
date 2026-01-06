@@ -6,7 +6,7 @@ interface ActionButtonsProps{
     isSessionActive: boolean
     isPaused: boolean
     appointmentExists: boolean
-    sessionStatus: "active" | "completed" | undefined
+    sessionStatus: "active" | "completed" | null | undefined
     appointmentStatus: string | undefined
     startSession: () => void
     endSession: () => void

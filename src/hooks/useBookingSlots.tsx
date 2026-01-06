@@ -104,7 +104,7 @@ export const useBookingSlots = ()=>{
                 status: "pending",
                 hasLabOrder: false,
                 hasReferral: false,
-                sessionStatus: undefined,
+                sessionStatus: null,
                 paymentStatus: "unpaid",
                 isReviewed: false,
                 consultationType,

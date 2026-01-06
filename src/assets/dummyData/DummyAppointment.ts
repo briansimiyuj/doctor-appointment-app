@@ -13,7 +13,7 @@ export const DummyAppointment: AppointmentType ={
     consultationType: "in-person",
     hasLabOrder: false,
     hasReferral: false,
-    sessionStatus: undefined,
+    sessionStatus: null,
 
     patient:{
         

@@ -27,7 +27,7 @@ export  interface AppointmentType{
     actualEndTime?: string
     actualDurationSeconds?: number
     isStarted?: boolean 
-    sessionStatus: "active" | "completed" | undefined
+    sessionStatus: "active" | "completed" | null
     paymentStatus: "paid" | "unpaid" | "pending"
     
 }
