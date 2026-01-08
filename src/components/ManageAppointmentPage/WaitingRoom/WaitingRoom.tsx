@@ -1,3 +1,4 @@
+import AppointmentDetails from "./AppointmentDetails"
 import PatientHeader from "./PatientHeader"
 
 const WaitingRoom: React.FC = ()=>{
@@ -7,6 +8,8 @@ const WaitingRoom: React.FC = ()=>{
         <div className="space-y-4">
 
             <PatientHeader/>
+
+            <AppointmentDetails/>
             
         </div>
 
