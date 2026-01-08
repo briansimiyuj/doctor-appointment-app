@@ -8,6 +8,7 @@ import ViewLabOrderModal from "./QuickActionsAside/Modals/LabOrderModal/ViewLabO
 import ReferralModal from "./QuickActionsAside/Modals/ReferralModal/ReferralModal"
 import ViewReferralModal from "./QuickActionsAside/Modals/ReferralModal/ViewReferral/ViewReferralModal"
 import QuickActionsAside from "./QuickActionsAside/QuickActionsAside"
+import WaitingRoom from "./WaitingRoom/WaitingRoom"
 
 const ManageAppointmentContent: React.FC = () =>{
 
@@ -27,7 +28,7 @@ const ManageAppointmentContent: React.FC = () =>{
                         
                         {
 
-                            (sessionStatus === "Active" || sessionStatus === "Paused" || sessionStatus === "Overtime") &&(
+                            (sessionStatus === "Active" || sessionStatus === "Paused" || sessionStatus === "Overtime") ?(
 
                                 <VideoCallContextProvider>
                                 
@@ -35,10 +36,14 @@ const ManageAppointmentContent: React.FC = () =>{
                     
                                 </VideoCallContextProvider>
                                             
+                            ):(sessionStatus === "Ready") ?(
 
-                            )
+                                <WaitingRoom/>
+
+                            ): null
 
                         }
+
 
                     </div>
 
