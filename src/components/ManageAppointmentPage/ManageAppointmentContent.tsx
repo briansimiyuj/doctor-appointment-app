@@ -8,6 +8,7 @@ import ViewLabOrderModal from "./QuickActionsAside/Modals/LabOrderModal/ViewLabO
 import ReferralModal from "./QuickActionsAside/Modals/ReferralModal/ReferralModal"
 import ViewReferralModal from "./QuickActionsAside/Modals/ReferralModal/ViewReferral/ViewReferralModal"
 import QuickActionsAside from "./QuickActionsAside/QuickActionsAside"
+import SessionCompleted from "./SessionCompleted/SessionCompleted"
 import WaitingRoom from "./WaitingRoom/WaitingRoom"
 
 const ManageAppointmentContent: React.FC = () =>{
@@ -40,7 +41,11 @@ const ManageAppointmentContent: React.FC = () =>{
 
                                 <WaitingRoom/>
 
-                            ): null
+                            ):(sessionStatus === "Completed") ?(
+
+                                <SessionCompleted/>
+
+                            ):null
 
                         }
 
