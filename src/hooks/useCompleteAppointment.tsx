@@ -25,8 +25,19 @@ export const useCompleteAppointment = () =>{
         const targetAppointment = appointmentToManage || appointment
 
         if(!targetAppointment || !appointmentID){
+
             showToast("Missing appointment information", "error")
+
             return
+
+        }
+
+        if(targetAppointment.paymentStatus !== "paid"){
+
+            showToast("Cannot complete appointment. Payment is pending.", "error")
+
+            return
+
         }
 
         setLoading(true)
