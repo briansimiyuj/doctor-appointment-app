@@ -512,7 +512,7 @@ const TabActionButton: React.FC = ()=>{
         
             {renderActionButton()}
 
-            { showCancelModal && <CancelAppointmentModal appointment={appointmentToCancel} onClose={closeCancelModal} cancelAppointment={() => {}}/> }
+            { showCancelModal && <CancelAppointmentModal appointment={appointmentToCancel} onClose={closeCancelModal}/> }
 
             { showRejectModal && <RejectAppointmentModal appointment={appointmentToReject} onClose={closeRejectModal}/> }
 

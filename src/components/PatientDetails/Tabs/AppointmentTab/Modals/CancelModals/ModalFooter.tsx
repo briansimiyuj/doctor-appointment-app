@@ -1,25 +1,14 @@
 import { useContext } from "react"
 import { useModalContext } from "../../../../../../context/ModalContext"
 import { ProfileContext } from "../../../../../../context/ProfileContext"
-import { AppointmentType } from "../../../../../../assets/types/AppointmentType"
 
-interface ModalFooterProps{
-
-    cancelAppointment: (appointmentID: string) => void
-    appointment: AppointmentType
-
-}
-
-const ModalFooter: React.FC<ModalFooterProps> = ({ cancelAppointment, appointment })=>{
+const ModalFooter: React.FC = ()=>{
 
     const { onClose, isValid, handleCancelAppointment } = useModalContext(), 
           profileContext = useContext(ProfileContext)
 
 
     if(!profileContext) return null
-
-    const { profile } = profileContext,
-          cancelAction = profile?.type === "doctor" ? handleCancelAppointment : () => cancelAppointment(appointment._id)
 
     return(
 
@@ -32,7 +21,7 @@ const ModalFooter: React.FC<ModalFooterProps> = ({ cancelAppointment, appointmen
 
             <button
                 className={`px-4 py-2 bg-red-600 text-white dark:text-white rounded-md duration-300 transition-all ${isValid ? 'hover:bg-red-700' : 'opacity-50 cursor-not-allowed'}`}
-                onClick={cancelAction}
+                onClick={handleCancelAppointment}
                 disabled={!isValid}
             >Confirm Cancellation</button>
 

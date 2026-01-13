@@ -15,6 +15,7 @@ export  interface AppointmentType{
     isReviewed: boolean
     cancellationReason?: string 
     cancellationAlternative?: string | null
+    cancelledBy?: "doctor" | "patient"
     noShowReason?: string
     rejectionReason?: string 
     rejectionAlternative?: string | null

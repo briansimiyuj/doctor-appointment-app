@@ -206,7 +206,7 @@ const PatientTabActionButton: React.FC = () =>{
       
       {renderActionButton()}
 
-      { showCancelModal && <CancelAppointmentModal appointment={appointmentToCancel} onClose={closeCancelModal} cancelAppointment={cancelAppointment}/> }
+      { showCancelModal && <CancelAppointmentModal appointment={appointmentToCancel} onClose={closeCancelModal}/> }
       { showViewNotesModal && <ViewNotesModal onClose={closeViewNotesModal}/> }
       { showScheduleHistoryModal && <ScheduleHistoryModal onClose={closeScheduleHistoryModal}/> }
       { showRescheduleHistoryModal && <RescheduleHistoryModal onClose={closeRescheduleHistoryModal}/> }

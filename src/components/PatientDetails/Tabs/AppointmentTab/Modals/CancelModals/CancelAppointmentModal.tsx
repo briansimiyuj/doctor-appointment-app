@@ -8,11 +8,10 @@ interface CancelAppointmentModalProps{
 
     appointment: AppointmentType, 
     onClose: () => void
-    cancelAppointment: (appointmentID: string) => void 
 
 }
 
-const CancelAppointmentModal: React.FC<CancelAppointmentModalProps> = ({ appointment, onClose, cancelAppointment })=>{
+const CancelAppointmentModal: React.FC<CancelAppointmentModalProps> = ({ appointment, onClose })=>{
 
     return(
 
@@ -26,7 +25,7 @@ const CancelAppointmentModal: React.FC<CancelAppointmentModalProps> = ({ appoint
 
                     <ModalBody/>
 
-                    <ModalFooter cancelAppointment={cancelAppointment} appointment={appointment}/>
+                    <ModalFooter/>
 
                 </ModalProvider>
 

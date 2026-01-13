@@ -4,6 +4,10 @@ import { usePatientDetails } from "./PatientDetailsContext"
 import { AppointmentType } from "../assets/types/AppointmentType"
 import { useCancelAppointment } from "../hooks/useCancelAppointment"
 import { ProfileContext } from "./ProfileContext"
+import { doc, setDoc } from "firebase/firestore"
+import { db } from "../firebaseConfig"
+import { useToast } from "../hooks/useToast"
+import { useScheduleHistory } from "../hooks/useScheduleHistory"
 
 interface ModalProviderProps{
 
@@ -21,7 +25,9 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children, appointm
 
     const { updateAppointmentDataAndStatus } = usePatientDetails(),
           { handleCancelAppointment: cancelAppointment } = useCancelAppointment(), 
+          { addScheduleHistoryEntry } = useScheduleHistory(),
           profileContext = useContext(ProfileContext),
+          { showToast } = useToast(),
             [reason, setReason] = useState<string>(''),
             [alternative, setAlternative] = useState<string>(''),
             [isConfirmed, setIsConfirmed] = useState<boolean>(false)
@@ -37,19 +43,74 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children, appointm
     
     }
 
-    const handleCancelAppointment = () =>{
+    const handleCancelAppointment = async () =>{
     
         if(!appointment || !isValid) return
 
-        cancelAppointment(reason, getAlternativeValue(alternative))
+        try{
 
-        if(onCancel){
+            if(profile?.type === "patient"){
 
-            onCancel(reason)
+                const appointmentDocRef = doc(db, "appointments", appointment._id)
+
+                await setDoc(appointmentDocRef, {
+                    status: "cancelled",
+                    cancellationReason: reason,
+                    cancellationAlternative: getAlternativeValue(alternative),
+                    cancelledBy: "patient",
+                    performedBy: {
+                        type: "patient",
+                        name: appointment.patient.patientInfo.name,
+                        id: appointment.patient.patientInfo._id,
+                        timestamp: new Date().toISOString()
+                    }
+                }, { merge: true })
+ 
+                const dateTimeID = `${appointment.date}-${appointment.time}`,
+                    isBookedDocRef = doc(db, "bookedDoctors", `${appointment.doctor.doctorInfo._id}_${dateTimeID}`)
+
+                await setDoc(isBookedDocRef, {
+                    isBooked: false,
+                }, { merge: true })
+
+                updateAppointmentDataAndStatus(appointment, "cancelled", reason, getAlternativeValue(alternative))
+
+                addScheduleHistoryEntry(
+                    appointment,
+                    "cancelled",
+                    reason,
+                    getAlternativeValue(alternative),
+                    {
+                        type: "patient",
+                        name: appointment.patient.patientInfo.name,
+                        _id: appointment.patient.patientInfo._id
+                    }
+                )
+
+                showToast("Appointment cancelled successfully", "success")
+
+            }else{
+
+                localStorage.setItem('CurrentAppointmentToCancel', JSON.stringify(appointment))
+                
+                cancelAppointment(reason, getAlternativeValue(alternative))
+
+            }
+
+            if(onCancel){
+
+                onCancel(reason)
+
+            }
+
+            onClose()
+
+        }catch(error){
+
+            console.error('Error cancelling appointment:', error)
+            showToast("Error cancelling appointment", "error")
 
         }
-
-        onClose()
     
     }
 
