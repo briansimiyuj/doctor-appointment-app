@@ -3,7 +3,6 @@ import { useUpdatePatientDetails } from "../../../../hooks/useUpdatePatientDetai
 import { FaClock, FaTimes, FaComments, FaStickyNote, FaHistory, FaRedo, FaStar, FaEye, FaStethoscope } from "react-icons/fa"
 import CancelAppointmentModal from "./Modals/CancelModals/CancelAppointmentModal"
 import ViewNotesModal from "./Modals/ViewNotesModals/ViewNotesModal"
-import ManageAppointmentModal from "./Modals/ManageModals/ManageAppointmentModal"
 import ScheduleHistoryModal from "./Modals/ScheduleModals/ScheduleHistoryModal/ScheduleHistoryModal"
 import RescheduleHistoryModal from "./Modals/RescheduleModals/RescheduleHistoryModal/RescheduleHistoryModal"
 import ViewReasonsModals from "./Modals/ViewReasonsModals/ViewReasonsModals"
@@ -15,7 +14,7 @@ import { useNavigate } from "react-router-dom"
 const PatientTabActionButton: React.FC = () =>{
 
   const { patientAppointments } = usePatientDetails(),
-        { appointmentToCancel, openCancelModal, showCancelModal, closeCancelModal, openRescheduleModal, showScheduleHistoryModal, openScheduleHistoryModal, closeScheduleHistoryModal, showManageModal, openManageModal, closeManageModal, showViewNotesModal, openViewNotesModal, closeViewNotesModal, showRescheduleHistoryModal, openRescheduleHistoryModal, closeRescheduleHistoryModal, showViewReasonsModal, openViewReasonModal, closeViewReasonModal, showReviewModal, openReviewModal, closeReviewModal, showViewReviewsModal, openViewReviewModal, closeViewReviewModal } = useUpdatePatientDetails() as any,
+        { appointmentToCancel, openCancelModal, showCancelModal, closeCancelModal, openRescheduleModal, showScheduleHistoryModal, openScheduleHistoryModal, closeScheduleHistoryModal, showViewNotesModal, openViewNotesModal, closeViewNotesModal, showRescheduleHistoryModal, openRescheduleHistoryModal, closeRescheduleHistoryModal, showViewReasonsModal, openViewReasonModal, closeViewReasonModal, showReviewModal, openReviewModal, closeReviewModal, showViewReviewsModal, openViewReviewModal, closeViewReviewModal } = useUpdatePatientDetails() as any,
         { cancelAppointment } = useBookingSlots(),
         latestAppointment = patientAppointments && patientAppointments.length > 0 ? patientAppointments[0] : null,
         navigate = useNavigate()
@@ -151,7 +150,12 @@ const PatientTabActionButton: React.FC = () =>{
 
             <button
               className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white dark:text-white rounded-md hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
-              onClick={() => openManageModal(latestAppointment)}
+              onClick={() => {
+                if(latestAppointment && latestAppointment._id){
+                  localStorage.setItem('CurrentAppointmentToManage', JSON.stringify(latestAppointment))
+                  navigate(`/appointments/${latestAppointment._id}/session`)
+                }
+              }}
             ><FaComments /> View Appointment Details</button>
 
             <button
@@ -204,7 +208,6 @@ const PatientTabActionButton: React.FC = () =>{
 
       { showCancelModal && <CancelAppointmentModal appointment={appointmentToCancel} onClose={closeCancelModal} cancelAppointment={cancelAppointment}/> }
       { showViewNotesModal && <ViewNotesModal onClose={closeViewNotesModal}/> }
-      { showManageModal && <ManageAppointmentModal onClose={closeManageModal}/> }
       { showScheduleHistoryModal && <ScheduleHistoryModal onClose={closeScheduleHistoryModal}/> }
       { showRescheduleHistoryModal && <RescheduleHistoryModal onClose={closeRescheduleHistoryModal}/> }
       { showViewReasonsModal && <ViewReasonsModals onClose={closeViewReasonModal}/> }
