@@ -6,7 +6,6 @@ import ViewNotesModal from "./Modals/ViewNotesModals/ViewNotesModal"
 import ScheduleHistoryModal from "./Modals/ScheduleModals/ScheduleHistoryModal/ScheduleHistoryModal"
 import RescheduleHistoryModal from "./Modals/RescheduleModals/RescheduleHistoryModal/RescheduleHistoryModal"
 import ViewReasonsModals from "./Modals/ViewReasonsModals/ViewReasonsModals"
-import ScheduleAppointmentModal from "./Modals/ScheduleModals/ScheduleAppointmentModal"
 import ReviewModal from "./Modals/ReviewModals/ReviewModal"
 import ViewReviewModal from "./Modals/ReviewModals/ViewReview/ViewReviewModal"
 import { useNavigate } from "react-router-dom"
@@ -23,9 +22,6 @@ const PatientTabActionButton: React.FC = () =>{
           openRescheduleHistoryModal, 
           showRescheduleHistoryModal, 
           closeRescheduleHistoryModal, 
-          openScheduleNewAppointmentModal,
-          showScheduleNewAppointmentModal, 
-          closeScheduleNewAppointmentModal, 
           showScheduleHistoryModal, 
           openScheduleHistoryModal, 
           closeScheduleHistoryModal, 
@@ -152,8 +148,8 @@ const PatientTabActionButton: React.FC = () =>{
 
                 <button
                     className="flex items-center justify-center gap-2 px-4 py-2 bg-red-600 text-white dark:text-white rounded-md hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
-                    onClick={() => openScheduleNewAppointmentModal(latestAppointment)}
-                ><FaCalendarPlus /> Reschedule Appointment</button>
+                    onClick={() => navigate('/doctors')}
+                ><FaCalendarPlus /> Book New Appointment</button>
 
               ): null
                 
@@ -254,8 +250,6 @@ const PatientTabActionButton: React.FC = () =>{
       { showViewReasonsModal && <ViewReasonsModals onClose={closeViewReasonModal}/> }
       { showReviewModal && <ReviewModal onClose={closeReviewModal}/> }
       { showViewReviewsModal && <ViewReviewModal onClose={closeViewReviewModal}/> }
-    
-      { showScheduleNewAppointmentModal && latestAppointment && <ScheduleAppointmentModal onClose={closeScheduleNewAppointmentModal} appointment={latestAppointment}/> }
 
     </>
 
