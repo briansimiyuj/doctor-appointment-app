@@ -1,6 +1,6 @@
 import { usePatientDetails } from "../../../../context/PatientDetailsContext"
 import { useUpdatePatientDetails } from "../../../../hooks/useUpdatePatientDetails"
-import { FaClock, FaTimes, FaComments, FaStickyNote, FaHistory, FaRedo, FaStar, FaEye, FaStethoscope } from "react-icons/fa"
+import { FaClock, FaTimes, FaComments, FaStickyNote, FaHistory, FaRedo, FaStar, FaEye, FaStethoscope, FaCalendarPlus } from "react-icons/fa"
 import CancelAppointmentModal from "./Modals/CancelModals/CancelAppointmentModal"
 import ViewNotesModal from "./Modals/ViewNotesModals/ViewNotesModal"
 import ScheduleHistoryModal from "./Modals/ScheduleModals/ScheduleHistoryModal/ScheduleHistoryModal"
@@ -23,6 +23,7 @@ const PatientTabActionButton: React.FC = () =>{
           openRescheduleHistoryModal, 
           showRescheduleHistoryModal, 
           closeRescheduleHistoryModal, 
+          openScheduleNewAppointmentModal,
           showScheduleNewAppointmentModal, 
           closeScheduleNewAppointmentModal, 
           showScheduleHistoryModal, 
@@ -140,14 +141,21 @@ const PatientTabActionButton: React.FC = () =>{
 
             {
            
-              latestAppointment.cancelledBy === "doctor" &&(
+              latestAppointment.cancelledBy === "doctor" ?(
 
                 <button
                   className="flex items-center justify-center gap-2 px-4 py-2 bg-green-600 text-white dark:text-white rounded-md hover:bg-green-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
                   onClick={() => openViewReasonModal(latestAppointment)}
                 ><FaEye/> View Cancellation Reasons</button>
 
-              )
+              ): latestAppointment.cancelledBy === "patient" ?(
+
+                <button
+                    className="flex items-center justify-center gap-2 px-4 py-2 bg-red-600 text-white dark:text-white rounded-md hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full sm:w-auto"
+                    onClick={() => openScheduleNewAppointmentModal(latestAppointment)}
+                ><FaCalendarPlus /> Reschedule Appointment</button>
+
+              ): null
                 
             }
 
