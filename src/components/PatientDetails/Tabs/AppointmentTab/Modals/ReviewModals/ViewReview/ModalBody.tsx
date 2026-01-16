@@ -106,7 +106,7 @@ const ModalBody: React.FC = () =>{
 
             </div>
 
-            <div className="bg-gray-50 p-3 rounded-lg border">
+            <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border">
 
                 <div className="flex items-center justify-between mb-2">
 
