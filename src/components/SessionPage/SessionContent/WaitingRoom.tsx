@@ -1,11 +1,58 @@
 import { FaCalendarAlt, FaClock, FaUserMd } from "react-icons/fa"
 import { useManageAppointmentContext } from "../../../context/ManageAppointmentContext"
+import { useEffect, useState } from "react"
 
 const WaitingRoom: React.FC = ()=>{
 
-    const { appointment, formatTime, remainingTime, sessionStatus } = useManageAppointmentContext(),
+    const { appointment, sessionStatus } = useManageAppointmentContext(),
           doctorName = appointment?.doctor?.doctorInfo.name || 'your Doctor',
-          appointmentTime = appointment?.time
+          appointmentTime = appointment?.time,
+          [timeUntilAppointment, setTimeUntilAppointment] = useState(0)
+
+    useEffect(() =>{
+
+        const calculateTimeUntilAppointment = () =>{
+
+            if(appointment?.date && appointment?.time){
+
+                const appointmentDateTime = new Date(`${appointment.date}T${appointment.time}`),
+                      now = new Date(),                      
+                      secondsLeft = Math.max(Math.floor((appointmentDateTime.getTime() - now.getTime()) / 1000), 0)
+
+                setTimeUntilAppointment(secondsLeft)
+
+            }
+        }
+
+        calculateTimeUntilAppointment()
+
+        const interval = setInterval(calculateTimeUntilAppointment, 1000)
+
+        return () => clearInterval(interval)
+
+    }, [appointment?.date, appointment?.time])
+
+    const formatTime = (totalSeconds: number): string =>{
+
+        const days = Math.floor(totalSeconds / (24 * 3600)),
+              hours = Math.floor((totalSeconds % (24 * 3600)) / 3600),
+              minutes = Math.floor((totalSeconds % 3600) / 60),
+              seconds = totalSeconds % 60
+
+        if(days > 0){
+
+            return `${days}d ${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}m`
+            
+        }else if(hours > 0){
+
+            return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+            
+        }else{
+
+            return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+            
+        }
+    }
 
     let statusMessage = 'Please wait for your session to start.',
         statusColor = 'text-gray-600 dark:text-gray-400',
@@ -17,19 +64,19 @@ const WaitingRoom: React.FC = ()=>{
 
         icon = <FaClock className="w-8 h-8 text-blue-500 mb-4 animate-spin"/>
 
-    }else if(remainingTime > 60){
+    }else if(timeUntilAppointment > 3600){
         
-        statusMessage = `Your session starts in ${formatTime(remainingTime)}.`
+        statusMessage = `Your session starts in ${formatTime(timeUntilAppointment)}.`
 
         statusColor = 'text-green-600 dark:text-green-400'
 
-    }else if(remainingTime > 0){
+    }else if(timeUntilAppointment > 0){
 
-        statusMessage = `Prepare now, session starting soon! (${formatTime(remainingTime)})`
+        statusMessage = `Prepare now, session starting soon! (${formatTime(timeUntilAppointment)})`
 
         statusColor = "text-orange-600 dark:text-orange-400"
         
-    }else if(remainingTime <= 0){
+    }else if(timeUntilAppointment <= 0){
 
         statusMessage = `Your doctor should be joining shortly.`
 
