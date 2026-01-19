@@ -34,6 +34,33 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
           [showViewLabOrderModal, setShowViewLabOrderModal] = useState(false),
           [showReferralModal, setShowReferralModal] = useState(false),
           [showViewReferralModal, setShowViewReferralModal] = useState(false),
+          [isChatModalOpen, setIsChatModalOpen] = useState<boolean>(() =>{
+
+                if(appointmentID){
+
+                    const saved = localStorage.getItem(`chatModalOpen-${appointmentID}`)
+
+                    if(saved !== null){
+
+                        try{
+                        
+                           return JSON.parse(saved)
+                        
+                        }catch(error){
+                        
+                           console.error('Failed to parse saved chat visibility:', error)
+                        
+                        }
+
+                    }
+
+                }
+
+                const isDesktop = typeof window !== "undefined" && window.innerWidth >= 768
+
+                return isDesktop
+
+          }),
           [scheduledDuration, setScheduledDuration] = useState(30),
           [refferalData, setReferralData] = useState<ReferralType | null>(null),
           [labOrderData, setLabOrderData] = useState<LabTestType | null>(null),
@@ -500,7 +527,48 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
         return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart( 2, '0', )}`;
 
     }
-          
+
+    const toggleChatModal = useCallback(() =>{
+
+        setIsChatModalOpen(prev =>{
+
+            const newState = !prev
+
+            if(appointmentID){
+
+                localStorage.setItem(`chatModalOpen-${appointmentID}`, JSON.stringify(newState))
+
+            }
+
+            return newState
+
+        })
+
+    }, [appointmentID])
+
+    const openChatModal = useCallback(() =>{
+
+        setIsChatModalOpen(true)
+
+        if(appointmentID){
+
+            localStorage.setItem(`chatModalOpen-${appointmentID}`, JSON.stringify(true))
+
+        }
+
+    }, [appointmentID])
+
+    const closeChatModal = useCallback(() =>{
+        
+        setIsChatModalOpen(false)
+
+        if(appointmentID){
+
+            localStorage.setItem(`chatModalOpen-${appointmentID}`, JSON.stringify(false))
+
+        }
+
+    }, [appointmentID])
 
     const contextValue: ManageAppointmentContextProps ={
 
@@ -547,7 +615,11 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
         labOrderData,
         sessionStatus,
         statusColorClass,
-        formatTime
+        formatTime,
+        isChatModalOpen,
+        toggleChatModal,
+        openChatModal,
+        closeChatModal,
 
     }
 

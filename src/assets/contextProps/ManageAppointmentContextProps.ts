@@ -48,6 +48,11 @@ export interface ManageAppointmentContextProps{
     openViewReferralModal: () => void
     closeViewReferralModal: () => void
 
+    isChatModalOpen: boolean
+    openChatModal: () => void
+    closeChatModal: () => void
+    toggleChatModal: () => void
+
     refferalData: ReferralType | null
     labOrderData: LabTestType | null
 
