@@ -6,7 +6,7 @@ import VideoInterface from "./VideoInterface/VideoInterface"
 
 const LiveSession: React.FC = ()=>{
 
-    const { appointment } = useManageAppointmentContext(),
+    const { appointment, isChatModalOpen } = useManageAppointmentContext(),
           { profile } = useProfileContext(),
           isDoctor = profile?.type === "doctor",
           isOnline = appointment?.consultationType === "online"
@@ -18,7 +18,7 @@ const LiveSession: React.FC = ()=>{
 
             <div className="hidden md:flex h-full">
 
-                <div className={`${isDoctor ? 'md:w-3/5 lg:w-2/3' : 'md:w-2/3 lg:w-3/4'} border-r border-gray-200 dark:border-gray-700`}>
+                <div className={`${isChatModalOpen ? (isDoctor ? 'md:w-3/5 lg:w-2/3' : 'md:w-2/3 lg:w-3/4') : 'w-full'} transition-all duration-300 ease-in-out border-r border-gray-200 dark:border-gray-700`}>
 
                     {
 
@@ -28,15 +28,24 @@ const LiveSession: React.FC = ()=>{
 
                 </div>
 
-                <div className={`${isDoctor ? 'md:w-2/5 lg:w-1/3' : 'md:w-1/3 lg:w-1/4'}`}>
-                
-                    <LiveChatContextProvider>
+                {
 
-                        <LiveChat note={null}/>
 
-                    </LiveChatContextProvider>
+                    isChatModalOpen &&(
+                        
+                        <div className={`${isDoctor ? 'md:w-2/5 lg:w-1/3' : 'md:w-1/3 lg:w-1/4'}`}>
                 
-                </div>
+                            <LiveChatContextProvider>
+
+                                <LiveChat note={null}/>
+
+                            </LiveChatContextProvider>
+
+                        </div>
+                        
+                    )
+
+                }
 
             </div>
 
@@ -52,15 +61,23 @@ const LiveSession: React.FC = ()=>{
 
                 </div>
 
-                <div className="h-1/3 min-h-[200px]">
+                {
 
-                    <LiveChatContextProvider>
+                    isChatModalOpen &&(
 
-                        <LiveChat note={null}/>
+                        <div className="h-1/2 min-h-[250px] border-t border-gray-200 dark:border-gray-700 transition-all duration-300 ease-in-out">
 
-                    </LiveChatContextProvider>
+                            <LiveChatContextProvider>
 
-                </div>
+                                <LiveChat note={null}/>
+
+                            </LiveChatContextProvider>
+
+                        </div>
+
+                    )
+
+                }
 
             </div>
 
