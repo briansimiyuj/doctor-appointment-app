@@ -1,5 +1,5 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { ManageAppointmentContextProps, SessionStatus } from "../assets/contextProps/ManageAppointmentContextProps"
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { usePatientDetails } from "./PatientDetailsContext"
 import { useToast } from "../hooks/useToast"
 import { getLabOrderByAppointmentID, getReferralByAppointmentID, updateAppointmentSessionDataInFirebase, updateAppointmentStatusInFirebase } from "../firebase/firebaseApi"
@@ -34,33 +34,7 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
           [showViewLabOrderModal, setShowViewLabOrderModal] = useState(false),
           [showReferralModal, setShowReferralModal] = useState(false),
           [showViewReferralModal, setShowViewReferralModal] = useState(false),
-          [isChatModalOpen, setIsChatModalOpen] = useState<boolean>(() =>{
-
-                if(appointmentID){
-
-                    const saved = localStorage.getItem(`chatModalOpen-${appointmentID}`)
-
-                    if(saved !== null){
-
-                        try{
-                        
-                           return JSON.parse(saved)
-                        
-                        }catch(error){
-                        
-                           console.error('Failed to parse saved chat visibility:', error)
-                        
-                        }
-
-                    }
-
-                }
-
-                const isDesktop = typeof window !== "undefined" && window.innerWidth >= 768
-
-                return isDesktop
-
-          }),
+          [isChatModalOpen, setIsChatModalOpen] = useState<boolean>(false),
           [scheduledDuration, setScheduledDuration] = useState(30),
           [refferalData, setReferralData] = useState<ReferralType | null>(null),
           [labOrderData, setLabOrderData] = useState<LabTestType | null>(null),
@@ -69,6 +43,64 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
           consultationType = appointment?.consultationType || "in-person",
           remainingTime = Math.max(scheduledDuration * 60 - elapsedTime, 0),
           isOvertime = elapsedTime > (scheduledDuration * 60)
+
+    const saveChatModalState = (isOpen: boolean) =>{
+    
+        if(appointmentID){
+        
+            localStorage.setItem(`chatModalOpen-${appointmentID}`, JSON.stringify(isOpen))
+        
+        }
+    
+    }
+
+    useEffect(() =>{
+    
+        let initialValue = true
+
+        if(appointmentID){
+        
+            const saved = localStorage.getItem(`chatModalOpen-${appointmentID}`)
+
+            if(saved !== null){
+
+                try{
+                
+                   initialValue = JSON.parse(saved)
+                
+                }catch(error){
+                
+                   console.error('Failed to parse chat modal state from local storage', error)
+
+                   initialValue = window.innerWidth >= 768
+                
+                }
+
+            }else{
+
+                initialValue = window.innerWidth >= 768
+
+            }
+        
+        }else{
+
+            initialValue = window.innerWidth >= 768
+
+        }
+
+        setIsChatModalOpen(initialValue)
+    
+    }, [appointmentID])
+
+    useEffect(() =>{
+    
+        if(appointmentID){
+        
+            saveChatModalState(isChatModalOpen)
+        
+        }
+    
+    }, [isChatModalOpen, appointmentID])
 
     
     useEffect(() =>{
