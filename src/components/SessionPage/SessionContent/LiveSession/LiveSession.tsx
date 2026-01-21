@@ -3,14 +3,36 @@ import { useManageAppointmentContext } from "../../../../context/ManageAppointme
 import { useProfileContext } from "../../../../context/ProfileContext"
 import LiveChat from "../../../LiveChat/LiveChat"
 import VideoInterface from "./VideoInterface/VideoInterface"
+import { useEffect, useRef } from "react"
 
 const LiveSession: React.FC = ()=>{
 
     const { appointment, isChatModalOpen } = useManageAppointmentContext(),
           { profile } = useProfileContext(),
           isDoctor = profile?.type === "doctor",
-          isOnline = appointment?.consultationType === "online"
+          isOnline = appointment?.consultationType === "online",
+          desktopChatRef = useRef<HTMLDivElement>(null),
+          mobileChatRef = useRef<HTMLDivElement>(null)
 
+    useEffect(() =>{
+
+        if(isChatModalOpen){
+
+            if(desktopChatRef.current){
+
+                desktopChatRef.current.scrollTop = 0
+
+            }
+
+            if(mobileChatRef.current){
+
+                mobileChatRef.current.scrollTop = 0
+
+            }
+
+        }
+        
+    }, [isChatModalOpen])
 
     return(
 
@@ -28,24 +50,28 @@ const LiveSession: React.FC = ()=>{
 
                 </div>
 
-                {
-
-
-                    isChatModalOpen &&(
-                        
-                        <div className={`${isDoctor ? 'md:w-2/5 lg:w-1/3' : 'md:w-1/3 lg:w-1/4'}`}>
+                <div 
+                    ref={desktopChatRef}
+                    className={`
+                        transition-all duration-300 ease-in-out
+                        ${isChatModalOpen 
+                            ? `opacity-100 translate-x-0 ${isDoctor ? 'md:w-2/5 lg:w-1/3' : 'md:w-1/3 lg:w-1/4'}` 
+                            : 'opacity-0 translate-x-full w-0 pointer-events-none'
+                        }
+                    `}
+                >
+                    
+                    <div className={`h-full ${isChatModalOpen ? 'block' : 'hidden'}`}>
                 
-                            <LiveChatContextProvider>
+                        <LiveChatContextProvider>
 
-                                <LiveChat note={null}/>
+                            <LiveChat note={null}/>
 
-                            </LiveChatContextProvider>
+                        </LiveChatContextProvider>
 
-                        </div>
+                    </div>
                         
-                    )
-
-                }
+                </div>
 
             </div>
 
@@ -61,23 +87,30 @@ const LiveSession: React.FC = ()=>{
 
                 </div>
 
-                {
+                <div 
+                    ref={mobileChatRef}
+                    className={`
+                        transition-all duration-300 ease-in-out
+                        ${isChatModalOpen 
+                            ? 'opacity-100 translate-y-0 h-1/2 min-h-[250px]' 
+                            : 'opacity-0 translate-y-full h-0 pointer-events-none'
+                        }
+                        border-t border-gray-200 dark:border-gray-700
+                        overflow-hidden
+                    `}
+                >
 
-                    isChatModalOpen &&(
+                    <div className={`h-full ${isChatModalOpen ? 'block' : 'hidden'}`}>
 
-                        <div className="h-1/2 min-h-[250px] border-t border-gray-200 dark:border-gray-700 transition-all duration-300 ease-in-out">
+                        <LiveChatContextProvider>
 
-                            <LiveChatContextProvider>
+                            <LiveChat note={null}/>
 
-                                <LiveChat note={null}/>
+                        </LiveChatContextProvider>
 
-                            </LiveChatContextProvider>
+                    </div>
 
-                        </div>
-
-                    )
-
-                }
+                </div>
 
             </div>
 
