@@ -47,7 +47,7 @@ const LiveChatMessage: React.FC<LiveChatMessageProps> = ({ message })=>{
 
                 <p className={`flex items-center justify-end gap-1 text-[11px] mt-1 ${message.sender !== sender ? "text-gray-800" : "text-gray-300"}`}>
 
-                    {new Date(message.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                    {new Date(message.createdAt as string | number).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
 
                     {
                     

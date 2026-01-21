@@ -13,5 +13,7 @@ export interface LiveChatContextProps{
     selectedMessage: MessageType | null
     handleHoverMessage: (message: MessageType | null) => void
     hoveredMessage: MessageType | null
+    loading: boolean
+    error: string | null
 
 }

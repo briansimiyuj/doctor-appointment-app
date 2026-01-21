@@ -1,3 +1,5 @@
+import { FieldValue } from "firebase/firestore"
+
 export interface MessageType{
 
     _id: string
@@ -5,8 +7,8 @@ export interface MessageType{
     senderID: string | undefined
     senderName: string | undefined
     text: string
-    createdAt: string
-    updatedAt?: string | null
+    createdAt: string | FieldValue
+    updatedAt?: string | FieldValue
     status?: "sent" | "delivered" | "read" | "error"
 
 }

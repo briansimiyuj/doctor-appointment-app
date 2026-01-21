@@ -9,7 +9,7 @@ export const dummyMessages: MessageType[] =[
         senderName: "Dr. Brian Simiyu",
         text: "Hello, how are you feeling today?",
         createdAt: "2025-09-13T08:30:00.000Z",
-        updatedAt :null
+        updatedAt : undefined
     },
 
     {
@@ -19,7 +19,7 @@ export const dummyMessages: MessageType[] =[
         senderName: "John Doe",
         text: "I’m feeling better, but still have some mild headaches.",
         createdAt: "2025-09-13T08:31:00.000Z",
-        updatedAt :null,
+        updatedAt : undefined,
         status: "read"
     },
 
@@ -30,7 +30,7 @@ export const dummyMessages: MessageType[] =[
         senderName: "Dr. Brian Simiyu",
         text: "That’s good to hear. Continue with the prescribed medication and rest.",
         createdAt: "2025-09-13T08:32:00.000Z",
-        updatedAt :null
+        updatedAt : undefined
     },
 
     {
@@ -40,7 +40,7 @@ export const dummyMessages: MessageType[] =[
         senderName: "System Admin",
         text: "Reminder: Your next appointment is scheduled for tomorrow at 10 AM.",
         createdAt: "2025-09-13T08:33:00.000Z",
-        updatedAt :null
+        updatedAt : undefined
     },
 
     {
@@ -50,7 +50,7 @@ export const dummyMessages: MessageType[] =[
         senderName: "John Doe",
         text: "Thanks! I’ll make sure to be on time.",
         createdAt: "2025-09-13T08:34:00.000Z",
-        updatedAt :null,
+        updatedAt : undefined,
         status: "read"
     },
 
@@ -61,7 +61,7 @@ export const dummyMessages: MessageType[] =[
         senderName: "Dr. Brian Simiyu",
         text: "Also, remember to take your morning medication.",
         createdAt: "2025-09-13T08:35:00.000Z",
-        updatedAt :null
+        updatedAt : undefined
     },
 
     {
@@ -71,7 +71,7 @@ export const dummyMessages: MessageType[] =[
         senderName: "John Doe",
         text: "Got it! Will do.",
         createdAt: "2025-09-13T08:36:00.000Z",
-        updatedAt :null,
+        updatedAt : undefined,
         status: "sent"
     },
 
@@ -82,7 +82,7 @@ export const dummyMessages: MessageType[] =[
         senderName: "System Admin",
         text: "System maintenance will occur tonight at 11 PM. Expect brief downtime.",
         createdAt: "2025-09-13T08:37:00.000Z",
-        updatedAt :null
+        updatedAt : undefined
     },
 
     {
@@ -92,7 +92,7 @@ export const dummyMessages: MessageType[] =[
         senderName: "John Doe",
         text: "Okay, but what if the system is down longer?",
         createdAt: "2025-09-13T08:38:00.000Z",
-        updatedAt :null,
+        updatedAt : undefined,
         status: "error"
     }
 ]

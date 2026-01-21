@@ -1,7 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { MessageType } from "../assets/types/MessageType"
-import { dummyMessages } from "../assets/dummyData/dummyMessages"
 import { LiveChatContextProps } from "../assets/contextProps/LiveChatContextProps"
+import { useManageAppointmentContext } from "../context/ManageAppointmentContext"
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore"
+import { db } from "../firebaseConfig"
 
 interface LiveChatContextProviderProps{
 
@@ -13,23 +15,64 @@ export const LiveChatContext=createContext<LiveChatContextProps | undefined>(und
 
 export const LiveChatContextProvider:React.FC<LiveChatContextProviderProps> = ({ children })=>{
 
-    const [messages, setMessages] = useState<MessageType[]>(() =>{
-
-        const savedMessages = localStorage.getItem("messages")
-
-        return savedMessages ? JSON.parse(savedMessages) : dummyMessages
-
-    }),
+    const [messages, setMessages] = useState<MessageType[]>([]),
           [input, setInput] = useState(''),
           [messageMenuModal, setMessageMenuModal] = useState(false),
           [selectedMessage, setSelectedMessage] = useState<MessageType | null>(null),
-          [hoveredMessage, setHoveredMessage] = useState<MessageType | null>(null)
+          [hoveredMessage, setHoveredMessage] = useState<MessageType | null>(null),
+          [loading, setLoading] = useState<boolean>(true),
+          [error, setError] = useState<string | null>(null),
+          { appointment } = useManageAppointmentContext(),
+          appointmentID = appointment?._id || ""
 
     useEffect(() =>{
     
-       localStorage.setItem("messages", JSON.stringify(messages))
+        if(!appointmentID){
+
+            setMessages([])
+
+            setLoading(false)
+
+            return
+
+        }
+
+        setLoading(true)
+
+        setError(null)
+
+        const messagesRef = collection(db, "appointments", appointmentID, "messages"),
+              q = query(messagesRef, orderBy("createdAt", "asc"))
+
+        const unsubscribe = onSnapshot(q, (snapshot) =>{
+
+            const newMessages: MessageType[] = []
+
+            snapshot.forEach((doc) =>{
+
+                const message = doc.data() as MessageType
+
+                newMessages.push(message)
+
+            })
+
+            setMessages(newMessages)
+
+            setLoading(false)
+
+        }, (error) =>{
+
+            console.error("Error fetching messages:", error)
+
+            setError("Failed to load messages")
+
+            setLoading(false)
+
+        })
+
+        return () => unsubscribe()
     
-    }, [messages])
+    }, [appointmentID])
 
     const openMessageMenu = (message: MessageType) =>{
 
@@ -65,7 +108,9 @@ export const LiveChatContextProvider:React.FC<LiveChatContextProviderProps> = ({
         openMessageMenu,
         closeMessageMenu,
         hoveredMessage,
-        handleHoverMessage
+        handleHoverMessage,
+        loading,
+        error
 
     }
 
