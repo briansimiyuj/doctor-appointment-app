@@ -471,6 +471,10 @@ export const VideoCallContextProvider:React.FC<VideoCallContextProviderProps> = 
     useEffect(() =>{
     
         const handleKeyDown = (e: KeyboardEvent) =>{
+
+            const isTypingInInput = (e.target as HTMLElement).tagName === "INPUT" || (e.target as HTMLElement).tagName === "TEXTAREA" || (e.target as HTMLElement).isContentEditable
+
+            if(isTypingInInput) return
         
             if(e.key === "f" || e.key === "F"){
 
