@@ -101,6 +101,7 @@ export const LiveChatContextProvider:React.FC<LiveChatContextProviderProps> = ({
         messages,
         setMessages,
         selectedMessage,
+        setSelectedMessage,
         input,
         setInput,
         messageMenuModal,
