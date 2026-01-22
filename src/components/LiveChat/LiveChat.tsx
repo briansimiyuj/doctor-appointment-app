@@ -1,4 +1,5 @@
 import { NoteType } from "../../assets/types/NoteType"
+import { useLiveChatContext } from "../../context/LiveChatContext"
 import LiveChatHeader from "./LiveChatHeader"
 import LiveChatInput from "./LiveChatInput"
 import LiveChatMessages from "./LiveChatMessages/LiveChatMessages"
@@ -12,17 +13,20 @@ interface LiveChatProps{
 
 const LiveChat: React.FC<LiveChatProps> = ({ note })=>{
 
-    const messagesContainerRef = useRef<HTMLDivElement>(null)
+    const messagesContainerRef = useRef<HTMLDivElement>(null),
+          { messages } = useLiveChatContext()
 
     useEffect(() =>{
 
         if(messagesContainerRef.current){
 
-            messagesContainerRef.current.scrollTop = 0
+            const container = messagesContainerRef.current
+
+            container.scrollTop = container.scrollHeight
 
         }
 
-    }, [])
+    }, [messages])
 
     return(
 

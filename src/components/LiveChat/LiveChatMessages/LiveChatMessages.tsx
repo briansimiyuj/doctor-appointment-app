@@ -1,18 +1,10 @@
-import { useEffect, useRef } from "react"
 import { useLiveChatContext } from "../../../context/LiveChatContext"
 import LiveChatMessage from "./LiveChatMessage"
 import MessageMenuModal from "./MessageMenuModal"
 
 const LiveChatMessages: React.FC = ()=>{
 
-    const { messages, messageMenuModal, selectedMessage, closeMessageMenu } = useLiveChatContext(),
-          bottomRef = useRef<HTMLDivElement>(null)
-
-    useEffect(() =>{
-    
-       bottomRef.current?.scrollIntoView({behavior: "smooth"})
-    
-    }, [messages])
+    const { messages, messageMenuModal, selectedMessage, closeMessageMenu } = useLiveChatContext()
 
     return(
 
@@ -39,9 +31,9 @@ const LiveChatMessages: React.FC = ()=>{
 
                     messages.map(msg =>(
                         
-                        <div className="relative">
+                        <div className="relative" key={msg._id}>
 
-                            <LiveChatMessage key={msg._id} message={msg}/>
+                            <LiveChatMessage message={msg}/>
 
                             {
 
@@ -58,8 +50,6 @@ const LiveChatMessages: React.FC = ()=>{
                 )
                 
             }
-
-            <div ref={bottomRef}></div>
 
         </div>
 
