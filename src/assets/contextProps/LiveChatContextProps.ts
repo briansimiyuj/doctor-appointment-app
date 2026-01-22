@@ -11,6 +11,7 @@ export interface LiveChatContextProps{
     openMessageMenu: (message: MessageType) => void
     closeMessageMenu: () => void
     selectedMessage: MessageType | null
+    setSelectedMessage: (message: MessageType | null) => void
     handleHoverMessage: (message: MessageType | null) => void
     hoveredMessage: MessageType | null
     loading: boolean
