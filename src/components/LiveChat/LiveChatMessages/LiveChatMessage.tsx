@@ -2,6 +2,7 @@ import { MessageType } from "../../../assets/types/MessageType"
 import { FiCheck, FiChevronDown, FiClock } from "react-icons/fi"
 import { useProfileContext } from "../../../context/ProfileContext"
 import { useLiveChatContext } from "../../../context/LiveChatContext"
+import { useMessageStatus } from "../../../hooks/useMessageStatus"
 
 interface LiveChatMessageProps{
 
@@ -13,29 +14,45 @@ const LiveChatMessage: React.FC<LiveChatMessageProps> = ({ message })=>{
 
     const { profile } = useProfileContext(),
           { openMessageMenu, handleHoverMessage, hoveredMessage } = useLiveChatContext(),
+          { markAsRead } = useMessageStatus(),
           isAdmin = message.sender === "admin",
-          sender = profile?.type === "doctor" ? "doctor" : profile?.type === "patient" ? "patient" : "admin",
-          receiver = profile?.type === "patient" ? "doctor" : profile?.type === "doctor" ? "patient" : "admin"    
+          isCurrentUserSender = message.sender === profile?.type,
+          senderName = profile?.type === "doctor" ? "doctor" : 
+                      profile?.type === "patient" ? "patient" : "admin",
+          receiver = profile?.type === "patient" ? "doctor" : 
+                    profile?.type === "doctor" ? "patient" : "admin"
+
+    const handleHover = () =>{
+
+        handleHoverMessage(message)
+
+        if(!isCurrentUserSender && message.status === "delivered"){
+
+            markAsRead(message._id)
+
+        }
+
+    }
 
     return(
 
-        <div className={`flex ${message.sender !== sender ? "justify-start" : sender ? "justify-end" : "just-center"}`}>
+        <div className={`flex ${message.sender !== senderName ? "justify-start" : "justify-end"}`}>
 
             <div
                 className={`px-4 py-5 rounded-xl max-w-sm text-base shadow relative
-                    ${message.sender === sender 
+                    ${message.sender === senderName 
                         ? "bg-green-500 text-white dark:text-white rounded-br-none"
                         : message.sender === receiver
                         ? "bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-100 rounded-bl-none"
                         : message.sender === "admin" ? "bg-yellow-200 text-gray-800 dark:bg-yellow-600 dark:text-gray-100 text-center" : null
                 }`}
-                onMouseOver={() => handleHoverMessage(message)}
+                onMouseOver={handleHover}
                 onMouseLeave={() => handleHoverMessage(null)}
             >
 
                 {
 
-                    !isAdmin && message.sender !== sender &&(
+                    !isAdmin && message.sender !== senderName &&(
 
                         <p className="font-bold text-sm mb-1">{message.senderName}</p>
 
@@ -45,13 +62,13 @@ const LiveChatMessage: React.FC<LiveChatMessageProps> = ({ message })=>{
 
                 <p className="leading-relaxed">{message.text}</p>
 
-                <p className={`flex items-center justify-end gap-1 text-[11px] mt-1 ${message.sender !== sender ? "text-gray-800" : "text-gray-300"}`}>
+                <p className={`flex items-center justify-end gap-1 text-[11px] mt-1 ${message.sender !== senderName ? "text-gray-800" : "text-gray-300"}`}>
 
                     {new Date(message.createdAt as string | number).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
 
                     {
                     
-                        sender &&(
+                        isCurrentUserSender &&(
 
                             <>
 
