@@ -4,6 +4,7 @@ import { LiveChatContextProps } from "../assets/contextProps/LiveChatContextProp
 import { useManageAppointmentContext } from "../context/ManageAppointmentContext"
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore"
 import { db } from "../firebaseConfig"
+import { useProfileContext } from "./ProfileContext"
 
 interface LiveChatContextProviderProps{
 
@@ -24,6 +25,7 @@ export const LiveChatContextProvider:React.FC<LiveChatContextProviderProps> = ({
           [loading, setLoading] = useState<boolean>(true),
           [error, setError] = useState<string | null>(null),
           { appointment } = useManageAppointmentContext(),
+          { profile } = useProfileContext(),
           appointmentID = appointment?._id || ""
 
     useEffect(() =>{
@@ -52,8 +54,14 @@ export const LiveChatContextProvider:React.FC<LiveChatContextProviderProps> = ({
             snapshot.forEach((doc) =>{
 
                 const message = doc.data() as MessageType
+                
+                const isDeletedForCurrentUser = message.deletedFor?.includes(profile?._id || "")
+                
+                if(!isDeletedForCurrentUser){
 
-                newMessages.push(message)
+                    newMessages.push(message)
+
+                }
 
             })
 
@@ -72,8 +80,8 @@ export const LiveChatContextProvider:React.FC<LiveChatContextProviderProps> = ({
         })
 
         return () => unsubscribe()
-    
-    }, [appointmentID])
+
+    }, [appointmentID, profile?._id]) 
 
     const openMessageMenu = (message: MessageType) =>{
 
