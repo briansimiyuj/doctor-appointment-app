@@ -124,7 +124,10 @@ const LiveChatMessage: React.FC<LiveChatMessageProps> = ({ message })=>{
 
                                     hoveredMessage?._id === message._id && !isAdmin &&(
 
-                                        <span className="absolute top-1 right-2 cursor-pointer" onClick={() => openMessageMenu(message)}>
+                                        <span className="absolute top-1 right-2 cursor-pointer" onClick={e =>{
+                                            e.stopPropagation()
+                                            openMessageMenu(message)
+                                        }}>
 
                                            <FiChevronDown className="w-6 h-6 text-gray-500 dark:text-gray-900"
                                            />                                        
