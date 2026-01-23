@@ -19,6 +19,9 @@ export const LiveChatContextProvider:React.FC<LiveChatContextProviderProps> = ({
           [input, setInput] = useState(''),
           [messageMenuModal, setMessageMenuModal] = useState(false),
           [selectedMessage, setSelectedMessage] = useState<MessageType | null>(null),
+          [showDeleteMessageModal, setShowDeleteMessageModal] = useState(
+            import .meta.env.VITE_DEV_MODE === "true" ? true : false
+          ),
           [hoveredMessage, setHoveredMessage] = useState<MessageType | null>(null),
           [loading, setLoading] = useState<boolean>(true),
           [error, setError] = useState<string | null>(null),
@@ -96,6 +99,22 @@ export const LiveChatContextProvider:React.FC<LiveChatContextProviderProps> = ({
     
     }
 
+    const openDeleteMessageModal = (message: MessageType) =>{
+    
+        setSelectedMessage(message)
+
+        setShowDeleteMessageModal(true)
+    
+    }
+
+    const closeDeleteMessageModal = () =>{
+
+        setShowDeleteMessageModal(false)
+
+        setSelectedMessage(null)
+
+    }
+
     const contextValue: LiveChatContextProps ={
 
         messages,
@@ -111,7 +130,10 @@ export const LiveChatContextProvider:React.FC<LiveChatContextProviderProps> = ({
         hoveredMessage,
         handleHoverMessage,
         loading,
-        error
+        error,
+        showDeleteMessageModal,
+        openDeleteMessageModal,
+        closeDeleteMessageModal
 
     }
 

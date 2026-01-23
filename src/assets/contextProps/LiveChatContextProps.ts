@@ -10,6 +10,9 @@ export interface LiveChatContextProps{
     setMessageMenuModal: (messageMenuModal: boolean) => void
     openMessageMenu: (message: MessageType) => void
     closeMessageMenu: () => void
+    showDeleteMessageModal: boolean
+    openDeleteMessageModal: (message: MessageType) => void
+    closeDeleteMessageModal: () => void
     selectedMessage: MessageType | null
     setSelectedMessage: (message: MessageType | null) => void
     handleHoverMessage: (message: MessageType | null) => void
