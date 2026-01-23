@@ -1,5 +1,6 @@
 import { NoteType } from "../../assets/types/NoteType"
 import { useLiveChatContext } from "../../context/LiveChatContext"
+import DeleteMessageModal from "./DeleteMessageModal/DeleteMessageModal"
 import LiveChatHeader from "./LiveChatHeader"
 import LiveChatInput from "./LiveChatInput"
 import LiveChatMessages from "./LiveChatMessages/LiveChatMessages"
@@ -14,7 +15,7 @@ interface LiveChatProps{
 const LiveChat: React.FC<LiveChatProps> = ({ note })=>{
 
     const messagesContainerRef = useRef<HTMLDivElement>(null),
-          { messages } = useLiveChatContext()
+          { messages, showDeleteMessageModal } = useLiveChatContext()
 
     useEffect(() =>{
 
@@ -44,6 +45,8 @@ const LiveChat: React.FC<LiveChatProps> = ({ note })=>{
             </div>
 
            <LiveChatInput/> 
+
+           { showDeleteMessageModal && <DeleteMessageModal/> }
 
         </div>
 
