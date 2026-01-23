@@ -6,6 +6,7 @@ export interface MessageType{
     sender: "doctor" | "patient" | "admin"
     senderID: string | undefined
     senderName: string | undefined
+    deletedFor?: string[]   
     text: string
     createdAt: string | FieldValue
     updatedAt?: string | FieldValue
