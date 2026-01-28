@@ -11,5 +11,8 @@ export interface MessageType{
     createdAt: string | FieldValue
     updatedAt?: string | FieldValue
     status?: "sent" | "delivered" | "read" | "error"
+    isEdited?: boolean
+    isEditing?: boolean
+    editText?: string
 
 }

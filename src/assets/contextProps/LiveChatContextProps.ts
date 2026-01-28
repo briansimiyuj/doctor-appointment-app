@@ -19,5 +19,11 @@ export interface LiveChatContextProps{
     hoveredMessage: MessageType | null
     loading: boolean
     error: string | null
+    editText: string
+    setEditText: (editText: string) => void
+    showEditMessageModal: boolean
+    openEditMessageModal: (message: MessageType) => void
+    closeEditMessageModal: () => void
+    
 
 }

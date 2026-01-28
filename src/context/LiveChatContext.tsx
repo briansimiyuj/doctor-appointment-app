@@ -23,6 +23,10 @@ export const LiveChatContextProvider:React.FC<LiveChatContextProviderProps> = ({
           [showDeleteMessageModal, setShowDeleteMessageModal] = useState(false),
           [hoveredMessage, setHoveredMessage] = useState<MessageType | null>(null),
           [loading, setLoading] = useState<boolean>(true),
+          [editText, setEditText] = useState(''),
+          [showEditMessageModal, setShowEditMessageModal] = useState(
+            import .meta.env.VITE_DEV_MODE === "true" ? true : false
+          ),
           [error, setError] = useState<string | null>(null),
           { appointment } = useManageAppointmentContext(),
           { profile } = useProfileContext(),
@@ -121,6 +125,27 @@ export const LiveChatContextProvider:React.FC<LiveChatContextProviderProps> = ({
 
     }
 
+    const openEditMessageModal = (message: MessageType) =>{
+    
+       setSelectedMessage(message)
+
+       setEditText(message.text)
+
+       setShowEditMessageModal(true)
+
+       closeMessageMenu()
+    
+    }
+
+    const closeEditMessageModal = () =>{
+        
+        setShowEditMessageModal(false)
+
+        setSelectedMessage(null)
+
+        setEditText('')
+    }
+
     const contextValue: LiveChatContextProps ={
 
         messages,
@@ -139,7 +164,12 @@ export const LiveChatContextProvider:React.FC<LiveChatContextProviderProps> = ({
         error,
         showDeleteMessageModal,
         openDeleteMessageModal,
-        closeDeleteMessageModal
+        closeDeleteMessageModal,
+        editText,
+        setEditText,
+        showEditMessageModal,
+        openEditMessageModal,
+        closeEditMessageModal
 
     }
 
