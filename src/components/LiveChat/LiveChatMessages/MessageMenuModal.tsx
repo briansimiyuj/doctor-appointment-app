@@ -14,7 +14,7 @@ const MessageMenuModal: React.FC<MessageMenuModalProps> = ({ message }) =>{
     if(!message) return null
 
     const { profile } = useProfileContext(),
-          { openDeleteMessageModal, closeMessageMenu } = useLiveChatContext(),
+          { openDeleteMessageModal, closeMessageMenu, openEditMessageModal } = useLiveChatContext(),
           { copy } = useCopyToClipboard(),
           sender = profile?.type === "doctor" ? "doctor" : profile?.type === "patient" ? "patient" : "admin"
 
@@ -59,7 +59,13 @@ const MessageMenuModal: React.FC<MessageMenuModalProps> = ({ message }) =>{
                                 }}
                             >Delete</li>
 
-                            <li className="px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer">Edit</li>
+                            <li 
+                                className="px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer"
+                                onClick={e =>{
+                                    e.stopPropagation()
+                                    openEditMessageModal(message)
+                                }}
+                            >Edit</li>
                             
                         </>
                     )
