@@ -5,6 +5,7 @@ import LiveChatHeader from "./LiveChatHeader"
 import LiveChatInput from "./LiveChatInput"
 import LiveChatMessages from "./LiveChatMessages/LiveChatMessages"
 import { useEffect, useRef } from "react"
+import TypingIndicator from "./TypingIndicator"
 
 interface LiveChatProps{
 
@@ -41,6 +42,8 @@ const LiveChat: React.FC<LiveChatProps> = ({ note })=>{
             >
 
                 <LiveChatMessages/>
+
+                <TypingIndicator/>
 
             </div>
 

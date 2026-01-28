@@ -41,8 +41,6 @@ export const useTypingIndicator = () =>{
                 hasSeenDocumentRef.current = true
 
                 if(isOtherUserTyping && isRecent){
-
-                    console.log('✅ TYPING EVENT: Other user typing detected - Showing indicator')
                     
                     isHandlingDeleteRef.current = false
                     
@@ -50,17 +48,11 @@ export const useTypingIndicator = () =>{
 
                     if(hideTypingTimeoutRef.current){
 
-                        console.log('🔄 TYPING TIMER: Clearing previous hide timer')
-
                         clearTimeout(hideTypingTimeoutRef.current)
 
                     }   
-
-                    console.log(`⏰ TYPING TIMER: Setting hide timer for ${TYPING_INDICATOR_DELAY}ms`)
                     
                     hideTypingTimeoutRef.current = setTimeout(() =>{
-
-                        console.log('⏰ TYPING TIMER: Hide timer expired - Hiding indicator')
 
                         setOtherUserTyping(false)
 
@@ -72,27 +64,19 @@ export const useTypingIndicator = () =>{
 
                 if(!hasSeenDocumentRef.current){
 
-                    console.log('📭 TYPING: Initial state - no typing document exists')
-
                     return
                     
                 }
 
                 if(isHandlingDeleteRef.current){
 
-                    console.log('⏸️ TYPING: Skipping duplicate delete - already handling one')
-
                     return
                     
                 }
                 
-                console.log('🗑️ TYPING EVENT: Document deleted - User stopped typing')
-                
                 isHandlingDeleteRef.current = true
                 
                 if(hideTypingTimeoutRef.current){
-
-                    console.log('🗑️ TYPING TIMER: Clearing hide timer')
 
                     clearTimeout(hideTypingTimeoutRef.current)
 
@@ -129,8 +113,6 @@ export const useTypingIndicator = () =>{
         
             if(isUserTyping){
 
-                console.log('📝 TYPING STATUS: Setting MY status to TYPING')
-
                 await setDoc(myTypingRef, {
 
                     isTyping: true,
@@ -143,15 +125,13 @@ export const useTypingIndicator = () =>{
             
             }else{
                 
-                console.log('📝 TYPING STATUS: Setting MY status to NOT TYPING')
-
                 await deleteDoc(myTypingRef)
 
             }
         
         }catch(error){
         
-           console.error('❌ TYPING ERROR: ', error)
+           console.error('Error updating typing status: ', error)
         
         }
 
@@ -159,13 +139,9 @@ export const useTypingIndicator = () =>{
 
     const startTyping = useCallback(() =>{
 
-        console.log('⌨️ TYPING ACTION: startTyping called')
-
         if(!isTyping) setIsTyping(true)
 
         if(typingTimeoutRef.current){
-
-            console.log('🔄 TYPING TIMER: Clearing previous typing timeout')
 
             clearTimeout(typingTimeoutRef.current)
 
@@ -175,25 +151,17 @@ export const useTypingIndicator = () =>{
 
         typingTimeoutRef.current = setTimeout(() =>{
 
-            console.log('⏰ TYPING TIMER: Typing timeout expired - Stopping typing')
-
             setIsTyping(false)
 
             setTypingStatus(false)
 
         }, DEBOUNCE_DELAY)
 
-        console.log(`⏰ TYPING TIMER: Started ${DEBOUNCE_DELAY}ms typing timeout`)
-
     }, [isTyping, setTypingStatus])
 
     const stopTyping = useCallback(() =>{
         
-        console.log('🛑 TYPING ACTION: stopTyping called')
-        
         if(typingTimeoutRef.current){
-
-            console.log('🛑 TYPING TIMER: Clearing typing timeout')
 
             clearTimeout(typingTimeoutRef.current)
 
