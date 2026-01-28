@@ -2,11 +2,13 @@ import { useRef, useEffect } from "react"
 import { useLiveChatContext } from "../../context/LiveChatContext"
 import { FiSend } from "react-icons/fi"
 import { useSendMessage } from "../../hooks/useSendMessage"
+import { useTypingIndicator } from "../../hooks/useTypingIndicator"
 
 const LiveChatInput: React.FC = () =>{
 
     const { input, setInput } = useLiveChatContext(),
           { sendMessage } = useSendMessage(), 
+          { startTyping, stopTyping } = useTypingIndicator(),
           textareaRef = useRef<HTMLTextAreaElement | null>(null)
 
     useEffect(() =>{
@@ -23,9 +25,30 @@ const LiveChatInput: React.FC = () =>{
 
     }, [input])
 
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>{
+
+        const value = e.target.value
+
+        setInput(value)
+
+        if(value.trim().length > 0){
+
+            startTyping()
+
+        }else{
+
+            stopTyping()
+
+        }
+
+    }
+
     const submitForm = (e: React.FormEvent<HTMLFormElement>) =>{
     
        e.preventDefault()
+
+       stopTyping()
 
        sendMessage()
     
@@ -38,7 +61,8 @@ const LiveChatInput: React.FC = () =>{
             <textarea
                 ref={textareaRef}
                 value={input}
-                onChange={e => setInput(e.target.value)}
+                onChange={handleInputChange}
+                onBlur={stopTyping}
                 placeholder="Type a message..."
                 className="w-full resize-none overflow-y-auto rounded-full bg-white border pr-10 pl-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 rows={1}
@@ -47,6 +71,8 @@ const LiveChatInput: React.FC = () =>{
                     if(e.key === "Enter" && !e.shiftKey){
 
                         e.preventDefault()
+
+                        stopTyping()
 
                         sendMessage()
                         
