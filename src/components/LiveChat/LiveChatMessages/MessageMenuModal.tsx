@@ -1,9 +1,12 @@
 import { MessageType } from "../../../assets/types/MessageType"
 import { useLiveChatContext } from "../../../context/LiveChatContext"
 import { useProfileContext } from "../../../context/ProfileContext"
+import { useCopyToClipboard } from "../../../hooks/useCopyToClipboard"
 
 interface MessageMenuModalProps{
+
     message: MessageType | null
+
 }
 
 const MessageMenuModal: React.FC<MessageMenuModalProps> = ({ message }) =>{
@@ -11,8 +14,17 @@ const MessageMenuModal: React.FC<MessageMenuModalProps> = ({ message }) =>{
     if(!message) return null
 
     const { profile } = useProfileContext(),
-          { openDeleteMessageModal } = useLiveChatContext(),
+          { openDeleteMessageModal, closeMessageMenu } = useLiveChatContext(),
+          { copy } = useCopyToClipboard(),
           sender = profile?.type === "doctor" ? "doctor" : profile?.type === "patient" ? "patient" : "admin"
+
+    const handleCopy = () =>{
+    
+       if(message && message.text) copy(message.text)
+
+        closeMessageMenu()
+    
+    }
 
     return(
 
@@ -20,7 +32,13 @@ const MessageMenuModal: React.FC<MessageMenuModalProps> = ({ message }) =>{
 
             <ul className="flex flex-col text-sm text-gray-800 dark:text-gray-100">
 
-                <li className="px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer">Copy</li>
+                <li 
+                    className="px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer"
+                    onClick={e =>{
+                        e.stopPropagation()
+                        handleCopy()
+                    }}
+                >Copy</li>
 
                 <li className="px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer">Forward</li>
 
