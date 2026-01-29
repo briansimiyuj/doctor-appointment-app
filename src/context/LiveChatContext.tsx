@@ -24,9 +24,7 @@ export const LiveChatContextProvider:React.FC<LiveChatContextProviderProps> = ({
           [hoveredMessage, setHoveredMessage] = useState<MessageType | null>(null),
           [loading, setLoading] = useState<boolean>(true),
           [editText, setEditText] = useState(''),
-          [showEditMessageModal, setShowEditMessageModal] = useState(
-            import .meta.env.VITE_DEV_MODE === "true" ? true : false
-          ),
+          [showEditMessageModal, setShowEditMessageModal] = useState(false),
           [error, setError] = useState<string | null>(null),
           { appointment } = useManageAppointmentContext(),
           { profile } = useProfileContext(),

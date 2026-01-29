@@ -1,12 +1,13 @@
 import { useEffect, useRef } from "react"
 import { useLiveChatContext } from "../../../context/LiveChatContext"
+import { useEditMessage } from "../../../hooks/useEditMessage"
 import { FiX } from "react-icons/fi"
 
 const EditMessageModal: React.FC = () =>{
 
     const { showEditMessageModal, closeEditMessageModal, editText, setEditText, selectedMessage  } = useLiveChatContext(),
-    
-    textareaRef = useRef<HTMLTextAreaElement>(null)
+          { editMessage, getRemainingTime, formatRemainingTime } = useEditMessage(),
+          textareaRef = useRef<HTMLTextAreaElement>(null)
 
     useEffect(() =>{
 
@@ -20,7 +21,10 @@ const EditMessageModal: React.FC = () =>{
 
     }, [showEditMessageModal])
 
-    const handleSave = () =>{
+    if(!showEditMessageModal || !selectedMessage) return null
+    
+
+    const handleSave = async () =>{
 
         if(!selectedMessage || !editText.trim()){
 
@@ -30,7 +34,9 @@ const EditMessageModal: React.FC = () =>{
 
         }
         
-        closeEditMessageModal()
+        const success = await editMessage(selectedMessage._id, editText.trim())
+
+        if(success) closeEditMessageModal()
 
     }
 
@@ -50,7 +56,9 @@ const EditMessageModal: React.FC = () =>{
 
     }
 
-    if(!showEditMessageModal) return null
+    const remainingTime = getRemainingTime(selectedMessage),
+          formattedTime = formatRemainingTime(remainingTime),
+          isTimeExpired = remainingTime <= 0
 
     return(
 
@@ -82,6 +90,42 @@ const EditMessageModal: React.FC = () =>{
 
                 <div className="p-4">
 
+                    {
+
+                        isTimeExpired ?(
+
+                            <div className="mb-3 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+
+                                <p className="text-red-600 dark:text-red-400 text-sm font-medium">
+
+                                    ⏰ Edit time expired. You can no longer edit this message.
+
+                                </p>
+
+                            </div>
+
+                        ):(
+
+                            <div className="mb-3 flex items-center justify-between text-sm">
+
+                                <span className="text-gray-600 dark:text-gray-400">
+
+                                    Time remaining to edit:
+
+                                </span>
+
+                                <span className="font-medium text-blue-600 dark:text-blue-400">
+
+                                    {formattedTime}
+
+                                </span>
+
+                            </div>
+
+                        )
+
+                    }
+
                     <textarea
                         ref={textareaRef}
                         value={editText}
@@ -91,6 +135,7 @@ const EditMessageModal: React.FC = () =>{
                         rows={4}
                         placeholder="Edit your message..."
                         autoFocus
+                        disabled={isTimeExpired}
                     />
 
                     <div className="flex justify-end gap-3 mt-4">
@@ -102,7 +147,8 @@ const EditMessageModal: React.FC = () =>{
 
                         <button
                             onClick={handleSave}
-                            className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white dark:text-white font-semibold rounded-lg flex items-center gap-2 transition-colors"
+                            disabled={isTimeExpired || !editText.trim()}
+                            className="px-4 py-2 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white dark:text-white font-semibold rounded-lg flex items-center gap-2 transition-colors"
                         >Save Changes</button>
 
                     </div>
