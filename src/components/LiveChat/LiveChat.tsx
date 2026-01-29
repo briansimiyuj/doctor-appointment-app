@@ -6,6 +6,7 @@ import LiveChatInput from "./LiveChatInput"
 import LiveChatMessages from "./LiveChatMessages/LiveChatMessages"
 import { useEffect, useRef } from "react"
 import TypingIndicator from "./TypingIndicator"
+import EditMessageModal from "./EditMessageModal/EditMessageModal"
 
 interface LiveChatProps{
 
@@ -16,7 +17,7 @@ interface LiveChatProps{
 const LiveChat: React.FC<LiveChatProps> = ({ note })=>{
 
     const messagesContainerRef = useRef<HTMLDivElement>(null),
-          { messages, showDeleteMessageModal } = useLiveChatContext()
+          { messages, showDeleteMessageModal, showEditMessageModal } = useLiveChatContext()
 
     useEffect(() =>{
 
@@ -50,6 +51,8 @@ const LiveChat: React.FC<LiveChatProps> = ({ note })=>{
            <LiveChatInput/> 
 
            { showDeleteMessageModal && <DeleteMessageModal/> }
+
+           { showEditMessageModal && <EditMessageModal/> }
 
         </div>
 
