@@ -1,11 +1,27 @@
 import { FaCompress, FaExpand, FaMicrophone, FaMicrophoneSlash, FaVideo, FaVideoSlash, FaComments, FaTimes } from "react-icons/fa"
 import { useManageAppointmentContext } from "../../../../../context/ManageAppointmentContext"
 import { useVideoCallContext } from "../../../../../context/VideoCallContext"
+import UnreadMessageBubble from "../../../../LiveChat/UnreadMessageBubble"
+import { useLiveChatContext } from "../../../../../context/LiveChatContext"
 
 const VideoControls: React.FC = ()=>{
+    
     const { formatTime, sessionStatus, elapsedTime, isChatModalOpen, toggleChatModal } = useManageAppointmentContext(),
            { isMicMuted, isCamOff, toggleMic, toggleCam, isFullScreen, toggleFullScreen } = useVideoCallContext(),
+           { markMessagesAsRead } = useLiveChatContext(),
           isOvertime = sessionStatus === "Overtime"
+
+    const handleChatToggle = () =>{
+    
+        if(!isChatModalOpen && markMessagesAsRead){
+        
+            markMessagesAsRead()
+        
+        }
+
+        toggleChatModal()
+    
+    }
 
     return(
 
@@ -22,8 +38,8 @@ const VideoControls: React.FC = ()=>{
             <div className="flex items-center space-x-1 sm:space-x-2 md:space-x-3">
                 
                 <button 
-                    onClick={toggleChatModal}
-                    className={`p-2 sm:p-3 rounded-full text-white dark:text-white transition ${
+                    onClick={handleChatToggle}
+                    className={`p-2 sm:p-3 rounded-full relative text-white dark:text-white transition ${
                         isChatModalOpen ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-700 hover:bg-gray-600'
                     }`}
                     title={isChatModalOpen ? "Close Chat" : "Open Chat"}
@@ -34,6 +50,8 @@ const VideoControls: React.FC = ()=>{
                         isChatModalOpen ? <FaTimes className="w-4 h-4 sm:w-5 sm:h-5"/> : <FaComments className="w-4 h-4 sm:w-5 sm:h-5"/>
 
                     }
+
+                    { !isChatModalOpen && <UnreadMessageBubble/> }
 
                 </button>
 

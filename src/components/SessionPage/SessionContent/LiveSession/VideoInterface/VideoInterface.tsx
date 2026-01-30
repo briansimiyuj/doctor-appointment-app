@@ -4,6 +4,7 @@ import { useProfileContext } from "../../../../../context/ProfileContext"
 import VideoControls from "./VideoControls"
 import { useVideoCallContext } from "../../../../../context/VideoCallContext"
 import { useEffect, useRef } from "react"
+import { LiveChatContextProvider } from "../../../../../context/LiveChatContext"
 
 const VideoInterface: React.FC = ()=>{
 
@@ -178,7 +179,11 @@ const VideoInterface: React.FC = ()=>{
 
             </div>
 
-            <VideoControls/>
+            <LiveChatContextProvider>
+
+                <VideoControls/>
+
+            </LiveChatContextProvider>
 
         </div>
 
