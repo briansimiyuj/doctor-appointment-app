@@ -1,10 +1,12 @@
 import { useLiveChatContext } from "../../../context/LiveChatContext"
+import { useProfileContext } from "../../../context/ProfileContext"
 import LiveChatMessage from "./LiveChatMessage"
 import MessageMenuModal from "./MessageMenuModal"
 
 const LiveChatMessages: React.FC = ()=>{
 
-    const { messages, messageMenuModal, selectedMessage, closeMessageMenu } = useLiveChatContext()
+    const { messages, messageMenuModal, selectedMessage, closeMessageMenu } = useLiveChatContext(),
+          { profile } = useProfileContext()
 
     return(
 
@@ -23,7 +25,19 @@ const LiveChatMessages: React.FC = ()=>{
 
                     <div className="flex justify-center items-center h-full m-auto">
 
-                        <p className="text-gray-500 text-sm">Start a conversation with a doctor</p>
+                        {
+
+                            profile?.type === "patient" ?(
+
+                                <p className="text-gray-500 text-sm">Start a conversation with a doctor</p>
+
+                            ):(
+                                
+                                <p className="text-gray-500 text-sm">Start a conversation with a patient</p>
+
+                            )
+
+                        }
 
                     </div>
 
