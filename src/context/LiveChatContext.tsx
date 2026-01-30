@@ -26,9 +26,92 @@ export const LiveChatContextProvider:React.FC<LiveChatContextProviderProps> = ({
           [editText, setEditText] = useState(''),
           [showEditMessageModal, setShowEditMessageModal] = useState(false),
           [error, setError] = useState<string | null>(null),
+          [unreadCount, setUnreadCount] = useState<number>(0),
+          [lastReadMessageID, setLastReadMessageID] = useState<string | null>(null),
+          [newMessageIDsSinceLastRead, setNewMessageIDsSinceLastRead] = useState<Set<string>>(new Set()),
+          { isChatModalOpen } = useManageAppointmentContext(),
           { appointment } = useManageAppointmentContext(),
           { profile } = useProfileContext(),
           appointmentID = appointment?._id || ""
+
+    useEffect(() =>{
+    
+        if(!profile || !appointmentID || messages.length === 0) return
+
+        if(isChatModalOpen){
+
+            if(messages.length > 0){
+
+                const lastMessage = messages[messages.length - 1]
+
+                setLastReadMessageID(lastMessage._id)
+
+                setNewMessageIDsSinceLastRead(new Set())
+
+                setUnreadCount(0)
+
+            }
+
+            return
+
+        }
+
+        let newUnread = 0
+
+        const newMessageIDs = new Set<string>()
+
+        messages.forEach(message =>{
+
+            if(message.senderID === profile._id) return
+
+            if(lastReadMessageID){
+
+                const lastReadMessage = messages.find(msg => msg._id === lastReadMessageID)
+
+                if(!lastReadMessage) return
+
+                const lastReadTime = new Date(lastReadMessage.createdAt as string).getTime(),
+                      messageTime = new Date(message.createdAt as string).getTime()
+
+                if(messageTime > lastReadTime && !newMessageIDsSinceLastRead.has(message._id)){
+
+                    newUnread++
+
+                    newMessageIDs.add(message._id)
+
+                }
+
+            }else{
+
+                if(!newMessageIDsSinceLastRead.has(message._id)){
+
+                    newUnread++
+              
+                    newMessageIDs.add(message._id)
+
+                }
+
+            }
+            
+        })
+
+        if(newUnread > 0){
+
+            setUnreadCount(prev => prev + newUnread)    
+
+            setNewMessageIDsSinceLastRead(prev =>{
+
+                const updatedSet = new Set(prev)
+
+                newMessageIDs.forEach(ID => updatedSet.add(ID))
+
+                return updatedSet
+
+            })
+
+        }
+    
+    }, [messages, isChatModalOpen, lastReadMessageID, profile, appointmentID, newMessageIDsSinceLastRead])
 
     useEffect(() =>{
     
@@ -144,6 +227,30 @@ export const LiveChatContextProvider:React.FC<LiveChatContextProviderProps> = ({
         setEditText('')
     }
 
+    const handleAddNewMessageID = (messageID: string) =>{
+
+        setNewMessageIDsSinceLastRead(prev => new Set(prev).add
+       
+        (messageID))
+
+    }
+
+    const markMessagesAsRead = () =>{
+
+        if(messages.length > 0){
+
+            const lastMessage = messages[messages.length - 1]
+
+            setLastReadMessageID(lastMessage._id)
+
+        }
+
+        setNewMessageIDsSinceLastRead(new Set())
+
+        setUnreadCount(0)
+
+    }
+
     const contextValue: LiveChatContextProps ={
 
         messages,
@@ -167,7 +274,14 @@ export const LiveChatContextProvider:React.FC<LiveChatContextProviderProps> = ({
         setEditText,
         showEditMessageModal,
         openEditMessageModal,
-        closeEditMessageModal
+        closeEditMessageModal,
+        unreadCount,
+        setUnreadCount,
+        lastReadMessageID,
+        setLastReadMessageID,
+        markMessagesAsRead,
+        newMessageIDsSinceLastRead,
+        setNewMessageIDsSinceLastRead: handleAddNewMessageID,
 
     }
 

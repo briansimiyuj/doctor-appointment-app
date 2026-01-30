@@ -24,6 +24,12 @@ export interface LiveChatContextProps{
     showEditMessageModal: boolean
     openEditMessageModal: (message: MessageType) => void
     closeEditMessageModal: () => void
-    
+    unreadCount: number
+    setUnreadCount: (count: number) => void
+    lastReadMessageID: string | null
+    setLastReadMessageID: (messageID: string | null) => void
+    markMessagesAsRead: () => void
+    newMessageIDsSinceLastRead: Set<string>
+    setNewMessageIDsSinceLastRead: (messageID: string) => void
 
 }
