@@ -58,7 +58,9 @@ const EditMessageModal: React.FC = () =>{
 
     const remainingTime = getRemainingTime(selectedMessage),
           formattedTime = formatRemainingTime(remainingTime),
-          isTimeExpired = remainingTime <= 0
+          isTimeExpired = remainingTime <= 0,
+          isUnchanged = editText.trim() === selectedMessage.text?.trim(),
+          shouldDisableSave = isTimeExpired || !editText.trim() || isUnchanged
 
     return(
 
@@ -142,13 +144,18 @@ const EditMessageModal: React.FC = () =>{
 
                         <button
                             onClick={closeEditMessageModal}
-                            className="px-4 py-2 text-gray-700 dark:text-gray-300 font-semibold bg-gray-300 dark:bg-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                            className="px-4 py-2 text-gray-700 dark:text-gray-300 font-semibold bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors"
                         >Cancel</button>
 
                         <button
                             onClick={handleSave}
-                            disabled={isTimeExpired || !editText.trim()}
-                            className="px-4 py-2 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white dark:text-white font-semibold rounded-lg flex items-center gap-2 transition-colors"
+                            disabled={shouldDisableSave}
+                            className="px-4 py-2 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold rounded-lg flex items-center gap-2 transition-colors"
+                            title={shouldDisableSave ? 
+                                (isTimeExpired ? "Edit time expired" : 
+                                 isUnchanged ? "Make changes to save" : 
+                                 "Enter text to save") : 
+                                "Save changes"}
                         >Save Changes</button>
 
                     </div>

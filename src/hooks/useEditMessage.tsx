@@ -24,6 +24,10 @@ export const useEditMessage = () =>{
 
         }
 
+        const originalMessage = messages.find(message => message._id === messageID)
+
+        if(originalMessage && newText.trim() === originalMessage.text.trim()) return false
+
         try{
         
             const messageRef = doc(db, "appointments", appointmentID, "messages", messageID)
