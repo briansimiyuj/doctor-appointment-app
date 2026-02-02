@@ -38,6 +38,7 @@ import GeneralPhysician from "./General_physician.svg"
 import Gynecologist from "./Gynecologist.svg"
 import Neurologist from "./Neurologist.svg"
 import Pediatrician from "./Pediatricians.svg"
+import Psychologist from "./Psychologist.png"
 import patient1 from "./patient1.jpg"
 import patient2 from "./patient2.jpg"
 import patient3 from "./patient3.jpg"
@@ -143,6 +144,11 @@ export const specialityData =[
     {
         speciality:"Pediatrician",
         image: Pediatrician
+    },
+
+    {
+        speciality:"Counselling Psychologist",
+        image: Psychologist
     }
 
 ]
