@@ -4,6 +4,8 @@ import { useManageAppointmentContext } from "../context/ManageAppointmentContext
 import { useProfileContext } from "../context/ProfileContext"
 import { useLiveChatContext } from "../context/LiveChatContext"
 import { useToast } from "./useToast"
+import { MessageType } from "../assets/types/MessageType"
+import { formatRemainingTime, getRemainingTime, isWithinTimeLimit, MessageTimeLimits } from "../assets/utils/messageTimeLimits"
 
 export const useDeleteMessage = () =>{
 
@@ -71,12 +73,37 @@ export const useDeleteMessage = () =>{
 
     }
 
-    const canDeleteForEveryone = (messageSenderID: string | undefined) =>{
+    const canDeleteForEveryone = (message: MessageType): boolean =>{
 
-        return messageSenderID === currentUserID
+        if(!message || !currentUserID) return false
+
+        const isSender = message.senderID === currentUserID
+        if(!isSender) return false
+
+        return isWithinTimeLimit(message, MessageTimeLimits.deleteForEveryone)
+    
+    }
+
+    const getDeleteRemainingTime = (message: MessageType): number =>{
+    
+        return getRemainingTime(message, MessageTimeLimits.deleteForEveryone)
+    
+    }
+
+    const formatDeleteRemainingTime = (remainingTime: number): string =>{
+
+        return formatRemainingTime(remainingTime)
 
     }
 
-    return { deleteForMe, deleteForEveryone, canDeleteForEveryone }
+    return{ 
+        
+        deleteForMe, 
+        deleteForEveryone, 
+        canDeleteForEveryone, 
+        getDeleteRemainingTime, 
+        formatDeleteRemainingTime 
+
+    }
 
 }

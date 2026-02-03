@@ -5,6 +5,7 @@ import { useProfileContext } from "../context/ProfileContext"
 import { useToast } from "./useToast"
 import { db } from "../firebaseConfig"
 import { MessageType } from "../assets/types/MessageType"
+import { formatRemainingTime, getRemainingTime, isWithinTimeLimit, MessageTimeLimits } from "../assets/utils/messageTimeLimits"
 
 export const useEditMessage = () =>{
 
@@ -84,44 +85,29 @@ export const useEditMessage = () =>{
        const isNotDeleted = !message.deletedFor?.includes(profile._id || "")
 
        if(!isNotDeleted) return false
+       
+       return isWithinTimeLimit(message, MessageTimeLimits.edit)
 
-       const messageAge = Date.now() - new Date(message.createdAt as string).getTime(),
-            isWithinEditWindow = messageAge <= 15 * 60 * 1000
-
-       return isWithinEditWindow
-    
     }
 
-    const getRemainingTime = (message: MessageType): number =>{
+    const getEditRemainingTime = (message: MessageType): number =>{
     
-        if(!message) return 0
-
-        const createdAt = typeof message.createdAt === "string"  ? new Date(message.createdAt).getTime() : typeof message.createdAt === 'number' ? message.createdAt : Date.now()
-
-        const messageAge = Date.now() - createdAt,
-              timeLimit = 15 * 60 * 1000,
-              remainingTime = Math.max(0, timeLimit - messageAge)
-
-        return remainingTime
+       return getRemainingTime(message, MessageTimeLimits.edit)
     
     }
+    const formatEditRemainingTime = (remainingTime: number): string =>{
 
-    const formatRemainingTime = (milliSeconds: number): string =>{
-    
-       const totalSeconds = Math.floor(milliSeconds / 1000),
-             minutes = Math.floor(totalSeconds / 60),
-             seconds = totalSeconds % 60
+        return formatRemainingTime(remainingTime)
 
-        if(minutes > 0){
-
-            return `${minutes}m ${seconds}s`
-
-        }
-
-        return `${seconds}s`
-    
     }
           
-    return { editMessage, canEditMessage, getRemainingTime, formatRemainingTime }
+    return{ 
+
+        editMessage, 
+        canEditMessage, 
+        getRemainingTime: getEditRemainingTime, 
+        formatRemainingTime: formatEditRemainingTime
+
+    }
 
 }
