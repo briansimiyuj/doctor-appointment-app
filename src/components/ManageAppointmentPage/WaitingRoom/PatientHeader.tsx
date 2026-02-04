@@ -14,26 +14,32 @@ const PatientHeader: React.FC = ()=>{
         if(!appointment) return 'Not Checked in'
 
         const currentTime = new Date().getTime(),
-              appointmentTime = new Date(appointment.date + ' ' + appointment.time).getTime(),
-              timeDiff = currentTime - appointmentTime
+              appointmentTimeString = appointment.date || appointment.actualStartTime || '',
+              appointmentTime = new Date(appointmentTimeString).getTime(),
+              timeDiff = currentTime - appointmentTime,
+              fiveMinutesMs = 5 * 60 * 1000
 
-        if(timeDiff > 300000){
-        
-           return 'Not Checked in'
-        
-        }else if(timeDiff > 0){
+        if(isNaN(appointmentTime)) return 'Not Checked in'
+
+        if(timeDiff < -fiveMinutesMs){
+
+            return 'Not Checked in'
+
+        }
+
+        if(timeDiff < 0 && timeDiff >= -fiveMinutesMs){
 
             return 'Waiting'
 
-        }else if(timeDiff > -300000){
+        }
+
+        if(timeDiff >= 0 && timeDiff <= fiveMinutesMs){
 
             return 'Ready'
 
-        }else{
-            
-            return 'Late'
-
         }
+
+        return 'Late'
     
     }
 
