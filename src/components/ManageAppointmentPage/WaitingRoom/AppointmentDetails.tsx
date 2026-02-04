@@ -33,11 +33,13 @@ const AppointmentDetails: React.FC = () =>{
 
     useEffect(() =>{
     
-        const appointmentTimeMs = getAppointmentTimeMs(appointment?.date || '')
+        const appointmentTimeString = appointment?.date || appointment?.actualStartTime || '',
+              appointmentTimeMs = getAppointmentTimeMs(appointmentTimeString)
 
         if(!appointmentTimeMs){
 
             setCountdown("Time not available")
+           
             return
 
         }
@@ -75,13 +77,13 @@ const AppointmentDetails: React.FC = () =>{
         
         return () => clearInterval(intervalId)
     
-    }, [appointment?.date])
+    }, [appointment?.date, appointment?.actualStartTime])
 
     const consultationType = appointment?.consultationType || "online",
-          typeConfig = consultationTypeConfig[consultationType as keyof typeof consultationTypeConfig] || consultationTypeConfig.online
-
-    const currentTimeStatus = timeStatusConfig[timeStatus]
-
+          typeConfig = consultationTypeConfig[consultationType as keyof typeof consultationTypeConfig] || consultationTypeConfig.online,
+          currentTimeStatus = timeStatusConfig[timeStatus],
+          displayTimeString = appointment?.date || appointment?.actualStartTime || '',
+          durationMinutes = appointment?.actualDurationSeconds ? Math.floor(appointment.actualDurationSeconds / 60) : 30
 
     return(
 
@@ -150,7 +152,7 @@ const AppointmentDetails: React.FC = () =>{
 
                             <p className="text-lg font-semibold text-gray-900 dark:text-white">
 
-                                {formatDisplayTime(appointment?.actualStartTime || '')} - {getAppointmentEndTime(appointment?.actualStartTime || '', appointment?.actualDurationSeconds || 30)}
+                                {formatDisplayTime(displayTimeString)} - {getAppointmentEndTime(displayTimeString, durationMinutes)}
 
                             </p>
 
@@ -160,7 +162,7 @@ const AppointmentDetails: React.FC = () =>{
 
                     <div className="text-sm text-gray-500 dark:text-gray-400 px-3 py-1 bg-gray-200 dark:bg-gray-800 rounded">
 
-                        30 min
+                        {durationMinutes} min
 
                     </div>
 
