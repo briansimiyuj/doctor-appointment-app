@@ -1,6 +1,6 @@
 export const formatTimeDifference = (diffMs: number): string =>{
 
-    if(diffMs = 0) return 'Now'
+    if(diffMs === 0) return 'Now'
      
     if(diffMs < 0) return 'Passed'
 
@@ -21,10 +21,25 @@ export const formatTimeDifference = (diffMs: number): string =>{
 
     }
 
-    const hours = Math.floor(minutes / 60),
+    const totalHours = Math.floor(minutes / 60),
           remainingMinutes = minutes % 60
 
-    return `In ${hours}h ${remainingMinutes}m`
+    if(totalHours < 24){
+
+        return `In ${totalHours}h ${remainingMinutes.toString().padStart(2, '0')}m` 
+
+    }
+
+    const totalDays = Math.floor(totalHours / 24),
+          remainingHours = totalHours % 24
+
+    if(remainingHours > 0){
+
+        return `In ${totalDays}d ${remainingHours.toString().padStart(2, '0')}h`
+
+    }
+
+    return `In ${totalDays}d ${totalDays == 1 ? 'day' : 'days'}`
 
 }
 
