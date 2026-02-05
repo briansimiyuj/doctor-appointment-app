@@ -1,4 +1,5 @@
 import { useManageAppointmentContext } from "../../../../../../context/ManageAppointmentContext"
+import CallToRoomButton from "./CallToRoomButton"
 import RoomAssignment from "./RoomAssignment"
 
 const DoctorPhysicalSession: React.FC = ()=>{
@@ -23,6 +24,8 @@ const DoctorPhysicalSession: React.FC = ()=>{
                 <div className="space-y-4">
 
                     <RoomAssignment/>
+
+                    <CallToRoomButton/>
 
                 </div>
 
