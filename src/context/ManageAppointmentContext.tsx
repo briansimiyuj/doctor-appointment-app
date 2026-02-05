@@ -1,4 +1,4 @@
-import { ManageAppointmentContextProps, SessionStatus } from "../assets/contextProps/ManageAppointmentContextProps"
+import { CheckInStatus, ManageAppointmentContextProps, SessionStatus, WaitingRoomStatus } from "../assets/contextProps/ManageAppointmentContextProps"
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { usePatientDetails } from "./PatientDetailsContext"
 import { useToast } from "../hooks/useToast"
@@ -38,6 +38,13 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
           [scheduledDuration, setScheduledDuration] = useState(30),
           [refferalData, setReferralData] = useState<ReferralType | null>(null),
           [labOrderData, setLabOrderData] = useState<LabTestType | null>(null),
+          [roomNumber, setRoomNumber] = useState<string | null>(null),
+          [checkInTime, setCheckInTime] = useState<Date | null>(null),
+          [checkInStatus, setCheckInStatus] = useState<CheckInStatus>('not-checked-in'),
+          [waitingRoomStatus, setWaitingRoomStatus] = useState<WaitingRoomStatus>('waiting'),
+          [isPatientLate, setIsPatientLate] = useState<boolean>(false),
+          [estimatedWaitMinutes, setEstimatedWaitMinutes] = useState<number>(0),
+          [queuePosition, setQueuePosition] = useState<number>(0),
           timeIntervalRef = useRef<NodeJS.Timeout | null>(null),
           appointment = patientAppointments.find(app => app._id === appointmentID) || null,
           consultationType = appointment?.consultationType || "in-person",
@@ -602,6 +609,91 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
 
     }, [appointmentID])
 
+    const markPatientArrived = useCallback(async() =>{
+
+        if(!appointmentID) return
+
+        const arrivalTime = new Date()
+
+        setCheckInTime(arrivalTime)
+
+        setCheckInStatus('checked-in')
+
+        setIsPatientLate(false)
+       
+        showToast("Patient has arrived", "success")
+
+    }, [appointmentID, showToast])
+
+    const assignRoom = useCallback(async (room: string) =>{
+
+        if(!appointmentID) return
+
+        setRoomNumber(room)
+
+        setWaitingRoomStatus('waiting')
+
+        showToast(`Patient assigned to room ${room}`, "success")
+
+    }, [appointmentID, showToast])
+
+    const callPatientToRoom = useCallback(async () =>{
+
+        if(!appointmentID || !roomNumber) return
+
+        setWaitingRoomStatus('with-doctor')
+
+        showToast(`Patient called to room ${roomNumber}`, "success")
+
+    }, [appointmentID, roomNumber, showToast])
+    
+    const updateQueuePosition = useCallback(async (position: number) =>{
+
+        if(!appointmentID) return
+
+        setQueuePosition(position)
+
+        setEstimatedWaitMinutes(position * 5)
+
+    }, [appointmentID])
+
+    useEffect(() =>{
+    
+        if(consultationType === "in-person" && appointment?.date && appointment.time){
+
+            try{
+            
+                const appointmentDateTimeString = `${appointment.date}T${appointment.time}`,
+                        appointmentTimeMs = new Date(appointmentDateTimeString).getTime(),
+                        now = Date.now(),
+                        timeDiffMs = now - appointmentTimeMs,
+                        fifteenMinutesMs = 15 * 60 * 1000,
+                        patientLate = timeDiffMs > fifteenMinutesMs && checkInStatus === "not-checked-in"
+
+                if(patientLate !== isPatientLate){
+
+                    setIsPatientLate(patientLate)
+
+                    if(patientLate){
+
+                        const minutesLate = Math.floor(timeDiffMs / 60000)
+
+                        showToast(`Patient is late by ${minutesLate} minute${minutesLate > 1 ? 's' : ''}.`, "warning")
+
+                    }
+
+                }
+            
+            }catch(error){
+            
+               console.error('Error: ', error)
+            
+            }
+
+        }
+    
+    }, [appointment?.date, appointment?.time, checkInStatus, consultationType, isPatientLate, showToast])
+
     const contextValue: ManageAppointmentContextProps ={
 
         appointment,
@@ -652,6 +744,17 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
         toggleChatModal,
         openChatModal,
         closeChatModal,
+        markPatientArrived,
+        checkInTime,
+        checkInStatus,
+        roomNumber,
+        assignRoom,
+        waitingRoomStatus,
+        isPatientLate,
+        estimatedWaitMinutes,
+        queuePosition,
+        updateQueuePosition,
+        callPatientToRoom
 
     }
 

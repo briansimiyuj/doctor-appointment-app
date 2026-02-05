@@ -3,6 +3,8 @@ import { LabTestType } from "../types/LabTestType"
 import { ReferralType } from "../types/ReferralType"
 
 export type SessionStatus = 'Loading...' | 'Ready' | 'Active' | 'Overtime' | 'Paused' | 'Completed'
+export type CheckInStatus = 'not-checked-in' | 'checked-in' | 'in-waiting-room' | 'with-doctor'
+export type WaitingRoomStatus = 'waiting' | 'ready' | 'with-doctor'
 
 export interface ManageAppointmentContextProps{
     
@@ -63,5 +65,19 @@ export interface ManageAppointmentContextProps{
     sessionStatus: SessionStatus
     statusColorClass: string
     formatTime: (seconds: number) => string
+
+    roomNumber: string | null
+    checkInTime: Date | null
+    checkInStatus: CheckInStatus
+    waitingRoomStatus: WaitingRoomStatus
+    isPatientLate: boolean
+    estimatedWaitMinutes: number
+    queuePosition: number
+
+    // IN-PERSON SPECIFIC FUNCTIONS
+    markPatientArrived: () => Promise<void>
+    assignRoom: (room: string) => Promise<void>
+    callPatientToRoom: () => Promise<void>
+    updateQueuePosition: (position: number) => Promise<void>
 
 }
