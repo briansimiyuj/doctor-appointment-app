@@ -1,4 +1,5 @@
 import { useManageAppointmentContext } from "../../../../../../context/ManageAppointmentContext"
+import RoomAssignment from "./RoomAssignment"
 
 const DoctorPhysicalSession: React.FC = ()=>{
 
@@ -17,7 +18,16 @@ const DoctorPhysicalSession: React.FC = ()=>{
 
             </div>
 
-            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+                <div className="space-y-4">
+
+                    <RoomAssignment/>
+
+                </div>
+
+            </div>
+
 
         </div>
 
