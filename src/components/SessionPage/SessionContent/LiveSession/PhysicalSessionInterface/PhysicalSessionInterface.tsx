@@ -1,6 +1,7 @@
 import { useManageAppointmentContext } from "../../../../../context/ManageAppointmentContext"
 import { useProfileContext } from "../../../../../context/ProfileContext"
 import DoctorPhysicalSession from "./DoctorPhysicalSession/DoctorPhysicalSession"
+import PatientPhysicalSession from "./PatientPhysicalSession/PatientPhysicalSession"
 
 const PhysicalSessionInterface: React.FC = ()=>{
 
@@ -14,6 +15,12 @@ const PhysicalSessionInterface: React.FC = ()=>{
 
         return <DoctorPhysicalSession/>
 
+    }
+
+    if(profile?.type === "patient"){
+
+        return <PatientPhysicalSession/>
+        
     }
 
     return(
