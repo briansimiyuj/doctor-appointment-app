@@ -2,6 +2,7 @@ import { LiveChatContextProvider } from "../../../../context/LiveChatContext"
 import { useManageAppointmentContext } from "../../../../context/ManageAppointmentContext"
 import { useProfileContext } from "../../../../context/ProfileContext"
 import LiveChat from "../../../LiveChat/LiveChat"
+import PhysicalSessionInterface from "./PhysicalSessionInterface/PhysicalSessionInterface"
 import VideoInterface from "./VideoInterface/VideoInterface"
 import { useEffect, useRef } from "react"
 
@@ -44,7 +45,7 @@ const LiveSession: React.FC = ()=>{
 
                     {
 
-                        isOnline && <VideoInterface/>
+                        isOnline ? <VideoInterface/> : <PhysicalSessionInterface/>
 
                     }
 
@@ -81,7 +82,7 @@ const LiveSession: React.FC = ()=>{
 
                     {
 
-                        isOnline && <VideoInterface/>
+                        isOnline ? <VideoInterface/> : <PhysicalSessionInterface/>
 
                     }
 
