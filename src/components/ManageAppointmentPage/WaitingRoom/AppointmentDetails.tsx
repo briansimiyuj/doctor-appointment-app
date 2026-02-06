@@ -125,9 +125,9 @@ const AppointmentDetails: React.FC = () =>{
 
                         <div>
 
-                            <p className="text-sm text-gray-500 dark:text-gray-400">Appointment Date</p>
+                            <p className="text-xs md:text-sm text-gray-500 dark:text-gray-400">Appointment Date</p>
 
-                            <p className="text-lg font-semibold text-gray-900 dark:text-white">
+                            <p className="text-sm md:text-lg font-semibold text-gray-900 dark:text-white">
 
                                 {formatDisplayDate(appointment?.date || '')}
 
@@ -140,17 +140,21 @@ const AppointmentDetails: React.FC = () =>{
                 </div>
 
             
-                <div className="flex items-center flex-col md:flex-row gap-4 justify-between p-3 bg-gray-50 dark:bg-gray-900 rounded-lg">
+                <div className="flex items-start flex-col md:flex-row gap-4 justify-between p-3 bg-gray-50 dark:bg-gray-900 rounded-lg">
 
                     <div className="flex items-center">
 
-                        <FaClock className="mr-3 text-gray-500 w-5 h-5"/>
+                        <div className="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center mr-3">
+
+                            <FaClock className="text-indigo-600 dark:text-indigo-300"/>
+
+                        </div>
 
                         <div>
 
-                            <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Scheduled Time</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">Scheduled Time</p>
 
-                            <p className="text-lg font-semibold text-gray-900 dark:text-white">
+                            <p className="text-sm md:text-lg font-semibold text-gray-900 dark:text-white">
 
                                 {formatDisplayTime(displayTimeString)} - {getAppointmentEndTime(displayTimeString, durationMinutes)}
 
@@ -193,7 +197,7 @@ const AppointmentDetails: React.FC = () =>{
 
                                 <p className="text-sm text-gray-500 dark:text-gray-400">Session Starts</p>
 
-                                <p className={`text-xl font-bold ${timeStatus === 'late' ? 'text-red-600 dark:text-red-400' : timeStatus === 'on-time' ? 'text-yellow-600 dark:text-yellow-400' : 'text-green-600 dark:text-green-400'}`}>
+                                <p className={`font-bold ${timeStatus === 'late' ? 'text-red-600 dark:text-red-400' : timeStatus === 'on-time' ? 'text-yellow-600 dark:text-yellow-400' : 'text-green-600 dark:text-green-400'}`}>
 
                                     {countdown}
 
@@ -210,9 +214,9 @@ const AppointmentDetails: React.FC = () =>{
                 
                 <div className={`p-3 rounded-lg ${typeConfig.bgColor} border ${typeConfig.color.replace('text-', 'border-')}/20`}>
 
-                    <div className="flex items-center">
+                    <div className="flex items-center gap-2">
 
-                        <div className="mr-3">
+                        <div className="mr-3 flex items-center justify-center w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900">
 
                             {typeConfig.icon}
 
