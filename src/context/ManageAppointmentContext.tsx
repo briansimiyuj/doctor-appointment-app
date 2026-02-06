@@ -5,6 +5,8 @@ import { useToast } from "../hooks/useToast"
 import { getLabOrderByAppointmentID, getReferralByAppointmentID, updateAppointmentSessionDataInFirebase, updateAppointmentStatusInFirebase } from "../firebase/firebaseApi"
 import { ReferralType } from "../assets/types/ReferralType"
 import { LabTestType } from "../assets/types/LabTestType"
+import { doc, onSnapshot } from "firebase/firestore"
+import { db } from "../firebaseConfig"
 
 interface ManageAppointmentContextProviderProps{
 
@@ -322,13 +324,26 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
 
             const startTime = new Date(),
                  startTimeISO = startTime.toISOString()
+            
+            const updatedData: any ={
 
-            await updateAppointmentSessionDataInFirebase(appointment._id, {
                 sessionStatus: "active",
                 actualStartTime: startTimeISO,
                 isStarted: true
-            })
 
+            }
+
+            
+            if(consultationType === "in-person"){
+
+                updatedData.checkInStatus = "with-doctor"
+
+                updatedData.waitingRoomStatus = "with-doctor"
+
+            }
+            
+            await updateAppointmentSessionDataInFirebase(appointment._id, updatedData)
+            
             setSessionStartTime(startTime)
 
             setIsSessionActive(true)
@@ -338,6 +353,14 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
             setIsPaused(false)
 
             setPauseReason(null)
+
+            if(consultationType === "in-person"){
+
+                setCheckInStatus("with-doctor")
+
+                setWaitingRoomStatus("with-doctor")
+                
+            }
 
             showToast("Session started", "success")
 
@@ -627,15 +650,119 @@ export const ManageAppointmentContextProvider:React.FC<ManageAppointmentContextP
 
     const assignRoom = useCallback(async (room: string) =>{
 
+        if(!appointmentID || !appointment) return
+
+        try{
+        
+           setRoomNumber(room)
+
+            const updatedData: any ={
+
+                roomNumber: room,
+                updatedAt: new Date().toISOString()
+
+            }
+
+            if(checkInStatus === "checked-in"){
+
+                updatedData.checkInStatus = "in-waiting-room"
+
+                updatedData.waitingStatus = "waiting"
+
+                setCheckInStatus("in-waiting-room")
+
+                setWaitingRoomStatus('waiting')
+
+            }
+
+            await updateAppointmentSessionDataInFirebase(appointmentID, updatedData)
+
+            showToast(`Room ${room} assigned${checkInStatus === "checked-in" ? ' - Patient moved to waiting room' : ' (pre-assigned)'}`, "success")
+        
+        }catch(error){
+        
+           console.error('Error: ', error)
+        
+        }
+
+    }, [appointmentID, showToast, appointment, checkInStatus])
+
+    useEffect(() =>{
+    
         if(!appointmentID) return
 
-        setRoomNumber(room)
+        let unsubscribe: (() => void) | undefined
 
-        setWaitingRoomStatus('waiting')
+        const setupFirestoreListener = async() =>{
+        
+            try{
+            
+                const appointmentRef = doc(db, "appointments", appointmentID)
 
-        showToast(`Patient assigned to room ${room}`, "success")
+                unsubscribe = onSnapshot(appointmentRef, docSnapshot =>{
 
-    }, [appointmentID, showToast])
+                    if(docSnapshot.exists()){
+
+                        const data = docSnapshot.data()
+
+                        if(data.roomNumber && data.roomNumber !== roomNumber){
+
+                            setRoomNumber(data.roomNumber)
+
+                        }
+
+                        if(data.checkInStatus && data.checkInStatus !== checkInStatus){
+
+                            setCheckInStatus(data.checkInStatus as CheckInStatus)
+                            
+                        }
+
+                        if(data.waitingRoomStatus && data.waitingRoomStatus !== waitingRoomStatus){
+
+                            setWaitingRoomStatus(data.waitingRoomStatus as WaitingRoomStatus)
+                        }
+
+                        if(data.checkInTime && data.checkInTime !== checkInTime){
+
+                            const newCheckInTime = new Date(data.checkInTime)
+
+                            if(!checkInTime || newCheckInTime.getTime() !== checkInTime.getTime()){
+
+                                setCheckInTime(newCheckInTime)
+
+                            }
+            
+                        }
+
+                    }
+                    
+                }, error =>{
+
+                    console.error('Firestore listener error: ', error)
+                    
+                })
+            
+            }catch(error){
+            
+               console.error('Fail to setup Firestore listener: ', error)
+            
+            }
+        
+        }
+
+        setupFirestoreListener()
+
+        return () =>{
+
+            if(unsubscribe){
+
+                unsubscribe()
+
+            }
+
+        }
+    
+    }, [appointmentID, roomNumber, checkInStatus, waitingRoomStatus, checkInTime])
 
     const callPatientToRoom = useCallback(async () =>{
 
