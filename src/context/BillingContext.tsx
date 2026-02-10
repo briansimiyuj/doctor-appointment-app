@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react"
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react"
 import { BillingContextProps } from "../assets/contextProps/BillingContextProps"
 import { useProfileContext } from "./ProfileContext"
 import { BillableItem, BillingRecord, PaymentMethod } from "../assets/types/BillingType"
@@ -20,7 +20,13 @@ export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ c
           [items, setItems] = useState<BillableItem[]>([]),
           [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('cash'),
           [discount, setDiscount] = useState<number>(0),
-          [loading, setLoading] = useState<boolean>(false)
+          [loading, setLoading] = useState<boolean>(false),
+          [isOpen, setIsOpen] = useState<boolean>(false),
+          [name, setName] = useState<string>(''),
+          [description, setDescription] = useState<string>(''),
+          [price, setPrice] = useState<number>(0),
+          [taxRate, setTaxRate] = useState<number>(10),
+          [sessionCount, setSessionCount] = useState<number>(1)
 
     const calculations = useMemo(()=>{
 
@@ -102,6 +108,45 @@ export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ c
     
     }, [appointmentID])
 
+    const handleSubmit = async(e: React.FormEvent)=>{
+    
+        e.preventDefault()  
+
+        if(!name || !price) return
+
+        const newItem: BillableItem ={
+            
+            _id: uuidv4(),
+            name: name.trim(),
+            description: description.trim() || undefined,
+            price,
+            taxRate,
+            sessionCount
+
+        }
+
+        addItem(newItem)
+
+        resetForm()
+
+        setIsOpen(false)
+    
+    }
+
+    const resetForm = () =>{
+    
+        setName('')    
+
+        setDescription('')
+
+        setPrice(0)
+
+        setTaxRate(10)
+
+        setSessionCount(1)
+
+    }
+
     const contextValue: BillingContextProps ={
 
         bill,
@@ -114,7 +159,20 @@ export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ c
         setDiscount,
         calculations,
         recalculate,
-        loading
+        loading,
+        isOpen,
+        setIsOpen,  
+        name, 
+        setName,
+        description,    
+        setDescription,
+        price,
+        setPrice,
+        taxRate,
+        setTaxRate,
+        sessionCount,
+        setSessionCount,
+        handleSubmit
 
     }
 

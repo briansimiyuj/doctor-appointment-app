@@ -13,5 +13,18 @@ export interface BillingContextProps{
     calculations: BillingCalculations
     recalculate: () => void
     loading: boolean
+    isOpen: boolean
+    setIsOpen: (isOpen: boolean) => void
+    description: string
+    setDescription: (description: string) => void
+    name: string
+    setName: (name: string) => void
+    price: number
+    setPrice: (price: number) => void
+    taxRate: number
+    setTaxRate: (taxRate: number) => void
+    sessionCount: number
+    setSessionCount: (sessionCount: number) => void
+    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
 
 }
