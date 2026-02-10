@@ -1,4 +1,5 @@
 import BillingHeader from "../components/BillingPage/BillingHeader"
+import BillSummary from "../components/BillingPage/BillSummary"
 import { useAppointmentsContext } from "../context/AppointmentContext"
 import { BillingContextProvider } from "../context/BillingContext"
 import { useProfileContext } from "../context/ProfileContext"
@@ -22,6 +23,16 @@ const BillingPage: React.FC = ()=>{
                 <div className="max-w-6xl mx-auto">
 
                     <BillingHeader appointmentID={appointmentID}/>
+
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+
+                            <div className="space-y-6">
+
+                                <BillSummary/>
+
+                            </div>
+
+                        </div>
 
                 </div>
 
