@@ -1,3 +1,4 @@
+import AddItemForm from "../components/BillingPage/AddItemForm"
 import BillingHeader from "../components/BillingPage/BillingHeader"
 import BillItemList from "../components/BillingPage/BillItemList"
 import BillSummary from "../components/BillingPage/BillSummary"
@@ -28,6 +29,8 @@ const BillingPage: React.FC = ()=>{
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
 
                             <div className="lg:col-span-2 space-y-6">
+
+                                <AddItemForm/>
 
                                <BillItemList/>
 
