@@ -1,5 +1,6 @@
 import { FaCheckCircle, FaClipboardCheck, FaFileMedical, FaHistory, FaUserCheck, FaMoneyBillWave } from "react-icons/fa"
 import { useManageAppointmentContext } from "../../../context/ManageAppointmentContext"
+import { useNavigate } from "react-router-dom"
 
 const SessionCompleted: React.FC = () =>{
 
@@ -7,6 +8,7 @@ const SessionCompleted: React.FC = () =>{
           patientName = appointment?.patient?.patientInfo?.name || "Patient",
           patientProfileImage = appointment?.patient?.patientInfo?.profileImage?.content,
           sessionDuration = formatTime(elapsedTime),
+          navigate = useNavigate(),
           completedAt = new Date().toLocaleTimeString([], { 
             hour: "2-digit", 
             minute: "2-digit" 
@@ -174,11 +176,7 @@ const SessionCompleted: React.FC = () =>{
                     </button>
 
                     <button
-                        onClick={() =>{
-                            // TODO: Implement billing submission logic
-                            console.log("Review and submit billing information")
-                            // This could open a billing modal or navigate to billing page
-                        }}
+                        onClick={() => navigate(`/appointments/${appointment?._id}/billing`)}
                         className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white dark:text-white rounded-lg font-medium transition flex items-center justify-center"
                     >
 
