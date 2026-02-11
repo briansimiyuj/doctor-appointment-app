@@ -1,12 +1,12 @@
-import { FaCalculator, FaReceipt, FaTag } from "react-icons/fa"
+import { FaCalculator, FaReceipt, FaTag, FaEdit } from "react-icons/fa"
 import { useBillingContext } from "../../context/BillingContext"
 import { useCurrencyContext } from "../../context/CurrencyContext"
 
-const BillSummary: React.FC = ()=>{
+const BillSummary: React.FC = () =>{
 
-    const { calculations } = useBillingContext(),
-         { currencySymbol } = useCurrencyContext(),
-         { subTotal, tax, discount, total } = calculations
+    const { calculations, discount, setDiscount, isEditing, handleEditClick, handleSave, handleKeyDown, inputRef } = useBillingContext(),
+          { currencySymbol } = useCurrencyContext(),
+          { subTotal, tax, total } = calculations
 
     return(
 
@@ -41,17 +41,67 @@ const BillSummary: React.FC = ()=>{
 
                 </div>
 
-                <div className="flex justify-between">
+                <div className="flex justify-between items-center">
 
-                    <span className="text-gray-600 dark:text-gray-400 flex items-center gap-2">
+                    <div className="flex items-center gap-2">
 
                         <FaTag className="text-green-600"/>
 
-                        Discount
+                        <span className="text-gray-600 dark:text-gray-400">Discount</span>
 
-                    </span>
+                    </div>
 
-                    <span className="font-medium text-green-600">-{currencySymbol}{discount.toFixed(2)}</span>
+                    <div className="flex items-center gap-2">
+
+                        {
+                        
+                            isEditing ?(
+
+                                <div className="flex items-center gap-2">
+
+                                    <input
+                                        ref={inputRef}
+                                        type="number"
+                                        min={0}
+                                        max={30}
+                                        step={1}
+                                        value={discount}
+                                        onChange={e => setDiscount(Number(e.target.value))}
+                                        className="w-20 px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-center text-sm"
+                                        autoFocus
+                                        onKeyDown={handleKeyDown}
+                                        onBlur={handleSave}
+                                    />
+
+                                </div>
+
+                            ):(
+
+                                <>
+
+                                    <span 
+                                        className="font-medium text-green-600 cursor-pointer hover:text-green-700"
+                                        onClick={() => handleEditClick()}
+                                        title="Click to edit discount"
+                                    >-{currencySymbol}{calculations.discount.toFixed(2)}</span>
+
+                                    <button
+                                        onClick={() => handleEditClick()}
+                                        className="p-1 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
+                                        title="Edit discount"
+                                    >
+
+                                        <FaEdit size={14}/>
+
+                                    </button>
+
+                                </>
+                                
+                            )
+                            
+                        }
+                        
+                    </div>
                     
                 </div>
 
@@ -70,8 +120,8 @@ const BillSummary: React.FC = ()=>{
                         <span className="text-lg font-bold text-gray-900 dark:text-white">Total</span>
 
                         <div className="flex items-center gap-2">
-                            <FaReceipt className="text-purple-600"/>
 
+                            <FaReceipt className="text-purple-600"/>
 
                             <span className="text-xl font-bold text-purple-600 dark:text-purple-400">
 
