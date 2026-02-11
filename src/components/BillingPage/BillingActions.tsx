@@ -3,7 +3,7 @@ import { useBillingContext } from "../../context/BillingContext"
 
 const BillingActions: React.FC = ()=>{
 
-    const { items, loading } = useBillingContext(),
+    const { items, loading, submitBill } = useBillingContext(),
           hasItems = items.length > 0
 
     return(
@@ -40,6 +40,7 @@ const BillingActions: React.FC = ()=>{
                         : 'bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed'
                         }
                     `}
+                    onClick={submitBill}
                 >
  
                     <FaPaperPlane/>
