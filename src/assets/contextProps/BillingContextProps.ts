@@ -31,6 +31,7 @@ export interface BillingContextProps{
     handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void
     handleEditClick: () => void
     handleSave: () => void
-    handleCancel: () => void    
+    handleCancel: () => void
+    submitBill: () => Promise<boolean>
 
 }

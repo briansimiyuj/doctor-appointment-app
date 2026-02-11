@@ -3,6 +3,8 @@ import { BillingContextProps } from "../assets/contextProps/BillingContextProps"
 import { useProfileContext } from "./ProfileContext"
 import { BillableItem, BillingRecord, PaymentMethod } from "../assets/types/BillingType"
 import { v4 as uuidv4 } from "uuid"
+import { useAppointmentsContext } from "./AppointmentContext"
+import { useSubmitBill } from "../hooks/useSubmitBill"
 
 interface BillingContextProviderProps{
 
@@ -16,6 +18,8 @@ export const BillingContext = createContext<BillingContextProps | undefined>(und
 export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ children, appointmentID })=>{
 
     const { profile } = useProfileContext(),
+          { appointment } = useAppointmentsContext(),
+          { submitBill } = useSubmitBill(),
           [bill, setBill] = useState<BillingRecord | null>(null),
           [items, setItems] = useState<BillableItem[]>([]),
           [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('cash'),
@@ -135,6 +139,46 @@ export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ c
     
     }
 
+    const handleSubmitBill = useCallback(async (): Promise<boolean> =>{
+
+        if(!appointmentID || !profile) return false
+
+        if(!items.length) return false
+
+        const patientID = appointment?.patient.patientInfo._id
+
+        if(!patientID) return false
+
+        setLoading(true)
+
+        try{
+        
+            const submittedBiil = await submitBill(
+                appointmentID,
+                patientID,
+                profile._id,
+                items,
+                calculations
+            )
+
+            setBill(submittedBiil)
+
+            return true
+        
+        }catch(error){
+        
+           console.error('Failed to submit bill:', error)
+
+           return false
+        
+        }finally{
+        
+           setLoading(false)
+        
+        }
+
+    }, [appointmentID, profile, items, calculations, appointment, submitBill])
+
     const resetForm = () =>{
     
         setName('')    
@@ -213,7 +257,8 @@ export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ c
         handleKeyDown,
         handleEditClick,
         handleSave,
-        handleCancel
+        handleCancel,
+        submitBill: handleSubmitBill
 
     }
 
