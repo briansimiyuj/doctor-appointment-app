@@ -25,7 +25,7 @@ export interface BillingRecord{
     currency: string
     exchangeRate: number
     itemList: BillableItem[]
-    paymentMethod: PaymentMethod
+    paymentMethod?: PaymentMethod
     createdAt: Date
     updatedAt: Date
 
