@@ -5,6 +5,7 @@ import { BillableItem, BillingRecord, PaymentMethod } from "../assets/types/Bill
 import { v4 as uuidv4 } from "uuid"
 import { useAppointmentsContext } from "./AppointmentContext"
 import { useSubmitBill } from "../hooks/useSubmitBill"
+import { useSaveDraft } from "../hooks/useSaveDraft"
 
 interface BillingContextProviderProps{
 
@@ -20,6 +21,7 @@ export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ c
     const { profile } = useProfileContext(),
           { appointment } = useAppointmentsContext(),
           { submitBill } = useSubmitBill(),
+          { saveDraft } = useSaveDraft(),
           [bill, setBill] = useState<BillingRecord | null>(null),
           [items, setItems] = useState<BillableItem[]>([]),
           [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('cash'),
@@ -179,6 +181,47 @@ export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ c
 
     }, [appointmentID, profile, items, calculations, appointment, submitBill])
 
+    const handleSaveDraft = useCallback(async (): Promise<boolean> =>{
+
+
+        if(!appointmentID || !profile) return false
+
+        if(!items.length) return false
+
+        const patientID = appointment?.patient.patientInfo._id
+
+        if(!patientID) return false
+
+        setLoading(true)
+
+        try{
+
+            const savedBill = await saveDraft(
+                appointmentID,
+                patientID,
+                profile._id,
+                items,
+                calculations
+            )
+
+            setBill(savedBill)
+
+            return true
+
+        }catch(error){
+
+           console.error('Failed to save draft:', error)
+
+           return false
+
+        }finally{
+
+           setLoading(false)
+
+        }
+
+    }, [appointmentID, profile, items, calculations, appointment, saveDraft])
+
     const resetForm = () =>{
     
         setName('')    
@@ -258,7 +301,8 @@ export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ c
         handleEditClick,
         handleSave,
         handleCancel,
-        submitBill: handleSubmitBill
+        submitBill: handleSubmitBill,
+        saveDraftBill: handleSaveDraft
 
     }
 
