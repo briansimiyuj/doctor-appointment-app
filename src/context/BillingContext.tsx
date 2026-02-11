@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react"
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { BillingContextProps } from "../assets/contextProps/BillingContextProps"
 import { useProfileContext } from "./ProfileContext"
 import { BillableItem, BillingRecord, PaymentMethod } from "../assets/types/BillingType"
@@ -26,7 +26,9 @@ export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ c
           [description, setDescription] = useState<string>(''),
           [price, setPrice] = useState<number>(0),
           [taxRate, setTaxRate] = useState<number>(10),
-          [sessionCount, setSessionCount] = useState<number>(1)
+          [sessionCount, setSessionCount] = useState<number>(1),
+          [isEditing, setIsEditing] = useState(false),
+          inputRef = useRef<HTMLInputElement>(null)
 
     const calculations = useMemo(()=>{
 
@@ -147,6 +149,39 @@ export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ c
 
     }
 
+    useEffect(() =>{
+    
+        if(isEditing && inputRef.current){
+        
+           inputRef.current.focus()
+
+           inputRef.current.select()
+        
+        }
+    
+    }, [isEditing])
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) =>{
+    
+        if(e.key === "Enter"){
+
+            setIsEditing(false)
+
+        }else if(e.key === "Escape"){
+
+            setIsEditing(false)
+
+        }
+    
+    }
+
+    const handleEditClick = () => setIsEditing(true)
+
+    const handleSave = () => setIsEditing(false)
+
+    const handleCancel = () => setIsEditing(false)
+    
+
     const contextValue: BillingContextProps ={
 
         bill,
@@ -172,7 +207,13 @@ export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ c
         setTaxRate,
         sessionCount,
         setSessionCount,
-        handleSubmit
+        handleSubmit,
+        isEditing,
+        inputRef,
+        handleKeyDown,
+        handleEditClick,
+        handleSave,
+        handleCancel
 
     }
 

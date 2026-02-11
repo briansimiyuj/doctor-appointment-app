@@ -26,5 +26,11 @@ export interface BillingContextProps{
     sessionCount: number
     setSessionCount: (sessionCount: number) => void
     handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+    isEditing: boolean
+    inputRef: React.RefObject<HTMLInputElement>
+    handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void
+    handleEditClick: () => void
+    handleSave: () => void
+    handleCancel: () => void    
 
 }
