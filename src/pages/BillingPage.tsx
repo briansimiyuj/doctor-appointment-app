@@ -1,4 +1,5 @@
 import AddItemForm from "../components/BillingPage/AddItemForm"
+import BillingActions from "../components/BillingPage/BillingActions"
 import BillingHeader from "../components/BillingPage/BillingHeader"
 import BillItemList from "../components/BillingPage/BillItemList"
 import BillSummary from "../components/BillingPage/BillSummary"
@@ -39,6 +40,8 @@ const BillingPage: React.FC = ()=>{
                             <div className="space-y-6">
 
                                 <BillSummary/>
+
+                                <BillingActions/>
 
                             </div>
 
