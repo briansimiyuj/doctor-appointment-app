@@ -3,8 +3,9 @@ import { useBillingContext } from "../../context/BillingContext"
 
 const BillingActions: React.FC = ()=>{
 
-    const { items, loading, submitBill, saveDraftBill } = useBillingContext(),
-          hasItems = items.length > 0
+    const { items, loading, submitBill, saveDraftBill, bill } = useBillingContext(),
+          hasItems = items.length > 0,
+          isExistingDraft = !!bill
 
     return(
 
@@ -28,7 +29,7 @@ const BillingActions: React.FC = ()=>{
 
                     <FaSave/>
 
-                    <span>Save as Draft</span>
+                    <span>{loading ? 'Saving...' : isExistingDraft ? 'Update Draft' : 'Save as Draft'}</span>
 
                 </button>
 

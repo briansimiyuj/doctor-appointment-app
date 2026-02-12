@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid"
 import { useAppointmentsContext } from "./AppointmentContext"
 import { useSubmitBill } from "../hooks/useSubmitBill"
 import { useSaveDraft } from "../hooks/useSaveDraft"
+import { useLoadDraft } from "../hooks/useLoadDraft"
 
 interface BillingContextProviderProps{
 
@@ -22,6 +23,7 @@ export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ c
           { appointment } = useAppointmentsContext(),
           { submitBill } = useSubmitBill(),
           { saveDraft } = useSaveDraft(),
+          { loadDraft } = useLoadDraft(),
           [bill, setBill] = useState<BillingRecord | null>(null),
           [items, setItems] = useState<BillableItem[]>([]),
           [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('cash'),
@@ -98,7 +100,17 @@ export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ c
 
             try{
             
-                //TODO: Load existing bill from database
+                const existingBill = await loadDraft(appointmentID)
+
+                if(existingBill){
+                    
+                    setBill(existingBill)
+                    
+                    setItems(existingBill.itemList)
+
+                    setDiscount(existingBill.discount || 0)
+
+                }
             
             }catch(error){
             
