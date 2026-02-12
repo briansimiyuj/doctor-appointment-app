@@ -34,5 +34,6 @@ export interface BillingContextProps{
     handleCancel: () => void
     submitBill: () => Promise<boolean>
     saveDraftBill: () => Promise<boolean>
+    hasChanges: boolean
 
 }

@@ -36,6 +36,7 @@ export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ c
           [taxRate, setTaxRate] = useState<number>(10),
           [sessionCount, setSessionCount] = useState<number>(1),
           [isEditing, setIsEditing] = useState(false),
+          [hasChanges, setHasChanges] = useState<boolean>(false),
           inputRef = useRef<HTMLInputElement>(null)
 
     const calculations = useMemo(()=>{
@@ -213,10 +214,13 @@ export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ c
                 patientID,
                 profile._id,
                 items,
-                calculations
+                calculations,
+                bill?._id
             )
 
             setBill(savedBill)
+
+            setHasChanges(false)
 
             return true
 
@@ -233,6 +237,23 @@ export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ c
         }
 
     }, [appointmentID, profile, items, calculations, appointment, saveDraft])
+
+    useEffect(() =>{
+    
+        if(!bill){
+        
+           setHasChanges(items.length > 0)
+
+           return
+        
+        }
+
+        const itemsChanged = JSON.stringify(items) !== JSON.stringify(bill.itemList),
+              discountChanged = discount !== bill.discount
+
+        setHasChanges(itemsChanged || discountChanged)
+    
+    }, [items, discount, bill])
 
     const resetForm = () =>{
     
@@ -314,7 +335,8 @@ export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ c
         handleSave,
         handleCancel,
         submitBill: handleSubmitBill,
-        saveDraftBill: handleSaveDraft
+        saveDraftBill: handleSaveDraft,
+        hasChanges
 
     }
 

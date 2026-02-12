@@ -3,9 +3,10 @@ import { useBillingContext } from "../../context/BillingContext"
 
 const BillingActions: React.FC = ()=>{
 
-    const { items, loading, submitBill, saveDraftBill, bill } = useBillingContext(),
+    const { items, loading, submitBill, saveDraftBill, bill, hasChanges } = useBillingContext(),
           hasItems = items.length > 0,
-          isExistingDraft = !!bill
+          isExistingDraft = !!bill,
+          isUpdateDisabled = isExistingDraft && !hasChanges
 
     return(
 
@@ -16,10 +17,10 @@ const BillingActions: React.FC = ()=>{
             <div className="space-y-3">
 
                 <button
-                    disabled={!hasItems || loading}
+                    disabled={!hasItems || loading || isUpdateDisabled}
                     className={`
                         w-full py-3 rounded-lg font-medium transition flex items-center justify-center gap-2
-                        ${hasItems && !loading
+                        ${hasItems && !loading && !isUpdateDisabled 
                         ? 'bg-blue-600 hover:bg-blue-700 text-secondary-bg'
                         : 'bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed'
                         }
@@ -29,7 +30,7 @@ const BillingActions: React.FC = ()=>{
 
                     <FaSave/>
 
-                    <span>{loading ? 'Saving...' : isExistingDraft ? 'Update Draft' : 'Save as Draft'}</span>
+                    <span>{loading ? 'Saving...' : isExistingDraft  ? isUpdateDisabled ? 'No Changes' : 'Update Draft' : 'Save as Draft'}</span>
 
                 </button>
 
