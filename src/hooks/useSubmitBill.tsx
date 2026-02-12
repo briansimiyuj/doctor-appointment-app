@@ -2,21 +2,24 @@ import { useCallback } from "react"
 import { BillableItem, BillingCalculations, BillingRecord } from "../assets/types/BillingType"
 import { v4 as uuidv4 } from "uuid"
 import { useCurrencyContext } from "../context/CurrencyContext"
-import { addDoc, collection } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, query, where, getDocs } from "firebase/firestore"
 import { db } from "../firebaseConfig"
 import { useToast } from "./useToast"
+import { useNavigate } from "react-router-dom"
 
 export const useSubmitBill = () =>{
 
     const { currency, rate } = useCurrencyContext(),
-          { showToast } = useToast()
+          { showToast } = useToast(),
+          navigate = useNavigate()
 
     const submitBill = useCallback(async (
         appointmentID: string,
         patientID: string,
         doctorID: string,
         items: BillableItem[],
-        calculations: BillingCalculations
+        calculations: BillingCalculations,
+        existingDraftID?: string
     ): Promise<BillingRecord> =>{
 
         try{
@@ -44,7 +47,36 @@ export const useSubmitBill = () =>{
 
             await addDoc(billingRef, bill)
 
+            if(existingDraftID){
+            
+                const draftRef = doc(db, "appointments", appointmentID, "billing", existingDraftID)
+
+                await deleteDoc(draftRef)
+            
+            }else{
+            
+                const q = query(
+                    collection(db, "appointments", appointmentID, "billing"),
+                    where("status", "==", "draft")
+                )
+
+                const querySnapshot = await getDocs(q)
+                
+                querySnapshot.forEach(async (doc) =>{
+                    
+                    await deleteDoc(doc.ref)
+
+                })
+            
+            }
+
             showToast("Bill submitted successfully", "success")
+
+            setTimeout(() =>{
+
+                navigate(`/appointments/${appointmentID}/payment`)
+
+            }, 1500)
 
             return bill
         
@@ -58,7 +90,7 @@ export const useSubmitBill = () =>{
         
         }
 
-    }, [])
+    }, [currency, rate, showToast, navigate])
 
     return { submitBill }
 
