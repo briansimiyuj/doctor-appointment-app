@@ -2,7 +2,7 @@ export interface BillableItem{
 
     _id: string
     name: string
-    description?: string
+    description?: string | null
     price: number
     sessionCount: number
     taxRate: number

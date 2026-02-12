@@ -25,6 +25,14 @@ export const useSaveDraft = () =>{
             const billID = existingBillID || uuidv4(),
                   now = new Date()
 
+            const cleanedItems = items.map(item =>({
+
+                ...item,
+                description: item.description || null,
+                sessionCount: item.sessionCount || 1
+
+            }))
+
             const bill: BillingRecord ={
 
                 _id: billID,
@@ -34,7 +42,7 @@ export const useSaveDraft = () =>{
                 status: "draft",
                 subTotal: calculations.subTotal,
                 discount: calculations.discount,
-                itemList: items,
+                itemList: cleanedItems,
                 tax: calculations.tax,
                 total: calculations.total,
                 currency,
