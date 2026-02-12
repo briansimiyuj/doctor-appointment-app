@@ -7,6 +7,7 @@ import { useAppointmentsContext } from "./AppointmentContext"
 import { useSubmitBill } from "../hooks/useSubmitBill"
 import { useSaveDraft } from "../hooks/useSaveDraft"
 import { useLoadDraft } from "../hooks/useLoadDraft"
+import { useLoadInvoice } from "../hooks/useLoadInvoice"
 
 interface BillingContextProviderProps{
 
@@ -24,6 +25,7 @@ export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ c
           { submitBill } = useSubmitBill(),
           { saveDraft } = useSaveDraft(),
           { loadDraft } = useLoadDraft(),
+          { loadInvoice } = useLoadInvoice(),
           [bill, setBill] = useState<BillingRecord | null>(null),
           [items, setItems] = useState<BillableItem[]>([]),
           [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('cash'),
@@ -37,6 +39,7 @@ export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ c
           [sessionCount, setSessionCount] = useState<number>(1),
           [isEditing, setIsEditing] = useState(false),
           [hasChanges, setHasChanges] = useState<boolean>(false),
+          [invoice, setInvoice] = useState<BillingRecord | null>(null),
           inputRef = useRef<HTMLInputElement>(null)
 
     const calculations = useMemo(()=>{
@@ -126,6 +129,40 @@ export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ c
         }
 
         loadExistingBill()
+    
+    }, [appointmentID])
+
+    useEffect(() =>{
+    
+        const handleLoadInvoice = async() =>{
+        
+            if(!appointmentID) return
+
+            setLoading(true)
+
+            try{
+            
+                const retreivedInvoice = await loadInvoice(appointmentID)
+
+                if(retreivedInvoice){
+                    
+                    setInvoice(retreivedInvoice)
+
+                }
+            
+            }catch(error){
+            
+               console.error('Failed to load invoice', error)
+            
+            }finally{
+            
+               setLoading(false)
+            
+            }
+        
+        }
+
+        handleLoadInvoice()
     
     }, [appointmentID])
 
@@ -329,6 +366,7 @@ export const BillingContextProvider:React.FC<BillingContextProviderProps> = ({ c
         setSessionCount,
         handleSubmit,
         isEditing,
+        invoice,
         inputRef,
         handleKeyDown,
         handleEditClick,

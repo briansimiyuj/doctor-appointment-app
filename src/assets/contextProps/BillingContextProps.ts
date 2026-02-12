@@ -23,6 +23,7 @@ export interface BillingContextProps{
     setPrice: (price: number) => void
     taxRate: number
     setTaxRate: (taxRate: number) => void
+    invoice: BillingRecord | null
     sessionCount: number
     setSessionCount: (sessionCount: number) => void
     handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
