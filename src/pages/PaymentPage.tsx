@@ -5,6 +5,7 @@ import NotFoundPage from "./NotFoundPage"
 import PaymentHeader from "../components/PaymentPage/PaymentHeader"
 import InvoiceItemsList from "../components/PaymentPage/InvoiceItemsList"
 import PaymentSummary from "../components/PaymentPage/PaymentSummary"
+import PaymentActions from "../components/PaymentPage/PaymentActions"
 
 const PaymentPageContent: React.FC = ()=>{
 
@@ -16,13 +17,27 @@ const PaymentPageContent: React.FC = ()=>{
 
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4">
 
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-6xl mx-auto">
 
                 <PaymentHeader invoice={invoice}/>
 
-                <InvoiceItemsList invoice={invoice}/>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
 
-                <PaymentSummary invoice={invoice}/>
+                    <div className="lg:col-span-2 space-y-6">
+
+                        <InvoiceItemsList invoice={invoice}/>
+
+                        <PaymentSummary invoice={invoice}/>
+
+                    </div>
+
+                    <div className="space-y-6">
+
+                        <PaymentActions invoice={invoice}/>
+
+                    </div>
+
+                </div>
 
             </div>
 
