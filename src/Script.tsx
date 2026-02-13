@@ -36,6 +36,7 @@ import { ManageAppointmentContextProvider } from "./context/ManageAppointmentCon
 import ManageAppointmentPage from "./pages/ManageAppointmentPage"
 import SessionPage from "./pages/SessionPage"
 import BillingPage from "./pages/BillingPage"
+import PaymentPage from "./pages/PaymentPage"
 
 const Script: React.FC = () =>{
 
@@ -372,6 +373,20 @@ const Script: React.FC = () =>{
                         <ManageRouteWrapper>
 
                           <BillingPage/>
+
+                        </ManageRouteWrapper>
+
+                      </PrivateRoute>
+
+                    }/>
+
+                    <Route path="/appointments/:appointmentID/payment" element={
+
+                      <PrivateRoute>
+
+                        <ManageRouteWrapper>
+
+                          <PaymentPage/>
 
                         </ManageRouteWrapper>
 
