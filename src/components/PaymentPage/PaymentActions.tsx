@@ -1,6 +1,7 @@
 import { FaArrowLeft, FaDownload, FaEnvelope, FaPrint } from "react-icons/fa"
 import { useNavigate } from "react-router-dom"
 import { BillingRecord } from "../../assets/types/BillingType"
+import { useExportInvoice } from "../../hooks/useExportInvoice"
 
 interface PaymentActionsProps{
 
@@ -10,12 +11,13 @@ interface PaymentActionsProps{
 
 const PaymentActions: React.FC<PaymentActionsProps> = ({ invoice })=>{
 
-    const appointmentID = invoice.appointmentID,
+    const { handleExportInvoice } = useExportInvoice(),
+          appointmentID = invoice.appointmentID,
           navigate = useNavigate()
 
     const handlePrint = () => window.print()
 
-    const handleDownload = () => console.log("Download receipt for:", invoice._id)
+    const handleDownload = () => handleExportInvoice(invoice)
 
     const handleEmail = () => console.log("Email receipt to:", invoice.patientEmail)
 
