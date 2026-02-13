@@ -4,6 +4,7 @@ import { useProfileContext } from "../context/ProfileContext"
 import NotFoundPage from "./NotFoundPage"
 import PaymentHeader from "../components/PaymentPage/PaymentHeader"
 import InvoiceItemsList from "../components/PaymentPage/InvoiceItemsList"
+import PaymentSummary from "../components/PaymentPage/PaymentSummary"
 
 const PaymentPageContent: React.FC = ()=>{
 
@@ -20,6 +21,8 @@ const PaymentPageContent: React.FC = ()=>{
                 <PaymentHeader invoice={invoice}/>
 
                 <InvoiceItemsList invoice={invoice}/>
+
+                <PaymentSummary invoice={invoice}/>
 
             </div>
 
