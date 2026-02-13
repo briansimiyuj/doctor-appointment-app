@@ -5,11 +5,17 @@ import { useCurrencyContext } from "../context/CurrencyContext"
 import { setDoc, doc } from "firebase/firestore"
 import { db } from "../firebaseConfig"
 import { useToast } from "./useToast"
+import { useAppointmentsContext } from "../context/AppointmentContext"
 
 export const useSaveDraft = () =>{
 
     const { currency, rate } = useCurrencyContext(),
-          { showToast } = useToast()
+          { appointment } = useAppointmentsContext(),
+          { showToast } = useToast(),
+          doctorName = appointment?.doctor?.doctorInfo.name || 'Doctor Name',
+          patientName = appointment?.patient?.patientInfo.name || 'Patient Name',
+          patientEmail = appointment?.patient?.patientInfo.addressValue.email || '',
+          patientPhone = appointment?.patient?.patientInfo.addressValue.phone || ''
 
     const saveDraft = useCallback(async (
         appointmentID: string,
@@ -39,6 +45,10 @@ export const useSaveDraft = () =>{
                 appointmentID,
                 patientID,
                 doctorID,
+                doctorName,
+                patientName,
+                patientEmail,
+                patientPhone,
                 status: "draft",
                 subTotal: calculations.subTotal,
                 discount: calculations.discount,

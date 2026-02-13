@@ -16,7 +16,11 @@ export interface BillingRecord{
     _id: string
     appointmentID: string
     patientID: string
+    patientName: string
+    patientPhone: string
+    patientEmail: string
     doctorID: string
+    doctorName: string
     status: "pending" | "paid" | "cancelled" | "draft"
     subTotal: number
     tax: number

@@ -6,12 +6,18 @@ import { addDoc, collection, deleteDoc, doc, query, where, getDocs } from "fireb
 import { db } from "../firebaseConfig"
 import { useToast } from "./useToast"
 import { useNavigate } from "react-router-dom"
+import { useAppointmentsContext } from "../context/AppointmentContext"
 
 export const useSubmitBill = () =>{
 
     const { currency, rate } = useCurrencyContext(),
+          { appointment } = useAppointmentsContext(),
           { showToast } = useToast(),
-          navigate = useNavigate()
+          navigate = useNavigate(),
+          doctorName = appointment?.doctor?.doctorInfo.name || 'Doctor Name',
+          patientName = appointment?.patient?.patientInfo.name || 'Patient Name',
+          patientEmail = appointment?.patient?.patientInfo.addressValue.email || '',
+          patientPhone = appointment?.patient?.patientInfo.addressValue.phone || ''
 
     const submitBill = useCallback(async (
         appointmentID: string,
@@ -30,6 +36,10 @@ export const useSubmitBill = () =>{
                 appointmentID,
                 patientID,
                 doctorID,
+                doctorName,
+                patientName,
+                patientEmail,
+                patientPhone,
                 status: "pending",
                 subTotal: calculations.subTotal,
                 discount: calculations.discount,
