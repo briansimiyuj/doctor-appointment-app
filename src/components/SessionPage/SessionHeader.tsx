@@ -2,11 +2,20 @@ import { useMemo } from "react"
 import { useManageAppointmentContext } from "../../context/ManageAppointmentContext"
 import { FiCreditCard } from "react-icons/fi"
 import { BsFillDoorClosedFill } from "react-icons/bs"
+import { useNavigate } from "react-router-dom"
 
 const SessionHeader: React.FC = ()=>{
 
     const { appointment, sessionStatus, statusColorClass, formatTime, elapsedTime } = useManageAppointmentContext(),
-          doctorName = appointment?.doctor?.doctorInfo.name
+          doctorName = appointment?.doctor?.doctorInfo.name,
+          invoiceID = appointment?.invoiceID,
+          navigate = useNavigate()
+
+    const handlePayNow = () =>{
+    
+        if(invoiceID) navigate(`/my-invoices/${invoiceID}`)
+    
+    }      
 
     const getStatusText = () =>{
     
@@ -59,7 +68,7 @@ const SessionHeader: React.FC = ()=>{
                 <div className="flex items-center space-x-4 flex-col sm:flex-row space-y-2 sm:space-y-0">
                     
                     <button
-                        onClick={() => console.log('Navigate to Payment Portal')} // TODO: Implement payment logic/navigation
+                        onClick={() => handlePayNow()}
                         className="flex items-center text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white dark:text-white px-4 py-2 rounded-lg transition duration-150 shadow-md"
                         title="Complete Payment for the Session"
                     >
@@ -74,7 +83,7 @@ const SessionHeader: React.FC = ()=>{
                     <button
                         className="flex items-center text-sm font-medium bg-red-600 hover:bg-red-700 text-white dark:text-white px-4 py-2 rounded-lg transition duration-150 shadow-md"
                         title="Exit the session and return to appointment details"
-                        onClick={() => window.history.back()}
+                        onClick={() => navigate(`/appointments/${appointment?._id}`)}
                     >
                         <BsFillDoorClosedFill className="mr-2 h-4 w-4"/>
 

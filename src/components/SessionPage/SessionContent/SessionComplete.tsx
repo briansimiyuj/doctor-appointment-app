@@ -1,11 +1,20 @@
 import { FaCheckCircle, FaHistory, FaMoneyBillWave } from "react-icons/fa"
 import { useManageAppointmentContext } from "../../../context/ManageAppointmentContext"
+import { useNavigate } from "react-router-dom"
 
 const SessionComplete: React.FC = ()=>{
 
     const { appointment, formatTime, elapsedTime } = useManageAppointmentContext(),
-            needsPayment = appointment?.paymentStatus === "unpaid",
-            totalDurationFormatted = formatTime(elapsedTime)
+            needsPayment = appointment?.paymentStatus !== "paid",
+            totalDurationFormatted = formatTime(elapsedTime), 
+            navigate = useNavigate(),
+            invoiceID = appointment?.invoiceID
+
+    const handlePayNow = ()=>{
+
+        if(invoiceID) navigate(`/my-invoices/${invoiceID}`)
+        
+    }
 
     return(
 
@@ -52,8 +61,8 @@ const SessionComplete: React.FC = ()=>{
                     needsPayment &&(
 
                         <button
-                            // onClick={handlePayNow}
-                            className="flex-1 flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-150"
+                            onClick={handlePayNow}
+                            className="flex-1 flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white dark:text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-150"
                         >
 
                             <FaMoneyBillWave className="mr-2"/> Pay Outstanding Fee

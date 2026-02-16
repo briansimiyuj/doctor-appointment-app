@@ -37,6 +37,7 @@ import ManageAppointmentPage from "./pages/ManageAppointmentPage"
 import SessionPage from "./pages/SessionPage"
 import BillingPage from "./pages/BillingPage"
 import PaymentPage from "./pages/PaymentPage"
+import PatientInvoicePage from "./pages/PatientInvoicePage"
 
 const Script: React.FC = () =>{
 
@@ -389,6 +390,16 @@ const Script: React.FC = () =>{
                           <PaymentPage/>
 
                         </ManageRouteWrapper>
+
+                      </PrivateRoute>
+
+                    }/>
+
+                    <Route path="/my-invoices/:invoiceID" element={
+                      
+                      <PrivateRoute>
+
+                        <PatientInvoicePage/>
 
                       </PrivateRoute>
 
