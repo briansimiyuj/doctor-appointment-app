@@ -2,7 +2,7 @@ import { useCallback } from "react"
 import { BillableItem, BillingCalculations, BillingRecord } from "../assets/types/BillingType"
 import { v4 as uuidv4 } from "uuid"
 import { useCurrencyContext } from "../context/CurrencyContext"
-import { addDoc, collection, deleteDoc, doc, query, where, getDocs } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, query, where, getDocs, updateDoc } from "firebase/firestore"
 import { db } from "../firebaseConfig"
 import { useToast } from "./useToast"
 import { useNavigate } from "react-router-dom"
@@ -13,11 +13,7 @@ export const useSubmitBill = () =>{
     const { currency, rate } = useCurrencyContext(),
           { appointment } = useAppointmentsContext(),
           { showToast } = useToast(),
-          navigate = useNavigate(),
-          doctorName = appointment?.doctor?.doctorInfo.name || 'Doctor Name',
-          patientName = appointment?.patient?.patientInfo.name || 'Patient Name',
-          patientEmail = appointment?.patient?.patientInfo.addressValue.email || '',
-          patientPhone = appointment?.patient?.patientInfo.addressValue.phone || ''
+          navigate = useNavigate()
 
     const submitBill = useCallback(async (
         appointmentID: string,
@@ -30,6 +26,20 @@ export const useSubmitBill = () =>{
 
         try{
         
+            const doctorName = appointment?.doctor?.doctorInfo.name || 'Doctor Name',
+                  patientName = appointment?.patient?.patientInfo.name || 'Patient Name',
+                  patientEmail = appointment?.patient?.patientInfo.addressValue?.email || '',
+                  patientPhone = appointment?.patient?.patientInfo.addressValue?.phone || ''
+
+            const cleanedItems = items.map(item => ({
+                _id: item._id,
+                name: item.name,
+                description: item.description || null,
+                price: item.price,
+                sessionCount: item.sessionCount,
+                taxRate: item.taxRate
+            }))
+
             const bill: BillingRecord ={
 
                 _id: uuidv4(),
@@ -38,12 +48,12 @@ export const useSubmitBill = () =>{
                 doctorID,
                 doctorName,
                 patientName,
-                patientEmail,
-                patientPhone,
+                patientEmail: patientEmail || '',
+                patientPhone: patientPhone || '',
                 status: "pending",
                 subTotal: calculations.subTotal,
                 discount: calculations.discount,
-                itemList: items,
+                itemList: cleanedItems,
                 tax: calculations.tax,
                 total: calculations.total,
                 currency,
@@ -57,10 +67,16 @@ export const useSubmitBill = () =>{
 
             await addDoc(billingRef, bill)
 
+            const appointmentRef = doc(db, "appointments", appointmentID)
+
+            await updateDoc(appointmentRef, {
+                invoiceID: bill._id,
+                paymentStatus: "pending"
+            })
+
             if(existingDraftID){
             
                 const draftRef = doc(db, "appointments", appointmentID, "billing", existingDraftID)
-
                 await deleteDoc(draftRef)
             
             }else{
@@ -73,9 +89,7 @@ export const useSubmitBill = () =>{
                 const querySnapshot = await getDocs(q)
                 
                 querySnapshot.forEach(async (doc) =>{
-                    
                     await deleteDoc(doc.ref)
-
                 })
             
             }
@@ -83,9 +97,7 @@ export const useSubmitBill = () =>{
             showToast("Bill submitted successfully", "success")
 
             setTimeout(() =>{
-
                 navigate(`/appointments/${appointmentID}/payment`)
-
             }, 1500)
 
             return bill
@@ -93,14 +105,12 @@ export const useSubmitBill = () =>{
         }catch(error){
         
            console.error('Error submitting bill:', error)
-
            showToast("Error submitting bill", "error")  
-
            throw error
         
         }
 
-    }, [currency, rate, showToast, navigate])
+    }, [currency, rate, showToast, navigate, appointment])
 
     return { submitBill }
 

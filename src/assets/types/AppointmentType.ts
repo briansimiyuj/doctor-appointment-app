@@ -30,5 +30,6 @@ export  interface AppointmentType{
     isStarted?: boolean 
     sessionStatus: "active" | "completed" | null
     paymentStatus: "paid" | "unpaid" | "pending"
+    invoiceID?: string
     
 }
