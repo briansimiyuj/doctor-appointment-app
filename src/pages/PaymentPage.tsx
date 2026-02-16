@@ -6,6 +6,7 @@ import PaymentHeader from "../components/PaymentPage/PaymentHeader"
 import InvoiceItemsList from "../components/PaymentPage/InvoiceItemsList"
 import PaymentSummary from "../components/PaymentPage/PaymentSummary"
 import PaymentActions from "../components/PaymentPage/PaymentActions"
+import PatientContact from "../components/PaymentPage/PatientContact"
 
 const PaymentPageContent: React.FC = ()=>{
 
@@ -32,6 +33,8 @@ const PaymentPageContent: React.FC = ()=>{
                     </div>
 
                     <div className="space-y-6">
+
+                        <PatientContact invoice={invoice}/>
 
                         <PaymentActions invoice={invoice}/>
 
