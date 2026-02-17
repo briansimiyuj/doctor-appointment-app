@@ -395,7 +395,7 @@ const Script: React.FC = () =>{
 
                     }/>
 
-                    <Route path="/my-invoices/:invoiceID" element={
+                    <Route path="/my-invoices/:appointmentID/:invoiceID" element={
                       
                       <PrivateRoute>
 

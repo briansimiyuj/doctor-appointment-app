@@ -8,11 +8,12 @@ const SessionComplete: React.FC = ()=>{
             needsPayment = appointment?.paymentStatus !== "paid",
             totalDurationFormatted = formatTime(elapsedTime), 
             navigate = useNavigate(),
-            invoiceID = appointment?.invoiceID
+            invoiceID = appointment?.invoiceID,
+            appointmentID = appointment?._id
 
     const handlePayNow = ()=>{
 
-        if(invoiceID) navigate(`/my-invoices/${invoiceID}`)
+        if(invoiceID) navigate(`/my-invoices/${appointmentID}/${invoiceID}`)
         
     }
 

@@ -9,11 +9,12 @@ const SessionHeader: React.FC = ()=>{
     const { appointment, sessionStatus, statusColorClass, formatTime, elapsedTime } = useManageAppointmentContext(),
           doctorName = appointment?.doctor?.doctorInfo.name,
           invoiceID = appointment?.invoiceID,
+          appointmentID = appointment?._id,
           navigate = useNavigate()
 
     const handlePayNow = () =>{
     
-        if(invoiceID) navigate(`/my-invoices/${invoiceID}`)
+        if(invoiceID) navigate(`/my-invoices/${appointmentID}/${invoiceID}`)
     
     }      
 
