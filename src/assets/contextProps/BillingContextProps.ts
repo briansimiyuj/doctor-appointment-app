@@ -6,8 +6,8 @@ export interface BillingContextProps{
     items: BillableItem[]
     addItem: (item: BillableItem) => void
     removeItem: (id: string) => void
-    paymentMethod: PaymentMethod
-    setPaymentMethod: (method: PaymentMethod) => void
+    paymentMethod: PaymentMethod | null
+    setPaymentMethod: (method: PaymentMethod | null) => void
     discount: number
     setDiscount: (discount: number) => void
     calculations: BillingCalculations

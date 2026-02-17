@@ -54,6 +54,14 @@ import sampleXray from "../dummyData/dummyDocuments/sample xray.jpg"
 import sampleUltrasound from "../dummyData/dummyDocuments/sample ultrasound image.webp"
 import sampleCTScan from "../dummyData/dummyDocuments/sample CT Scan.jpeg"
 import { DocumentType } from "../types/DocumentType"
+import cashLogo from "./cash_logo.png"
+import bankTransferLogo from "./bank_logo.png"
+import visaLogo from "./visa_logo.png"
+import masterCardLogo from "./mastercard_logo.png"
+import shaLogo from "./sha_logo.png"
+import insuaranceLogo from "./insurance_logo.jpg"
+import mpesaLogo from "./mpesa_logo.jpg"
+import { PaymentMethod } from "../types/BillingType"
 
 export const assets ={
   
@@ -251,4 +259,61 @@ export const dummyDocuments: DocumentType[] =[
         content: medicalCertificate
     }
     
+]
+
+
+export const paymentMethods:{
+    method: PaymentMethod["method"],
+    image: string,
+    label: string
+
+}[] =[
+
+    {
+        method: "MPESA",
+        label: "MPESA",
+        image: mpesaLogo
+    },
+
+
+    {
+        method: "insurance",
+        label: "Isurance",
+        image: insuaranceLogo
+    },
+
+
+    {
+        label: "Bank Transfer",
+        method: "bankTransfer",
+        image: bankTransferLogo
+    },
+
+
+    {
+        label: "Cash",
+        method: "cash",
+        image: cashLogo
+    },
+
+    {
+        label: "VISA",
+        method: "visa",
+        image: visaLogo
+    },
+
+
+    {
+        label: "MasterCard",
+        method: "masterCard",
+        image: masterCardLogo
+    },
+
+
+    {
+        label: "Social Health Authority",
+        method: "SHA",
+        image: shaLogo
+    }
+
 ]

@@ -9,7 +9,12 @@ export interface BillableItem{
 
 }
 
-export type PaymentMethod = "creditCard" | "insurance" | "cash" | "SHA" | "bankTransfer" | "MPESA"
+export interface PaymentMethod{
+
+    method: "creditCard" | "insurance" | "cash" | "SHA" | "bankTransfer" | "MPESA" | "visa" | "masterCard"
+    image: string
+
+}
 
 export interface BillingRecord{
     
