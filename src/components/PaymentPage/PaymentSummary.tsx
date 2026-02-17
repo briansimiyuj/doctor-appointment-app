@@ -2,6 +2,7 @@
 import { FaCalculator, FaReceipt, FaTag } from "react-icons/fa"
 import { useCurrencyContext } from "../../context/CurrencyContext"
 import { BillingRecord } from "../../assets/types/BillingType"
+import { useProfileContext } from "../../context/ProfileContext"
 
 interface PaymentSummaryProps{
     
@@ -12,6 +13,7 @@ interface PaymentSummaryProps{
 const PaymentSummary: React.FC<PaymentSummaryProps> = ({ invoice }) =>{
 
     const { currencySymbol } = useCurrencyContext(),
+          { profile } = useProfileContext(),  
           { subTotal, tax, discount, total } = invoice
 
     return(
@@ -24,7 +26,7 @@ const PaymentSummary: React.FC<PaymentSummaryProps> = ({ invoice }) =>{
 
                     <FaCalculator className="text-blue-600 dark:text-blue-400"/>
 
-                    Payment Summary
+                    {profile?.type === "doctor" ? 'Payment Summary' : 'Invoice Summary'}
 
                 </h2>
 
