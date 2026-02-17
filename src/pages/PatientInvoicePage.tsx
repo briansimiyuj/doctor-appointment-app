@@ -4,6 +4,7 @@ import NotFoundPage from "./NotFoundPage"
 import { BillingContextProvider, useBillingContext } from "../context/BillingContext"
 import PaymentHeader from "../components/PaymentPage/PaymentHeader"
 import PaymentSummary from "../components/PaymentPage/PaymentSummary"
+import InvoiceItemsList from "../components/PaymentPage/InvoiceItemsList"
 
 const PatientInvoicePage: React.FC = ()=>{
 
@@ -63,6 +64,8 @@ const PatientInvoiceContent: React.FC = ()=>{
             <div className="max-w-4xl mx-auto space-y-6">
 
                 <PaymentHeader invoice={invoice}/>
+
+                <InvoiceItemsList invoice={invoice}/>
 
                 <PaymentSummary invoice={invoice}/>
 
