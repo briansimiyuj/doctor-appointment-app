@@ -1,15 +1,18 @@
 import { FaCheckCircle, FaClock, FaReceipt, FaTimesCircle } from "react-icons/fa"
 import { BillingRecord } from "../../assets/types/BillingType"
+import { useProfileContext } from "../../context/ProfileContext"
+import PaymentHeaderMessage from "./PaymentHeaderMessage"
 
 interface PaymentHeaderProps{
 
-    invoice: BillingRecord
+    invoice: BillingRecord 
 
 }
 
 const PaymentHeader: React.FC<PaymentHeaderProps> = ({ invoice })=>{
 
-    const createdAt = invoice.createdAt instanceof Date ? invoice.createdAt : new Date((invoice.createdAt as { seconds: number }).seconds * 1000)
+    const createdAt = invoice.createdAt instanceof Date ? invoice.createdAt : new Date((invoice.createdAt as { seconds: number }).seconds * 1000),
+        { profile } = useProfileContext()
 
     const getStatusConfig = (status: string) =>{
     
@@ -103,15 +106,17 @@ const PaymentHeader: React.FC<PaymentHeaderProps> = ({ invoice })=>{
 
                         <p className="text-sm sm:text-xl text-center text-gray-500 dark:text-gray-400 mt-0.5">
 
-                            {invoice.status === "pending" && 'Waiting for payment confirmation'}
+                            {invoice.status === "pending" && (profile?.type === "patient" ? "Please complete your payment" : "Waiting for patient payment")}
 
-                            {invoice.status === "paid" && 'Payment has been received'}
+                            {invoice.status === "paid" && (profile?.type === "patient" ? "Your payment has been received" : "Payment has been received from patient")}
 
-                            {invoice.status === "cancelled" && 'Payment has been cancelled'}
+                            {invoice.status === "cancelled" && (profile?.type === "patient" ? "Your payment has been cancelled" : "Payment has been cancelled")}
 
                         </p>
                     
                     </div>
+
+                    <PaymentHeaderMessage invoice={invoice}/>
 
                 </div>
 

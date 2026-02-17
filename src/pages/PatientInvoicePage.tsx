@@ -1,15 +1,18 @@
-import { useNavigate, useParams } from "react-router-dom"
 import { useProfileContext } from "../context/ProfileContext"
+import { useNavigate, useParams } from "react-router-dom"
 import NotFoundPage from "./NotFoundPage"
-import { BillingContextProvider } from "../context/BillingContext"
+import { BillingContextProvider, useBillingContext } from "../context/BillingContext"
+import PaymentHeader from "../components/PaymentPage/PaymentHeader"
 
 const PatientInvoicePage: React.FC = ()=>{
 
-    const { invoiceID } = useParams<{ invoiceID: string }>(),
+    const { invoiceID, appointmentID } = useParams<{ invoiceID: string, appointmentID: string }>(),
           { profile } = useProfileContext(),
           navigate = useNavigate()
 
     if(profile?.type !== "patient") return <NotFoundPage/>
+
+    if(!invoiceID || !appointmentID) return
 
     if(!invoiceID) return(
 
@@ -34,7 +37,7 @@ const PatientInvoicePage: React.FC = ()=>{
 
     return(
 
-        <BillingContextProvider appointmentID={invoiceID}>
+        <BillingContextProvider appointmentID={appointmentID}>
 
             <PatientInvoiceContent/>
 
@@ -48,9 +51,21 @@ export default PatientInvoicePage
 
 const PatientInvoiceContent: React.FC = ()=>{
 
+    const { invoice, loading } = useBillingContext()
+
+    if(!invoice || loading) return <div>Loading...</div>
+
     return(
 
-        <h1>PatientInvoiceContent</h1>
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4">
+
+            <div className="max-w-4xl mx-auto space-y-6">
+
+                <PaymentHeader invoice={invoice}/>
+               
+            </div>
+
+        </div>
 
     )
 
