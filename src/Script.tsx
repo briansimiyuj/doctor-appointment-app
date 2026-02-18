@@ -38,6 +38,7 @@ import SessionPage from "./pages/SessionPage"
 import BillingPage from "./pages/BillingPage"
 import PaymentPage from "./pages/PaymentPage"
 import PatientInvoicePage from "./pages/PatientInvoicePage"
+import PatientPaymentPage from "./pages/PatientPaymentPage"
 
 const Script: React.FC = () =>{
 
@@ -400,6 +401,16 @@ const Script: React.FC = () =>{
                       <PrivateRoute>
 
                         <PatientInvoicePage/>
+
+                      </PrivateRoute>
+
+                    }/>
+
+                    <Route path="/payment/:invoiceID/:appointmentID" element={
+                      
+                      <PrivateRoute>
+
+                        <PatientPaymentPage/>
 
                       </PrivateRoute>
 
