@@ -5,6 +5,7 @@ import { BillingContextProvider, useBillingContext } from "../context/BillingCon
 import PaymentHeader from "../components/PaymentPage/PaymentHeader"
 import PaymentSummary from "../components/PaymentPage/PaymentSummary"
 import InvoiceItemsList from "../components/PaymentPage/InvoiceItemsList"
+import PaymentMethodSelector from "../components/PatientInvoicePage/PaymentMethodSelector"
 
 const PatientInvoicePage: React.FC = ()=>{
 
@@ -53,7 +54,7 @@ export default PatientInvoicePage
 
 const PatientInvoiceContent: React.FC = ()=>{
 
-    const { invoice, loading } = useBillingContext()
+    const { invoice, loading, setPaymentMethod } = useBillingContext()
 
     if(!invoice || loading) return <div>Loading...</div>
 
@@ -63,11 +64,26 @@ const PatientInvoiceContent: React.FC = ()=>{
 
             <div className="max-w-4xl mx-auto space-y-6">
 
-                <PaymentHeader invoice={invoice}/>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
 
-                <InvoiceItemsList invoice={invoice}/>
+                    <div className="lg:col-span-2 space-y-6">
 
-                <PaymentSummary invoice={invoice}/>
+                        <PaymentHeader invoice={invoice}/>
+
+                        <InvoiceItemsList invoice={invoice}/>
+
+                        <PaymentSummary invoice={invoice}/>
+
+                    </div>
+
+                    <div className="space-y-6">
+
+                        <PaymentMethodSelector onSelect={setPaymentMethod} invoice={invoice}/>
+                        
+                    </div>
+
+                </div>
+
 
             </div>
 
