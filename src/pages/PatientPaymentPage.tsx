@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import NotFoundPage from "./NotFoundPage"
 import { BillingContextProvider, useBillingContext } from "../context/BillingContext"
 import PaymentHeader from "../components/PaymentPage/PaymentHeader"
+import PaymentInstructions from "../components/PatientPaymentPage/PaymentInstructions"
 
 const PatientPaymentPage: React.FC = ()=>{
 
@@ -66,6 +67,8 @@ const PatientPaymentContent: React.FC = ()=>{
             <div className="max-w-4xl mx-auto space-y-6">
 
                 <PaymentHeader invoice={invoice}/>
+
+                <PaymentInstructions invoice={invoice}/>
 
             </div>
 
