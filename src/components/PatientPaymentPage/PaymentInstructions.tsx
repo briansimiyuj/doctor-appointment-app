@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import { BillingRecord } from "../../assets/types/BillingType"
-import { FaCopy, FaCheck, FaCreditCard } from "react-icons/fa"
+import { FaCopy, FaCheck, FaCreditCard, FaMobile, FaList } from "react-icons/fa"
 import { financialAssets, getMPESAAccount } from "../../assets/frontend/financialAssets"
 import { useCopyToClipboard } from "../../hooks/useCopyToClipboard"
 import { useCurrencyContext } from "../../context/CurrencyContext"
+import MPESASTKForm from "./MPESASTKForm"
 
 interface PaymentInstructionsProps{
 
@@ -15,12 +16,14 @@ const PaymentInstructions: React.FC<PaymentInstructionsProps> = ({ invoice })=>{
 
     const [selectedMethod, setSelectedMethod] = useState<string | null>(null),
           [copied, setCopied] = useState<string | null>(null),
+          [mpesaMode, setMpesaMode] = useState<"stk" | "manual">("stk"), 
           { copy } = useCopyToClipboard(),
           { currencySymbol } = useCurrencyContext()
 
     useEffect(() =>{
 
         const method = localStorage.getItem("paymentMethod")
+        
         setSelectedMethod(method)
     
     }, [])
@@ -42,9 +45,53 @@ const PaymentInstructions: React.FC<PaymentInstructionsProps> = ({ invoice })=>{
         const mpesa = financialAssets.mpesa,
               accountRef = getMPESAAccount(invoice._id)
 
+        if(mpesaMode === "stk"){
+
+            return(
+
+                
+                <>
+                    
+                    <div className="flex justify-end mb-4">
+
+                        <button
+                            onClick={() => setMpesaMode("manual")}
+                            className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+                        >
+
+                            <FaList/>
+
+                            Switch to Manual Instructions
+
+                        </button>
+
+                    </div>
+
+                    <MPESASTKForm invoice={invoice} onSuccess={() =>{
+
+                        console.log("✅ MPESA payment successful")
+
+                    }}/>
+
+                </>
+
+            )
+
+        }
+
         return(
 
             <div className="space-y-4">
+
+                <div className="flex justify-end mb-2">
+                    <button
+                        onClick={() => setMpesaMode("stk")}
+                        className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+                    >
+                        <FaMobile/>
+                        Switch to M-PESA Express
+                    </button>
+                </div>
 
                 <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
 
