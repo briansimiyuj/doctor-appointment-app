@@ -5,6 +5,8 @@ import { financialAssets, getMPESAAccount } from "../../assets/frontend/financia
 import { useCopyToClipboard } from "../../hooks/useCopyToClipboard"
 import { useCurrencyContext } from "../../context/CurrencyContext"
 import MPESASTKForm from "./MPESASTKForm"
+import { CardPaymentContextProvider } from "../../context/CardPaymentContext"
+import CardPaymentForm from "./CardPaymentForm/CardPaymentForm"
 
 interface PaymentInstructionsProps{
 
@@ -148,87 +150,57 @@ const PaymentInstructions: React.FC<PaymentInstructionsProps> = ({ invoice })=>{
 
         return(
 
-            <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+            <CardPaymentContextProvider>
 
-                <div className="flex items-center gap-3 mb-3">
+                <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
 
-                    <FaCreditCard className="w-6 h-6 text-blue-600 dark:text-blue-400"/>
+                    <div className="flex items-center gap-3 mb-3">
 
-                    <h3 className="font-semibold text-blue-700 dark:text-blue-300">Visa Card Payment</h3>
+                        <FaCreditCard className="w-6 h-6 text-blue-600 dark:text-blue-400"/>
 
-                </div>
+                        <h3 className="font-semibold text-blue-700 dark:text-blue-300">Visa Card Payment</h3>
 
-                <p className="text-gray-700 dark:text-gray-300 mb-3">{visa.instructions}</p>
+                    </div>
 
-                <div className="space-y-2 text-sm">
+                    <p className="text-gray-700 dark:text-gray-300 mb-3">{visa.instructions}</p>
 
-                    <p><span className="font-medium">Accepted Cards:</span> {visa.supportedCards.join(', ')}</p>
-
-                    <p><span className="font-medium">Supported Currencies:</span> {visa.currency}</p>
-
-                </div>
-
-                <div className="mt-4 p-3 bg-gray-50 dark:bg-gray-900 rounded-lg">
-
-                    <p className="text-center text-gray-600 dark:text-gray-400">
-
-                        Amount: <span className="font-bold text-blue-600 dark:text-blue-400">
-
-                            {currencySymbol}{invoice.total.toFixed(2)}
-
-                        </span>
-
-                    </p>
+                    <CardPaymentForm
+                        invoice={invoice}
+                        cardType="visa"
+                    />
 
                 </div>
 
-            </div>
+            </CardPaymentContextProvider>
 
         )
 
     }
 
     const renderMastercard = () =>{
-
-        const mastercard = financialAssets.mastercard
-
+        
         return(
 
-            <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg">
+            <CardPaymentContextProvider>
 
-                <div className="flex items-center gap-3 mb-3">
+                <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg">
 
-                    <FaCreditCard className="w-6 h-6 text-orange-600 dark:text-orange-400"/>
+                    <div className="flex items-center gap-3 mb-3">
 
-                    <h3 className="font-semibold text-orange-700 dark:text-orange-300">Mastercard Payment</h3>
+                        <FaCreditCard className="w-6 h-6 text-orange-600 dark:text-orange-400"/>
 
-                </div>
+                        <h3 className="font-semibold text-orange-700 dark:text-orange-300">Mastercard Payment</h3>
 
-                <p className="text-gray-700 dark:text-gray-300 mb-3">{mastercard.instructions}</p>
+                    </div>
 
-                <div className="space-y-2 text-sm">
-
-                    <p><span className="font-medium">Accepted Cards:</span> {mastercard.supportedCards.join(', ')}</p>
-
-                    <p><span className="font-medium">Supported Currencies:</span> {mastercard.currency}</p>
-
-                </div>
-
-                <div className="mt-4 p-3 bg-gray-50 dark:bg-gray-900 rounded-lg">
-
-                    <p className="text-center text-gray-600 dark:text-gray-400">
-
-                        Amount: <span className="font-bold text-orange-600 dark:text-orange-400">
-
-                            {currencySymbol}{invoice.total.toFixed(2)}
-
-                        </span>
-
-                    </p>
+                    <CardPaymentForm
+                        invoice={invoice}
+                        cardType="mastercard"
+                    />
 
                 </div>
 
-            </div>
+            </CardPaymentContextProvider>
 
         )
 
@@ -367,7 +339,7 @@ const PaymentInstructions: React.FC<PaymentInstructionsProps> = ({ invoice })=>{
 
             case "visa": return renderVisa()
 
-            case "mastercard": return renderMastercard()
+            case "masterCard": return renderMastercard()
 
             default: return null
 
