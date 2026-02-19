@@ -1,5 +1,6 @@
 import { BillingRecord } from "../../../assets/types/BillingType"
 import CardHeader from "./CardHeader"
+import CardInputs from "./CardInputs"
 
 interface CardPaymentFormProps{
 
@@ -17,6 +18,8 @@ const CardPaymentForm: React.FC<CardPaymentFormProps> = ({ invoice, cardType })=
             <form className="space-y-4">
 
                 <CardHeader invoice={invoice} cardType={cardType}/>
+
+                <CardInputs cardType={cardType}/>
 
             </form>
 
