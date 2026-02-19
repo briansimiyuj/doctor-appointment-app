@@ -1,6 +1,7 @@
 import { BillingRecord } from "../../../assets/types/BillingType"
 import CardHeader from "./CardHeader"
 import CardInputs from "./CardInputs"
+import ErrorMessage from "./ErrorMessage"
 
 interface CardPaymentFormProps{
 
@@ -20,6 +21,8 @@ const CardPaymentForm: React.FC<CardPaymentFormProps> = ({ invoice, cardType })=
                 <CardHeader invoice={invoice} cardType={cardType}/>
 
                 <CardInputs cardType={cardType}/>
+
+                <ErrorMessage/>
 
             </form>
 
