@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useState } from "react"
+import { createContext, useCallback, useContext, useEffect, useState } from "react"
 import { CardPaymentContextProps } from "../assets/contextProps/CardPaymentContextProps"
 import { CardDetailsType } from "../assets/types/CardDetailsType"
 import { useToast } from "../hooks/useToast"
@@ -25,7 +25,26 @@ export const CardPaymentContextProvider:React.FC<PaymentContextProviderProps> = 
     }),
           [loading, setLoading] = useState<boolean>(false),
           [error, setError] = useState<string | null>(null),
+          [isFormValid, setIsFormValid] = useState<boolean>(false),
           { showToast } = useToast()
+
+    useEffect(() =>{
+
+        const isCardNumberValid = cardDetails.cardNumber.replace(/\s/g, '').length === 16,
+              isNameValid = cardDetails.cardHolderName.trim().length > 0,
+              isMonthValid = cardDetails.cardExpiryMonth.length === 2,
+              isYearValid = cardDetails.cardExpiryYear.length === 4,
+              isCVVValid = cardDetails.cardCVV.length >= 3
+
+        setIsFormValid(
+            isCardNumberValid && 
+            isNameValid && 
+            isMonthValid && 
+            isYearValid && 
+            isCVVValid
+        )
+
+    }, [cardDetails])
 
     const setCardDetails = useCallback((details: Partial<CardDetailsType>) =>{
     
@@ -85,7 +104,7 @@ export const CardPaymentContextProvider:React.FC<PaymentContextProviderProps> = 
 
         return true
     
-    }, [])
+    }, [cardDetails])
 
     const processCardPayment = useCallback(async (
         invoice: BillingRecord,
@@ -154,6 +173,7 @@ export const CardPaymentContextProvider:React.FC<PaymentContextProviderProps> = 
         setCardDetails,
         loading,
         error,
+        isFormValid,
         formatCardNumber,
         validateCardForm,
         processCardPayment,

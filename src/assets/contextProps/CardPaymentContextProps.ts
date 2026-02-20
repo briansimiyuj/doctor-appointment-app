@@ -9,6 +9,7 @@ export interface CardPaymentContextProps{
     error: string | null
     formatCardNumber: (cardNumber: string) => string
     validateCardForm: () => boolean
+    isFormValid: boolean
     processCardPayment: (invoice: BillingRecord, cardType: "visa" | "mastercard") => Promise<boolean>
     resetCardForm: () => void
     years: number[]
