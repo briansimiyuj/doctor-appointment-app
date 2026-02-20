@@ -24,7 +24,11 @@ export const useLoadInvoice = () =>{
             if(!querySnapshot.empty){
                 
                 const doc = querySnapshot.docs[0],
-                      billData = doc.data() as BillingRecord
+                      data = doc.data(),
+                      billData: BillingRecord = {
+                        ...data,
+                        _id: doc.id  // ✅ Add the Firestore document ID
+                      } as BillingRecord
 
                 showToast("Invoice loaded successfully", "success")
 

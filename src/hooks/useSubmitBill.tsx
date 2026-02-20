@@ -65,12 +65,13 @@ export const useSubmitBill = () =>{
 
             const billingRef = collection(db, "appointments", appointmentID, "billing")
 
-            await addDoc(billingRef, bill)
+            const docRef = await addDoc(billingRef, bill),
+                  firestoreDocID = docRef.id
 
             const appointmentRef = doc(db, "appointments", appointmentID)
 
             await updateDoc(appointmentRef, {
-                invoiceID: bill._id,
+                invoiceID: firestoreDocID,
                 paymentStatus: "pending"
             })
 
@@ -100,12 +101,14 @@ export const useSubmitBill = () =>{
                 navigate(`/appointments/${appointmentID}/payment`)
             }, 1500)
 
-            return bill
+            return { ...bill, _id: firestoreDocID }
         
         }catch(error){
         
            console.error('Error submitting bill:', error)
+
            showToast("Error submitting bill", "error")  
+           
            throw error
         
         }
