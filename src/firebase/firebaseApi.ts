@@ -138,3 +138,35 @@ export const getLabOrderByAppointmentID = async (
     return unsubscribe
 
 }
+
+export const updateBillStatusToPaid = async (
+    appointmentID: string,
+    invoiceID: string 
+): Promise<void> =>{
+
+    try{
+
+        const billRef = doc(db, "appointments", appointmentID, "billing", invoiceID)
+
+        await updateDoc(billRef, { 
+            status: "paid", 
+            updatedAt: new Date()
+        })
+
+        const appointmentRef = doc(db, "appointments", appointmentID)
+       
+        await updateDoc(appointmentRef, {
+            paymentStatus: "paid"
+        })
+
+        console.log(`Bill ${invoiceID} updated to paid in Firebase.`)
+
+    }catch(error){
+
+        console.error("Error updating bill status to paid in Firebase:", error)
+
+        throw new Error("Failed to update bill status to paid in Firebase.")
+
+    }
+
+}

@@ -4,6 +4,7 @@ import { CardDetailsType } from "../assets/types/CardDetailsType"
 import { useToast } from "../hooks/useToast"
 import { BillingRecord } from "../assets/types/BillingType"
 import { useBillingContext } from "./BillingContext"
+import { updateBillStatusToPaid } from "../firebase/firebaseApi"
 
 interface PaymentContextProviderProps{
 
@@ -174,7 +175,13 @@ export const CardPaymentContextProvider:React.FC<PaymentContextProviderProps> = 
 
         validateCardForm()
 
-        processCardPayment(invoice, cardType)
+        const paymentSuccess = await processCardPayment(invoice, cardType)
+
+        if(paymentSuccess){
+            
+            updateBillStatusToPaid(invoice.appointmentID, invoice._id)
+
+        }
     
     }
 

@@ -3,6 +3,7 @@ import { useState } from "react"
 import { FaMobile, FaArrowRight, FaSpinner } from "react-icons/fa"
 import { BillingRecord } from "../../assets/types/BillingType"
 import { useCurrencyContext } from "../../context/CurrencyContext"
+import { updateBillStatusToPaid } from "../../firebase/firebaseApi"
 
 interface MPESASTKFormProps{
 
@@ -47,6 +48,8 @@ const MPESASTKForm: React.FC<MPESASTKFormProps> = ({ invoice, onSuccess })=>{
                 amount: invoice.total,
                 account: invoice._id.slice(0, 6)
             })
+
+            updateBillStatusToPaid(invoice.appointmentID, invoice._id)
 
             await new Promise(resolve => setTimeout(resolve, 2000))
             
