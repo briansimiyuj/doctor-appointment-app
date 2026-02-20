@@ -14,5 +14,6 @@ export interface CardPaymentContextProps{
     resetCardForm: () => void
     years: number[]
     months: string[]
+    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
 
 }

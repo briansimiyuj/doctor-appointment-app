@@ -150,7 +150,7 @@ const PaymentInstructions: React.FC<PaymentInstructionsProps> = ({ invoice })=>{
 
         return(
 
-            <CardPaymentContextProvider>
+            <CardPaymentContextProvider cardType="visa">
 
                 <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
 
@@ -181,7 +181,7 @@ const PaymentInstructions: React.FC<PaymentInstructionsProps> = ({ invoice })=>{
         
         return(
 
-            <CardPaymentContextProvider>
+            <CardPaymentContextProvider cardType="mastercard">
 
                 <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg">
 

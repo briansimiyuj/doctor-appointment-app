@@ -1,4 +1,5 @@
 import { BillingRecord } from "../../../assets/types/BillingType"
+import { useCardPaymentContext } from "../../../context/CardPaymentContext"
 import CardHeader from "./CardHeader"
 import CardInputs from "./CardInputs"
 import ErrorMessage from "./ErrorMessage"
@@ -14,11 +15,13 @@ interface CardPaymentFormProps{
 
 const CardPaymentForm: React.FC<CardPaymentFormProps> = ({ invoice, cardType })=>{
 
+    const { handleSubmit } = useCardPaymentContext()
+
     return(
 
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 p-6">
 
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
 
                 <CardHeader invoice={invoice} cardType={cardType}/>
 

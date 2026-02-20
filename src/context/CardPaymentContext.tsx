@@ -1,18 +1,20 @@
-import { createContext, useCallback, useContext, useEffect, useState } from "react"
+import React, { createContext, useCallback, useContext, useEffect, useState } from "react"
 import { CardPaymentContextProps } from "../assets/contextProps/CardPaymentContextProps"
 import { CardDetailsType } from "../assets/types/CardDetailsType"
 import { useToast } from "../hooks/useToast"
 import { BillingRecord } from "../assets/types/BillingType"
+import { useBillingContext } from "./BillingContext"
 
 interface PaymentContextProviderProps{
 
     children: React.ReactNode
+    cardType: "visa" | "mastercard" 
 
 }
 
 export const CardPaymentContext = createContext<CardPaymentContextProps | undefined>(undefined)
 
-export const CardPaymentContextProvider:React.FC<PaymentContextProviderProps> = ({ children })=>{
+export const CardPaymentContextProvider:React.FC<PaymentContextProviderProps> = ({ children, cardType })=>{
 
     const [cardDetails, setCardDetailsState] = useState<CardDetailsType>({
 
@@ -26,6 +28,7 @@ export const CardPaymentContextProvider:React.FC<PaymentContextProviderProps> = 
           [loading, setLoading] = useState<boolean>(false),
           [error, setError] = useState<string | null>(null),
           [isFormValid, setIsFormValid] = useState<boolean>(false),
+          { invoice } = useBillingContext(),
           { showToast } = useToast()
 
     useEffect(() =>{
@@ -163,6 +166,18 @@ export const CardPaymentContextProvider:React.FC<PaymentContextProviderProps> = 
     
     }, [])
 
+    const handleSubmit = async(e: React.FormEvent) =>{
+
+        if(!invoice) return
+    
+        e.preventDefault()
+
+        validateCardForm()
+
+        processCardPayment(invoice, cardType)
+    
+    }
+
     const currentYear = new Date().getFullYear(),
           years = Array.from({length: 10}, (_, i) => currentYear + i),
           months = Array.from({ length: 12 }, (_, i) => new Date(2000, i, 1).toLocaleString('default', { month: 'short' }))
@@ -179,7 +194,8 @@ export const CardPaymentContextProvider:React.FC<PaymentContextProviderProps> = 
         processCardPayment,
         resetCardForm,
         years,
-        months
+        months,
+        handleSubmit
 
     }
 
