@@ -12,19 +12,21 @@ interface SubmitButtonProps{
 
 const SubmitButton: React.FC<SubmitButtonProps> = ({ invoice, cardType })=>{
 
-    const { loading } = useCardPaymentContext(),
+    const { loading, isFormValid } = useCardPaymentContext(),
           { currencySymbol } = useCurrencyContext()
 
     return(
 
         <button
             type="submit"
-            disabled={loading}
+            disabled={loading || !isFormValid}
             className={`w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-medium transition disabled:opacity-50 mt-4 ${
                 cardType === "visa" 
                     ? "bg-blue-600 hover:bg-blue-700" 
                     : "bg-orange-600 hover:bg-orange-700"
-            } text-white dark:text-white`}
+            } text-white dark:text-white ${
+                !isFormValid ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
         >
 
             {
